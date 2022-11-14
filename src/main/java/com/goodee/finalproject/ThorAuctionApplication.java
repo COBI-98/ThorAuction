@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ThorAuctionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThorAuctionApplication.class, args);
+		SpringApplication.run(ThorAuctionApplication.class, args);//
 	}
 
 }
