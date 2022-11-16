@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>토르의 실시간 대장간</title>
+	<c:import url="./template/boot.jsp"></c:import>
+	<link href="/css/reset.css" rel="stylesheet">
+	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
-	<c:if test="${member != null}">
-		<a href="../member/logout">로그아웃</a>
-		<a href="#">마이페이지</a>	
-	</c:if>
-	<c:if test="${member == null}">
-		<a href="../member/login">로그인</a>
-		<a href="../member/join">회원가입</a>
-	</c:if>
+	<c:import url="./template/header.jsp"></c:import>
+	<section class="container d-flex flex-wrap justify-content-center">
+		
+			<h1> 토르의 실시간 대장간 메인</h1>
+		
+	</section>
+	<c:import url="./template/footer.jsp"></c:import>
 </body>
 </html>
