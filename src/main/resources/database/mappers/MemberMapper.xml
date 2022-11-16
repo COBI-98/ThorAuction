@@ -5,6 +5,17 @@
 	
 <mapper namespace="com.goodee.finalproject.member.MemberMapper">
 
+	<!-- 회원정보 수정 -->
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE THORMEMBER 
+		SET
+		EMAIL = #{email},
+		POST = #{post},
+		ADDR = #{addr},
+		ADDR2 = #{addr2}
+		WHERE ID = #{id}
+	</update>
+
 	<!-- 로그인 -->
 	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
 		SELECT * 
@@ -17,7 +28,20 @@
 		ON R.ROLENUM = MR.ROLENUM
 		WHERE M.ID = #{id}
 	</select>
+
+	<!-- 회원등급 -->
+	<insert id="setRole" parameterType="MemberVO">
+		INSERT INTO THORMEMBER_ROLE
+		VALUES(#{id}, 3)
+	</insert>
+
+	<!-- 회원가입 -->
+	<insert id="setJoin" parameterType="MemberVO">
+		INSERT INTO THORMEMBER
+		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{post}, #{addr}, #{addr2}, #{phone}, 1000);
+	</insert>
 	
+	<!-- 로그인 join -->
 	<resultMap type="MemberVO" id="getLoginResult">
 		<id column="id" property="id" />
 		<result column="pw" property="pw" />
@@ -35,17 +59,5 @@
 			<result column="roleName" property="roleName"/>
 		</collection>
 	</resultMap>
-
-	<!-- 회원등급 -->
-	<insert id="setRole" parameterType="MemberVO">
-		INSERT INTO THORMEMBER_ROLE
-		VALUES(#{id}, 3)
-	</insert>
-
-	<!-- 회원가입 -->
-	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO THORMEMBER
-		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{post}, #{addr}, #{addr2}, #{phone}, 1000);
-	</insert>
 	
 </mapper>

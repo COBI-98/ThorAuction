@@ -20,6 +20,20 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	// 회원정보 수정 GET
+	@GetMapping("update")
+	public void setUpdate() throws Exception {}
+	
+	// 회원정보 수정 POST
+	@PostMapping("update")
+	public String setUpdate(MemberVO memberVO) throws Exception {
+		
+		int result = memberService.setUpdate(memberVO);
+		
+		return "../member/update";
+	}
+	
+	
 	// 로그인 GET
 	@GetMapping("login")
 	public void getLogin() throws Exception {}
@@ -40,6 +54,7 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
+	// 로그아웃
 	@GetMapping("logout")
 	public String getLogout(HttpSession session) throws Exception {
 		session.invalidate();
