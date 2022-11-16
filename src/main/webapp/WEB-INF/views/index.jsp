@@ -7,14 +7,15 @@
 <meta charset="UTF-8">
 	<title>토르의 실시간 대장간</title>
 	<c:import url="./template/boot.jsp"></c:import>
+	<link href="/css/reset.css" rel="stylesheet">
+	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
+	<section>
+	
 	<h1> 토르의 실시간 대장간 메인</h1>
-	
-	
-	
-	
+	</section>
 	<c:import url="./template/footer.jsp"></c:import>
 </body>
 </html>
