@@ -1,25 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>토르의 실시간 대장간</title>
-<c:import url="../template/boot.jsp"></c:import>
-<link href="/css/reset.css" rel="stylesheet">
-<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+<title>Insert title here</title>
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>
-	<section class="container d-flex flex-wrap justify-content-center">
-		<h1>회원가입</h1>
-
-		<form action="join" method="POST">
+	<h1>회원정보 수정</h1>
+	<form action="join" method="POST">
 			<table>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="id"></td>
+					<td><input type="text" name="id" value="${member.id}"></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
@@ -57,8 +50,5 @@
 
 			<button type="submit">가입하기</button>
 		</form>
-
-	</section>
-	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

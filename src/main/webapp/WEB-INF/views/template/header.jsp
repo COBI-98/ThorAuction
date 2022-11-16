@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <div class="wrap">
 <nav class="py-2 bg-light border-bottom">
     <div class="container d-flex flex-wrap">
@@ -7,10 +8,20 @@
         
       </ul>
       <ul class="nav">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">로그인</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">회원가입</a></li>
+      	<!-- 로그인 전 -->
+      	<c:if test="${member == null}">
+	        <li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
+	        <li class="nav-item"><a href="../member/join" class="nav-link link-dark px-2">회원가입</a></li>
+        </c:if>
+        
+      	<!-- 로그인 후 -->
+      	<c:if test="${member != null}">
+      		<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>	
+      		<li class="nav-item"><a href="../myPage" class="nav-link link-dark px-2">마이페이지</a></li>	
+      	</c:if>
+      	
         <li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">마이페이지</a></li>
+        
       </ul>
     </div>
   </nav>
