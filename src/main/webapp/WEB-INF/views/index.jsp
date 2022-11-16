@@ -12,9 +12,10 @@
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
-	<section>
-	
-	<h1> 토르의 실시간 대장간 메인</h1>
+	<section class="container d-flex flex-wrap justify-content-center">
+		
+			<h1> 토르의 실시간 대장간 메인</h1>
+		
 	</section>
 	<c:import url="./template/footer.jsp"></c:import>
 </body>
