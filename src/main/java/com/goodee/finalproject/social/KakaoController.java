@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/kjk/admin/*")
 @Slf4j
+@RequestMapping("/member/*")
 public class KakaoController
 {
-	@GetMapping("admin")
-	public String admin() throws Exception
+	@GetMapping("join")
+	public String join() throws Exception
 	{
-		log.info("-- get admin --");
+		log.info("--- get join ---");
 
-		return "/kjk/admin/admin";
+		return "member/join";
 	}
 
-	@GetMapping("loginPhoto")
-	public String photo() throws Exception
+	@GetMapping("login")
+	public String login() throws Exception
 	{
-		log.info("-- photo --");
+		log.info("--- get login ---");
 
-		return "/kjk/admin/loginPhoto";
+		return "member/login";
 	}
 }
