@@ -47,4 +47,17 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	@GetMapping("detail")
+	public ModelAndView getNoticeListDetail(NoticeVO noticeVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		log.info("noticeVO1 -> {}",noticeVO);
+		log.info("noticeVO1 -> {}",noticeVO.getTitle());
+		NoticeVO test = noticeService.getNoticeListDetail(noticeVO);
+	
+		mv.addObject("noticeVO",test);
+		mv.setViewName("/board/notice/detail");
+		log.info("noticeVO -> {}",test.getTitle());
+		return mv;
+	}
 }
