@@ -17,4 +17,8 @@ public interface NoticeMapper  {
 	public int setNoticeAdd(NoticeVO noticeVO) throws Exception;
 
 	public NoticeVO getNoticeListDetail(NoticeVO noticeVO) throws Exception;
+	
+	public int setNoticeUpdate(NoticeVO noticeVO) throws Exception;
+	
+	public int setNoticeDelete(NoticeVO noticeVO) throws Exception;
 }

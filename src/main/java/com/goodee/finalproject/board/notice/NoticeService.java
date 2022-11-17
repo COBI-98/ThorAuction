@@ -31,4 +31,16 @@ public class NoticeService implements NoticeMapper {
 		// TODO Auto-generated method stub
 		return noticeMapper.getNoticeListDetail(noticeVO);
 	}
+
+	@Override
+	public int setNoticeUpdate(NoticeVO noticeVO) throws Exception {
+		
+		return noticeMapper.setNoticeUpdate(noticeVO);
+	}
+
+	@Override
+	public int setNoticeDelete(NoticeVO noticeVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.setNoticeDelete(noticeVO);
+	}
 }

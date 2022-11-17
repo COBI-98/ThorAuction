@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,13 +52,34 @@ public class NoticeController {
 	@GetMapping("detail")
 	public ModelAndView getNoticeListDetail(NoticeVO noticeVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		log.info("noticeVO1 -> {}",noticeVO);
-		log.info("noticeVO1 -> {}",noticeVO.getTitle());
 		NoticeVO test = noticeService.getNoticeListDetail(noticeVO);
 	
 		mv.addObject("noticeVO",test);
 		mv.setViewName("/board/notice/detail");
-		log.info("noticeVO -> {}",test.getTitle());
+		return mv;
+	}
+	
+	@GetMapping("update")
+	public void setNoticeUpdate(NoticeVO noticeVO,Model model) throws Exception{
+		model.addAttribute("noticeNum", noticeVO.getNoticeNum());
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setNoticeUpdate(NoticeVO noticeVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setNoticeUpdate(noticeVO);
+		
+		mv.setViewName("redirect:./list");
+		
+		return mv;
+	}
+	
+	@GetMapping("delete")
+	public ModelAndView setNoticeDelete(NoticeVO noticeVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		noticeService.setNoticeDelete(noticeVO);
+		mv.setViewName("redirect:./list");
 		return mv;
 	}
 }

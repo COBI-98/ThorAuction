@@ -17,4 +17,14 @@
  		INSERT INTO boardNotice
 		VALUE (#{noticeNum},#{writer},#{title},#{contents},0,now());
  	</insert>
+ 	
+ 	
+ 	<delete id="setNoticeDelete" parameterType="NoticeVO">
+ 		DELETE FROM boardNotice WHERE NOTICENUM = #{noticeNum}
+ 	</delete>
+ 	
+ 	<update id="setNoticeUpdate" parameterType="NOTICEVO">
+ 		UPDATE boardNotice SET 
+		WRITER = #{writer}, TITLE = #{title}, contents = #{contents} WHERE NOTICENUM=#{noticeNum}
+ 	</update>
 </mapper>
