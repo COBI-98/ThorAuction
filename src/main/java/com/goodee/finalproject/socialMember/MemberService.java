@@ -1,4 +1,4 @@
-package com.goodee.finalproject.social.member;
+package com.goodee.finalproject.socialMember;
 
 import org.springframework.stereotype.Service;
 
