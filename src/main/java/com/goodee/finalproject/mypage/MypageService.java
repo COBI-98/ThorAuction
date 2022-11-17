@@ -1,5 +1,7 @@
 package com.goodee.finalproject.mypage;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

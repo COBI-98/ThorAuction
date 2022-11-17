@@ -9,10 +9,15 @@
 	<update id="setUpdate" parameterType="MemberVO">
 		UPDATE THORMEMBER 
 		SET
+		ID = #{id},
+		NAME = #{name},
+		BIRTH = #{birth},
 		EMAIL = #{email},
 		POST = #{post},
 		ADDR = #{addr},
-		ADDR2 = #{addr2}
+		ADDR2 = #{addr2},
+		PHONE = #{phone}
+		
 		WHERE ID = #{id}
 	</update>
 </mapper>
