@@ -9,6 +9,10 @@
  		select * from boardNotice
  	</select>
  	
+ 	<select id="getNoticeListDetail" parameterType="NoticeVO" resultType="NoticeVO">
+ 		select * from boardNotice where noticeNum = #{noticeNum}
+ 	</select>
+ 	
  	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">	
  		INSERT INTO boardNotice
 		VALUE (#{noticeNum},#{writer},#{title},#{contents},0,now());

@@ -30,7 +30,7 @@
 		    <c:forEach items="${testdto}" var="dto">
 		    <tr>
 		      
-			      <td><a href="./detail?boardNum=${dto.noticeNum}">${dto.noticeNum}</a></td>
+			      <td><a href="./detail?noticeNum=${dto.noticeNum}">${dto.noticeNum}</a></td>
 			      <td>${dto.writer}</td>
 			      <td>${dto.title}</td>
 			      <td>${dto.contents}</td>

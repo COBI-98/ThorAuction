@@ -25,4 +25,10 @@ public class NoticeService implements NoticeMapper {
 		
 		return noticeMapper.setNoticeAdd(noticeVO);
 	}
+
+	@Override
+	public NoticeVO getNoticeListDetail(NoticeVO noticeVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.getNoticeListDetail(noticeVO);
+	}
 }
