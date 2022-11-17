@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.util.BoardPageMaker;
 
@@ -42,7 +43,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setNoticeAdd(NoticeVO notcieVO, MultipartFile [] files) throws Exception{
+	public ModelAndView setNoticeAdd(NoticeVO notcieVO, MultipartFile [] files,RedirectAttributes redirectAttributes) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		log.info("NoticeVO -> {}", notcieVO);
@@ -50,6 +51,7 @@ public class NoticeController {
 		
 		mv.setViewName("redirect:./list");
 		
+		redirectAttributes.addAttribute("result", result);
 		return mv;
 	}
 	

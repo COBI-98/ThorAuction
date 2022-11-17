@@ -95,7 +95,7 @@
 			<a href="./add" type="button" class="btn btn-info">글쓰기</a>
 		</div>
 		</section>
-			<!-- <script type="text/javascript">
+			<script type="text/javascript">
 				let result = '${param.result}';
 				if(result != ""){
 					if(result == '1'){
@@ -104,7 +104,7 @@
 						swal("등록실패","","error")
 					}
 				}
-			</script> -->
+			</script> 
 </body>
 </html>
 
