@@ -28,7 +28,6 @@
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">|카카오 로그아웃|</a></li>
 					<form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<br>
