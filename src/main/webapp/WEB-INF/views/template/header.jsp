@@ -17,7 +17,7 @@
       	<!-- 로그인 후 -->
       	<c:if test="${member != null}">
       		<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>	
-      		<li class="nav-item"><a href="../myPage" class="nav-link link-dark px-2">마이페이지</a></li>	
+      		<li class="nav-item"><a href="../mypage/update" class="nav-link link-dark px-2">마이페이지</a></li>	
       	</c:if>
       	
         <li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
