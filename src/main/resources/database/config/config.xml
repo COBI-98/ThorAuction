@@ -6,6 +6,9 @@
 <configuration>
    <typeAliases>
    		<typeAlias type="com.goodee.finalproject.board.notice.NoticeVO" alias="NoticeVO"/>
+   		<typeAlias type="com.goodee.finalproject.util.BoardPageMaker" alias="BoardPageMaker"/>
+   		
+   		<typeAlias type="java.lang.Long" alias="Long"/>
    </typeAliases>
 
 </configuration>

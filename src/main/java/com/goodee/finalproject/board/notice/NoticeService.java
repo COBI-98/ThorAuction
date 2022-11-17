@@ -5,42 +5,52 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.goodee.finalproject.util.BoardPageMaker;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class NoticeService implements NoticeMapper {
+public class NoticeService  {
 
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
-	@Override
-	public List<NoticeVO> getNoticeList(NoticeVO noticeVO) throws Exception{ 
+	
+	public List<NoticeVO> getNoticeList(BoardPageMaker boardPageMaker) throws Exception{ 
 		
-		return noticeMapper.getNoticeList(noticeVO);
+		Long totalCount = noticeMapper.getCount(boardPageMaker);
+		boardPageMaker.getNum(totalCount);
+		boardPageMaker.getRowNum();
+		log.info("totalCount :  {}", totalCount);
+
+		log.info("boardPageMake -> {} ", boardPageMaker);
+		return noticeMapper.getNoticeList(boardPageMaker);
 	}
 
-	@Override
+	
 	public int setNoticeAdd(NoticeVO noticeVO) throws Exception {
 		
 		return noticeMapper.setNoticeAdd(noticeVO);
 	}
 
-	@Override
+	
 	public NoticeVO getNoticeListDetail(NoticeVO noticeVO) throws Exception {
 		// TODO Auto-generated method stub
 		return noticeMapper.getNoticeListDetail(noticeVO);
 	}
 
-	@Override
+	
 	public int setNoticeUpdate(NoticeVO noticeVO) throws Exception {
 		
 		return noticeMapper.setNoticeUpdate(noticeVO);
 	}
 
-	@Override
+	
 	public int setNoticeDelete(NoticeVO noticeVO) throws Exception {
 		// TODO Auto-generated method stub
 		return noticeMapper.setNoticeDelete(noticeVO);
 	}
+
+	
 }
