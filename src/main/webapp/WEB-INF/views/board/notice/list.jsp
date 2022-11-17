@@ -42,24 +42,24 @@
 		   </tbody>
 	</table>
 	
-	<%-- <nav aria-label="Page navigation example">
+	 <nav aria-label="Page navigation example">
 				<ul class="pagination">
-					<c:if test="${pager.pre}">
+					<c:if test="${boardPageMaker.pre}">
 						<li class="page-item"><a class="page-link"
-							href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">Previous</a>
+							href="./list?page=${boardPageMaker.startNum-1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">Previous</a>
 						</li>
 					</c:if>
-					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					<c:forEach begin="${boardPageMaker.startNum}" end="${boardPageMaker.lastNum}" var="i">
 						<li class="page-item"><a class="page-link"
-							href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							href="./list?page=${i}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">${i}</a></li>
 					</c:forEach>
 
-					<li class="page-item ${pager.next?'':'disabled'}"><a
+					<li class="page-item ${boardPageMaker.next?'':'disabled'}"><a
 						class="page-link"
-						href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">Next</a>
+						href="./list?page=${boardPageMaker.lastNum+1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">Next</a>
 					</li>
 				</ul>
-		</nav> --%>
+		</nav>
 		<div>
 			<a href="./add" type="button" class="btn btn-info">글쓰기</a>
 		</div>

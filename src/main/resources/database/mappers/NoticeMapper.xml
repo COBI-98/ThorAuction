@@ -27,4 +27,10 @@
  		UPDATE boardNotice SET 
 		WRITER = #{writer}, TITLE = #{title}, contents = #{contents} WHERE NOTICENUM=#{noticeNum}
  	</update>
+ 	
+ 	<select id="getCount" resultType="Long" parameterType="BoardPageMaker">
+		SELECT
+		COUNT(noticeNum) FROM boardNotice
+		<include refid="search"></include>
+	</select>
 </mapper>
