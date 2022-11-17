@@ -14,4 +14,5 @@ public interface NoticeMapper  {
 
 	public List<NoticeVO> getNoticeList(NoticeVO noticeVO) throws Exception;
 
+	public int setNoticeAdd(NoticeVO noticeVO) throws Exception;
 }

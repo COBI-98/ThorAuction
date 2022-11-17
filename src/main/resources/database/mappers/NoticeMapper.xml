@@ -8,4 +8,9 @@
  	<select id="getNoticeList" parameterType="NoticeVO" resultType="NoticeVO">
  		select * from boardNotice
  	</select>
+ 	
+ 	<insert id="setNoticeAdd" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">	
+ 		INSERT INTO boardNotice
+		VALUE (#{noticeNum},#{writer},#{title},#{contents},0,now());
+ 	</insert>
 </mapper>
