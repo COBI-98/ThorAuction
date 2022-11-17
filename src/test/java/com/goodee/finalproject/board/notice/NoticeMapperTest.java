@@ -12,7 +12,7 @@ class NoticeMapperTest {
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
-	@Test
+	//@Test
 	void test3() throws Exception {
 		NoticeVO noticeVO = new NoticeVO();
 		int result = 0;
