@@ -5,9 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
 	
-	// 회원정보 수정
-	public int setUpdate(MemberVO memberVO) throws Exception;
-	
 	// 로그인
 	public MemberVO getLogin(MemberVO memberVO) throws Exception;
 	

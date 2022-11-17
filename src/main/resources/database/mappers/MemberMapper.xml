@@ -5,17 +5,6 @@
 	
 <mapper namespace="com.goodee.finalproject.member.MemberMapper">
 
-	<!-- 회원정보 수정 -->
-	<update id="setUpdate" parameterType="MemberVO">
-		UPDATE THORMEMBER 
-		SET
-		EMAIL = #{email},
-		POST = #{post},
-		ADDR = #{addr},
-		ADDR2 = #{addr2}
-		WHERE ID = #{id}
-	</update>
-
 	<!-- 로그인 -->
 	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
 		SELECT * 
@@ -41,7 +30,7 @@
 		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{post}, #{addr}, #{addr2}, #{phone}, 1000);
 	</insert>
 	
-	<!-- 로그인 join -->
+	<!-- 로그인 join resultMap -->
 	<resultMap type="MemberVO" id="getLoginResult">
 		<id column="id" property="id" />
 		<result column="pw" property="pw" />
