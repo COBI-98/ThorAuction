@@ -1,4 +1,4 @@
-package com.goodee.finalproject.social;
+package com.goodee.finalproject.socialMember;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

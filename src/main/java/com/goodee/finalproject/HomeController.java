@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController
 {
 	// 카카오 로그인
-	@Value("${spring.security.oauth2.client.registration.kakao.client-id}")
-	private String KakaoClientID;
+//	@Value("${spring.security.oauth2.client.registration.kakao.client-id}")
+//	private String KakaoClientID;
 
 	@GetMapping("/")
 	public String home(HttpSession session) throws Exception
