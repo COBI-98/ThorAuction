@@ -14,9 +14,10 @@
 	<c:import url="./template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
 		
-			<h1> 토르의 실시간 대장간 메인</h1>
+			<h1> 토르의 실시간 대장간 메인</h1>	
+			
 			<div class="mt-5">
-				<a href="../member/update">회원정보 수정</a>
+				<a href="../mypage/update">회원정보 수정</a>
 			</div>
 		
 	</section>
