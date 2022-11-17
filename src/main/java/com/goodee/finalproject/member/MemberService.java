@@ -9,14 +9,6 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	// 회원정보 수정
-	public int setUpdate(MemberVO memberVO) throws Exception {
-		
-		int result = memberMapper.setUpdate(memberVO);
-		
-		return result;
-	}
-	
 	// 로그인
 	public MemberVO getLogin(MemberVO memberVO) throws Exception {
 		
