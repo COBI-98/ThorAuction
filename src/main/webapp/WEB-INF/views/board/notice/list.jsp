@@ -67,7 +67,7 @@
 		     </c:forEach>
 		   </tbody>
 	</table>
-	
+	  
 	 <nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<c:if test="${boardPageMaker.pre}">
@@ -76,7 +76,12 @@
 						</li>
 					</c:if>
 					<c:forEach begin="${boardPageMaker.startNum}" end="${boardPageMaker.lastNum}" var="i">
-						<li class="page-item"><a class="page-link"
+						
+							
+						
+						<li class="page-item <c:if test="${param.page == i}">
+								active
+							</c:if>" ><a class="page-link"
 							href="./list?page=${i}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">${i}</a></li>
 					</c:forEach>
 
