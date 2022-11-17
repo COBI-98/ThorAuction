@@ -20,6 +20,10 @@ public class NoticeService  {
 	public List<NoticeVO> getNoticeList(BoardPageMaker boardPageMaker) throws Exception{ 
 		
 		Long totalCount = noticeMapper.getCount(boardPageMaker);
+		
+		if(totalCount == 0L) {
+			totalCount = 1L;
+		}
 		boardPageMaker.getNum(totalCount);
 		boardPageMaker.getRowNum();
 		log.info("totalCount :  {}", totalCount);
