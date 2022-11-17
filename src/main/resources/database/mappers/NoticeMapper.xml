@@ -5,8 +5,23 @@
     
 <mapper namespace="com.goodee.finalproject.board.notice.NoticeMapper">
  
+ 	<sql id="search">
+		WHERE
+		<choose>
+			<when test="kind =='noticeNum'">NoticeNum</when>
+			<when test="kind == 'title'">Title</when>
+			<when test="kind =='writer'">Writer</when>
+			<otherwise>contents</otherwise>
+		</choose>
+		LIKE CONCAT('%',#{search},'%')
+	</sql>
+	
  	<select id="getNoticeList" parameterType="NoticeVO" resultType="NoticeVO">
- 		select * from boardNotice
+ 		SELECT * 
+		FROM boardNotice
+		<include refid="search"></include>
+		ORDER BY noticeNum DESC
+		limit #{startRow}, #{lastRow}
  	</select>
  	
  	<select id="getNoticeListDetail" parameterType="NoticeVO" resultType="NoticeVO">
