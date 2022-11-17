@@ -5,4 +5,7 @@
     
 <mapper namespace="com.goodee.finalproject.board.notice.NoticeMapper">
  
+ 	<select id="getNoticeList" parameterType="NoticeVO" resultType="NoticeVO">
+ 		select * from boardNotice
+ 	</select>
 </mapper>

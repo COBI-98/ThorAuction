@@ -10,5 +10,6 @@
 </head>
 <body>
   <h1>ㅎㅇㅎㅇ</h1>
+  <a href="/board/notice/list">ㅎㅇㅎㅇ</a>
 </body>
 </html>
