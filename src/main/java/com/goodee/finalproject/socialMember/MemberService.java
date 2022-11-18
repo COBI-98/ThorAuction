@@ -1,5 +1,6 @@
 package com.goodee.finalproject.socialMember;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -15,8 +16,16 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class MemberService
 {
+	@Autowired
+	public KakaoMapperIF kakaoMapperIF;
+
 	@Value("${kakao.Admin.key}")
 	private String adminKey;
+
+	public int setKakaoMember(KakaoVO kakaoVO) throws Exception
+	{
+		return kakaoMapperIF.setKakaoMember(kakaoVO);
+	}
 
 	// 소셜 회원 탈퇴
 	public int SocialDelete(KakaoVO kakaoVO) throws Exception

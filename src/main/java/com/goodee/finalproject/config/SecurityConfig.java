@@ -53,7 +53,6 @@ public class SecurityConfig
 				// ---------- 로그아웃 시작 ---------------
 				.logout() // 로그 아웃시
 				.logoutUrl("/member/logout") // 로그아웃
-				// .logoutSuccessUrl("/") // 로그아웃 성공시
 				.addLogoutHandler(logoutCustom) // 로그아웃 시 실행
 				.logoutSuccessHandler(logoutSuccessCustom) // 로그아웃 성공 시 실행
 				.invalidateHttpSession(true) // Session 내용 없애기

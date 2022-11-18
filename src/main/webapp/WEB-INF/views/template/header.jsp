@@ -30,10 +30,9 @@
 				<sec:authorize access="isAuthenticated()">
 					<form action="/member/logout" method="post">
 						<sec:csrfInput />
-						<br>
-						<button class="btn btn-outline-dark">logout</button>
+						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form>
-					<li class="nav-item"><a href="../mypage/update" class="nav-link link-dark px-2">|카카오 마이페이지|</a></li>
+					<li class="nav-item"><a href="../member/kakaoLogin" class="nav-link link-dark px-2">|카카오 정보|</a></li>
 				</sec:authorize>
 				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
 

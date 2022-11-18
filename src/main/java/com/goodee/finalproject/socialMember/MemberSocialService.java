@@ -6,11 +6,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,12 +35,12 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		String social = userRequest.getClientRegistration().getRegistrationId();
 		log.info(social);
 
-		OAuth2User oAuth2User2 = this.socialJoinCheck(userRequest);
+		OAuth2User oAuth2User2 = this.socialJoinCheck(null, userRequest);
 
 		return oAuth2User2;
 	}
 
-	private OAuth2User socialJoinCheck(OAuth2UserRequest userRequest)
+	public OAuth2User socialJoinCheck(HttpSession session, OAuth2UserRequest userRequest)
 	{
 		// 회원가입 유무
 		log.info("===== user infomation =====");
@@ -68,6 +71,10 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 		kakaoVO.setSocial(userRequest.getClientRegistration().getRegistrationId()); // 소셜 이름 가져옴 : kakao
 		kakaoVO.setAttributes(oAuth2User.getAttributes());
+		
+		String name = kakaoVO.getKaNickName();
+
+		session.setAttribute("name", name);
 
 		return kakaoVO;
 	}

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,11 @@ public class KakaoController
 {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MemberSocialService memberSocialService;
+	
+	// join 2번 페이지로 카카오 정보 넘기기
+	
 
 	@GetMapping("delete")
 	public ModelAndView SocialDelete(HttpSession session) throws Exception
@@ -38,6 +45,18 @@ public class KakaoController
 		}
 		
 		return modelAndView;
+	}
+	
+	@GetMapping("kakaoLogin")
+	public void kakaoLogin(HttpSession session) throws Exception
+	{
+		log.info("--- get kakaoLogin ---");
+		
+		Object name = session.getAttribute("name");
+		
+		log.info("name? : {}", name);
+
+		return ;
 	}
 
 	@GetMapping("join")
