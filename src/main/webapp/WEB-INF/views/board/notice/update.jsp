@@ -15,7 +15,7 @@
 <body>
 	
 	<section class="container-fluid col-lg-8 mt-5">
-		<h1>공지게시판 Update Page</h1>
+		<h1>공지게시판 수정</h1>
 		<div class="row">
 	 <form class="align-center" action="./update" method="post">
         

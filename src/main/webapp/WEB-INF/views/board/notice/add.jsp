@@ -14,7 +14,7 @@
 <body>
 	
 	<section class="container-fluid col-lg-8 mt-5">
-		<h1>Notice Write Page</h1>
+		<h1>공지게시판 글쓰기</h1>
 		<div class="row">
 	 <form class="align-center" action="./add" method="post" enctype="multipart/form-data">
         

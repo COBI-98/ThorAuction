@@ -13,7 +13,7 @@
 <body>
 
 	<section class="container-fluid col-lg-8 mt-5">
-	<h1>Notice List</h1>
+	<h1>공지게시판</h1>
 	<div class="row mb-3">
 		<form action="./list"
 			class="row row-cols-lg-auto g-3 align-items-center">

@@ -14,7 +14,7 @@
 	<section class="container-fluid col-lg-8 mt-5">
 
 
-	<h1> boardNotice detail page</h1>
+	<h1>공지게시판 상세보기</h1>
 	
 	<table class="table table-bordered border-primary">
   <tbody>
