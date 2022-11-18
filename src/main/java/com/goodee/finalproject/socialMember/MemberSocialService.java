@@ -35,12 +35,12 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		String social = userRequest.getClientRegistration().getRegistrationId();
 		log.info(social);
 
-		OAuth2User oAuth2User2 = this.socialJoinCheck(null, userRequest);
+		OAuth2User oAuth2User2 = this.socialJoinCheck(userRequest);
 
 		return oAuth2User2;
 	}
 
-	public OAuth2User socialJoinCheck(HttpSession session, OAuth2UserRequest userRequest)
+	public OAuth2User socialJoinCheck(OAuth2UserRequest userRequest)
 	{
 		// 회원가입 유무
 		log.info("===== user infomation =====");
@@ -71,10 +71,6 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 		kakaoVO.setSocial(userRequest.getClientRegistration().getRegistrationId()); // 소셜 이름 가져옴 : kakao
 		kakaoVO.setAttributes(oAuth2User.getAttributes());
-		
-		String name = kakaoVO.getKaNickName();
-
-		session.setAttribute("name", name);
 
 		return kakaoVO;
 	}

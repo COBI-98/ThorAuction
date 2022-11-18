@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.goodee.finalproject.socialMember.KakaoMapperIF">
+<mapper
+	namespace="com.goodee.finalproject.socialMember.KakaoMapperIF">
 
 	<insert id="setKakaoMember" parameterType="KakaoVO">
 		insert into
-		SOCIALKAKAO values(${kaNickName}, ${kaEmail}, ${kaBirth},
-		${kaName},
-		${kaPost},
-		${kaAddr}, ${kaAddrDetail},${kaPhone}, 1000)
+		SOCIALKAKAO(KANICKNAME, KAEMAIL, KANAME) values(${kaNickName},
+		${kaEmail},	${kaName})
 	</insert>
 
 </mapper>
