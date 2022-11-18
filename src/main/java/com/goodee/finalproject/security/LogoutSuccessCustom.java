@@ -29,6 +29,8 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler
 	private String client_id;
 	@Value("${kakao.redirect-uri.logout}")
 	private String redirect_uri;
+	@Value("${kakao.logout}")
+	private String logout_uri;
 
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
@@ -44,7 +46,7 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler
 			{
 				try
 				{
-					response.sendRedirect("https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + redirect_uri);
+					response.sendRedirect("https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + logout_uri);
 					log.info("kakao logout");
 				} catch (IOException e)
 				{

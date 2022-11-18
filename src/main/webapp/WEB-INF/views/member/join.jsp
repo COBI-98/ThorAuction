@@ -68,6 +68,22 @@
 							</div>
 						</div>
 					</form>
+					<br>
+					<br>
+					<br>
+					<div class="login__l-or" style="text-align: center; padding-top: 50px;">OR</div>
+
+					<div class="simple-login" style="text-align: center;">
+						<h2 class="login__fb-title">SNS계정으로 간편 로그인/회원가입</h2>
+						<a href="/oauth2/authorization/kakao" style="text-decoration: none; padding-right: 15px;">
+							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
+								class="kakao-button__img" alt="카카오로고">
+						</a>
+
+						<a href="#">
+							<img src="/images/member/icons8-구글-로고.svg" class="google-button__img" alt="구글로고">
+						</a>
+					</div>
 
 					<div class="sign-up__go-to-login">
 						이미 회원이신가요?
