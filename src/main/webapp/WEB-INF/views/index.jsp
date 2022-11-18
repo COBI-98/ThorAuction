@@ -18,6 +18,7 @@
 			
 			<div class="mt-5">
 				<a href="../mypage/update">회원정보 수정</a>
+				<a href="../mypage/delete">회원탈퇴</a>
 			</div>
 		
 	</section>

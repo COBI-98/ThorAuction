@@ -5,6 +5,14 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 회원탈퇴 -->
+	<delete id="setDelete">
+		DELETE FROM THORMEMBER
+		WHERE ID = #{id}
+			AND PW = #{pw}
+		
+	</delete>
+
 	<!-- 회원정보 수정 -->
 	<update id="setUpdate" parameterType="MemberVO">
 		UPDATE THORMEMBER 
