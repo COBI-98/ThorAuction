@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
+// 소셜 로그인 하는 클래스
 @Service
 @Slf4j
 public class MemberSocialService extends DefaultOAuth2UserService
