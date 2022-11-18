@@ -10,6 +10,7 @@
 </head>
 <body>
   <h1>ㅎㅇㅎㅇ</h1>
-  <a href="/board/notice/list">ㅎㅇㅎㅇ</a>
+  <a href="/board/notice/list">공지게시판</a>
+  <a href="/board/application/list">신청게시판</a>
 </body>
 </html>
