@@ -23,9 +23,8 @@ public class KakaoController
 	private MemberService memberService;
 	@Autowired
 	private MemberSocialService memberSocialService;
-	
+
 	// join 2번 페이지로 카카오 정보 넘기기
-	
 
 	@GetMapping("delete")
 	public ModelAndView SocialDelete(HttpSession session) throws Exception
@@ -43,20 +42,20 @@ public class KakaoController
 		{
 			modelAndView.setViewName("redirect:/member/logout");
 		}
-		
+
 		return modelAndView;
 	}
-	
+
 	@GetMapping("kakaoLogin")
-	public void kakaoLogin(HttpSession session) throws Exception
+	public void kakaoLogin(KakaoVO kakaoVO) throws Exception
 	{
 		log.info("--- get kakaoLogin ---");
-		
-		Object name = session.getAttribute("name");
-		
-		log.info("name? : {}", name);
 
-		return ;
+		int rs = memberService.setKakaoMember(kakaoVO);
+
+		log.info("kakao login rs: {}", rs);
+
+		return;
 	}
 
 	@GetMapping("join")

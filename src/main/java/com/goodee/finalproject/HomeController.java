@@ -28,6 +28,8 @@ public class HomeController
 //		// 4. 요청 객체 생성
 //		HttpEntity<MultiValueMap<String, String>> req = new HttpEntity<MultiValueMap<String, String>>(param, headers);
 //		// 5. 요청 전송 결과 처리
+		
+		log.info("kakao name? : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 
 		return "index";
 	}
