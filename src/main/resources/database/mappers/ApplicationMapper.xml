@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.goodee.finalproject.board.application.ApplicationMapper">
+ 
+ 	<sql id="search">
+		WHERE
+		<choose>
+			<when test="kind =='applicationNum'">ApplicationNum</when>
+			<when test="kind == 'title'">Title</when>
+			<when test="kind =='writer'">Writer</when>
+			<otherwise>contents</otherwise>
+		</choose>
+		LIKE CONCAT('%',#{search},'%')
+	</sql>
+	
+ 	<select id="getApplicationList" parameterType="ApplicationVO" resultType="ApplicationVO">
+ 		SELECT * 
+		FROM boardApplication
+		<include refid="search"></include>
+		ORDER BY applicationNum DESC
+		limit #{startRow}, #{lastRow}
+ 	</select>
+ 	
+ 	<select id="getApplicationListDetail" parameterType="ApplicationVO" resultType="ApplicationVO">
+ 		select * from boardApplication where applicationNum = #{applicationNum}
+ 	</select>
+ 	
+ 	<insert id="setApplicationAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="applicationNum">	
+ 		INSERT INTO boardApplication
+		VALUE (#{applicationNum},#{writer},#{title},#{contents},0,now());
+ 	</insert>
+ 	
+ 	
+ 	<delete id="setApplicationDelete" parameterType="ApplicationVO">
+ 		DELETE FROM boardApplication WHERE applicationNum = #{applicationNum}
+ 	</delete>
+ 	
+ 	<update id="setApplicationUpdate" parameterType="ApplicationVO">
+ 		UPDATE boardApplication SET 
+		WRITER = #{writer}, TITLE = #{title}, contents = #{contents} WHERE applicationNum=#{applicationNum}
+ 	</update>
+ 	
+ 	<select id="getApplicationCount" resultType="Long" parameterType="BoardPageMaker">
+		SELECT
+		COUNT(applicationNum) FROM boardApplication
+		<include refid="search"></include>
+	</select>
+</mapper>

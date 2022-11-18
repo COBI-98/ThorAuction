@@ -38,16 +38,16 @@ public class NoticeController {
 	}
 	
 	@GetMapping("add")
-	public void setNoticeAdd(NoticeVO notcieVO) throws Exception{
+	public void setNoticeAdd(NoticeVO noticeVO) throws Exception{
 		log.info("---------------------");
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setNoticeAdd(NoticeVO notcieVO, MultipartFile [] files,RedirectAttributes redirectAttributes) throws Exception{
+	public ModelAndView setNoticeAdd(NoticeVO noticeVO, MultipartFile [] files,RedirectAttributes redirectAttributes) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		log.info("NoticeVO -> {}", notcieVO);
-		int result = noticeService.setNoticeAdd(notcieVO);
+		log.info("NoticeVO -> {}", noticeVO);
+		int result = noticeService.setNoticeAdd(noticeVO);
 		
 		mv.setViewName("redirect:./list");
 		
