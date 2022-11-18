@@ -3,13 +3,6 @@
 <div class="container">
   <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
     <div class="col mb-3">
-      <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      </a>
-      <p class="text-muted">© 2022</p>
-    </div>
-
-    <div class="col mb-3">
 
     </div>
 
@@ -46,7 +39,7 @@
       </ul>
     </div>
     <div class="second-menu">
-                <div id="map" style="width:300px;height:170px;"></div>
+                <div id="map" style="width:400px;height:200px;"></div>
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=67a15d0ede53def65514d5bb44685f5a"></script>
                 <script>
                   var container = document.getElementById('map');

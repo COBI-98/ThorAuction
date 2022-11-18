@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="./template/boot.jsp"></c:import>
+	<link href="/css/reset.css" rel="stylesheet">
+	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 	<title>Chating</title>
@@ -59,8 +63,11 @@
 
 
 <body>
+	<c:import url="./template/header.jsp"></c:import>
+	<section class="container d-flex flex-wrap justify-content-center">
 	<div id='chatt'>
-		<h1>WebSocket Chatting</h1>
+		<h1>실시간 경매</h1>
+		<h1>물품 : </h1>
 		<input type='text' id='mid' value='홍길동'>
 		<input type='button' value='로그인' id='btnLogin'>
 		<br/>
@@ -78,7 +85,8 @@
     
     <script src="/socket.io/socket.io.js"></script>
     
-    
+    </section>
+	<c:import url="./template/footer.jsp"></c:import>
 	<script src='/js/chat.js'></script>
 </body>
 </html>
