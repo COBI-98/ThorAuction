@@ -75,6 +75,7 @@
 
 					<div class="simple-login" style="text-align: center;">
 						<h2 class="login__fb-title">SNS계정으로 간편 로그인/회원가입</h2>
+						<!-- javascript:popup() -->
 						<a href="/oauth2/authorization/kakao" style="text-decoration: none; padding-right: 15px;">
 							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
 								class="kakao-button__img" alt="카카오로고">
@@ -94,4 +95,18 @@
 		</div>
 	</div>
 </body>
+<script>
+	var width = '500';
+	var height = '400';
+	var left = Math.ceil((window.screen.width) / 2);
+	var top = Math.ceil((window.screen.height) / 2);
+// /oauth2/authorization/kakao
+	function popup() {
+		var url = "/oauth2/authorization/kakao";
+		var name = "popup test";
+		var option = "width=" + width + ", height=" + height + ", top=" + top
+				+ ", left=" + left + ", location=kakaoLogin"
+		window.open(url, name, option);
+	}
+</script>
 </html>

@@ -29,6 +29,7 @@ public class KakaoVO implements OAuth2User, UserDetails
 	private String kaPost;
 	private String kaAddr;
 	private String kaAddrDetail;
+	private String kaPhone;
 	private Long kaPoint;
 
 	private String social;
