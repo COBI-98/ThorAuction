@@ -9,6 +9,12 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	// 아이디 중복확인
+	public MemberVO getIdCheck(String id) throws Exception {
+		
+		return memberMapper.getIdCheck(id);
+	}
+	
 	// 로그인
 	public MemberVO getLogin(MemberVO memberVO) throws Exception {
 		

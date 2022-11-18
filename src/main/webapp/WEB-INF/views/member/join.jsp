@@ -19,7 +19,14 @@
 			<table>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="id"></td>
+					<td><input type="text" id="id" name="id">
+					
+					<button type="button" class="idCheck">중복확인</button>
+					
+					<p class="result">
+						<span class="msg"></span>
+					</p>
+					</td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
@@ -55,10 +62,41 @@
 				</tr>
 			</table>
 
-			<button type="submit">가입하기</button>
+			<button type="submit" id="join_btn" disabled="disabled">가입하기</button>
 		</form>
 
 	</section>
+	<script>
+		$(".idCheck").click(function() {
+			var query = {id : $("#id").val()};
+			
+			$.ajax({
+				url : "/member/idCheck",
+				type : "POST",
+				data : query,
+				success : function(data) {
+					if(data == 1) {
+						$(".result .msg").text("중복되는 아이디가 있습니다");
+						$(".result .msg").attr("style", "color : #f00");
+						$("#join_btn").attr("disabled", "disabled");
+					} else {
+						$(".result .msg").text("사용가능한 아이디입니다");
+						$(".result .msg").attr("style", "color : #00f");
+						$(".idcheck").attr("disabled", "disabled");
+						$("#join_btn").removeAttr("disabled");
+					}
+				}
+				
+			});
+		});
+		$("#id").blur(function(){
+			 $(".result .msg").text("중복확인을 해주세요");
+			 $(".result .msg").attr("style", "color:#000");
+			 
+			 $("#submit").attr("disabled", "disabled");
+			 
+			});
+	</script>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

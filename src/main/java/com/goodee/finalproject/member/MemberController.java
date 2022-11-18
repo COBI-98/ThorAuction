@@ -1,5 +1,6 @@
 package com.goodee.finalproject.member;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,23 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	// 아이디 중복확인 POST
+	@PostMapping("/idCheck")
+	@ResponseBody
+	public int getIdCheck(HttpServletRequest httpServletRequest) throws Exception {
+		
+		String equalsId = httpServletRequest.getParameter("id");
+		MemberVO idCheck = memberService.getIdCheck(equalsId);
+		
+		int result = 0;
+		
+		if(idCheck != null) {
+			result = 1;
+		}
+		
+		return result;
+	}
 	
 	// 로그인 GET
 	@GetMapping("login")
