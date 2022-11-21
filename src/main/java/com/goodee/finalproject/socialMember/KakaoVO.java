@@ -12,25 +12,9 @@ import lombok.Data;
 @Data
 public class KakaoVO implements OAuth2User, UserDetails
 {
-	// `KANICKNAME` VARCHAR(100) NOT NULL,
-	// `KAEMAIL` VARCHAR(100) NOT NULL,
-	// `KABIRTH` INT NOT NULL,
-	// `KANAME` VARCHAR(100) NOT NULL,
-	// `KAPOST` VARCHAR(100) NOT NULL,
-	// `KAADDR` VARCHAR(100) NOT NULL,
-	// `KAADDRDETAIL` VARCHAR(255) NOT NULL,
-	// `KAPHONE` VARCHAR(100) NOT NULL,
-	// `KAPOINT` INT NOT NULL,
-
 	private String kaNickName;
 	private String kaEmail;
-	private Long kaBirth;
 	private String kaName;
-	private String kaPost;
-	private String kaAddr;
-	private String kaAddrDetail;
-	private String kaPhone;
-	private Long kaPoint;
 
 	private String social;
 

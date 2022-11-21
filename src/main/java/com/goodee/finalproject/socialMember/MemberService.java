@@ -22,31 +22,24 @@ public class MemberService
 	@Value("${kakao.Admin.key}")
 	private String adminKey;
 
-	public int setKakaoMember(KakaoVO kakaoVO) throws Exception
+	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
-		return kakaoMapperIF.setKakaoMember(kakaoVO);
+		return kakaoMapperIF.IdCheck(kakaoVO);
 	}
 
-	// 소셜 회원 탈퇴
-	public int SocialDelete(KakaoVO kakaoVO) throws Exception
+	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
-		WebClient webClient = WebClient.builder() //
-				.baseUrl("https://kapi.kakao.com/") //
-				.build();
+		return kakaoMapperIF.setKakaoDetail(kakaoDetailVO);
+	}
 
-		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-		map.add("target_id_type", "user_id");
-		map.add("target_id", kakaoVO.getKaNickName());
+	public int setKakao1(KakaoVO object) throws Exception
+	{
+		log.info("===== kakao service =====");
 
-		Mono<String> Mono = webClient.post() //
-				.uri("v1/user/unlink")//
-				.body(BodyInserters.fromFormData(map)) //
-				.header("Authorization", "KakaoAK " + adminKey) //
-				.header("Content-Type", " application/x-www-form-urlencoded") //
-				.retrieve() //
-				.bodyToMono(String.class) //
-		;
+		int rs = kakaoMapperIF.setKakao1(object);
 
-		return 1;
+		log.info("memberservice set kakao : {}", rs);
+
+		return rs;
 	}
 }

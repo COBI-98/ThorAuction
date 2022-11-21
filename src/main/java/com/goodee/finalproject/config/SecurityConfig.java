@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import com.goodee.finalproject.security.LoginSuccess;
 import com.goodee.finalproject.security.LogoutCustom;
 import com.goodee.finalproject.security.LogoutSuccessCustom;
 import com.goodee.finalproject.socialMember.MemberSocialService;
@@ -23,6 +24,8 @@ public class SecurityConfig
 	private LogoutCustom logoutCustom;
 	@Autowired
 	private LogoutSuccessCustom logoutSuccessCustom;
+	@Autowired
+	private LoginSuccess loginSuccess;
 
 	@Bean
 	WebSecurityCustomizer webSecurityCustomizer()
@@ -50,6 +53,9 @@ public class SecurityConfig
 				.antMatchers("/admin").hasRole("AMDIN") //
 				.anyRequest().permitAll() //
 				.and() //
+				.oauth2Login() //
+				.successHandler(loginSuccess)
+				.and()//
 				// ---------- 로그아웃 시작 ---------------
 				.logout() // 로그 아웃시
 				.logoutUrl("/member/logout") // 로그아웃

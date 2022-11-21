@@ -7,5 +7,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 @Mapper
 public interface KakaoMapperIF
 {
-	public int setKakaoMember(KakaoVO kakaoVO) throws Exception;
+	public int setKakao1(Object object) throws Exception;
+
+	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception;
+	
+	public int IdCheck(KakaoVO kakaoVO) throws Exception;
 }
