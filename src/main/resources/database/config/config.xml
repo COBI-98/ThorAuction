@@ -6,6 +6,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.goodee.finalproject.socialMember.KakaoVO" alias="KakaoVO" />
+		<typeAlias type="com.goodee.finalproject.socialMember.KakaoDetailVO" alias="KakaoDetailVO" />
 		
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="int"/>

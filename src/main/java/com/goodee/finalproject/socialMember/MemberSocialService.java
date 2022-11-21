@@ -72,6 +72,10 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		kakaoVO.setSocial(userRequest.getClientRegistration().getRegistrationId()); // 소셜 이름 가져옴 : kakao
 		kakaoVO.setAttributes(oAuth2User.getAttributes());
 
+		// log.info("kakaoVO.getKaNickName(): {}", kakaoVO.getKaNickName());
+		// log.info("kakaoVO.getKaName(): {}", kakaoVO.getKaName());
+		// log.info("kakaoVO.getKaEmail(): {}", kakaoVO.getKaEmail());
+
 		return kakaoVO;
 	}
 }
