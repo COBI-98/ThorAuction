@@ -69,6 +69,6 @@ public class MypageController {
 		
 //		int result = mypageService.setUpdate(memberVO, session.getServletContext()); // 새로 로그인 해야 수정된 게 보이는데 
 		
-		return "../member/login";
+		return "redirect:../member/login";
 	}
 }

@@ -33,7 +33,7 @@
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
 		INSERT INTO THORMEMBER
-		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{post}, #{addr}, #{addr2}, #{phone}, 1000);
+		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{post}, #{addr}, #{addr2}, #{phone}, 3000);
 	</insert>
 	
 	<!-- 로그인 join resultMap -->
