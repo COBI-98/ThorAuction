@@ -40,6 +40,11 @@ public class KakaoController
 		log.info("--- get kakaoLogin ---");
 		log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 		log.info("===== authentication: {}", authentication.getPrincipal());
+
+		int rs = memberService.IdCheck(kakaoVO);
+
+		log.info("IdCheck rs : {}", rs);
+
 		memberService.setKakao1((KakaoVO) authentication.getPrincipal());
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -57,18 +62,13 @@ public class KakaoController
 		ModelAndView modelAndView = new ModelAndView();
 
 		log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
-		// Object rs = session.getAttribute("SPRING_SECURITY_CONTEXT");
-
-		// rs = memberService.setKakao(kakaoVO);
 
 		int rs2 = memberService.setKakaoDetail(kakaoDetailVO);
 
-		// log.info("kakao login rs: {}", rs);
 		log.info("kakao login rs2: {}", rs2);
 
-		// modelAndView.addObject("rs", rs);
 		modelAndView.addObject("rs2", rs2);
-		modelAndView.setViewName("redirect:/member/login");
+		modelAndView.setViewName("redirect:/");
 
 		return modelAndView;
 	}
