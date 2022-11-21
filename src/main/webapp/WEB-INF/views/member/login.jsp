@@ -18,11 +18,11 @@
 			<table>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="id" value="p"></td>
+					<td><input type="text" name="id" value="test"></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="password" name="pw" value="p"></td>
+					<td><input type="password" name="pw" value="test"></td>
 				</tr>
 			</table>
 

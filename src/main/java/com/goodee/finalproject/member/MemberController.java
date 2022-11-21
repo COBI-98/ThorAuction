@@ -22,7 +22,7 @@ public class MemberController {
 	private MemberService memberService;
 	
 	// 아이디 중복확인 POST
-	@PostMapping("/idCheck")
+	@PostMapping("idCheck")
 	@ResponseBody
 	public int getIdCheck(HttpServletRequest httpServletRequest) throws Exception {
 		
@@ -67,11 +67,24 @@ public class MemberController {
 		
 	}
 	
-	// 회원가입 GET
+	// 회원가입 signUp(ID, PW) GET
+	@GetMapping("signUp")
+	public void setSignUp() throws Exception {}
+	
+	// 회원가입 signUp(ID, PW) POST	
+	@PostMapping("signUp")
+	public String setSignUp(MemberVO memberVO, HttpSession session) throws Exception {
+		session.setAttribute("signUp", memberVO);
+		
+		return "member/join";
+	}
+	
+	// 회원가입 join(name, birth, ...) GET
 	@GetMapping("join")
 	public void setJoin() throws Exception {}
+
 	
-	// 회원가입 + 회원등급 POST
+	// 회원가입 join(name, birth, ...) + 회원등급 POST
 	@PostMapping("join")
 	public String setJoin(MemberVO memberVO) throws Exception {
 		
