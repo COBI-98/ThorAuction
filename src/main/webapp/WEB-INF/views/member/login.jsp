@@ -9,8 +9,8 @@
 	<!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<!-- 로그인 CSS -->
-<link rel="stylesheet" href="/css/member/login.css">
+    <!-- 로그인 CSS -->
+    <link rel="stylesheet" href="/css/member/login.css">
 </head>
 <body>
 <div id="root">
@@ -23,7 +23,7 @@
                         </h1>
                         
                         <div class="login">
-                            <form action="login" method="POST">
+                            <form action="login" method="POST" id="loginForm">
                                     <div class="member-input">
                                     <div class="member-input__state">
                                         <input id="id" name="id" class="member-input__box" type="text" placeholder="아이디" autocomplete="off">
@@ -38,7 +38,9 @@
                                     </div>
                                 </div>
                                 
-                                <button type="submit" class="member-button login__btn">로그인</button>
+                                 <div class="member-input-wrong-message">ID가 존재하지 않거나 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</div>
+                                
+                                <button type="button" id="login_submit_btn" class="member-button login__btn">로그인</button>
 
                                 <div class="login__l-sign-up">
                                     <span class="login__sign-up-link">
