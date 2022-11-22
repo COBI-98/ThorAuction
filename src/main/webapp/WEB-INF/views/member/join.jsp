@@ -8,6 +8,10 @@
 
 	<!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- 회원가입 CSS -->
     <link rel="stylesheet" href="/css/member/join.css">
@@ -33,7 +37,7 @@
                         </div>
                     </div>
 
-                    <form action="join" method="POST" id="join_form">
+                    <form action="join" method="POST" id="joinform">
                         
                         <input type="hidden" name="id" value="${param.id}">
                         <input type="hidden" name="pw" value="${param.pw}">

@@ -8,6 +8,10 @@
     
 	<!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- 회원가입 CSS -->
     <link rel="stylesheet" href="/css/member/join.css">
@@ -42,7 +46,7 @@
                             <div class="member-input">
                                 <div class="member-input__state" style="padding-bottom: 0px;">
                                     <div class="container">
-                                        <input id="id" class="member-input__box" placeholder="아이디" type="text" autocomplete="off" name="id">                                    
+                                        <input id="id" class="member-input__box" placeholder="아이디" maxlength='15' type="text" autocomplete="off" name="id">                                    
                                         <button type="button" class="member-button confirm__btn idCheck">중복확인</button>
                                     </div>
                                     <span class="member-input__valid-wrapper"></span>

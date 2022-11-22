@@ -279,6 +279,23 @@ a {
     top: 8px;
 }
 
+.member-input-wrong-message {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 8px;
+    position: relative;
+    padding-left: 24px;
+    color: #fe453b;
+}
+
 .login__l {
     line-height: 1;
     -webkit-text-size-adjust: none;
