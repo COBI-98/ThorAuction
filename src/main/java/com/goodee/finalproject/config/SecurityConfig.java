@@ -54,8 +54,7 @@ public class SecurityConfig
 				.anyRequest().permitAll() //
 				.and() //
 				.oauth2Login() //
-				.successHandler(loginSuccess)
-				.and()//
+				.successHandler(loginSuccess).and()//
 				// ---------- 로그아웃 시작 ---------------
 				.logout() // 로그 아웃시
 				.logoutUrl("/member/logout") // 로그아웃

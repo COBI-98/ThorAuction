@@ -10,15 +10,15 @@
 <c:import url="../template/boot.jsp"></c:import>
 <link href="/css/reset.css" rel="stylesheet">
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
-<link rel="stylesheet" href="/js/kakaoJoin.js">
 </head>
+<script defer src="/js/kakaoJoin.js"></script>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container justify-content-center" style="text-align: center;">
 
 		<div class="login__l-sign-up">
-			<span class="login__sign-up-link">
-				<a class="member-link" class="btn btn-outline-none" href="./join2">회원가입</a>
+			<span class="login__sign-up-link"> <a class="member-link" class="btn btn-outline-none"
+					href="./join2">회원가입</a>
 			</span>
 		</div>
 		<br>
@@ -30,22 +30,36 @@
 			<h2 class="login__fb-title">SNS계정으로 간편 로그인/회원가입</h2>
 			<!-- /oauth2/authorization/kakao -->
 
+			<input type="hidden" id="nickName" name="kaNickName" value="${kakaoInfo.kaNickName }">
 			<sec:authorize access="!isAuthenticated()">
-				<a href="/oauth2/authorization/kakao" id="kakaoJoinBtn">
-					<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
-						class="kakao-button__img" alt="카카오로고">
-				</a>
+				<c:choose>
+					<c:when test="${detailData != null }">
+						<!-- onclick="kakao()" -->
+						<a href="/" id="kakaoJoinBtn">
+							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
+								class="kakao-button__img" alt="카카오로고">
+						</a>
+					</c:when>
+					<c:otherwise>
+						<button type="button" id="kakaoJoinBtn" onclick="kakao()" class="btn btn-outline-none">
+							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
+								class="kakao-button__img" alt="카카오로고">
+						</button>
+						<!-- 						<a href="/oauth2/authorization/kakao" id="kakaoJoinBtn" onclick="kakao()">
+							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
+								class="kakao-button__img" alt="카카오로고">
+						</a> -->
+					</c:otherwise>
+				</c:choose>
 			</sec:authorize>
 			<!-- 로그인 후 -->
 			<sec:authentication property="Principal" var="member" />
 			<sec:authorize access="isAuthenticated()">
-				<a href="/" id="kakaoJoinBtn"> 로그인 한거
+				<a href="/" id="kakaoJoinBtn2">
 					<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
 						class="kakao-button__img" alt="카카오로고">
 				</a>
 			</sec:authorize>
-
-
 
 			<a href="#">
 				<img src="/images/member/icons8-구글-로고.svg" class="google-button__img" alt="구글로고">
