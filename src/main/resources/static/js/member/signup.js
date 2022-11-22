@@ -1,4 +1,4 @@
-// signUp.js
+// signup.js
 
 let results = [false, false, false];
 
@@ -9,7 +9,7 @@ $("#id").blur(function () {
 		$(".idErrorMessage").text("필수 항목입니다");
 		$(".idErrorMessage").attr("style", "color:#98a0a7");
 
-		$("#signUp_next_btn").attr("disabled", "disabled");
+		$("#signup_next_btn").attr("disabled", "disabled");
 	} else { }
 
 });
@@ -29,11 +29,11 @@ $(".idCheck").click(function () {
 			if (data == 1) {
 				$(".idErrorMessage").text("중복되는 아이디가 있습니다");
 				$(".idErrorMessage").attr("style", "color : #98a0a7");
-				$("#signUp_next_btn").attr("disabled", "disabled");
+				$("#signup_next_btn").attr("disabled", "disabled");
 			} else {
 				$(".idErrorMessage").text("사용가능한 아이디입니다");
 				$(".idErrorMessage").attr("style", "color : #00f");
-				$("#signUp_next_btn").removeAttr("disabled");
+				$("#signup_next_btn").removeAttr("disabled");
 
 				results[0] = true;
 			}
@@ -43,7 +43,7 @@ $(".idCheck").click(function () {
 				$(".idErrorMessage").text("3~15자의 영문 소문자, 숫자만 사용 가능합니다");
 				$(".idErrorMessage").attr("style", "color:#98a0a7");
 
-				$("#signUp_next_btn").attr("disabled", "disabled");
+				$("#signup_next_btn").attr("disabled", "disabled");
 			} else { }
 		}
 
@@ -88,15 +88,15 @@ $("#pwEquals").blur(function () {
 });
 
 // 필수항목 체크
-$("#signUp_next_btn").click(function () {
+$("#signup_next_btn").click(function () {
 	if (results.includes(false)) {
 		alert("필수 항목을 모두 입력해 주세요.");
 	} else {
-		location.href = "/member/join";
+		$("#signupForm").submit();
 	}
 });
 
 // 취소 버튼 클릭 시
-$("#signUp_cancel_btn").click(function () {
+$("#signup_cancel_btn").click(function () {
 	location.href = "../";
 });

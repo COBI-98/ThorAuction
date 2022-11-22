@@ -67,21 +67,21 @@ public class MemberController {
 		
 	}
 	
-	// 회원가입 signUp(ID, PW) GET
-	@GetMapping("signUp")
+	// 회원가입 signup(ID, PW) GET
+	@GetMapping("signup")
 	public void setSignUp() throws Exception {}
 	
-	// 회원가입 signUp(ID, PW) POST	
-	@PostMapping("signUp")
+	// 회원가입 signup(ID, PW) POST	
+	@PostMapping("signup")
 	public String setSignUp(MemberVO memberVO, HttpSession session) throws Exception {
-		session.setAttribute("signUp", memberVO);
+		session.setAttribute("signup", memberVO);
 		
 		return "member/join";
 	}
 	
 	// 회원가입 join(name, birth, ...) GET
-	@GetMapping("join")
-	public void setJoin() throws Exception {}
+//	@GetMapping("join")
+//	public void setJoin() throws Exception {}
 
 	
 	// 회원가입 join(name, birth, ...) + 회원등급 POST
