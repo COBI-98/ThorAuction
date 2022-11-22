@@ -40,37 +40,22 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler
 		KakaoVO kakaoVO = new KakaoVO();
 		kakaoVO = (KakaoVO) authentication.getPrincipal();
 		String social = kakaoVO.getSocial();
+		log.info("kakao social: {}", social);
+
 		if (social != null)
 		{
 			if (social.equals("kakao"))
 			{
-				try
-				{
-					response.sendRedirect("https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + logout_uri);
-					log.info("kakao logout");
-				} catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				response.sendRedirect("https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + logout_uri);
+				log.info("kakao logout");
 			}
-			else if (social.equals("google"))
-			{
-
-			}
-			else if (social.equals("naver"))
-			{
-
-			}
-			// log.info("social: {}", );
-
 		}
 		// 일반 로그인
-//		else
-//		{
-//			log.info("normal logout");
-//			response.sendRedirect("/");
-//		}
+		// else
+		// {
+		// log.info("normal logout");
+		// response.sendRedirect("/");
+		// }
 
 	}
 }

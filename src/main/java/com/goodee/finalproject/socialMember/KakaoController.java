@@ -26,32 +26,54 @@ public class KakaoController
 	@Autowired
 	private MemberSocialService memberSocialService;
 
-	@GetMapping("IdCheck")
-	@ResponseBody
-	public void IdCheck(KakaoVO kakaoVO, Authentication authentication)
+	@GetMapping("mypage")
+	public void mypage(Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
 	{
-		log.info("kakao id : {}", kakaoVO.getKaNickName());
-		log.info("authenti id : {}", authentication.getPrincipal());
+		log.info("--- get myPage ---");
+		ModelAndView modelAndView = new ModelAndView();
+		log.info("mypage auth: {}", authentication);
+		log.info("mypage detail: {}", kakaoDetailVO);
+
+		// modelAndView.addObject("auth", authentication);
 	}
 
-	@GetMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
+	@PostMapping("IdCheck")
+	@ResponseBody
+	public int IdCheck(KakaoVO kakaoVO, Authentication authentication) throws Exception
 	{
-		log.info("--- get kakaoLogin ---");
-		log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
-		log.info("===== authentication: {}", authentication.getPrincipal());
+		log.info("kakao id : {}", kakaoVO);
+		// log.info("authenti id : {}", authentication.getPrincipal());
 
 		int rs = memberService.IdCheck(kakaoVO);
 
-		log.info("IdCheck rs : {}", rs);
+		log.info("idCheck rs: {}", rs);
 
-		memberService.setKakao1((KakaoVO) authentication.getPrincipal());
+		return rs;
+	}
+
+	@GetMapping("kakaoLogin")
+	public ModelAndView kakaoLogin(KakaoVO kakaoVO, Authentication authentication) throws Exception
+	{
+		log.info("--- get kakaoLogin ---");
+		log.info("===== authentication: {}", authentication.getPrincipal());
+		log.info("authentication != null: {}", authentication.getPrincipal() != null);
+
 		ModelAndView modelAndView = new ModelAndView();
+		if (authentication.getPrincipal() != null)
+		{
+			modelAndView.setViewName("redirect:/");
+			return modelAndView;
+		}
+		else
+		{
+			memberService.setKakao1((KakaoVO) authentication.getPrincipal());
 
-		modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
-		modelAndView.setViewName("/member/kakaoLogin");
+			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
+			modelAndView.setViewName("/member/kakaoLogin");
 
-		return modelAndView;
+			return modelAndView;
+		}
+
 	}
 
 	@PostMapping("kakaoLogin")
@@ -74,17 +96,24 @@ public class KakaoController
 	}
 
 	@GetMapping("joinchoose")
-	public void joinchoose() throws Exception
+	public void joinchoose(Authentication authentication) throws Exception
 	{
 		log.info("--- get joinchoose ---");
 	}
 
-	@GetMapping("join")
-	public String join() throws Exception
+	@PostMapping("joinchoose")
+	public ModelAndView joinchoose(HttpSession session, Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
 	{
-		log.info("--- get join ---");
+		log.info("authenti id : {}", authentication.getPrincipal());
 
-		return "member/join";
+		ModelAndView modelAndView = new ModelAndView();
+
+		modelAndView.addObject("detailData", authentication.getPrincipal());
+		session.setAttribute("kakaoVO", authentication.getPrincipal());
+		modelAndView.setViewName("/member/kakaoLogin");
+//		modelAndView.setViewName("index");
+
+		return modelAndView;
 	}
 
 	@GetMapping("join2")
@@ -93,13 +122,5 @@ public class KakaoController
 		log.info("--- get join2 ---");
 
 		return "member/join2";
-	}
-
-	@GetMapping("login")
-	public String login() throws Exception
-	{
-		log.info("--- get login ---");
-
-		return "member/login";
 	}
 }

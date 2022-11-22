@@ -8,10 +8,10 @@
 <c:import url="../template/boot.jsp"></c:import>
 <link href="/css/reset.css" rel="stylesheet">
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
-<link rel="stylesheet" href="/js/kakaoJoin.js">
-</head>
 <link rel="stylesheet" href="/css/member/join.css">
+</head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 	<div id="root">
 		<div class="app">
 			<div class="member-scroll-layout">
@@ -89,7 +89,6 @@
 								</td>
 							</tr>
 						</table>
-						<!-- onclick="kakao()" -->
 						<button type="submit" id="join_btn">가입하기</button>
 					</form>
 					<br>
@@ -106,33 +105,4 @@
 	</div>
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
-<script>
-	// /oauth2/authorization/kakao
-	let namea = $("#nickName").val();
-
-	function kakao() {
-		// alert("야");
-		// $("#join_btn").click(function() {
-		$.ajax({
-			url : "/member/kakaoLogin",
-			type : "POST",
-			data : {
-				kaNickName : namea
-			},
-
-			success : function(rs) {
-				if (rs == 1) {
-					alert("중복된 아이디");
-					// location.history();
-					return;
-				}
-			},
-			error : function(status, error) {
-				console.log("status: ", status);
-				console.log("error: ", error);
-			}
-		})
-		// })
-	}
-</script>
 </html>

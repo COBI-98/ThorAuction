@@ -26,7 +26,8 @@
 	</insert>
 
 	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
-		select count(KANICKNAME) from SOCIALKAKAO where KANICKNAME=#{kaNickName}
+		<!-- select count(*) from SOCIALKAKAO where KANICKNAME=#{kaNickName} -->
+		select count(kaName) from SOCIALKAKAO where KANAME=#{kaName}
 	</select>
 
 </mapper>
