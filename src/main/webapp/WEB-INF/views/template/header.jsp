@@ -11,7 +11,7 @@
       	<!-- 로그인 전 -->
       	<c:if test="${member == null}">
 	        <li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-	        <li class="nav-item"><a href="../member/signUp" class="nav-link link-dark px-2">회원가입</a></li>
+	        <li class="nav-item"><a href="../member/signup" class="nav-link link-dark px-2">회원가입</a></li>
         </c:if>
         
       	<!-- 로그인 후 -->

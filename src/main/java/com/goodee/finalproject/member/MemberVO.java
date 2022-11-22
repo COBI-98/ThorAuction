@@ -2,18 +2,15 @@ package com.goodee.finalproject.member;
 
 import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-
 import lombok.Data;
 
 @Data
 public class MemberVO {
 
-	@NotBlank(message = "필수 항목입니다")
 	private String id;
 	private String pw;
 	private String name;
-	private Long birth;
+	private String birth;
 	private String email;
 	private String post;
 	private String addr;

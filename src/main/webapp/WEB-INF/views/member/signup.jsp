@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/member/join.css">
 
     <!-- 회원가입 JS -->
-    <script defer src="/js/member/signUp.js"></script>
+    <script defer src="/js/member/signup.js"></script>
 </head>
 <body>
 <div id="root">
@@ -23,7 +23,7 @@
                 <div class="member-scroll-layout__inner">
                     <div class="register-header">
                         <h1 class="register-header__logo">
-                            <img class="register-header__logo-image" src="/images/member/Testimg.png" alt="토실대">
+                            <img class="register-header__logo-image" src="/images/member/Testimg.png" alt="토실대 임시로고">
                         </h1>
                         <div class="register-header__step">
                             <i class="register-header__step-dot">step 1</i>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
 
-                    <form action="signUp" method="POST">
+                    <form action="signup" method="POST" id="signupForm">
                         <div class="sign-up">
                             <h2 class="sign-up__title">기본정보입력</h2>
                             <div class="sign-up__sub">회원가입을 위해서 핸드폰 인증이 진행되며, <br>인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</div>
@@ -70,8 +70,8 @@
                             </div>
 
                             <div class="sign-up__l-btn">
-                                <button type="submit" id="signUp_next_btn" disabled="disabled" class="member-button sign-up__btn">다음</button>
-                                <button type="button" id="signUp_cancel_btn" class="member-button cancel-button sign-up__btn-cancel">취소</button>
+                                <button type="button" id="signup_next_btn" disabled="disabled" class="member-button sign-up__btn">다음</button>
+                                <button type="button" id="signup_cancel_btn" class="member-button cancel-button sign-up__btn-cancel">취소</button>
                             </div>
                         </div>
                     </form>

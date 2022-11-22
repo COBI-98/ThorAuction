@@ -23,7 +23,7 @@
                 <div class="member-scroll-layout__inner">
                     <div class="register-header">
                         <h1 class="register-header__logo">
-                            <img class="register-header__logo-image" src="/images/member/Testimg.png" alt="토실대">
+                            <img class="register-header__logo-image" src="/images/member/Testimg.png" alt="토실대 임시로고">
                         </h1>
                         <div class="register-header__step">
                             <i class="register-header__step-dot">step 1</i>
@@ -34,7 +34,9 @@
                     </div>
 
                     <form action="join" method="POST" id="join_form">
+                        
                         <input type="hidden" name="id" value="${param.id}">
+                        <input type="hidden" name="pw" value="${param.pw}">
                         <div class="sign-up">
                             <h2 class="sign-up__title">개인정보입력</h2>
                             <div class="sign-up__sub">회원가입을 위해서 핸드폰 인증이 진행되며, <br>인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</div>
@@ -42,7 +44,7 @@
                             <!-- 이름 -->
                             <div class="member-input">
                                 <div class="member-input__state">
-                                    <input id="name" class="member-input__box" placeholder="이름" type="text" autocomplete="off" name="name">                                    
+                                    <input id="name" name="name" class="member-input__box" placeholder="이름" type="text" autocomplete="off">                                    
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
                                 <div class="sign-up__input-error-message nameErrorMessage"></div>
@@ -61,7 +63,7 @@
                             <div class="member-input">
                                 <div class="member-input__state" style="padding-bottom: 0px;">
                                     <div class="container">
-                                        <input id="phone" oninput="autoHyphen(this)" class="member-input__box" name="phone" maxlength='13'placeholder="전화번호" type="text" autocomplete="off">
+                                        <input id="phone" oninput="autoHyphen(this)" class="member-input__box" name="phone" maxlength='13' placeholder="전화번호" type="text" autocomplete="off">
                                         <button id="confirm__btn" type="button" class="member-button confirm__btn">인증번호 받기</button>
                                     </div>
                                     <span class="member-input__valid-wrapper"></span>
@@ -89,7 +91,7 @@
                             <div class="member-input">
                                 <div class="member-input__state" style="padding-bottom: 0px;">
                                     <div class="container">
-                                    <input id="post" class="member-input__box" readonly="readonly" placeholder="우편번호" type="text" autocomplete="off" name="post">
+                                    <input id="post" name="post" class="member-input__box" readonly="readonly" placeholder="우편번호" type="text" autocomplete="off">
                                     <button type="button" onclick="execution_daum_address()" class="member-button confirm__btn">검색</button>
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
@@ -109,7 +111,7 @@
                             <!-- 상세주소 -->
                             <div class="member-input">
                                 <div class="member-input__state">
-                                    <input id="addr2" class="member-input__box" readonly="readonly" placeholder="상세주소" type="text" autocomplete="off" name="addr2">
+                                    <input id="addr2" name="addr2" class="member-input__box" readonly="readonly" placeholder="상세주소" type="text" autocomplete="off">
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
                             </div>
