@@ -2,7 +2,6 @@
 
 let results = [false, false, false];
 
-
 // 아이디 검증
 $("#id").blur(function () {
 
@@ -18,13 +17,10 @@ $("#id").blur(function () {
 // 아이디 중복확인
 $(".idCheck").click(function () {
 
-	var userIdCheck = RegExp(/[^0-9]$/);
+	// 아이디 정규식
+	let userIdCheck = RegExp(/[^a-zA-Z0-9]$/);
 
-	if(userIdCheck.test($('#id').val())){
-		console.log("정규표현식에 맞지 않음");
-	}
-
-	var query = {
+	let query = {
 		id: $("#id").val()
 	};
 
@@ -46,13 +42,22 @@ $(".idCheck").click(function () {
 				results[0] = true;
 			}
 
-			//아이디의 길이가 3자미만이면
-			if ($("#id").val().length < 3) {
-				$(".idErrorMessage").text("3~15자의 영문 소문자, 숫자만 사용 가능합니다");
-				$(".idErrorMessage").attr("style", "color:#98a0a7");
+			// 아이디 3자 이상 + 아이디 정규식
+			// 아이디의 길이가 3자미만이고, 특수문자가 있을 경우
+			if (userIdCheck.test($('#id').val()) || $("#id").val().length < 3) {
+				$(".idErrorMessage").text("3~15자의 영문 대ㆍ소문자, 숫자만 사용 가능합니다");
+				$(".idErrorMessage").attr("style", "color:#f00");
 
 				$("#signup_next_btn").attr("disabled", "disabled");
 			} else { }
+
+			// // 아이디 정규표현식 영문 대ㆍ소문자, 숫자만 가능
+			// if(userIdCheck.test($('#id').val())){
+			// 	$(".idErrorMessage").text("3~15자의 영문 대ㆍ소문자, 숫자만 사용 가능합니다");
+			// 	$(".idErrorMessage").attr("style", "color:#f00");
+
+			// 	$("#signup_next_btn").attr("disabled", "disabled");
+			// } else{ }
 	
 		}
 
@@ -62,9 +67,13 @@ $(".idCheck").click(function () {
 
 
 // 비밀번호 검증
-$("#pw").on({
-	blur: function () {
 
+// 비밀번호 정규식
+let userPwCheck = RegExp(/[^a-zA-Z0-9]$/);
+
+$("#pw").on({
+
+	blur: function () {
 		if ($("#pw").val() == "") {
 			$(".pwErrorMessage").text("필수 항목입니다");
 			$(".pwErrorMessage").attr("style", "color:#98a0a7");
@@ -79,6 +88,10 @@ $("#pw").on({
 			$(".pwErrorMessage").text("");
 
 			results[1] = true;
+		}
+		if(userIdCheck.test($('#pw').val())) {
+			$(".pwErrorMessage").text("8~16자 영문 대ㆍ소문자, 숫자를 사용하세요");
+			$(".pwErrorMessage").attr("style", "color:#f00");
 		}
 	}
 });
