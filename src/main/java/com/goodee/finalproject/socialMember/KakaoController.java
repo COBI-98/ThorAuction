@@ -23,8 +23,6 @@ public class KakaoController
 {
 	@Autowired
 	private SocialMemberService memberService;
-	@Autowired
-	private SocialMemberService memberSocialService;
 
 	@GetMapping("mypage")
 	public void mypage(HttpSession session, Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
@@ -65,7 +63,6 @@ public class KakaoController
 
 		if (authentication.getPrincipal() != null)
 		{
-			
 			memberService.setKakao1((KakaoVO) authentication.getPrincipal());
 			
 			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
@@ -121,13 +118,5 @@ public class KakaoController
 		// modelAndView.setViewName("index");
 
 		return modelAndView;
-	}
-
-	@GetMapping("join2")
-	public String join2() throws Exception
-	{
-		log.info("--- get join2 ---");
-
-		return "member/join2";
 	}
 }
