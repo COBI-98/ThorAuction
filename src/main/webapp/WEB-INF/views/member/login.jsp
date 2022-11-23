@@ -61,7 +61,7 @@
 
                                 <div class="simple-login">
                                     <h2 class="login__fb-title">SNS계정으로 간편 로그인/회원가입</h2>
-                                    <a href="#">
+                                    <a href="/oauth2/authorization/kakao">
                                         <img src="/images/member/kakao_login_logo.png" class="kakao-button__img" alt="">
                                     </a>
 
