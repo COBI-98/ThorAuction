@@ -7,7 +7,7 @@ $("#name").blur(function () {
 
 	if ($("#name").val() == "") {
 		$(".nameErrorMessage").text("필수 항목입니다");
-		$(".nameErrorMessage").attr("style", "color:#98a0a7");
+		$(".nameErrorMessage").attr("style", "color:#f00");
 	} else {
 		$(".nameErrorMessage").text("");
 
@@ -19,7 +19,7 @@ $("#name").blur(function () {
 $("#birth").blur(function () {
 	if ($("#birth").val() == "") {
 		$(".birthErrorMessage").text("필수 항목입니다");
-		$(".birthErrorMessage").attr("style", "color:#98a0a7");
+		$(".birthErrorMessage").attr("style", "color:#f00");
 
 	} else if ($("#birth").val().length < 6) {
 		$(".birthErrorMessage").text("생년월일 6자를 정확하게 입력하세요 ex)000101");
@@ -41,7 +41,7 @@ const autoHyphen = (target) => {
 $("#phone").blur(function () {
 	if ($("#phone").val() == "") {
 		$(".phoneErrorMessage").text("필수 항목입니다");
-		$(".phoneErrorMessage").attr("style", "color:#98a0a7");
+		$(".phoneErrorMessage").attr("style", "color:#f00");
 	} else if ($("#phone").val().length < 11) {
 		$(".phoneErrorMessage").text("전화번호를 정확히 입력하세요");
 	}
@@ -64,7 +64,7 @@ function isEmail(asValue) {
 $("#email").blur(function () {
 	if ($("#email").val() == "") {
 		$(".emailErrorMessage").text("필수 항목입니다");
-		$(".emailErrorMessage").attr("style", "color:#98a0a7");
+		$(".emailErrorMessage").attr("style", "color:#f00");
 
 	} else if (!isEmail($("#email").val())) {
 		$(".emailErrorMessage").text("이메일 주소를 다시 확인해주세요");
@@ -134,7 +134,11 @@ function execution_daum_address() {
 // 필수항목 체크
 $("#join_submit_btn").click(function () {
 	if (results.includes(false)) {
-		alert("필수 항목을 모두 입력해 주세요.");
+		Swal.fire({
+			icon: 'warning',
+			title: '잠시만요!',
+			text: '필수 항목을 모두 입력해 주세요.',
+		  });
 	} else {
 		$("#joinForm").submit();
 	}

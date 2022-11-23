@@ -16,7 +16,11 @@ $("#pw").blur(function(){
 
 $("#login_submit_btn").click(function () {
 	if (results.includes(false)) {
-		alert("필수 항목을 모두 입력해 주세요.");
+        Swal.fire({
+			icon: 'warning',
+			title: '다시 시도해주세요',
+			text: 'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.',
+		  });
 	} else {
 		$("#loginForm").submit();
 	}

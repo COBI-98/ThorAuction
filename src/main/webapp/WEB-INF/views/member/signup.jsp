@@ -12,6 +12,10 @@
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- 회원가입 CSS -->
     <link rel="stylesheet" href="/css/member/join.css">

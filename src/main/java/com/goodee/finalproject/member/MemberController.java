@@ -74,7 +74,7 @@ public class MemberController {
 	// 회원가입 signup(ID, PW) POST	
 	@PostMapping("signup")
 	public String setSignUp(MemberVO memberVO, HttpSession session) throws Exception {
-		session.setAttribute("signup", memberVO);
+		// session.setAttribute("signup", memberVO);
 		
 		return "member/join";
 	}
