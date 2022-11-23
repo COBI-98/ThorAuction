@@ -27,12 +27,13 @@ public class KakaoController
 	private MemberSocialService memberSocialService;
 
 	@GetMapping("mypage")
-	public void mypage(Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
+	public void mypage(HttpSession session, Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
 	{
 		log.info("--- get myPage ---");
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("mypage auth: {}", authentication);
 		log.info("mypage detail: {}", kakaoDetailVO);
+		log.info("session: {}", session.getAttribute("Detail"));
 
 		// modelAndView.addObject("auth", authentication);
 	}
@@ -56,20 +57,25 @@ public class KakaoController
 	{
 		log.info("--- get kakaoLogin ---");
 		log.info("===== authentication: {}", authentication.getPrincipal());
-		log.info("authentication != null: {}", authentication.getPrincipal() != null);
-
+		int rs = memberService.IdCheck(kakaoVO);
+		
+		log.info("idCheck rs: {}", rs);
+		
 		ModelAndView modelAndView = new ModelAndView();
+
 		if (authentication.getPrincipal() != null)
 		{
-			modelAndView.setViewName("redirect:/");
+			
+			memberService.setKakao1((KakaoVO) authentication.getPrincipal());
+			
+			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
+			modelAndView.setViewName("/member/kakaoLogin");
 			return modelAndView;
 		}
 		else
 		{
-			memberService.setKakao1((KakaoVO) authentication.getPrincipal());
-
 			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
-			modelAndView.setViewName("/member/kakaoLogin");
+			modelAndView.setViewName("redirect:/");
 
 			return modelAndView;
 		}
@@ -91,6 +97,7 @@ public class KakaoController
 
 		modelAndView.addObject("rs2", rs2);
 		modelAndView.setViewName("redirect:/");
+		session.setAttribute("Detail", kakaoDetailVO);
 
 		return modelAndView;
 	}
@@ -111,7 +118,7 @@ public class KakaoController
 		modelAndView.addObject("detailData", authentication.getPrincipal());
 		session.setAttribute("kakaoVO", authentication.getPrincipal());
 		modelAndView.setViewName("/member/kakaoLogin");
-//		modelAndView.setViewName("index");
+		// modelAndView.setViewName("index");
 
 		return modelAndView;
 	}

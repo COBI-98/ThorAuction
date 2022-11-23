@@ -1,50 +1,19 @@
-let p = true;
-var check = $("input[type='checkbox']");
-check.click(function() {
-	if (p == true) { // 차단 했을 때
-		$("p").toggle();
-		// alert("차단");
-		p = false;
-		return;
-	}
-	else if (p == false) { // 차단 해제 했을 때
-		$("p").toggle();
-		// alert("차단 해제");
-		p = true;
-	}
-});
+const selectRole = document.getElementById("selectRole");
 
-const swalWithBootstrapButtons = Swal.mixin({
-  customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger'
-  },
-  buttonsStyling: false
-})
+$("#selectRole").css("background", "#FFCCCC");
+$("#selectRole").css("color", "#000000");
 
-swalWithBootstrapButtons.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonText: 'Yes, delete it!',
-  cancelButtonText: 'No, cancel!',
-  reverseButtons: true
-}).then((result) => {
-  if (result.isConfirmed) {
-    swalWithBootstrapButtons.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  } else if (
-    /* Read more about handling dismissals below */
-    result.dismiss === Swal.DismissReason.cancel
-  ) {
-    swalWithBootstrapButtons.fire(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
-    )
+selectRole.addEventListener("change", function () {
+  if ($("#opBan:selected").text() == "Ban") { // > 여기에 쓴 값 </option>
+    $("#selectRole").css("background", "#000000");
+    $("#selectRole").css("color", "#FF0000");
+  }
+  else if ($("#opMem:selected").text() == "Member") {
+    $("#selectRole").css("background", "#FFCCCC");
+    $("#selectRole").css("color", "#000000");
+  }
+  else if ($("#opMana:selected").text() == "Manager") {
+    $("#selectRole").css("background", "#FFCC00");
+    $("#selectRole").css("color", "#000000");
   }
 })

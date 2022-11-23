@@ -19,8 +19,8 @@ public class MemberService
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
 
-	@Value("${kakao.Admin.key}")
-	private String adminKey;
+//	@Value("${kakao.Admin.key}")
+//	private String adminKey;
 
 	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
