@@ -21,7 +21,7 @@ public class LogoutCustom implements LogoutHandler
 		log.info("=========== logout Handler ===========");
 
 		// 1. 일반 로그인 or 소셜 로그인 판별
-		log.info("auth: {}", authentication);
+//		log.info("authentication getSocial: {}", authentication.getPrincipal());
 		
 		request.getSession().invalidate();
 		try
