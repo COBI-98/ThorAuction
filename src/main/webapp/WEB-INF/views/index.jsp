@@ -20,6 +20,8 @@
     <div id="videos-container" style="margin: 20px 0;"></div>
 
     <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
+
+    <button id="camera">Camera OFF</button>
   </section>
 
 <script src="/js/RTCMultiConnection.js"></script>

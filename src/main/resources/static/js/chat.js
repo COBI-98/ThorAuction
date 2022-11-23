@@ -56,6 +56,5 @@ function send(){
 		var temp = JSON.stringify(data);
 		ws.send(temp);
 	}
-	msg.value ='';
-	
+	msg.value =''
 }
