@@ -23,7 +23,7 @@
 
 				<%-- <sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/joinchoose" class="nav-link link-dark px-2">|회원가입|</a></li>
-				</sec:authorize>
+				</sec:authorize> --%>
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
@@ -32,9 +32,9 @@
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form>
 					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a></li>
-				</sec:authorize> --%>
+				</sec:authorize>
+				
 				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
-
 			</ul>
 		</div>
 	</nav>
