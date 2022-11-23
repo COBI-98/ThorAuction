@@ -6,20 +6,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import com.goodee.finalproject.security.LoginSuccess;
 import com.goodee.finalproject.security.LogoutCustom;
 import com.goodee.finalproject.security.LogoutSuccessCustom;
-import com.goodee.finalproject.socialMember.MemberSocialService;
+import com.goodee.finalproject.socialMember.SocialMemberService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig
 {
 	@Autowired
-	private MemberSocialService memberSocialService;
+	private SocialMemberService memberSocialService;
 	@Autowired
 	private LogoutCustom logoutCustom;
 	@Autowired
@@ -67,7 +70,7 @@ public class SecurityConfig
 				.and() //
 				.oauth2Login() //
 				.userInfoEndpoint() //
-				.userService(memberSocialService) // 소셜 로그인 실행 클래스
+				.userService((OAuth2UserService<OAuth2UserRequest, OAuth2User>) memberSocialService) // 소셜 로그인 실행 클래스
 		;
 
 		return httpSecurity.build();

@@ -1,27 +1,57 @@
 package com.goodee.finalproject.socialMember;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClient.Builder;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
-// 소셜 로그인 하는 클래스
 @Service
 @Slf4j
-public class MemberSocialService extends DefaultOAuth2UserService
+public class SocialMemberService extends DefaultOAuth2UserService
 {
+	@Autowired
+	public KakaoMapperIF kakaoMapperIF;
+
+	// @Value("${kakao.Admin.key}")
+	// private String adminKey;
+
+	public int IdCheck(KakaoVO kakaoVO) throws Exception
+	{
+		return kakaoMapperIF.IdCheck(kakaoVO);
+	}
+
+	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
+	{
+		return kakaoMapperIF.setKakaoDetail(kakaoDetailVO);
+	}
+
+	public int setKakao1(KakaoVO object) throws Exception
+	{
+		log.info("===== kakao service =====");
+
+		int rs = kakaoMapperIF.setKakao1(object);
+
+		log.info("memberservice set kakao : {}", rs);
+
+		return rs;
+	}
+
+	// 카카오 소셜 로그인7
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
 	{
