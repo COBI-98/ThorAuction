@@ -5,7 +5,7 @@ function kakao() {
 	// alert("야");
 	// return;
 	$.ajax({
-		url: "/member/IdCheck",
+		url: "/admin/IdCheck",
 		type: "POST",
 		data: {
 			kaNickName: kaNickName

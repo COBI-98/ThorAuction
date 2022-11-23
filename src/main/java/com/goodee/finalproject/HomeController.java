@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.goodee.finalproject.socialMember.KakaoDetailVO;
-import com.goodee.finalproject.socialMember.KakaoVO;
+import com.goodee.finalproject.socialmember.KakaoDetailVO;
+import com.goodee.finalproject.socialmember.KakaoVO;
 
 import lombok.extern.slf4j.Slf4j;
 

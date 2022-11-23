@@ -11,7 +11,7 @@
 <link href="/css/reset.css" rel="stylesheet">
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 </head>
-<script defer src="/js/kakaoJoin.js"></script>
+<script defer src="/js/admin/kakaoJoin.js"></script>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container justify-content-center" style="text-align: center;">
@@ -35,21 +35,21 @@
 				<c:choose>
 					<c:when test="${detailData == null }">
 						<!-- onclick="kakao()" -->
-						<!-- <button type="button" id="kakaoJoinBtn" onclick="kakao()" class="btn btn-outline-none">
+						<button type="button" id="kakaoJoinBtn" onclick="kakao()" class="btn btn-outline-none">
 							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
 								class="kakao-button__img" alt="카카오로고">
-						</button> -->
-						<a href="/oauth2/authorization/kakao" id="kakaoJoinBtn">
+						</button>
+						<!-- <a href="/oauth2/authorization/kakao" id="kakaoJoinBtn">
 							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
 								class="kakao-button__img" alt="카카오로고">
-						</a>
+						</a> -->
 					</c:when>
 					<c:otherwise>
 						<a href="/" id="kakaoJoinBtn">
 							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
 								class="kakao-button__img" alt="카카오로고">
 						</a>
-						<!-- 						<a href="/oauth2/authorization/kakao" id="kakaoJoinBtn" onclick="kakao()">
+						<!--<a href="/oauth2/authorization/kakao" id="kakaoJoinBtn" onclick="kakao()">
 							<img src="/images/member/icons8-free-instant-messaging-app-for-cross-platform-devices-48.png"
 								class="kakao-button__img" alt="카카오로고">
 						</a> -->

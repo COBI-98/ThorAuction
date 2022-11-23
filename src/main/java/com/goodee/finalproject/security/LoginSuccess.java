@@ -50,6 +50,6 @@ public class LoginSuccess implements AuthenticationSuccessHandler
 		// }
 		// }
 		
-		response.sendRedirect("/member/kakaoLogin");
+		response.sendRedirect("/admin/kakaoLogin");
 	}
 }

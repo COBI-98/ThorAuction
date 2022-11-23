@@ -1,4 +1,4 @@
-package com.goodee.finalproject.socialMember;
+package com.goodee.finalproject.socialmember;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
