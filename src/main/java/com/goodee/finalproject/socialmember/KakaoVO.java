@@ -1,4 +1,4 @@
-package com.goodee.finalproject.socialMember;
+package com.goodee.finalproject.socialmember;
 
 import java.util.Collection;
 import java.util.Map;

@@ -24,6 +24,14 @@ public class LogoutCustom implements LogoutHandler
 		log.info("auth: {}", authentication);
 		
 		request.getSession().invalidate();
+		try
+		{
+			response.sendRedirect("/");
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

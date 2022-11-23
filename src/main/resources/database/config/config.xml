@@ -5,8 +5,8 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.goodee.finalproject.socialMember.KakaoVO" alias="KakaoVO" />
-		<typeAlias type="com.goodee.finalproject.socialMember.KakaoDetailVO" alias="KakaoDetailVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.KakaoVO" alias="KakaoVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.KakaoDetailVO" alias="KakaoDetailVO" />
 		<typeAlias type="com.goodee.finalproject.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.goodee.finalproject.member.RoleVO" alias="RoleVO" />
 		

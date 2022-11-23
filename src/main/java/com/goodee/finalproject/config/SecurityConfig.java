@@ -10,19 +10,18 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import com.goodee.finalproject.security.LoginSuccess;
 import com.goodee.finalproject.security.LogoutCustom;
 import com.goodee.finalproject.security.LogoutSuccessCustom;
-import com.goodee.finalproject.socialMember.SocialMemberService;
+import com.goodee.finalproject.socialmember.MemberSocialService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig
 {
 	@Autowired
-	private SocialMemberService memberSocialService;
+	private MemberSocialService memberSocialService;
 	@Autowired
 	private LogoutCustom logoutCustom;
 	@Autowired
@@ -62,7 +61,7 @@ public class SecurityConfig
 				.logout() // 로그 아웃시
 				.logoutUrl("/member/logout") // 로그아웃
 				.addLogoutHandler(logoutCustom) // 로그아웃 시 실행
-				.logoutSuccessHandler(logoutSuccessCustom) // 로그아웃 성공 시 실행
+//				.logoutSuccessHandler(logoutSuccessCustom) // 로그아웃 성공 시 실행
 				.invalidateHttpSession(true) // Session 내용 없애기
 				.deleteCookies("JSESSIONID") // 쿠키 삭제
 				.permitAll() //
