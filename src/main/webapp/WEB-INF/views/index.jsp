@@ -23,7 +23,7 @@
   </section>
 
 <script src="/js/RTCMultiConnection.js"></script>
-<!-- <script src="/node_modules/webrtc-adapter/out/adapter.js"></script> -->
+
 <script src="https://muazkhan.com:9001/socket.io/socket.io.js"></script>
 
 <!-- custom layout for HTML5 audio/video elements -->
