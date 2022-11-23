@@ -16,8 +16,16 @@ function kakao() {
 			// location.history();
 			// return;
 			if (rs == 1) {
-				alert("회원가입 되어 있는 아이디입니다. (자동 로그인)");
-				location.href = "/";
+				swal({
+					title: "회원가입 되어 있는 아이디입니다. ",
+					text: "자동 로그인",
+					icon: "success",
+					buttons: '확인'
+				}).then((value) => {
+					if (value) {
+						location.href = '/';
+					}
+				});
 				return;
 			}
 			else {
@@ -28,10 +36,10 @@ function kakao() {
 					buttons: '확인'
 				}).then((value) => {
 					if (value) {
-                        location.href = '/oauth2/authorization/kakao';
+						location.href = '/oauth2/authorization/kakao';
 					}
 				});
-				return false;
+				// return false;
 			}
 		},
 		error: function(status, error) {

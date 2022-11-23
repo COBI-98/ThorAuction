@@ -21,15 +21,14 @@
 				<th>차단 여부</th>
 			</tr>
 			<tr>
-				<td></td>
-				<td>id1</td>
 				<td>Name1</td>
+				<td>Eamil1</td>
 				<td>
-					<label class="switch">
-						<input type="checkbox"> <span class="slider round"></span>
-					</label>
-					<p>OFF</p>
-					<p style="display: none;">ON</p>
+					<select name="select" id="selectRole">
+						<option id="opMana" value="Manager">Manager</option>
+						<option id="opMem" value="Member" selected>Member</option>
+						<option id="opBan" value="Ban">Ban</option>
+					</select>
 				</td>
 			</tr>
 		</table>
