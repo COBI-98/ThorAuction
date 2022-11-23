@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.goodee.finalproject.member.MemberMapper">
+
+	<!-- 아이디 중복확인 -->
+	<select id="getIdCheck" resultType="MemberVO">
+		SELECT ID FROM THORMEMBER
+		WHERE ID = #{id}
+	</select>
+
+	<!-- 로그인 -->
+	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
+		SELECT * 
+		FROM THORMEMBER M
+		INNER JOIN 
+		THORMEMBER_ROLE MR
+		ON M.ID = MR.ID
+		INNER JOIN
+		THORROLE R
+		ON R.ROLENUM = MR.ROLENUM
+		WHERE M.ID = #{id}
+		AND M.PW = #{pw}
+	</select>
+
+	<!-- 회원등급 -->
+	<insert id="setRole" parameterType="MemberVO">
+		INSERT INTO THORMEMBER_ROLE
+		VALUES(#{id}, 3)
+	</insert>
+
+	<!-- 회원가입 -->
+	<insert id="setJoin" parameterType="MemberVO">
+		INSERT INTO THORMEMBER(ID, PW, NAME, BIRTH, PHONE, EMAIL, POST, ADDR, ADDR2, POINT)
+		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{phone}, #{email}, #{post}, #{addr}, #{addr2}, 3000)
+	</insert>
+	
+	<!-- 로그인 join resultMap -->
+	<resultMap type="MemberVO" id="getLoginResult">
+		<id column="id" property="id" />
+		<result column="pw" property="pw" />
+		<result column="name" property="name" />
+		<result column="birth" property="birth" />
+		<result column="email" property="email" />
+		<result column="post" property="post" />
+		<result column="addr" property="addr" />
+		<result column="addr2" property="addr2" />
+		<result column="phone" property="phone" />
+		<result column="point" property="point" />
+		
+		<collection property="roleVOs" javaType="List" ofType="RoleVO" >
+			<id column="roleNum" property="roleNum"/>
+			<result column="roleName" property="roleName"/>
+		</collection>
+	</resultMap>
+	
+</mapper>

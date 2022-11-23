@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.goodee.finalproject.socialmember.KakaoMapperIF">
+
+	<!-- insert into SOCIALKAKAO values(${kaNickName}, ${kaEmail}, ${kaBirth}, 
+		${kaName}, ${kaPost}, ${kaAddr}, ${kaAddrDetail}, ${kaPhone}, 3000) -->
+
+	<insert id="setKakao1" parameterType="KakaoVO">
+		INSERT INTO
+		SOCIALKAKAO(KANICKNAME,KAEMAIL,KANAME)
+		values(#{kaNickName},
+		#{kaEmail}, #{kaName})
+	</insert>
+
+	<insert id="setKakaoDetail" parameterType="KakaoDetailVO">
+		insert into
+		SOCIALKAKAODETAIL
+		(KANICKNAME, KABIRTH, KAPOST, KAADDR, KAADDRDETAIL,
+		KAPHONE, KAPOINT)
+		values
+		(#{kaNickName}, #{kaBirth}, #{kaPost},
+		#{kaAddr},
+		#{kaAddrDetail}, #{kaPhone}, 3000)
+	</insert>
+
+	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
+		<!-- select count(*) from SOCIALKAKAO where KANICKNAME=#{kaNickName} -->
+		select count(kaName) from SOCIALKAKAO where KANAME=#{kaName}
+	</select>
+
+</mapper>

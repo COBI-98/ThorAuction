@@ -1,0 +1,388 @@
+/* join.css */
+
+#root {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    min-height: 100%;
+    background-color: #f3f5f7;
+}
+
+.app {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+}
+
+.member-scroll-layout {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    min-width: 320px;
+    min-height: 100%;
+    background-color: #f3f5f7;
+    height: 100%;
+    margin: 0 auto;
+    width: 610px;
+}
+
+.member-scroll-layout__bg {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: absolute;
+    width: 610px;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    margin-left: -305px;
+    background-color: #fff;
+}
+
+.member-scroll-layout__inner {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    margin: 0 80px;
+    padding-bottom: 88px;
+}
+
+.register-header {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    padding-top: 88px;
+    padding-bottom: 56px;
+}
+.register-header__logo {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    text-align: center;
+}
+
+.register-header__logo-image {
+    line-height: 1;
+    text-align: center;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    width: 400px;
+    height: 200px;
+}
+
+.register-header__step {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin-top: 32px;
+    text-align: center;
+    font-size: 0;
+}
+
+.register-header__step-dot {
+    line-height: 1;
+    text-align: center;
+    -webkit-text-size-adjust: none;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    display: inline-block;
+    font-size: 0;
+    margin: 0 8px;
+    background-color: #e9edef;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.register-header__step-dot--on {
+    line-height: 1;
+    text-align: center;
+    -webkit-text-size-adjust: none;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    display: inline-block;
+    font-size: 0;
+    margin: 0 8px;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #1ea1f7;
+}
+
+.sign-up {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+}
+
+.sign-up__title {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.sign-up__sub {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    margin-top: 12px;
+    padding: 16px;
+    background-color: #f3f5f7;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #52595f;
+    margin-bottom: 32px;
+    word-break: keep-all;
+}
+
+.member-input {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+}
+
+.member-input__state {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin-top: 27px;
+    position: relative;
+    padding: 10px 0 11px;
+    border-bottom: 1px solid #dddfe4;
+}
+
+.member-input__box {
+    word-break: keep-all;
+    -webkit-text-size-adjust: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    outline: 0;
+}
+
+.member-input__valid-wrapper {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+
+.sign-up__input-error-message {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    color: #98a0a7;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.sign-up__l-btn {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin-top: 40px;
+}
+
+.member-button, .member-button:disabled{
+    position: relative;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: center;
+    background-color: #1ea1f7;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 56px;
+    padding: 0 20px;
+    font-size: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    height: 56px;
+}
+
+.member-button:disabled {
+    background-color: #dddfe4!important;
+    cursor: default!important;
+}
+
+.sign-up__btn {
+    float: right;
+    width: 217px;
+
+
+}
+
+.cancel-button {
+    background-color: #fff;
+    color: #1e2022;
+    border: 1px solid #dddfe4;
+    font-weight: 400;
+}
+
+.sign-up__btn-cancel {
+    float: left;
+    width: 217px;
+}
+
+.sign-up__go-to-login {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin-top: 110px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.sign-up__go-to-login-btn {
+    text-align: center;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    color: #1ea1f7;
+    text-decoration: underline;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    margin-left: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.container {
+    display: flex;
+}
+
+.confirm__btn {
+    float: right;
+    font-size: 14px;
+    height: 50px;
+    /* width: 100px; */
+    line-height: normal;
+}
+
+.test{
+    margin-bottom: 0px;
+}
