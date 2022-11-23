@@ -22,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 public class KakaoController
 {
 	@Autowired
-	private MemberService memberService;
+	private SocialMemberService memberService;
 	@Autowired
-	private MemberSocialService memberSocialService;
+	private SocialMemberService memberSocialService;
 
 	@GetMapping("mypage")
 	public void mypage(HttpSession session, Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
