@@ -10,18 +10,18 @@
 			</ul>
 			<ul class="nav">
 				<!-- 로그인 전 -->
-				<%-- 				<c:if test="${member == null}">
+				<c:if test="${member == null}">
 					<li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-					<li class="nav-item"><a href="../member/join" class="nav-link link-dark px-2">회원가입</a></li>
+					<li class="nav-item"><a href="../member/signup" class="nav-link link-dark px-2">회원가입</a></li>
 				</c:if>
 
 				<!-- 로그인 후 -->
 				<c:if test="${member != null}">
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
 					<li class="nav-item"><a href="../mypage/update" class="nav-link link-dark px-2">마이페이지</a></li>
-				</c:if> --%>
+				</c:if>
 
-				<sec:authorize access="!isAuthenticated()">
+				<%-- <sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/joinchoose" class="nav-link link-dark px-2">|회원가입|</a></li>
 				</sec:authorize>
 				<!-- 로그인 후 -->
@@ -32,7 +32,7 @@
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form>
 					<li class="nav-item"><a href="/member/mypage" class="nav-link link-dark px-2">|카카오 정보|</a></li>
-				</sec:authorize>
+				</sec:authorize> --%>
 				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
 
 			</ul>

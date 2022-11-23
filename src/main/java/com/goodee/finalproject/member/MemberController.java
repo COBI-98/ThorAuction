@@ -59,13 +59,13 @@ public class MemberController {
 	}
 	
 	// 로그아웃
-	@GetMapping("logout")
-	public String getLogout(HttpSession session) throws Exception {
-		session.invalidate();
-		
-		return "redirect:../";
-		
-	}
+//	@GetMapping("logout")
+//	public String getLogout(HttpSession session) throws Exception {
+//		session.invalidate();
+//		
+//		return "redirect:../";
+//		
+//	}
 	
 	// 회원가입 signup(ID, PW) GET
 	@GetMapping("signup")
