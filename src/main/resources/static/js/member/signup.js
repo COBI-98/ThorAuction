@@ -76,14 +76,14 @@ $("#pw").on({
 	blur: function () {
 		if ($("#pw").val() == "") {
 			$(".pwErrorMessage").text("필수 항목입니다");
-			$(".pwErrorMessage").attr("style", "color:#98a0a7");
+			$(".pwErrorMessage").attr("style", "color:#f00");
 		}
 	},
 
 	change: function () {
 		if ($("#pw").val().length < 8 || $("#pw").val().length > 16) {
 			$(".pwErrorMessage").text("8~16자 영문 대ㆍ소문자, 숫자를 사용하세요");
-			$(".pwErrorMessage").attr("style", "color:#98a0a7");
+			$(".pwErrorMessage").attr("style", "color:#f00");
 		} else {
 			$(".pwErrorMessage").text("");
 
@@ -100,7 +100,7 @@ $("#pw").on({
 $("#pwEquals").blur(function () {
 	if ($("#pw").val() != $("#pwEquals").val()) {
 		$(".pwEqualsErrorMessage").text("비밀번호가 일치하지 않습니다");
-		$(".pwEqualsErrorMessage").attr("style", "color:#98a0a7");
+		$(".pwEqualsErrorMessage").attr("style", "color:#f00");
 	} else {
 		$(".pwEqualsErrorMessage").text("");
 
