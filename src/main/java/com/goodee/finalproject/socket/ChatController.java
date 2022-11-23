@@ -13,16 +13,5 @@ public class ChatController {
 		mv.setViewName("chat");
 		return mv;
 	}
-	@RequestMapping("/callee")
-	public ModelAndView callee() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("callee");
-		return mv;
-	}
-	@RequestMapping("/caller")
-	public ModelAndView caller() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("caller");
-		return mv;
-	}
+	
 }
