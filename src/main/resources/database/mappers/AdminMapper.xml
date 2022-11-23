@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodee.finalproject.admin.AdminIF">
+
+	<select id="getMemberTotal" parameterType="MemberVO"
+		resultMap="getMemberTotal">
+		SELECT *
+		FROM THORMEMBER order by ID asc;
+	</select>
+	<resultMap type="MemberVO" id="getMemberTotal">
+		<id column="id" property="id" />
+		<result column="pw" property="pw" />
+		<result column="name" property="name" />
+		<result column="birth" property="birth" />
+		<result column="email" property="email" />
+		<result column="post" property="post" />
+		<result column="addr" property="addr" />
+		<result column="addr2" property="addr2" />
+		<result column="phone" property="phone" />
+		<result column="point" property="point" />
+		<collection property="roleVOs" javaType="List"
+			ofType="RoleVO">
+			<id column="roleNum" property="roleNum" />
+			<result column="roleName" property="roleName" />
+		</collection>
+	</resultMap>
+
+	<select id="getKakaoTotal" parameterType="KakaoVO"
+		resultMap="getKakaoTotal">
+		select * FROM
+		SOCIALKAKAO sk
+		left join
+		SOCIALKAKAODETAIL skd
+		on
+		sk.KANICKNAME = skd.KANICKNAME
+	</select>
+
+	<resultMap type="KakaoVO" id="getKakaoTotal">
+		<id column="kaNickName" property="kaNickName" />
+		<result column="kaEmail" property="kaEmail" />
+		<result column="kaName" property="kaName" />
+		<collection property="kakaoDetailVOs" javaType="List"
+			ofType="KakaoDetailVO">
+			<id column="kaNickName" property="kaNickName" />
+			<result column="kaBirth" property="kaBirth" />
+			<result column="kaPost" property="kaPost" />
+			<result column="kaAddr" property="kaAddr" />
+			<result column="kaAddrDetail" property="kaAddrDetail" />
+			<result column="kaPhone" property="kaPhone" />
+			<result column="kaPoint" property="kaPoint" />
+		</collection>
+	</resultMap>
+
+</mapper>

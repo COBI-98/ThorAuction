@@ -18,23 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/admin/*")
+@RequestMapping("/socialMember/*")
 public class KakaoController
 {
 	@Autowired
 	private MemberSocialService memberService;
-
-	@GetMapping("adminpage")
-	public void adminpage(HttpSession session, Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
-	{
-		log.info("--- get adminpage ---");
-		ModelAndView modelAndView = new ModelAndView();
-		log.info("adminpage auth: {}", authentication);
-		log.info("adminpage detail: {}", kakaoDetailVO);
-		log.info("session: {}", session.getAttribute("Detail"));
-
-		// modelAndView.addObject("auth", authentication);
-	}
 
 	@PostMapping("IdCheck")
 	@ResponseBody
@@ -66,7 +54,7 @@ public class KakaoController
 			memberService.setKakao1((KakaoVO) authentication.getPrincipal());
 			
 			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
-			modelAndView.setViewName("admin/kakaoLogin");
+			modelAndView.setViewName("socialMember/kakaoLogin");
 			return modelAndView;
 		}
 		else
@@ -114,7 +102,7 @@ public class KakaoController
 
 		modelAndView.addObject("detailData", authentication.getPrincipal());
 		session.setAttribute("kakaoVO", authentication.getPrincipal());
-		modelAndView.setViewName("admin/kakaoLogin");
+		modelAndView.setViewName("socialMember/kakaoLogin");
 		// modelAndView.setViewName("index");
 
 		return modelAndView;
