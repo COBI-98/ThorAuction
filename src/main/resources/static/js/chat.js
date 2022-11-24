@@ -15,10 +15,14 @@ var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
 var auction = getId('auction');
+var stop = getId('stop');
+var count = 'tnuoc';
+var reset = getId('reset');
+var usercount = getId('count');
 
 btnLogin.onclick = function(){
 	ws = new WebSocket("ws://" + location.host + "/chatt");
-	
+
 	ws.onmessage = function(msg){
 		var data = JSON.parse(msg.data);
 		var css;
@@ -29,9 +33,12 @@ btnLogin.onclick = function(){
 			css = 'class=other';
 		}
 		
+		var cc = `<div>현재인원 : ${data.count}</div>`;
+		usercount.innerHTML = cc;
+		
 		var item = `<div ${css} >
 		                <span><b>${data.mid}</b></span> [ ${data.date} ]<br/>
-                      <span>${data.msg}</span>
+                      <span class="text">${data.msg}</span>
 						</div>`;
 					
 		talk.innerHTML += item;
@@ -54,6 +61,7 @@ function send(){
 		data.mid = getId('mid').value;
 		data.msg = msg.value;
 		data.date = new Date().toLocaleString();
+		data.count = count;
 		var temp = JSON.stringify(data);
 		ws.send(temp);
 	}
@@ -65,3 +73,13 @@ auction.addEventListener("click",function(){
 	msg.value='';
 	msg.value = "[경매]" + text;
 })
+
+stop.addEventListener("click",function(){
+	$('#msg').attr("readonly",true);
+})
+
+reset.addEventListener("click",function(){
+	console.log(talk.childNodes);
+})
+
+
