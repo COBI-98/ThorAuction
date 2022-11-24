@@ -88,7 +88,7 @@
 		<div id="text">
 			<h1>실시간 경매</h1>
 			<h1>물품 : </h1>
-			<h1 id="amount">현재 금액</h1>
+			<h1 id="amount"></h1>
 			<h1 id="count"></h1>
 		</div>	
 		<input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
