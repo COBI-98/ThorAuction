@@ -7,9 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ChatController {
 	
+	WebSocketChat webSocketChat = new WebSocketChat();
+		
 	@RequestMapping("/chat")
 	public ModelAndView chat() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("count",webSocketChat.getCount());
 		mv.setViewName("chat");
 		return mv;
 	}

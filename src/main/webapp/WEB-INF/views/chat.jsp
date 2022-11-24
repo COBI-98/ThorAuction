@@ -26,7 +26,7 @@
 	height: 650px;
 	overflow: scroll;
 	border : 1px solid #aaa;
-	text-align: center;
+	/* text-align: center; */
 }
 #chatt #msg{
 	width: 490px;
@@ -47,15 +47,15 @@
 }
 
 #chatt #talk div{
-	width: 70%;
+	width: 60%;
 	display: inline-block;
 	padding: 6px;
 	border-radius:10px;	
 }
 
 #chatt .me{
-	background-color : #ffc;
-	margin : 1px 0px 2px 30%;	
+	background-color : #fea532;
+	margin : 1px 0px 2px 40%;	
 }
 
 #chatt .other{
@@ -88,16 +88,21 @@
 		<div id="text">
 			<h1>실시간 경매</h1>
 			<h1>물품 : </h1>
+			<h1 id="amount">현재 금액</h1>
+			<h1 id="count"></h1>
 		</div>	
-		<input type='text' id='mid' value='홍길동'>
+		<input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
 		<input type='button' value='로그인' id='btnLogin'>
 		<br/>
 		<div id='talk'></div>
 		<div id='sendZone'>
 			<input type='button' value="경매" id="auction">
-			<textarea id='msg' value='hi...' ></textarea>
-			<input type='button' value='전송' id='btnSend'>
+			<textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
+			<input type='button' value='보내기' id='btnSend'>
+			<input type="button" value="얼리기" id='stop'>
+			<input type="button" value="새로고침" id="reset">
 		</div>
+
 		
 	</div>
 
