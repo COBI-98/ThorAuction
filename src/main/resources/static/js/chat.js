@@ -14,6 +14,7 @@ var btnLogin = getId('btnLogin');
 var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
+var auction = getId('auction');
 
 btnLogin.onclick = function(){
 	ws = new WebSocket("ws://" + location.host + "/chatt");
@@ -58,3 +59,9 @@ function send(){
 	}
 	msg.value =''
 }
+
+auction.addEventListener("click",function(){
+	var text = msg.value;
+	msg.value='';
+	msg.value = "[경매]" + text;
+})
