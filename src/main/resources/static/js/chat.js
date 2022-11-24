@@ -19,6 +19,8 @@ var stop = getId('stop');
 var count = 'tnuoc';
 var reset = getId('reset');
 var usercount = getId('count');
+var amount = getId('amount');
+var max =0;
 
 btnLogin.onclick = function(){
 	ws = new WebSocket("ws://" + location.host + "/chatt");
@@ -43,6 +45,17 @@ btnLogin.onclick = function(){
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+		let index = talk.childNodes.length;
+			var ttt = talk.children[index-1].childNodes[5].innerText
+			var t4 = ttt.substr(4);
+			if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+	
+				if(t4 > max) {
+					max = t4;
+				}
+			}
+			amount.innerHTML = `현재 금액 : ` +max;
+			
 	}
 }
 
@@ -88,7 +101,6 @@ reset.addEventListener("click",function(){
 
 			console.log(ttt.substr(4));
 		}
-		
 	}
 	// console.log(talk.children[0].childNodes[5].innerText);
 	// console.log(talk.children[1].childNodes[5].innerText);
