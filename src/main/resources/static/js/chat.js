@@ -78,8 +78,22 @@ stop.addEventListener("click",function(){
 	$('#msg').attr("readonly",true);
 })
 
+var pattern_num = /[0-9]/;	// 숫자
+
 reset.addEventListener("click",function(){
-	console.log(talk.childNodes);
+	let index = talk.childNodes.length;
+	for(let i=0;i<index;i++){
+		var ttt = talk.children[i].childNodes[5].innerText
+		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(ttt.substr(4))){
+
+			console.log(ttt.substr(4));
+		}
+		
+	}
+	// console.log(talk.children[0].childNodes[5].innerText);
+	// console.log(talk.children[1].childNodes[5].innerText);
+	// console.log(talk.children[2].childNodes[5].innerText);
+	
 })
 
 
