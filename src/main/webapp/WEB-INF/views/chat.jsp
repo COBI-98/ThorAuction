@@ -16,18 +16,20 @@
 }
 
 #chatt{
-	width: 800px;
+	width: 700px;
 	margin: 20px auto;
+	/* text-align: center; */
 }
 
 #chatt #talk{
-	width: 800px;
-	height: 400px;
+	width: 600px;
+	height: 650px;
 	overflow: scroll;
 	border : 1px solid #aaa;
+	text-align: center;
 }
 #chatt #msg{
-	width: 740px;
+	width: 490px;
 	height:100px;
 	display: inline-block;
 }
@@ -39,14 +41,16 @@
 #chatt #btnSend{
 	width: 54px;
 	height: 100px;
+	background-color: #fea532;
+	color: white;
+	border-style: none;
 }
 
 #chatt #talk div{
 	width: 70%;
 	display: inline-block;
 	padding: 6px;
-	border-radius:10px;
-	
+	border-radius:10px;	
 }
 
 #chatt .me{
@@ -58,6 +62,21 @@
 	background-color : #eee;
 	margin : 2px;
 }
+
+#text{
+	text-align: center;
+}
+
+.container{
+	padding: 0px;
+}
+
+#auction{
+	background-color: white;
+	color: #fea532;
+	font-weight: bold;
+	border-style: none;
+}
 	</style>
 </head>
 
@@ -66,21 +85,24 @@
 	<c:import url="./template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
 	<div id='chatt'>
-		<h1>실시간 경매</h1>
-		<h1>물품 : </h1>
+		<div id="text">
+			<h1>실시간 경매</h1>
+			<h1>물품 : </h1>
+		</div>	
 		<input type='text' id='mid' value='홍길동'>
 		<input type='button' value='로그인' id='btnLogin'>
 		<br/>
 		<div id='talk'></div>
 		<div id='sendZone'>
+			<input type='button' value="경매" id="auction">
 			<textarea id='msg' value='hi...' ></textarea>
 			<input type='button' value='전송' id='btnSend'>
 		</div>
 		
 	</div>
 
-    <video id="localVideo" autoplay playsinline width="480px"></video>
-   <video id="remoteVideo" autoplay playsinline width="480px"></video>
+    <!-- <video id="localVideo" autoplay playsinline width="480px"></video>
+   <video id="remoteVideo" autoplay playsinline width="480px"></video> -->
 
     
     <script src="/socket.io/socket.io.js"></script>
