@@ -8,7 +8,7 @@
 <c:import url="../template/boot.jsp"></c:import>
 <link href="/css/reset.css" rel="stylesheet">
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
-<link rel="stylesheet" href="/css/admin/join.css">
+<link rel="stylesheet" href="/css/member/join.css">
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
