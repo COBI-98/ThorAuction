@@ -15,8 +15,8 @@ var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
 
-btnLogin.onclick = function(){
-	ws = new WebSocket("ws://" + location.host + "/chatt");
+
+	ws = new WebSocket("wss://" + location.host + "/chatt");
 	
 	ws.onmessage = function(msg){
 		var data = JSON.parse(msg.data);
@@ -36,7 +36,7 @@ btnLogin.onclick = function(){
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 	}
-}
+
 
 msg.onkeyup = function(ev){
 	if(ev.keyCode == 13){
