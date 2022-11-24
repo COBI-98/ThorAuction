@@ -1,6 +1,6 @@
 // join.js
 
-let results = [false, false, false, false, false];
+let resultss = [false, false, false, false, false];
 
 // 이름 검증
 $("#name").blur(function () {
@@ -11,7 +11,7 @@ $("#name").blur(function () {
 	} else {
 		$(".nameErrorMessage").text("");
 
-		results[0] = true;
+		resultss[0] = true;
 	}
 });
 
@@ -22,11 +22,11 @@ $("#birth").blur(function () {
 		$(".birthErrorMessage").attr("style", "color:#f00");
 
 	} else if ($("#birth").val().length < 6) {
-		$(".birthErrorMessage").text("생년월일 6자를 정확하게 입력하세요 ex)000101");
+		$(".birthErrorMessage").text("생년월일 6자를 정확하게 입력해 주세요 ex)000101");
 	} else {
 		$(".birthErrorMessage").text("");
 
-		results[1] = true;
+		resultss[1] = true;
 	}
 });
 
@@ -43,12 +43,12 @@ $("#phone").blur(function () {
 		$(".phoneErrorMessage").text("필수 항목입니다");
 		$(".phoneErrorMessage").attr("style", "color:#f00");
 	} else if ($("#phone").val().length < 11) {
-		$(".phoneErrorMessage").text("전화번호를 정확히 입력하세요");
+		$(".phoneErrorMessage").text("전화번호를 정확히 입력해 주세요");
 	}
 	else {
 		$(".phoneErrorMessage").text("");
 
-		results[2] = true;
+		resultss[2] = true;
 	}
 });
 
@@ -67,12 +67,12 @@ $("#email").blur(function () {
 		$(".emailErrorMessage").attr("style", "color:#f00");
 
 	} else if (!isEmail($("#email").val())) {
-		$(".emailErrorMessage").text("이메일 주소를 다시 확인해주세요");
+		$(".emailErrorMessage").text("이메일 주소를 다시 확인해 주세요");
 	}
 	else {
 		$(".emailErrorMessage").text("");
 
-		results[3] = true;
+		resultss[3] = true;
 	}
 });
 
@@ -121,7 +121,7 @@ function execution_daum_address() {
 			// 우편번호와 주소 정보를 해당 필드에 넣는다.
 			$("#post").val(data.zonecode);
 			$("#addr").val(addr);
-			results[4] = true;
+			resultss[4] = true;
 
 			// 상세주소 입력란 disabled 속성 변경 및 커서를 상세주소 필드로 이동한다.
 			$("#addr2").attr("readonly", false);

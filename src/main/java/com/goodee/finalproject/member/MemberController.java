@@ -1,10 +1,18 @@
 package com.goodee.finalproject.member;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,28 +75,72 @@ public class MemberController {
 //		
 //	}
 	
-	// 회원가입 signup(ID, PW) GET
-	@GetMapping("signup")
-	public void setSignUp() throws Exception {}
-	
-	// 회원가입 signup(ID, PW) POST	
-	@PostMapping("signup")
-	public String setSignUp(MemberVO memberVO, HttpSession session) throws Exception {
-		// session.setAttribute("signup", memberVO);
-		
-		return "member/join";
-	}
+	// 페이지 합쳐서 주석
+//	// 회원가입 signup(ID, PW) GET
+//	@GetMapping("signup")
+//	public void setSignup() throws Exception {}
+//	
+//	// 회원가입 signup(ID, PW) POST	
+//	@PostMapping("signup")
+//	public String setSignup(@Valid MemberVO memberVO, BindingResult bindingResult, Model model) throws Exception {
+//		System.out.println(memberVO);
+//		
+//		if(bindingResult.hasErrors()) {
+//			log.info("SIGNUP ERROR");
+//			
+//			List<FieldError> errors = bindingResult.getFieldErrors();
+//			Map<String, String> errorMsg = new HashMap<>();
+//			
+//			for(int i = 0; i < errors.size(); i++) {
+//				String field = errors.get(i).getField();
+//				String message = errors.get(i).getDefaultMessage();
+//				
+//				log.info("field : {}", field);
+//				log.info("message : {}", message);
+//				
+//				errorMsg.put(field, message);
+//			}
+//			model.addAttribute("errorMsg", errorMsg);
+//			
+//			return "member/signup";
+//			
+//		}
+//		
+//		return "member/join";
+//	}
 	
 	// 회원가입 join(name, birth, ...) GET
-//	@GetMapping("join")
-//	public void setJoin() throws Exception {}
+	@GetMapping("join")
+	public void setJoin() throws Exception {}
 
 	
 	// 회원가입 join(name, birth, ...) + 회원등급 POST
 	@PostMapping("join")
-	public String setJoin(MemberVO memberVO) throws Exception {
-		
+	public String setJoin(@Valid MemberVO memberVO, BindingResult bindingResult, Model model) throws Exception {
 		int result = memberService.setJoin(memberVO);
+		
+		System.out.println(memberVO);
+		
+		if(bindingResult.hasErrors()) {
+			log.info("JOIN ERROR");
+			
+			List<FieldError> errors = bindingResult.getFieldErrors();
+			Map<String, String> errorMsg = new HashMap<>();
+			
+			for(int i = 0; i < errors.size(); i++) {
+				String field = errors.get(i).getField();
+				String message = errors.get(i).getDefaultMessage();
+				
+				log.info("field : {}", field);
+				log.info("message : {}", message);
+				
+				errorMsg.put(field, message);
+			}
+			model.addAttribute("errorMsg", errorMsg);
+			
+			return "member/join";
+			
+		}
 		
 		return "redirect:../";
 	}

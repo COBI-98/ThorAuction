@@ -26,7 +26,7 @@
                 <div class="member-card-layout__container">
                     <div class="member-card-layout__inner">
                         <h1 class="member-card-layout__logo">
-                            <img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="토실대 임시로고">
+                            <a href="../"><img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="토실대 임시로고"></a>
                         </h1>
                         
                         <div class="login">
