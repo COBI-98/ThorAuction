@@ -23,11 +23,11 @@ public class AdminController
 	public AdminService adminService;
 
 	@GetMapping("adminpage")
-	public ModelAndView adminpage(Authentication authentication, MemberVO memberVO, KakaoVO kakaoVO) throws Exception
+	public ModelAndView adminpage(MemberVO memberVO, KakaoVO kakaoVO) throws Exception
 	{
 		log.info("--- get adminpage ---");
 		ModelAndView modelAndView = new ModelAndView();
-		log.info("adminpage auth: {}", authentication.getPrincipal());
+		// log.info("adminpage auth: {}", authentication.getPrincipal());
 
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);

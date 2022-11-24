@@ -5,8 +5,16 @@
 
 	<select id="getMemberTotal" parameterType="MemberVO"
 		resultMap="getMemberTotal">
-		SELECT *
-		FROM THORMEMBER order by ID asc;
+		SELECT th.*, tr.* FROM
+		THORMEMBER th
+		inner join
+		THORMEMBER_ROLE tmr
+		on th.ID = tmr.ID
+		inner join
+		THORROLE tr
+		on
+		tmr.ROLENUM = tr.ROLENUM
+		order by th.ID asc
 	</select>
 	<resultMap type="MemberVO" id="getMemberTotal">
 		<id column="id" property="id" />
@@ -26,14 +34,18 @@
 		</collection>
 	</resultMap>
 
+	<!-- select * FROM SOCIALKAKAO sk inner join SOCIALKAKAODETAIL skd on sk.KANICKNAME 
+		= skd.KANICKNAME -->
+
 	<select id="getKakaoTotal" parameterType="KakaoVO"
-		resultMap="getKakaoTotal">
-		select * FROM
+		resultMap="getKakaoTotal"> <!-- resultMap="getKakaoTotal" -->
+		select sk.*, skd.* FROM
 		SOCIALKAKAO sk
-		left join
+		inner join
 		SOCIALKAKAODETAIL skd
 		on
 		sk.KANICKNAME = skd.KANICKNAME
+		order by sk.KANICKNAME asc
 	</select>
 
 	<resultMap type="KakaoVO" id="getKakaoTotal">
