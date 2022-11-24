@@ -26,18 +26,18 @@
 				<th>등급</th>
 				<th>차단 여부</th>
 			</tr>
-			<c:forEach items="${member }" var="member">
+			<c:forEach items="${member}" var="m">
 				<tr>
-					<td>${member.id }</td>
-					<td>${member.email }</td>
-					<td>${member.name }</td>
-					<td>${member.point }</td>
-					<td>${member.roleVOs[0].roleName }</td>
+					<td>${m.id }</td>
+					<td>${m.email }</td>
+					<td>${m.name }</td>
+					<td>${m.point }</td>
+					<td>${m.roleVOs[0].roleName }</td>
 					<td>
-						<select name="select" id="selectRole">
-							<option id="opMana" value="Manager">Manager</option>
-							<option id="opMem" value="User" selected>User</option>
-							<option id="opBan" value="Ban">Ban</option>
+						<select name="select" class="selectRole">
+							<option class="opMana" value="Manager">Manager</option>
+							<option class="opMem" value="User" selected>User</option>
+							<option class="opBan" value="Ban">Ban</option>
 						</select>
 					</td>
 				</tr>
@@ -50,10 +50,10 @@
 					<td>${kakao.kakaoDetailVOs[0].kaPoint }</td>
 					<td>X</td>
 					<td>
-						<select name="select" id="selectRole">
-							<option id="opMana" value="Manager">Manager</option>
-							<option id="opMem" value="Member" selected>User</option>
-							<option id="opBan" value="Ban">Ban</option>
+						<select name="select" class="selectRole">
+							<option class="opMana" value="Manager">Manager</option>
+							<option class="opMem" value="Member" selected>User</option>
+							<option class="opBan" value="Ban">Ban</option>
 						</select>
 					</td>
 				</tr>
