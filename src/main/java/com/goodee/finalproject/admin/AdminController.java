@@ -37,7 +37,10 @@ public class AdminController
 
 		modelAndView.addObject("member", memberVOs);
 		modelAndView.addObject("kakao", kakaoVOs);
+		modelAndView.addObject("test", "test");
 		modelAndView.setViewName("admin/adminpage");
+		
+		log.info("size: {}",memberVOs.size());
 
 		return modelAndView;
 	}
