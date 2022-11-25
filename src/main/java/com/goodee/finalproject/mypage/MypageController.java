@@ -3,6 +3,7 @@ package com.goodee.finalproject.mypage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,16 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService mypageService;
+	
+	// 마이페이지 홈
+	@GetMapping("")
+	public String mypageHome() throws Exception {
+		
+		return "mypage/index";
+	}
+	
+	@GetMapping("charge")
+	public void charge() throws Exception {}
 	
 	// 회원탈퇴 GET
 	@GetMapping("delete")
