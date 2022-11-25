@@ -86,10 +86,11 @@
 	<section class="container d-flex flex-wrap justify-content-center">
 	<div id='chatt'>
 		<div id="text">
-			<h1>실시간 경매</h1>
-			<h1>물품 : </h1>
-			<h1 id="amount"></h1>
-			<h1 id="count"></h1>
+			<h3>실시간 경매</h3>
+			<h3>물품 : </h3>
+			<h3>현재금액</h3>
+			<h3 id="amount">${value}</h3>
+			<h3 id="count"></h3>
 		</div>	
 		<input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
 		<input type='button' value='로그인' id='btnLogin'>
@@ -100,7 +101,7 @@
 			<textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
 			<input type='button' value='보내기' id='btnSend'>
 			<input type="button" value="얼리기" id='stop'>
-			<input type="button" value="새로고침" id="reset">
+			<input type="button" value="종료" id="end">
 		</div>
 
 		

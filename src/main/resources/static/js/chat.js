@@ -20,7 +20,11 @@ var count = 'tnuoc';
 var reset = getId('reset');
 var usercount = getId('count');
 var amount = getId('amount');
-var max =0;
+let aaa = amount.innerText*1;
+var rank = [aaa,"id"]; //3등, 2등, 1등 순 초기값 : 시작값으로 변경할 예정 -> ajax로 controller에 보내서 저장해서 뿌려줄 예정
+var enterid = [];
+
+var pattern_num = /[0-9]/;	// 숫자 판별
 
 btnLogin.onclick = function(){
 	ws = new WebSocket("ws://" + location.host + "/chatt");
@@ -37,6 +41,10 @@ btnLogin.onclick = function(){
 		
 		var cc = `<div>현재인원 : ${data.count}</div>`;
 		usercount.innerHTML = cc;
+
+		// var am = `<div>현재 금액 : ${data.value}</div>`;
+		// amount.innerHTML = am;
+
 		
 		var item = `<div ${css} >
 		                <span><b>${data.mid}</b></span> [ ${data.date} ]<br/>
@@ -45,16 +53,32 @@ btnLogin.onclick = function(){
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-		let index = talk.childNodes.length;
-			var ttt = talk.children[index-1].childNodes[5].innerText
-			var t4 = ttt.substr(4);
-			if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+		 let index = talk.childNodes.length;
+		 	var ttt = talk.children[index-1].childNodes[5].innerText;
+			var id = talk.children[index-1].childNodes[1].innerText;
+			console.log(id);
+		 	//var t4 = ttt.substr(4)*1;
+		// 	var max = amount.innerText;
+			// if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+			// 	if(t4 > max) {
+			// 		max=t4;	
+			// 		console.log(max);
+			// 		amount.innerHTML = max;
+			// 	}
+			// }
+			//console.log(rank);
+
+		//let index = msg.value;
+		var t4 = ttt.substr(4)*1;
+		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
 	
-				if(t4 > max) {
-					max = t4;
+				if(t4 > rank[0]) {
+					rank[0] = t4;
 				}
 			}
-			amount.innerHTML = `현재 금액 : ` +max;
+			console.log(rank);
+			amount.innerHTML = rank[0];
+			rank[1] = id;
 			
 	}
 }
@@ -70,11 +94,42 @@ btnSend.onclick = function(){
 }
 
 function send(){
+
+	
+	// let index = msg.value;
+	// var t4 = index.substr(4)*1;
+	// 	if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+	
+	// 			if(t4 > rank[0]) {
+	// 				if(t4>rank[1]) {
+	// 					if(t4 > rank[2]) {
+	// 						rank[2] = t4;
+	// 					}else{
+	// 						rank[1] = t4;
+	// 					}
+	// 				}else{
+	// 					rank[0]= t4;
+	// 				}
+	// 			}
+	// 		}
+	// 		console.log(rank);
+	let index = msg.value;
+	var max = amount.innerText*1;
+	var t4 = index.substr(4)*1;
+	if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+		if(t4 > max) {
+			max=t4;	
+			console.log(max);
+			amount.innerHTML = max;
+		}
+	}
+	
 	if(msg.value.trim() != ''){
 		data.mid = getId('mid').value;
 		data.msg = msg.value;
 		data.date = new Date().toLocaleString();
 		data.count = count;
+		data.value = max;
 		var temp = JSON.stringify(data);
 		ws.send(temp);
 	}
@@ -91,21 +146,44 @@ stop.addEventListener("click",function(){
 	$('#msg').attr("readonly",true);
 })
 
-var pattern_num = /[0-9]/;	// 숫자
 
-reset.addEventListener("click",function(){
-	let index = talk.childNodes.length;
-	for(let i=0;i<index;i++){
-		var ttt = talk.children[i].childNodes[5].innerText
-		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(ttt.substr(4))){
+// reset.addEventListener("click",function(){
+// 	$.ajax({
+// 		type:"POST",
+// 		url:"chat",
+// 		data:{
+// 			rank : rank[2]
 
-			console.log(ttt.substr(4));
-		}
-	}
-	// console.log(talk.children[0].childNodes[5].innerText);
-	// console.log(talk.children[1].childNodes[5].innerText);
-	// console.log(talk.children[2].childNodes[5].innerText);
+// 		},
+// 		success:function(result) {
+// 			console.log("Result : ",  result);
+// 		},
+// 		error:function(){
+// 			console.log("error");
+// 		}
+
+// 	})
 	
-})
+	
+// })
+
+// setInterval(function() {
+// 	$.ajax({
+// 		type:"POST",
+// 		url:"chat",
+// 		data:{
+// 			rank : rank[2]
+
+// 		},
+// 		success:function(result) {
+// 			console.log("Result : ",  result);
+// 		},
+// 		error:function(){
+// 			console.log("error");
+// 		}
+
+// 	})
+// },30000);
+
 
 
