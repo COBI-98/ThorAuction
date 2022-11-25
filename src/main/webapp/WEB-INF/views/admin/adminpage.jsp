@@ -27,6 +27,7 @@
 				<th>차단 여부</th>
 			</tr>
 			<c:forEach items="${member}" var="m">
+				<input type="hidden" value="${m.roleVOs[0].roleName }" class="roleName">
 				<tr>
 					<td>${m.id }</td>
 					<td>${m.email }</td>
@@ -34,7 +35,7 @@
 					<td>${m.point }</td>
 					<td>${m.roleVOs[0].roleName }</td>
 					<td>
-						<select name="select" class="selectRole">
+						<select name="select" class="selectRole" id="s">
 							<option class="opMana" value="Manager">Manager</option>
 							<option class="opMem" value="User" selected>User</option>
 							<option class="opBan" value="Ban">Ban</option>
@@ -50,11 +51,11 @@
 					<td>${kakao.kakaoDetailVOs[0].kaPoint }</td>
 					<td>X</td>
 					<td>
-						<select name="select" class="selectRole">
+						<!-- <select name="select" class="selectRole">
 							<option class="opMana" value="Manager">Manager</option>
-							<option class="opMem" value="Member" selected>User</option>
+							<option class="opMem" value="User" selected>User</option>
 							<option class="opBan" value="Ban">Ban</option>
-						</select>
+						</select> -->
 					</td>
 				</tr>
 			</c:forEach>
