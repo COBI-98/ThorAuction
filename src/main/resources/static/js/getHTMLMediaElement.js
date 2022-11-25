@@ -1,6 +1,9 @@
 // __________________
 // getHTMLMediaElement.js
 
+
+
+
 function getHTMLMediaElement(mediaElement, config) {
     config = config || {};
 
@@ -48,7 +51,7 @@ function getHTMLMediaElement(mediaElement, config) {
     mediaControls.className = 'media-controls';
     mediaElementContainer.appendChild(mediaControls);
 
-    if (buttons.has('mute-audio')) {
+   // if (buttons.has('mute-audio')) {
         var muteAudio = document.createElement('div');
         muteAudio.className = 'control ' + (config.toggle.has('mute-audio') ? 'unmute-audio selected' : 'mute-audio');
         mediaControls.appendChild(muteAudio);
@@ -66,9 +69,10 @@ function getHTMLMediaElement(mediaElement, config) {
                 if (config.onMuted) config.onMuted('audio');
             }
         };
-    }
+        
+   // }
 
-    if (buttons.has('mute-video')) {
+   // if (buttons.has('mute-video')) {
         var muteVideo = document.createElement('div');
         muteVideo.className = 'control ' + (config.toggle.has('mute-video') ? 'unmute-video selected' : 'mute-video');
         mediaControls.appendChild(muteVideo);
@@ -88,19 +92,9 @@ function getHTMLMediaElement(mediaElement, config) {
                 if (config.onMuted) config.onMuted('video');
             }
         };
-    }
+    //}
 
-    if (buttons.has('take-snapshot')) {
-        var takeSnapshot = document.createElement('div');
-        takeSnapshot.className = 'control take-snapshot';
-        mediaControls.appendChild(takeSnapshot);
-
-        takeSnapshot.onclick = function() {
-            if (config.onTakeSnapshot) config.onTakeSnapshot();
-        };
-    }
-
-    if (buttons.has('stop')) {
+   // if (buttons.has('stop')) {
         var stop = document.createElement('div');
         stop.className = 'control stop';
         mediaControls.appendChild(stop);
@@ -114,44 +108,13 @@ function getHTMLMediaElement(mediaElement, config) {
             }, 800);
             if (config.onStopped) config.onStopped();
         };
-    }
+   // }
 
     var volumeControl = document.createElement('div');
     volumeControl.className = 'volume-control';
 
-    if (buttons.has('record-audio')) {
-        var recordAudio = document.createElement('div');
-        recordAudio.className = 'control ' + (config.toggle.has('record-audio') ? 'stop-recording-audio selected' : 'record-audio');
-        volumeControl.appendChild(recordAudio);
 
-        recordAudio.onclick = function() {
-            if (recordAudio.className.indexOf('stop-recording-audio') != -1) {
-                recordAudio.className = recordAudio.className.replace('stop-recording-audio selected', 'record-audio');
-                if (config.onRecordingStopped) config.onRecordingStopped('audio');
-            } else {
-                recordAudio.className = recordAudio.className.replace('record-audio', 'stop-recording-audio selected');
-                if (config.onRecordingStarted) config.onRecordingStarted('audio');
-            }
-        };
-    }
-
-    if (buttons.has('record-video')) {
-        var recordVideo = document.createElement('div');
-        recordVideo.className = 'control ' + (config.toggle.has('record-video') ? 'stop-recording-video selected' : 'record-video');
-        volumeControl.appendChild(recordVideo);
-
-        recordVideo.onclick = function() {
-            if (recordVideo.className.indexOf('stop-recording-video') != -1) {
-                recordVideo.className = recordVideo.className.replace('stop-recording-video selected', 'record-video');
-                if (config.onRecordingStopped) config.onRecordingStopped('video');
-            } else {
-                recordVideo.className = recordVideo.className.replace('record-video', 'stop-recording-video selected');
-                if (config.onRecordingStarted) config.onRecordingStarted('video');
-            }
-        };
-    }
-
-    if (buttons.has('volume-slider')) {
+   // if (buttons.has('volume-slider')) {
         var volumeSlider = document.createElement('div');
         volumeSlider.className = 'control volume-slider';
         volumeControl.appendChild(volumeSlider);
@@ -165,9 +128,9 @@ function getHTMLMediaElement(mediaElement, config) {
             mediaElement.volume = '.' + slider.value.toString().substr(0, 1);
         };
         volumeSlider.appendChild(slider);
-    }
+  //  }
 
-    if (buttons.has('full-screen')) {
+  //  if (buttons.has('full-screen')) {
         var zoom = document.createElement('div');
         zoom.className = 'control ' + (config.toggle.has('zoom-in') ? 'zoom-out selected' : 'zoom-in');
 
@@ -234,7 +197,7 @@ function getHTMLMediaElement(mediaElement, config) {
         document.addEventListener('fullscreenchange', screenStateChange, false);
         document.addEventListener('mozfullscreenchange', screenStateChange, false);
         document.addEventListener('webkitfullscreenchange', screenStateChange, false);
-    }
+  //  }
 
     if (buttons.has('volume-slider') || buttons.has('full-screen') || buttons.has('record-audio') || buttons.has('record-video')) {
         mediaElementContainer.appendChild(volumeControl);
