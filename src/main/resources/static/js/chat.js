@@ -21,22 +21,32 @@ var reset = getId('reset');
 var usercount = getId('count');
 var amount = getId('amount');
 let aaa = amount.innerText*1;
-var rank = [aaa,"id"]; //3등, 2등, 1등 순 초기값 : 시작값으로 변경할 예정 -> ajax로 controller에 보내서 저장해서 뿌려줄 예정
-var enterid = [];
+var rank = [aaa,"id"]; //최고값, id : 시작값으로 변경할 예정 -> ajax로 controller에 보내서 저장해서 뿌려줄 예정
+//var enterid = [];
+var username;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
+//로그인 , 메세지 전송 받아오기
 btnLogin.onclick = function(){
 	ws = new WebSocket("ws://" + location.host + "/chatt");
 
 	ws.onmessage = function(msg){
 		var data = JSON.parse(msg.data);
 		var css;
+		var cssid;
 		
 		if(data.mid == mid.value){
 			css = 'class=me';
 		}else{
 			css = 'class=other';
+		}
+
+		let a = data.msg;
+		var b = a.substr(4)*1;
+		
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b)){
+			cssid = 'id=enter';
 		}
 		
 		var cc = `<div>현재인원 : ${data.count}</div>`;
@@ -46,9 +56,9 @@ btnLogin.onclick = function(){
 		// amount.innerHTML = am;
 
 		
-		var item = `<div ${css} >
-		                <span><b>${data.mid}</b></span> [ ${data.date} ]<br/>
-                      <span class="text">${data.msg}</span>
+		var item = `<div ${css} ${cssid}>
+						<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
+					<span class="text">${data.msg}</span>
 						</div>`;
 					
 		talk.innerHTML += item;
@@ -74,14 +84,33 @@ btnLogin.onclick = function(){
 	
 				if(t4 > rank[0]) {
 					rank[0] = t4;
+					amount.innerHTML = rank[0];
+					rank[1] = id;
 				}
 			}
 			console.log(rank);
-			amount.innerHTML = rank[0];
-			rank[1] = id;
+
+		// let size = talk.childNodes.length;
+		// for(let i=0;i<size;i++) {
+		// 	var userName = talk.children[i].childNodes[1].innerText;
+		// 	userName.addEventListener("click",function(event){
+		// 		console.log(event);
+		// 	})
+		// }
+
+		
 			
 	}
 }
+
+//회원 강퇴시키기
+talk.addEventListener("click",function(event){
+	let even = event.target;
+	if(even.classList[0] == 'name') {
+		alert(even.innerText +" 님을 강퇴시키겠습니까?");
+	}
+
+})
 
 msg.onkeyup = function(ev){
 	if(ev.keyCode == 13){
@@ -93,6 +122,7 @@ btnSend.onclick = function(){
 	send();
 }
 
+//메세지 전송
 function send(){
 
 	
@@ -136,15 +166,20 @@ function send(){
 	msg.value =''
 }
 
+//경매 버튼
 auction.addEventListener("click",function(){
 	var text = msg.value;
 	msg.value='';
 	msg.value = "[경매]" + text;
 })
 
+
+//얼리기
 stop.addEventListener("click",function(){
 	$('#msg').attr("readonly",true);
 })
+
+
 
 
 // reset.addEventListener("click",function(){
@@ -186,4 +221,10 @@ stop.addEventListener("click",function(){
 // },30000);
 
 
-
+// let ii = talk.childNodes.length;
+// var nikname = talk.children[ii-1];
+// //nikname.addEventListener("click",function(){
+// 	console.log(ii);
+// 	console.log(talk.children[ii-1]);
+	//console.log(nikname);
+//})
