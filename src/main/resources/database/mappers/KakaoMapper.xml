@@ -4,8 +4,10 @@
 <mapper
 	namespace="com.goodee.finalproject.socialmember.KakaoMapperIF">
 
-	<!-- insert into SOCIALKAKAO values(${kaNickName}, ${kaEmail}, ${kaBirth}, 
-		${kaName}, ${kaPost}, ${kaAddr}, ${kaAddrDetail}, ${kaPhone}, 3000) -->
+	<insert id="setKaRole" parameterType="KakaoRoleVO">
+		insert into KAKAOMEMBERROLE
+		values(#{kaNickName}, 3)
+	</insert>
 
 	<insert id="setKakao1" parameterType="KakaoVO">
 		INSERT INTO
@@ -26,8 +28,9 @@
 	</insert>
 
 	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
-		<!-- select count(*) from SOCIALKAKAO where KANICKNAME=#{kaNickName} -->
-		select count(kaName) from SOCIALKAKAO where KANAME=#{kaName}
+		select count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
+
+
 
 </mapper>

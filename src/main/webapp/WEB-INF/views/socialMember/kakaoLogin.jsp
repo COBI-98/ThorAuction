@@ -10,8 +10,9 @@
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 <link rel="stylesheet" href="/css/member/join.css">
 </head>
+<script defer src="/js/admin/kakaoLoginCheck.js"></script>
 <body>
-<c:import url="../template/header.jsp"></c:import>
+	<c:import url="../template/header.jsp"></c:import>
 	<div id="root">
 		<div class="app">
 			<div class="member-scroll-layout">
@@ -27,37 +28,14 @@
 								class="register-header__step-dot">step 3</i> <i class="register-header__step-dot">step 4</i>
 						</div>
 					</div>
+					<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
 					<form action="./kakaoLogin" method="post">
-						<input type="hidden" id="nickName" name="kaNickName" value="${kakaoInfo.kaNickName }">
+						<!-- <input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }"> -->
 						<table>
 							<tr>
 								<th>이름</th>
 								<td>${kakaoInfo.kaName }</td>
 							</tr>
-							<!-- <tr>
-								<th>아이디</th>
-								<td>
-									<input type="text" id="id" name="id">
-
-									<button type="button" class="idCheck">중복확인</button>
-
-									<p class="result">
-										<span class="msg"></span>
-									</p>
-								</td>
-							</tr>
-							<tr>
-								<th>비밀번호</th>
-								<td>
-									<input type="password" name="pw">
-								</td>
-							</tr>
-							<tr>
-								<th>이름</th>
-								<td>
-									<input type="text" name="name">
-								</td>
-							</tr> -->
 							<tr>
 								<th>생년월일</th>
 								<td>

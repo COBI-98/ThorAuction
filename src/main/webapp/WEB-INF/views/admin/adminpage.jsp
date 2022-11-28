@@ -24,7 +24,7 @@
 				<th>Name</th>
 				<th>Point</th>
 				<th>등급</th>
-				<th>차단 여부</th>
+				<th>등급 변경</th>
 			</tr>
 			<c:forEach items="${member}" var="m">
 				<input type="hidden" value="${m.roleVOs[0].roleName }" class="roleName">
@@ -36,26 +36,26 @@
 					<td>${m.roleVOs[0].roleName }</td>
 					<td>
 						<select name="select" class="selectRole" id="s">
-							<option class="opMana" value="Manager">Manager</option>
-							<option class="opMem" value="User" selected>User</option>
-							<option class="opBan" value="Ban">Ban</option>
+							<option class="role" value="Manager">Manager</option>
+							<option class="role" value="User" selected>User</option>
+							<option class="role" value="Ban">Ban</option>
 						</select>
 					</td>
 				</tr>
 			</c:forEach>
-			<c:forEach items="${kakao }" var="kakao">
+			<c:forEach items="${kakao }" var="ka">
 				<tr>
-					<td>${kakao.kaNickName }</td>
-					<td>${kakao.kaEmail }</td>
-					<td>${kakao.kaName }</td>
-					<td>${kakao.kakaoDetailVOs[0].kaPoint }</td>
-					<td>X</td>
+					<td>${ka.kaNickName }</td>
+					<td>${ka.kaEmail }</td>
+					<td>${ka.kaName }</td>
+					<td>${ka.kakaoDetailVOs[0].kaPoint }</td>
+					<td>${ka.kakaoRoleVOs}</td>
 					<td>
-						<!-- <select name="select" class="selectRole">
-							<option class="opMana" value="Manager">Manager</option>
-							<option class="opMem" value="User" selected>User</option>
-							<option class="opBan" value="Ban">Ban</option>
-						</select> -->
+						<select name="select" class="selectRole">
+							<option class="role" value="Manager">Manager</option>
+							<option class="role" value="User" selected>User</option>
+							<option class="role" value="Ban">Ban</option>
+						</select>
 					</td>
 				</tr>
 			</c:forEach>

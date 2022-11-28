@@ -21,6 +21,10 @@ public class AdminService
 
 	public List<KakaoVO> getKakaoTotal(KakaoVO kakaoVO) throws Exception
 	{
-		return adminIF.getKakaoTotal(kakaoVO);
+		List<KakaoVO> ar = adminIF.getKakaoTotal(kakaoVO); 
+		
+		adminIF.getkakaoRole(kakaoVO);
+		
+		return ar;
 	}
 }

@@ -1,5 +1,6 @@
 package com.goodee.finalproject.socialmember;
 
+import java.security.Principal;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -31,25 +32,23 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
+
 		return kakaoMapperIF.setKakaoDetail(kakaoDetailVO);
 	}
 
-	public int setKakao1(KakaoVO object) throws Exception
+	public int setKakao1(KakaoVO kakaoVO) throws Exception
 	{
-		log.info("===== kakao service =====");
-
-		int rs = kakaoMapperIF.setKakao1(object);
-
-		log.info("memberservice set kakao : {}", rs);
+		int rs = kakaoMapperIF.setKakao1(kakaoVO);
+		kakaoMapperIF.setKaRole(kakaoVO);
 
 		return rs;
 	}
 
-	// 카카오 소셜 로그인7
+	// 카카오 소셜 로그인
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
 	{
-		// log.info("===== Social Login try =====");
+		log.info("===== Social Login try =====");
 		// // log.info("userRequest: {}", userRequest);
 		// log.info("userRequest AccessToken: {}", userRequest.getAccessToken());
 		// log.info("userRequest AdditionalParameters: {}", userRequest.getAdditionalParameters());
@@ -57,9 +56,10 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		//
 		// log.info("==================================");
 		String social = userRequest.getClientRegistration().getRegistrationId();
-		log.info(social);
+//		log.info(social);
 
 		OAuth2User oAuth2User2 = this.socialJoinCheck(userRequest);
+//		log.info("oAuth: {}", oAuth2User2);
 
 		return oAuth2User2;
 	}
