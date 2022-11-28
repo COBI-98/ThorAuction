@@ -9,7 +9,7 @@ function getId(id){
 var data = {};//전송 데이터(JSON)
 
 var ws ;
-var mid = getId('mid');
+var userid = getId('id');
 var btnLogin = getId('btnLogin');
 var btnSend = getId('btnSend');
 var talk = getId('talk');
@@ -27,16 +27,16 @@ var username;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
-//로그인 , 메세지 전송 받아오기
-btnLogin.onclick = function(){
-	ws = new WebSocket("ws://" + location.host + "/chatt");
+ws = new WebSocket("ws://" + location.host + "/chatt");
+// //로그인 , 메세지 전송 받아오기
+// btnLogin.onclick = function(){
 
 	ws.onmessage = function(msg){
 		var data = JSON.parse(msg.data);
 		var css;
 		var cssid;
 		
-		if(data.mid == mid.value){
+		if(data.mid == userid.innerText){
 			css = 'class=me';
 		}else{
 			css = 'class=other';
@@ -101,7 +101,7 @@ btnLogin.onclick = function(){
 		
 			
 	}
-}
+//}
 
 //회원 강퇴시키기
 talk.addEventListener("click",function(event){
@@ -155,7 +155,7 @@ function send(){
 	}
 	
 	if(msg.value.trim() != ''){
-		data.mid = getId('mid').value;
+		data.mid = getId('id').innerHTML;
 		data.msg = msg.value;
 		data.date = new Date().toLocaleString();
 		data.count = count;

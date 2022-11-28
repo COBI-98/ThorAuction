@@ -2,10 +2,15 @@ package com.goodee.finalproject.socket;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.websocket.EncodeException;
+import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -18,6 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.socket.WebSocketSession;
+
+import com.goodee.finalproject.member.MemberVO;
 
 
 
@@ -29,12 +37,15 @@ public class WebSocketChat {
 	private static Set<Session> clients = 
 			Collections.synchronizedSet(new HashSet<Session>());
 	private static int value;
+	//private static final Map<Session, WebSocketSession> sessionMap = new HashMap<Session, WebSocketSession>();
 	
 	//ChatController chatController = new ChatController();
 
 	
 	@OnOpen
-	public void onOpen(Session s) throws Exception {
+	public void onOpen(Session s,EndpointConfig config) throws Exception {
+		//HttpSession httpSession = (HttpSession) config.getUserProperties().get("member");
+		//MemberVO mem = (MemberVO)request.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
 		System.out.println("open session : " + s.toString());
 		if(!clients.contains(s)) {
@@ -43,11 +54,18 @@ public class WebSocketChat {
 		}else {
 			System.out.println("이미 연결된 session 임!!!");
 		}System.out.println(clients.size());
+//		logger.info("WebSocket Session created : " + s.getId());
+//		logger.info("Http Session is : " + httpSession.getId());
+//		
+//		sessionMap.put(s, httpSession);
 	}
 	
 	
 	@OnMessage
 	public void onMessage(String msg, Session session) throws Exception{
+		//HttpSession mem = sessionMap.get(session);
+		//MemberVO mem = (MemberVO)request.getSession().getAttribute("member");
+		
 		System.out.println(msg.toString());
 		String count = String.valueOf(clients.size());
 		msg = msg.replace("tnuoc", count);
@@ -74,6 +92,9 @@ public class WebSocketChat {
 	
 	@OnClose
 	public void onClose(Session s) {
+		//HttpSession httpSession = sessionMap.get(s);
+		//MemberVO mem = (MemberVO)request.getSession().getAttribute("member");
+
 		System.out.println("session close : " + s);
 		clients.remove(s);
 		System.out.println(clients.size());
