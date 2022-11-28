@@ -20,9 +20,10 @@ var count = 'tnuoc';
 var reset = getId('reset');
 var usercount = getId('count');
 var amount = getId('amount');
+var iddd = getId('iddd');
 let aaa = amount.innerText*1;
 var rank = [aaa,"id"]; //최고값, id : 시작값으로 변경할 예정 -> ajax로 controller에 보내서 저장해서 뿌려줄 예정
-//var enterid = [];
+var enterid = [];
 var username;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
@@ -31,80 +32,128 @@ ws = new WebSocket("ws://" + location.host + "/chatt");
 // //로그인 , 메세지 전송 받아오기
 // btnLogin.onclick = function(){
 
-	ws.onmessage = function(msg){
-		var data = JSON.parse(msg.data);
-		var css;
-		var cssid;
-		
-		if(data.mid == userid.innerText){
-			css = 'class=me';
-		}else{
-			css = 'class=other';
-		}
+ws.onopen = function(){
+	// enterid.push(userid.innerText);
+	// for(let i=0;i<enterid.length;i++) {
+	// 	console.log(enterid[i]);
+	// 	iddd.innerHTML += enterid[i];
+	// }
+	var user = userid.innerText;
+	$.ajax({
+		type:"POST",
+		url:"chatid",
+		data:{
+			user : user
 
-		let a = data.msg;
-		var b = a.substr(4)*1;
-		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
-			cssid = 'id=enter';
-		}
-		
-		var cc = `<div>현재인원 : ${data.count}</div>`;
-		usercount.innerHTML = cc;
+		},
+		success:function(result) {
+			console.log("Result : ",  result);
 
-		// var am = `<div>현재 금액 : ${data.value}</div>`;
-		// amount.innerHTML = am;
-
-		
-		var item = `<div ${css} ${cssid}>
-						<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
-					<span class="text">${data.msg}</span>
-						</div>`;
-					
-		talk.innerHTML += item;
-		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-		 let index = talk.childNodes.length;
-		 	var ttt = talk.children[index-1].childNodes[5].innerText;
-			var id = talk.children[index-1].childNodes[1].innerText;
-			console.log(id);
-		 	//var t4 = ttt.substr(4)*1;
-		// 	var max = amount.innerText;
-			// if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-			// 	if(t4 > max) {
-			// 		max=t4;	
-			// 		console.log(max);
-			// 		amount.innerHTML = max;
-			// 	}
-			// }
-			//console.log(rank);
-
-		//let index = msg.value;
-		var t4 = ttt.substr(4)*1;
-		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-	
-				if(t4 > rank[0]) {
-					rank[0] = t4;
-					amount.innerHTML = rank[0];
-					rank[1] = id;
-				}
+			for(let i=0;i<result.length;i++) {
+				enterid.push(result[i]);
+				iddd.innerHTML += enterid[i];
 			}
-			console.log(rank);
+		},
+		error:function(){
+			console.log("error");
+		}
+	})
+}
 
-		// let size = talk.childNodes.length;
-		// for(let i=0;i<size;i++) {
-		// 	var userName = talk.children[i].childNodes[1].innerText;
-		// 	userName.addEventListener("click",function(event){
-		// 		console.log(event);
-		// 	})
-		// }
-
-		
+// ws.onclose = function() {
+// 	var user = userid.innerText;
+// 	$.ajax({
+// 		type:"POST",
+// 		url:"out",
+// 		data:{
+// 			user : user
+// 		},
+// 		success:function(result){
+// 			console.log(result);
+// 			enterid.pop(user);
 			
+// 		},
+// 		error:function(){
+// 			console.log("error");
+// 		}
+// 	})
+
+// }
+
+ws.onmessage = function(msg){
+	var data = JSON.parse(msg.data);
+	var css;
+	var cssid;
+	
+	if(data.mid == userid.innerText){
+		css = 'class=me';
+	}else{
+		css = 'class=other';
 	}
+
+	let a = data.msg;
+	var b = a.substr(4)*1;
+	
+	if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
+		cssid = 'id=enter';
+	}
+	
+	var cc = `<div>현재인원 : ${data.count}</div>`;
+	usercount.innerHTML = cc;
+
+	// var am = `<div>현재 금액 : ${data.value}</div>`;
+	// amount.innerHTML = am;
+
+	
+	var item = `<div ${css} ${cssid}>
+					<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
+				<span class="text">${data.msg}</span>
+					</div>`;
+				
+	talk.innerHTML += item;
+	talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+		let index = talk.childNodes.length;
+		var ttt = talk.children[index-1].childNodes[5].innerText;
+		var id = talk.children[index-1].childNodes[1].innerText;
+		console.log(id);
+		//var t4 = ttt.substr(4)*1;
+	// 	var max = amount.innerText;
+		// if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+		// 	if(t4 > max) {
+		// 		max=t4;	
+		// 		console.log(max);
+		// 		amount.innerHTML = max;
+		// 	}
+		// }
+		//console.log(rank);
+
+	//let index = msg.value;
+	var t4 = ttt.substr(4)*1;
+	if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+
+			if(t4 > rank[0]) {
+				rank[0] = t4;
+				amount.innerHTML = rank[0];
+				rank[1] = id;
+			}
+		}
+		console.log(rank);
+
+	// let size = talk.childNodes.length;
+	// for(let i=0;i<size;i++) {
+	// 	var userName = talk.children[i].childNodes[1].innerText;
+	// 	userName.addEventListener("click",function(event){
+	// 		console.log(event);
+	// 	})
+	// }
+
+	
+		
+}
 //}
 
 //회원 강퇴시키기
-talk.addEventListener("click",function(event){
+iddd.addEventListener("click",function(event){
 	let even = event.target;
 	if(even.classList[0] == 'name') {
 		alert(even.innerText +" 님을 강퇴시키겠습니까?");

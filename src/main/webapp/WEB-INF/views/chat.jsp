@@ -120,10 +120,9 @@
 			<input type="button" value="종료" id="end"> <!--session 닫힘-->
 		</div>
 
-		<div>
-			<c:forEach items="${list}" var="ul">
-				<h1>${ul}</h1>
-			</c:forEach>
+		<h3>현재 채팅 참가자</h3>
+		<div id = "iddd">
+		
 		</div>
 
 		

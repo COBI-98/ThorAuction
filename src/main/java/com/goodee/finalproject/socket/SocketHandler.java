@@ -19,8 +19,8 @@ public class SocketHandler extends TextWebSocketHandler {
 //	ArrayList<WebSocketSession> sessions = new ArrayList<>();
 	HashMap<String, WebSocketSession> sessions = new HashMap<>();
 	
-	@Autowired
-	WebSocketChat socket;
+//	@Autowired
+//	WebSocketChat socket;
 
 	// client에서 메시지가 서버로 전송댈때 실행되는 함수.
 	@Override
