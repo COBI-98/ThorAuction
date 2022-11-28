@@ -2031,7 +2031,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
         }
 
         var MediaStream = window.MediaStream;
-
+        
         if (typeof MediaStream === 'undefined' && typeof webkitMediaStream !== 'undefined') {
             MediaStream = webkitMediaStream;
         }
@@ -3608,7 +3608,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
             navigator.mediaDevices.getUserMedia(options.localMediaConstraints).then(function(stream) {
                 stream.streamid = stream.streamid || stream.id || getRandomString();
                 stream.idInstance = idInstance;
-
+                stream.srcObject = null;
                 streaming(stream);
             }).catch(function(error) {
                 options.onLocalMediaError(error, options.localMediaConstraints);

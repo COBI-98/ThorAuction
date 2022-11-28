@@ -25,7 +25,24 @@
   </section>
 
 <button id="cameraStatus"> 방송 종료 </button>
+<button id="cameraPause" class= ""> 방송 일시 정지 </button>
 
+
+<div id='chatt'>
+		<h1>WebSocket Chatting</h1>
+		<input type='text' id='mid' value='홍길동'>
+		<input type='button' value='로그인' id='btnLogin'>
+		<br/>
+		<div id='talk'></div>
+		<div id='sendZone'>
+			<textarea id='msg' value='hi...' ></textarea>
+			<input type='button' value='전송' id='btnSend'>
+		</div>
+		
+	</div>
+
+<script src="/socket.io/socket.io.js"></script>
+	<script src='/js/chat.js'></script>
 <script src="/js/RTCMultiConnection.js"></script>
 
 <!-- <script src="https://muazkhan.com:9001/socket.io/socket.io.js"></script> -->

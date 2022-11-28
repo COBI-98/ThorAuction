@@ -74,6 +74,10 @@ function getHTMLMediaElement(mediaElement, config) {
 
    // if (buttons.has('mute-video')) {
         var muteVideo = document.createElement('div');
+        let muteVideoId = document.createAttribute("id");
+        muteVideoId.value = "muteVideo";
+        muteVideo.setAttributeNode(muteVideoId);
+        
         muteVideo.className = 'control ' + (config.toggle.has('mute-video') ? 'unmute-video selected' : 'mute-video');
         mediaControls.appendChild(muteVideo);
 
