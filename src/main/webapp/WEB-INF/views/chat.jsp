@@ -107,9 +107,9 @@
 			<h3 id="count"></h3>
 		</div>	
 		<h2 id="id">${member}</h2>
-		<input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
+		<!-- <input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
 		<input type='button' value='로그인' id='btnLogin'>
-		<br/>
+		<br/> -->
 		<div id='talk'></div>
 		<div id='sendZone'>
 			<input type='button' value="경매" id="auction">
@@ -118,6 +118,12 @@
 			<input type="button" value="얼리기" id='stop'>
 			<input type="button" value="경매종료" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
 			<input type="button" value="종료" id="end"> <!--session 닫힘-->
+		</div>
+
+		<div>
+			<c:forEach items="${list}" var="ul">
+				<h1>${ul}</h1>
+			</c:forEach>
 		</div>
 
 		

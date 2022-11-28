@@ -56,6 +56,7 @@ public class WebSocketChat {
 		}System.out.println(clients.size());
 //		logger.info("WebSocket Session created : " + s.getId());
 //		logger.info("Http Session is : " + httpSession.getId());
+		System.out.println(clients);
 //		
 //		sessionMap.put(s, httpSession);
 	}
@@ -116,6 +117,9 @@ public class WebSocketChat {
 	public void setValue(int valu) {
 		this.value = valu;
 	}
+//	public Session getSession() {
+//		return clients;
+//	}
 	
 //	//메시지 전체 전송
 //	public void broadCast(String text) throws IOException {

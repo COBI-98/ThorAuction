@@ -1,5 +1,10 @@
 package com.goodee.finalproject.socket;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,11 +19,20 @@ import com.goodee.finalproject.member.MemberVO;
 public class ChatController {
 	
 	WebSocketChat webSocketChat = new WebSocketChat();
+	
+	//Map<String, String> map = new HashMap<>();
+	private static List<String> list = new ArrayList<>();
 		
 	@RequestMapping("/chat")
 	public ModelAndView chat(HttpSession session,HttpServletRequest req) {
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
+//		for(int i=0;i<list.size();i++) {
+//			if(!(list.get(i).equals(mem.getName()))) {
+				//list.add(mem.getName());
+			//}
+		//}
+		mv.addObject("list",list);
 		mv.addObject("member", mem.getName());
 		mv.addObject("value",webSocketChat.getValue());
 		System.out.println("value : "+webSocketChat.getValue());

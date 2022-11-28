@@ -45,7 +45,7 @@ ws = new WebSocket("ws://" + location.host + "/chatt");
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b)){
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
 			cssid = 'id=enter';
 		}
 		
