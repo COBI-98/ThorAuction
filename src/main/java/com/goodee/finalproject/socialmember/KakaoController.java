@@ -1,5 +1,8 @@
 package com.goodee.finalproject.socialmember;
 
+import java.security.Principal;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.goodee.finalproject.admin.AdminService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -22,16 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 public class KakaoController
 {
 	@Autowired
-	private MemberSocialService memberService;
+	private MemberSocialService memberSocialService;
 
 	@PostMapping("IdCheck")
 	@ResponseBody
-	public int IdCheck(KakaoVO kakaoVO, Authentication authentication) throws Exception
+	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
-		log.info("kakao id : {}", kakaoVO);
-		// log.info("authenti id : {}", authentication.getPrincipal());
-
-		int rs = memberService.IdCheck(kakaoVO);
+		log.info("======= id check =======");
+		int rs = memberSocialService.IdCheck(kakaoVO);
 
 		log.info("idCheck rs: {}", rs);
 
@@ -41,20 +44,32 @@ public class KakaoController
 	@GetMapping("kakaoLogin")
 	public ModelAndView kakaoLogin(KakaoVO kakaoVO, Authentication authentication) throws Exception
 	{
-		log.info("--- get kakaoLogin ---");
-		log.info("===== authentication: {}", authentication.getPrincipal());
-		int rs = memberService.IdCheck(kakaoVO);
-		
-		log.info("idCheck rs: {}", rs);
-		
 		ModelAndView modelAndView = new ModelAndView();
+		log.info("--- get kakaoLogin ---");
+		log.info("===== authentication: {}", authentication.getName());
+		log.info("kakao: {}", kakaoVO.getKaNickName());
 
+		int rs = memberSocialService.IdCheck(kakaoVO);
+
+		log.info("idCheck rs: {}", rs);
+
+		// if (rs == 1)
+		// {
+		// modelAndView.addObject("rs", rs);
+		// modelAndView.setViewName("redirect:/");
+		//
+		// return modelAndView;
+		// }
+		// else
+		// {
+		// }
 		if (authentication.getPrincipal() != null)
 		{
-			memberService.setKakao1((KakaoVO) authentication.getPrincipal());
-			
+			memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
+
 			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
 			modelAndView.setViewName("socialMember/kakaoLogin");
+
 			return modelAndView;
 		}
 		else
@@ -68,7 +83,7 @@ public class KakaoController
 	}
 
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, KakaoDetailVO kakaoDetailVO) throws Exception
+	public ModelAndView kakaoLogin(HttpSession session, KakaoDetailVO kakaoDetailVO) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
 
@@ -76,7 +91,7 @@ public class KakaoController
 
 		log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 
-		int rs2 = memberService.setKakaoDetail(kakaoDetailVO);
+		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
 
 		log.info("kakao login rs2: {}", rs2);
 

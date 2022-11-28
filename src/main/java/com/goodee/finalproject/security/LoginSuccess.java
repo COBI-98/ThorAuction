@@ -22,7 +22,6 @@ public class LoginSuccess implements AuthenticationSuccessHandler
 	{
 		log.info("======= 로그인 성공 ====== ");
 		log.info("Auth: {}", authentication);
-		log.info("ID: {}", request.getParameter("kaNickName"));
 
 		// String ch = request.getParameter("rememberId");
 		// log.info("check: {}", ch);

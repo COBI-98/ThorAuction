@@ -64,4 +64,29 @@
 		</collection>
 	</resultMap>
 
+	<select id="getkakaoRole" parameterType="KakaoVO"
+		resultMap="total">
+		select * FROM
+		SOCIALKAKAO s
+		inner join
+		KAKAOMEMBERROLE kmr
+		on
+		s.KANICKNAME = kmr.KANICKNAME
+		inner JOIN
+		KAKAOROLE kr
+		on kmr.KAROLE =
+		kr.KAROLE
+		where s.KANICKNAME = #{kaNickName}
+	</select>
+	<resultMap type="KakaoVO" id="total">
+		<id column="kaNickName" property="kaNickName" />
+		<result column="kaEmail" property="kaEmail" />
+		<result column="kaName" property="kaName" />
+		<collection property="kakaoRoleVOs" javaType="List"
+			ofType="KakaoRoleVO">
+			<id column="kaRole" property="kaRole" />
+			<result column="kaRoleName" property="kaRoleName" />
+		</collection>
+	</resultMap>
+
 </mapper>
