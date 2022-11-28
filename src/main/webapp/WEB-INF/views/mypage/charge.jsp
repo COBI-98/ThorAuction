@@ -28,12 +28,23 @@
 	        <label class="box-radio-input"><input type="radio" name="cp_item" value="35000"><span>35,000원</span></label>
 	        <label class="box-radio-input"><input type="radio" name="cp_item" value="40000"><span>40,000원</span></label>
 	        <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
-	        <p style="color: #ac2925; margin-top: 30px">카카오페이의 최소 충전금액은 5,000원이며 <br/>최대 충전금액은 50,000원 입니다.</p>
+	        <label class="box-radio-input">
+	        	<input type="radio" name="cp_item" id="value_money" value="">
+	        	<input type="text" id="input_money" placeholder="직접입력">
+	        </label>
+			<br/>
         
         	<button type="button" class="btn btn-lg btn-block btn-custom" id="pay">충전하기</button>
 		</div>
 		
-	</section>
+	</section>	
+	<input type="hidden" id="id" name="id" disabled="disabled" value="${member.id}">
+	<input type="hidden" id="name" name="name" disabled="disabled" value="${member.name}">
+	<input type="hidden" id="email" name="email" disabled="disabled" value="${member.email}">
+	<input type="hidden" id="post" name="post" disabled="disabled" value="${member.post}">
+	<input type="hidden" id="addr" name="addr" disabled="disabled" value="${member.addr}">
+	<input type="hidden" id="addr2" name="addr2" disabled="disabled" value="${member.addr2}">
+	<input type="hidden" id="phone" name="phone" disabled="disabled" value="${member.phone}">
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<!-- 충전하기 JS -->

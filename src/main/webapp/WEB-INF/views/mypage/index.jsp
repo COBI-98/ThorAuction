@@ -13,6 +13,17 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
+	
+			<div class="me-5">
+				<input type="text" name="id" disabled="disabled" value="${member.id}">
+				<input type="text" name="id" disabled="disabled" value="${member.name}">
+				<input type="text" name="id" disabled="disabled" value="${member.birth}">
+				<input type="text" name="id" disabled="disabled" value="${member.email}">
+				<input type="text" name="id" disabled="disabled" value="${member.post}">
+				<input type="text" name="id" disabled="disabled" value="${member.addr}">
+				<input type="text" name="id" disabled="disabled" value="${member.addr2}">
+				<input type="text" name="id" disabled="disabled" value="${member.phone}">
+			</div>
 		
 			<div class="me-5">
 				<a href="./charge">충전하기</a>
