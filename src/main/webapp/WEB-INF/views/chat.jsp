@@ -106,6 +106,7 @@
 			<h3 id="amount">${value}</h3>
 			<h3 id="count"></h3>
 		</div>	
+		<h2 id="id">${member}</h2>
 		<input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
 		<input type='button' value='로그인' id='btnLogin'>
 		<br/>
