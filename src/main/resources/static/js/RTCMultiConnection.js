@@ -123,6 +123,8 @@ var RTCMultiConnection = function(roomid, forceOptions) {
     })(typeof global !== 'undefined' ? global : null);
 
     function SocketConnection(connection, connectCallback) {
+
+        
         function isData(session) {
             return !session.audio && !session.video && !session.screen && session.data;
         }
@@ -356,13 +358,14 @@ var RTCMultiConnection = function(roomid, forceOptions) {
         connection.socket.resetProps = function() {
             alreadyConnected = false;
         };
-
+        
+        
         connection.socket.on('connect', function() {
             if (alreadyConnected) {
                 return;
             }
             alreadyConnected = true;
-
+            
             if (connection.enableLogs) {
                 console.info('socket.io connection is opened.');
             }
@@ -375,6 +378,14 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                 connectCallback(connection.socket);
             }
         });
+
+        const cameraOff = document.querySelector("#cameraStatus");
+        cameraOff.addEventListener("click", function(){
+            if(connection.socket.connect()){
+                connection.socket.disconnect();
+            }
+        })
+        
 
         connection.socket.on('disconnect', function(event) {
             connection.onSocketDisconnect(event);
