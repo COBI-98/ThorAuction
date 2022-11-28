@@ -37,6 +37,7 @@ public class WebSocketChat {
 	private static Set<Session> clients = 
 			Collections.synchronizedSet(new HashSet<Session>());
 	private static int value;
+	
 	//private static final Map<Session, WebSocketSession> sessionMap = new HashMap<Session, WebSocketSession>();
 	
 	//ChatController chatController = new ChatController();
