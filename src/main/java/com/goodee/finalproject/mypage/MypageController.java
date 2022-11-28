@@ -58,7 +58,7 @@ public class MypageController {
 		}
 		
 		mypageService.setDelete(memberVO);
-//		session.invalidate();
+		session.invalidate(); // 세션 업데이트?
 		
 		return "redirect:../";
 		
