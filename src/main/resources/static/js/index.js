@@ -104,23 +104,42 @@ connection.onstream = function(event) {
           video.setAttribute('muted', true);
       }
     }
+    
     video.srcObject = event.stream;
+    
+  	//var video = document.createElement('video');
+    // const pause = document.querySelector("#cameraPause");
+    // pause.addEventListener("click",function(){
+	// 	if(video.srcObject == null){
+	// 		video.srcObject = event.stream;
+	// 	}else{
+	// 		video.srcObject = null;
+	// 	}
+	   
+    // })
+    
+    showVideo();
 
-    var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
-    var mediaElement = getHTMLMediaElement(video, {
-        title: event.userid,
-        buttons: ['full-screen'],
-        width: width,
-        showOnMouseEnter: false
-    });
+    function  showVideo(){
 
-    connection.videosContainer.appendChild(mediaElement);
+        var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
+        var mediaElement = getHTMLMediaElement(video, {
+            title: event.userid,
+            buttons: ['full-screen'],
+            width: width,
+            showOnMouseEnter: false
+        });
+    
+        connection.videosContainer.appendChild(mediaElement);
+    
+        setTimeout(function() {
+            mediaElement.media.play();
+        }, 5000);
+    
+        mediaElement.id = event.streamid;
 
-    setTimeout(function() {
-        mediaElement.media.play();
-    }, 5000);
-
-    mediaElement.id = event.streamid;
+    }
+   
 };
 
 connection.onstreamended = function(event) {
