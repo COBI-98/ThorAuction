@@ -115,7 +115,7 @@
 			<input type='button' value="경매" id="auction">
 			<textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
 			<input type='button' value='보내기' id='btnSend'>
-			<input type="button" value="얼리기" id='stop'>
+			<input type="button" class="" value="얼리기" id='stop'>
 			<input type="button" value="경매종료" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
 			<input type="button" value="종료" id="end"> <!--session 닫힘-->
 		</div>

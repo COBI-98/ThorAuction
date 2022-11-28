@@ -70,14 +70,16 @@ public class WebSocketChat {
 		
 		System.out.println(msg.toString());
 		String count = String.valueOf(clients.size());
-		msg = msg.replace("tnuoc", count);
-		//msg에 있는 value값 가져와서 value 에 저장
-		int index = msg.lastIndexOf("value");
-		System.out.println(index);
-		String vv = msg.substring(index+7, msg.length()-1);
-		System.out.println(vv);
-		int valu = Integer.parseInt(vv);
-		setValue(valu);
+		if(msg.substring(2, 4).equals("mid")) {
+			msg = msg.replace("tnuoc", count);
+			//msg에 있는 value값 가져와서 value 에 저장
+			int index = msg.lastIndexOf("value");
+			System.out.println(index);
+			String vv = msg.substring(index+7, msg.length()-1);
+			System.out.println(vv);
+			int valu = Integer.parseInt(vv);
+			setValue(valu);
+		}
 //		String value = String.valueOf(ChatController.getValue());
 //		msg = msg.replace("eulav", value);
 		

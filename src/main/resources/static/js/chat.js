@@ -7,6 +7,7 @@ function getId(id){
 }
 
 var data = {};//전송 데이터(JSON)
+var data3 = {};
 
 var ws ;
 var userid = getId('id');
@@ -84,60 +85,65 @@ ws.onmessage = function(msg){
 	var data = JSON.parse(msg.data);
 	var css;
 	var cssid;
-	
-	if(data.mid == userid.innerText){
-		css = 'class=me';
-	}else{
-		css = 'class=other';
-	}
+	if(data.stop == null) {
 
-	let a = data.msg;
-	var b = a.substr(4)*1;
-	
-	if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
-		cssid = 'id=enter';
-	}
-	
-	var cc = `<div>현재인원 : ${data.count}</div>`;
-	usercount.innerHTML = cc;
-
-	// var am = `<div>현재 금액 : ${data.value}</div>`;
-	// amount.innerHTML = am;
-
-	
-	var item = `<div ${css} ${cssid}>
-					<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
-				<span class="text">${data.msg}</span>
-					</div>`;
-				
-	talk.innerHTML += item;
-	talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-		let index = talk.childNodes.length;
-		var ttt = talk.children[index-1].childNodes[5].innerText;
-		var id = talk.children[index-1].childNodes[1].innerText;
-		console.log(id);
-		//var t4 = ttt.substr(4)*1;
-	// 	var max = amount.innerText;
-		// if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-		// 	if(t4 > max) {
-		// 		max=t4;	
-		// 		console.log(max);
-		// 		amount.innerHTML = max;
-		// 	}
-		// }
-		//console.log(rank);
-
-	//let index = msg.value;
-	var t4 = ttt.substr(4)*1;
-	if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-
-			if(t4 > rank[0]) {
-				rank[0] = t4;
-				amount.innerHTML = rank[0];
-				rank[1] = id;
-			}
+		if(data.mid == userid.innerText){
+			css = 'class=me';
+		}else{
+			css = 'class=other';
 		}
-		console.log(rank);
+
+		let a = data.msg;
+		var b = a.substr(4)*1;
+		
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
+			cssid = 'id=enter';
+		}
+		
+		var cc = `<div>현재인원 : ${data.count}</div>`;
+		usercount.innerHTML = cc;
+
+		// var am = `<div>현재 금액 : ${data.value}</div>`;
+		// amount.innerHTML = am;
+
+		
+		var item = `<div ${css} ${cssid}>
+						<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
+					<span class="text">${data.msg}</span>
+						</div>`;
+					
+		talk.innerHTML += item;
+		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+			let index = talk.childNodes.length;
+			var ttt = talk.children[index-1].childNodes[5].innerText;
+			var id = talk.children[index-1].childNodes[1].innerText;
+			console.log(id);
+			//var t4 = ttt.substr(4)*1;
+		// 	var max = amount.innerText;
+			// if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+			// 	if(t4 > max) {
+			// 		max=t4;	
+			// 		console.log(max);
+			// 		amount.innerHTML = max;
+			// 	}
+			// }
+			//console.log(rank);
+
+		//let index = msg.value;
+		var t4 = ttt.substr(4)*1;
+		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+
+				if(t4 > rank[0]) {
+					rank[0] = t4;
+					amount.innerHTML = rank[0];
+					rank[1] = id;
+				}
+			}
+			console.log(rank);
+	}else{
+		let value = data.stop;
+		$('#msg').attr("readonly",value);
+	}
 
 	// let size = talk.childNodes.length;
 	// for(let i=0;i<size;i++) {
@@ -225,8 +231,22 @@ auction.addEventListener("click",function(){
 
 //얼리기
 stop.addEventListener("click",function(){
-	$('#msg').attr("readonly",true);
+	stop.classList.toggle("stop");
+	sendstop();
 })
+
+function stopchat(){
+	if(stop.classList.contains("stop")){
+		return true;
+	}
+	return false;
+}
+
+function sendstop(){
+	data3.stop = stopchat();
+	var temp = JSON.stringify(data3);
+	ws.send(temp);
+}
 
 
 
