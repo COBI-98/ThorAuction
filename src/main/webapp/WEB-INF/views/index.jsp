@@ -2,45 +2,26 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>토르의 실시간 대장간</title>
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-
+<meta charset="UTF-8">
+	<title>토르의 실시간 대장간</title>
+	<c:import url="./template/boot.jsp"></c:import>
+	<link href="/css/reset.css" rel="stylesheet">
+	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
-  
-  <section class="make-center">
-    <input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
-    <button id="open-room">Open Room</button>
-    <button id="join-room">Join Room</button>
-    <button id="open-or-join-room">Auto Open Or Join Room</button>
-
-    <div id="videos-container" style="margin: 20px 0;"></div>
-    
-    
-	<div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
-  </section>
-
-
-
-<script src="/js/RTCMultiConnection.js"></script>
-
-<!-- <script src="https://muazkhan.com:9001/socket.io/socket.io.js"></script> -->
-<script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
-<!-- custom layout for HTML5 audio/video elements -->
-<link rel="stylesheet" href="/css/getHTMLMediaElement.css">
-<script src="/js/getHTMLMediaElement.js"></script>
-<script src='/js/index.js'></script>
-
-  <footer>
-    <small id="send-message"></small>
-  </footer>
-
-  <script src="https://www.webrtc-experiment.com/common.js"></script>
-  
-  
+	<c:import url="./template/header.jsp"></c:import>
+	<section class="container d-flex flex-wrap justify-content-center">
+		
+			<h1> 토르의 실시간 대장간 메인</h1>	
+			
+			<div class="mt-5">
+				<a href="../mypage/update">회원정보 수정</a>
+				<a href="../mypage/delete">회원탈퇴</a>
+			</div>
+		
+	</section>
+	<c:import url="./template/footer.jsp"></c:import>
 </body>
 </html>

@@ -82,6 +82,9 @@ function getHTMLMediaElement(mediaElement, config) {
                 muteVideo.className = muteVideo.className.replace('unmute-video selected', 'mute-video');
                 mediaElement.muted = false;
                 mediaElement.volume = 1;
+                
+                
+                
                 mediaElement.play();
                 if (config.onUnMuted) config.onUnMuted('video');
             } else {
