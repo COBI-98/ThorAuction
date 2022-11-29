@@ -9,7 +9,7 @@
 		<typeAlias type="com.goodee.finalproject.socialmember.KakaoDetailVO" alias="KakaoDetailVO" />
 		<typeAlias type="com.goodee.finalproject.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.goodee.finalproject.member.RoleVO" alias="RoleVO" />
-		<typeAlias type="com.goodee.finalproject.pay.PayVO" alias="PayVO" />
+		<typeAlias type="com.goodee.finalproject.mypage.PayVO" alias="PayVO" />
 		
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="int"/>
