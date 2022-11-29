@@ -38,6 +38,7 @@ public class ChatController {
 //			}
 //		}
 		mv.addObject("member", mem.getName());
+		mv.addObject("point", mem.getPoint());
 		mv.addObject("value",webSocketChat.getValue());
 		System.out.println("value : "+webSocketChat.getValue());
 		mv.addObject("count",webSocketChat.getCount());
