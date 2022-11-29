@@ -1,18 +1,18 @@
 package com.goodee.finalproject.mypage;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.goodee.finalproject.member.MemberController;
 import com.goodee.finalproject.member.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +32,41 @@ public class MypageController {
 		return "mypage/index";
 	}
 	
+	// 포인트 충전 GET
 	@GetMapping("charge")
-	public void charge() throws Exception {}
+	public void charge(HttpSession session) throws Exception { }
+	
+	// 포인트 충전 POST
+	@PostMapping("charge/point")
+	@ResponseBody
+	public int chargePoint(PayVO payVO, HttpServletRequest request, HttpSession session) throws Exception {
+		
+		// 세션으로 id를 꺼냄
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		log.info("charge : {}", memberVO);
+		
+		// 세션으로 memberVO를 꺼내서, PayVo에 넣어줌
+		payVO.setId(memberVO.getId());
+		
+		int result = mypageService.ChargePoint(payVO);
+		
+		Enumeration<String> enumeration = request.getParameterNames();
+		
+		while (enumeration.hasMoreElements()) {
+			String string = enumeration.nextElement();
+			log.info("key : {}", string);
+			String value = request.getParameter(string);
+			log.info("value : {}", value);
+			
+		}
+		
+		log.info("payUid : {}", payVO.getPayUid());
+		log.info("payTotal : {}", payVO.getPayTotal());
+		log.info("payResult : {}", payVO.getPayResult());
+		log.info("payDate : {}", payVO.getPayDate());
+		
+		return result;
+	}
 	
 	// 회원탈퇴 GET
 	@GetMapping("delete")
