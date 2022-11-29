@@ -37,11 +37,11 @@ public class WebSocketChat {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private static Set<Session> clients = 
-			Collections.synchronizedSet(new HashSet<Session>());
+			Collections.synchronizedSet(new HashSet<Session>()); //채팅참여 session
 	private static int value;
 	private static String username;
-	private static Set<String> set = new HashSet<String>();
-	private static Map<Session, String> list = new HashMap<>(); 
+	private static Set<String> set = new HashSet<String>(); //채팅참여 name 
+	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
 	
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
@@ -66,16 +66,21 @@ public class WebSocketChat {
 		Object obj = parser.parse(msg);
 		JSONObject jsonObj = (JSONObject) obj;
 		
+		if(msg.substring(2, 5).equals("out")) {
+			String outname = String.valueOf(jsonObj.get("out"));
+			Session ss = getKey(list,outname);
+			System.out.println(ss);
+			sendOneMessage(msg, ss);
+		}
+		
 		//경매 결과
-		if(msg.substring(2, 8).equals("amount")) {
+		else if(msg.substring(2, 8).equals("amount")) {
 
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
 			//DB에 저장할 예정
 
 		}else if(msg.substring(2, 5).equals("mid")) {
-			//msg = msg.replace("tnuoc", count);
-			//msg에 있는 value값 가져와서 value 에 저장
 			
 			String vv = String.valueOf(jsonObj.get("value"));
 			System.out.println(vv);
@@ -108,6 +113,14 @@ public class WebSocketChat {
 			System.out.println("send data : " + msg);
 			s.getBasicRemote().sendText(msg);
 		}
+	}
+	
+	//한명한테만 메세지 전송
+	public void sendOneMessage(String msg, Session session) throws IOException{
+		System.out.println("receive message : " + msg);
+			System.out.println("send data : " + msg);
+			session.getBasicRemote().sendText(msg);
+		
 	}
 	
 	@OnClose
@@ -149,6 +162,16 @@ public class WebSocketChat {
 	}
 	public void setname(String name) {
 		this.username = name;
+	}
+	
+	public static <K, V> K getKey(Map<K, V> map, V value) {
+	       // 찾을 hashmap 과 주어진 단서 value
+	       for (K key : map.keySet()) {
+	           if (value.equals(map.get(key))) {
+	               return key;
+	           }
+	       }
+	       return null;
 	}
 
 }
