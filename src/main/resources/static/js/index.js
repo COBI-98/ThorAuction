@@ -86,7 +86,10 @@ connection.onstream = function(event) {
     event.mediaElement.muted = true;
     event.mediaElement.volume = 0;
 
-    var video = document.createElement('video');
+
+
+ var video = document.querySelector("#localVideo");
+ /*   var video = document.createElement('video');
 
     try {
         video.setAttributeNode(document.createAttribute('autoplay'));
@@ -95,7 +98,7 @@ connection.onstream = function(event) {
         video.setAttribute('autoplay', true);
         video.setAttribute('playsinline', true);
     }
-
+*/
     if(event.type === 'local') {
       video.volume = 0;
       try {
@@ -106,6 +109,16 @@ connection.onstream = function(event) {
     }
     
     video.srcObject = event.stream;
+    
+  ///  
+  	const cameraBlack = document.querySelector("#cameraBlack");
+  	
+  	cameraBlack.addEventListener("click",function(){
+	 video.srcObject.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
+	 video.srcObject.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
+})
+    
+    
     
   	//var video = document.createElement('video');
     // const pause = document.querySelector("#cameraPause");
@@ -121,12 +134,12 @@ connection.onstream = function(event) {
     showVideo();
 
     function  showVideo(){
-
-        var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
+	
+      	var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
         var mediaElement = getHTMLMediaElement(video, {
             title: event.userid,
             buttons: ['full-screen'],
-            width: width,
+           	width: width,
             showOnMouseEnter: false
         });
     
@@ -262,3 +275,8 @@ if(navigator.connection &&
    navigator.connection.downlinkMax <= 0.115) {
   alert('2G is not supported. Please use a better internet service.');
 }
+
+
+
+
+
