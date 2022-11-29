@@ -10,6 +10,10 @@
 	<link href="/css/reset.css" rel="stylesheet">
 	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 	
+	<!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 	 <!-- 아임포트 -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
@@ -38,13 +42,6 @@
 		</div>
 		
 	</section>	
-	<input type="hidden" id="id" name="id" disabled="disabled" value="${member.id}">
-	<input type="hidden" id="name" name="name" disabled="disabled" value="${member.name}">
-	<input type="hidden" id="email" name="email" disabled="disabled" value="${member.email}">
-	<input type="hidden" id="post" name="post" disabled="disabled" value="${member.post}">
-	<input type="hidden" id="addr" name="addr" disabled="disabled" value="${member.addr}">
-	<input type="hidden" id="addr2" name="addr2" disabled="disabled" value="${member.addr2}">
-	<input type="hidden" id="phone" name="phone" disabled="disabled" value="${member.phone}">
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<!-- 충전하기 JS -->
