@@ -63,21 +63,21 @@ public class WebSocketChat {
 
 		JSONParser parser = new JSONParser();
 		String count = String.valueOf(clients.size());
+		Object obj = parser.parse(msg);
+		JSONObject jsonObj = (JSONObject) obj;
 		
 		//경매 결과
 		if(msg.substring(2, 8).equals("amount")) {
-			Object obj = parser.parse(msg);
-			JSONObject jsonObj = (JSONObject) obj;
+
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
 			//DB에 저장할 예정
 
 		}else if(msg.substring(2, 5).equals("mid")) {
-			msg = msg.replace("tnuoc", count);
+			//msg = msg.replace("tnuoc", count);
 			//msg에 있는 value값 가져와서 value 에 저장
-			int index = msg.lastIndexOf("value");
-			System.out.println(index);
-			String vv = msg.substring(index+7, msg.length()-1);
+			
+			String vv = String.valueOf(jsonObj.get("value"));
 			System.out.println(vv);
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
@@ -85,15 +85,13 @@ public class WebSocketChat {
 			sendMessage(msg, session);
 			
 		}else if(msg.substring(2, 10).equals("usercome")) {
-			Object obj = parser.parse(msg);
-			JSONObject jsonObj = (JSONObject) obj;
+
 			String name = String.valueOf(jsonObj.get("usercome")); //입장한 사람 name
 			set.add(name);
 			list.put(session, name);
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(set);
 			
-			System.out.println(jsonString);
 			sendMessage(jsonString, session);
 		}
 		
@@ -124,7 +122,6 @@ public class WebSocketChat {
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(set);
 		
-		System.out.println(jsonString);
 		sendMessage(jsonString, s);
 		
 	}

@@ -7,6 +7,8 @@
 <c:import url="./template/boot.jsp"></c:import>
 	<link href="/css/reset.css" rel="stylesheet">
 	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 	<title>Chating</title>
