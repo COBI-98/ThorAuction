@@ -37,6 +37,9 @@ document.getElementById('open-or-join-room').onclick = function() {
     });
 };
 
+
+
+
 // ......................................................
 // ..................RTCMultiConnection Code.............
 // ......................................................
@@ -89,16 +92,8 @@ connection.onstream = function(event) {
 
 
  var video = document.querySelector("#localVideo");
- /*   var video = document.createElement('video');
 
-    try {
-        video.setAttributeNode(document.createAttribute('autoplay'));
-        video.setAttributeNode(document.createAttribute('playsinline'));
-    } catch (e) {
-        video.setAttribute('autoplay', true);
-        video.setAttribute('playsinline', true);
-    }
-*/
+
     if(event.type === 'local') {
       video.volume = 0;
       try {
@@ -109,27 +104,64 @@ connection.onstream = function(event) {
     }
     
     video.srcObject = event.stream;
-    
+    getCameras(video.srcObject);
   ///  
   	const cameraBlack = document.querySelector("#cameraBlack");
-  	
+  	let cameraSelect=document.querySelector("#cameras")
   	cameraBlack.addEventListener("click",function(){
-	 video.srcObject.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
-	 video.srcObject.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
-})
+	
+		video.srcObject.getVideoTracks().forEach((track) => (console.log(track)));
+		console.log(cameraSelect.value);
+	
+	
+		 video.srcObject.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
+		 video.srcObject.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
+	})
+    
+    
+    document.querySelector("#screenShare").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
+	
+			 navigator.mediaDevices.getDisplayMedia({
+		        video: true,
+		        audio: true,
+		      })
+		      .then((stream) => {
+		        video.srcObject = stream; // 내 비디오 공유 화면으로 변경
+		        
+				})
+				video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
+	//replaceTrack RTCM. 으로 이용 가능하다 (트랙, 아이디? , 비디오트랙인지) 
+	
+		  
+	})
+    
+    
+    ////
+  
+    document.querySelector("#cameras").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
+	
+			 navigator.mediaDevices.getUserMedia({
+		        video: {
+						facingMode: { exact: "environment" }
+					},
+		        audio: true,
+		      })
+		      .then((stream) => {
+		        video.srcObject = stream; // 내 비디오 공유 화면으로 변경
+		        
+				})
+				video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
+	//replaceTrack RTCM. 으로 이용 가능하다 (트랙, 아이디? , 비디오트랙인지) 
+	
+		  
+	})
     
     
     
-  	//var video = document.createElement('video');
-    // const pause = document.querySelector("#cameraPause");
-    // pause.addEventListener("click",function(){
-	// 	if(video.srcObject == null){
-	// 		video.srcObject = event.stream;
-	// 	}else{
-	// 		video.srcObject = null;
-	// 	}
-	   
-    // })
+    
+    
+    
+    
     
     showVideo();
 
@@ -154,6 +186,27 @@ connection.onstream = function(event) {
     }
    
 };
+
+async function getCameras(myStream){
+    try{
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const cameras = devices.filter((device) => (device.kind === "videoinput"));
+        const currentCamera = myStream.getAudioTracks()[0];
+        cameras.forEach((camera) => {
+            const option = document.createElement("option");
+            option.value = camera.deviceId;
+            option.innerText = camera.label;
+            if(currentCamera.label === camera.label) {
+                option.selected = true;
+            }
+            document.querySelector("#cameras").appendChild(option);
+        });
+    }catch(e){
+        console.log(e);
+    }
+}
+
+
 
 connection.onstreamended = function(event) {
     var mediaElement = document.getElementById(event.streamid);

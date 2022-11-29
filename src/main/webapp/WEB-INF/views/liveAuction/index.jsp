@@ -27,7 +27,9 @@
 <button id="cameraStatus"> 방송 종료 </button>
 <button id="cameraPause" class= ""> 방송 일시 정지 </button>
 <button id="cameraBlack" class= ""> 방송 일시 정지 2 </button>
-
+<button id="screenShare" class= ""> 화면 공유로 전환 </button>
+<select id="cameras"></select>
+<h2 id= "consoleee"></h2>
 <div id='chatt'>
 		<h1>WebSocket Chatting</h1>
 		<input type='text' id='mid' value='홍길동'>
