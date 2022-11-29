@@ -120,40 +120,57 @@ connection.onstream = function(event) {
     
     
     document.querySelector("#screenShare").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
-	
+			var videoStream =  video.srcObject;
+			
 			 navigator.mediaDevices.getDisplayMedia({
 		        video: true,
 		        audio: true,
 		      })
 		      .then((stream) => {
-		        video.srcObject = stream; // 내 비디오 공유 화면으로 변경
+		          video.srcObject = stream; // 내 비디오 공유 화면으로 변경
+		          var videoTrack = stream.getVideoTracks()[0];
+		          
+		          connection.replaceTrack(videoTrack,event.userId,true);
+			          
+			   
+		          videoTrack.onended = function () {
+	          	  const screenTrack = videoStream.getVideoTracks()[0];
+	      		  connection.replaceTrack(screenTrack,event.userId,true);
+			          
+	        	  stream.getTracks().forEach((track) => track.stop());
+		          video.srcObject = videoStream; // 내 비디오로 변경
+	       		 };
+		        
 		        
 				})
-				video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
+				//video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
 	//replaceTrack RTCM. 으로 이용 가능하다 (트랙, 아이디? , 비디오트랙인지) 
 	
-		  
+		 
 	})
     
     
     ////
   
-    document.querySelector("#cameras").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
-	
+    document.querySelector("#cameras").addEventListener("input",function(){ 
+			
 			 navigator.mediaDevices.getUserMedia({
 		        video: {
-						facingMode: { exact: "environment" }
+						'deviceId' : document.querySelector("#cameras").value
 					},
 		        audio: true,
 		      })
 		      .then((stream) => {
-		        video.srcObject = stream; // 내 비디오 공유 화면으로 변경
+				video.srcObject = stream; // 내 비디오 공유 화면으로 변경
+		          var videoTrack = stream.getVideoTracks()[0];
+		          
+		          connection.replaceTrack(videoTrack,event.userId,true);
+			          
+			   });
 		        
-				})
-				video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
+				//video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
 	//replaceTrack RTCM. 으로 이용 가능하다 (트랙, 아이디? , 비디오트랙인지) 
-	
-		  
+			
 	})
     
     
