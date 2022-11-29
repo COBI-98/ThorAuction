@@ -96,8 +96,8 @@ ws.onmessage = function(msg){
 			cssid = 'id=enter';
 		}
 		
-		var cc = `<div>현재인원 : ${data.count}</div>`;
-		usercount.innerHTML = cc;
+		// var cc = `<div>현재인원 : ${data.count}</div>`;
+		// usercount.innerHTML = cc;
 
 		// var am = `<div>현재 금액 : ${data.value}</div>`;
 		// amount.innerHTML = am;
@@ -143,6 +143,7 @@ ws.onmessage = function(msg){
 	}else{
 		iddd.innerHTML="";
 		iddd.innerHTML += data;
+		usercount.innerHTML = data.length;
 	}
 	// let size = talk.childNodes.length;
 	// for(let i=0;i<size;i++) {

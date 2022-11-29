@@ -105,6 +105,7 @@
 			<h3 id="final">현재 금액</h3>
 			<h3 id="amount">${value}</h3>
 			<h3 id="finalamount"></h3>
+			<h3>현재 인원</h3>
 			<h3 id="count"></h3>
 		</div>	
 		<h2 id="id">${member}</h2>
