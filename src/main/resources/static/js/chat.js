@@ -32,6 +32,7 @@ var finalamount = getId('finalamount');
 let aaa = amount.innerText*1;
 var rank = [aaa,"id"]; //최고값, id
 var end = getId('end');
+var point =getId('point');
 var userlist = [];
 var username;
 
@@ -59,8 +60,17 @@ ws.onmessage = function(msg){
 	var cssid;
 
 	if(data.out != null) {
-		alert("강퇴되었습니다.");
-		location.href="../../";
+		Swal.fire({
+			title: "강퇴 되었습니다.",  // title, text , html  로 글 작성
+			icon: "error",    //상황에 맞는 아이콘
+	
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: '확인',
+			//reverseButtons: true   // 버튼 순서 변경
+		} ).then((result) => {   // 아무 버튼이나 누르면 발생
+			location.href="../../";
+		})
 	}
 	//방송 종료
 	if(data.end != null) {
@@ -68,6 +78,7 @@ ws.onmessage = function(msg){
 		location.href="../../";
 	}
 	if(data.mid != null) {
+		var mypoint = point.innerText;
 
 		if(data.mid == userid.innerText){
 			css = 'class=me';
@@ -78,8 +89,22 @@ ws.onmessage = function(msg){
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b)){
+			// if(b <= mypoint){
 			cssid = 'id=enter';
+			// }else{
+			// 	Swal.fire({
+			// 		title: "보유 중인 포인트보다 높은 금액을 입력하셨습니다.",  // title, text , html  로 글 작성
+			// 		icon: "error",    //상황에 맞는 아이콘
+			
+			// 		showCancelButton: true,
+			// 		confirmButtonColor: '#3085d6',
+			// 		confirmButtonText: '확인',
+			// 		//reverseButtons: true   // 버튼 순서 변경
+			// 	} ).then((result) => {   // 아무 버튼이나 누르면 발생
+					
+			// 	})
+			// }
 		}
 
 		var item = `<div ${css} ${cssid}>
@@ -110,7 +135,7 @@ ws.onmessage = function(msg){
 		let value = data.stop;
 		$('#msg').attr("readonly",value);
 	//입장, 퇴장 리스트
-	}else{
+	}else {
 		iddd.innerHTML="";
 		for(let i=0;i<data.length;i++) {
 			iddd.innerHTML += `<div>`+data[i]; + `</div>`;
@@ -142,7 +167,6 @@ iddd.addEventListener("click",function(event){
 			var temp = JSON.stringify(data7);
 			ws.send(temp);
 			
-
 			Swal.fire({    
 				title: "강퇴 되었습니다.",
 				icon: "success",
@@ -229,6 +253,7 @@ auctionend.addEventListener("click",function(){
 	let ff = rank[0];
 	$('#amount').css("display","none");
 	finalamount.innerText = ff;
+	talk.innerHTML += "*경매가 종료 되었습니다.*";
 	sendresult();
 })
 
@@ -237,7 +262,6 @@ function sendresult() {
 	data4.winner = rank[1];
 	var temp = JSON.stringify(data4);
 	ws.send(temp);
-
 }
 
 function usercome(){
