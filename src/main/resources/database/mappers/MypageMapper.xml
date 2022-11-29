@@ -5,6 +5,12 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 포인트 충전 -->
+	<insert id="chargePoint" parameterType="PayVO">
+		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE)
+		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
+	</insert>
+
 	<!-- 회원탈퇴 -->
 	<delete id="setDelete">
 		DELETE FROM THORMEMBER

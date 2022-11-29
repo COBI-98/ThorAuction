@@ -1,4 +1,4 @@
-package com.goodee.finalproject.pay;
+package com.goodee.finalproject.mypage;
 
 import java.sql.Date;
 
@@ -8,10 +8,9 @@ import lombok.Data;
 
 @Data
 public class PayVO extends MemberVO{
-	private Long payUid;
+	private String payUid;
 	private Long payTotal;
-	private Long payResult;
-	private Date payDate;
-	
-	
+	private String payResult;
+	private String payDate;
+
 }

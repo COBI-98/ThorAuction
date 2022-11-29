@@ -7,7 +7,7 @@
 
 	<!-- 포인트 -->
 	<insert id="chargePoint" parameterType="PayVO">
-		INSERT INTO PAY 
+		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE)
 		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
 	</insert>
 </mapper>
