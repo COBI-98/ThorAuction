@@ -8,6 +8,8 @@ function getId(id){
 
 var data = {};//전송 데이터(JSON)
 var data3 = {};
+var data4 = {};
+var data5 = {};
 
 var ws ;
 var userid = getId('id');
@@ -22,9 +24,12 @@ var reset = getId('reset');
 var usercount = getId('count');
 var amount = getId('amount');
 var iddd = getId('iddd');
+var auctionend = getId('auctionend');
+var final = getId('final');
+var finalamount = getId('finalamount');
 let aaa = amount.innerText*1;
-var rank = [aaa,"id"]; //최고값, id : 시작값으로 변경할 예정 -> ajax로 controller에 보내서 저장해서 뿌려줄 예정
-var enterid = [];
+var rank = [aaa,"id"]; //최고값, id
+var userlist = [];
 var username;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
@@ -33,6 +38,7 @@ ws = new WebSocket("ws://" + location.host + "/chatt");
 // //로그인 , 메세지 전송 받아오기
 // btnLogin.onclick = function(){
 
+
 ws.onopen = function(){
 	// enterid.push(userid.innerText);
 	// for(let i=0;i<enterid.length;i++) {
@@ -40,52 +46,42 @@ ws.onopen = function(){
 	// 	iddd.innerHTML += enterid[i];
 	// }
 	var user = userid.innerText;
-	$.ajax({
-		type:"POST",
-		url:"chatid",
-		data:{
-			user : user
+	// $.ajax({
+	// 	type:"POST",
+	// 	url:"chatid",
+	// 	data:{
+	// 		user : user
 
-		},
-		success:function(result) {
-			console.log("Result : ",  result);
+	// 	},
+	// 	success:function(result) {
+	// 		console.log("Result : ",  result);
 
-			for(let i=0;i<result.length;i++) {
-				enterid.push(result[i]);
-				iddd.innerHTML += enterid[i];
-			}
-		},
-		error:function(){
-			console.log("error");
-		}
-	})
+	// 		for(let i=0;i<result.length;i++) {
+	// 			enterid.push(result[i]);
+	// 			iddd.innerHTML += enterid[i];
+	// 		}
+	// 	},
+	// 	error:function(){
+	// 		console.log("error");
+	// 	}
+	// })
+	usercome();
+	//userlist.push(userid.innerText);
+	//console.log(userlist);
+	//iddd.innerHTML += user;
+
 }
 
-// ws.onclose = function() {
-// 	var user = userid.innerText;
-// 	$.ajax({
-// 		type:"POST",
-// 		url:"out",
-// 		data:{
-// 			user : user
-// 		},
-// 		success:function(result){
-// 			console.log(result);
-// 			enterid.pop(user);
-			
-// 		},
-// 		error:function(){
-// 			console.log("error");
-// 		}
-// 	})
+ws.onclose = function() {
+	usercome();
 
-// }
+}
 
 ws.onmessage = function(msg){
 	var data = JSON.parse(msg.data);
 	var css;
 	var cssid;
-	if(data.stop == null) {
+	if(data.mid != null) {
 
 		if(data.mid == userid.innerText){
 			css = 'class=me';
@@ -140,11 +136,14 @@ ws.onmessage = function(msg){
 				}
 			}
 			console.log(rank);
-	}else{
+	}
+	else if(data.stop != null){
 		let value = data.stop;
 		$('#msg').attr("readonly",value);
+	}else{
+		iddd.innerHTML="";
+		iddd.innerHTML += data;
 	}
-
 	// let size = talk.childNodes.length;
 	// for(let i=0;i<size;i++) {
 	// 	var userName = talk.children[i].childNodes[1].innerText;
@@ -152,9 +151,7 @@ ws.onmessage = function(msg){
 	// 		console.log(event);
 	// 	})
 	// }
-
 	
-		
 }
 //}
 
@@ -245,6 +242,30 @@ function stopchat(){
 function sendstop(){
 	data3.stop = stopchat();
 	var temp = JSON.stringify(data3);
+	ws.send(temp);
+}
+
+
+//경매 종료 시 
+auctionend.addEventListener("click",function(){
+	final.innerText = "최종 금액";
+	let ff = rank[0];
+	$('#amount').css("display","none");
+	finalamount.innerText = ff;
+	sendresult();
+})
+
+function sendresult() {
+	data4.amount = rank[0];
+	data4.winner = rank[1];
+	var temp = JSON.stringify(data4);
+	ws.send(temp);
+
+}
+
+function usercome(){
+	data5.usercome = userid.innerText;
+	var temp =JSON.stringify(data5);
 	ws.send(temp);
 }
 

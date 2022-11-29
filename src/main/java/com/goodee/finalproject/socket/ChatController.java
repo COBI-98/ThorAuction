@@ -25,17 +25,18 @@ public class ChatController {
 	
 	//Map<String, String> map = new HashMap<>();
 	private static Set<String> set = new HashSet<String>();
+	
 		
 	@RequestMapping("/chat")
 	public ModelAndView chat(HttpSession session,HttpServletRequest req) {
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
+
 //		for(int i=0;i<list.size();i++) {
 //			if(!(list.get(i).equals(mem.getName()))) {
 //				list.add(mem.getName());
 //			}
 //		}
-		//mv.addObject("list",list);
 		mv.addObject("member", mem.getName());
 		mv.addObject("value",webSocketChat.getValue());
 		System.out.println("value : "+webSocketChat.getValue());
@@ -59,6 +60,10 @@ public class ChatController {
 	public void out(String user){
 		set.remove(user);
 		System.out.println("sizeee"+set.size());
+	}
+	
+	public void getuserlist() {
+		this.set = set;
 	}
 
 }
