@@ -11,6 +11,7 @@ var data3 = {};
 var data4 = {};
 var data5 = {};
 var data6 = {};
+var data7 ={};
 
 var ws ;
 var userid = getId('id');
@@ -56,6 +57,12 @@ ws.onmessage = function(msg){
 	var data = JSON.parse(msg.data);
 	var css;
 	var cssid;
+
+	if(data.out != null) {
+		alert("강퇴되었습니다.");
+		location.href="../../";
+	}
+	//방송 종료
 	if(data.end != null) {
 		ws.close();
 		location.href="../../";
@@ -131,7 +138,10 @@ iddd.addEventListener("click",function(event){
 		if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
 			
 			//강퇴 진행
-			ws.destroy()
+			data7.out = even.innerText;
+			var temp = JSON.stringify(data7);
+			ws.send(temp);
+			
 
 			Swal.fire({    
 				title: "강퇴 되었습니다.",
@@ -236,6 +246,7 @@ function usercome(){
 	ws.send(temp);
 }
 
+//실시간 경매 종료 (소켓 닫음)
 end.addEventListener("click",function(){
 
 	Swal.fire({
