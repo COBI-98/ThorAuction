@@ -10,6 +10,7 @@ var data = {};//전송 데이터(JSON)
 var data3 = {};
 var data4 = {};
 var data5 = {};
+var data6 = {};
 
 var ws ;
 var userid = getId('id');
@@ -29,6 +30,7 @@ var final = getId('final');
 var finalamount = getId('finalamount');
 let aaa = amount.innerText*1;
 var rank = [aaa,"id"]; //최고값, id
+var end = getId('end');
 var userlist = [];
 var username;
 
@@ -39,48 +41,25 @@ ws = new WebSocket("ws://" + location.host + "/chatt");
 // btnLogin.onclick = function(){
 
 
+//입장 시
 ws.onopen = function(){
-	// enterid.push(userid.innerText);
-	// for(let i=0;i<enterid.length;i++) {
-	// 	console.log(enterid[i]);
-	// 	iddd.innerHTML += enterid[i];
-	// }
-	var user = userid.innerText;
-	// $.ajax({
-	// 	type:"POST",
-	// 	url:"chatid",
-	// 	data:{
-	// 		user : user
-
-	// 	},
-	// 	success:function(result) {
-	// 		console.log("Result : ",  result);
-
-	// 		for(let i=0;i<result.length;i++) {
-	// 			enterid.push(result[i]);
-	// 			iddd.innerHTML += enterid[i];
-	// 		}
-	// 	},
-	// 	error:function(){
-	// 		console.log("error");
-	// 	}
-	// })
 	usercome();
-	//userlist.push(userid.innerText);
-	//console.log(userlist);
-	//iddd.innerHTML += user;
-
 }
 
+//퇴장 시
 ws.onclose = function() {
 	usercome();
-
 }
 
+//메시지 받기
 ws.onmessage = function(msg){
 	var data = JSON.parse(msg.data);
 	var css;
 	var cssid;
+	if(data.end != null) {
+		ws.close();
+		location.href="../../";
+	}
 	if(data.mid != null) {
 
 		if(data.mid == userid.innerText){
@@ -95,14 +74,7 @@ ws.onmessage = function(msg){
 		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && b>rank[0]){
 			cssid = 'id=enter';
 		}
-		
-		// var cc = `<div>현재인원 : ${data.count}</div>`;
-		// usercount.innerHTML = cc;
 
-		// var am = `<div>현재 금액 : ${data.value}</div>`;
-		// amount.innerHTML = am;
-
-		
 		var item = `<div ${css} ${cssid}>
 						<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
 					<span class="text">${data.msg}</span>
@@ -114,18 +86,7 @@ ws.onmessage = function(msg){
 			var ttt = talk.children[index-1].childNodes[5].innerText;
 			var id = talk.children[index-1].childNodes[1].innerText;
 			console.log(id);
-			//var t4 = ttt.substr(4)*1;
-		// 	var max = amount.innerText;
-			// if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-			// 	if(t4 > max) {
-			// 		max=t4;	
-			// 		console.log(max);
-			// 		amount.innerHTML = max;
-			// 	}
-			// }
-			//console.log(rank);
 
-		//let index = msg.value;
 		var t4 = ttt.substr(4)*1;
 		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
 
@@ -137,31 +98,55 @@ ws.onmessage = function(msg){
 			}
 			console.log(rank);
 	}
+	//얼리기
 	else if(data.stop != null){
 		let value = data.stop;
 		$('#msg').attr("readonly",value);
+	//입장, 퇴장 리스트
 	}else{
 		iddd.innerHTML="";
-		iddd.innerHTML += data;
+		for(let i=0;i<data.length;i++) {
+			iddd.innerHTML += `<div>`+data[i]; + `</div>`;
+		}
 		usercount.innerHTML = data.length;
-	}
-	// let size = talk.childNodes.length;
-	// for(let i=0;i<size;i++) {
-	// 	var userName = talk.children[i].childNodes[1].innerText;
-	// 	userName.addEventListener("click",function(event){
-	// 		console.log(event);
-	// 	})
-	// }
-	
+		console.log(data);
+	}	
 }
-//}
+
 
 //회원 강퇴시키기
 iddd.addEventListener("click",function(event){
 	let even = event.target;
-	if(even.classList[0] == 'name') {
-		alert(even.innerText +" 님을 강퇴시키겠습니까?");
-	}
+
+	Swal.fire({
+		title: even.innerText + " 님을 강퇴시키겠습니까?",  // title, text , html  로 글 작성
+		icon: "warning",    //상황에 맞는 아이콘
+
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: '강퇴',
+		cancelButtonText: '취소',
+		reverseButtons: true   // 버튼 순서 변경
+	} ).then((result) => {   // 아무 버튼이나 누르면 발생
+		if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
+			
+			//강퇴 진행
+			ws.destroy()
+
+			Swal.fire({    
+				title: "강퇴 되었습니다.",
+				icon: "success",
+				confirmButtonColor: '#3085d6',
+				
+				confirmButtonText: '확인'
+			} ).then((result) => {
+				if (result.isConfirmed) {
+
+				}
+			})
+		}
+	})
+
 
 })
 
@@ -178,24 +163,6 @@ btnSend.onclick = function(){
 //메세지 전송
 function send(){
 
-	
-	// let index = msg.value;
-	// var t4 = index.substr(4)*1;
-	// 	if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-	
-	// 			if(t4 > rank[0]) {
-	// 				if(t4>rank[1]) {
-	// 					if(t4 > rank[2]) {
-	// 						rank[2] = t4;
-	// 					}else{
-	// 						rank[1] = t4;
-	// 					}
-	// 				}else{
-	// 					rank[0]= t4;
-	// 				}
-	// 			}
-	// 		}
-	// 		console.log(rank);
 	let index = msg.value;
 	var max = amount.innerText*1;
 	var t4 = index.substr(4)*1;
@@ -211,7 +178,6 @@ function send(){
 		data.mid = getId('id').innerHTML;
 		data.msg = msg.value;
 		data.date = new Date().toLocaleString();
-		data.count = count;
 		data.value = max;
 		var temp = JSON.stringify(data);
 		ws.send(temp);
@@ -270,52 +236,35 @@ function usercome(){
 	ws.send(temp);
 }
 
+end.addEventListener("click",function(){
 
+	Swal.fire({
+		title: "실시간 경매를 종료하시겠습니까?",  // title, text , html  로 글 작성
+		icon: "warning",    //상황에 맞는 아이콘
 
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: '종료',
+		cancelButtonText: '취소',
+		reverseButtons: true   // 버튼 순서 변경
+	} ).then((result) => {   // 아무 버튼이나 누르면 발생
+		if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
+			
+			data6.end = true;
+			var temp = JSON.stringify(data6);
 
-// reset.addEventListener("click",function(){
-// 	$.ajax({
-// 		type:"POST",
-// 		url:"chat",
-// 		data:{
-// 			rank : rank[2]
+			Swal.fire({    
+				title: "종료 되었습니다.",
+				icon: "success",
+				confirmButtonColor: '#3085d6',
+				
+				confirmButtonText: '확인'
+			} ).then((result) => {
+				if (result.isConfirmed) {
+					ws.send(temp);
+				}
+			})
+		}
+	})
 
-// 		},
-// 		success:function(result) {
-// 			console.log("Result : ",  result);
-// 		},
-// 		error:function(){
-// 			console.log("error");
-// 		}
-
-// 	})
-	
-	
-// })
-
-// setInterval(function() {
-// 	$.ajax({
-// 		type:"POST",
-// 		url:"chat",
-// 		data:{
-// 			rank : rank[2]
-
-// 		},
-// 		success:function(result) {
-// 			console.log("Result : ",  result);
-// 		},
-// 		error:function(){
-// 			console.log("error");
-// 		}
-
-// 	})
-// },30000);
-
-
-// let ii = talk.childNodes.length;
-// var nikname = talk.children[ii-1];
-// //nikname.addEventListener("click",function(){
-// 	console.log(ii);
-// 	console.log(talk.children[ii-1]);
-	//console.log(nikname);
-//})
+})
