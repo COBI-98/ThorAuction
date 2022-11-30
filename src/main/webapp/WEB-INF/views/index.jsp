@@ -27,7 +27,7 @@
 				<img src="/images/member/kakao_login_logo.png" class="kakao-button__img" alt="">
 			</a> -->
 			<c:forEach items="${kakao }" var="ka">
-				<input type="text" class="kNickName" value="${ka.kaNickName }">
+				<input type="hidden" class="kNickName" value="${ka.kaNickName }">
 			</c:forEach>
 		</form>
 		<sec:authorize access="!isAuthenticated()">
@@ -37,7 +37,7 @@
 			<a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
-		로그인완료!
+		<b>카카오 로그인완료!</b>
 		<a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a>
 		</sec:authorize>
 	</section>
