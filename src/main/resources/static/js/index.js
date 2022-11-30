@@ -167,29 +167,19 @@ connection.onstream = function(event) {
 		          connection.replaceTrack(videoTrack,event.userId,true);
 			          
 			   });
-		        
-				//video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
-	//replaceTrack RTCM. 으로 이용 가능하다 (트랙, 아이디? , 비디오트랙인지) 
-			
 	})
     
     
     
-    
-    
-    
-    
-    
     showVideo();
-
     function  showVideo(){
 	
       	var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
         var mediaElement = getHTMLMediaElement(video, {
             title: event.userid,
-            buttons: ['full-screen'],
+            buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
            	width: width,
-            showOnMouseEnter: false
+            showOnMouseEnter: true
         });
     
         connection.videosContainer.appendChild(mediaElement);
