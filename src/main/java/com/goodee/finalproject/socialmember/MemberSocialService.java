@@ -47,12 +47,7 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 		return rs;
 	}
-
-	public KakaoVO getNickName(KakaoVO kakaoVO) throws Exception
-	{
-		return kakaoMapperIF.getNickName(kakaoVO);
-	}
-
+	
 	// 카카오 소셜 로그인
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException

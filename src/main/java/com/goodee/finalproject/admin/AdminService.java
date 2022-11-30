@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.member.RoleVO;
 import com.goodee.finalproject.socialmember.KakaoRoleVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
 
@@ -27,9 +28,11 @@ public class AdminService
 	{
 		List<KakaoVO> ar = adminIF.getKakaoTotal(kakaoVO);
 
-		log.info("admin getRole: {}", adminIF.getkakaoRole(kakaoVO));
-		adminIF.getkakaoRole(kakaoVO);
-
 		return ar;
+	}
+
+	public int setMemberRole(MemberVO memberVO) throws Exception
+	{
+		return adminIF.setMemberRole(memberVO);
 	}
 }

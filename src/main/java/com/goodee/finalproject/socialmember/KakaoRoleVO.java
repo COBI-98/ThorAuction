@@ -9,6 +9,4 @@ public class KakaoRoleVO
 {
 	private Long kaRole;
 	private String kaNickName;
-	
-	private List<KaRoleVO> kaRoleVOs;
 }
