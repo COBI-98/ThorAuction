@@ -20,19 +20,16 @@ public class ChatController {
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
 
-		mv.addObject("member", mem.getName());
-		mv.addObject("point", mem.getPoint());
-		mv.addObject("value",webSocketChat.getValue());
-		mv.setViewName("liveAction");
-		return mv;
-	}
-	
-	
-	@GetMapping("/liveAuction")
-	public ModelAndView liveAuction() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/liveAuction/liveAuction");
-		return mv;
+//		mv.addObject("member", mem.getName());
+//		mv.addObject("point", mem.getPoint());
 		
+		mv.addObject("member", "ball");
+		mv.addObject("point","40000");
+		mv.addObject("value",webSocketChat.getValue());
+		mv.setViewName("liveAuction/liveAuction");
+		return mv;
 	}
+	
+	
+
 }

@@ -16,42 +16,57 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 
 
 #localVideo{
-	position: absolute;
-	left: 0;
-	top: 0;
+	
 	width: 100%;
 	height: 100%;
 }
 
 .media-container {
-  position: relative;
-  height: 500px;
+  width : calc(100% - 150px)!important;
+  
   background-color: skyblue;
   overflow: hidden;
+  aspect-ratio: 16 / 9; 
+  margin-left: 75px;
+  border: 0;
+  display: flex !important;
+  justify-content: center;
 }
 
-#media-box {
-	position: absolute; 
+#media-header{
+	display: flex;
+	justify-content: space-between;
+}
+
+#media-broadcast{
 	width: 75%;
+	height: 75px;
 }
-
 
 .media-box {
   width: 100%;
   background-color: gold;
-  position: absolute; 
-  left: 0; 
-  right: 0;
+
   margin: 0 auto;
+  aspect-ratio: 16 / 9; 
 }
 
-.media-box::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 0;
-  padding-top: 56.25%;
+#media-title{
+	
+	width : 80%;
+	padding: 15px;
 }
+
+
+
+
+/* .media-box::before { */
+/*   content: ""; */
+/*   display: block; */
+/*   width: 100%; */
+/*   height: 0; */
+/* /*   padding-top: 56.25%; */ 
+/* } */
 
 .media-container, .media-container * {
     -moz-transition: all .5s ease-in-out;

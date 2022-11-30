@@ -92,8 +92,8 @@ connection.onstream = function(event) {
 
 
  var video = document.querySelector("#localVideo");
-
-
+	video.removeAttribute("hidden");
+	document.querySelector("#blackVideo").remove();
     if(event.type === 'local') {
       video.volume = 0;
       try {
@@ -174,7 +174,8 @@ connection.onstream = function(event) {
     showVideo();
     function  showVideo(){
 	
-      	var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
+      	var width = parseInt(connection.videosContainer.clientWidth / 2) + 200;
+      
         var mediaElement = getHTMLMediaElement(video, {
             title: document.querySelector("#room-id").value ,//event.userid,
             buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
