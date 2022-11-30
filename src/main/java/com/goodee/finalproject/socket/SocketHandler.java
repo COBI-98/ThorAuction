@@ -2,18 +2,25 @@ package com.goodee.finalproject.socket;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.goodee.finalproject.member.MemberVO;
+
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 
 //	ArrayList<WebSocketSession> sessions = new ArrayList<>();
 	HashMap<String, WebSocketSession> sessions = new HashMap<>();
+	
+//	@Autowired
+//	WebSocketChat socket;
 
 	// client에서 메시지가 서버로 전송댈때 실행되는 함수.
 	@Override
@@ -37,6 +44,16 @@ public class SocketHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		sessions.put(session.getId(), session);
+//		Map<String, Object> map = session.getAttributes();
+//		MemberVO mem = (MemberVO) map.get("member");
+//		String id = mem.getId();
+//		
+//		if(sessions.get(id) != null) {
+//			sessions.replace(id, session);
+//		}else {
+//			sessions.put(id, session);
+//		}
+		
 	}
 
 	// 세션이 끝날때 실행되는 함수
