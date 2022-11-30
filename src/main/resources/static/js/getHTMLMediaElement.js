@@ -186,7 +186,7 @@ function getHTMLMediaElement(mediaElement, config) {
 
             mediaElementContainer.style.width = (isFullScreeMode ? (window.innerWidth - 20) : config.width) + 'px';
             mediaElementContainer.style.display = isFullScreeMode ? 'block' : 'inline-block';
-
+			
             if (config.height) {
                 mediaBox.style.height = (isFullScreeMode ? (window.innerHeight - 20) : config.height) + 'px';
             }
@@ -226,7 +226,6 @@ function getHTMLMediaElement(mediaElement, config) {
     if (!config.width) config.width = (innerWidth / 2) - 50;  // 영상크기 설정이 안 되어 있으면 기본값.
 
     mediaElementContainer.style.width = config.width + 'px';
-
     if (config.height) {
         mediaBox.style.height = config.height + 'px';
     }
@@ -412,7 +411,7 @@ function getAudioElement(mediaElement, config) {
 //    stop.style['border-top-right-radius'] = '5px';
 //    stop.style['border-bottom-right-radius'] = '5px';
 
-    var mediaBox = document.createElement('div');    // 화면 DIV 부분
+    var mediaBox = document.querySelector('#media-box');    // 화면 DIV 부분
     mediaBox.className = 'media-box';
     mediaElementContainer.appendChild(mediaBox);
 

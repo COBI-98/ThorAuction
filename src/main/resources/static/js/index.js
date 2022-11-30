@@ -174,9 +174,9 @@ connection.onstream = function(event) {
     showVideo();
     function  showVideo(){
 	
-      	var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
+      	var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
         var mediaElement = getHTMLMediaElement(video, {
-            title: event.userid,
+            title: document.querySelector("#room-id").value ,//event.userid,
             buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
            	width: width,
             showOnMouseEnter: true
