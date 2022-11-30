@@ -23,21 +23,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeController
 {
-	@Autowired
-	private AdminService adminService;
-
 	@GetMapping("/")
-	public ModelAndView home(KakaoVO kakaoVO) throws Exception
+	public ModelAndView home(Authentication authentication, HttpSession session) throws Exception
 	{
 		log.info("===== home controller =====");
+		log.info("getNickName: {}", session.getAttribute("kakaoInfo"));
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
-
-		// log.info("list kakaoVOs: {}", kakaoVOs);
-
-		modelAndView.addObject("kakao", kakaoVOs);
+		modelAndView.addObject("ka", session.getAttribute("kakaoInfo"));
 		modelAndView.setViewName("index");
 
 		return modelAndView;

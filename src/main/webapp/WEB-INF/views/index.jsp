@@ -22,22 +22,15 @@
 			<a href="../mypage/update">회원정보 수정</a>
 			<a href="../mypage/delete">회원탈퇴</a>
 		</div>
-		<form action="/oauth2/authorization/kakao" method="post" id="frm">
-			<!-- <a href="/oauth2/authorization/kakao">
-				<img src="/images/member/kakao_login_logo.png" class="kakao-button__img" alt="">
-			</a> -->
-			<c:forEach items="${kakao }" var="ka">
-				<input type="hidden" class="kNickName" value="${ka.kaNickName }">
-			</c:forEach>
-		</form>
 		<sec:authorize access="!isAuthenticated()">
-			<button type="submit" class="btn btn-outline-none" onclick="idcheck()">
+			<button type="button" class="btn btn-outline-none" onclick="idcheck()">
 				<img src="/images/member/kakao_login_logo.png" class="kakao-button__img" alt="">
 			</button>
 			<a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
 		<b>카카오 로그인완료!</b>
+		<br>
 		<a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a>
 		</sec:authorize>
 	</section>

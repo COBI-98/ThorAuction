@@ -49,40 +49,37 @@ public class KakaoController
 		log.info("--- get kakaoLogin ---");
 		log.info("===== authentication: {}", authentication.getName());
 
-		// auth getName 과 DB의 소셜 ID가 같으면 return; ?
-		log.info("kakao nickName: {}",kakaoVO.getKaNickName());
-		log.info("session setAttr: {}", session.getAttribute("Detail"));
+		// auth getName 과 DB의 소셜 ID가 같으면 메인으로?
 
-		if (authentication.getPrincipal() != null)
+		int rs = memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
+
+		modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
+		modelAndView.setViewName("socialMember/kakaoLogin");
+		session.setAttribute("kakaoVO", rs);
+		session.setAttribute("kakaoInfo", authentication.getPrincipal());
+		
+		log.info("getNickName: {}", session.getAttribute("kakaoVO"));
+		int se = (int) session.getAttribute("kakaoVO");
+		if (se == 0)
 		{
-			memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
-
-			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
-			modelAndView.setViewName("socialMember/kakaoLogin");
-
-			return modelAndView;
-		}
-		else
-		{
-			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
 			modelAndView.setViewName("redirect:/");
 
 			return modelAndView;
 		}
 
+		return modelAndView;
 	}
 
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoDetailVO kakaoDetailVO) throws Exception
+	public ModelAndView kakaoLogin(HttpSession session, KakaoDetailVO kakaoDetailVO, Authentication authentication) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
+		// log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 
 		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
-		session.setAttribute("Detail", kakaoDetailVO);
 
 		log.info("kakao login rs2: {}", rs2);
 
