@@ -14,6 +14,10 @@ public interface AdminIF
 	public List<MemberVO> getMemberTotal(MemberVO memberVO) throws Exception;
 
 	public List<KakaoVO> getKakaoTotal(KakaoVO kakaoVO) throws Exception;
-	
-	public int setMemberRole(MemberVO memberVO) throws Exception;
+
+	public int roleSetManager(MemberVO memberVO) throws Exception;
+
+	public int roleSetUser(MemberVO memberVO) throws Exception;
+
+	public int roleSetBan(MemberVO memberVO) throws Exception;
 }

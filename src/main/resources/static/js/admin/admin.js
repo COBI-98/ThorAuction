@@ -5,26 +5,39 @@ $(".selectRole").change(function () {
 
 		if ($(r).prop('selected')) {
 			var num = $(r).attr('value');
-			// DB에서 등급 하나만 주고 버튼 바꿀때 계속 update되게 바꾸기
-			// 카카오 소셜 로그인에서 로그아웃하고 다시 로그인할때
-			//primary key 중복 되는거 질문하기
+
 			if (num == "Manager") {
-				swal("매니저", "등급이 변경되었습니다.", "success");
-				// console.log($(this).val());
+				swal({
+					title: "매니저",
+					text: '등급이 변경되었습니다.',
+					icon: "success",
+				}).then(function () {
+					location.reload();
+				});
 				$(this).val('ROLE_MANGER');
 
 				return false;
 			}
 			else if (num == 'User') {
-				swal("유저", "등급이 변경되었습니다.", "success");
-				// console.log($(this).val());
+				swal({
+					title: "유저",
+					text: '등급이 변경되었습니다.',
+					icon: "success",
+				}).then(function () {
+					location.reload();
+				});
 				$(this).val('ROLE_USER');
 
 				return false;
 			}
 			else {
-				swal("로그인 차단", "차단되었습니다.", "error");
-				// console.log($(this).val());
+				swal({
+					title: "로그인 차단",
+					text: '차단되었습니다.',
+					icon: "error",
+				}).then(function () {
+					location.reload();
+				});
 				$(this).val('ROLE_BAN');
 
 				return false;
@@ -37,7 +50,9 @@ $(".selectRole").change(function () {
 	$.ajax({
 		url: './adminpage',
 		type: 'POST',
-		data: { roleName: $(this).val() },
+		data: {
+			roleName: $(this).val(),
+		},
 		success: function () {
 			console.log("통신완료");
 		},
