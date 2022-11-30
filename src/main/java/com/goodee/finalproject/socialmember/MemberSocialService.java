@@ -39,7 +39,11 @@ public class MemberSocialService extends DefaultOAuth2UserService
 	public int setKakao1(KakaoVO kakaoVO) throws Exception
 	{
 		int rs = kakaoMapperIF.setKakao1(kakaoVO);
-		kakaoMapperIF.setKaRole(kakaoVO);
+		log.info("------> service rs: {}", rs);
+		if (rs == 1)
+		{
+			kakaoMapperIF.setKaRole(kakaoVO);
+		}
 
 		return rs;
 	}

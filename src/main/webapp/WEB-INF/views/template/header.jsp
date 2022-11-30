@@ -27,6 +27,7 @@
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2"><b>${ka.kaName }님 안녕하세요</b></a></li>
 					<form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>

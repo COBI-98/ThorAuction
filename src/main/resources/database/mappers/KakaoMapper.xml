@@ -5,19 +5,19 @@
 	namespace="com.goodee.finalproject.socialmember.KakaoMapperIF">
 
 	<insert id="setKaRole" parameterType="KakaoRoleVO">
-		insert into KAKAOMEMBERROLE
+		insert IGNORE INTO KAKAOMEMBERROLE
 		values(#{kaNickName}, 3)
 	</insert>
 
 	<insert id="setKakao1" parameterType="KakaoVO">
-		INSERT INTO
+		INSERT IGNORE INTO
 		SOCIALKAKAO(KANICKNAME,KAEMAIL,KANAME)
 		values(#{kaNickName},
 		#{kaEmail}, #{kaName})
 	</insert>
 
 	<insert id="setKakaoDetail" parameterType="KakaoDetailVO">
-		insert into
+		insert IGNORE into
 		SOCIALKAKAODETAIL
 		(KANICKNAME, KABIRTH, KAPOST, KAADDR, KAADDRDETAIL,
 		KAPHONE, KAPOINT)
@@ -33,14 +33,14 @@
 	</select>
 
 	<select id="getNickName" parameterType="KakaoVO"
-		resultMap="kakao">
+		resultType="KakaoVO">
 		select * from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
 
-	<resultMap type="KakaoVO" id="kakao">
+<!-- 	<resultMap type="KakaoVO" id="ka">
 		<id column="kaNickName" property="kaNickName" />
 		<result column="kaEmail" property="kaEmail" />
 		<result column="kaName" property="kaName" />
-	</resultMap>
+	</resultMap> -->
 
 </mapper>
