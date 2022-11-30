@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.websocket.EncodeException;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,18 +15,13 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.socket.WebSocketSession;
 
-import com.goodee.finalproject.member.MemberVO;
 import com.google.gson.Gson;
-
-
 
 @Service
 @ServerEndpoint(value="/chatt")
@@ -39,9 +31,9 @@ public class WebSocketChat {
 	private static Set<Session> clients = 
 			Collections.synchronizedSet(new HashSet<Session>()); //채팅참여 session
 	private static int value;
-	private static String username;
 	private static Set<String> set = new HashSet<String>(); //채팅참여 name 
 	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
+	private static String winuser="";
 	
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
@@ -54,22 +46,18 @@ public class WebSocketChat {
 		}else {
 			System.out.println("이미 연결된 session 임!!!");
 		}System.out.println(clients.size());
-
 	}
-	
 	
 	@OnMessage
 	public void onMessage(String msg, Session session) throws Exception{
 
 		JSONParser parser = new JSONParser();
-		String count = String.valueOf(clients.size());
 		Object obj = parser.parse(msg);
 		JSONObject jsonObj = (JSONObject) obj;
 		
 		if(msg.substring(2, 5).equals("out")) {
 			String outname = String.valueOf(jsonObj.get("out"));
 			Session ss = getKey(list,outname);
-			System.out.println(ss);
 			sendOneMessage(msg, ss);
 		}
 		
@@ -79,11 +67,19 @@ public class WebSocketChat {
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
 			//DB에 저장할 예정
+			
+			sendMessage(msg,session);
 
 		}else if(msg.substring(2, 5).equals("mid")) {
 			
 			String vv = String.valueOf(jsonObj.get("value"));
-			System.out.println(vv);
+			String win = String.valueOf(jsonObj.get("win"));
+
+			if(!(win.equals("false"))) {
+				winuser = win;
+			}else if(win.equals("false")) {
+				msg = msg.replace(String.valueOf(jsonObj.get("win")),'"'+winuser+'"');
+			}
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
 			
@@ -102,7 +98,6 @@ public class WebSocketChat {
 		
 		else {
 			sendMessage(msg, session);
-
 		}	
 	}
 	
@@ -120,7 +115,6 @@ public class WebSocketChat {
 		System.out.println("receive message : " + msg);
 			System.out.println("send data : " + msg);
 			session.getBasicRemote().sendText(msg);
-		
 	}
 	
 	@OnClose
@@ -136,17 +130,6 @@ public class WebSocketChat {
 		String jsonString = gson.toJson(set);
 		
 		sendMessage(jsonString, s);
-		
-	}
-	
-	//채팅방 인원수
-	public void userCount(Session s) throws IOException, EncodeException {
-		s.getBasicRemote().sendObject(clients.size());
-		
-	}
-	
-	public int getCount() {
-		return clients.size();
 	}
 	
 	public int getValue() {
@@ -154,14 +137,6 @@ public class WebSocketChat {
 	}
 	public void setValue(int valu) {
 		this.value = valu;
-	}
-	
-	
-	public String getname() {
-		return username;
-	}
-	public void setname(String name) {
-		this.username = name;
 	}
 	
 	public static <K, V> K getKey(Map<K, V> map, V value) {

@@ -2,6 +2,7 @@
  * web socket
  */
 
+
 function getId(id){
 	return document.getElementById(id);
 }
@@ -12,6 +13,7 @@ var data4 = {};
 var data5 = {};
 var data6 = {};
 var data7 ={};
+var data8={};
 
 var ws ;
 var userid = getId('id');
@@ -35,12 +37,11 @@ var end = getId('end');
 var point =getId('point');
 var userlist = [];
 var username;
+var win = false;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
 ws = new WebSocket("ws://" + location.host + "/chatt");
-// //로그인 , 메세지 전송 받아오기
-// btnLogin.onclick = function(){
 
 
 //입장 시
@@ -59,7 +60,23 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
-	if(data.out != null) {
+	//방송 일시정지 시
+	if(data.pause != null){
+		let muteVideo = document.querySelector("#muteVideo");
+		muteVideo.click();
+	 }
+
+	//경매 종료 시
+	else if(data.amount != null) {
+		final.innerText = "최종 금액";
+		let ff = rank[0];
+		$('#amount').css("display","none");
+		finalamount.innerText = ff;
+		talk.innerHTML += "*경매가 종료 되었습니다.*";
+	}
+
+	//강퇴 당했을 시
+	else if(data.out != null) {
 		Swal.fire({
 			title: "강퇴 되었습니다.",  // title, text , html  로 글 작성
 			icon: "error",    //상황에 맞는 아이콘
@@ -73,12 +90,13 @@ ws.onmessage = function(msg){
 		})
 	}
 	//방송 종료
-	if(data.end != null) {
+	else if(data.end != null) {
 		ws.close();
 		location.href="../../";
 	}
-	if(data.mid != null) {
-		var mypoint = point.innerText;
+
+	//채팅 메세지 
+	else if(data.mid != null) {
 
 		if(data.mid == userid.innerText){
 			css = 'class=me';
@@ -89,22 +107,8 @@ ws.onmessage = function(msg){
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b)){
-			// if(b <= mypoint){
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid){
 			cssid = 'id=enter';
-			// }else{
-			// 	Swal.fire({
-			// 		title: "보유 중인 포인트보다 높은 금액을 입력하셨습니다.",  // title, text , html  로 글 작성
-			// 		icon: "error",    //상황에 맞는 아이콘
-			
-			// 		showCancelButton: true,
-			// 		confirmButtonColor: '#3085d6',
-			// 		confirmButtonText: '확인',
-			// 		//reverseButtons: true   // 버튼 순서 변경
-			// 	} ).then((result) => {   // 아무 버튼이나 누르면 발생
-					
-			// 	})
-			// }
 		}
 
 		var item = `<div ${css} ${cssid}>
@@ -114,26 +118,18 @@ ws.onmessage = function(msg){
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-			let index = talk.childNodes.length;
-			var ttt = talk.children[index-1].childNodes[5].innerText;
-			var id = talk.children[index-1].childNodes[1].innerText;
-			console.log(id);
 
-		var t4 = ttt.substr(4)*1;
-		if(ttt.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+		rank[0] = data.value;
+		rank[1] = data.win;
+		amount.innerHTML = rank[0];
+		console.log(rank);
 
-				if(t4 > rank[0]) {
-					rank[0] = t4;
-					amount.innerHTML = rank[0];
-					rank[1] = id;
-				}
-			}
-			console.log(rank);
 	}
 	//얼리기
 	else if(data.stop != null){
 		let value = data.stop;
 		$('#msg').attr("readonly",value);
+		
 	//입장, 퇴장 리스트
 	}else {
 		iddd.innerHTML="";
@@ -180,8 +176,6 @@ iddd.addEventListener("click",function(event){
 			})
 		}
 	})
-
-
 })
 
 msg.onkeyup = function(ev){
@@ -200,12 +194,33 @@ function send(){
 	let index = msg.value;
 	var max = amount.innerText*1;
 	var t4 = index.substr(4)*1;
+	var mypoint = point.innerText;
+
 	if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-		if(t4 > max) {
-			max=t4;	
-			console.log(max);
-			amount.innerHTML = max;
+		if(t4 <= mypoint){
+			if(t4 > max) {
+				max=t4;	
+				console.log(max);
+				amount.innerHTML = max;
+				win = getId('id').innerHTML;
+			}else{
+				win = false;
+			}
+		}else{
+			win=false;
+			Swal.fire({
+				title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
+				icon: "error",    //상황에 맞는 아이콘
+		
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: '확인',
+				//reverseButtons: true   // 버튼 순서 변경
+			} ).then((result) => {   // 아무 버튼이나 누르면 발생
+			})
 		}
+	}else{
+		win=false;
 	}
 	
 	if(msg.value.trim() != ''){
@@ -213,6 +228,8 @@ function send(){
 		data.msg = msg.value;
 		data.date = new Date().toLocaleString();
 		data.value = max;
+		data.point = point.innerText;
+		data.win = win;
 		var temp = JSON.stringify(data);
 		ws.send(temp);
 	}
@@ -248,12 +265,7 @@ function sendstop(){
 
 
 //경매 종료 시 
-auctionend.addEventListener("click",function(){
-	final.innerText = "최종 금액";
-	let ff = rank[0];
-	$('#amount').css("display","none");
-	finalamount.innerText = ff;
-	talk.innerHTML += "*경매가 종료 되었습니다.*";
+auctionend.addEventListener("click",function(){	
 	sendresult();
 })
 
@@ -303,3 +315,24 @@ end.addEventListener("click",function(){
 	})
 
 })
+
+//방송 일시정지
+let cameraPause = document.querySelector("#cameraPause")
+
+cameraPause.addEventListener("click",function(){
+   cameraPause.classList.toggle("pause");
+   sendPause();
+})
+
+function pauseCam(){
+   if(cameraPause.classList.contains("pause")){
+      return true;
+   }   
+   return false;
+}
+
+function sendPause(){
+   data2.pause = pauseCam();
+   var temp = JSON.stringify(data2);
+   ws.send(temp);
+}
