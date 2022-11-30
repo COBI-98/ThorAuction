@@ -1,6 +1,7 @@
 package com.goodee.finalproject.mypage;
 
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.member.MemberVO;
@@ -27,14 +29,23 @@ public class MypageController {
 	
 	// 마이페이지 홈
 	@GetMapping("")
-	public String mypageHome() throws Exception {
+	public ModelAndView mypageHome(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception {
 		
-		return "mypage/index";
+		mypageService.getList(memberVO);
+		
+		memberVO = (MemberVO)session.getAttribute("member");
+		
+		log.info("나와주세요 : {}", memberVO);
+		
+		mv.addObject("memberDB", memberVO);
+		mv.setViewName("mypage/index");
+		
+		return mv;
 	}
 	
 	// 포인트 충전 GET
 	@GetMapping("charge")
-	public void charge(HttpSession session) throws Exception { }
+	public void chargePoint(HttpSession session) throws Exception { }
 	
 	// 포인트 충전 POST
 	@PostMapping("charge/point")
@@ -83,15 +94,15 @@ public class MypageController {
 		String sessionPw = member.getPw();
 		
 		// VO에 들어오는 비밀번호 
-		String voPw = memberVO.getPw();
+		String VOPw = memberVO.getPw();
 		
-		if(!(sessionPw.equals(voPw))) {
+		if(!(sessionPw.equals(VOPw))) {
 			attributes.addFlashAttribute("msg", false);
 			return "redirect:/mypage/delete";
 		}
 		
 		mypageService.setDelete(memberVO);
-		session.invalidate(); // 세션 업데이트?
+		session.invalidate();
 		
 		return "redirect:../";
 		
@@ -107,12 +118,11 @@ public class MypageController {
 	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		
-		mypageService.setUpdate(memberVO);
+		int result = mypageService.setUpdate(memberVO); // 새로 로그인 해야 수정된 게 보이는데
 		
-		session.invalidate(); // 세션 끊어버리는 방법말고 뭐가 있을까...
+		//session.invalidate(); // 세션 끊어버리는 방법말고 뭐가 있을까...
 		
-//		int result = mypageService.setUpdate(memberVO, session.getServletContext()); // 새로 로그인 해야 수정된 게 보이는데 
 		
-		return "redirect:../member/login";
+		return "redirect:../";
 	}
 }

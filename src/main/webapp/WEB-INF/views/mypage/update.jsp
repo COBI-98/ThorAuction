@@ -12,8 +12,8 @@
 		<table>
 			<tr>
 				<th>등급</th>
-				<td><input type="text" name="id" value="${member.roleVOs[0].roleNum}"></td>
-				<td><input type="text" name="id" value="${member.roleVOs[0].roleName}"></td>
+				<td><input type="text" name="id" disabled="disabled" value="${member.roleVOs[0].roleNum}"></td>
+				<td><input type="text" name="id" disabled="disabled" value="${member.roleVOs[0].roleName}"></td>
 			</tr>		
 			<tr>
 				<th>아이디</th>
