@@ -6,10 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.member.RoleVO;
+import com.goodee.finalproject.socialmember.KakaoRoleVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +28,10 @@ public class AdminController
 	public AdminService adminService;
 
 	@GetMapping("adminpage")
-	public ModelAndView adminpage(MemberVO memberVO, KakaoVO kakaoVO) throws Exception
+	public ModelAndView adminpage(MemberVO memberVO, KakaoVO kakaoVO, KakaoRoleVO kakaoRoleVO) throws Exception
 	{
 		log.info("--- get adminpage ---");
 		ModelAndView modelAndView = new ModelAndView();
-		// log.info("adminpage auth: {}", authentication.getPrincipal());
 
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
@@ -40,5 +44,16 @@ public class AdminController
 		modelAndView.setViewName("admin/adminpage");
 
 		return modelAndView;
+	}
+
+	@PostMapping("adminpage")
+	@ResponseBody
+	public void adminpage(MemberVO memberVO, @RequestParam("roleName") String role) throws Exception
+	{
+		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
+		log.info(role);
+		log.info("list member Role: {}", memberVOs.get(0).getRoleVOs());
+		
+//		adminService.setMemberRole(memberVO);
 	}
 }

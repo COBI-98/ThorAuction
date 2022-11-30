@@ -5,7 +5,7 @@
 
 	<select id="getMemberTotal" parameterType="MemberVO"
 		resultMap="getMemberTotal">
-		SELECT th.*, tr.* FROM
+		SELECT th.*, tr.*, tmr.* FROM
 		THORMEMBER th
 		inner join
 		THORMEMBER_ROLE tmr
@@ -15,7 +15,8 @@
 		on
 		tmr.ROLENUM = tr.ROLENUM
 		WHERE tmr.ROLENUM NOT LIKE "%1%"
-		order by th.ID asc
+		order by th.ID
+		asc
 	</select>
 	<resultMap type="MemberVO" id="getMemberTotal">
 		<id column="id" property="id" />
@@ -35,17 +36,19 @@
 		</collection>
 	</resultMap>
 
-	<!-- select * FROM SOCIALKAKAO sk inner join SOCIALKAKAODETAIL skd on sk.KANICKNAME 
-		= skd.KANICKNAME -->
-
 	<select id="getKakaoTotal" parameterType="KakaoVO"
-		resultMap="getKakaoTotal"> <!-- resultMap="getKakaoTotal" -->
-		select sk.*, skd.* FROM
+		resultMap="getKakaoTotal">
+		select sk.*, skd.*, kmr.*, k.* FROM
 		SOCIALKAKAO sk
 		inner join
 		SOCIALKAKAODETAIL skd
-		on
-		sk.KANICKNAME = skd.KANICKNAME
+		on sk.KANICKNAME = skd.KANICKNAME
+		inner JOIN
+		KAKAOMEMBERROLE kmr
+		on sk.KANICKNAME = kmr.KANICKNAME
+		inner join
+		KAKAOROLE k
+		on kmr.KAROLE = k.KAROLE
 		order by sk.KANICKNAME asc
 	</select>
 
@@ -63,29 +66,20 @@
 			<result column="kaPhone" property="kaPhone" />
 			<result column="kaPoint" property="kaPoint" />
 		</collection>
-	</resultMap>
-
-	<select id="getkakaoRole" parameterType="KakaoRoleVO"
-		resultMap="total">
-		<!-- select * FROM SOCIALKAKAO s inner join KAKAOMEMBERROLE kmr on s.KANICKNAME 
-			= kmr.KANICKNAME inner JOIN KAKAOROLE kr on kmr.KAROLE = kr.KAROLE where 
-			s.KANICKNAME = #{kaNickName} -->
-		select * from
-		KAKAOMEMBERROLE kmr
-		inner JOIN
-		KAKAOROLE kr
-		on kmr.KAROLE =
-		kr.KAROLE
-		where kmr.KANICKNAME = #{kaNickName}
-	</select>
-	<resultMap type="KakaoRoleVO" id="total">
-		<id column="kaRole" property="kaRole" />
-		<result column="kaNickName" property="kaNickName" />
 		<collection property="kaRoleVOs" javaType="List"
 			ofType="KaRoleVO">
 			<id column="kaRole" property="kaRole" />
 			<result column="kaRoleName" property="kaRoleName" />
 		</collection>
+		<collection property="kakaoRoleVOs" javaType="List"
+			ofType="KakaoRoleVO">
+			<id column="kaRole" property="kaRole" />
+			<result column="kaNickName" property="kaNickName" />
+		</collection>
 	</resultMap>
+
+	<update id="setMemberRole" parameterType="MemberVO">
+		update THORMEMBER_ROLE set ROLENAME = #{roleName} where ID = #{id}
+	</update>
 
 </mapper>
