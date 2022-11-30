@@ -109,10 +109,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src='/js/chat.js'></script>
-<script src="/js/RTCMultiConnection.js"></script>
+<script src='/js/liveauction/chat.js'></script>
+<script src="/js/liveauction/RTCMultiConnection.js"></script>
 <script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
-<script src="/js/getHTMLMediaElement.js"></script>
+<script src="/js/liveauction/getHTMLMediaElement.js"></script>
 <script src='/js/index.js'></script>
 
   <footer>
