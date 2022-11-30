@@ -31,8 +31,8 @@
 				<th>등급</th>
 				<th>등급 변경</th>
 			</tr>
+			<input type="hidden" value="${member }" name="memID" class="memID">
 			<c:forEach items="${member}" var="m">
-				<input type="hidden" value="${m.roleVOs }" class="roleName">
 				<tr>
 					<td>${m.id }</td>
 					<td>${m.email }</td>
@@ -47,7 +47,7 @@
 					<td>
 						<c:choose>
 							<c:when test="${m.roleVOs[0].roleName == 'ROLE_MANGER' }">
-								<select name="select" class="selectRole" id="s">
+								<select name="select" class="selectRole">
 									<option class="role" value="Manager" selected>Manager</option>
 									<option class="role" value="User">User</option>
 									<option class="role" value="Ban">Ban</option>

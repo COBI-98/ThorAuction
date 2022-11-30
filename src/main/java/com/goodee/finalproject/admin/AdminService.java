@@ -31,8 +31,18 @@ public class AdminService
 		return ar;
 	}
 
-	public int setMemberRole(MemberVO memberVO) throws Exception
+	public int roleSetManager(MemberVO memberVO) throws Exception
 	{
-		return adminIF.setMemberRole(memberVO);
+		return adminIF.roleSetManager(memberVO);
+	}
+
+	public int roleSetUser(MemberVO memberVO) throws Exception
+	{
+		return adminIF.roleSetUser(memberVO);
+	}
+
+	public int roleSetBan(MemberVO memberVO) throws Exception
+	{
+		return adminIF.roleSetBan(memberVO);
 	}
 }

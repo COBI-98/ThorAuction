@@ -1,5 +1,6 @@
 package com.goodee.finalproject.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,42 @@ public class AdminController
 	{
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		log.info(role);
-		log.info("list member Role: {}", memberVOs.get(0).getRoleVOs());
-		
-//		adminService.setMemberRole(memberVO);
+
+		log.info("array memberVOs2: {}", memberVOs);
+
+		for (MemberVO memberVO2 : memberVOs)
+		{
+			log.info("for in memberVO: {}", memberVO2);
+
+			if (role.equals("ROLE_MANGER"))
+			{
+				log.info("manager");
+				log.info("update maneger: {}", adminService.roleSetManager(memberVO2));
+				adminService.roleSetManager(memberVO2);
+
+				return;
+			}
+			else if (role.equals("ROLE_USER"))
+			{
+				log.info("user");
+				log.info("update USER: {}", adminService.roleSetUser(memberVO2));
+				adminService.roleSetUser(memberVO2);
+
+				return;
+			}
+			else if (role.equals("ROLE_BAN"))
+			{
+				log.info("ban");
+				log.info("update BAN: {}", adminService.roleSetBan(memberVO2));
+				adminService.roleSetBan(memberVO2);
+
+				return;
+			}
+			else
+			{
+				log.info("error");
+				return;
+			}
+		} // for end
 	}
 }

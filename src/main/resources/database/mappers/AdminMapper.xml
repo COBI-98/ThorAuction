@@ -78,8 +78,19 @@
 		</collection>
 	</resultMap>
 
-	<update id="setMemberRole" parameterType="MemberVO">
-		update THORMEMBER_ROLE set ROLENAME = #{roleName} where ID = #{id}
+	<update id="roleSetManager" parameterType="MemberVO">
+		update THORMEMBER_ROLE
+		set ROLENUM = 2 where ID = #{id}
+	</update>
+	
+	<update id="roleSetUser" parameterType="MemberVO">
+		update THORMEMBER_ROLE
+		set ROLENUM = 3 where ID = #{id}
+	</update>
+	
+	<update id="roleSetBan" parameterType="MemberVO">
+		update THORMEMBER_ROLE
+		set ROLENUM = 4 where ID = #{id}
 	</update>
 
 </mapper>
