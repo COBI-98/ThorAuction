@@ -51,7 +51,7 @@ function getHTMLMediaElement(mediaElement, config) {
     mediaControls.className = 'media-controls';
     mediaElementContainer.appendChild(mediaControls);
 
-   // if (buttons.has('mute-audio')) {
+    if (buttons.has('mute-audio')) {
         var muteAudio = document.createElement('div');
         muteAudio.className = 'control ' + (config.toggle.has('mute-audio') ? 'unmute-audio selected' : 'mute-audio');
         mediaControls.appendChild(muteAudio);
@@ -70,9 +70,9 @@ function getHTMLMediaElement(mediaElement, config) {
             }
         };
         
-   // }
+    }
 
-   // if (buttons.has('mute-video')) {
+    if (buttons.has('mute-video')) {
         var muteVideo = document.createElement('div');
         let muteVideoId = document.createAttribute("id");
         muteVideoId.value = "muteVideo";
@@ -80,7 +80,7 @@ function getHTMLMediaElement(mediaElement, config) {
         
         muteVideo.className = 'control ' + (config.toggle.has('mute-video') ? 'unmute-video selected' : 'mute-video');
         mediaControls.appendChild(muteVideo);
-
+		muteVideo.style.display="none";
         muteVideo.onclick = function() {
             if (muteVideo.className.indexOf('unmute-video') != -1) {
                 muteVideo.className = muteVideo.className.replace('unmute-video selected', 'mute-video');
@@ -99,29 +99,29 @@ function getHTMLMediaElement(mediaElement, config) {
                 if (config.onMuted) config.onMuted('video');
             }
         };
-    //}
+    }
 
-   // if (buttons.has('stop')) {
-        var stop = document.createElement('div');
-        stop.className = 'control stop';
-        mediaControls.appendChild(stop);
-
-        stop.onclick = function() {
-            mediaElementContainer.style.opacity = 0;
-            setTimeout(function() {
-                if (mediaElementContainer.parentNode) {
-                    mediaElementContainer.parentNode.removeChild(mediaElementContainer);
-                }
-            }, 800);
-            if (config.onStopped) config.onStopped();
-        };
-   // }
+//    if (buttons.has('stop')) {
+//        var stop = document.createElement('div');
+//        stop.className = 'control stop';
+//        mediaControls.appendChild(stop);
+//
+//        stop.onclick = function() {
+//            mediaElementContainer.style.opacity = 0;
+//            setTimeout(function() {
+//                if (mediaElementContainer.parentNode) {
+//                    mediaElementContainer.parentNode.removeChild(mediaElementContainer);
+//                }
+//            }, 800);
+//            if (config.onStopped) config.onStopped();
+//        };
+//    }
 
     var volumeControl = document.createElement('div');
     volumeControl.className = 'volume-control';
 
 
-   // if (buttons.has('volume-slider')) {
+    if (buttons.has('volume-slider')) {
         var volumeSlider = document.createElement('div');
         volumeSlider.className = 'control volume-slider';
         volumeControl.appendChild(volumeSlider);
@@ -135,9 +135,9 @@ function getHTMLMediaElement(mediaElement, config) {
             mediaElement.volume = '.' + slider.value.toString().substr(0, 1);
         };
         volumeSlider.appendChild(slider);
-  //  }
+    }
 
-  //  if (buttons.has('full-screen')) {
+    if (buttons.has('full-screen')) {
         var zoom = document.createElement('div');
         zoom.className = 'control ' + (config.toggle.has('zoom-in') ? 'zoom-out selected' : 'zoom-in');
 
@@ -179,7 +179,7 @@ function getHTMLMediaElement(mediaElement, config) {
             }
         }
 
-        function screenStateChange(e) {
+        function screenStateChange(e) {		
             if (e.srcElement != mediaElementContainer) return;
 
             var isFullScreeMode = document.webkitIsFullScreen || document.mozFullScreen || document.fullscreen;
@@ -204,7 +204,7 @@ function getHTMLMediaElement(mediaElement, config) {
         document.addEventListener('fullscreenchange', screenStateChange, false);
         document.addEventListener('mozfullscreenchange', screenStateChange, false);
         document.addEventListener('webkitfullscreenchange', screenStateChange, false);
-  //  }
+    }
 
     if (buttons.has('volume-slider') || buttons.has('full-screen') || buttons.has('record-audio') || buttons.has('record-video')) {
         mediaElementContainer.appendChild(volumeControl);
@@ -214,7 +214,7 @@ function getHTMLMediaElement(mediaElement, config) {
     mediaBox.className = 'media-box';
     mediaElementContainer.appendChild(mediaBox);
 
-    if (config.title) {
+    if (config.title) {  // 방송 제목 노출부분 현재는 ID로 되어 이씅ㅁ
         var h2 = document.createElement('h2');
         h2.innerHTML = config.title;
         h2.setAttribute('style', 'position: absolute;color:white;font-size:17px;text-shadow: 1px 1px black;padding:0;margin:0;text-align: left; margin-top: 10px; margin-left: 10px; display: block; border: 0;line-height:1.5;z-index:1;');
@@ -223,7 +223,7 @@ function getHTMLMediaElement(mediaElement, config) {
 
     mediaBox.appendChild(mediaElement);
 
-    if (!config.width) config.width = (innerWidth / 2) - 50;
+    if (!config.width) config.width = (innerWidth / 2) - 50;  // 영상크기 설정이 안 되어 있으면 기본값.
 
     mediaElementContainer.style.width = config.width + 'px';
 
@@ -235,7 +235,7 @@ function getHTMLMediaElement(mediaElement, config) {
 
     var times = 0;
 
-    function adjustControls() {
+    function adjustControls() { 	//마우스 올리면 사라지는 컨트롤바 이벤트
         mediaControls.style.marginLeft = (mediaElementContainer.clientWidth - mediaControls.clientWidth - 2) + 'px';
 
         if (slider) {
@@ -357,21 +357,21 @@ function getAudioElement(mediaElement, config) {
         }
     };
 
-    if (!config.buttons || (config.buttons && config.buttons.indexOf('record-audio') != -1)) {
-        var recordAudio = document.createElement('div');
-        recordAudio.className = 'control ' + (config.toggle.has('record-audio') ? 'stop-recording-audio selected' : 'record-audio');
-        mediaControls.appendChild(recordAudio);
-
-        recordAudio.onclick = function() {
-            if (recordAudio.className.indexOf('stop-recording-audio') != -1) {
-                recordAudio.className = recordAudio.className.replace('stop-recording-audio selected', 'record-audio');
-                if (config.onRecordingStopped) config.onRecordingStopped('audio');
-            } else {
-                recordAudio.className = recordAudio.className.replace('record-audio', 'stop-recording-audio selected');
-                if (config.onRecordingStarted) config.onRecordingStarted('audio');
-            }
-        };
-    }
+//    if (!config.buttons || (config.buttons && config.buttons.indexOf('record-audio') != -1)) {
+//        var recordAudio = document.createElement('div');
+//        recordAudio.className = 'control ' + (config.toggle.has('record-audio') ? 'stop-recording-audio selected' : 'record-audio');
+//        mediaControls.appendChild(recordAudio);
+//
+//        recordAudio.onclick = function() {
+//            if (recordAudio.className.indexOf('stop-recording-audio') != -1) {
+//                recordAudio.className = recordAudio.className.replace('stop-recording-audio selected', 'record-audio');
+//                if (config.onRecordingStopped) config.onRecordingStopped('audio');
+//            } else {
+//                recordAudio.className = recordAudio.className.replace('record-audio', 'stop-recording-audio selected');
+//                if (config.onRecordingStarted) config.onRecordingStarted('audio');
+//            }
+//        };
+//    }
 
     var volumeSlider = document.createElement('div');
     volumeSlider.className = 'control volume-slider';
@@ -395,28 +395,28 @@ function getAudioElement(mediaElement, config) {
     };
     volumeSlider.appendChild(slider);
 
-    var stop = document.createElement('div');
-    stop.className = 'control stop';
-    mediaControls.appendChild(stop);
+//    var stop = document.createElement('div');       // 화면 숨기기 버튼(본인만)
+//    stop.className = 'control stop';
+//    mediaControls.appendChild(stop);
+//
+//    stop.onclick = function() {
+//        mediaElementContainer.style.opacity = 0;
+//        setTimeout(function() {
+//            if (mediaElementContainer.parentNode) {
+//                mediaElementContainer.parentNode.removeChild(mediaElementContainer);
+//            }
+//        }, 800);
+//        if (config.onStopped) config.onStopped();
+//    };
+//
+//    stop.style['border-top-right-radius'] = '5px';
+//    stop.style['border-bottom-right-radius'] = '5px';
 
-    stop.onclick = function() {
-        mediaElementContainer.style.opacity = 0;
-        setTimeout(function() {
-            if (mediaElementContainer.parentNode) {
-                mediaElementContainer.parentNode.removeChild(mediaElementContainer);
-            }
-        }, 800);
-        if (config.onStopped) config.onStopped();
-    };
-
-    stop.style['border-top-right-radius'] = '5px';
-    stop.style['border-bottom-right-radius'] = '5px';
-
-    var mediaBox = document.createElement('div');
+    var mediaBox = document.createElement('div');    // 화면 DIV 부분
     mediaBox.className = 'media-box';
     mediaElementContainer.appendChild(mediaBox);
 
-    var h2 = document.createElement('h2');
+    var h2 = document.createElement('h2');		// 화면에 제목 부분
     h2.innerHTML = config.title || 'Audio Element';
     h2.setAttribute('style', 'position: absolute;color: rgb(160, 160, 160);font-size: 20px;text-shadow: 1px 1px rgb(255, 255, 255);padding:0;margin:0;');
     mediaBox.appendChild(h2);
@@ -432,7 +432,7 @@ function getAudioElement(mediaElement, config) {
 
     var times = 0;
 
-    function adjustControls() {
+    function adjustControls() {		// 마우스 치우면 컨트롤바 사라짐
         mediaControls.style.marginLeft = (mediaElementContainer.clientWidth - mediaControls.clientWidth - 7) + 'px';
         mediaControls.style.marginTop = (mediaElementContainer.clientHeight - mediaControls.clientHeight - 6) + 'px';
         if (times < 10) {
