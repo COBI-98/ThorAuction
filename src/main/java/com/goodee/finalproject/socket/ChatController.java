@@ -23,16 +23,8 @@ public class ChatController {
 		mv.addObject("member", mem.getName());
 		mv.addObject("point", mem.getPoint());
 		mv.addObject("value",webSocketChat.getValue());
-		mv.setViewName("liveAction");
-		return mv;
-	}
-	
-	
-	@GetMapping("/liveAuction")
-	public ModelAndView liveAuction() {
-		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/liveAuction/liveAuction");
 		return mv;
-		
 	}
+	
 }

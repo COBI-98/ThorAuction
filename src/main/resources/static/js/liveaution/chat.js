@@ -42,7 +42,7 @@ var win = false;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
-ws = new WebSocket("ws://" + location.host + "/chatt");
+ws = new WebSocket("wss://" + location.host + "/chatt");
 
 
 //입장 시
@@ -108,7 +108,12 @@ ws.onmessage = function(msg){
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid){
+		rank[0] = data.value;
+		rank[1] = data.win;
+		amount.innerHTML = rank[0];
+		console.log(rank);
+		
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
 			cssid = 'id=enter';
 		}
 
@@ -120,10 +125,6 @@ ws.onmessage = function(msg){
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 
-		rank[0] = data.value;
-		rank[1] = data.win;
-		amount.innerHTML = rank[0];
-		console.log(rank);
 
 	}
 	//얼리기
