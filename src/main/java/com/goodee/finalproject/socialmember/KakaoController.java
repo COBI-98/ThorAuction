@@ -3,6 +3,7 @@ package com.goodee.finalproject.socialmember;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class KakaoController
 
 	@PostMapping("IdCheck")
 	@ResponseBody
-	public int IdCheck(KakaoVO kakaoVO) throws Exception
+	public int IdCheck(KakaoVO kakaoVO, HttpServletResponse response) throws Exception
 	{
 		log.info("======= id check =======");
 		int rs = memberSocialService.IdCheck(kakaoVO);
@@ -42,27 +43,16 @@ public class KakaoController
 	}
 
 	@GetMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(KakaoVO kakaoVO, Authentication authentication) throws Exception
+	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
 		log.info("===== authentication: {}", authentication.getName());
-		log.info("kakao: {}", kakaoVO.getKaNickName());
 
-		int rs = memberSocialService.IdCheck(kakaoVO);
+		// auth getName 과 DB의 소셜 ID가 같으면 return; ?
+		log.info("kakao nickName: {}",kakaoVO.getKaNickName());
+		log.info("session setAttr: {}", session.getAttribute("Detail"));
 
-		log.info("idCheck rs: {}", rs);
-
-		// if (rs == 1)
-		// {
-		// modelAndView.addObject("rs", rs);
-		// modelAndView.setViewName("redirect:/");
-		//
-		// return modelAndView;
-		// }
-		// else
-		// {
-		// }
 		if (authentication.getPrincipal() != null)
 		{
 			memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
@@ -92,12 +82,12 @@ public class KakaoController
 		log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 
 		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
+		session.setAttribute("Detail", kakaoDetailVO);
 
 		log.info("kakao login rs2: {}", rs2);
 
 		modelAndView.addObject("rs2", rs2);
 		modelAndView.setViewName("redirect:/");
-		session.setAttribute("Detail", kakaoDetailVO);
 
 		return modelAndView;
 	}

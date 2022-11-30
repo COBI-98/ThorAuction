@@ -36,6 +36,7 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
 	{
 		log.info("====== logout Success =====");
+		request.getSession().invalidate();
 
 		KakaoVO kakaoVO = new KakaoVO();
 		kakaoVO = (KakaoVO) authentication.getPrincipal();

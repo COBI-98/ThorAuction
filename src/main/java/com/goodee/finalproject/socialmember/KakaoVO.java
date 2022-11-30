@@ -19,6 +19,7 @@ public class KakaoVO implements OAuth2User, UserDetails
 	private String kaEmail;
 	private String kaName;
 	
+	private List<KaRoleVO> kaRoleVOs;
 	private List<KakaoRoleVO> kakaoRoleVOs;
 	private List<KakaoDetailVO> kakaoDetailVOs;
 

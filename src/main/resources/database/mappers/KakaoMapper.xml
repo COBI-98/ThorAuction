@@ -28,9 +28,19 @@
 	</insert>
 
 	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
-		select count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
+		select
+		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
 
+	<select id="getNickName" parameterType="KakaoVO"
+		resultMap="kakao">
+		select * from SOCIALKAKAO where KANICKNAME = #{kaNickName}
+	</select>
 
+	<resultMap type="KakaoVO" id="kakao">
+		<id column="kaNickName" property="kaNickName" />
+		<result column="kaEmail" property="kaEmail" />
+		<result column="kaName" property="kaName" />
+	</resultMap>
 
 </mapper>
