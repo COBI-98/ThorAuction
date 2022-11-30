@@ -54,22 +54,24 @@ public class SecurityConfig
 				.authorizeRequests() //
 				.antMatchers("/admin").hasRole("AMDIN") //
 				.anyRequest().permitAll() //
-				.and() //
-				.oauth2Login() //
-				.successHandler(loginSuccess).and()//
+				// .and() //
+				// .oauth2Login() //
+				// .successHandler(loginSuccess)//
+				.and()//
 				// ---------- 로그아웃 시작 ---------------
 				.logout() // 로그 아웃시
 				.logoutUrl("/member/logout") // 로그아웃
-				.addLogoutHandler(logoutCustom) // 로그아웃 시 실행
-//				.logoutSuccessHandler(logoutSuccessCustom) // 로그아웃 성공 시 실행
+				// .addLogoutHandler(logoutCustom) // 로그아웃 시 실행
+				.logoutSuccessHandler(logoutSuccessCustom) // 로그아웃 성공 시 실행
 				.invalidateHttpSession(true) // Session 내용 없애기
 				.deleteCookies("JSESSIONID") // 쿠키 삭제
 				.permitAll() //
 				// ---------- 로그아웃 끝 ---------------
 				.and() //
 				.oauth2Login() //
+				.successHandler(loginSuccess)//
 				.userInfoEndpoint() //
-				.userService((OAuth2UserService<OAuth2UserRequest, OAuth2User>) memberSocialService) // 소셜 로그인 실행 클래스
+				.userService(memberSocialService) // 소셜 로그인 실행 클래스
 		;
 
 		return httpSecurity.build();

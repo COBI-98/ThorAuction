@@ -14,6 +14,7 @@
 		THORROLE tr
 		on
 		tmr.ROLENUM = tr.ROLENUM
+		WHERE tmr.ROLENUM NOT LIKE "%1%"
 		order by th.ID asc
 	</select>
 	<resultMap type="MemberVO" id="getMemberTotal">
@@ -64,26 +65,24 @@
 		</collection>
 	</resultMap>
 
-	<select id="getkakaoRole" parameterType="KakaoVO"
+	<select id="getkakaoRole" parameterType="KakaoRoleVO"
 		resultMap="total">
-		select * FROM
-		SOCIALKAKAO s
-		inner join
+		<!-- select * FROM SOCIALKAKAO s inner join KAKAOMEMBERROLE kmr on s.KANICKNAME 
+			= kmr.KANICKNAME inner JOIN KAKAOROLE kr on kmr.KAROLE = kr.KAROLE where 
+			s.KANICKNAME = #{kaNickName} -->
+		select * from
 		KAKAOMEMBERROLE kmr
-		on
-		s.KANICKNAME = kmr.KANICKNAME
 		inner JOIN
 		KAKAOROLE kr
 		on kmr.KAROLE =
 		kr.KAROLE
-		where s.KANICKNAME = #{kaNickName}
+		where kmr.KANICKNAME = #{kaNickName}
 	</select>
-	<resultMap type="KakaoVO" id="total">
-		<id column="kaNickName" property="kaNickName" />
-		<result column="kaEmail" property="kaEmail" />
-		<result column="kaName" property="kaName" />
-		<collection property="kakaoRoleVOs" javaType="List"
-			ofType="KakaoRoleVO">
+	<resultMap type="KakaoRoleVO" id="total">
+		<id column="kaRole" property="kaRole" />
+		<result column="kaNickName" property="kaNickName" />
+		<collection property="kaRoleVOs" javaType="List"
+			ofType="KaRoleVO">
 			<id column="kaRole" property="kaRole" />
 			<result column="kaRoleName" property="kaRoleName" />
 		</collection>

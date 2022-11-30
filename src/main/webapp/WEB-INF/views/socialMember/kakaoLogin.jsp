@@ -30,7 +30,7 @@
 					</div>
 					<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
 					<form action="./kakaoLogin" method="post">
-						<!-- <input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }"> -->
+						<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
 						<table>
 							<tr>
 								<th>이름</th>

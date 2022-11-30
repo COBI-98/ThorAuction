@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<body>
+    <h1>swal 1</h1>
+    <button id="b" type="submit">button</button>
+</body>
+<script>
+    let c = document.getElementById("b")
+    c.addEventListener("click", function(){
+
+        swal({
+            title: "카카오 로그인",
+            text: "아이디가 이미 존재합니다.",
+            icon: "info",
+        }).then(function () {
+            location = './swal2.html';
+            history.back();
+        });
+
+    })
+</script>
+</html>

@@ -13,28 +13,32 @@ function idcheck() {
         type: "POST",
         data: { kaNickName: kNickName },
         traditional: true,
-        success: function (result) {
-            console.log(result);
-            if (result == 1) {
-                swal({
-                    title: "카카오 로그인",
-                    text: "아이디가 이미 존재합니다.",
-                    icon: "info",
-                    // closeOnClickOutside: false
-                }).then(function (rs) {
-                    // 이벤트
-                    if (rs) {
-                        location.href = "/";
-                        return false;
-                    }
-                });
-                // swal("카카오 로그인", "아이디가 이미 존재합니다.", "info");
-                // location.href = "/";
-                // return false;
-            }
-            else {
-                alert("아이디 없음");
-            }
+        success: function (rs) {
+            console.log(rs);
+            swal({
+                title: "카카오 로그인",
+                icon: "info",
+            }).then(function () {
+                if (rs == 0) {
+                    swal({
+                        title: "카카오 회원가입",
+                        icon: "info",
+                    }).then(function () {
+                        location = '/oauth2/authorization/kakao';
+                    })
+                    // location = '/kakaoLogin';
+                }
+                else {
+                    swal({
+                        title: "연결이 유효함",
+                        text: '카카오로 로그인합니다.',
+                        icon: "success",
+                    }).then(function () {
+                        location = '/oauth2/authorization/kakao';
+                    })
+                    // location = '/';
+                }
+            });
         },
         error: function (textStatus, errorThrown) {
             alert("서버 요청 실패");
@@ -42,5 +46,4 @@ function idcheck() {
             console.log(errorThrown);
         }
     })
-
 }
