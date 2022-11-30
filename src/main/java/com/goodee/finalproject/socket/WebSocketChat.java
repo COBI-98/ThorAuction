@@ -36,6 +36,7 @@ public class WebSocketChat {
 	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
 	private static String winuser="";
 	
+	//입장시
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
 
@@ -57,7 +58,17 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
-		if(msg.substring(2, 5).equals("out")) {
+		//단위가격 
+		if(msg.substring(2, 4).equals("id")) {
+			String vv = String.valueOf(jsonObj.get("value"));
+			int valu = Integer.parseInt(vv);
+			setValue(valu);
+			
+			sendMessage(msg, session);
+		}
+		
+		//강퇴
+		else if(msg.substring(2, 5).equals("out")) {
 			String outname = String.valueOf(jsonObj.get("out"));
 			Session ss = getKey(list,outname);
 			sendOneMessage(msg, ss);
@@ -71,7 +82,8 @@ public class WebSocketChat {
 			//DB에 저장할 예정
 			
 			sendMessage(msg,session);
-
+			
+		//채팅 전송
 		}else if(msg.substring(2, 5).equals("mid")) {
 			
 			String vv = String.valueOf(jsonObj.get("value"));
@@ -87,24 +99,21 @@ public class WebSocketChat {
 			
 			sendMessage(msg, session);
 			
+		//입장시
 		}else if(msg.substring(2, 10).equals("usercome")) {
 
-			System.out.println(msg);
 			String name = String.valueOf(jsonObj.get("usercome")); //입장한 사람 name
 			String come = String.valueOf(jsonObj.get("come"));
-			//msg = msg.replace(name, set);
+
 			set.add(come);
 			list.put(session, come);
+			
 			StringBuilder sb = new StringBuilder();
-			
 			sb.append(set.toString());
-			System.out.println(sb);
-			
 			msg = msg.replace(name, sb.toString());
 						
 			sendMessage(msg, session);
 		}
-		
 		else {
 			sendMessage(msg, session);
 		}	
@@ -135,11 +144,6 @@ public class WebSocketChat {
 		
 		String name = list.get(s);
 		set.remove(name);
-		
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append(set.toString());
-		System.out.println(sb);
 		
 		JSONObject jsonObject = new JSONObject();
 
