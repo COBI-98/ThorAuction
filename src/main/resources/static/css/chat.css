@@ -3,31 +3,42 @@
 }
 
 #chatt{
-   width: 700px;
-   margin: 20px auto;
+
+   width: 25%;
+   padding: 0px 15px;
    /* text-align: center; */
 }
 
+#chat-box{
+	width: 100%;
+	aspect-ratio: 4.9 / 9; 
+}
+
 #chatt #talk{
-   width: 600px;
-   height: 650px;
+   width: 100%;
+   height: 83%;
    overflow: scroll;
    border : 1px solid #aaa;
    /* text-align: center; */
 }
+
+
+#sendZone{
+	display:flex;
+	justify-content:space-around;
+	height: 15%;
+	margin-top: 10px;
+}
+
 #chatt #msg{
-   width: 490px;
-   height:100px;
+   width: 75%;
+   height: 100%;
    display: inline-block;
 }
 
-#chatt #sendZone > *{
-   vertical-align: top;
-   
-}
 #chatt #btnSend{
-   width: 54px;
-   height: 100px;
+   width: 20%;
+   height: 100%;
    background-color: #fea532;
    color: white;
    border-style: none;
@@ -64,8 +75,11 @@
    margin : 2px;
 }
 
+
+
 #text{
    text-align: center;
+   height: 75px;
 }
 
 .container{

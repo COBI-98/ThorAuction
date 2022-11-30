@@ -42,7 +42,7 @@ var win = false;
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
-ws = new WebSocket("ws://" + location.host + "/chatt");
+ws = new WebSocket("wss://" + location.host + "/chatt");
 
 
 //입장 시

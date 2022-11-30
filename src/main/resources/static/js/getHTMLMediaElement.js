@@ -44,7 +44,7 @@ function getHTMLMediaElement(mediaElement, config) {
         return config.toggle.indexOf(element) !== -1;
     };
 
-    var mediaElementContainer = document.createElement('div');
+    var mediaElementContainer = document.querySelector('#media-container');
     mediaElementContainer.className = 'media-container';
 
     var mediaControls = document.createElement('div');
@@ -210,9 +210,9 @@ function getHTMLMediaElement(mediaElement, config) {
         mediaElementContainer.appendChild(volumeControl);
     }
 
-    var mediaBox = document.createElement('div');
+    var mediaBox = document.querySelector('#media-box');
     mediaBox.className = 'media-box';
-    mediaElementContainer.appendChild(mediaBox);
+  //  mediaElementContainer.appendChild(mediaBox);
 
     if (config.title) {  // 방송 제목 노출부분 현재는 ID로 되어 이씅ㅁ
         var h2 = document.createElement('h2');
@@ -331,7 +331,7 @@ function getAudioElement(mediaElement, config) {
         return config.toggle.indexOf(element) !== -1;
     };
 
-    var mediaElementContainer = document.createElement('div');
+    var mediaElementContainer = document.querySelector('#media-container');
     mediaElementContainer.className = 'media-container';
 
     var mediaControls = document.createElement('div');
