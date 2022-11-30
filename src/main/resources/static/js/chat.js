@@ -2,16 +2,7 @@
  * web socket
  */
 
-let cameraPause = document.querySelector("#cameraPause")
 
-
-cameraPause.addEventListener("click",function(){
-	
-	cameraPause.classList.toggle("pause");
-	sendPause();
-	
-	
-})
 
 
 
@@ -90,16 +81,21 @@ function send(){
 	
 }
 
+let cameraPause = document.querySelector("#cameraPause")
+
+cameraPause.addEventListener("click",function(){
+	cameraPause.classList.toggle("pause");
+	sendPause();
+})
+
+
+
 function pauseCam(){
 	if(cameraPause.classList.contains("pause")){
-		
 		return true;
-	}
-			
+	}	
 	return false;
-	
 }
-
 
 function sendPause(){
 	data2.pause = pauseCam();

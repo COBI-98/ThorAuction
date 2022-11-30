@@ -19,7 +19,7 @@ public class ChatController {
 	@GetMapping("/liveAuction")
 	public ModelAndView liveAuction() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/liveAuction/index");
+		mv.setViewName("/liveAuction/liveAuction");
 		return mv;
 		
 	}

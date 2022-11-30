@@ -1,0 +1,80 @@
+*{
+   box-sizing: border-box;
+}
+
+#chatt{
+   width: 700px;
+   margin: 20px auto;
+   /* text-align: center; */
+}
+
+#chatt #talk{
+   width: 600px;
+   height: 650px;
+   overflow: scroll;
+   border : 1px solid #aaa;
+   /* text-align: center; */
+}
+#chatt #msg{
+   width: 490px;
+   height:100px;
+   display: inline-block;
+}
+
+#chatt #sendZone > *{
+   vertical-align: top;
+   
+}
+#chatt #btnSend{
+   width: 54px;
+   height: 100px;
+   background-color: #fea532;
+   color: white;
+   border-style: none;
+}
+
+#chatt #talk div{
+   width: 60%;
+   display: inline-block;
+   padding: 6px;
+   border-radius:10px;   
+}
+
+#chatt .me{
+   background-color : #eee;
+   margin : 1px 0px 2px 40%;   
+}
+
+#chatt .other{
+   background-color : #eee;
+   margin : 2px;
+}
+
+#chatt .me#enter{
+   background-color: white;
+   border-style:solid;
+   border-color: #fea532;
+   margin : 1px 0px 2px 40%;   
+}
+
+#chatt .other#enter{
+   background-color: white;
+   border-style:solid;
+   border-color: #fea532;
+   margin : 2px;
+}
+
+#text{
+   text-align: center;
+}
+
+.container{
+   padding: 0px;
+}
+
+#auction{
+   background-color: white;
+   color: #fea532;
+   font-weight: bold;
+   border-style: none;
+}
