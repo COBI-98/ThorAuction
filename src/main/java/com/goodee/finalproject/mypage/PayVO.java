@@ -1,7 +1,5 @@
 package com.goodee.finalproject.mypage;
 
-import java.sql.Date;
-
 import com.goodee.finalproject.member.MemberVO;
 
 import lombok.Data;

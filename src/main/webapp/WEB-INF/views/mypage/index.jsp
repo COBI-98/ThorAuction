@@ -15,18 +15,23 @@
 	<section class="container d-flex flex-wrap justify-content-center">
 	
 			<div class="me-5">
-				<input type="text" name="id" disabled="disabled" value="${member.id}">
-				<input type="text" name="id" disabled="disabled" value="${member.name}">
-				<input type="text" name="id" disabled="disabled" value="${member.birth}">
-				<input type="text" name="id" disabled="disabled" value="${member.email}">
-				<input type="text" name="id" disabled="disabled" value="${member.post}">
-				<input type="text" name="id" disabled="disabled" value="${member.addr}">
-				<input type="text" name="id" disabled="disabled" value="${member.addr2}">
-				<input type="text" name="id" disabled="disabled" value="${member.phone}">
+				<label>아이디<input type="text" name="id" disabled="disabled" value="${memberDB.id}"></label><br>
+				<label>이름<input type="text" name="name" disabled="disabled" value="${memberDB.name}"></label><br>
+				<label>생년월일<input type="text" name="birth" disabled="disabled" value="${memberDB.birth}"></label><br>
+				<label>이메일<input type="text" name="email" disabled="disabled" value="${memberDB.email}"></label><br>
+				<label>우편번호<input type="text" name="post" disabled="disabled" value="${memberDB.post}"></label>
+				<label>주소<input type="text" name="addr" disabled="disabled" value="${memberDB.addr}"></label>
+				<label>상세주소<input type="text" name="addr2" disabled="disabled" value="${memberDB.addr2}"></label><br>
+				<label>전화번호<input type="text" name="phone" disabled="disabled" value="${memberDB.phone}"></label><br>
+				<label>포인트<input type="text" name="point" disabled="disabled" value="${memberDB.point}"></label>
+				<label>테스트<input type="text" name="payPoint" disabled="disabled" value="${pay.payTotal}"></label>
 			</div>
-		
+			
 			<div class="me-5">
 				<a href="./charge">충전하기</a>
+			</div>
+			<div class="me-5">
+				<a href="./paypoint">충전내역</a>
 			</div>
 			<div class="me-5">
 				<a href="./update">정보수정</a>
