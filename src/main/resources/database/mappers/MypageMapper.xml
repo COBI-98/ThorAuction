@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
+
+	<!-- 회원탈퇴 -->
+	<delete id="setDelete">
+		DELETE FROM THORMEMBER
+		WHERE ID = #{id}
+		AND PW = #{pw}
+	</delete>
+
+	<!-- 회원정보 수정 -->
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE THORMEMBER 
+		SET
+		ID = #{id},
+		NAME = #{name},
+		BIRTH = #{birth},
+		EMAIL = #{email},
+		POST = #{post},
+		ADDR = #{addr},
+		ADDR2 = #{addr2},
+		PHONE = #{phone}
+		WHERE ID = #{id}
+	</update>
+</mapper>

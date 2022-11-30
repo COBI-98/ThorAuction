@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="./template/boot.jsp"></c:import>
+	<link href="/css/reset.css" rel="stylesheet">
+	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 	<title>Chating</title>
@@ -12,18 +18,20 @@
 }
 
 #chatt{
-	width: 800px;
+	width: 700px;
 	margin: 20px auto;
+	/* text-align: center; */
 }
 
 #chatt #talk{
-	width: 800px;
-	height: 400px;
+	width: 600px;
+	height: 650px;
 	overflow: scroll;
 	border : 1px solid #aaa;
+	/* text-align: center; */
 }
 #chatt #msg{
-	width: 740px;
+	width: 490px;
 	height:100px;
 	display: inline-block;
 }
@@ -35,50 +43,104 @@
 #chatt #btnSend{
 	width: 54px;
 	height: 100px;
+	background-color: #fea532;
+	color: white;
+	border-style: none;
 }
 
 #chatt #talk div{
-	width: 70%;
+	width: 60%;
 	display: inline-block;
 	padding: 6px;
-	border-radius:10px;
-	
+	border-radius:10px;	
 }
 
 #chatt .me{
-	background-color : #ffc;
-	margin : 1px 0px 2px 30%;	
+	background-color : #eee;
+	margin : 1px 0px 2px 40%;	
 }
 
 #chatt .other{
 	background-color : #eee;
 	margin : 2px;
 }
+
+#chatt .me#enter{
+	background-color: white;
+	border-style:solid;
+	border-color: #fea532;
+	margin : 1px 0px 2px 40%;	
+}
+
+#chatt .other#enter{
+	background-color: white;
+	border-style:solid;
+	border-color: #fea532;
+	margin : 2px;
+}
+
+#text{
+	text-align: center;
+}
+
+.container{
+	padding: 0px;
+}
+
+#auction{
+	background-color: white;
+	color: #fea532;
+	font-weight: bold;
+	border-style: none;
+}
 	</style>
 </head>
 
 
 <body>
+	<c:import url="./template/header.jsp"></c:import>
+	<section class="container d-flex flex-wrap justify-content-center">
 	<div id='chatt'>
-		<h1>WebSocket Chatting</h1>
-		<input type='text' id='mid' value='홍길동'>
+		<div id="text">
+			<h3>실시간 경매</h3>
+			<h3>물품 : </h3>
+			<h3 id="final">현재 금액</h3>
+			<h3 id="amount">${value}</h3>
+			<h3 id="finalamount"></h3>
+			<h3>현재 인원</h3>
+			<h3 id="count"></h3>
+		</div>	
+		<h2 id="id">${member}</h2>
+		<h2 id="point">${point}</h2>
+		<!-- <input type='text' id='mid' value="홍길동" placeholder="닉네임을 입력해주세요">
 		<input type='button' value='로그인' id='btnLogin'>
-		<br/>
+		<br/> -->
 		<div id='talk'></div>
 		<div id='sendZone'>
-			<textarea id='msg' value='hi...' ></textarea>
-			<input type='button' value='전송' id='btnSend'>
+			<input type='button' value="경매" id="auction">
+			<textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
+			<input type='button' value='보내기' id='btnSend'>
+			<input type="button" class="" value="얼리기" id='stop'>
+			<input type="button" value="경매종료" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
+			<input type="button" value="종료" id="end"> <!--session 닫힘-->
 		</div>
+
+		<h3>현재 채팅 참가자</h3>
+		<div id = "iddd">
+		
+		</div>
+
 		
 	</div>
 
-    <video id="localVideo" autoplay playsinline width="480px"></video>
-   <video id="remoteVideo" autoplay playsinline width="480px"></video>
+    <!-- <video id="localVideo" autoplay playsinline width="480px"></video>
+   <video id="remoteVideo" autoplay playsinline width="480px"></video> -->
 
     
     <script src="/socket.io/socket.io.js"></script>
     
-    
+    </section>
+	<c:import url="./template/footer.jsp"></c:import>
 	<script src='/js/chat.js'></script>
 </body>
 </html>
