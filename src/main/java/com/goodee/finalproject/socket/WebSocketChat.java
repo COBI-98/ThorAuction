@@ -15,6 +15,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ public class WebSocketChat {
 	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
 	private static String winuser="";
 	
+	//입장시
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
 
@@ -54,8 +56,19 @@ public class WebSocketChat {
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(msg);
 		JSONObject jsonObj = (JSONObject) obj;
+		System.out.println(msg);
 		
-		if(msg.substring(2, 5).equals("out")) {
+		//단위가격 
+		if(msg.substring(2, 4).equals("id")) {
+			String vv = String.valueOf(jsonObj.get("value"));
+			int valu = Integer.parseInt(vv);
+			setValue(valu);
+			
+			sendMessage(msg, session);
+		}
+		
+		//강퇴
+		else if(msg.substring(2, 5).equals("out")) {
 			String outname = String.valueOf(jsonObj.get("out"));
 			Session ss = getKey(list,outname);
 			sendOneMessage(msg, ss);
@@ -69,7 +82,8 @@ public class WebSocketChat {
 			//DB에 저장할 예정
 			
 			sendMessage(msg,session);
-
+			
+		//채팅 전송
 		}else if(msg.substring(2, 5).equals("mid")) {
 			
 			String vv = String.valueOf(jsonObj.get("value"));
@@ -85,17 +99,21 @@ public class WebSocketChat {
 			
 			sendMessage(msg, session);
 			
+		//입장시
 		}else if(msg.substring(2, 10).equals("usercome")) {
 
 			String name = String.valueOf(jsonObj.get("usercome")); //입장한 사람 name
-			set.add(name);
-			list.put(session, name);
-			Gson gson = new Gson();
-			String jsonString = gson.toJson(set);
+			String come = String.valueOf(jsonObj.get("come"));
+
+			set.add(come);
+			list.put(session, come);
 			
-			sendMessage(jsonString, session);
+			StringBuilder sb = new StringBuilder();
+			sb.append(set.toString());
+			msg = msg.replace(name, sb.toString());
+						
+			sendMessage(msg, session);
 		}
-		
 		else {
 			sendMessage(msg, session);
 		}	
@@ -126,10 +144,15 @@ public class WebSocketChat {
 		
 		String name = list.get(s);
 		set.remove(name);
-		Gson gson = new Gson();
-		String jsonString = gson.toJson(set);
 		
-		sendMessage(jsonString, s);
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put("name",name);
+		jsonObject.put("list", set);
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(jsonObject);
+		
+		sendMessage(jsonString.toString(), s);
 	}
 	
 	public int getValue() {

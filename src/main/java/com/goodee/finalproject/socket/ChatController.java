@@ -19,17 +19,14 @@ public class ChatController {
 	public ModelAndView chat(HttpSession session,HttpServletRequest req) {
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
-
-//		mv.addObject("member", mem.getName());
-//		mv.addObject("point", mem.getPoint());
+		System.out.println(mem.getName());
 		
-		mv.addObject("member", "ball");
-		mv.addObject("point","40000");
+		System.out.println("pointttt : " +mem.getPoint());
+		mv.addObject("member", mem.getName());
+		mv.addObject("point", 3000L);
 		mv.addObject("value",webSocketChat.getValue());
-		mv.setViewName("liveAuction/liveAuction");
+		mv.setViewName("/liveAuction/liveAuction");
 		return mv;
 	}
 	
-	
-
 }
