@@ -73,6 +73,7 @@
 			      <div id="text">
 			         <span id="final">경매 최고가:</span>
 			         <span id="amount">${value}</span>
+               <span id="hidden" style="visibility: hidden;">${value}</span>
 			         <span id="finalamount"></span>
 			      </div>   
 			      <div id="chat-box">

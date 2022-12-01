@@ -38,10 +38,12 @@ let aaa = amount.innerText*1;
 var rank = [aaa,"id"]; //최고값, id
 var end = getId('end');
 var point =getId('point');
+var hidden = getId('hidden');
 var userlist = [];
 var username;
 var win = false;
 var add = getId('add');
+
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
@@ -389,12 +391,17 @@ function sendPause(){
    ws.send(temp);
 }
 
+//최고가 변경시 hidden 값 변경 (1초 뒤)
+$('#amount').on('DOMSubtreeModified propertychange',function(){
+	setTimeout(() => hidden.innerText = amount.innerText,1000);
+}) 
+
 //단위 가격 누를시
 add.addEventListener("click",function(){
 	if(auctionend.className == "start") {
 
 		var ii = getId('id').innerHTML;
-		var mm = amount.innerText*1 ;
+		var mm = hidden.innerText*1 ;
 		var pp = point.innerText*1;
 		var aa = 1000 *1;
 		if(mm + aa > pp) {
