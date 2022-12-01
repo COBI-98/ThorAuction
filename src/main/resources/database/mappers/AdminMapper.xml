@@ -78,19 +78,39 @@
 		</collection>
 	</resultMap>
 
+	<!-- 일반 회원 등급 수정 -->
 	<update id="roleSetManager" parameterType="MemberVO">
 		update THORMEMBER_ROLE
 		set ROLENUM = 2 where ID = #{id}
 	</update>
-	
+
 	<update id="roleSetUser" parameterType="MemberVO">
 		update THORMEMBER_ROLE
 		set ROLENUM = 3 where ID = #{id}
 	</update>
-	
+
 	<update id="roleSetBan" parameterType="MemberVO">
 		update THORMEMBER_ROLE
-		set ROLENUM = 4 where ID = #{id}
+		set
+		ROLENUM = 4 where ID = #{id}
+	</update>
+	<!-- 일반 회원 등급 수정 -->
+
+	<!-- 카카오 회원 등급 수정 -->
+	<update id="kakaoRoleSetManager" parameterType="KakaoVO">
+		update KAKAOMEMBERROLE
+		set KAROLE = 2 where KANICKNAME = #{kaNickName}
 	</update>
 
+	<update id="kakaoRoleSetUser" parameterType="KakaoVO">
+		update KAKAOMEMBERROLE
+		set KAROLE = 3 where KANICKNAME = #{kaNickName}
+	</update>
+
+	<update id="kakaoRoleSetBan" parameterType="KakaoVO">
+		update KAKAOMEMBERROLE
+		set
+		KAROLE = 4 where KANICKNAME = #{kaNickName}
+	</update>
+	<!-- 카카오 회원 등급 수정 -->
 </mapper>

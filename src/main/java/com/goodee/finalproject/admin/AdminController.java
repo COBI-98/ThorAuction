@@ -2,6 +2,7 @@ package com.goodee.finalproject.admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,8 +38,8 @@ public class AdminController
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
 
-		log.info("adminService memberVO: {}", memberVOs);
-		log.info("adminService kakaoVO: {}", kakaoVOs);
+		// log.info("adminService memberVO: {}", memberVOs);
+		// log.info("adminService kakaoVO: {}", kakaoVOs);
 
 		modelAndView.addObject("member", memberVOs);
 		modelAndView.addObject("kakao", kakaoVOs);
@@ -49,46 +50,45 @@ public class AdminController
 
 	@PostMapping("adminpage")
 	@ResponseBody
-	public void adminpage(MemberVO memberVO, @RequestParam("roleName") String role) throws Exception
+	public void adminpage(KakaoVO kakaoVO, @RequestParam("kakaoID") String kaNickName, @RequestParam("kakaoEmail") String kakaoEmail,
+			@RequestParam("kakaoName") String kakaoName, @RequestParam("ID") String id, MemberVO memberVO,
+			@RequestParam("roleName") String role) throws Exception
 	{
+		log.info("====== post adminPage =====");
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
+		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
+		// kakaoVOs kakaoEmail kakaoName
+		log.info(kakaoName);
+		log.info(kakaoEmail);
+		log.info(kaNickName);
 		log.info(role);
+		log.info("list ID: {}", id);
 
-		log.info("array memberVOs2: {}", memberVOs);
-
-		for (MemberVO memberVO2 : memberVOs)
+		if (role.equals("ROLE_MANGER"))
 		{
-			log.info("for in memberVO: {}", memberVO2);
+			log.info("manager update");
+			log.info("update maneger: {}", adminService.roleSetManager(memberVOs, id, kakaoVOs, kakaoEmail, kakaoName, kaNickName));
 
-			if (role.equals("ROLE_MANGER"))
-			{
-				log.info("manager");
-				log.info("update maneger: {}", adminService.roleSetManager(memberVO2));
-				adminService.roleSetManager(memberVO2);
+			return;
+		}
+		else if (role.equals("ROLE_USER"))
+		{
+			log.info("user update");
+			log.info("update USER: {}", adminService.roleSetUser(memberVOs, id, kakaoVOs, kakaoEmail, kakaoName, kaNickName));
 
-				return;
-			}
-			else if (role.equals("ROLE_USER"))
-			{
-				log.info("user");
-				log.info("update USER: {}", adminService.roleSetUser(memberVO2));
-				adminService.roleSetUser(memberVO2);
+			return;
+		}
+		else if (role.equals("ROLE_BAN"))
+		{
+			log.info("ban update");
+			log.info("update BAN: {}", adminService.roleSetBan(memberVOs, id, kakaoVOs, kakaoEmail, kakaoName, kaNickName));
 
-				return;
-			}
-			else if (role.equals("ROLE_BAN"))
-			{
-				log.info("ban");
-				log.info("update BAN: {}", adminService.roleSetBan(memberVO2));
-				adminService.roleSetBan(memberVO2);
-
-				return;
-			}
-			else
-			{
-				log.info("error");
-				return;
-			}
-		} // for end
+			return;
+		}
+		else
+		{
+			log.info("error");
+			return;
+		}
 	}
 }

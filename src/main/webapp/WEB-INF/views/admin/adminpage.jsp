@@ -16,6 +16,10 @@
 <body>
 	<c:import url="../template/boot.jsp"></c:import>
 	<c:import url="../template/header.jsp"></c:import>
+	<c:forEach items="${member}" var="mID">
+		<input type="hidden" value="${mID.id }" name="memID" class="memID">
+		<input type="hidden" value="${mID.roleVOs[0].roleName }" name="memRoleName" class="memRoleName">
+	</c:forEach>
 	<section class="container-fluid justify-content-center col-lg-11">
 		<table class="table table-hover">
 			<tr>
@@ -31,10 +35,9 @@
 				<th>등급</th>
 				<th>등급 변경</th>
 			</tr>
-			<input type="hidden" value="${member }" name="memID" class="memID">
 			<c:forEach items="${member}" var="m">
 				<tr>
-					<td>${m.id }</td>
+					<td class="mId">${m.id }</td>
 					<td>${m.email }</td>
 					<td>${m.name }</td>
 					<td>${m.birth }</td>
@@ -54,14 +57,14 @@
 								</select>
 							</c:when>
 							<c:when test="${m.roleVOs[0].roleName == 'ROLE_USER' }">
-								<select name="select" class="selectRole" id="s">
+								<select name="select" class="selectRole">
 									<option class="role" value="Manager">Manager</option>
 									<option class="role" value="User" selected>User</option>
 									<option class="role" value="Ban">Ban</option>
 								</select>
 							</c:when>
 							<c:when test="${m.roleVOs[0].roleName == 'ROLE_BAN' }">
-								<select name="select" class="selectRole" id="s">
+								<select name="select" class="selectRole">
 									<option class="role" value="Manager">Manager</option>
 									<option class="role" value="User">User</option>
 									<option class="role" value="Ban" selected>Ban</option>
@@ -69,19 +72,14 @@
 							</c:when>
 							<c:otherwise>에러</c:otherwise>
 						</c:choose>
-						<!-- <select name="select" class="selectRole" id="s">
-							<option class="role" value="Manager">Manager</option>
-							<option class="role" value="User" selected>User</option>
-							<option class="role" value="Ban">Ban</option>
-						</select> -->
 					</td>
 				</tr>
 			</c:forEach>
 			<c:forEach items="${kakao }" var="ka">
 				<tr>
-					<td>${ka.kaNickName }</td>
-					<td>${ka.kaEmail }</td>
-					<td>${ka.kaName }</td>
+					<td class="kakaoID">${ka.kaNickName }</td>
+					<td class="kakaoEmail">${ka.kaEmail }</td>
+					<td class="kakaoName">${ka.kaName }</td>
 					<td>${ka.kakaoDetailVOs[0].kaBirth }</td>
 					<td>${ka.kakaoDetailVOs[0].kaPost }</td>
 					<td>${ka.kakaoDetailVOs[0].kaAddr }</td>
@@ -90,11 +88,30 @@
 					<td>${ka.kakaoDetailVOs[0].kaPoint }</td>
 					<td>${ka.kaRoleVOs[0].kaRoleName}</td>
 					<td>
-						<select name="select" class="selectRole">
-							<option class="role" value="Manager">Manager</option>
-							<option class="role" value="User" selected>User</option>
-							<option class="role" value="Ban">Ban</option>
-						</select>
+						<c:choose>
+							<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_MANGER' }">
+								<select name="select" class="selectRole">
+									<option class="role" value="Manager" selected>Manager</option>
+									<option class="role" value="User">User</option>
+									<option class="role" value="Ban">Ban</option>
+								</select>
+							</c:when>
+							<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_USER' }">
+								<select name="select" class="selectRole">
+									<option class="role" value="Manager">Manager</option>
+									<option class="role" value="User" selected>User</option>
+									<option class="role" value="Ban">Ban</option>
+								</select>
+							</c:when>
+							<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_BAN' }">
+								<select name="select" class="selectRole">
+									<option class="role" value="Manager">Manager</option>
+									<option class="role" value="User">User</option>
+									<option class="role" value="Ban" selected>Ban</option>
+								</select>
+							</c:when>
+							<c:otherwise>에러</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 			</c:forEach>
