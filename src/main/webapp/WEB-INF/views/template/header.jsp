@@ -27,12 +27,12 @@
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2"><b>${ka.kaName }님 안녕하세요</b></a></li>
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
 					<form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form>
-					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a></li>
+					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 기능</a></li>
 				</sec:authorize>
 				
 				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
