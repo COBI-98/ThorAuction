@@ -90,6 +90,9 @@
 			</div>
 	    </div>
 	
+	
+	<h2 id="id">${member}</h2>
+	<h2 id="point">${point}</h2>
     <h3>현재 채팅 참가자</h3>
       <div id = "iddd">
       
@@ -97,42 +100,19 @@
 	
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
-  
-  
-  <!-- 방송 마지막 부분 -->
-  
-  <!-- 채팅 시작 부분 -->
-  
-  
-  
-  <!-- 채팅 마지막 부분 -->
-  
-  
-  
-  
-  
   </section>
-
-	
-	
-
-
-
-
-
-
-
 
 <%-- <c:import url="../template/footer.jsp"></c:import> --%>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script src="/socket.io/socket.io.js"></script>
+<script src='/js/liveauction/chat.js'></script>
+<script src="/js/liveauction/RTCMultiConnection.js"></script>
 <!-- <script src="/socket.io/socket.io.js"></script> -->
-<script src='/js/chat.js'></script>
-<script src="/js/RTCMultiConnection.js"></script>
 <script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
-<script src="/js/getHTMLMediaElement.js"></script>
+<script src="/js/liveauction/getHTMLMediaElement.js"></script>
 <script src='/js/index.js'></script>
 
   <footer>

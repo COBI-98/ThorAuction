@@ -8,14 +8,15 @@ function getId(id){
 }
 
 var data = {};//전송 데이터(JSON)
+var data2 = {};//전송 데이터(JSON)
 var data3 = {};
 var data4 = {};
 var data5 = {};
 var data6 = {};
-var data7 ={};
-var data8={};
+var data7 = {};
+var data8 = {};
+var data9 = {};
 
-var data2 = {};//전송 데이터(JSON)
 var ws ;
 var userid = getId('id');
 var btnLogin = getId('btnLogin');
@@ -39,6 +40,7 @@ var point =getId('point');
 var userlist = [];
 var username;
 var win = false;
+var add = getId('add');
 
 var pattern_num = /[0-9]/;	// 숫자 판별
 
@@ -51,9 +53,9 @@ ws.onopen = function(){
 }
 
 //퇴장 시
-ws.onclose = function() {
-	usercome();
-}
+// ws.onclose = function() {
+// 	usercome();
+// }
 
 //메시지 받기
 ws.onmessage = function(msg){
@@ -61,8 +63,16 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
+	//단위가격 클릭시
+	if(data.id != null){
+		console.log(data);
+		rank[0] = data.value;
+		rank[1] = data.id;
+		amount.innerHTML = rank[0];
+	}
+
 	//방송 일시정지 시
-	if(data.pause != null){
+	else if(data.pause != null){
 		let muteVideo = document.querySelector("#muteVideo");
 		muteVideo.click();
 	 }
@@ -90,6 +100,7 @@ ws.onmessage = function(msg){
 			location.href="../../";
 		})
 	}
+
 	//방송 종료
 	else if(data.end != null) {
 		ws.close();
@@ -108,7 +119,12 @@ ws.onmessage = function(msg){
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid){
+		rank[0] = data.value;
+		rank[1] = data.win;
+		amount.innerHTML = rank[0];
+		console.log(rank);
+		
+		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
 			cssid = 'id=enter';
 		}
 
@@ -119,25 +135,36 @@ ws.onmessage = function(msg){
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-
-		rank[0] = data.value;
-		rank[1] = data.win;
-		amount.innerHTML = rank[0];
-		console.log(rank);
-
 	}
+
 	//얼리기
 	else if(data.stop != null){
 		let value = data.stop;
 		$('#msg').attr("readonly",value);
+	}
+
+	//입장시
+	else if(data.usercome != null) {
+		var user = data.usercome.substr(1,data.usercome.length-2);
+		userlist = user.split(',');
 		
-	//입장, 퇴장 리스트
-	}else {
 		iddd.innerHTML="";
-		for(let i=0;i<data.length;i++) {
-			iddd.innerHTML += `<div>`+data[i]; + `</div>`;
+		for(let i=0;i<userlist.length;i++){
+			iddd.innerHTML += `<div>`+userlist[i] + `</div>`;
 		}
-		usercount.innerHTML = data.length;
+		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
+		usercount.innerHTML = userlist.length;
+	}
+
+	//퇴장시
+	else if(data.name != null){
+		iddd.innerHTML="";
+		for(let i=0;i<data.list.length;i++) {
+			iddd.innerHTML += `<div>`+data.list[i] + `</div>`;
+		}
+		usercount.innerHTML = data.list.length;
+		talk.innerHTML += `<div class="hi">` + data.name + "님이 퇴장하셨습니다." +`</div>`;
+
 		console.log(data);
 	}	
 }
@@ -171,9 +198,6 @@ iddd.addEventListener("click",function(event){
 				
 				confirmButtonText: '확인'
 			} ).then((result) => {
-				if (result.isConfirmed) {
-
-				}
 			})
 		}
 	})
@@ -278,7 +302,8 @@ function sendresult() {
 }
 
 function usercome(){
-	data5.usercome = userid.innerText;
+	data5.usercome = "emocresu"; //list 
+	data5.come = userid.innerText;
 	var temp =JSON.stringify(data5);
 	ws.send(temp);
 }
@@ -337,3 +362,29 @@ function sendPause(){
    var temp = JSON.stringify(data2);
    ws.send(temp);
 }
+
+//단위 가격 누를시
+add.addEventListener("click",function(){
+	var ii = getId('id').innerHTML;
+	var mm = amount.innerText*1 ;
+	var pp = point.innerText*1;
+	var aa = 1000 *1;
+	if(mm + aa > pp) {
+		Swal.fire({
+			title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
+			icon: "error",    //상황에 맞는 아이콘
+	
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: '확인',
+			//reverseButtons: true   // 버튼 순서 변경
+		} ).then((result) => {   // 아무 버튼이나 누르면 발생
+		})
+	}else{
+		data9.id = ii;
+		data9.value = mm+aa;
+		var temp = JSON.stringify(data9);
+		ws.send(temp);
+	}
+})
+
