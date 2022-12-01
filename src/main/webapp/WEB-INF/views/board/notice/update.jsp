@@ -7,56 +7,142 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jquery -->
-<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <c:import url="../../temp/boot.jsp"></c:import>
 <c:import url="../../temp/summer.jsp"></c:import>
-<!-- include summernote css/js-->
+<!-- 서머노트를 위해 추가해야할 부분 -->
+<script src="/js/summernote/summernote-ko-KR.js"></script>
+<script src="/js/summernote/summernote-lite.js"></script>
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 </head>
 <body>
 	
 	<section class="container-fluid col-lg-8 mt-5">
 		<h1>공지게시판 수정</h1>
-		<div class="row">
-	 <form class="align-center" action="./update" method="post">
-        
-        <input type="hidden" name="noticeNum" value="${noticeNum}">
+		<div class="row mt-5">
+	 <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="noticeNum" id="noticeNum" value="${noticeUpdate.noticeNum}" >
+        <div class="form-check">
+            <input type="checkbox" id="checkDate"  name="importCheck" <c:if test="${noticeUpdate.importCheck == true}">checked</c:if> >
+            <label for="">
+                중요 공지사항
+            </label>
+            <!-- <input type="radio" id="radioDate2" name="importCheck">
+            <label for="">
+                해당 없음
+            </label> -->
+        </div>
         <div>
         글 제목<br>
-        <input type="text" name="title"><br>
+        <input type="text" name="title" value="${noticeUpdate.title}">
+        <br>
         </div>
          <div>
         작성자<br>
-        <input type="text" name="writer"  ><br>
+        <input type="text" name="writer"  value="${noticeUpdate.writer}"><br>
         </div>
         <div>
         글 내용<br>
-        <textarea id="contents" name="contents" rows="30" cols="100"></textarea>
+        <textarea id="summernote" name="contents" rows="30" cols="100" >${noticeUpdate.contents}</textarea>
         </div>
+        <div  class="board-filetitle mb-3" id="refresh">💾첨부 파일  
+            <div class="mb-3" id="fileAddResult">
+        <c:forEach items="${noticeUpdate.noticeFileVOs}" var="file" varStatus="status">
+            <c:if test="${not file.sort}">
+                
+                    <div class="file_form mt-2">
+                        <!-- <label for="contents" class="form-label"></label> -->
+
+                        <input type="file" name="files"  class="files form-control">
+                        <span class="text" >${file.noticeOriName}</span> 
+                        <button type="button" class="del btn btn-danger" style="margin:auto;display: block;">X</button>
+                        
+                    </div>
+                
+            </c:if>
+        </c:forEach>
+          </div>
+      </div>  
+			<div class="mb-3">
+				<button type="button" id="fileAdd" class="btn btn-success">첨부파일 추가</button>
+			</div>
         
-  
-        <!-- <div id="addFiles">
-            <button type="button" id="fileadd" class="btn btn-success">파일 추가</button>
-        </div> -->
-				
-        
-        
-        <input type="submit" name="update" value="수정하기"  class ="btn btn-info">
+         
+        <input type="submit" name="add" value="수정하기"  class ="btn btn-info"style="margin-left: 300px;">
         </form>
 </div>
 	
 </section>
+<script src="/js/fileManager.js">
 
+</script>
 
 <script type="text/javascript">
-	$("#contents").summernote({
-        height: 300,                 // 에디터 높이
-        minHeight: null,             // 최소 높이
-        maxHeight: null,             // 최대 높이
-        focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-        lang: "ko-KR",               // 한글 설정
-        placeholder: '최대 2048자까지 쓸 수 있습니다'   //placeholder 설정
-          
-   });
+   
+	$(document).ready(function() {
+
+    var toolbar = [
+        // 글꼴 설정
+        ['fontname', ['fontname']],
+        // 글자 크기 설정
+        ['fontsize', ['fontsize']],
+        // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+        ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+        // 글자색
+        ['color', ['forecolor','color']],
+        // 표만들기
+        ['table', ['table']],
+        // 글머리 기호, 번호매기기, 문단정렬
+        ['para', ['ul', 'ol', 'paragraph']],
+        // 줄간격
+        ['height', ['height']],
+        // 그림첨부, 링크만들기, 동영상첨부
+        ['insert',['picture','link','video']],
+        // 코드보기, 확대해서보기, 도움말
+        ['view', ['codeview','fullscreen', 'help']]
+      ];
+
+    var setting = {
+        height : 500,
+        minHeight : null,
+        maxHeight : null,
+        focus : true,
+        lang : 'ko-KR',
+        toolbar : toolbar,
+        callbacks : { //여기 부분이 이미지를 첨부하는 부분
+        onImageUpload : function(files, editor,
+        welEditable) {
+        for (var i = files.length - 1; i >= 0; i--) {
+        uploadSummernoteImageFile(files[i],
+        this);
+                }
+            }
+        }
+    };
+
+
+    $('#summernote').summernote(setting);
+    });
+    
+
+    function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "./uploadSummernoteImageFile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+                    console.log(data.url);
+					$(el).summernote('editor.insertImage', data.url);
+                    console.log("rr");
+				}
+			});
+        }
+ 
 </script>
 </body>
 </html>

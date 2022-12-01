@@ -20,12 +20,12 @@
   <tbody>
   
     <tr >
-    	<th>제목</th>
+    	<th style="width: 70x;">글제목</th>
     	<td>${noticeVO.title}</td>
       
     </tr>
      <tr >
-    	<th>제작자</th>
+    	<th>작성자</th>
     	<td>${noticeVO.writer}</td>
     </tr>
      <tr>
@@ -34,17 +34,22 @@
     </tr>
     </tbody>
 </table>
-    
-   <%-- c:forEach items="${qnaVO.qnaFileVOs }" var="file">
-	    <tr class="table-primary">
+<div  class="board-filetitle">💾첨부 파일</div>
+    <table class="table table-bordered border-primary">
+    <tbody>
+    <tr class="table-primary">
 	    <th>파일</th>
-		     
-				<td><img alt="" src="/file/qna/${file.fileName}"></td>
-			    <td><a href="/fileDown/qna?fileName=${file.fileName}">down</a></td>	
-			
-	    </tr>
-	</c:forEach> --%>
-    
+    <c:forEach items="${noticeVO.noticeFileVOs }" var="file">
+    	<c:if test="${not file.sort}">
+	    
+		     <tr>
+				<!-- <td><a href ="/file/notice/${file.noticeFileName}"></a>test</td> -->
+				<td><a href="/fileDown/notice?noticeFileName=${file.noticeFileName}">${file.noticeOriName}</a></td>
+	    	</tr>
+	    </c:if>
+	</c:forEach>
+	</tbody>
+    </table>
 
 
 </section>

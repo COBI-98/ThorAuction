@@ -9,6 +9,7 @@
 
 <c:import url="../../temp/boot.jsp"></c:import>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="/css/importTR.css">
 </head>
 <body>
 
@@ -45,24 +46,29 @@
 		 <thead >
 		    <tr class="table-primary">
 		      <th scope="col">번호</th>
-		      <th scope="col">작성자</th>
 		      <th scope="col">제목</th>
-		      <th scope="col">내용</th>
-		      <th scope="col">조회수</th>
+		      <th scope="col">작성자</th>
 		      <th scope="col">작성날짜</th>
 		    </tr>
 		  </thead>
 		  <tbody>
+		  	<c:forEach items="${importNotice}" var="dto">
+			  	<c:if test="${!not dto.importCheck}">
+					<tr class="importTr"> 
+						<td class="importTd">공지</td>
+					    <td><a href="./detail?noticeNum=${dto.noticeNum}" >${dto.title}</a></td>  
+						<td>${dto.writer}</td>
+					    <td>${dto.regDate}</td> 
+					</tr>
+				</c:if>
+		  	</c:forEach>
 		    <c:forEach items="${testdto}" var="dto">
+			
 		    <tr>
-		      
-			      <td><a href="./detail?noticeNum=${dto.noticeNum}">${dto.noticeNum}</a></td>
-			      <td>${dto.writer}</td>
-			      <td>${dto.title}</td>
-			      <td>${dto.contents}</td>
-			      <td>${dto.hit}</td>
-			      <td>${dto.regDate}</td>      
-			     
+			      <td>${dto.noticeNum}</td>
+			  	  <td><a href="./detail?noticeNum=${dto.noticeNum}" >${dto.title}</a></td>  
+				  <td>${dto.writer}</td>
+			      <td>${dto.regDate}</td>      		     
 		    </tr>
 		     </c:forEach>
 		   </tbody>
@@ -77,11 +83,8 @@
 					</c:if>
 					<c:forEach begin="${boardPageMaker.startNum}" end="${boardPageMaker.lastNum}" var="i">
 						
-							
-						
-						<li class="page-item <c:if test="${param.page == i}">
-								active
-							</c:if>" ><a class="page-link"
+						<li class="page-item <c:if test="${param.page == i || param.page == null && i == 1 }">active</c:if>" >
+						<a class="page-link"
 							href="./list?page=${i}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">${i}</a></li>
 					</c:forEach>
 
