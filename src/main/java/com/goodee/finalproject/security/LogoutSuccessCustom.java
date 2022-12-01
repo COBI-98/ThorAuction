@@ -33,7 +33,8 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler
 	private String logout_uri;
 
 	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
+	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException
 	{
 		log.info("====== logout Success =====");
 		request.getSession().invalidate();

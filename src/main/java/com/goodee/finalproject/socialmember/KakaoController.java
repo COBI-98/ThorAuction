@@ -88,25 +88,4 @@ public class KakaoController
 
 		return modelAndView;
 	}
-
-	@GetMapping("joinchoose")
-	public void joinchoose(Authentication authentication) throws Exception
-	{
-		log.info("--- get joinchoose ---");
-	}
-
-	@PostMapping("joinchoose")
-	public ModelAndView joinchoose(HttpSession session, Authentication authentication, KakaoDetailVO kakaoDetailVO) throws Exception
-	{
-		log.info("authenti id : {}", authentication.getPrincipal());
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		modelAndView.addObject("detailData", authentication.getPrincipal());
-		session.setAttribute("kakaoVO", authentication.getPrincipal());
-		modelAndView.setViewName("socialMember/kakaoLogin");
-		// modelAndView.setViewName("index");
-
-		return modelAndView;
-	}
 }

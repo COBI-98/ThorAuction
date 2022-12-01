@@ -1,3 +1,20 @@
+$(".selectRole").each(function (index, r) {
+	// console.log(r);
+	// console.log($(this).children('.role:selected').val());
+
+	if ($(this).children('.role:selected').val() == 'Manager') {
+		$(this).closest('tr').css("background-color", "#55DB44");
+		$(this).closest('tr').find(".selectRole").css("background-color", "#55DB44");
+	}
+	else if ($(this).children('.role:selected').val() == 'User') {
+		$(this).closest('tr').css("background-color", "#44DBCA");
+		$(this).closest('tr').find(".selectRole").css("background-color", "#44DBCA");
+	}
+	else {
+		$(this).closest('tr').css("background-color", "#FF6347");
+		$(this).closest('tr').find(".selectRole").css("background-color", "#FF6347");
+	}
+});
 
 $(".selectRole").change(function () {
 
