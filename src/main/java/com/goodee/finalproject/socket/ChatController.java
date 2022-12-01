@@ -1,5 +1,8 @@
 package com.goodee.finalproject.socket;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,18 +17,26 @@ import com.goodee.finalproject.member.MemberVO;
 public class ChatController {
 	
 	WebSocketChat webSocketChat = new WebSocketChat();
+	static List<String> list = new ArrayList<String>();
 	
 	@RequestMapping("/liveAuction")
 	public ModelAndView chat(HttpSession session,HttpServletRequest req) {
+		list = webSocketChat.getBanList();
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
-		System.out.println(mem.getName());
+		if(list.size() > 0) {
+			for(int i=0;i<list.size();i++) {
+				if(mem.getName().equals(list.get(i))) {
+					mv.setViewName("/index");
+				}
+			}
+		}else {
+			mv.addObject("member", mem.getName());
+			mv.addObject("point", 3000L);
+			mv.addObject("value",webSocketChat.getValue());
+			mv.setViewName("/liveAuction/liveAuction");
+		}
 		
-		System.out.println("pointttt : " +mem.getPoint());
-		mv.addObject("member", mem.getName());
-		mv.addObject("point", 3000L);
-		mv.addObject("value",webSocketChat.getValue());
-		mv.setViewName("/liveAuction/liveAuction");
 		return mv;
 	}
 	
