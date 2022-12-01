@@ -1,16 +1,17 @@
 package com.goodee.finalproject.mypage;
 
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -79,6 +80,21 @@ public class MypageController {
 		return result;
 	}
 	
+	// 비밀번호 체크 GET
+	@GetMapping("checkpw")
+	public void checkpw() throws Exception { }
+	
+	// 비밀번호 POST
+	@PostMapping("checkpw")
+	@ResponseBody
+	public MemberVO checkpw(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId(id);
+		MemberVO result = mypageService.getList(memberVO);
+		
+		return result;
+	}
+	
 	// 회원탈퇴 GET
 	@GetMapping("delete")
 	public void setDelete() throws Exception {}
@@ -118,11 +134,17 @@ public class MypageController {
 	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		
-		int result = mypageService.setUpdate(memberVO); // 새로 로그인 해야 수정된 게 보이는데
+		int result = mypageService.setUpdate(memberVO);
 		
-		//session.invalidate(); // 세션 끊어버리는 방법말고 뭐가 있을까...
+		if(result > 0) {
+			log.info("수정 성공");
+		} else {
+			log.info("수정 실패");
+		}
 		
+		session.invalidate();
 		
-		return "redirect:../";
+		return "redirect:../member/login";
 	}
+	
 }
