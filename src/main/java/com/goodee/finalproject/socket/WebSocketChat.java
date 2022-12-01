@@ -1,9 +1,11 @@
 package com.goodee.finalproject.socket;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,10 +40,13 @@ public class WebSocketChat {
 	private static String stop="false";
 	private static String start="false";
 	
+	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
+	
 	//입장시
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
 
+		
 		ModelAndView mv = new ModelAndView();
 		System.out.println("open session : " + s.toString());
 		if(!clients.contains(s)) {
@@ -84,6 +89,7 @@ public class WebSocketChat {
 		//강퇴
 		else if(msg.substring(2, 5).equals("out")) {
 			String outname = String.valueOf(jsonObj.get("out"));
+			banlist.add(outname);
 			Session ss = getKey(list,outname);
 			sendOneMessage(msg, ss);
 		}
@@ -119,9 +125,6 @@ public class WebSocketChat {
 			String name = String.valueOf(jsonObj.get("usercome")); //입장한 사람 name
 			String come = String.valueOf(jsonObj.get("come"));
 			
-
-			JSONObject jsonObject = new JSONObject();
-
 			set.add(come);
 			list.put(session, come);
 			

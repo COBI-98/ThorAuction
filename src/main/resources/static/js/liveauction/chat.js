@@ -19,6 +19,7 @@ var data9 = {};
 var data10 = {};
 
 var ws ;
+
 var userid = getId('id');
 var btnLogin = getId('btnLogin');
 var btnSend = getId('btnSend');
@@ -34,19 +35,20 @@ var iddd = getId('iddd');
 var auctionend = getId('auctionend');
 var final = getId('final');
 var finalamount = getId('finalamount');
-let aaa = amount.innerText*1;
-var rank = [aaa,"id"]; //최고값, id
 var end = getId('end');
 var point =getId('point');
 var hidden = getId('hidden');
-var userlist = [];
+var add = getId('add');
+var list = getId('list');
+var listttt = getId('listttt');
+
 var username;
 var win = false;
-var add = getId('add');
-var stopp = false;
-
-
+let aaa = amount.innerText*1;
 var pattern_num = /[0-9]/;	// 숫자 판별
+
+var userlist = [];
+var rank = [aaa,"id"]; //최고값, id
 
 ws = new WebSocket("wss://" + location.host + "/chatt");
 
@@ -72,6 +74,7 @@ ws.onmessage = function(msg){
 	if(data.start != null){
 		talk.innerHTML += "*경매가 시작되었습니다.*";
 	}
+
 	//단위가격 클릭시
 	else if(data.id != null){
 		console.log(data);
@@ -151,8 +154,12 @@ ws.onmessage = function(msg){
 
 	//얼리기
 	else if(data.stop != null){
-		let value = data.stop;
-		$('#msg').attr("readonly",value);
+		if(data.stop =="true"){
+			msg.innerHTML ='';
+			$('#msg').attr("readonly",true);
+		}else{
+			$('#msg').attr("readonly",false);
+		}
 	}
 
 	//입장시
@@ -166,29 +173,32 @@ ws.onmessage = function(msg){
 		
 		iddd.innerHTML="";
 		for(let i=0;i<userlist.length;i++){
-			iddd.innerHTML += `<div>`+userlist[i] + `</div>`;
+			iddd.innerHTML += `<div>`+"👀"+ userlist[i] + `</div>`;
 		}
 		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
 		usercount.innerHTML = userlist.length;
 		
+		//얼리기 설정
 		if(data.ppp =="true"){
 			$('#msg').attr("readonly",true);
 		}else{
 			$('#msg').attr("readonly",false);
 		}
 
+		//경매시작 설정
 		if(data.gogo == "true") {
 			auctionend.className = 'start';
 		}
-		
 	}
 
 	//퇴장시
 	else if(data.name != null){
 		iddd.innerHTML="";
+
 		for(let i=0;i<data.list.length;i++) {
 			iddd.innerHTML += `<div>`+data.list[i] + `</div>`;
 		}
+
 		usercount.innerHTML = data.list.length;
 		talk.innerHTML += `<div class="hi">` + data.name + "님이 퇴장하셨습니다." +`</div>`;
 
@@ -200,7 +210,6 @@ ws.onmessage = function(msg){
 //회원 강퇴시키기
 iddd.addEventListener("click",function(event){
 	let even = event.target;
-
 	Swal.fire({
 		title: even.innerText + " 님을 강퇴시키겠습니까?",  // title, text , html  로 글 작성
 		icon: "warning",    //상황에 맞는 아이콘
@@ -214,7 +223,7 @@ iddd.addEventListener("click",function(event){
 		if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
 			
 			//강퇴 진행
-			data7.out = even.innerText;
+			data7.out = even.innerText.substr(2);
 			var temp = JSON.stringify(data7);
 			ws.send(temp);
 			
@@ -313,11 +322,6 @@ function stopchat(){
 }
 
 function sendstop(){
-	// if(stopp == false) {
-	// 	stopp = true;
-	// }else{
-	// 	stopp = false;
-	// }
 	data3.stop = stopchat();
 
 	var temp = JSON.stringify(data3);
@@ -430,19 +434,26 @@ $('#amount').on('DOMSubtreeModified propertychange',function(){
 	setTimeout(() => hidden.innerText = amount.innerText,1000);
 }) 
 
-//단위 가격 누를시
+//단위 가격 누를 시
 add.addEventListener("click",function(){
 	if(auctionend.className == "start") {
-
-
 		var mm = hidden.innerHTML*1;
 		var aa = 1000 *1;
 		var text = mm+aa;
 
 		msg.value='';
 		msg.value = "[경매]" + text;
-		
-		
 	}
 })
+
+
+$('ul.tabs li').click(function(){
+	var tab_id = $(this).attr('data-tab');
+	$('ul.tabs li').removeClass('current');
+	$('.tab-content').removeClass('current');
+
+	$(this).addClass('current');
+	$("#"+tab_id).addClass('current');
+})
+
 
