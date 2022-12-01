@@ -6,7 +6,8 @@
 <mapper namespace="com.goodee.finalproject.board.application.ApplicationMapper">
  
  	<sql id="search">
-		WHERE
+		WHERE AUCTIONSORT = #{auctionSort} 
+		AND
 		<choose>
 			<when test="kind =='applicationNum'">ApplicationNum</when>
 			<when test="kind == 'title'">Title</when>
