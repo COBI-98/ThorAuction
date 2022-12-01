@@ -20,7 +20,8 @@ public class ChatController {
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
 		System.out.println(mem.getName());
-		//System.out.println("pointttt : " +mem.getPoint());
+		
+		System.out.println("pointttt : " +mem.getPoint());
 		mv.addObject("member", mem.getName());
 		mv.addObject("point", 3000L);
 		mv.addObject("value",webSocketChat.getValue());
