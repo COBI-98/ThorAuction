@@ -1,0 +1,52 @@
+
+.test_obj input[type="radio"] {
+    display: none;
+}
+ 
+.test_obj input[type="radio"] + span {
+    display: inline-block;
+    padding: 15px 10px;
+    border: 1px solid #dfdfdf;
+    background-color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+.test_obj input[type="radio"]:checked + span {
+    background-color: #113a6b;
+    color: #ffffff;
+}
+
+
+.test_obj input[type="submit"] {
+    display: none;
+}
+
+.test_obj input[type="submit"] + span {
+    display: inline-block;
+    padding: 15px 10px;
+    border: 1px solid #dfdfdf;
+    background-color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.test_obj input[type="submit"]:checked + span {
+    background-color: #113a6b;
+    color: #ffffff;
+}
+
+.test_obj input[type="submit"].checked + span{
+    background-color: #113a6b;
+    color: #ffffff;
+    /* color: #113a6b; */
+}
+
+
+.apllicationForm {
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: solid 1px black;
+}

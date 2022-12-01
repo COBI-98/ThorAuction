@@ -9,6 +9,7 @@
 
 <c:import url="../../temp/boot.jsp"></c:import>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="/css/application.css">
 </head>
 <body>
 
@@ -18,10 +19,16 @@
 		<form action="./list"
 			class="row row-cols-lg-auto g-3 align-items-center">
 
+	<div class="row mb-3">
+		<form action="./list"
+			class="row row-cols-lg-auto g-3 align-items-center">
+			<input type="hidden" value="${param.auctionSort}">
 			<div class="col-12">
 				<label class="visually-hidden" for="Kind" >Kind</label> 
 				<select name="kind" class="form-select" id="Kind">
-					<option class="kinds" value="noticeNum" <c:if test="${param.kind eq 'noticeNum' }"> selected </c:if>>글번호</option>
+					
+					<option class="kinds" value="applicationNum" <c:if test="${param.kind eq 'applicationNum' }"> selected </c:if>>글번호</option>
+		
 					<!-- <option class="kinds" value="contents">글내용</option> -->
 					<option class="kinds" value="title" <c:if test="${param.kind eq 'title' }"> selected </c:if> >글제목</option>
 					<option class="kinds" value="writer"  <c:if test="${param.kind eq 'writer' }"> selected </c:if> >작성자</option>
@@ -36,6 +43,13 @@
 				</div>
 			</div>
 			<div class="col-12">
+				<label class="visually-hidden" for="auctionSort"></label>
+				<div class="input-group">
+					<input type="hidden" name="auctionSort" value="${param.auctionSort}"
+						class="form-control" id="auctionSort" >
+				</div>
+			</div>
+			<div class="col-12">
 				<button type="submit" class="btn btn-primary">검색어찾기</button>
 			</div>
 		</form>
@@ -47,20 +61,15 @@
 		      <th scope="col">번호</th>
 		      <th scope="col">작성자</th>
 		      <th scope="col">제목</th>
-		      <th scope="col">내용</th>
-		      <th scope="col">조회수</th>
 		      <th scope="col">작성날짜</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <c:forEach items="${applicationVO}" var="VO">
-		    <tr>
-		      
+		    <tr>		      
 			      <td><a href="./detail?applicationNum=${VO.applicationNum}">${VO.applicationNum}</a></td>
 			      <td>${VO.writer}</td>
 			      <td>${VO.title}</td>
-			      <td>${VO.contents}</td>
-			      <td>${VO.hit}</td>
 			      <td>${VO.regDate}</td>      
 			     
 		    </tr>
@@ -79,9 +88,8 @@
 						
 							
 						
-						<li class="page-item <c:if test="${param.page == i}">
-								active
-							</c:if>" ><a class="page-link"
+						<li class="page-item <c:if test="${param.page == i || param.page == null && i == 1 }">active</c:if>" >
+						<a class="page-link"
 							href="./list?page=${i}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">${i}</a></li>
 					</c:forEach>
 

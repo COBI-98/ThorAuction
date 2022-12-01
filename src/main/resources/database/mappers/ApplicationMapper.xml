@@ -11,41 +11,84 @@
 			<when test="kind =='applicationNum'">ApplicationNum</when>
 			<when test="kind == 'title'">Title</when>
 			<when test="kind =='writer'">Writer</when>
-			<otherwise>contents</otherwise>
+			<otherwise>RegDate</otherwise>
 		</choose>
 		LIKE CONCAT('%',#{search},'%')
+		
+	</sql>
+	
+	<sql id="auctionSort">
+		WHERE AUCTIONSORT =
+		<choose>
+			<when test="kind == 'true'">1</when>
+			<when test="kind == 'false'">0</when>
+			<otherwise>1</otherwise>
+		</choose>
 	</sql>
 	
  	<select id="getApplicationList" parameterType="ApplicationVO" resultType="ApplicationVO">
  		SELECT * 
-		FROM boardApplication
+		FROM BOARDAPPLICATION
 		<include refid="search"></include>
-		ORDER BY applicationNum DESC
+		ORDER BY APPLICATIONNUM DESC
 		limit #{startRow}, #{lastRow}
+		
  	</select>
  	
- 	<select id="getApplicationListDetail" parameterType="ApplicationVO" resultType="ApplicationVO">
- 		select * from boardApplication where applicationNum = #{applicationNum}
+ 	<select id="getApplicationListDetail" parameterType="ApplicationVO" resultMap="getProductDetail">
+ 		SELECT * 
+			FROM BOARDAPPLICATION b 
+			left join
+			AUCTIONPRODUCT a 
+			ON (b.APPLICATIONNUM = a.APPLICATIONNUM)
+			left JOIN 
+			PRODUCTFILES p 
+			on (a.PRODUCTNUM = p.PRODUCTNUM)
+			where b.APPLICATIONNUM  =  #{applicationNum}
  	</select>
+ 	
+ 	<resultMap type="ApplicationVO" id="getProductDetail">
+ 		<id column="APPLICATIONNUM" property="applicationNum"></id>
+		<result column="WRITER" property="writer"></result>
+		<result column="TITLE" property="title"></result>
+		<result column="AUCTIONSORT" property="auctionSort"></result>
+		<result column="REGDATE" property="regDate"></result>
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
+			</collection>
+			
+		</collection>
+		
+ 	</resultMap>
  	
  	<insert id="setApplicationAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="applicationNum">	
- 		INSERT INTO boardApplication
-		VALUE (#{applicationNum},#{writer},#{title},#{contents},0,now());
+ 		INSERT INTO BOARDAPPLICATION
+		VALUE (#{applicationNum},#{writer},#{title},#{auctionSort},now());
  	</insert>
  	
  	
  	<delete id="setApplicationDelete" parameterType="ApplicationVO">
- 		DELETE FROM boardApplication WHERE applicationNum = #{applicationNum}
+ 		DELETE FROM BOARDAPPLICATION WHERE APPLICATIONNUM = #{applicationNum}
  	</delete>
  	
  	<update id="setApplicationUpdate" parameterType="ApplicationVO">
- 		UPDATE boardApplication SET 
-		WRITER = #{writer}, TITLE = #{title}, contents = #{contents} WHERE applicationNum=#{applicationNum}
+ 		UPDATE BOARDAPPLICATION SET 
+		WRITER = #{writer}, TITLE = #{title}, AUCTIONSORT = #{auctionSort} WHERE APPLICATIONNUM=#{applicationNum}
  	</update>
  	
  	<select id="getApplicationCount" resultType="Long" parameterType="BoardPageMaker">
 		SELECT
-		COUNT(applicationNum) FROM boardApplication
+		COUNT(APPLICATIONNUM) FROM BOARDAPPLICATION
 		<include refid="search"></include>
 	</select>
 </mapper>

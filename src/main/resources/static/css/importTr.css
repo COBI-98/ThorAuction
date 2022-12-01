@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.table {
+	text-align: center;
+}
+.importTr{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	background-color: #cfccc6;
+	text-align: center;
+}
+
+.importTr .importTd {
+    display: inline-block;
+    font-size: 14px;
+    background-color: #9c1d1d;
+	margin-top: 4px;
+    padding: 4px 12px 5px;
+    color: #fff;
+    border-bottom-right-radius: 8px;
+}
+
+
+
+/* .importTr:nth */
