@@ -47,7 +47,7 @@
 			</a>
 			<ul class="nav">
 				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://192.168.1.83:80/" class="nav-link link-dark px-2">실시간 경매장</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://192.168.1.101:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">신청게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">공지게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>

@@ -16,6 +16,7 @@ var data6 = {};
 var data7 = {};
 var data8 = {};
 var data9 = {};
+var data10 = {};
 
 var ws ;
 var userid = getId('id');
@@ -63,8 +64,12 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
+	//경매 시작시
+	if(data.start != null){
+		talk.innerHTML += "*경매가 시작되었습니다.*";
+	}
 	//단위가격 클릭시
-	if(data.id != null){
+	else if(data.id != null){
 		console.log(data);
 		rank[0] = data.value;
 		rank[1] = data.id;
@@ -124,8 +129,10 @@ ws.onmessage = function(msg){
 		amount.innerHTML = rank[0];
 		console.log(rank);
 		
-		if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
-			cssid = 'id=enter';
+		if(auctionend.className == "start") {
+			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
+				cssid = 'id=enter';
+			}
 		}
 
 		var item = `<div ${css} ${cssid}>
@@ -135,6 +142,7 @@ ws.onmessage = function(msg){
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+		
 	}
 
 	//얼리기
@@ -221,31 +229,34 @@ function send(){
 	var t4 = index.substr(4)*1;
 	var mypoint = point.innerText;
 
-	if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
-		if(t4 <= mypoint){
-			if(t4 > max) {
-				max=t4;	
-				console.log(max);
-				amount.innerHTML = max;
-				win = getId('id').innerHTML;
+	if(auctionend.className == "start") {
+
+		if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
+			if(t4 <= mypoint){
+				if(t4 > max) {
+					max=t4;	
+					console.log(max);
+					amount.innerHTML = max;
+					win = getId('id').innerHTML;
+				}else{
+					win = false;
+				}
 			}else{
-				win = false;
+				win=false;
+				Swal.fire({
+					title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
+					icon: "error",    //상황에 맞는 아이콘
+			
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: '확인',
+					//reverseButtons: true   // 버튼 순서 변경
+				} ).then((result) => {   // 아무 버튼이나 누르면 발생
+				})
 			}
 		}else{
 			win=false;
-			Swal.fire({
-				title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
-				icon: "error",    //상황에 맞는 아이콘
-		
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				confirmButtonText: '확인',
-				//reverseButtons: true   // 버튼 순서 변경
-			} ).then((result) => {   // 아무 버튼이나 누르면 발생
-			})
 		}
-	}else{
-		win=false;
 	}
 	
 	if(msg.value.trim() != ''){
@@ -289,11 +300,25 @@ function sendstop(){
 }
 
 
-//경매 종료 시 
-auctionend.addEventListener("click",function(){	
-	sendresult();
+//경매 시작,종료 시 
+auctionend.addEventListener("click",function(){
+	auctionend.classList.toggle("start");
+	if(auctionend.value == "경매시작")	 {
+		auctionend.value = "경매 종료";
+		auctionstart();
+	}else{
+		sendresult();
+	}
 })
 
+//경매 시작 함수
+function auctionstart(){
+	data10.start = "경매가 시작되었습니다.";
+	var temp = JSON.stringify(data10);
+	ws.send(temp);
+}
+
+//경매 종료 함수
 function sendresult() {
 	data4.amount = rank[0];
 	data4.winner = rank[1];
@@ -301,6 +326,7 @@ function sendresult() {
 	ws.send(temp);
 }
 
+//user 입장 함수
 function usercome(){
 	data5.usercome = "emocresu"; //list 
 	data5.come = userid.innerText;
@@ -365,26 +391,29 @@ function sendPause(){
 
 //단위 가격 누를시
 add.addEventListener("click",function(){
-	var ii = getId('id').innerHTML;
-	var mm = amount.innerText*1 ;
-	var pp = point.innerText*1;
-	var aa = 1000 *1;
-	if(mm + aa > pp) {
-		Swal.fire({
-			title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
-			icon: "error",    //상황에 맞는 아이콘
-	
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			confirmButtonText: '확인',
-			//reverseButtons: true   // 버튼 순서 변경
-		} ).then((result) => {   // 아무 버튼이나 누르면 발생
-		})
-	}else{
-		data9.id = ii;
-		data9.value = mm+aa;
-		var temp = JSON.stringify(data9);
-		ws.send(temp);
+	if(auctionend.className == "start") {
+
+		var ii = getId('id').innerHTML;
+		var mm = amount.innerText*1 ;
+		var pp = point.innerText*1;
+		var aa = 1000 *1;
+		if(mm + aa > pp) {
+			Swal.fire({
+				title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
+				icon: "error",    //상황에 맞는 아이콘
+		
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: '확인',
+				//reverseButtons: true   // 버튼 순서 변경
+			} ).then((result) => {   // 아무 버튼이나 누르면 발생
+			})
+		}else{
+			data9.id = ii;
+			data9.value = mm+aa;
+			var temp = JSON.stringify(data9);
+			ws.send(temp);
+		}
 	}
 })
 
