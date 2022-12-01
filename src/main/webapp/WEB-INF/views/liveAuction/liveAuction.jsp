@@ -68,37 +68,46 @@
 			
 				
 				
-				
-				<div id='chatt'>
-			      <div id="text">
-			         <span id="final">경매 최고가:</span>
-			         <span id="amount">${value}</span>
-               <span id="hidden" style="visibility: hidden;">${value}</span>
-			         <span id="finalamount"></span>
-			      </div>   
-			      <div id="chat-box">
-				      <div id='talk'></div>
-				      <div id='sendZone'>
-				         <textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
-				         <input type='button' value='보내기' id='btnSend'>
-				      </div>
-			      </div>
-			      <div>
-			      		<input type='button' value="직접입력" id="auction">
-			      		<input type='button' value="단위경매" id="add">
-			      </div>
-			   </div>
-			</div>
-	    </div>
+        <div class="container">
+          <div id="text">
+            <span id="final">경매 최고가:</span>
+            <span id="amount">${value}</span>
+            <span id="hidden" style="visibility: hidden;">${value}</span>
+            <span id="finalamount"></span>
+          </div>   
+
+          <ul class="tabs">
+            <li class="tab-link current" data-tab="chatt">채팅창</li>
+            <li class="tab-link" data-tab="iddd">참가인원 목록</li>
+          </ul>
+          <div id='chatt' class="tab-content current">
+              <div id="chat-box">
+                <div id='talk'></div>
+                <div id='sendZone'>
+                  <textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
+                  <input type='button' value='보내기' id='btnSend'>
+                </div>
+              </div>
+              <div>
+                  <input type='button' value="직접입력" id="auction">
+                  <input type='button' value="단위경매" id="add">
+              </div>
+          </div>
+          <div id ="iddd" class="tab-content">
+              
+          </div>
+        </div>
+        
+    
+      </div>	
 	
-	
-	<h2 id="id">${member}</h2>
-	<h2 id="point">${point}</h2>
-    <h3>현재 채팅 참가자</h3>
-      <div id = "iddd">
-      
-      </div>
-	
+      <h2 id="id">${member}</h2>
+      <h2 id="point">${point}</h2>
+      <input type="button" value ="회원 리스트" id="list">
+        <h3>현재 채팅 참가자</h3>
+
+  
+
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
   </section>
