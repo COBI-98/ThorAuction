@@ -97,16 +97,12 @@
               
           </div>
         </div>
-        
-    
       </div>	
+    </div>
+  </div>
 	
       <h2 id="id">${member}</h2>
       <h2 id="point">${point}</h2>
-      <input type="button" value ="회원 리스트" id="list">
-        <h3>현재 채팅 참가자</h3>
-
-  
 
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
