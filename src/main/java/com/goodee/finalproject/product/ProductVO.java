@@ -13,9 +13,9 @@ public class ProductVO {
 	private Long productPrice;
 	private String productInformation;
 	private Long auctionPeriod;
-	private Long boardNum;
+	private Long applicationNum;
 	
-	private MultipartFile [] filse;
+	private MultipartFile [] files;
 	
 	private List<ProductFileVO> productFileVOs;
 	
