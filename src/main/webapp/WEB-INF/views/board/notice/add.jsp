@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jquery -->
-<c:import url="../../temp/boot.jsp"></c:import>
-<c:import url="../../temp/summer.jsp"></c:import>
+<c:import url="../../template/boot.jsp"></c:import>
+<c:import url="../../template/summer.jsp"></c:import>
 <!-- 서머노트를 위해 추가해야할 부분 -->
 <script src="/js/summernote/summernote-ko-KR.js"></script>
 <script src="/js/summernote/summernote-lite.js"></script>
