@@ -198,9 +198,6 @@ iddd.addEventListener("click",function(event){
 				
 				confirmButtonText: '확인'
 			} ).then((result) => {
-				if (result.isConfirmed) {
-
-				}
 			})
 		}
 	})
