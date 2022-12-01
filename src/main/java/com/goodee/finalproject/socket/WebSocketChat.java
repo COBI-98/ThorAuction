@@ -35,6 +35,8 @@ public class WebSocketChat {
 	private static Set<String> set = new HashSet<String>(); //채팅참여 name 
 	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
 	private static String winuser="";
+	private static String stop="false";
+	private static String start="false";
 	
 	//입장시
 	@OnOpen
@@ -58,8 +60,20 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
+		//경매 시작
+		if(msg.substring(2, 7).equals("start")) {
+			start = String.valueOf(jsonObj.get("gogo"));
+			sendMessage(msg, session);
+		}
+		
+		//얼리기
+		else if(msg.substring(2, 6).equals("stop")) {
+			stop = String.valueOf(jsonObj.get("stop"));
+			sendMessage(msg, session);
+		}
+		
 		//단위가격 
-		if(msg.substring(2, 4).equals("id")) {
+		else if(msg.substring(2, 4).equals("id")) {
 			String vv = String.valueOf(jsonObj.get("value"));
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
@@ -104,6 +118,9 @@ public class WebSocketChat {
 
 			String name = String.valueOf(jsonObj.get("usercome")); //입장한 사람 name
 			String come = String.valueOf(jsonObj.get("come"));
+			
+
+			JSONObject jsonObject = new JSONObject();
 
 			set.add(come);
 			list.put(session, come);
@@ -111,6 +128,8 @@ public class WebSocketChat {
 			StringBuilder sb = new StringBuilder();
 			sb.append(set.toString());
 			msg = msg.replace(name, sb.toString());
+			msg = msg.replace(String.valueOf(jsonObj.get("ppp")), stop);
+			msg = msg.replace(String.valueOf(jsonObj.get("gogo")), start);
 						
 			sendMessage(msg, session);
 		}

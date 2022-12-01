@@ -43,6 +43,7 @@ var userlist = [];
 var username;
 var win = false;
 var add = getId('add');
+var stopp = false;
 
 
 var pattern_num = /[0-9]/;	// 숫자 판별
@@ -52,6 +53,7 @@ ws = new WebSocket("wss://" + location.host + "/chatt");
 
 //입장 시
 ws.onopen = function(){
+	if(auctionend)
 	usercome();
 }
 
@@ -155,6 +157,10 @@ ws.onmessage = function(msg){
 
 	//입장시
 	else if(data.usercome != null) {
+
+		console.log(data);
+		console.log(data.gogo);
+
 		var user = data.usercome.substr(1,data.usercome.length-2);
 		userlist = user.split(',');
 		
@@ -164,6 +170,17 @@ ws.onmessage = function(msg){
 		}
 		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
 		usercount.innerHTML = userlist.length;
+		
+		if(data.ppp =="true"){
+			$('#msg').attr("readonly",true);
+		}else{
+			$('#msg').attr("readonly",false);
+		}
+
+		if(data.gogo == "true") {
+			auctionend.className = 'start';
+		}
+		
 	}
 
 	//퇴장시
@@ -296,7 +313,13 @@ function stopchat(){
 }
 
 function sendstop(){
+	// if(stopp == false) {
+	// 	stopp = true;
+	// }else{
+	// 	stopp = false;
+	// }
 	data3.stop = stopchat();
+
 	var temp = JSON.stringify(data3);
 	ws.send(temp);
 }
@@ -315,9 +338,18 @@ auctionend.addEventListener("click",function(){
 
 //경매 시작 함수
 function auctionstart(){
+
 	data10.start = "경매가 시작되었습니다.";
+	data10.gogo = start();
 	var temp = JSON.stringify(data10);
 	ws.send(temp);
+}
+
+function start() {
+	if(auctionend.classList.contains("start")){
+		return true;
+	}
+	return false;
 }
 
 //경매 종료 함수
@@ -332,6 +364,8 @@ function sendresult() {
 function usercome(){
 	data5.usercome = "emocresu"; //list 
 	data5.come = userid.innerText;
+	data5.ppp = "potsss";
+	data5.gogo = "trats";
 	var temp =JSON.stringify(data5);
 	ws.send(temp);
 }
@@ -400,27 +434,15 @@ $('#amount').on('DOMSubtreeModified propertychange',function(){
 add.addEventListener("click",function(){
 	if(auctionend.className == "start") {
 
-		var ii = getId('id').innerHTML;
-		var mm = hidden.innerText*1 ;
-		var pp = point.innerText*1;
+
+		var mm = hidden.innerHTML*1;
 		var aa = 1000 *1;
-		if(mm + aa > pp) {
-			Swal.fire({
-				title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
-				icon: "error",    //상황에 맞는 아이콘
+		var text = mm+aa;
+
+		msg.value='';
+		msg.value = "[경매]" + text;
 		
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				confirmButtonText: '확인',
-				//reverseButtons: true   // 버튼 순서 변경
-			} ).then((result) => {   // 아무 버튼이나 누르면 발생
-			})
-		}else{
-			data9.id = ii;
-			data9.value = mm+aa;
-			var temp = JSON.stringify(data9);
-			ws.send(temp);
-		}
+		
 	}
 })
 
