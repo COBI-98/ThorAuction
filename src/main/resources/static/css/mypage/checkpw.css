@@ -1,0 +1,324 @@
+/* checkpw.css */
+
+#root {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    min-height: 100%;
+    background-color: #f3f5f7;
+}
+
+.app {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+}
+
+.member-card-layout {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    min-width: 320px;
+    min-height: 100%;
+    padding: 120px 0 170px;
+}
+
+.member-card-layout__container {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    margin: 0 auto;
+    width: 450px;
+    min-height: 682px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+.member-card-layout__inner {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin: 0 40px;
+    padding-bottom: 40px;
+}
+
+.member-card-layout__logo {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    padding-top: 48px;
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+.member-card-layout__logo-image {
+    line-height: 1;
+    text-align: center;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    width: 128px;
+    height: 32px;
+}
+
+.check-password {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+}
+
+.check-password__title {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1e2022;
+}
+
+.check-password__sub {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin-top: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.43;
+    color: #52595f;
+    border-radius: 3px;
+    padding: 16px;
+    background-color: #f3f5f7;
+}
+
+.member-input {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+}
+
+.member-input__state {
+    margin-top: 27px;
+    position: relative;
+    padding: 10px 0 11px;
+    border-bottom: 1px solid #dddfe4;
+}
+
+.member-input__box {
+    word-break: keep-all;
+    -webkit-text-size-adjust: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    outline: 0;
+    color: #6f6f6f!important;
+}
+
+.member-input__label {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    top: 11px;
+    transform-origin: bottom left;
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+    transition-property: color,bottom,transform;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    width: 100%;
+    color: #6f6f6f!important;
+    transform: scale(.75) translateY(-39px);
+}
+
+.member-input__valid-wrapper {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+
+.check-password__l-find-password {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin-top: 16px;
+}
+
+.check-password__find-password-btn {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    float: right;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #1ea1f7;
+}
+
+.check-password__l-modal-btn {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    margin: 80px 0px;
+}
+
+.member-button {
+    position: relative;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: center;
+    background-color: #1ea1f7;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 56px;
+    padding: 0 20px;
+}
+
+.check-password__btn {
+    width: 100%;
+    border-radius: 3px;
+    text-align: center;
+    padding: 0;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    line-height: 56px;
+    height: 56px;
+    background-color: #1ea1f7;
+    color: #fff;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+}
+
+.member-button:disabled {
+    background-color: #dddfe4!important;
+    cursor: default!important;
+}
+
+.member-button, .member-button:disabled {
+    font-size: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    height: 56px;
+}
+
+.check-password__btn:disabled {
+    border-radius: 3px;
+    text-align: center;
+    padding: 0;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    line-height: 56px;
+    height: 56px;
+    background-color: #dddfe4;
+    color: #fff;
+    font-weight: 700;
+    border: 0;
+    cursor: default;
+}

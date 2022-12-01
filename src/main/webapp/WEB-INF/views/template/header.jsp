@@ -18,7 +18,7 @@
 				<!-- 로그인 후 -->
 				<c:if test="${member != null}">
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
-					<li class="nav-item"><a href="../mypage/" class="nav-link link-dark px-2">마이페이지</a></li>
+					<li class="nav-item"><a href="../mypage/checkpw?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
 				</c:if>
 
 				<%-- <sec:authorize access="!isAuthenticated()">
