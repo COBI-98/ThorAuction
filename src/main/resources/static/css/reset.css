@@ -1,0 +1,29 @@
+
+/* 헤더 푸터 기본설정 */
+
+html, body {
+    height: 100%
+}
+
+section {
+padding-top: 50px;
+min-height: 100%;
+padding-bottom: 50px;
+}
+
+footer{
+  
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+}
+
+a{
+text-decoration: none !important;
+}
+.wrap {
+min-height: 100%;
+position: relative;
+padding-bottom: 305px; /* footer height = 84px */
+}
