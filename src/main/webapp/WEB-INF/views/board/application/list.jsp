@@ -17,7 +17,20 @@
 	<h1>경매신청 게시판</h1>
 	<div class="row mb-3">
 		<form action="./list"
-			class="row row-cols-lg-auto g-3 align-items-center">
+			class="row row-cols-lg-auto g-3 mt-5 align-items-center">
+			<div>
+				<label class="test_obj">
+					<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == null || param.auctionSort == 1}">class="checked"</c:if> value="1">
+					<span>실시간경매 게시판</span>
+				</label>
+				 
+				<label class="test_obj">
+					<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == 0}">class="checked"</c:if> value="0" >
+					<span>온라인경매 게시판</span>
+				</label>
+			 </div>
+		</form>
+	</div> 
 
 	<div class="row mb-3">
 		<form action="./list"
