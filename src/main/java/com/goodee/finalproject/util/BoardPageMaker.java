@@ -19,7 +19,6 @@ public class BoardPageMaker {
 	private Long lastRow;
 	private Long perPage;
 	private Long perBlock;
-	private Long LicenseNum;
 
 	//이전 블럭의 유무
 	private boolean pre = false;
@@ -31,6 +30,8 @@ public class BoardPageMaker {
 	private String kind;
 	//검색어
 	private String search; 
+	
+	private String auctionSort;
 
 
 	public String getKind() {
@@ -39,6 +40,18 @@ public class BoardPageMaker {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
+	
+	public String getAuctionSort() {
+		
+		if(this.auctionSort == null) {
+			this.auctionSort = "1";
+		}		
+		return auctionSort;
+	}
+	public void setAuctionSort(String auctionSort) {
+		this.auctionSort = auctionSort;
+	}
+	
 	public String getSearch() {
 		if(this.search == null)
 			this.search = "";
@@ -122,13 +135,7 @@ public class BoardPageMaker {
 	public void setPerBlock(Long perBlock) {
 		this.perBlock = perBlock;
 	}
-
-	public Long getLicenseNum() {
-		return LicenseNum;
-	}
-	public void setLicenseNum(Long licenseNum) {
-		LicenseNum = licenseNum;
-	}
+	
 	// 1. mapper에서 사용할 값
 	public void getRowNum() throws Exception{
 		this.startRow = (this.getPage()-1)*this.getPerPage();
