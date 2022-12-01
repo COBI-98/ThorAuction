@@ -40,7 +40,7 @@
 				<div id="media-broadcast">
 					<div id="media-header" >
 						<div id="media-title">
-							<h1> 제목 들어갑니다 ~ </h1>
+							<h2 id="media-titleText"> 제목 들어갑니다 ~ </h2>
 						</div>
 						<div>
 							현재 인원<span id="count"></span>
@@ -78,21 +78,23 @@
 			      <div id="chat-box">
 				      <div id='talk'></div>
 				      <div id='sendZone'>
-				         
 				         <textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
 				         <input type='button' value='보내기' id='btnSend'>
-				         
 				      </div>
 			      </div>
-			
+			      <div>
+			      		<input type='button' value="직접입력" id="auction">
+			      		<input type='button' value="단위경매" id="add">
+			      </div>
 			   </div>
-				
 			</div>
 	    </div>
 	
-    
+    <h3>현재 채팅 참가자</h3>
+      <div id = "iddd">
+      
+      </div>
 	
-    <input type='button' value="경매" id="auction">
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
   

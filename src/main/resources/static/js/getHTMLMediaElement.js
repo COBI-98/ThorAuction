@@ -215,10 +215,9 @@ function getHTMLMediaElement(mediaElement, config) {
   //  mediaElementContainer.appendChild(mediaBox);
 
     if (config.title) {  // 방송 제목 노출부분 현재는 ID로 되어 이씅ㅁ
-        var h2 = document.createElement('h2');
+        var h2 = document.querySelector('#media-titleText');
         h2.innerHTML = config.title;
-        h2.setAttribute('style', 'position: absolute;color:white;font-size:17px;text-shadow: 1px 1px black;padding:0;margin:0;text-align: left; margin-top: 10px; margin-left: 10px; display: block; border: 0;line-height:1.5;z-index:1;');
-        mediaBox.appendChild(h2);
+       // mediaBox.appendChild(h2);
     }
 
     mediaBox.appendChild(mediaElement);
