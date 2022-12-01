@@ -1,6 +1,8 @@
 package com.goodee.finalproject.admin;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,18 +33,42 @@ public class AdminService
 		return ar;
 	}
 
-	public int roleSetManager(MemberVO memberVO) throws Exception
+	public int roleSetManager(List<MemberVO> memberVOs, String id, List<KakaoVO> kakaoVOs, String kakaoEmail, String kakaoName,
+			String kaNickName) throws Exception
 	{
-		return adminIF.roleSetManager(memberVO);
+		int rs = adminIF.roleSetManager(memberVOs, id);
+
+		if (id == "")
+		{
+			rs = adminIF.kakaoRoleSetManager(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+		}
+
+		return rs;
 	}
 
-	public int roleSetUser(MemberVO memberVO) throws Exception
+	public int roleSetUser(List<MemberVO> memberVOs, String id, List<KakaoVO> kakaoVOs, String kakaoEmail, String kakaoName,
+			String kaNickName) throws Exception
 	{
-		return adminIF.roleSetUser(memberVO);
+		int rs = adminIF.roleSetUser(memberVOs, id);
+
+		if (id == "")
+		{
+			rs = adminIF.kakaoRoleSetUser(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+		}
+
+		return rs;
 	}
 
-	public int roleSetBan(MemberVO memberVO) throws Exception
+	public int roleSetBan(List<MemberVO> memberVOs, String id, List<KakaoVO> kakaoVOs, String kakaoEmail, String kakaoName,
+			String kaNickName) throws Exception
 	{
-		return adminIF.roleSetBan(memberVO);
+		int rs = adminIF.roleSetBan(memberVOs, id);
+
+		if (id == "")
+		{
+			rs = adminIF.kakaoRoleSetBan(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+		}
+
+		return rs;
 	}
 }
