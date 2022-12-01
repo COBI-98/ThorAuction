@@ -116,7 +116,7 @@ ul.tabs li.current{
 	/*background: #ededed;*/
 	color: #222;
    /*border: 1px solid;*/
-   box-shadow: 1px 1px 3px 1px #dadce0;
+   box-shadow: 1px 1px 3px 1px #aaa;
 }
 
 .tab-content{
