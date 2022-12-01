@@ -193,5 +193,9 @@ public class WebSocketChat {
 	       }
 	       return null;
 	}
+	
+	public List<String> getBanList() {
+		return banlist;
+	}
 
 }
