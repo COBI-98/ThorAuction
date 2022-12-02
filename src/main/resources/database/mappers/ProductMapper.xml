@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.goodee.finalproject.product.ProductMapper">
+ 	
+ 	<insert id="setProductAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">	
+ 		INSERT INTO AUCTIONPRODUCT
+		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum});
+ 	</insert>
+ 	
+ 	<insert id="setProductFileAdd" parameterType="ProductFileVO">
+ 		INSERT INTO PRODUCTFILES
+ 		VALUE (FILENUM,#{fileName},#{oriName},#{sort},#{productNum})
+ 	</insert>
+ 	
+ 	<delete id="setSummerFileDelete" parameterType="ProductFileVO">
+	 	DELETE FROM 
+		PRODUCTFILES WHERE FILENUM =(
+		select MIN(FILENUM)  from PRODUCTFILES WHERE PRODUCTNUM=#{productNum});
+ 	</delete>
+ 	
+ 	<select id="getFileNumCheck" parameterType="ProductFileVO" resultType="ProductFileVO">
+ 		SELECT t.FILENUM FROM
+			(select @ROWNUM:=@ROWNUM+1 AS ROWNUM, PF.* 
+			FROM PRODUCTFILES PF, (SELECT @ROWNUM:=0) R
+			WHERE PRODUCTNUM = #{productNum} 
+			AND SORT = 0 ) AS t WHERE t.ROWNUM = #{rowNum};
+ 	</select>
+ 	
+ 	<!-- 게시글 수정하기에서 delete(x) 버튼시 바로 삭제하는문 -->
+ 	<delete id="setFileNumCheckDelete" parameterType="ProductFileVO">
+ 		DELETE FROM PRODUCTFILES WHERE FILENUM = #{fileNum};
+ 	</delete>
+ 	
+ 	<!-- 상품 정보 수정 -->
+ 	<update id="setProductUpdate" parameterType="ProductVO">
+ 		UPDATE AUCTIONPRODUCT SET
+ 		PRODUCTNAME =#{productName}, PRODUCTPRICE = #{productPrice}, 
+ 		PRODUCTINFORMATION = #{productInformation}, AUCTIONPERIOD = #{auctionPeriod}
+ 		WHERE PRODUCTNUM = #{productNum};
+ 	</update><!-- 완 -->
+ 	
+ 	<!-- 파일 정보 수정 -->
+ 	<update id="setProductFileUpdate" parameterType="ProductFileVO">
+ 		UPDATE PRODUCTFILES SET 
+		FILENAME =#{fileName}, ORINAME=#{oriName} 
+		WHERE FILENUM=#{fileNum}
+ 	</update>
+ 	
+ 	
+ 	<!-- 게시글 수정 시 기존에 있던 상세정보(sort 1) 안에있는 파일을 삭제 -->
+ 	<delete id="setFileDeleteSort" parameterType="ProductFileVO">
+ 		DELETE FROM PRODUCTFILES WHERE PRODUCTNUM = #{productNum} AND SORT = 1;
+ 	</delete>
+ 	
+ 	<delete id="setProductDelete" parameterType="ProductVO">
+ 		DELETE FROM AUCTIONPRODUCT WHERE APPLICATIONNUM = #{applicationNum}
+ 	</delete>
+	
+	<select id="getProductNumCheck" parameterType="ProductVO" resultType="ProductVO">
+		SELECT * FROM AUCTIONPRODUCT a WHERE APPLICATIONNUM=#{applicationNum};
+	</select>
+	
+	<delete id="setFileDelete" parameterType="ProductFileVO">
+		DELETE FROM PRODUCTFILES WHERE PRODUCTNUM=#{productNum};
+	</delete>
+	
+	<!-- 상품 리스트 구현   -->
+	<select id="getProductApproval" parameterType="productVO" resultMap="getProductFileList">
+		SELECT * FROM 
+		AUCTIONPRODUCT a
+		LEFT JOIN
+		PRODUCTFILES p 
+		ON (a.PRODUCTNUM = p.PRODUCTNUM)
+		WHERE a.PRODUCTNUM = #{productNum}
+	</select>
+	
+	<resultMap type="ProductVO" id="getProductFileList">
+ 			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
+			</collection>
+			
+		
+ 	</resultMap>
+</mapper>
