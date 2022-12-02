@@ -27,6 +27,7 @@
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
+				<input type="text" value="${kakao }">
 				<li class="nav-item"><a href="" class="nav-link link-dark px-2"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
 				<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
 					<%-- <form action="/member/logout" method="post">

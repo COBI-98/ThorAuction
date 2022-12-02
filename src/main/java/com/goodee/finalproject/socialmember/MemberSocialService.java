@@ -1,6 +1,5 @@
 package com.goodee.finalproject.socialmember;
 
-import java.security.Principal;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
@@ -22,8 +20,10 @@ public class MemberSocialService extends DefaultOAuth2UserService
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
 
-	// @Value("${kakao.Admin.key}")
-	// private String adminKey;
+	public KaRoleVO getKakaoRole(KaRoleVO kaRoleVO) throws Exception
+	{
+		return kakaoMapperIF.getKakaoRole(kaRoleVO);
+	}
 
 	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
