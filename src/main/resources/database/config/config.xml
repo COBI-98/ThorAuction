@@ -12,9 +12,16 @@
 		<typeAlias type="com.goodee.finalproject.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.goodee.finalproject.member.RoleVO" alias="RoleVO" />
 		<typeAlias type="com.goodee.finalproject.mypage.PayVO" alias="PayVO" />
-		
+		<typeAlias type="com.goodee.finalproject.board.notice.NoticeVO" alias="NoticeVO"/>
+   		<typeAlias type="com.goodee.finalproject.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
+   		<typeAlias type="com.goodee.finalproject.board.application.ApplicationVO" alias="ApplicationVO"/>
+   		<typeAlias type="com.goodee.finalproject.product.ProductFileVO" alias="ProductFileVO"/>
+   		<typeAlias type="com.goodee.finalproject.product.ProductVO" alias="ProductVO"/>
+   		
+   		<typeAlias type="com.goodee.finalproject.util.BoardPageMaker" alias="BoardPageMaker"/>
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="int"/>
+		<typeAlias type="java.lang.Integer" alias="Integer"/>	
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
