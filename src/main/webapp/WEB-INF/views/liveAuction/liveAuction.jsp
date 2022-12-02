@@ -109,6 +109,7 @@
 	
       <h2 id="id">${member}</h2>
       <h2 id="point">${point}</h2>
+      <h2 id="role">${role[0].roleName}</h2>
 
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
