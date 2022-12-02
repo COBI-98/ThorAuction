@@ -1,7 +1,6 @@
 package com.goodee.finalproject.socialmember;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,24 +10,21 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import lombok.Data;
 
 @Data
-public class KakaoVO implements OAuth2User, UserDetails
+public class NaverVO implements OAuth2User, UserDetails
 {
-	private String kaNickName;
-	private String kaEmail;
-	private String kaName;
-	
-	private List<KaRoleVO> kaRoleVOs;
-	private List<KakaoRoleVO> kakaoRoleVOs;
-	private List<KakaoDetailVO> kakaoDetailVOs;
+	private String NaNickName;
+	private String NaEmail;
+	private String NaName;
 
-	private String social;
+	private String NaSocial;
 
-	private Map<String, Object> attributes;
+	private Map<String, Object> attriutes;
 
 	@Override
 	public Map<String, Object> getAttributes()
 	{
-		return this.attributes;
+		// TODO Auto-generated method stub
+		return this.attriutes;
 	}
 
 	@Override
@@ -42,14 +38,27 @@ public class KakaoVO implements OAuth2User, UserDetails
 	public String getName()
 	{
 		// TODO Auto-generated method stub
-		return this.kaName;
+		return this.NaNickName;
+	}
+	
+	public String getEmail()
+	{
+		// TODO Auto-generated method stub
+		return this.NaEmail;
+	}
+
+	@Override
+	public String getPassword()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public String getUsername()
 	{
 		// TODO Auto-generated method stub
-		return this.kaNickName;
+		return this.NaName;
 	}
 
 	@Override
@@ -79,12 +88,4 @@ public class KakaoVO implements OAuth2User, UserDetails
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-	@Override
-	public String getPassword()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
