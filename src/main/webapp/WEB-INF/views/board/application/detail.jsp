@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
 				  </tr>
 				  <tr>
 					<th>초기가격</th>
-					<td>${product.productPrice}</td>
+					<td><fmt:formatNumber value="${product.productPrice}" pattern="###,###"/></td>
 				</tr>
 				<tr>
 					<th>상품상세정보</th>
@@ -75,7 +76,7 @@
 
 <div> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-info" >글 수정</a></div>
 <div> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-info" style="margin-top: 10px;">글 삭제</a></div>
-<div> <a href="#" class="btn btn-success" >승인</a></div>
+<div> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" class="btn btn-success" >승인</a></div>
 <!-- Button trigger modal -->
 <!-- Button trigger modal -->
 <button type="button" id="refuseBtn" class="btn btn-danger btn-lg"  >

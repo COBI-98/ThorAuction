@@ -23,28 +23,15 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@PostMapping("add")
-	public ModelAndView setProductAdd(ProductVO productVO,RedirectAttributes redirectAttributes,MultipartFile [] files,HttpSession session) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		log.info("<---------------------productAdd-------->");
-		String contents = productVO.getProductInformation();
-		
-		log.info("APPLICATIONNUM -> {}",productVO.getApplicationNum());
-		
-		
-		productVO.setProductInformation(contents.replace("temp/","notice"));
-		int result = productService.setProductAdd(productVO,files,session.getServletContext());
-		productService.saveTempFile(productVO,session.getServletContext());
-//		int result = noticeService.setNoticeAdd(noticeVO);
-		mv.setViewName("redirect:./list");
-		redirectAttributes.addAttribute("result", result);
-		return mv;
-	}
 	
 	@GetMapping("approval")
-	public void getApprovalProduct(ProductVO productVO) throws Exception{
+	public ModelAndView getApprovalProduct(ProductVO productVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		productVO = productService.getProductApproval(productVO);
 		
+		mv.addObject("productVO",productVO);
+		mv.setViewName("product/approval");
+		return mv;
 	}
 	
 }

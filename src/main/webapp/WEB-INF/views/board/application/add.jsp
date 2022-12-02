@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 <!-- jquery -->
 <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-<c:import url="../../template//boot.jsp"></c:import>
-<c:import url="../../template//summer.jsp"></c:import>
+<c:import url="../../template/boot.jsp"></c:import>
+<c:import url="../../template/summer.jsp"></c:import>
 <link rel="stylesheet" href="/css/application.css">
 <script src="/js/summernote/summernote-ko-KR.js"></script>
 <script src="/js/summernote/summernote-lite.js"></script>
@@ -83,7 +83,7 @@
 </div>
 	
 </section>
-<script src="/js/fileManager.js"></script>
+<script src="/js/applicationFileManager.js"></script>
 
 <script type="text/javascript">
 	$("#contents").summernote({

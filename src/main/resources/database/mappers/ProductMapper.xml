@@ -66,4 +66,31 @@
 	<delete id="setFileDelete" parameterType="ProductFileVO">
 		DELETE FROM PRODUCTFILES WHERE PRODUCTNUM=#{productNum};
 	</delete>
+	
+	<!-- 상품 리스트 구현   -->
+	<select id="getProductApproval" parameterType="productVO" resultMap="getProductFileList">
+		SELECT * FROM 
+		AUCTIONPRODUCT a
+		LEFT JOIN
+		PRODUCTFILES p 
+		ON (a.PRODUCTNUM = p.PRODUCTNUM)
+		WHERE a.PRODUCTNUM = #{productNum}
+	</select>
+	
+	<resultMap type="ProductVO" id="getProductFileList">
+ 			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
+			</collection>
+			
+		
+ 	</resultMap>
 </mapper>

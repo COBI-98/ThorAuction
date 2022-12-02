@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- security tag -->
 <%-- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%> --%>
-<div class="wrap">
+<div class="wrap" style="
+padding-bottom: 0px;
+">
 	<nav class="py-2 bg-light border-bottom">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
