@@ -22,6 +22,10 @@
 			<a href="../mypage/update">회원정보 수정</a>
 			<a href="../mypage/delete">회원탈퇴</a>
 		</div>
+
+<!-- 	<a href="/oauth2/authorization/naver" style="padding-left: 20px; padding-right: 20px;">
+		<img style="width: 80px; height: 80px;" src="/images/social/naver.png">
+	</a> -->
 	</section>
 	<c:import url="./template/footer.jsp"></c:import>
 </body>
