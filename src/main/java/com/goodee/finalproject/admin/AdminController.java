@@ -44,6 +44,7 @@ public class AdminController
 		modelAndView.addObject("member", memberVOs);
 		modelAndView.addObject("kakao", kakaoVOs);
 		modelAndView.setViewName("admin/adminpage");
+		modelAndView.setViewName("header");
 
 		return modelAndView;
 	}
