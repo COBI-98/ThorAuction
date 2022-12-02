@@ -5204,8 +5204,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                 mPeer.replaceTrack(track, remoteUserId, isVideoTrack);
                 return;
             }
-
-            connection.peers.getAllParticipants().forEach(function(participant) {
+	            connection.peers.getAllParticipants().forEach(function(participant) {
                 mPeer.replaceTrack(track, participant, isVideoTrack);
             });
         }

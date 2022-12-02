@@ -58,7 +58,6 @@
 						<button id="cameraBlack" class= ""> 방송 일시 정지 2 </button>
 						<button id="screenShare" class= ""> 화면 공유로 전환 </button>
 						<div>카메라 설정<select id="cameras"></select></div>
-						<div>해상도 설정<select ></select></div>
 						
 						<input type="button" class="" value="얼리기" id='stop'>
 					     <input type="button" value="경매종료" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
@@ -107,7 +106,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script src="/socket.io/socket.io.js"></script>
+
 <script src='/js/liveauction/chat.js'></script>
 <script src="/js/liveauction/RTCMultiConnection.js"></script>
 <!-- <script src="/socket.io/socket.io.js"></script> -->

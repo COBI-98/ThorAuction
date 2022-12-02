@@ -78,22 +78,36 @@ connection.iceServers = [{
 }];
 
 connection.videosContainer = document.getElementById('videos-container');
+
 connection.onstream = function(event) {
+	
+	console.log("evet ==" +event.mediaElement);
+	
     var existing = document.getElementById(event.streamid);
     if(existing && existing.parentNode) {
       existing.parentNode.removeChild(existing);
     }
 
-    event.mediaElement.removeAttribute('src');
-    event.mediaElement.removeAttribute('srcObject');
-    event.mediaElement.muted = true;
-    event.mediaElement.volume = 0;
+	
+		event.mediaElement.removeAttribute('src');
+	    event.mediaElement.removeAttribute('srcObject');
+	    event.mediaElement.muted = true;
+	    event.mediaElement.volume = 0;
+	    document.querySelector("#blackVideo").remove();
+	
 
 
 
  var video = document.querySelector("#localVideo");
 	video.removeAttribute("hidden");
-	document.querySelector("#blackVideo").remove();
+//var video = document.createElement("video");
+//	video.setAttributeNode(document.createAttribute('autoplay'));
+//    video.setAttributeNode(document.createAttribute('playsinline'));
+	
+	
+	
+
+	
     if(event.type === 'local') {
       video.volume = 0;
       try {
@@ -122,31 +136,31 @@ connection.onstream = function(event) {
     document.querySelector("#screenShare").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
 			var videoStream =  video.srcObject;
 			
+			
+			
 			 navigator.mediaDevices.getDisplayMedia({
 		        video: true,
 		        audio: true,
 		      })
 		      .then((stream) => {
+			
+		
+			
 		          video.srcObject = stream; // 내 비디오 공유 화면으로 변경
 		          var videoTrack = stream.getVideoTracks()[0];
-		          
 		          connection.replaceTrack(videoTrack,event.userId,true);
-			          
-			   
+			      
 		          videoTrack.onended = function () {
-	          	  const screenTrack = videoStream.getVideoTracks()[0];
-	      		  connection.replaceTrack(screenTrack,event.userId,true);
+		          	  const screenTrack = videoStream.getVideoTracks()[0];
+		      		  connection.replaceTrack(screenTrack,event.userId,true);
+				          
+		        	  stream.getTracks().forEach((track) => track.stop());
+			          video.srcObject = videoStream; 
 			          
-	        	  stream.getTracks().forEach((track) => track.stop());
-		          video.srcObject = videoStream; // 내 비디오로 변경
 	       		 };
-		        
-		        
-				})
-				//video.srcObject.getVideoTracks().forEach((track) => (track.stop()));
-	//replaceTrack RTCM. 으로 이용 가능하다 (트랙, 아이디? , 비디오트랙인지) 
-	
-		 
+			})
+
+			
 	})
     
     
@@ -165,33 +179,29 @@ connection.onstream = function(event) {
 		          var videoTrack = stream.getVideoTracks()[0];
 		          
 		          connection.replaceTrack(videoTrack,event.userId,true);
-			          
+			      
 			   });
 	})
-    
-    
-    
-    showVideo();
-    function  showVideo(){
 	
-      	var width = parseInt(connection.videosContainer.clientWidth / 2) + 200;
-      
-        var mediaElement = getHTMLMediaElement(video, {
-            title: document.querySelector("#room-id").value ,//event.userid,
-            buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
-           	width: width,
-            showOnMouseEnter: true
-        });
+	
     
-        connection.videosContainer.appendChild(mediaElement);
-    
-        setTimeout(function() {
-            mediaElement.media.play();
-        }, 5000);
-    
-        mediaElement.id = event.streamid;
+  	var width = parseInt(connection.videosContainer.clientWidth) + 200;
+  	
+    var mediaElement = getHTMLMediaElement(video, {
+        title: document.querySelector("#room-id").value ,//event.userid,
+        buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
+       	width: width,
+        showOnMouseEnter: true
+    });
 
-    }
+    connection.videosContainer.appendChild(mediaElement);
+
+    setTimeout(function() {
+        mediaElement.media.play();
+    }, 5000);
+
+    mediaElement.id = event.streamid;
+    
    
 };
 

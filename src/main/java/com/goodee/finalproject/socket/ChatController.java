@@ -19,10 +19,9 @@ public class ChatController {
 	public ModelAndView chat(HttpSession session,HttpServletRequest req) {
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
 		ModelAndView mv = new ModelAndView();
-		System.out.println(mem.getName());
 		
-		System.out.println("pointttt : " +mem.getPoint());
-		mv.addObject("member", mem.getName());
+//		mv.addObject("member", mem.getName());
+		mv.addObject("member", "ball");
 		mv.addObject("point", 3000L);
 		mv.addObject("value",webSocketChat.getValue());
 		mv.setViewName("/liveAuction/liveAuction");

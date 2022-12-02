@@ -16,9 +16,8 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 
 
 #localVideo{
-	
-	width: 100%;
 	height: 100%;
+	
 }
 
 .media-container {
@@ -56,6 +55,10 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 	width : 80%;
 	padding: 15px;
 }
+
+
+
+
 
 
 
@@ -174,7 +177,7 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 }
 
 .media-box video {
-    width: 100%;
+/*     width: 100%; */
     vertical-align: top;
     object-fit: fill;
 }
