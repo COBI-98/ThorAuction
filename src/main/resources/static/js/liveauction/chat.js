@@ -17,6 +17,7 @@ var data7 = {};
 var data8 = {};
 var data9 = {};
 var data10 = {};
+var data11 = {};
 
 var ws ;
 
@@ -41,6 +42,8 @@ var hidden = getId('hidden');
 var add = getId('add');
 var list = getId('list');
 var listttt = getId('listttt');
+var unit = getId('unit');
+var unitsend = getId('unitsend');
 
 var username;
 var win = false;
@@ -70,9 +73,15 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
+	//단위 경매 설정 시
+	if(data.unit != null){
+		talk.innerHTML += `<div>`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
+		add.value = "+" + data.unit;
+	}
+
 	//경매 시작시
-	if(data.start != null){
-		talk.innerHTML += "*경매가 시작되었습니다.*";
+	else if(data.start != null){
+		talk.innerHTML += `<div>`+ "*경매가 시작되었습니다.*" +`</div>`;
 	}
 
 	//단위가격 클릭시
@@ -95,7 +104,7 @@ ws.onmessage = function(msg){
 		let ff = rank[0];
 		$('#amount').css("display","none");
 		finalamount.innerText = ff;
-		talk.innerHTML += "*경매가 종료 되었습니다.*";
+		talk.innerHTML += `<div>`+ "*경매가  종료되었습니다.*" +`</div>`;
 	}
 
 	//강퇴 당했을 시
@@ -187,8 +196,12 @@ ws.onmessage = function(msg){
 
 		//경매시작 설정
 		if(data.gogo == "true") {
+			auctionend.innerHTML = "경매 종료";
 			auctionend.className = 'start';
 		}
+		
+		//단위 가격 설정
+		add.value = "+"+data.price;
 	}
 
 	//퇴장시
@@ -370,6 +383,7 @@ function usercome(){
 	data5.come = userid.innerText;
 	data5.ppp = "potsss";
 	data5.gogo = "trats";
+	data5.price = "ecirp";
 	var temp =JSON.stringify(data5);
 	ws.send(temp);
 }
@@ -437,8 +451,9 @@ $('#amount').on('DOMSubtreeModified propertychange',function(){
 //단위 가격 누를 시
 add.addEventListener("click",function(){
 	if(auctionend.className == "start") {
+		console.log("dddd : "+add.value.substr(2));
 		var mm = hidden.innerHTML*1;
-		var aa = 1000 *1;
+		var aa = add.value.substr(1) *1;
 		var text = mm+aa;
 
 		msg.value='';
@@ -456,4 +471,11 @@ $('ul.tabs li').click(function(){
 	$("#"+tab_id).addClass('current');
 })
 
+//단위가격 설정
+unitsend.addEventListener("click",function(){
+	console.log(unit.value);
+	data11.unit = unit.value;
+	var temp = JSON.stringify(data11);
+	ws.send(temp);
+})
 

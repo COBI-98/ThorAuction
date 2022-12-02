@@ -17,7 +17,6 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +38,7 @@ public class WebSocketChat {
 	private static String winuser="";
 	private static String stop="false";
 	private static String start="false";
+	private static String unit ="";
 	
 	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
 	
@@ -65,8 +65,14 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
+		//단위 경매 설정
+		if(msg.substring(2, 6).equals("unit")) {
+			unit = String.valueOf(jsonObj.get("unit"));
+			sendMessage(msg, session);
+		}
+		
 		//경매 시작
-		if(msg.substring(2, 7).equals("start")) {
+		else if(msg.substring(2, 7).equals("start")) {
 			start = String.valueOf(jsonObj.get("gogo"));
 			sendMessage(msg, session);
 		}
@@ -133,6 +139,7 @@ public class WebSocketChat {
 			msg = msg.replace(name, sb.toString());
 			msg = msg.replace(String.valueOf(jsonObj.get("ppp")), stop);
 			msg = msg.replace(String.valueOf(jsonObj.get("gogo")), start);
+			msg = msg.replace(String.valueOf(jsonObj.get("price")),unit);
 						
 			sendMessage(msg, session);
 		}
