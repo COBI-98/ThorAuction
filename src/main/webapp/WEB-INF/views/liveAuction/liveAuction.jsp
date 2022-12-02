@@ -60,6 +60,12 @@
 						<div>카메라 설정<select id="cameras"></select></div>
 						<div>해상도 설정<select ></select></div>
 						
+            <div>
+            <span>단위가격</span>
+            <input type="text" id="unit">
+            <input type="button" value="설정" id="unitsend">
+            </div>
+
 						<input type="button" class="" value="얼리기" id='stop'>
 					     <input type="button" class="" value="경매시작" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
 					     <input type="button" value="종료" id="end"> <!--session 닫힘-->
