@@ -84,13 +84,13 @@ ws.onmessage = function(msg){
 		talk.innerHTML += `<div>`+ "*경매가 시작되었습니다.*" +`</div>`;
 	}
 
-	//단위가격 클릭시
-	else if(data.id != null){
-		console.log(data);
-		rank[0] = data.value;
-		rank[1] = data.id;
-		amount.innerHTML = rank[0];
-	}
+	// //단위가격 클릭시
+	// else if(data.id != null){
+	// 	console.log(data);
+	// 	rank[0] = data.value;
+	// 	rank[1] = data.id;
+	// 	amount.innerHTML = rank[0];
+	// }
 
 	//방송 일시정지 시
 	else if(data.pause != null){
@@ -451,7 +451,6 @@ $('#amount').on('DOMSubtreeModified propertychange',function(){
 //단위 가격 누를 시
 add.addEventListener("click",function(){
 	if(auctionend.className == "start") {
-		console.log("dddd : "+add.value.substr(2));
 		var mm = hidden.innerHTML*1;
 		var aa = add.value.substr(1) *1;
 		var text = mm+aa;
@@ -461,7 +460,7 @@ add.addEventListener("click",function(){
 	}
 })
 
-
+//채팅창, 회원목록 tab 클릭 시
 $('ul.tabs li').click(function(){
 	var tab_id = $(this).attr('data-tab');
 	$('ul.tabs li').removeClass('current');

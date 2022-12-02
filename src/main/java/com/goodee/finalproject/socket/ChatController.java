@@ -30,6 +30,7 @@ public class ChatController {
 				}
 			}
 		}else {
+			mv.addObject("role", mem.getRoleVOs());
 			mv.addObject("member", mem.getName());
 			mv.addObject("point", 3000L);
 			mv.addObject("value",webSocketChat.getValue());
