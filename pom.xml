@@ -80,11 +80,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs  -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-taglibs</artifactId>
-		</dependency> -->
+		</dependency> 
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
 		<!-- 버전은 최신 버전으로 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
