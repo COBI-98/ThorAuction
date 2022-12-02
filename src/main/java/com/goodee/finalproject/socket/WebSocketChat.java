@@ -1,9 +1,11 @@
 package com.goodee.finalproject.socket;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +17,6 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +36,17 @@ public class WebSocketChat {
 	private static Set<String> set = new HashSet<String>(); //채팅참여 name 
 	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
 	private static String winuser="";
+	private static String stop="false";
+	private static String start="false";
+	private static String unit ="";
+	
+	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
 	
 	//입장시
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
 
+		
 		ModelAndView mv = new ModelAndView();
 		System.out.println("open session : " + s.toString());
 		if(!clients.contains(s)) {
@@ -58,8 +65,26 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
+		//단위 경매 설정
+		if(msg.substring(2, 6).equals("unit")) {
+			unit = String.valueOf(jsonObj.get("unit"));
+			sendMessage(msg, session);
+		}
+		
+		//경매 시작
+		else if(msg.substring(2, 7).equals("start")) {
+			start = String.valueOf(jsonObj.get("gogo"));
+			sendMessage(msg, session);
+		}
+		
+		//얼리기
+		else if(msg.substring(2, 6).equals("stop")) {
+			stop = String.valueOf(jsonObj.get("stop"));
+			sendMessage(msg, session);
+		}
+		
 		//단위가격 
-		if(msg.substring(2, 4).equals("id")) {
+		else if(msg.substring(2, 4).equals("id")) {
 			String vv = String.valueOf(jsonObj.get("value"));
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
@@ -70,6 +95,7 @@ public class WebSocketChat {
 		//강퇴
 		else if(msg.substring(2, 5).equals("out")) {
 			String outname = String.valueOf(jsonObj.get("out"));
+			banlist.add(outname);
 			Session ss = getKey(list,outname);
 			sendOneMessage(msg, ss);
 		}
@@ -104,13 +130,16 @@ public class WebSocketChat {
 
 			String name = String.valueOf(jsonObj.get("usercome")); //입장한 사람 name
 			String come = String.valueOf(jsonObj.get("come"));
-
+			
 			set.add(come);
 			list.put(session, come);
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(set.toString());
 			msg = msg.replace(name, sb.toString());
+			msg = msg.replace(String.valueOf(jsonObj.get("ppp")), stop);
+			msg = msg.replace(String.valueOf(jsonObj.get("gogo")), start);
+			msg = msg.replace(String.valueOf(jsonObj.get("price")),unit);
 						
 			sendMessage(msg, session);
 		}
@@ -170,6 +199,10 @@ public class WebSocketChat {
 	           }
 	       }
 	       return null;
+	}
+	
+	public List<String> getBanList() {
+		return banlist;
 	}
 
 }

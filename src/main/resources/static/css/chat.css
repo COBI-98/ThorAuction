@@ -2,12 +2,11 @@
    box-sizing: border-box;
 }
 
-#chatt{
-
+/* #chatt{
    width: 25%;
-   padding: 0px 15px;
-   /* text-align: center; */
-}
+   padding: 0px 15px; 
+   text-align: center;
+} */
 
 #chat-box{
 	width: 100%;
@@ -51,6 +50,12 @@
    border-radius:10px;   
 }
 
+#iddd div{
+   margin-left: 5px;
+   /*display: inline-block;*/
+   border-width: bold;
+}
+
 #chatt .me{
    background-color : #eee;
    margin : 1px 0px 2px 40%;   
@@ -79,16 +84,47 @@
 
 #text{
    text-align: center;
-   height: 75px;
+   height: 45px;
 }
 
-.container{
-   padding: 0px;
-}
+ .container{
+   width: 25%;
+   padding: 0px 15px;
+} 
 
 #auction{
    background-color: white;
    color: #fea532;
    font-weight: bold;
    border-style: none;
+}
+
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	/*list-style: none;*/
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	/*background: #ededed;*/
+	color: #222;
+   /*border: 1px solid;*/
+   box-shadow: 1px 1px 3px 1px #aaa;
+}
+
+.tab-content{
+	display: none;
+	/*background: #ededed;*/
+	
+}
+
+.tab-content.current{
+	display: inherit;
 }
