@@ -27,3 +27,23 @@ min-height: 100%;
 position: relative;
 padding-bottom: 305px; /* footer height = 84px */
 }
+
+.productImgs{
+    width: 300px;
+    height: 300px;
+}
+
+select {
+    width:300px;
+    padding:5px;
+    border:1px solid #999;
+    font-family:'Nanumgothic';
+    border-radius:3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance : none;
+}
+select::-ms-expand {
+  display: none;
+}
+

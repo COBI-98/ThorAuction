@@ -26,4 +26,7 @@ public interface ProductMapper {
 	public int setFileDelete(ProductFileVO productFileVO) throws Exception;
 
 	public ProductVO getProductNumCheck(ProductVO productVO) throws Exception;
+
+	// 상품리스트 구현 메퍼
+	public ProductVO getProductApproval(ProductVO productVO) throws Exception;
 }

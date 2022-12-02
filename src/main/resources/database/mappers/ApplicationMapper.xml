@@ -18,14 +18,7 @@
 		
 	</sql>
 	
-	<sql id="auctionSort">
-		WHERE AUCTIONSORT =
-		<choose>
-			<when test="kind == 'true'">1</when>
-			<when test="kind == 'false'">0</when>
-			<otherwise>1</otherwise>
-		</choose>
-	</sql>
+
 	
  	<select id="getApplicationList" parameterType="ApplicationVO" resultType="ApplicationVO">
  		SELECT * 
