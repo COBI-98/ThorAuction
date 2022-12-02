@@ -1,0 +1,130 @@
+*{
+   box-sizing: border-box;
+}
+
+/* #chatt{
+   width: 25%;
+   padding: 0px 15px; 
+   text-align: center;
+} */
+
+#chat-box{
+	width: 100%;
+	aspect-ratio: 4.9 / 9; 
+}
+
+#chatt #talk{
+   width: 100%;
+   height: 83%;
+   overflow: scroll;
+   border : 1px solid #aaa;
+   /* text-align: center; */
+}
+
+
+#sendZone{
+	display:flex;
+	justify-content:space-around;
+	height: 15%;
+	margin-top: 10px;
+}
+
+#chatt #msg{
+   width: 75%;
+   height: 100%;
+   display: inline-block;
+}
+
+#chatt #btnSend{
+   width: 20%;
+   height: 100%;
+   background-color: #fea532;
+   color: white;
+   border-style: none;
+}
+
+#chatt #talk div{
+   width: 60%;
+   display: inline-block;
+   padding: 6px;
+   border-radius:10px;   
+}
+
+#iddd div{
+   margin-left: 5px;
+   /*display: inline-block;*/
+   border-width: bold;
+}
+
+#chatt .me{
+   background-color : #eee;
+   margin : 1px 0px 2px 40%;   
+}
+
+#chatt .other{
+   background-color : #eee;
+   margin : 2px;
+}
+
+#chatt .me#enter{
+   background-color: white;
+   border-style:solid;
+   border-color: #fea532;
+   margin : 1px 0px 2px 40%;   
+}
+
+#chatt .other#enter{
+   background-color: white;
+   border-style:solid;
+   border-color: #fea532;
+   margin : 2px;
+}
+
+
+
+#text{
+   text-align: center;
+   height: 45px;
+}
+
+ .container{
+   width: 25%;
+   padding: 0px 15px;
+} 
+
+#auction{
+   background-color: white;
+   color: #fea532;
+   font-weight: bold;
+   border-style: none;
+}
+
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	/*list-style: none;*/
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	/*background: #ededed;*/
+	color: #222;
+   /*border: 1px solid;*/
+   box-shadow: 1px 1px 3px 1px #aaa;
+}
+
+.tab-content{
+	display: none;
+	/*background: #ededed;*/
+	
+}
+
+.tab-content.current{
+	display: inherit;
+}
