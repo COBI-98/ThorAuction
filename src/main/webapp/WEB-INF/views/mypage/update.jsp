@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" id="pw" name="pw" value="${member.pw}"></td>
+				<td><input type="password" id="pw" name="pw" value=""></td>
 			</tr>			
 			<tr>
 				<th>이름</th>
@@ -61,7 +61,7 @@
 				<td><input type="text" id="phone" name="phone" value="${member.phone}"></td>
 			</tr>
 		</table>
-
+		<div style="color: red;">${message}</div>
 		<button type="button" id="update_btn">수정하기</button>
 	</form>
 </body>

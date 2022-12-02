@@ -26,7 +26,7 @@
                 <div class="member-card-layout__container">
                     <div class="member-card-layout__inner">
                         <h1 class="member-card-layout__logo">
-                            <img class="member-card-layout__logo-image" src="https://member.op.gg/img_opgglogo.1924961d.svg" alt="OP.GG">
+                            <img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="OP.GG">
                         </h1>
                         <div class="check-password">
                             <h2 class="check-password__title">마이페이지</h2>

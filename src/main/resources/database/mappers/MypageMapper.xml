@@ -19,6 +19,13 @@
 		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE)
 		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
 	</insert>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="checkPw" parameterType="MemberVO" resultType="int">
+		SELECT COUNT(*) 
+        FROM THORMEMBER
+        WHERE ID = #{id} AND PW = #{pw}
+	</select>
 
 	<!-- 회원탈퇴 -->
 	<delete id="setDelete">
@@ -31,7 +38,6 @@
 	<update id="setUpdate" parameterType="MemberVO">
 		UPDATE THORMEMBER 
 		SET
-		PW = #{pw},
 		NAME = #{name},
 		BIRTH = #{birth},
 		EMAIL = #{email},

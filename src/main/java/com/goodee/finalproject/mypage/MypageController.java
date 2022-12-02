@@ -80,19 +80,15 @@ public class MypageController {
 		return result;
 	}
 	
-	// 비밀번호 체크 GET
+	// 비밀번호 체크	
 	@GetMapping("checkpw")
-	public void checkpw() throws Exception { }
-	
-	// 비밀번호 POST
-	@PostMapping("checkpw")
 	@ResponseBody
-	public MemberVO checkpw(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) throws Exception {
-		MemberVO memberVO = new MemberVO();
-		memberVO.setId(id);
-		MemberVO result = mypageService.getList(memberVO);
+	public int checkPw(MemberVO memberVO) throws Exception {
+		
+		int result = mypageService.checkPw(memberVO);
 		
 		return result;
+		
 	}
 	
 	// 회원탈퇴 GET
@@ -130,20 +126,14 @@ public class MypageController {
 	@GetMapping("update")
 	public void setUpdate() throws Exception {}
 	
-	// 회원정보 수정 POST
+	// 회원정보 수정 POST + 비밀번호 체크
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO, HttpSession session) throws Exception {
+	public String setUpdate(MemberVO memberVO, HttpSession session, Model model) throws Exception {
 		
-		int result = mypageService.setUpdate(memberVO);
-		
-		if(result > 0) {
-			log.info("수정 성공");
-		} else {
-			log.info("수정 실패");
-		}
-		
+		mypageService.setUpdate(memberVO);
+			
 		session.invalidate();
-		
+			
 		return "redirect:../member/login";
 	}
 	
