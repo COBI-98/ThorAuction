@@ -1,8 +1,6 @@
 
 package com.goodee.finalproject.mypage;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.finalproject.member.MemberVO;
@@ -15,6 +13,9 @@ public interface MypageMapper {
 	
 	// 포인트 충전
 	public int chargePoint(PayVO payVO) throws Exception;
+	
+	// 비밀번호 체크
+	public int checkPw(MemberVO memberVO) throws Exception;
 	
 	// 회원탈퇴
 	public int setDelete(MemberVO memberVO) throws Exception;

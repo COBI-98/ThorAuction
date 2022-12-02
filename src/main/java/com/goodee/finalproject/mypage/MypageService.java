@@ -1,7 +1,10 @@
 package com.goodee.finalproject.mypage;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,14 @@ public class MypageService {
 		
 		// 결제 완료 시 총포인트 업데이트
 		mypageMapper.getPoint(payVO);
+		
+		return result;
+	}
+	
+	// 비밀번호 체크
+	public int checkPw(MemberVO memberVO) throws Exception {
+		
+		int result = mypageMapper.checkPw(memberVO);
 		
 		return result;
 	}

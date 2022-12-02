@@ -23,7 +23,7 @@
 			<table>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="id" value="${member.id}"></td>
+					<td><input type="text" name="id" id="id" value="${member.id}"></td>
 				</tr> 
 				<tr>
 					<th>비밀번호</th>
