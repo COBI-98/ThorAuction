@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.goodee.finalproject.board.application.ApplicationMapper">
+ 
+ 	<sql id="search">
+		WHERE AUCTIONSORT = #{auctionSort} 
+		AND
+		<choose>
+			<when test="kind =='applicationNum'">ApplicationNum</when>
+			<when test="kind == 'title'">Title</when>
+			<when test="kind =='writer'">Writer</when>
+			<otherwise>RegDate</otherwise>
+		</choose>
+		LIKE CONCAT('%',#{search},'%')
+		
+	</sql>
+	
+
+	
+ 	<select id="getApplicationList" parameterType="ApplicationVO" resultType="ApplicationVO">
+ 		SELECT * 
+		FROM BOARDAPPLICATION
+		<include refid="search"></include>
+		ORDER BY APPLICATIONNUM DESC
+		limit #{startRow}, #{lastRow}
+		
+ 	</select>
+ 	
+ 	<select id="getApplicationListDetail" parameterType="ApplicationVO" resultMap="getProductDetail">
+ 		SELECT * 
+			FROM BOARDAPPLICATION b 
+			left join
+			AUCTIONPRODUCT a 
+			ON (b.APPLICATIONNUM = a.APPLICATIONNUM)
+			left JOIN 
+			PRODUCTFILES p 
+			on (a.PRODUCTNUM = p.PRODUCTNUM)
+			where b.APPLICATIONNUM  =  #{applicationNum}
+ 	</select>
+ 	
+ 	<resultMap type="ApplicationVO" id="getProductDetail">
+ 		<id column="APPLICATIONNUM" property="applicationNum"></id>
+		<result column="WRITER" property="writer"></result>
+		<result column="TITLE" property="title"></result>
+		<result column="AUCTIONSORT" property="auctionSort"></result>
+		<result column="REGDATE" property="regDate"></result>
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
+			</collection>
+			
+		</collection>
+		
+ 	</resultMap>
+ 	
+ 	<insert id="setApplicationAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="applicationNum">	
+ 		INSERT INTO BOARDAPPLICATION
+		VALUE (#{applicationNum},#{writer},#{title},#{auctionSort},now());
+ 	</insert>
+ 	
+ 	
+ 	<delete id="setApplicationDelete" parameterType="ApplicationVO">
+ 		DELETE FROM BOARDAPPLICATION WHERE APPLICATIONNUM = #{applicationNum}
+ 	</delete>
+ 	
+ 	<update id="setApplicationUpdate" parameterType="ApplicationVO">
+ 		UPDATE BOARDAPPLICATION SET 
+		WRITER = #{writer}, TITLE = #{title}, AUCTIONSORT = #{auctionSort} WHERE APPLICATIONNUM=#{applicationNum}
+ 	</update>
+ 	
+ 	<select id="getApplicationCount" resultType="Long" parameterType="BoardPageMaker">
+		SELECT
+		COUNT(APPLICATIONNUM) FROM BOARDAPPLICATION
+		<include refid="search"></include>
+	</select>
+</mapper>
