@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,23 +50,33 @@ public class MemberController {
 	
 	// 로그인 GET
 	@GetMapping("login")
-	public void getLogin() throws Exception {}
+	public void getLogin(@RequestParam(defaultValue = "false", required = false) Boolean error, String message, Model model) throws Exception {
+		if(error) {
+			model.addAttribute("msg", "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.");
+		}
+	}
 	
 	// 로그인 POST
-	@PostMapping("login")
-	public String getLogin(MemberVO memberVO, HttpSession session) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
-		memberVO = memberService.getLogin(memberVO);
-		
-		session.setAttribute("member", memberVO);
-		
-		log.info("login 확인 : {}", memberVO.getId());
-		
-		//mv.addObject("member", memberVO);
-		
-		return "redirect:../";
-	}
+//	@PostMapping("login")
+//	public String getLogin(MemberVO memberVO, HttpSession session) throws Exception {
+//		ModelAndView mv = new ModelAndView();
+//		
+//		//@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session
+////		
+//////		memberVO = memberService.getLogin(memberVO);
+////		
+//		session.setAttribute("member", memberVO);
+////		
+//		log.info("login 확인 : {}", memberVO.getId());
+////		
+//		mv.addObject("member", memberVO);
+////		
+////		return "redirect:../";
+//		
+//		log.info("===== LOGIN POST =====");
+//		
+//		return "member/login";
+//	}
 	
 	// 로그아웃
 //	@GetMapping("logout")
@@ -111,7 +123,7 @@ public class MemberController {
 	
 	// 회원가입 join(name, birth, ...) GET
 	@GetMapping("join")
-	public void setJoin() throws Exception {}
+	public void setJoin(@ModelAttribute MemberVO memberVO) throws Exception {}
 
 	
 	// 회원가입 join(name, birth, ...) + 회원등급 POST
