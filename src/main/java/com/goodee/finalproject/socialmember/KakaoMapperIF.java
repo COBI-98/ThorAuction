@@ -14,6 +14,4 @@ public interface KakaoMapperIF
 	public int setKaRole(KakaoVO kakaoVO) throws Exception;
 
 	public int IdCheck(KakaoVO kakaoVO) throws Exception;
-	
-	public KaRoleVO getKakaoRole(KaRoleVO kaRoleVO) throws Exception;
 }

@@ -20,11 +20,6 @@ public class MemberSocialService extends DefaultOAuth2UserService
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
 
-	public KaRoleVO getKakaoRole(KaRoleVO kaRoleVO) throws Exception
-	{
-		return kakaoMapperIF.getKakaoRole(kaRoleVO);
-	}
-
 	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
 		return kakaoMapperIF.IdCheck(kakaoVO);
@@ -62,8 +57,8 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		String social = userRequest.getClientRegistration().getRegistrationId();
 		log.info(social);
 
-		log.info("social kakao: {}", (social == "kakao"));
-		log.info("social naver: {}", (social == "naver"));
+		log.info("social kakao: {}", (social.equals("kakao")));
+		log.info("social naver: {}", (social.equals("naver")));
 
 		OAuth2User oAuth2User2 = null;
 
@@ -76,7 +71,7 @@ public class MemberSocialService extends DefaultOAuth2UserService
 			oAuth2User2 = this.naverJoinCheck(userRequest);
 		}
 
-		log.info("oAuth Naver: {}", oAuth2User2);
+		log.info("oAuth Social: {}", oAuth2User2);
 
 		return oAuth2User2;
 	}
