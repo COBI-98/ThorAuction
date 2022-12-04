@@ -32,9 +32,5 @@
 		select
 		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
-	
-	<select id="getKakaoRole" parameterType="KaRoleVO">
-	select * from KAKAOMEMBERROLE where KANICKNAME = #{kaNickName}
-	</select>
 
 </mapper>

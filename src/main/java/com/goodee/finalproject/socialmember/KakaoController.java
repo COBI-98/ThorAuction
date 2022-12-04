@@ -29,14 +29,8 @@ public class KakaoController
 {
 	@Autowired
 	private MemberSocialService memberSocialService;
-
-	@PostMapping("RoleCheck")
-	@ResponseBody
-	public void getKakaoRole(KaRoleVO kaRoleVO) throws Exception
-	{
-		kaRoleVO = memberSocialService.getKakaoRole(kaRoleVO);
-		log.info("karoleVO: {}, ", kaRoleVO);
-	}
+	@Autowired
+	public AdminService adminService;
 
 	@PostMapping("IdCheck")
 	@ResponseBody
@@ -55,14 +49,13 @@ public class KakaoController
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
-		log.info("===== authentication: {}", authentication.getName());
-		// auth getName 과 DB의 소셜 ID가 같으면 메인으로?
+		log.info("===== authentication: {}", authentication.getPrincipal());
 
 		int rs = memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
 
 		modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
 		modelAndView.setViewName("socialMember/kakaoLogin");
-		session.setAttribute("kakaoVO", rs);
+		session.setAttribute("kakaoVO", rs); // 카카오 정보 DB insert 성공/실패 값
 		session.setAttribute("kakaoInfo", authentication.getPrincipal());
 
 		log.info("getNickName: {}", session.getAttribute("kakaoVO"));
@@ -78,13 +71,11 @@ public class KakaoController
 	}
 
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoDetailVO kakaoDetailVO, Authentication authentication) throws Exception
+	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
 
 		ModelAndView modelAndView = new ModelAndView();
-
-		// log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 
 		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
 

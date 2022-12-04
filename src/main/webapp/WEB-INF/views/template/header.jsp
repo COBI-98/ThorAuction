@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
@@ -18,26 +18,32 @@
 				<!-- 로그인 후 -->
 				<c:if test="${member != null}">
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
-					<li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
+					<%-- <li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li> --%>
 				</c:if>
 
 				<%-- <sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/joinchoose" class="nav-link link-dark px-2">|회원가입|</a></li>
 				</sec:authorize> --%>
 				<!-- 로그인 후 -->
+				<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a></li>
+
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-				<input type="text" value="${kakao }">
-				<li class="nav-item"><a href="" class="nav-link link-dark px-2"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
-				<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
+
+					<li class="nav-item"><a href="" class="nav-link link-dark px-2">
+							<b>${kakaoInfo.kaName }님 안녕하세요</b>
+						</a></li>
+					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
 					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form> --%>
-					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 기능</a></li>
+					<c:forEach items="${kakaoRole }" var="kk">
+						<c:if test="${(kk.kaRoleVOs[0].kaRoleName == 'ROLE_ADMIN') == true}">
+							<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a></li>
+						</c:if>
+					</c:forEach>
 				</sec:authorize>
-				
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -49,21 +55,16 @@
 				<span class="fs-4">토실토실대</span>
 			</a>
 			<ul class="nav">
-				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://192.168.1.101:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">QNA챗봇</a></li>	
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">실시간 경매장</a></li>
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">신청게시판</a></li>
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">공지게시판</a></li>
+				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">QNA챗봇</a></li>
 			</ul>
-			<form role="search" style="width:220px; margin-left:20px;">
- 
-		        <input type="search" class="form-control" placeholder="Search..." aria-label="Search" style="display:inline; width:175px;">
-		        <button type="button" style="background-color: white; border-style:none; display:inline;">
-		        	<img src="/images/icons8-search-64.png" style="width: 25px; margin-bottom:8px;">
-		        </button>
-	
-	      	</form>	
+			<form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+				<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+			</form>
 		</div>
 	</header>
 
