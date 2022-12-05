@@ -73,6 +73,8 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
+
+
 	//단위 경매 설정 시
 	if(data.unit != null){
 		talk.innerHTML += `<div>`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
@@ -81,7 +83,23 @@ ws.onmessage = function(msg){
 
 	//경매 시작시
 	else if(data.start != null){
-		talk.innerHTML += `<div>`+ "*경매가 시작되었습니다.*" +`</div>`;
+		if(data.gogo == true) {
+			auctionend.value="경매종료";
+			talk.innerHTML += `<div>`+ "*경매가 시작되었습니다.*" +`</div>`;
+	
+			final.innerText ="경매 최고가:";
+			//최종금액 초기화, 안보이게
+			finalamount.innerHTML = 0;
+			$('#finalamount').css("display","none");
+	
+			//최고금액 보이게
+			$('#amount').css("display","inline");
+			
+		}else{
+			auctionend.value="경매시작";
+		}
+
+
 	}
 
 	// //단위가격 클릭시
@@ -100,11 +118,22 @@ ws.onmessage = function(msg){
 
 	//경매 종료 시
 	else if(data.amount != null) {
-		final.innerText = "최종 금액";
-		let ff = rank[0];
-		$('#amount').css("display","none");
-		finalamount.innerText = ff;
-		talk.innerHTML += `<div>`+ "*경매가  종료되었습니다.*" +`</div>`;
+		if(data.gg == false) {
+			auctionend.value="경매시작";
+			final.innerText = "최종 금액:";
+			let ff = rank[0];
+			$('#amount').css("display","none");
+			finalamount.innerText = ff;
+			amount.innerHTML = 0;
+			rank[0] =aaa;
+			rank[1] = "id";
+			max = 0;
+			win = false;
+			$('#finalamount').css("display","inline");
+			talk.innerHTML += `<div>`+ "*경매가  종료되었습니다.*" +`</div>`;
+		}else{
+			auctionend.value="경매종료";
+		}
 	}
 
 	//강퇴 당했을 시
@@ -152,7 +181,7 @@ ws.onmessage = function(msg){
 		}
 
 		var item = `<div ${css} ${cssid}>
-						<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
+						<span><b class="name">${data.mid}</b></span><br/>
 					<span class="text">${data.msg}</span>
 						</div>`;
 					
@@ -163,7 +192,9 @@ ws.onmessage = function(msg){
 
 	//얼리기
 	else if(data.stop != null){
-		if(data.stop =="true"){
+		console.log(data);
+		if(data.stop ==true){
+			
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
@@ -182,22 +213,26 @@ ws.onmessage = function(msg){
 		
 		iddd.innerHTML="";
 		for(let i=0;i<userlist.length;i++){
-			iddd.innerHTML += `<div>`+"👀"+ userlist[i] + `</div>`;
+			iddd.innerHTML += `<div id="user">`+"👀"+ userlist[i] + `</div>`;
 		}
 		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
 		usercount.innerHTML = userlist.length;
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
+			stop.value="얼리기 해제";
 			$('#msg').attr("readonly",true);
 		}else{
+			stop.value="얼리기";
 			$('#msg').attr("readonly",false);
 		}
 
 		//경매시작 설정
 		if(data.gogo == "true") {
-			auctionend.innerHTML = "경매 종료";
+			auctionend.value = "경매종료";
 			auctionend.className = 'start';
+		}else if(data.gogo == "false"){
+			auctionend.value = "경매시작";
 		}
 		
 		//단위 가격 설정
@@ -223,33 +258,35 @@ ws.onmessage = function(msg){
 //회원 강퇴시키기
 iddd.addEventListener("click",function(event){
 	let even = event.target;
-	Swal.fire({
-		title: even.innerText + " 님을 강퇴시키겠습니까?",  // title, text , html  로 글 작성
-		icon: "warning",    //상황에 맞는 아이콘
-
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: '강퇴',
-		cancelButtonText: '취소',
-		reverseButtons: true   // 버튼 순서 변경
-	} ).then((result) => {   // 아무 버튼이나 누르면 발생
-		if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
-			
-			//강퇴 진행
-			data7.out = even.innerText.substr(2);
-			var temp = JSON.stringify(data7);
-			ws.send(temp);
-			
-			Swal.fire({    
-				title: "강퇴 되었습니다.",
-				icon: "success",
-				confirmButtonColor: '#3085d6',
+	if(even.id== "user") {
+		Swal.fire({
+			title: even.innerText + " 님을 강퇴시키겠습니까?",  // title, text , html  로 글 작성
+			icon: "warning",    //상황에 맞는 아이콘
+	
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: '강퇴',
+			cancelButtonText: '취소',
+			reverseButtons: true   // 버튼 순서 변경
+		} ).then((result) => {   // 아무 버튼이나 누르면 발생
+			if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
 				
-				confirmButtonText: '확인'
-			} ).then((result) => {
-			})
-		}
-	})
+				//강퇴 진행
+				data7.out = even.innerText.substr(2);
+				var temp = JSON.stringify(data7);
+				ws.send(temp);
+				
+				Swal.fire({    
+					title: "강퇴 되었습니다.",
+					icon: "success",
+					confirmButtonColor: '#3085d6',
+					
+					confirmButtonText: '확인'
+				} ).then((result) => {
+				})
+			}
+		})
+	}
 })
 
 msg.onkeyup = function(ev){
@@ -345,9 +382,12 @@ function sendstop(){
 //경매 시작,종료 시 
 auctionend.addEventListener("click",function(){
 	auctionend.classList.toggle("start");
+
+	//경매 시작 클릭 시
 	if(auctionend.value == "경매시작")	 {
-		auctionend.value = "경매 종료";
 		auctionstart();
+	
+	//경매 종료 클릭 시
 	}else{
 		sendresult();
 	}
@@ -373,6 +413,7 @@ function start() {
 function sendresult() {
 	data4.amount = rank[0];
 	data4.winner = rank[1];
+	data4.gg = start();
 	var temp = JSON.stringify(data4);
 	ws.send(temp);
 }

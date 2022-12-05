@@ -105,6 +105,10 @@ public class WebSocketChat {
 
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
+			
+			value = 0;
+			winuser="";
+			
 			//DB에 저장할 예정
 			
 			sendMessage(msg,session);
