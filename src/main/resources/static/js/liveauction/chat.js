@@ -138,6 +138,7 @@ ws.onmessage = function(msg){
 			win = false;
 			$('#finalamount').css("display","inline");
 			talk.innerHTML += `<div>`+ "*경매가  종료되었습니다.*" +`</div>`;
+			selecteditem.innerText = "";
 		}else{
 			auctionend.value="경매종료";
 		}
