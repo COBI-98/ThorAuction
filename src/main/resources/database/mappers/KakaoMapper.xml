@@ -43,4 +43,10 @@
 	<update id="setPoint" parameterType="KakaoDetailVO">
 		UPDATE SOCIALKAKAODETAIL SET KAPOINT = #{kaPoint} WHERE KANICKNAME = #{kaNickName} 
 	</update>
+	
+	<select id="getOneMember" parameterType="KakaoDetailVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+	
+	
 </mapper>

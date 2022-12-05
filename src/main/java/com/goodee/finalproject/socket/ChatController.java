@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goodee.finalproject.board.application.ApplicationService;
 import com.goodee.finalproject.board.application.ApplicationVO;
+import com.goodee.finalproject.member.MemberService;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.socialmember.KakaoDetailVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
@@ -25,6 +27,9 @@ public class ChatController {
 	
 	static WebSocketChat webSocketChat = new WebSocketChat();
 	static List<String> list = new ArrayList<String>();
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@Autowired
 	private MemberSocialService memberSocialService;
@@ -84,5 +89,40 @@ public class ChatController {
 		}
 		return false;
 	}
+	
+	@RequestMapping(value="/liveAuction/loginNum", method=RequestMethod.POST)
+	public void pointMinus(String loginnum) throws Exception {
+		int value = webSocketChat.getValue();
+		String winuser = webSocketChat.getWinuser();
+		String item = webSocketChat.getItem();
+
+		//일반 로그인 했을 때
+		if(loginnum.equals("1")) {
+			MemberVO mem = new MemberVO();
+			mem.setId(winuser);
+			Long point = memberService.getOneMember(mem).getPoint();
+			mem.setPoint(point - value);
+			mem.setId(winuser);
+			memberService.setPoint(mem);
+			//낙찰 내역 DB 저장
+		
+		//소셜 로그인 했을 때 
+		}else {
+			KakaoDetailVO kakaoDetailVO = new KakaoDetailVO();
+			kakaoDetailVO.setKaNickName(loginnum);
+			Long point = memberSocialService.getOneMember(kakaoDetailVO).getKaPoint();
+			kakaoDetailVO.setKaPoint(point - value);
+			kakaoDetailVO.setKaNickName(loginnum);
+			memberSocialService.setPoint(kakaoDetailVO);
+			//낙찰 내역 DB 저장
+			
+		}
+		
+		
+		webSocketChat.setValue(0);
+		webSocketChat.setWinuser("");
+		webSocketChat.setItem("");
+	}
+	
 	
 }
