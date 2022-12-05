@@ -8,9 +8,9 @@
    text-align: center;
 } */
 
-#chat-box{
+.chat-box{
 	width: 100%;
-	aspect-ratio: 4.9 / 9; 
+	aspect-ratio: 4 / 9; 
 }
 
 #chatt #talk{
@@ -38,13 +38,24 @@
 #chatt #btnSend{
    width: 20%;
    height: 100%;
-   background-color: #fea532;
-   color: white;
-   border-style: none;
+  
+}
+
+
+
+.bidcoinBtn{
+	background-color: #fea532;
+    color: white;
+    font-weight : 500;
+    border-style: none;
+    border-radius: 3px;
+	min-height: 40px;
+	min-width: 30px;
+	padding: 10px;
 }
 
 #chatt #talk div{
-   width: 60%;
+   
    display: inline-block;
    padding: 6px;
    border-radius:10px;   
@@ -57,8 +68,24 @@
 }
 
 #chatt .me{
+  
+   margin : 1px 0px 2px 30%;   
+   
+   display: flex !important;
+   justify-content: flex-end;
+   align-items: flex-end;
+}
+#chatt .chat-date{
+   font-size: 12px;
+}
+
+#chatt .chat-text{
    background-color : #eee;
-   margin : 1px 0px 2px 40%;   
+}
+
+#chatt .hi{
+   font-size: 14px;
+   width: 100%;
 }
 
 #chatt .other{
@@ -87,9 +114,9 @@
    height: 45px;
 }
 
- .container{
+ .chat-container{
    width: 25%;
-   padding: 0px 15px;
+   padding: 0 15px;
 } 
 
 #auction{
