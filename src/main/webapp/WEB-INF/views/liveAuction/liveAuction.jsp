@@ -60,7 +60,11 @@
             <span id="amount">${value}</span>
             <span id="hidden" style="visibility: hidden;">${value}</span>
             <span id="finalamount"></span>
-          </div>   
+          </div>
+          <div id="item">
+            <span>경매 물품</span>
+            <span id="selecteditem"></span>
+          </div>  
 
           <ul class="tabs">
             <li class="tab-link current" data-tab="chatt">채팅창</li>
@@ -110,7 +114,11 @@
 							<div>경매설정</div>
 							<div>
 				              <span>경매 물건</span>
-				              <select id="items" style="width: 60%"></select>
+                      <select id="items" name="items" style="width: 60%;">
+                        <c:forEach items="${itemList}" var="items">
+                        <option value="${items.productName}">${items.productName}</option>
+                      </c:forEach>
+                      </select>
 				              <input type="button" value="설정" id="itemsend" class="bidcoinBtn">
 				            </div>
 				             

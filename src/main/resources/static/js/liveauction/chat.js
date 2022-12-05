@@ -182,7 +182,7 @@ ws.onmessage = function(msg){
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
-		if(auctionend.className == "start") {
+		if(auctionend.classList.contains("start")) {
 			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==data.value){
 				if(rank[0]==0 && rank[1] == ''){
 					cssid = 'id=enter';
@@ -196,7 +196,7 @@ ws.onmessage = function(msg){
 		amount.innerHTML = rank[0];
 		console.log(rank);
 		
-		if(auctionend.className == "start") {
+		if(auctionend.classList.contains("start")) {
 			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
 				cssid = 'id=enter';
 			}
@@ -287,7 +287,7 @@ ws.onmessage = function(msg){
 		//경매시작 설정
 		if(data.gogo == "true") {
 			auctionend.value = "경매종료";
-			auctionend.className = 'start';
+			auctionend.classList[1] = 'start';
 		}else if(data.gogo == "false"){
 			auctionend.value = "경매시작";
 		}
@@ -371,7 +371,7 @@ function send(){
 	var t4 = index.substr(4)*1;
 	var mypoint = point.innerText;
 
-	if(auctionend.className == "start") {
+	if(auctionend.classList.contains("start")) {
 
 		if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
 			if(t4 <= mypoint){
@@ -559,7 +559,7 @@ $('#amount').on('DOMSubtreeModified propertychange',function(){
 
 //단위 가격 누를 시
 add.addEventListener("click",function(){
-	if(auctionend.className == "start") {
+	if(auctionend.classList.contains("start")) {
 		var mm = hidden.innerHTML*1;
 		var aa = add.value.substr(1) *1;
 		var text = mm+aa;
