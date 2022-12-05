@@ -31,7 +31,7 @@
                 <div class="member-scroll-layout__inner">
                     <div class="register-header">
                         <h1 class="register-header__logo">
-                            <img class="register-header__logo-image" src="/images/member/Testimg.png" alt="토실대 임시로고">
+                            <a href="../"><img class="register-header__logo-image" src="/images/member/Odin.png" alt="토실대 임시로고"></a>
                         </h1>
                         <div class="register-header__step">
                             <i class="register-header__step-dot">step 1</i>
@@ -50,12 +50,14 @@
                             <div class="member-input">
                                 <div class="member-input__state" style="padding-bottom: 0px;">
                                     <div class="container">
-                                        <input id="id" class="member-input__box" placeholder="아이디" maxlength='15' type="text" autocomplete="off" name="id">                                    
+                                        <input id="id" name="id" class="member-input__box" style="text-transform:lowercase;" placeholder="아이디" maxlength='15' type="text" autocomplete="off">                                    
                                         <button type="button" class="member-button confirm__btn idCheck">중복확인</button>
                                     </div>
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
-                                <div class="sign-up__input-error-message idErrorMessage"></div>
+                                
+                                <div class="sign-up__input-error-message idErrorMessage">영문 소문자, 숫자만 사용해 주세요</div>
+                                <span class="msg_box">${errorMsg.id}</span>
                             </div>
                             
                             <!-- 비밀번호 -->
@@ -64,8 +66,9 @@
                                     <input id="pw" class="member-input__box" placeholder="비밀번호" type="password" autocomplete="off" name="pw">
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
+                                
                                 <div class="sign-up__input-error-message pwErrorMessage"></div>
-                                <!-- <div class="sign-up__input-error-message pwErrorMessage">8~16자 영문 대ㆍ소문자, 숫자를 사용하세요</div> -->
+                                <span class="msg_box">${errorMsg.pw}</span>
                             </div>
 
                             <!-- 비밀번호 재확인 -->
@@ -74,6 +77,7 @@
                                     <input id="pwEquals" class="member-input__box" placeholder="비밀번호 재확인" type="password" autocomplete="off" name="pwEquals">
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
+                                
                                 <div class="sign-up__input-error-message pwEqualsErrorMessage"></div>
                             </div>
 

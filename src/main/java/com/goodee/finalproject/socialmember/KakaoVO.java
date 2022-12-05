@@ -1,6 +1,7 @@
 package com.goodee.finalproject.socialmember;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,10 @@ public class KakaoVO implements OAuth2User, UserDetails
 	private String kaNickName;
 	private String kaEmail;
 	private String kaName;
+	
+	private List<KaRoleVO> kaRoleVOs;
+	private List<KakaoRoleVO> kakaoRoleVOs;
+	private List<KakaoDetailVO> kakaoDetailVOs;
 
 	private String social;
 
