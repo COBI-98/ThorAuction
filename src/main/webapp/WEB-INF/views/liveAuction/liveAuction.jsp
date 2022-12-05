@@ -58,11 +58,17 @@
 						<button id="cameraBlack" class= ""> 방송 일시 정지 2 </button>
 						<button id="screenShare" class= ""> 화면 공유로 전환 </button>
 						<div>카메라 설정<select id="cameras"></select></div>
+
+            <div>
+              <span>경매 물건</span>
+              <select id="items"></select>
+              <input type="button" value="설정" id="itemsend">
+            </div>
 						
             <div>
-            <span>단위가격</span>
-            <input type="text" id="unit">
-            <input type="button" value="설정" id="unitsend">
+              <span>단위가격</span>
+              <input type="text" id="unit">
+              <input type="button" value="설정" id="unitsend">
             </div>
 
 						<input type="button" class="" value="얼리기" id='stop'>
