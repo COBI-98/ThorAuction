@@ -24,6 +24,10 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 	// @Value("${kakao.Admin.key}")
 	// private String adminKey;
+	
+	public KakaoDetailVO getKakaoDetail(KakaoVO kakaoVO) throws Exception{
+		return kakaoMapperIF.getKakaoDetail(kakaoVO);
+	}
 
 	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
