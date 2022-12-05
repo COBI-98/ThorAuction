@@ -14,4 +14,10 @@ public interface KakaoMapperIF
 	public int setKaRole(KakaoVO kakaoVO) throws Exception;
 
 	public int IdCheck(KakaoVO kakaoVO) throws Exception;
+	
+	public KakaoDetailVO getKakaoDetail(KakaoVO kakaoVO) throws Exception;
+	
+	public int setPoint(KakaoDetailVO kakaoDetailVO) throws Exception;
+	
+	public KakaoDetailVO getOneMember(KakaoDetailVO kakaoDetailVO) throws Exception;
 }
