@@ -49,7 +49,7 @@ var unitsend = getId('unitsend');
 var items = getId('items');
 var itemsend = getId('itemsend');
 var selecteditem = getId('selecteditem');
-var loginnum = getId('loginnum');
+var ln = getId('loginnum');
 
 var username;
 var win = false;
@@ -81,9 +81,22 @@ ws.onmessage = function(msg){
 
 	//로그인 종류
 	if(data.loginnum != null) {
-		data13.loginnum = loginnum.innerText;
-		var temp = JSON.stringify(data13);
-		ws.send(temp);
+		// data13.loginnum = loginnum.innerText;
+		// var temp = JSON.stringify(data13);
+		// ws.send(temp);
+
+		var loginnum = ln.innerText;
+		console.log("loginnnnn : "+loginnum);
+		$.ajax({
+			type:'POST',
+			url : '/liveAuction/loginNum',
+			data : {
+				loginnum : loginnum
+			},
+			success : function(result) {
+				console.log(result);
+			}
+		})
 	}
 
 	//경매 물품 설정 시
