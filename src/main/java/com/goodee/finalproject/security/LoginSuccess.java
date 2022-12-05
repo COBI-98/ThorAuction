@@ -46,7 +46,14 @@ public class LoginSuccess implements AuthenticationSuccessHandler
 		// }
 		// }
 		// }
-
 		response.sendRedirect("/socialMember/kakaoLogin");
+//		if (authentication != null)
+//		{
+//		}
+//		else
+//		{
+//			response.sendRedirect("/");
+//		}
+
 	}
 }

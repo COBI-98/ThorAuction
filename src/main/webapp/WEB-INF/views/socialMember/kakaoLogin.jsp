@@ -28,13 +28,39 @@
 								class="register-header__step-dot">step 3</i> <i class="register-header__step-dot">step 4</i>
 						</div>
 					</div>
-					<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
+					<c:choose>
+						<c:when test="${kakaoInfo != null }">
+							<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
+						</c:when>
+						<c:when test="${naverInfo != null }">
+							<input type="hidden" id="kemail" name="kaEmail" value="${naInfo.NaEmail }">
+						</c:when>
+						<c:otherwise>error</c:otherwise>
+					</c:choose>
+
 					<form action="./kakaoLogin" method="post">
-						<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
+
+						<c:choose>
+							<c:when test="${kakaoInfo != null }">
+								<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
+							</c:when>
+							<c:when test="${naverInfo != null }">
+								<input type="text" id="kaName" name="kaNickName" value="${naverInfo.name }">
+							</c:when>
+							<c:otherwise>error</c:otherwise>
+						</c:choose>
 						<table>
 							<tr>
 								<th>이름</th>
-								<td>${kakaoInfo.kaName }</td>
+								<c:choose>
+									<c:when test="${kakaoInfo != null }">
+										<td>${kakaoInfo.kaName }</td>
+									</c:when>
+									<c:when test="${naverInfo != null }">
+										<td>${naverInfo.name }</td>
+									</c:when>
+									<c:otherwise>error</c:otherwise>
+								</c:choose>
 							</tr>
 							<tr>
 								<th>생년월일</th>
