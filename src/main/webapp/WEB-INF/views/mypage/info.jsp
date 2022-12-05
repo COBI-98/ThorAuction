@@ -34,7 +34,7 @@
 				<a href="./paypoint">충전내역</a>
 			</div>
 			<div class="me-5">
-				<a href="./update">정보수정</a>
+				<a href="./checkpw">정보수정</a>
 			</div>
 			<div class="me-5">
 				<a href="./delete">회원탈퇴</a>
