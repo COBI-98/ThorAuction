@@ -25,5 +25,7 @@ public interface ApplicationMapper  {
 	
 	public int setApplicationDelete(ApplicationVO applicationVO) throws Exception;
 	
+	public List<ApplicationVO> getApprovalCheckList() throws Exception;
+	
 
 }

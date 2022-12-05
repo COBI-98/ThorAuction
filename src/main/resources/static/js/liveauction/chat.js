@@ -18,6 +18,7 @@ var data8 = {};
 var data9 = {};
 var data10 = {};
 var data11 = {};
+var data12 = {};
 
 var ws ;
 
@@ -44,6 +45,9 @@ var list = getId('list');
 var listttt = getId('listttt');
 var unit = getId('unit');
 var unitsend = getId('unitsend');
+var items = getId('items');
+var itemsend = getId('itemsend');
+var selecteditem = getId('selecteditem');
 
 var username;
 var win = false;
@@ -73,10 +77,13 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
-
-
+	//경매 물품 설정 시
+	if(data.item != null) {
+		selecteditem.innerText = data.item;
+	}
+	
 	//단위 경매 설정 시
-	if(data.unit != null){
+	else if(data.unit != null){
 		talk.innerHTML += `<div>`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
 		add.value = "+" + data.unit;
 	}
@@ -169,16 +176,20 @@ ws.onmessage = function(msg){
 		let a = data.msg;
 		var b = a.substr(4)*1;
 		
+		if(auctionend.className == "start") {
+			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==data.value){
+				if(rank[0]==0 && rank[1] == ''){
+					cssid = 'id=enter';
+				}else if(!(data.mid == rank[1] && b == rank[0])) {
+					cssid = 'id=enter';
+				}
+			}
+		}
 		rank[0] = data.value;
 		rank[1] = data.win;
 		amount.innerHTML = rank[0];
 		console.log(rank);
 		
-		if(auctionend.className == "start") {
-			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
-				cssid = 'id=enter';
-			}
-		}
 
 		var item = `
 				<div ${css} ${cssid}>
@@ -206,7 +217,7 @@ ws.onmessage = function(msg){
 
 	//입장시
 	else if(data.usercome != null) {
-
+		
 		console.log(data);
 		console.log(data.gogo);
 
@@ -215,7 +226,7 @@ ws.onmessage = function(msg){
 		
 		iddd.innerHTML="";
 		for(let i=0;i<userlist.length;i++){
-			iddd.innerHTML += `<div id="user">`+"👀"+ userlist[i] + `</div>`;
+			iddd.innerHTML += `<div id="user">`+"👀"+ userlist[i].trim() + `</div>`;
 		}
 		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
 		usercount.innerHTML = userlist.length;
@@ -236,9 +247,16 @@ ws.onmessage = function(msg){
 		}else if(data.gogo == "false"){
 			auctionend.value = "경매시작";
 		}
-		
+
+		rank[0] = data.value *1;
+		rank[1] = data.winner;
+		console.log(rank);
+
 		//단위 가격 설정
 		add.value = "+"+data.price;
+
+		//경매 물품 설정
+		selecteditem.innerText = data.goods;
 	}
 
 	//퇴장시
@@ -246,7 +264,7 @@ ws.onmessage = function(msg){
 		iddd.innerHTML="";
 
 		for(let i=0;i<data.list.length;i++) {
-			iddd.innerHTML += `<div>`+data.list[i] + `</div>`;
+			iddd.innerHTML += `<div>`+"👀"+data.list[i].trim() + `</div>`;
 		}
 
 		usercount.innerHTML = data.list.length;
@@ -342,7 +360,7 @@ function send(){
 	if(msg.value.trim() != ''){
 		data.mid = getId('id').innerHTML;
 		data.msg = msg.value;
-		data.date = new Date().toLocaleString().substring(13,21);
+		data.date = new Date().toLocaleString().substring(13,20);
 		data.value = max;
 		data.point = point.innerText;
 		data.win = win;
@@ -427,6 +445,9 @@ function usercome(){
 	data5.ppp = "potsss";
 	data5.gogo = "trats";
 	data5.price = "ecirp";
+	data5.winner = "renniw";
+	data5.value = "eulav";
+	data5.goods = "sdoog";
 	var temp =JSON.stringify(data5);
 	ws.send(temp);
 }
@@ -521,3 +542,11 @@ unitsend.addEventListener("click",function(){
 	ws.send(temp);
 })
 
+//경매 물품 선택
+itemsend.addEventListener("click",function(){
+	//items.options[items.selectedIndex].value;
+	console.log(items.options[items.selectedIndex].value);
+	data12.item = items.options[items.selectedIndex].value;
+	var temp = JSON.stringify(data12);
+	ws.send(temp);
+})
