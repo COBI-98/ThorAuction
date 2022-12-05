@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -20,14 +21,25 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.goodee.finalproject.member.MemberService;
+import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.socialmember.KakaoDetailVO;
+import com.goodee.finalproject.socialmember.MemberSocialService;
 import com.google.gson.Gson;
 
 @Service
 @ServerEndpoint(value="/chatt")
 public class WebSocketChat {
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private MemberSocialService memberSocialService;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private static Set<Session> clients = 
@@ -66,8 +78,39 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
+
+		//경매 종료 시 낙찰자만
+		if(msg.substring(2, 10).equals("loginnum")) {
+			//일반 로그인일때
+			if(String.valueOf(jsonObj.get("loginnum")).equals("1")) {
+				System.out.println(winuser);
+				System.out.println(value);
+				MemberVO mem = new MemberVO();
+				mem.setId(winuser);
+				System.out.println(mem);
+				mem = memberService.getOneMember(mem);
+				Long point = mem.getPoint();
+				mem.setPoint(point - value);
+				mem.setId(winuser);
+				memberService.setPoint(mem);
+			
+			//소셜 로그인일때
+			}else {
+				String num = String.valueOf(jsonObj.get("loginnum"));
+				KakaoDetailVO kakaoDetailVO = new KakaoDetailVO();
+				kakaoDetailVO.setKaNickName(num);
+				Long point = memberSocialService.getOneMember(kakaoDetailVO).getKaPoint();
+				kakaoDetailVO.setKaPoint(point - value);
+				memberSocialService.setPoint(kakaoDetailVO);
+			}
+			
+			//초기화
+			value = 0;
+			winuser="";
+		}
+		
 		//경매 물품 설정
-		if(msg.substring(2, 6).equals("item")) {
+		else if(msg.substring(2, 6).equals("item")) {
 			item = String.valueOf(jsonObj.get("item"));
 			sendMessage(msg,session);
 		}
@@ -113,14 +156,31 @@ public class WebSocketChat {
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
 			
-			value = 0;
-			winuser="";
+			String message = msg.replace("amount", "loginnum");
 			
+			value=Integer.parseInt(amount);
+			winuser = winner;
+//			value = 0;
+//			winuser="";
+			Session ss = getKey(list,winner);
 			//DB에 저장할 예정 (금액, id, 경매 물품) 포인트 바로 빠지게 함
+			//낙찰된 회원이 일반 로그인일때
+//			MemberVO memberVO = new MemberVO();
+//			memberVO.setId(winner);
+//			memberVO.setPoint(memberVO.getPoint() - Integer.parseInt(amount));
+//			memberService.setPoint(memberVO);
+			
+			//낙찰된 회원이 소셜 로그인일때
+			
+			
+			//DB 저장
+			
 			
 			//저장 후
 			item ="";
 			sendMessage(msg,session);
+			sendOneMessage(message, ss);
+
 			
 		//채팅 전송
 		}else if(msg.substring(2, 5).equals("mid")) {
@@ -219,6 +279,11 @@ public class WebSocketChat {
 	
 	public List<String> getBanList() {
 		return banlist;
+	}
+	
+	@OnError
+	public void handleError(Throwable t){
+		t.printStackTrace();
 	}
 
 }

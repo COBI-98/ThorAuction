@@ -122,6 +122,7 @@
   </div>
 	
       <h2 id="id">${member}</h2>
+      <h2 id="loginnum">${num}</h2>
       <h2 id="point">${point}</h2>
       <h2 id="role">${role[0].roleName}</h2>
 

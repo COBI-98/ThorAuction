@@ -46,6 +46,7 @@ public class ChatController {
 				}
 				else{
 					mv.addObject("member", mem.getId());
+					mv.addObject("num", "1");
 					mv.addObject("role", mem.getRoleVOs());
 					mv.addObject("point", mem.getPoint());
 				}
@@ -58,6 +59,7 @@ public class ChatController {
 					return mv;
 				}else {
 					mv.addObject("member", kakao.getKaName());
+					mv.addObject("num", kakao.getKaNickName());
 					mv.addObject("role",kakao.getKakaoRoleVOs());
 					mv.addObject("point", detail.getKaPoint());
 				}

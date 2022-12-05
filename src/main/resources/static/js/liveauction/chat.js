@@ -19,6 +19,7 @@ var data9 = {};
 var data10 = {};
 var data11 = {};
 var data12 = {};
+var data13 = {};
 
 var ws ;
 
@@ -48,6 +49,7 @@ var unitsend = getId('unitsend');
 var items = getId('items');
 var itemsend = getId('itemsend');
 var selecteditem = getId('selecteditem');
+var loginnum = getId('loginnum');
 
 var username;
 var win = false;
@@ -77,8 +79,15 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid;
 
+	//로그인 종류
+	if(data.loginnum != null) {
+		data13.loginnum = loginnum.innerText;
+		var temp = JSON.stringify(data13);
+		ws.send(temp);
+	}
+
 	//경매 물품 설정 시
-	if(data.item != null) {
+	else if(data.item != null) {
 		selecteditem.innerText = data.item;
 	}
 	
@@ -435,6 +444,7 @@ function sendresult() {
 	data4.amount = rank[0];
 	data4.winner = rank[1];
 	data4.gg = start();
+	data4.loginnnn = "dlkjslkfj";
 	var temp = JSON.stringify(data4);
 	ws.send(temp);
 }

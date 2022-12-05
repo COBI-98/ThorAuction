@@ -37,5 +37,14 @@ public class MemberService{
 		
 		return result;
 	}
+	
+	public int setPoint(MemberVO memberVO) throws Exception{
+		int result = memberMapper.setPoint(memberVO);
+		return result;
+	}
+	
+	public MemberVO getOneMember(MemberVO memberVO) throws Exception{
+		return memberMapper.getOneMember(memberVO);
+	}
 
 }
