@@ -5,6 +5,28 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 총 포인트 -->
+	<update id="getPoint" parameterType="PayVO">
+		UPDATE THORMEMBER M 
+		INNER JOIN PAY P
+		ON M.ID = P.ID
+		SET M.POINT = M.POINT + #{payTotal}
+		WHERE M.ID = #{id}
+	</update>
+
+	<!-- 포인트 충전 -->
+	<insert id="chargePoint" parameterType="PayVO">
+		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE)
+		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
+	</insert>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="checkPw" parameterType="MemberVO" resultType="int">
+		SELECT COUNT(*) 
+        FROM THORMEMBER
+        WHERE ID = #{id} AND PW = #{pw}
+	</select>
+
 	<!-- 회원탈퇴 -->
 	<delete id="setDelete">
 		DELETE FROM THORMEMBER
@@ -16,7 +38,6 @@
 	<update id="setUpdate" parameterType="MemberVO">
 		UPDATE THORMEMBER 
 		SET
-		ID = #{id},
 		NAME = #{name},
 		BIRTH = #{birth},
 		EMAIL = #{email},
@@ -24,6 +45,15 @@
 		ADDR = #{addr},
 		ADDR2 = #{addr2},
 		PHONE = #{phone}
+		
 		WHERE ID = #{id}
 	</update>
+	
+	<!-- 마이페이지 정보 출력 -->
+	<select id="getList" resultType="MemberVO">
+		SELECT *
+		FROM THORMEMBER
+		WHERE ID = #{id}
+	</select>
+	
 </mapper>

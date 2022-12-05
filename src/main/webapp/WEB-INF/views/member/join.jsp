@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/member/join.css">
 
     <!-- 회원가입 JS -->
+    <script defer src="/js/member/signup.js"></script>
     <script defer src="/js/member/join.js"></script>
 </head>
 <body>
@@ -27,23 +28,56 @@
                 <div class="member-scroll-layout__inner">
                     <div class="register-header">
                         <h1 class="register-header__logo">
-                            <img class="register-header__logo-image" src="/images/member/Testimg.png" alt="토실대 임시로고">
+                            <a href="../"><img class="register-header__logo-image" src="/images/member/Odin.png" alt="토실대 임시로고"></a>
                         </h1>
                         <div class="register-header__step">
                             <i class="register-header__step-dot">step 1</i>
-                            <i class="register-header__step-dot">step 2</i>
-                            <i class="register-header__step-dot register-header__step-dot--on">step 3</i>
-                            <i class="register-header__step-dot">step 4</i>
+                            <i class="register-header__step-dot register-header__step-dot--on">step 2</i>
+                            <i class="register-header__step-dot">step 3</i>
                         </div>
                     </div>
 
-                    <form action="join" method="POST" id="joinform">
-                        
-                        <input type="hidden" name="id" value="${param.id}">
-                        <input type="hidden" name="pw" value="${param.pw}">
+                    <form action="join" method="POST" id="joinForm">
+
                         <div class="sign-up">
                             <h2 class="sign-up__title">개인정보입력</h2>
                             <div class="sign-up__sub">회원가입을 위해서 핸드폰 인증이 진행되며, <br>인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</div>
+                            
+                            <!-- 아이디 -->
+                            <div class="member-input">
+                                <div class="member-input__state" style="padding-bottom: 0px;">
+                                    <div class="container">
+                                        <input id="id" name="id" class="member-input__box" style="text-transform:lowercase;" placeholder="아이디" maxlength='15' type="text" autocomplete="off">                                    
+                                        <button type="button" class="member-button confirm__btn idCheck">중복확인</button>
+                                    </div>
+                                    <span class="member-input__valid-wrapper"></span>
+                                </div>
+                                
+                                <div class="sign-up__input-error-message idErrorMessage">영문 소문자, 숫자만 사용해 주세요</div>
+                                <span class="msg_box">${errorMsg.id}</span>
+                            </div>
+                            
+                            <!-- 비밀번호 -->
+                            <div class="member-input">
+                                <div class="member-input__state">
+                                    <input id="pw" class="member-input__box" placeholder="비밀번호" type="password" autocomplete="off" name="pw">
+                                    <span class="member-input__valid-wrapper"></span>
+                                </div>
+                                
+                                <div class="sign-up__input-error-message pwErrorMessage"></div>
+                                <span class="msg_box">${errorMsg.pw}</span>
+                            </div>
+
+                            <!-- 비밀번호 재확인 -->
+                            <div class="member-input">
+                                <div class="member-input__state">
+                                    <input id="pwEquals" class="member-input__box" placeholder="비밀번호 재확인" type="password" autocomplete="off" name="pwEquals">
+                                    <span class="member-input__valid-wrapper"></span>
+                                </div>
+                                
+                                <div class="sign-up__input-error-message pwEqualsErrorMessage"></div>
+                            </div>
+                            
                             
                             <!-- 이름 -->
                             <div class="member-input">
@@ -51,7 +85,9 @@
                                     <input id="name" name="name" class="member-input__box" placeholder="이름" type="text" autocomplete="off">                                    
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
+                                
                                 <div class="sign-up__input-error-message nameErrorMessage"></div>
+                                <span class="msg_box">${errorMsg.name}</span>
                             </div>
                             
                             <!-- 생년월일 -->
@@ -60,7 +96,9 @@
                                     <input id="birth" class="member-input__box" name="birth" maxlength='6' placeholder="생년월일" type="text" autocomplete="off">
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
+                                
                                 <div class="sign-up__input-error-message birthErrorMessage"></div>
+                                <span class="msg_box">${errorMsg.birth}</span>
                             </div>
 
                             <!-- 전화번호 -->
@@ -72,7 +110,9 @@
                                     </div>
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
+                                
                                 <div class="sign-up__input-error-message phoneErrorMessage"></div>
+                                <span class="msg_box">${errorMsg.phone}</span>
                                 <div class="member-input__state">
                                     <input id="memberInput9300" class="member-input__box" readonly="readonly" placeholder="인증번호를 입력하세요" type="text" autocomplete="off" name="cnNum">                                    
                                     <span class="member-input__valid-wrapper"></span>
@@ -88,7 +128,9 @@
                                     <input id="email" class="member-input__box" placeholder="이메일" type="email" autocomplete="off" name="email">
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
+                                
                                 <div class="sign-up__input-error-message emailErrorMessage"></div>
+                                <span class="msg_box">${errorMsg.email}</span>
                             </div>
 
                             <!-- 우편번호 -->

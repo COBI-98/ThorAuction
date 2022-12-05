@@ -6,7 +6,7 @@ import lombok.Data;
 public class KakaoDetailVO
 {
 	private String kaNickName;
-	private Long kaBirth;
+	private String kaBirth;
 	private String kaPost;
 	private String kaAddr;
 	private String kaAddrDetail;
