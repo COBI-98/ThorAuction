@@ -15,7 +15,8 @@ $("#name").blur(function () {
 		$(".nameErrorMessage").text("필수 항목입니다");
 		$(".nameErrorMessage").attr("style", "color:#f00");
 	} else if (!isname($("#name").val())) {
-		$(".birthErrorMessage").text("2~5자 한글만 사용해 주세요");
+		$(".nameErrorMessage").text("2~5자 한글만 사용해 주세요");
+		$(".nameErrorMessage").attr("style", "color:#f00");
 		
 		resultss[0] = false;
 	} else {

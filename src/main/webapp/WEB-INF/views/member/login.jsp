@@ -54,7 +54,7 @@
                                         <span class="member-link__span">|</span>
                                         <a class="member-link" href="#">비밀번호 찾기</a> 
                                         <span class="member-link__span">|</span>
-                                        <a class="member-link" href="./signup">회원가입</a>
+                                        <a class="member-link" href="./join">회원가입</a>
                                     </span>
                                 </div>
 
