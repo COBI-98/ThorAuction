@@ -64,7 +64,7 @@ $("#pay").click(function () {
                 title: '결제 완료',
                 html: '마이페이지로 이동합니다',
             }).then(function () {
-                location.href = "/mypage/";
+                location.href = "/mypage/info";
             })
 
         } else {
