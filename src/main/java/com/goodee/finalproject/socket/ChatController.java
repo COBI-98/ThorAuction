@@ -21,20 +21,14 @@ import com.goodee.finalproject.socialmember.MemberSocialService;
 @Controller
 public class ChatController {
 	
-	WebSocketChat webSocketChat = new WebSocketChat();
+	static WebSocketChat webSocketChat = new WebSocketChat();
 	static List<String> list = new ArrayList<String>();
 	
 	@Autowired
 	private MemberSocialService memberSocialService;
 	
 	@RequestMapping("/liveAuction")
-	public ModelAndView chat(HttpSession session,HttpServletRequest req,Authentication authentication) throws Exception {
-		list = webSocketChat.getBanList();
-//		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
-//		KakaoVO kakao = (KakaoVO) req.getSession().getAttribute("Detail");
-//		System.out.println(mem);
-//		System.out.println(kakao);
-		System.out.println(authentication.getPrincipal());
+	public ModelAndView chat(Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		
@@ -54,18 +48,16 @@ public class ChatController {
 			}else {
 				KakaoVO kakao = (KakaoVO) authentication.getPrincipal();
 				KakaoDetailVO detail = memberSocialService.getKakaoDetail(kakao);
-				System.out.println(detail);
 				if(ban(kakao.getKaName())) {
 					mv.setViewName("/index");
 					return mv;
 				}else {
 					mv.addObject("member", kakao.getKaName());
-					mv.addObject("point", detail.getKaPoint());
 					mv.addObject("role",kakao.getKakaoRoleVOs());
+					mv.addObject("point", detail.getKaPoint());
 				}
 			}
-			//mv.addObject("member", principal.getName());
-			//mv.addObject("point", 3000L);
+
 			mv.addObject("value",webSocketChat.getValue());
 			mv.setViewName("/liveAuction/liveAuction");
 			return mv;
@@ -74,6 +66,7 @@ public class ChatController {
 	}
 	
 	public static boolean ban(String str) {
+		list = webSocketChat.getBanList();
 		if(list.size() > 0) {
 			for(int i=0;i<list.size();i++) {
 				if(str.equals(list.get(i))) {

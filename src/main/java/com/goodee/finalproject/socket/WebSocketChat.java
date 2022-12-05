@@ -109,7 +109,7 @@ public class WebSocketChat {
 			value = 0;
 			winuser="";
 			
-			//DB에 저장할 예정
+			//DB에 저장할 예정 (금액, id, 경매 물품) 포인트 바로 빠지게 함
 			
 			sendMessage(msg,session);
 			
