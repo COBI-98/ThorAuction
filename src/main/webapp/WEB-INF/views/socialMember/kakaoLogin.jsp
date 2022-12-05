@@ -45,7 +45,7 @@
 								<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
 							</c:when>
 							<c:when test="${naverInfo != null }">
-								<input type="text" id="kaName" name="kaNickName" value="${naverInfo.name }">
+								<input type="hidden" id="kaName" name="kaNickName" value="${naverInfo.username }">
 							</c:when>
 							<c:otherwise>error</c:otherwise>
 						</c:choose>

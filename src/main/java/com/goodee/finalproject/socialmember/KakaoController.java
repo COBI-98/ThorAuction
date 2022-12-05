@@ -35,8 +35,8 @@ public class KakaoController
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
-		log.info("===== authentication: {}", authentication.getPrincipal().getClass());
-		log.info("equals: {}", authentication.getPrincipal().getClass().toString());
+//		log.info("===== authentication: {}", authentication.getPrincipal().getClass());
+//		log.info("equals: {}", authentication.getPrincipal().getClass().toString());
 
 		if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.KakaoVO"))
 		{
@@ -104,6 +104,8 @@ public class KakaoController
 		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
 		{
 			int rs2 = memberSocialService.setNaverDetail(naverDetailVO);
+			
+			log.info("naver login rs2: {}", rs2);
 
 			modelAndView.addObject("rs2", rs2);
 			modelAndView.setViewName("redirect:/");
