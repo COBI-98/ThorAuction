@@ -180,10 +180,12 @@ ws.onmessage = function(msg){
 			}
 		}
 
-		var item = `<div ${css} ${cssid}>
-						<span><b class="name">${data.mid}</b></span><br/>
-					<span class="text">${data.msg}</span>
-						</div>`;
+		var item = `
+				<div ${css} ${cssid}>
+					<span><b class="name">${data.mid}</b></span><br/>
+					<span class="text">${data.msg}</span><br/>
+					<span>${data.date}</span>
+				</div>`;
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
@@ -340,7 +342,7 @@ function send(){
 	if(msg.value.trim() != ''){
 		data.mid = getId('id').innerHTML;
 		data.msg = msg.value;
-		data.date = new Date().toLocaleString();
+		data.date = new Date().toLocaleString().substring(13,21);
 		data.value = max;
 		data.point = point.innerText;
 		data.win = win;
