@@ -20,10 +20,6 @@
 	<section class="container d-flex flex-wrap justify-content-center">
 
 		<h1>토르의 실시간 대장간 메인</h1>
-
-		<a href="/oauth2/authorization/naver" style="padding-left: 20px; padding-right: 20px;">
-			<img style="width: 80px; height: 80px;" src="/images/social/naver.png">
-		</a>
 	</section>
 
 	<c:forEach items="${kakaoRole }" var="kk">
