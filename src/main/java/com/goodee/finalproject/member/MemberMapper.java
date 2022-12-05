@@ -17,5 +17,10 @@ public interface MemberMapper {
 	
 	// 회원가입
 	public int setJoin(MemberVO memberVO) throws Exception;
+	
+	//낙찰 후 포인트 update
+	public int setPoint(MemberVO memberVO) throws Exception;
+	
+	public MemberVO getOneMember(MemberVO memberVO) throws Exception;
 
 }

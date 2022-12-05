@@ -30,7 +30,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item"><a href="" class="nav-link link-dark px-2"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
-					<li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
+					<li class="nav-item"><a href="../mypage/id=" class="nav-link link-dark px-2">마이페이지</a></li>
 					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
@@ -51,7 +51,7 @@
 			</a>
 			<ul class="nav">
 				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://192.168.1.101:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://localhost:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>

@@ -270,4 +270,8 @@ public class ApplicationService {
 		
 		return productMapper.getProductNumCheck(productVO);
 	}
+	
+	public List<ApplicationVO> getApprovalCheckList() throws Exception{
+		return applicationMapper.getApprovalCheckList();
+	}
 }
