@@ -7,8 +7,11 @@
 	<typeAliases>
 		<typeAlias type="com.goodee.finalproject.socialmember.KakaoVO" alias="KakaoVO" />
 		<typeAlias type="com.goodee.finalproject.socialmember.KakaoDetailVO" alias="KakaoDetailVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.KakaoRoleVO" alias="KakaoRoleVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.KaRoleVO" alias="KaRoleVO" />
 		<typeAlias type="com.goodee.finalproject.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.goodee.finalproject.member.RoleVO" alias="RoleVO" />
+		<typeAlias type="com.goodee.finalproject.mypage.PayVO" alias="PayVO" />
 		<typeAlias type="com.goodee.finalproject.board.notice.NoticeVO" alias="NoticeVO"/>
    		<typeAlias type="com.goodee.finalproject.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
    		<typeAlias type="com.goodee.finalproject.board.application.ApplicationVO" alias="ApplicationVO"/>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodee.finalproject.admin.AdminIF">
+
+	<select id="getMemberTotal" parameterType="MemberVO"
+		resultMap="getMemberTotal">
+		SELECT th.*, tr.*, tmr.* FROM
+		THORMEMBER th
+		inner join
+		THORMEMBER_ROLE tmr
+		on th.ID = tmr.ID
+		inner join
+		THORROLE tr
+		on
+		tmr.ROLENUM = tr.ROLENUM
+		WHERE tmr.ROLENUM NOT LIKE "%1%"
+		order by th.ID
+		asc
+	</select>
+	<resultMap type="MemberVO" id="getMemberTotal">
+		<id column="id" property="id" />
+		<result column="pw" property="pw" />
+		<result column="name" property="name" />
+		<result column="birth" property="birth" />
+		<result column="email" property="email" />
+		<result column="post" property="post" />
+		<result column="addr" property="addr" />
+		<result column="addr2" property="addr2" />
+		<result column="phone" property="phone" />
+		<result column="point" property="point" />
+		<collection property="roleVOs" javaType="List"
+			ofType="RoleVO">
+			<id column="roleNum" property="roleNum" />
+			<result column="roleName" property="roleName" />
+		</collection>
+	</resultMap>
+
+	<select id="getKakaoTotal" parameterType="KakaoVO"
+		resultMap="getKakaoTotal">
+		select sk.*, skd.*, kmr.*, k.* FROM
+		SOCIALKAKAO sk
+		inner join
+		SOCIALKAKAODETAIL skd
+		on sk.KANICKNAME = skd.KANICKNAME
+		inner JOIN
+		KAKAOMEMBERROLE kmr
+		on sk.KANICKNAME = kmr.KANICKNAME
+		inner join
+		KAKAOROLE k
+		on kmr.KAROLE = k.KAROLE
+		order by sk.KANICKNAME asc
+	</select>
+
+	<resultMap type="KakaoVO" id="getKakaoTotal">
+		<id column="kaNickName" property="kaNickName" />
+		<result column="kaEmail" property="kaEmail" />
+		<result column="kaName" property="kaName" />
+		<collection property="kakaoDetailVOs" javaType="List"
+			ofType="KakaoDetailVO">
+			<id column="kaNickName" property="kaNickName" />
+			<result column="kaBirth" property="kaBirth" />
+			<result column="kaPost" property="kaPost" />
+			<result column="kaAddr" property="kaAddr" />
+			<result column="kaAddrDetail" property="kaAddrDetail" />
+			<result column="kaPhone" property="kaPhone" />
+			<result column="kaPoint" property="kaPoint" />
+		</collection>
+		<collection property="kaRoleVOs" javaType="List"
+			ofType="KaRoleVO">
+			<id column="kaRole" property="kaRole" />
+			<result column="kaRoleName" property="kaRoleName" />
+		</collection>
+		<collection property="kakaoRoleVOs" javaType="List"
+			ofType="KakaoRoleVO">
+			<id column="kaRole" property="kaRole" />
+			<result column="kaNickName" property="kaNickName" />
+		</collection>
+	</resultMap>
+
+	<!-- 일반 회원 등급 수정 -->
+	<update id="roleSetManager" parameterType="MemberVO">
+		update THORMEMBER_ROLE
+		set ROLENUM = 2 where ID = #{id}
+	</update>
+
+	<update id="roleSetUser" parameterType="MemberVO">
+		update THORMEMBER_ROLE
+		set ROLENUM = 3 where ID = #{id}
+	</update>
+
+	<update id="roleSetBan" parameterType="MemberVO">
+		update THORMEMBER_ROLE
+		set
+		ROLENUM = 4 where ID = #{id}
+	</update>
+	<!-- 일반 회원 등급 수정 -->
+
+	<!-- 카카오 회원 등급 수정 -->
+	<update id="kakaoRoleSetManager" parameterType="KakaoVO">
+		update KAKAOMEMBERROLE
+		set KAROLE = 2 where KANICKNAME = #{kaNickName}
+	</update>
+
+	<update id="kakaoRoleSetUser" parameterType="KakaoVO">
+		update KAKAOMEMBERROLE
+		set KAROLE = 3 where KANICKNAME = #{kaNickName}
+	</update>
+
+	<update id="kakaoRoleSetBan" parameterType="KakaoVO">
+		update KAKAOMEMBERROLE
+		set
+		KAROLE = 4 where KANICKNAME = #{kaNickName}
+	</update>
+	<!-- 카카오 회원 등급 수정 -->
+</mapper>

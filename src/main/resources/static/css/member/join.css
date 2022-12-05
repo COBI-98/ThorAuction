@@ -114,7 +114,7 @@
     font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
     vertical-align: baseline;
     word-break: keep-all;
-    width: 400px;
+    width: 190px;
     height: 200px;
 }
 
@@ -277,6 +277,21 @@
     word-break: keep-all;
     position: relative;
     color: #98a0a7;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.msg_box {
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
+    vertical-align: baseline;
+    word-break: keep-all;
+    position: relative;
+    color: red;
     margin-top: 8px;
     font-size: 14px;
     line-height: 20px;
