@@ -35,7 +35,6 @@
 						</c:when>
 						<c:when test="${naverInfo != null }">
 							<li class="nav-item"><b>${naverInfo.name }님 안녕하세요</b></li>
-							${naverInfo }
 						</c:when>
 						<c:otherwise>
 						error
