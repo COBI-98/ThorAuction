@@ -3,11 +3,22 @@
 let resultss = [false, false, false, false, false];
 
 // 이름 검증
+function isname(asValue) {
+	var regExp = /^[가-힣]{2,5}$/;
+
+	return regExp.test(asValue);
+}
+
 $("#name").blur(function () {
 
 	if ($("#name").val() == "") {
 		$(".nameErrorMessage").text("필수 항목입니다");
 		$(".nameErrorMessage").attr("style", "color:#f00");
+	} else if (!isname($("#name").val())) {
+		$(".nameErrorMessage").text("2~5자 한글만 사용해 주세요");
+		$(".nameErrorMessage").attr("style", "color:#f00");
+		
+		resultss[0] = false;
 	} else {
 		$(".nameErrorMessage").text("");
 

@@ -1,14 +1,21 @@
 package com.goodee.finalproject.member;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.Data;
 
 @Data
-public class MemberVO {
+public class MemberVO implements UserDetails{
 	
 	@NotBlank(message = "필수 항목입니다")
 	@Pattern(regexp = "[a-z0-9]{3,15}$", message = "3~15자의 영문 소문자, 숫자만 사용해 주세요")
@@ -39,4 +46,52 @@ public class MemberVO {
 	private Long point;
 	
 	private List<RoleVO> roleVOs;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		
+		for(RoleVO roleVO : roleVOs) {
+			authorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));
+		}
+		
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+
+		return this.pw; // PW 반환
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return this.id; // ID 반환
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

@@ -21,8 +21,8 @@
 		INNER JOIN
 		THORROLE R
 		ON R.ROLENUM = MR.ROLENUM
-		WHERE M.ID = #{id}
-		AND M.PW = #{pw}
+		WHERE M.ID = #{username}
+		<!-- AND M.PW = #{} -->
 	</select>
 
 	<!-- 회원등급 -->
