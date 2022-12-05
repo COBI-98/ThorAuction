@@ -29,60 +29,85 @@ public class KakaoController
 {
 	@Autowired
 	private MemberSocialService memberSocialService;
-	@Autowired
-	public AdminService adminService;
-
-	@PostMapping("IdCheck")
-	@ResponseBody
-	public int IdCheck(KakaoVO kakaoVO, HttpServletResponse response) throws Exception
-	{
-		log.info("======= id check =======");
-		int rs = memberSocialService.IdCheck(kakaoVO);
-
-		log.info("idCheck rs: {}", rs);
-
-		return rs;
-	}
 
 	@GetMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
+	public ModelAndView kakaoLogin(NaverVO naverVO, HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
-		log.info("===== authentication: {}", authentication.getPrincipal());
+		log.info("===== authentication: {}", authentication.getPrincipal().getClass());
+		log.info("equals: {}", authentication.getPrincipal().getClass().toString());
 
-		int rs = memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
-
-		modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
-		modelAndView.setViewName("socialMember/kakaoLogin");
-		session.setAttribute("kakaoVO", rs); // 카카오 정보 DB insert 성공/실패 값
-		session.setAttribute("kakaoInfo", authentication.getPrincipal());
-
-		log.info("getNickName: {}", session.getAttribute("kakaoVO"));
-		int se = (int) session.getAttribute("kakaoVO");
-		if (se == 0)
+		if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.KakaoVO"))
 		{
-			modelAndView.setViewName("redirect:/");
+			int rs = memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
 
-			return modelAndView;
+			modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
+			modelAndView.setViewName("socialMember/kakaoLogin");
+			session.setAttribute("kakaoVO", rs); // 카카오 정보 DB insert 성공/실패 값
+			session.setAttribute("kakaoInfo", authentication.getPrincipal());
+
+			if (rs == 0)
+			{
+				modelAndView.setViewName("redirect:/");
+
+				return modelAndView;
+			}
+		}
+		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
+		{
+			int rsNa = memberSocialService.setNaver((NaverVO) authentication.getPrincipal());
+
+			log.info("naver insert: {}", rsNa);
+
+			log.info("authentication.getPrincipal(): {}", authentication.getPrincipal());
+			modelAndView.addObject("naverInfo", authentication.getPrincipal());
+			modelAndView.setViewName("socialMember/kakaoLogin");
+			session.setAttribute("naverInfo", authentication.getPrincipal());
+			session.setAttribute("naverVO", rsNa); // 카카오 정보 DB insert 성공/실패 값
+
+			if (rsNa == 0)
+			{
+				modelAndView.setViewName("redirect:/");
+
+				return modelAndView;
+			}
+			else if (rsNa == 1)
+			{
+				modelAndView.setViewName("socialMember/kakaoLogin");
+
+				return modelAndView;
+			}
 		}
 
 		return modelAndView;
 	}
 
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO) throws Exception
+	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO, Authentication authentication, NaverDetailVO naverDetailVO) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
+		log.info("auth class: {}", authentication.getPrincipal().getClass().toString());
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
+		if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.KakaoVO"))
+		{
 
-		log.info("kakao login rs2: {}", rs2);
+			int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
 
-		modelAndView.addObject("rs2", rs2);
-		modelAndView.setViewName("redirect:/");
+			log.info("kakao login rs2: {}", rs2);
+
+			modelAndView.addObject("rs2", rs2);
+			modelAndView.setViewName("redirect:/");
+		}
+		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
+		{
+			int rs2 = memberSocialService.setNaverDetail(naverDetailVO);
+
+			modelAndView.addObject("rs2", rs2);
+			modelAndView.setViewName("redirect:/");
+		}
 
 		return modelAndView;
 	}

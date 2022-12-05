@@ -29,10 +29,19 @@
 
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-
-					<li class="nav-item"><a href="" class="nav-link link-dark px-2">
-							<b>${kakaoInfo.kaName }님 안녕하세요</b>
-						</a></li>
+					<c:choose>
+						<c:when test="${kakaoInfo != null }">
+							<li class="nav-item"><b>${kakaoInfo.kaName }님 안녕하세요</b></li>
+						</c:when>
+						<c:when test="${naverInfo != null }">
+							<li class="nav-item"><b>${naverInfo.name }님 안녕하세요</b></li>
+							${naverInfo }
+						</c:when>
+						<c:otherwise>
+						error
+							<%-- <li class="nav-item"><b>${naverInfo }님 안녕하세요</b></li> --%>
+						</c:otherwise>
+					</c:choose>
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
 					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
@@ -67,18 +76,3 @@
 			</form>
 		</div>
 	</header>
-
-	<script>
-		var width = '500';
-		var height = '600';
-		var left = Math.ceil((window.screen.width) / 2);
-		var top = Math.ceil((window.screen.height) / 2);
-		// /oauth2/authorization/kakao
-		function popup() {
-			var url = "/member/delete";
-			var name = "popup test";
-			var option = "width=" + width + ", height=" + height + ", top="
-					+ top + ", left=" + left
-			window.open(url, name, option);
-		}
-	</script>

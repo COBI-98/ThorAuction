@@ -1,6 +1,7 @@
 package com.goodee.finalproject.socialmember;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,10 @@ public class NaverVO implements OAuth2User, UserDetails
 	private String NaName;
 
 	private String NaSocial;
+
+	private List<NaRoleVO> naRoleVOs;
+	private List<NaverRoleVO> naverRoleVOs;
+	private List<NaverDetailVO> naverDetailVOs;
 
 	private Map<String, Object> attriutes;
 
@@ -38,9 +43,9 @@ public class NaverVO implements OAuth2User, UserDetails
 	public String getName()
 	{
 		// TODO Auto-generated method stub
-		return this.NaNickName;
+		return this.NaName;
 	}
-	
+
 	public String getEmail()
 	{
 		// TODO Auto-generated method stub
@@ -58,7 +63,7 @@ public class NaverVO implements OAuth2User, UserDetails
 	public String getUsername()
 	{
 		// TODO Auto-generated method stub
-		return this.NaName;
+		return this.NaNickName;
 	}
 
 	@Override

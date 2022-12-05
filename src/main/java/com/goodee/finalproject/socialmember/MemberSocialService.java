@@ -19,10 +19,24 @@ public class MemberSocialService extends DefaultOAuth2UserService
 {
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
+	@Autowired
+	public NaverMapperIF naverMapperIF;
 
-	public int IdCheck(KakaoVO kakaoVO) throws Exception
+	public int setNaverDetail(NaverDetailVO naverDetailVO) throws Exception
 	{
-		return kakaoMapperIF.IdCheck(kakaoVO);
+		return naverMapperIF.setNaverDetail(naverDetailVO);
+	}
+
+	public int setNaver(NaverVO naverVO) throws Exception
+	{
+		int rs = naverMapperIF.setNaver(naverVO);
+		log.info("------> service naver rs: {}", rs);
+		if (rs == 1)
+		{
+			naverMapperIF.setNaRole(naverVO);
+		}
+
+		return rs;
 	}
 
 	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
@@ -34,7 +48,7 @@ public class MemberSocialService extends DefaultOAuth2UserService
 	public int setKakao1(KakaoVO kakaoVO) throws Exception
 	{
 		int rs = kakaoMapperIF.setKakao1(kakaoVO);
-		log.info("------> service rs: {}", rs);
+		log.info("------> service kakao rs: {}", rs);
 		if (rs == 1)
 		{
 			kakaoMapperIF.setKaRole(kakaoVO);
@@ -130,19 +144,24 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		{
 			String key = keys.next();
 			// log.info("Key: {}", key);
-			// map.get(key);
+			map.get(key);
 		}
-		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("properties").getClass());
-		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("properties");
+		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("response").toString());
+		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("response");
 		log.info("naver properties: {}", lm);
-		LinkedHashMap<String, Object> na = oAuth2User.getAttribute("profile");
-		log.info("naver account: {}", na);
+		// LinkedHashMap<String, Object> na = oAuth2User.getAttribute("profile");
+		// log.info("naver account: {}", na);
 
 		NaverVO naverVO = new NaverVO();
-		naverVO.setNaNickName((String) lm.get("name"));
-		// naverVO.setNaEmail(na.get("email").toString());
+		naverVO.setNaNickName((String) lm.get("id"));
+		naverVO.setNaEmail(lm.get("email").toString());
+		naverVO.setNaName(lm.get("name").toString());
 		naverVO.setNaSocial(userRequest.getClientRegistration().getRegistrationId());
 		naverVO.setAttriutes(oAuth2User.getAttributes());
+
+		// log.info(naverVO.getNaNickName());
+		// log.info(naverVO.getNaName());
+		// log.info(naverVO.getNaEmail());
 
 		return naverVO;
 	}
