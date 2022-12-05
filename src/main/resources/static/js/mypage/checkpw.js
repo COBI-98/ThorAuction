@@ -1,36 +1,38 @@
 // checkpw.js
 
-$("#pw").on({
-	blur: function () {
-		$("#checkpw_btn").removeAttr("disabled");
-	},
-
-	click: function () {
-		var id = $('input[name=id]').val();
-		var pw = $('input[name=pw]').val();
-
-		$.get("./checkpw?pw=" + $("#pw").val(), function (data) {
-			console.log("Data : ", data);
+$('#checkpw_btn').click(function() {
+	const checkPassword = $('#pw').val();
 	
-			if (data == '0') {
-				results[0] = false;
-	
+	if(!checkPassword || checkPassword.trim() === ""){
+		Swal.fire({
+			icon: 'warning',
+			title: '잠시만요!',
+			text: '비밀번호를 입력하세요',
+		})
+	} else{
+		$.ajax({
+			type: 'POST',
+			url: '/mypage/checkpw',
+			data: {'checkPassword': checkPassword},
+			datatype: "text"
+		}).done(function(result){
+			console.log(result);
+			if(result){
+				console.log("비밀번호 일치");
+				window.location.href="/mypage/update";
+			} else if(!result){
+				console.log("비밀번호 틀림");
+				// 비밀번호가 일치하지 않으면
 				Swal.fire({
-					icon: 'warning',
-					title: '실패',
-					html: '비밀번호가 틀렸습니다.',
-				})          
-			} else {
-				results[0] = true;
-	
-				Swal.fire({
-				icon: 'success',
-				title: '완료',
-				html: '정보 수정이 완료되었습니다.<br> 로그인 페이지로 이동합니다',
-			}).then(function () {
-				$("#upadte_form").submit();
+					icon: 'error',
+					title: '잠시만요!',
+					text: '비밀번호가 일치하지 않습니다',
+				}).then(function() {
+				window.location.reload();
 			})
 			}
-		});
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		})
 	}
 });
