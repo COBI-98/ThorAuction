@@ -21,12 +21,12 @@
 	</insert>
 	
 	<!-- 비밀번호 체크 -->
-	<select id="checkPw" parameterType="MemberVO" resultType="int">
+<!--  	<select id="checkPw" parameterType="MemberVO">
 		SELECT COUNT(*) 
         FROM THORMEMBER
         WHERE ID = #{id} AND PW = #{pw}
-	</select>
-
+	</select> -->
+	
 	<!-- 회원탈퇴 -->
 	<delete id="setDelete">
 		DELETE FROM THORMEMBER

@@ -19,8 +19,7 @@
 		<h1>토르의 실시간 대장간 메인</h1>
 
 		<div class="mt-5">
-			<a href="../mypage/update">회원정보 수정</a>
-			<a href="../mypage/delete">회원탈퇴</a>
+			<a href="../mypage/checkpw">체크</a>
 		</div>
 
 <!-- 	<a href="/oauth2/authorization/naver" style="padding-left: 20px; padding-right: 20px;">

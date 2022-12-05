@@ -1,20 +1,23 @@
 package com.goodee.finalproject.mypage;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.goodee.finalproject.member.MemberVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MypageService {
 	
 	@Autowired
 	private MypageMapper mypageMapper;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder; 
 	
 	// 포인트 충전 + 누적 포인트
 	public int ChargePoint(PayVO payVO) throws Exception {
@@ -28,11 +31,18 @@ public class MypageService {
 	}
 	
 	// 비밀번호 체크
-	public int checkPw(MemberVO memberVO) throws Exception {
+	public boolean checkPw(MemberVO memberVO, String checkPassword) throws Exception {
+				
+		String realPassword = memberVO.getPw();
 		
-		int result = mypageMapper.checkPw(memberVO);
+		log.info("서비스 : {}", memberVO);
+		log.info("서비스 : {}", memberVO.getId());
+		log.info("서비스 : {}", checkPassword);
+		log.info("서비스 : {}", realPassword);
 		
-		return result;
+		boolean matches = encoder.matches(checkPassword, realPassword);
+		
+		return matches;
 	}
 	
 	// 회원탈퇴
