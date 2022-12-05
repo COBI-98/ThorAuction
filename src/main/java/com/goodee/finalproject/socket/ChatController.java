@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.socialmember.KakaoVO;
 
 @Controller
 public class ChatController {
@@ -22,6 +23,9 @@ public class ChatController {
 	public ModelAndView chat(HttpSession session,HttpServletRequest req) {
 		list = webSocketChat.getBanList();
 		MemberVO mem = (MemberVO) req.getSession().getAttribute("member");
+		KakaoVO kakao = (KakaoVO) req.getSession().getAttribute("Detail");
+		System.out.println(mem);
+		System.out.println(kakao);
 		ModelAndView mv = new ModelAndView();
 		if(list.size() > 0) {
 			for(int i=0;i<list.size();i++) {
