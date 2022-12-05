@@ -12,7 +12,7 @@
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- <script defer src="/js/social/kakaoBan.js"></script> -->
+<script defer src="/js/social/kakaoBan.js"></script>
 <script defer src="/js/social/memberBan.js"></script>
 </head>
 <body>
