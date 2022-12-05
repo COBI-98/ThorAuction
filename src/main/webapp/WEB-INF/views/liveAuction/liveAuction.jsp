@@ -61,7 +61,11 @@
 
             <div>
               <span>경매 물건</span>
-              <select id="items"></select>
+              <select id="items" name="items">
+                  <c:forEach items="${itemList}" var="items">
+                  <option value="${items.productName}">${items.productName}</option>
+                </c:forEach>
+                </select>
               <input type="button" value="설정" id="itemsend">
             </div>
 						
@@ -80,6 +84,11 @@
 				
 				
         <div class="container">
+          <div id="item">
+            <span>경매 물품</span>
+            <span id="selecteditem"></span>
+
+          </div>
           <div id="text">
             <span id="final">경매 최고가:</span>
             <span id="amount">${value}</span>

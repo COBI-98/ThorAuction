@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.goodee.finalproject.board.application.ApplicationService;
+import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.socialmember.KakaoDetailVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
@@ -27,10 +29,13 @@ public class ChatController {
 	@Autowired
 	private MemberSocialService memberSocialService;
 	
+	@Autowired
+	private ApplicationService applicationService;
+	
 	@RequestMapping("/liveAuction")
 	public ModelAndView chat(Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		List<ApplicationVO> itemList = applicationService.getApprovalCheckList();
 		
 			if(authentication.getPrincipal().toString().substring(0, 8).equals("MemberVO")) {
 				
@@ -58,6 +63,7 @@ public class ChatController {
 				}
 			}
 
+			mv.addObject("itemList", itemList);
 			mv.addObject("value",webSocketChat.getValue());
 			mv.setViewName("/liveAuction/liveAuction");
 			return mv;
@@ -73,9 +79,8 @@ public class ChatController {
 					return true;
 				}
 			}
-	}
+		}
 		return false;
-		
 	}
 	
 }
