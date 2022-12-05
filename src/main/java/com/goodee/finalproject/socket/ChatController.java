@@ -32,6 +32,7 @@ public class ChatController {
 		}else {
 			mv.addObject("role", mem.getRoleVOs());
 			mv.addObject("member", mem.getName());
+//				mv.addObject("member", "ball");
 			mv.addObject("point", 3000L);
 			mv.addObject("value",webSocketChat.getValue());
 			mv.setViewName("/liveAuction/liveAuction");
@@ -39,5 +40,7 @@ public class ChatController {
 		
 		return mv;
 	}
+	
+
 	
 }

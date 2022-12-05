@@ -45,8 +45,9 @@ function getHTMLMediaElement(mediaElement, config) {
     };
 
     var mediaElementContainer = document.querySelector('#media-container');
-    mediaElementContainer.className = 'media-container';
+    
 
+	mediaElementContainer.className = 'media-container';
     var mediaControls = document.createElement('div');
     mediaControls.className = 'media-controls';
     mediaElementContainer.appendChild(mediaControls);
@@ -137,15 +138,12 @@ function getHTMLMediaElement(mediaElement, config) {
         volumeSlider.appendChild(slider);
     }
 
-    if (buttons.has('full-screen')) {
-        var zoom = document.createElement('div');
+//    if (buttons.has('full-screen')) {
+        const zoom = document.querySelector('#zoom');
         zoom.className = 'control ' + (config.toggle.has('zoom-in') ? 'zoom-out selected' : 'zoom-in');
-
-        if (!slider && !recordAudio && !recordVideo && zoom) {
-            mediaControls.insertBefore(zoom, mediaControls.firstChild);
-        } else volumeControl.appendChild(zoom);
-
+		console.log("fullscreen");
         zoom.onclick = function() {
+			console.log("fullscreen!!");
             if (zoom.className.indexOf('zoom-out') != -1) {
                 zoom.className = zoom.className.replace('zoom-out selected', 'zoom-in');
                 exitFullScreen();
@@ -204,7 +202,7 @@ function getHTMLMediaElement(mediaElement, config) {
         document.addEventListener('fullscreenchange', screenStateChange, false);
         document.addEventListener('mozfullscreenchange', screenStateChange, false);
         document.addEventListener('webkitfullscreenchange', screenStateChange, false);
-    }
+//    }
 
     if (buttons.has('volume-slider') || buttons.has('full-screen') || buttons.has('record-audio') || buttons.has('record-video')) {
         mediaElementContainer.appendChild(volumeControl);
@@ -332,7 +330,9 @@ function getAudioElement(mediaElement, config) {
 
     var mediaElementContainer = document.querySelector('#media-container');
     mediaElementContainer.className = 'media-container';
-
+	
+	
+	
     var mediaControls = document.createElement('div');
     mediaControls.className = 'media-controls';
     mediaElementContainer.appendChild(mediaControls);

@@ -75,13 +75,13 @@ ws.onmessage = function(msg){
 
 	//단위 경매 설정 시
 	if(data.unit != null){
-		talk.innerHTML += `<div>`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
+		talk.innerHTML += `<div class="hi">`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
 		add.value = "+" + data.unit;
 	}
 
 	//경매 시작시
 	else if(data.start != null){
-		talk.innerHTML += `<div>`+ "*경매가 시작되었습니다.*" +`</div>`;
+		talk.innerHTML += `<div class="hi">`+ "*경매가 시작되었습니다.*" +`</div>`;
 	}
 
 	// //단위가격 클릭시
@@ -104,7 +104,7 @@ ws.onmessage = function(msg){
 		let ff = rank[0];
 		$('#amount').css("display","none");
 		finalamount.innerText = ff;
-		talk.innerHTML += `<div>`+ "*경매가  종료되었습니다.*" +`</div>`;
+		talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
 	}
 
 	//강퇴 당했을 시
@@ -131,11 +131,7 @@ ws.onmessage = function(msg){
 	//채팅 메세지 
 	else if(data.mid != null) {
 
-		if(data.mid == userid.innerText){
-			css = 'class=me';
-		}else{
-			css = 'class=other';
-		}
+		
 
 		let a = data.msg;
 		var b = a.substr(4)*1;
@@ -150,11 +146,46 @@ ws.onmessage = function(msg){
 				cssid = 'id=enter';
 			}
 		}
-
-		var item = `<div ${css} ${cssid}>
-						<span><b class="name">${data.mid}</b></span> [ ${data.date} ]<br/>
-					<span class="text">${data.msg}</span>
-						</div>`;
+		
+		var item;
+		if(data.mid == userid.innerText){
+			css = 'class=me';
+			item = `
+				
+					<div ${css} ${cssid}>
+						
+						<div class="chat-date">
+							 ${data.date} 
+						</div>
+						
+						<div class="chat-text">
+							<span><b class="name">${data.mid}</b></span> <br/>
+							<span class="text">${data.msg}</span>
+						</div>
+					</div>`;
+			
+		}else{
+			css = 'class=other';
+			item = `
+				<div ${css} ${cssid}>
+						
+						<div class="chat-text">
+							<span><b class="name">${data.mid}</b></span> <br/>
+							<span class="text">${data.msg}</span>
+						</div>
+						<div class="chat-date">
+							 ${data.date} 
+						</div>
+					</div>`;
+		}
+		
+		
+		
+						
+						
+						
+						
+						
 					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
@@ -303,7 +334,7 @@ function send(){
 	if(msg.value.trim() != ''){
 		data.mid = getId('id').innerHTML;
 		data.msg = msg.value;
-		data.date = new Date().toLocaleString();
+		data.date = new Date().toTimeString().split(' ')[0];
 		data.value = max;
 		data.point = point.innerText;
 		data.win = win;
