@@ -33,4 +33,9 @@
 		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
 
+
+	<!-- detail -->
+	<select id="getKakaoDetail" parameterType="KakaoVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
 </mapper>
