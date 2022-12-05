@@ -18,8 +18,8 @@
 	<%-- 			<!-- 로그인 후 -->
 				<c:if test="${member != null}">
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
-					<%-- <li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li> --%>
-				</c:if>
+					<%-- <li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
+				</c:if>--%>
 
 				<%-- <sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/joinchoose" class="nav-link link-dark px-2">|회원가입|</a></li>
@@ -38,7 +38,7 @@
 							<li class="nav-item"><b>${naverInfo.name }님 안녕하세요</b></li>
 						</c:when>
 						<c:otherwise>
-						error
+						member Login
 							<%-- <li class="nav-item"><b>${naverInfo }님 안녕하세요</b></li> --%>
 						</c:otherwise>
 					</c:choose>
