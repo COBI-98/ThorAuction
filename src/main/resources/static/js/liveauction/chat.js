@@ -77,7 +77,7 @@ ws.onopen = function(){
 ws.onmessage = function(msg){
 	var data = JSON.parse(msg.data);
 	var css;
-	var cssid;
+	var cssid = "";
 
 	//로그인 종류
 	if(data.loginnum != null) {
@@ -111,6 +111,7 @@ ws.onmessage = function(msg){
 	else if(data.start != null){
 		if(data.gogo == true) {
 			auctionend.value="경매종료";
+			auctionend.classList.add("start");
 			talk.innerHTML += `<div class="hi">`+ "*경매가 시작되었습니다.*" +`</div>`;
 	
 			final.innerText ="경매 최고가:";
@@ -193,37 +194,41 @@ ws.onmessage = function(msg){
 		var b = a.substr(4)*1;
 		
 		if(auctionend.classList.contains("start")) {
+			console.log("1");
 			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==data.value){
 				if(rank[0]==0 && rank[1] == ''){
-					cssid = 'id=enter';
+					cssid = 'enter';
+					console.log("2");
 				}else if(!(data.mid == rank[1] && b == rank[0])) {
-					cssid = 'id=enter';
+					cssid = 'enter';
+					console.log("3");
 				}
 			}
 		}
+		
 		rank[0] = data.value;
 		rank[1] = data.win;
 		amount.innerHTML = rank[0];
 		console.log(rank);
 		
-		if(auctionend.classList.contains("start")) {
-			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
-				cssid = 'id=enter';
-			}
-		}
+//		if(auctionend.classList.contains("start")) {
+//			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
+//				cssid = 'enter';
+//			}
+//		}
 		
 		var item;
 		if(data.mid == userid.innerText){
 			css = 'class=me';
 			item = `
 				
-					<div ${css} ${cssid}>
+					<div ${css} >
 						
 						<div class="chat-date">
 							 ${data.date} 
 						</div>
 						
-						<div class="chat-text">
+						<div class="chat-text ${cssid}">
 							<span><b class="name">${data.mid}</b></span> <br/>
 							<span class="text">${data.msg}</span>
 						</div>
@@ -232,9 +237,9 @@ ws.onmessage = function(msg){
 		}else{
 			css = 'class=other';
 			item = `
-				<div ${css} ${cssid}>
+				<div ${css} >
 						
-						<div class="chat-text">
+						<div class="chat-text ${cssid}">
 							<span><b class="name">${data.mid}</b></span> <br/>
 							<span class="text">${data.msg}</span>
 						</div>
