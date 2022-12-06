@@ -34,6 +34,7 @@
 				<th>포인트</th>
 				<th>등급</th>
 				<th>등급 변경</th>
+				<!-- normal member start -->
 			</tr>
 			<c:forEach items="${member}" var="m">
 				<tr>
@@ -75,6 +76,9 @@
 					</td>
 				</tr>
 			</c:forEach>
+			<!-- nomal member end -->
+
+			<!-- kakao member start -->
 			<c:forEach items="${kakao }" var="ka">
 				<c:if test="${ka.kaRoleVOs[0].kaRoleName != 'ROLE_ADMIN' }">
 					<tr>
@@ -116,6 +120,52 @@
 						</td>
 					</tr>
 				</c:if>
+			</c:forEach>
+			<!-- kakao member end -->
+
+			<!-- naver member start -->
+			<c:forEach items="${naver }" var="na">
+			${na }
+				<%-- <c:if test="${na.naRoleVOs[0].NaRoleName != 'ROLE_ADMIN' }"> --%>
+<%-- 					<tr>
+						<td class="kakaoID">${na.NaNickName }</td>
+						<td class="kakaoEmail">${na.NaEmail }</td>
+						<td class="kakaoName">${na.NaName }</td>
+						<td>${na.naverDetailVOs[0].NaBirth }</td>
+						<td>${na.naverDetailVOs[0].NaPost }</td>
+						<td>${na.naverDetailVOs[0].NaAddr }</td>
+						<td>${na.naverDetailVOs[0].NaAddrDetail }</td>
+						<td>${na.naverDetailVOs[0].NaPhone }</td>
+						<td>${na.naverDetailVOs[0].NaPoint }</td>
+						<td>${na.naRoleVOs[0].NaRoleName}</td>
+						<td>
+							<c:choose>
+								<c:when test="${na.naRoleVOs[0].NaRoleName == 'ROLE_MANGER' }">
+									<select name="select" class="selectRole">
+										<option class="role" value="Manager" selected>Manager</option>
+										<option class="role" value="User">User</option>
+										<option class="role" value="Ban">Ban</option>
+									</select>
+								</c:when>
+								<c:when test="${na.naRoleVOs[0].NaRoleName == 'ROLE_USER' }">
+									<select name="select" class="selectRole">
+										<option class="role" value="Manager">Manager</option>
+										<option class="role" value="User" selected>User</option>
+										<option class="role" value="Ban">Ban</option>
+									</select>
+								</c:when>
+								<c:when test="${na.naRoleVOs[0].NaRoleName == 'ROLE_BAN' }">
+									<select name="select" class="selectRole">
+										<option class="role" value="Manager">Manager</option>
+										<option class="role" value="User">User</option>
+										<option class="role" value="Ban" selected>Ban</option>
+									</select>
+								</c:when>
+								<c:otherwise>에러?</c:otherwise>
+							</c:choose>
+						</td>
+					</tr> --%>
+				<%-- </c:if> --%>
 			</c:forEach>
 		</table>
 	</section>

@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class NaRoleVO
 {
-	private Long kaRole;
-	private String kaRoleName;
+	private Long NaRole;
+	private String NaRoleName;
 }

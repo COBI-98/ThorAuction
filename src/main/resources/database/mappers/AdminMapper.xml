@@ -3,6 +3,7 @@
 
 <mapper namespace="com.goodee.finalproject.admin.AdminIF">
 
+	<!-- 일반 회원 정보 -->
 	<select id="getMemberTotal" parameterType="MemberVO"
 		resultMap="getMemberTotal">
 		SELECT th.*, tr.*, tmr.* FROM
@@ -36,6 +37,7 @@
 		</collection>
 	</resultMap>
 
+	<!-- 카카오 정보 -->
 	<select id="getKakaoTotal" parameterType="KakaoVO"
 		resultMap="getKakaoTotal">
 		select sk.*, skd.*, kmr.*, k.* FROM
@@ -78,6 +80,49 @@
 		</collection>
 	</resultMap>
 
+	<!-- 네이버 정보 -->
+	<select id="getNaverTotal" parameterType="NaverVO"
+		resultMap="naverTotal">
+		select sn.*, snd.*, nmr.*, n.* FROM
+		SOCIALNAVER sn
+		inner join
+		SOCIALNAVERDETAIL snd
+		on sn.NANICKNAME = snd.NANICKNAME
+		inner JOIN
+		NAVERMEMBERROLE nmr
+		on sn.NANICKNAME = nmr.NANICKNAME
+		inner join
+		NAVERROLE n
+		on nmr.NAROLE = n.NAROLE
+		order by sn.NANICKNAME asc
+	</select>
+
+	<resultMap type="NaverVO" id="naverTotal">
+		<id column="NaNickName" property="NaNickName" />
+		<result column="NaEmail" property="NaEmail" />
+		<result column="NaName" property="NaName" />
+		<collection property="naverDetailVOs" javaType="List"
+			ofType="NaverDetailVO">
+			<id column="NaNickName" property="NaNickName" />
+			<result column="NaBirth" property="NaBirth" />
+			<result column="NaPost" property="NaPost" />
+			<result column="NaAddr" property="NaAddr" />
+			<result column="NaAddrDetail" property="NaAddrDetail" />
+			<result column="NaPhone" property="NaPhone" />
+			<result column="NaPoint" property="NaPoint" />
+		</collection>
+		<collection property="naRoleVOs" javaType="List"
+			ofType="NaRoleVO">
+			<id column="NaRole" property="NaRole" />
+			<result column="NaRoleName" property="NaRoleName" />
+		</collection>
+		<collection property="naverRoleVOs" javaType="List"
+			ofType="NaverRoleVO">
+			<id column="NaRole" property="NaRole" />
+			<result column="NaNickName" property="NaNickName" />
+		</collection>
+	</resultMap>
+
 	<!-- 일반 회원 등급 수정 -->
 	<update id="roleSetManager" parameterType="MemberVO">
 		update THORMEMBER_ROLE
@@ -98,17 +143,20 @@
 
 	<!-- 카카오 회원 등급 수정 -->
 	<update id="kakaoRoleSetManager" parameterType="KakaoVO">
-		update KAKAOMEMBERROLE
+		update
+		KAKAOMEMBERROLE
 		set KAROLE = 2 where KANICKNAME = #{kaNickName}
 	</update>
 
 	<update id="kakaoRoleSetUser" parameterType="KakaoVO">
-		update KAKAOMEMBERROLE
+		update
+		KAKAOMEMBERROLE
 		set KAROLE = 3 where KANICKNAME = #{kaNickName}
 	</update>
 
 	<update id="kakaoRoleSetBan" parameterType="KakaoVO">
-		update KAKAOMEMBERROLE
+		update
+		KAKAOMEMBERROLE
 		set
 		KAROLE = 4 where KANICKNAME = #{kaNickName}
 	</update>

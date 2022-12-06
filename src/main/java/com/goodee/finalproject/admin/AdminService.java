@@ -11,6 +11,7 @@ import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.member.RoleVO;
 import com.goodee.finalproject.socialmember.KakaoRoleVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
+import com.goodee.finalproject.socialmember.NaverVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +32,11 @@ public class AdminService
 		List<KakaoVO> ar = adminIF.getKakaoTotal(kakaoVO);
 
 		return ar;
+	}
+
+	public List<NaverVO> getNaverTotal(NaverVO naverVO) throws Exception
+	{
+		return adminIF.getNaverTotal(naverVO);
 	}
 
 	public int roleSetManager(List<MemberVO> memberVOs, String id, List<KakaoVO> kakaoVOs, String kakaoEmail, String kakaoName,
