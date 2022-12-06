@@ -64,7 +64,7 @@
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form> --%>
 
-					<c:if test="${empty memID}">
+					<c:if test="${empty memID && not empty kakaoRole}">
 						<c:forEach items="${kakaoRole }" var="kk">
 							<c:if test="${kk.kaRoleVOs[0].kaRoleName == 'ROLE_ADMIN'}">
 								<li class="nav-item">
@@ -81,6 +81,17 @@
 							</li>
 						</c:if>
 					</c:if>
+
+					<c:if test="${empty memID}">
+						<c:forEach items="${naver }" var="na">
+							<c:if test="${na.naRoleVOs[0].naRoleName == 'ROLE_ADMIN'}">
+								<li class="nav-item">
+									<a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					</c:if>
+
 				</sec:authorize>
 			</ul>
 		</div>

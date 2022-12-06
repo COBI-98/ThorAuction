@@ -161,4 +161,27 @@
 		KAROLE = 4 where KANICKNAME = #{kaNickName}
 	</update>
 	<!-- 카카오 회원 등급 수정 -->
+
+
+	<!-- 네이버 회원 등급 수정 -->
+	<update id="naverRoleSetManager" parameterType="NaverVO">
+		update
+		NAVERMEMBERROLE
+		set NAROLE = 2 where NANICKNAME = #{NaNickName}
+	</update>
+
+	<update id="naverRoleSetUser" parameterType="NaverVO">
+		update
+		NAVERMEMBERROLE
+		set NAROLE = 3 where NANICKNAME = #{NaNickName}
+	</update>
+
+	<update id="naverRoleSetBan" parameterType="NaverVO">
+		update
+		NAVERMEMBERROLE
+		set
+		NAROLE = 4 where NANICKNAME = #{NaNickName}
+	</update>
+	<!-- 네이버 회원 등급 수정 -->
+
 </mapper>

@@ -35,7 +35,7 @@ public class AdminController
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
 		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
-		
+
 		log.info("naverVOs: {}", naverVOs);
 
 		modelAndView.addObject("member", memberVOs);
@@ -48,38 +48,39 @@ public class AdminController
 
 	@PostMapping("adminpage")
 	@ResponseBody
-	public void adminpage(KakaoVO kakaoVO, @RequestParam("kakaoID") String kaNickName, @RequestParam("kakaoEmail") String kakaoEmail,
-			@RequestParam("kakaoName") String kakaoName, @RequestParam("ID") String id, MemberVO memberVO,
-			@RequestParam("roleName") String role) throws Exception
+	public void adminpage(NaverVO naverVO, KakaoVO kakaoVO, @RequestParam("kakaoID") String nickName,
+			@RequestParam("kakaoEmail") String email, @RequestParam("kakaoName") String name, @RequestParam("ID") String id,
+			MemberVO memberVO, @RequestParam("roleName") String role) throws Exception
 	{
 		log.info("====== post adminPage =====");
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
+		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
 		// kakaoVOs kakaoEmail kakaoName
-		log.info(kakaoName);
-		log.info(kakaoEmail);
-		log.info(kaNickName);
+		log.info(name);
+		log.info(email);
+		log.info(nickName);
 		log.info(role);
 		log.info("list ID: {}", id);
 
 		if (role.equals("ROLE_MANGER"))
 		{
 			log.info("manager update");
-			log.info("update maneger: {}", adminService.roleSetManager(memberVOs, id, kakaoVOs, kakaoEmail, kakaoName, kaNickName));
+			log.info("update maneger: {}", adminService.roleSetManager(memberVOs, kakaoVOs, id, email, name, nickName));
 
 			return;
 		}
 		else if (role.equals("ROLE_USER"))
 		{
 			log.info("user update");
-			log.info("update USER: {}", adminService.roleSetUser(memberVOs, id, kakaoVOs, kakaoEmail, kakaoName, kaNickName));
+			log.info("update USER: {}", adminService.roleSetUser(memberVOs, id, kakaoVOs, email, name, nickName));
 
 			return;
 		}
 		else if (role.equals("ROLE_BAN"))
 		{
 			log.info("ban update");
-			log.info("update BAN: {}", adminService.roleSetBan(memberVOs, id, kakaoVOs, kakaoEmail, kakaoName, kaNickName));
+			log.info("update BAN: {}", adminService.roleSetBan(memberVOs, id, kakaoVOs, email, name, nickName));
 
 			return;
 		}
