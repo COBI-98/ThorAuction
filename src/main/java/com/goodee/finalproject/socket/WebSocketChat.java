@@ -156,7 +156,6 @@ public class WebSocketChat {
 			}
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
-			
 			sendMessage(msg, session);
 			
 		//입장시
@@ -177,12 +176,12 @@ public class WebSocketChat {
 			msg = msg.replace(String.valueOf(jsonObj.get("winner")), winuser);
 			msg = msg.replace(String.valueOf(jsonObj.get("value")), String.valueOf(value));
 			msg = msg.replace(String.valueOf(jsonObj.get("goods")), item);
-						
+			
 			sendMessage(msg, session);
 		}
 		else {
 			sendMessage(msg, session);
-		}	
+		}
 	}
 	
 	//메세지 전송

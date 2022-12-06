@@ -96,7 +96,7 @@
 						<div class="optionBox">
 							<div >방송설정</div>
 							<div>
-							  	<input  type="text" id="room-id" value="1234" autocorrect=off autocapitalize=off size=20>
+							  	<input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
 							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>
 							    <button class= "bidcoinBtn" id="join-room">Join Room</button>
 						  	</div>

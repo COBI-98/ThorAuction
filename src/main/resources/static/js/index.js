@@ -211,7 +211,7 @@ connection.onstream = function(event) {
   	
     var mediaElement = getHTMLMediaElement(video, {
         title: document.querySelector("#room-id").value ,//event.userid,
-        buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
+        buttons: ['full-screen','volume-slider','mute-video','mute-audio','record-audio','record-video'],
        	width: width,
         showOnMouseEnter: false
     });
@@ -328,7 +328,7 @@ if (localStorage.getItem(connection.socketMessageEvent)) {
 } else {
     roomid = connection.token();
 }
-document.getElementById('room-id').value = roomid;
+//document.getElementById('room-id').value = roomid;
 document.getElementById('room-id').onkeyup = function() {
     localStorage.setItem(connection.socketMessageEvent, document.getElementById('room-id').value);
 };
