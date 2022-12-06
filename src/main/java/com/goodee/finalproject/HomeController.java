@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.goodee.finalproject.admin.AdminService;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
+import com.goodee.finalproject.socialmember.NaverVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +37,7 @@ public class HomeController
 	private String logout_uri;
 
 	@GetMapping("/")
-	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO,
+	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO, NaverVO naverVO,
 			@RequestParam(value = "role", required = false) String role) throws Exception
 	{
 		log.info("===== home controller =====");
@@ -47,9 +48,11 @@ public class HomeController
 
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
+		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
 
 		modelAndView.addObject("kakaoRole", kakaoVOs);
 		modelAndView.addObject("member", memberVOs);
+		modelAndView.addObject("naver", naverVOs);
 		modelAndView.addObject("ka", session.getAttribute("kakaoInfo"));
 
 		if (principal != null)

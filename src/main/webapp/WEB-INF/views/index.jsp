@@ -35,6 +35,13 @@
 				<input type="hidden" value="${m.roleVOs[0].roleName}" class="MID" readOnly>
 			</c:if>
 		</c:forEach>
+
+		<c:forEach items="${naver }" var="n">
+			<c:if test="${n.username == naverInfo.username}">
+				<input type="hidden" value="${n.naRoleVOs[0].naRoleName}" class="krole" readOnly>
+			</c:if>
+		</c:forEach>
+
 	</sec:authorize>
 	<c:import url="./template/footer.jsp"></c:import>
 </body>

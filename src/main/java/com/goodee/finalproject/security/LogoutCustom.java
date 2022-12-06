@@ -69,7 +69,7 @@ public class LogoutCustom implements LogoutHandler
 			{
 				try
 				{
-					response.sendRedirect("https://nid.naver.com/nidlogin.logout=" + logout_uri);
+					response.sendRedirect("https://nid.naver.com/nidlogin.logout");
 //					response.sendRedirect("/");
 					request.getSession().invalidate();
 					// request.removeAttribute(client_id);
