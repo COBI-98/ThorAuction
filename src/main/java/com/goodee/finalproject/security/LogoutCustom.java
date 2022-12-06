@@ -24,8 +24,6 @@ public class LogoutCustom implements LogoutHandler
 	private String client_id;
 	@Value("${kakao.logout}")
 	private String logout_uri;
-	@Value("${spring.security.oauth2.client.registration.naver.client-id}")
-	private String naverClient;
 
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -36,6 +34,7 @@ public class LogoutCustom implements LogoutHandler
 		// log.info("authentication: {}", authentication.getClass());
 		// log.info("social 가져오자: {}", authentication.getPrincipal().getClass().toString());
 
+		// normal member logout
 		if (authentication == null)
 		{
 			try
@@ -51,6 +50,7 @@ public class LogoutCustom implements LogoutHandler
 		}
 		else
 		{
+			// kakao logout
 			if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.KakaoVO"))
 			{
 				try
@@ -65,14 +65,13 @@ public class LogoutCustom implements LogoutHandler
 					e.printStackTrace();
 				}
 			}
+			// naver logout
 			else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
 			{
 				try
 				{
 					response.sendRedirect("https://nid.naver.com/nidlogin.logout");
-//					response.sendRedirect("/");
 					request.getSession().invalidate();
-					// request.removeAttribute(client_id);
 				}
 				catch (IOException e)
 				{
