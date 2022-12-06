@@ -1,6 +1,6 @@
 package com.goodee.finalproject.product;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.Data;
@@ -12,7 +12,8 @@ public class SaleProductVO {
 	private Long categoryId;
 	private Boolean deadlineInfo;
 	private Long productHit;
-	private Date productDate;
+	private Timestamp productDate;
 
 	private List<ProductVO> productVOs;
+	private List<CategoryVO> categoryVOs;
 }
