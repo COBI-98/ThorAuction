@@ -15,6 +15,11 @@
  		VALUE (FILENUM,#{fileName},#{oriName},#{sort},#{productNum})
  	</insert>
  	
+ 	<insert id="setSaleProduct" parameterType="SaleProductVO">
+ 		INSERT INTO SALEPRODUCT
+ 		VALUE (PRODUCTID,#{productNum},#{categoryId},0,0,now());
+ 	</insert>
+ 	
  	<delete id="setSummerFileDelete" parameterType="ProductFileVO">
 	 	DELETE FROM 
 		PRODUCTFILES WHERE FILENUM =(
@@ -67,7 +72,7 @@
 		DELETE FROM PRODUCTFILES WHERE PRODUCTNUM=#{productNum};
 	</delete>
 	
-	<!-- 상품 리스트 구현   -->
+	<!-- 상품 승인화면 구현   -->
 	<select id="getProductApproval" parameterType="productVO" resultMap="getProductFileList">
 		SELECT * FROM 
 		AUCTIONPRODUCT a
@@ -89,8 +94,6 @@
 				<result column = "FILENAME" property="fileName"></result>
 				<result column = "ORINAME" property="oriName"></result>
 				<result column="SORT" property="sort"></result>
-			</collection>
-			
-		
+			</collection>	
  	</resultMap>
 </mapper>
