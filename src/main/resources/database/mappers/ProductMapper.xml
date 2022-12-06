@@ -103,6 +103,48 @@
 		SALEPRODUCT p;
  	</select>
  	
+ 	<!-- 상품리스트 디테일 -->
+ 	<select id="getSaleProductListDetail" parameterType="SaleProductVO" resultMap="getSaleProductDetail">
+ 		SELECT * FROM 
+		SALEPRODUCT p
+		LEFT JOIN
+		AUCTIONPRODUCT a 
+		ON(p.PRODUCTNUM = a.PRODUCTNUM)
+		LEFT JOIN
+		PRODUCTFILES pf 
+		ON(a.PRODUCTNUM =pf.PRODUCTNUM )
+		WHERE p.PRODUCTID = #{productId};
+ 	</select>
+	
+	<resultMap type="SaleProductVO" id="getSaleProductDetail">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
+			</collection>
+			
+		</collection>
+		<collection property="categoryVOs" javaType="List" ofType="CategoryVO">
+				<id column="CATEGORYID" property="categoryId"></id>
+				<result column = "CATEGORYNAME" property="categoryName"></result>
+		</collection>
+		
+ 	</resultMap>
+ 	
  	<!-- 카테고리 리스트 -->
  	
  	<select id="getCategoryList" parameterType="CategoryVO" resultType="CategoryVO">
