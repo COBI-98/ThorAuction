@@ -81,9 +81,6 @@ ws.onmessage = function(msg){
 
 	//로그인 종류
 	if(data.loginnum != null) {
-		// data13.loginnum = loginnum.innerText;
-		// var temp = JSON.stringify(data13);
-		// ws.send(temp);
 
 		var loginnum = ln.innerText;
 		console.log("loginnnnn : "+loginnum);
