@@ -1,5 +1,6 @@
 package com.goodee.finalproject;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,22 +36,34 @@ public class HomeController
 	private String logout_uri;
 
 	@GetMapping("/")
-	public ModelAndView home(MemberVO memberVOo, HttpSession session, KakaoVO kakaoVO,
-			@RequestParam(value = "role", required = false) String role, HttpServletRequest request, HttpServletResponse response)
-			throws Exception
+	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO,
+			@RequestParam(value = "role", required = false) String role) throws Exception
 	{
 		log.info("===== home controller =====");
 		// log.info("param Role: {}", role);
+		log.info("principal name: {}", principal);
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
-		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVOo);
+		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 
-		modelAndView.addObject("member", memberVOs);
 		modelAndView.addObject("kakaoRole", kakaoVOs);
-		// modelAndView.setViewName("index");
+		modelAndView.addObject("member", memberVOs);
 		modelAndView.addObject("ka", session.getAttribute("kakaoInfo"));
+
+		if (principal != null)
+		{
+			log.info("prin: {}", principal.toString().indexOf("MemberVO"));
+			if (principal.toString().indexOf("MemberVO") == 47)
+			{
+				log.info("타입정보 : {}" + principal.getClass());
+				log.info("ID정보 : {}" + principal.getName());
+				modelAndView.addObject("memID", principal.getName());
+				modelAndView.setViewName("header");
+			}
+		}
+
 		modelAndView.setViewName("index");
 
 		return modelAndView;
