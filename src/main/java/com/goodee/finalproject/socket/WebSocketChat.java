@@ -35,8 +35,7 @@ import com.google.gson.Gson;
 @ServerEndpoint(value="/chatt")
 public class WebSocketChat {
 	
-	@Autowired
-	private MemberService memberService;
+	
 	
 	@Autowired
 	private MemberSocialService memberSocialService;
@@ -78,24 +77,27 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
-
 		//경매 종료 시 낙찰자만
 		if(msg.substring(2, 10).equals("loginnum")) {
 			//일반 로그인일때
-//			if(String.valueOf(jsonObj.get("loginnum")).equals("1")) {
-//				System.out.println(winuser);
-//				System.out.println(value);
-//				MemberVO mem = new MemberVO();
-//				mem.setId(winuser);
-//				System.out.println(mem);
-//				mem = memberService.getOneMember(mem);
-//				Long point = mem.getPoint();
-//				mem.setPoint(point - value);
-//				mem.setId(winuser);
-//				memberService.setPoint(mem);
+			if(String.valueOf(jsonObj.get("loginnum")).equals("1")) {
+				System.out.println(winuser);
+				System.out.println(value);
+				MemberVO mem = new MemberVO();
+				mem.setId(winuser);
+				System.out.println(mem);
+				
+				
+				
+				
+				Long point = mem.getPoint();
+				mem.setPoint(point - value);
+				mem.setId(winuser);
+				//memberService.setPoint(mem);
 //			
 //			//소셜 로그인일때
-//			}else {
+			}
+//				else {
 //				String num = String.valueOf(jsonObj.get("loginnum"));
 //				KakaoDetailVO kakaoDetailVO = new KakaoDetailVO();
 //				kakaoDetailVO.setKaNickName(num);
@@ -195,7 +197,6 @@ public class WebSocketChat {
 			}
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
-			
 			sendMessage(msg, session);
 			
 		//입장시
@@ -216,12 +217,12 @@ public class WebSocketChat {
 			msg = msg.replace(String.valueOf(jsonObj.get("winner")), winuser);
 			msg = msg.replace(String.valueOf(jsonObj.get("value")), String.valueOf(value));
 			msg = msg.replace(String.valueOf(jsonObj.get("goods")), item);
-						
+			
 			sendMessage(msg, session);
 		}
 		else {
 			sendMessage(msg, session);
-		}	
+		}
 	}
 	
 	//메세지 전송
