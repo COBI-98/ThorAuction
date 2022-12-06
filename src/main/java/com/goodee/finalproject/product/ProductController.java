@@ -57,17 +57,27 @@ public class ProductController {
 		log.info("sale -> {}", saleVO);
 		
 		List<ProductVO> productVOs = new ArrayList<>();
-//		for(int productNum=0; productNum<saleVO.size(); productNum++) {
+		for(int productNum=0; productNum<saleVO.size(); productNum++) {
 			ProductVO productVO = new ProductVO();
-			productVO.setProductNum(saleVO.get(0).getProductNum());
-			productVO = productService.getProductApproval(productVO);
-			
-			
-//		}
-		mv.addObject("testVO", productVO);
+			productVO.setProductNum(saleVO.get(productNum).getProductNum());
+			productVO = productService.getProductApproval(productVO);		
+			mv.addObject("testVO"+productNum, productVO);
+		}
+		
+		
 		mv.addObject("categoryVO", categoryVO);
 		mv.addObject("saleVO", saleVO);
 		mv.setViewName("product/list");
+		return mv;
+	}
+	
+	@GetMapping("detail")
+	public ModelAndView getSaleProductListDetail(SaleProductVO saleProductVO) throws Exception{
+		ModelAndView mv= new ModelAndView();
+		saleProductVO = productService.getSaleProductListDetail(saleProductVO);
+		
+		mv.addObject("saleProductVO", saleProductVO);
+		mv.setViewName("product/detail");
 		return mv;
 	}
 }

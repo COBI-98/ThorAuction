@@ -89,7 +89,7 @@
 								<nav class="commerce-category-breadcrumb-wrap commerce-category-header__breadcrumb">
 									<ol class="commerce-category-breadcrumb">
 										<li class="commerce-category-breadcrumb__entry">
-											<a class="link" href="/store/category?category=1">패브릭</a>
+											<a class="link" href="#">의류</a>
 										</li>
 									</ol>
 								</nav>
@@ -113,92 +113,36 @@
 							</div>
 							<div class="auction_list">
 								<ul>
-									
-									
 									<!-- 올린시간 -->
-									<c:forEach items="${saleVO}" var="VO">
-										${VO.productNum}
+									<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
+										<li>
+											
+											<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+											<c:set var="testVO" value="testVO${status.index}" />
+											<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+											<div class="imgbox">
+												<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+												
+												<div class="timedate" id="timertest" >
+	
+												</div>
+											</div>
+											<div class="text">
+												<a href="#" class="title">${requestScope[testVO].productName}</a>
+												<div class="pricebox">
+													
+													<div>시작가 <span class="through">${requestScope[testVO].productPrice}</span> </div>
+													<div>현재가 <span class="price">${requestScope[testVO].productPrice}  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+													<a href="#" class="shophome">COBI</a>
+												</div>
+												
+											</div>
+										</li> 
 									</c:forEach>
 									
-									<input type="hidden" id="cobi" name="tdate" value="${saleVO[0].productDate}"> 
-									<li>
-										<input type="hidden" id="timeLength" value="${testVO.auctionPeriod}" /> 
-										<div class="imgbox">
-											<a href="#" class="img"><img src="/file/product/${testVO.productFileVOs[0].fileName}" alt="">${testVO.productName}</a>
-											
-											<div class="timedate" id="timertest" >
-
-											</div>
-										</div>
-										<div class="text">
-											<a href="#" class="title">${testVO.productName}</a>
-											<div class="pricebox">
-												
-												<div>시작가 <span class="through">${testVO.productPrice}</span> </div>
-												<div>현재가 <span class="price">${testVO.productPrice}  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-												<a href="#" class="shophome">COBI : (관리자이름 예정)</a>
-											</div>
-											
-										</div>
-										
-									</li>
 									
-									<!-- <input type="hidden" name="tdate" value="2022/12/16 19:04:00">
-									<li>
-										<div class="imgbox">
-											<a href="auction_view.asp?product_number=105" class="img"><img src="/userfiles/auction/2022/12/22022120517453_755006956.jpg" alt="마루망 마제스티 아이언 세트 새상품 3 (남성용)"></a>
-											<div class="timedate">남은시간 <strong><span id="d-day-day0">10</span>일<span id="d-day-hour0">08</span>:<span id="d-day-min0">17</span>:<span id="d-day-sec0">33</span></strong></div>
-										</div>
-										<div class="text">
-											<a href="auction_view.asp?product_number=105" class="title">마루망 마제스티 아이언 세트 새상품 3 (남성용)</a>
-											<div class="pricebox">
-												
-												<div>시작가 <span class="through">2,800,000</span> </div>
-												<div>현재가 <span class="price">2,800,000  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-												<a href="#" class="shophome">금강</a>
-											</div>
-											
-										</div>
-										
-									</li>
 									
-									<input type="hidden" name="tdate" value="2022/12/15 19:03:00">
-									<li>
-										<div class="imgbox">
-											<a href="auction_view.asp?product_number=104" class="img"><img src="/userfiles/auction/2022/12/22022120517324_755006956.jpg" alt="마루망 마제스티 아이언 세트 새상품 2 (남성용)"></a>
-											<div class="timedate">남은시간 <strong><span id="d-day-day1">09</span>일<span id="d-day-hour1">08</span>:<span id="d-day-min1">16</span>:<span id="d-day-sec1">33</span></strong></div>
-										</div>
-										<div class="text">
-											<a href="auction_view.asp?product_number=104" class="title">마루망 마제스티 아이언 세트 새상품 2 (남성용)</a>
-											<div class="pricebox">
-												
-												<div>시작가 <span class="through">2,800,000</span> </div>
-												<div>현재가 <span class="price">2,800,000  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-												<a href="#" class="shophome">금강</a>
-											</div>
-											
-										</div>
-										
-									</li>
 									
-									<input type="hidden" name="tdate" value="2022/12/22 19:02:00">
-									<li>
-										<div class="imgbox">
-											<a href="auction_view.asp?product_number=103" class="img"><img src="/userfiles/auction/2022/12/2202212051727_755006956.jpg" alt="마루망 마제스티 아이언 세트 새상품 1 (남성용)"></a>
-											<div class="timedate">남은시간 <strong><span id="d-day-day2">16</span>일<span id="d-day-hour2">08</span>:<span id="d-day-min2">15</span>:<span id="d-day-sec2">33</span></strong></div>
-										</div>
-										<div class="text">
-											<a href="auction_view.asp?product_number=103" class="title">마루망 마제스티 아이언 세트 새상품 1 (남성용)</a>
-											<div class="pricebox">
-												
-												<div>시작가 <span class="through">3,300,000</span> </div>
-												<div>현재가 <span class="price">3,300,000  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-												<a href="#" class="shophome">금강</a>
-											</div>
-											
-										</div>
-										
-									</li> -->
 									
 									
 								</ul>
@@ -208,7 +152,7 @@
 				</div>
 			</div>
 		</div>
-	<script src="/js/timerTest.js"></script>
+    <script src="/js/timerTest.js"></script> 
 	<script src="/js/test466.js"></script>
 	<script src="/js/test36.js"></script>
 	<script src="/js/test48.js"></script>
