@@ -122,7 +122,7 @@ function getHTMLMediaElement(mediaElement, config) {
     volumeControl.className = 'volume-control';
 
 
-    if (buttons.has('volume-slider')) {
+//    if (buttons.has('volume-slider')) {
         var volumeSlider = document.createElement('div');
         volumeSlider.className = 'control volume-slider';
         volumeControl.appendChild(volumeSlider);
@@ -136,7 +136,7 @@ function getHTMLMediaElement(mediaElement, config) {
             mediaElement.volume = '.' + slider.value.toString().substr(0, 1);
         };
         volumeSlider.appendChild(slider);
-    }
+//    }
 
 //    if (buttons.has('full-screen')) {
         const zoom = document.querySelector('#zoom');

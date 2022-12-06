@@ -89,22 +89,27 @@
 }
 
 #chatt .other{
-   background-color : #eee;
    margin : 2px;
 }
 
-#chatt .me#enter{
-   background-color: white;
-   border-style:solid;
-   border-color: #fea532;
-   margin : 1px 0px 2px 40%;   
-}
+/* #chatt .me#enter .chat-text{ */
+/*    background-color: white; */
+/*    border-style:solid; */
+/*    border-color: #fea532; */
+/* /*    margin : 1px 0px 2px 40%;    */ 
+/* } */
 
-#chatt .other#enter{
-   background-color: white;
+/* #chatt .other#enter .chat-text{ */
+/*    background-color: white; */
+/*    border-style:solid; */
+/*    border-color: #fea532; */
+/* /*    margin : 2px; */
+/* } */
+.enter{
+	background-color: white;
    border-style:solid;
    border-color: #fea532;
-   margin : 2px;
+	
 }
 
 
