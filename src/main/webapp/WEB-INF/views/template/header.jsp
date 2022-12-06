@@ -46,7 +46,7 @@
 				<span class="fs-4">토실토실대</span>
 			</a>
 			<ul class="nav">
-				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
+				<li class="nav-item" style="width : calc(100%/7);"><a href="/product/list" class="nav-link link-dark px-2">온라인경매장</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://192.168.1.101:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>

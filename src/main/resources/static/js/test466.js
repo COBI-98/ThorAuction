@@ -3,12 +3,7 @@
 
 console.log($(".production-selling-cover-image__list__btn").length);
 
-$(document).ready(function() {
 
-    $(".number").on("click",function(){
-        $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
-    })
-})
 
 for(let i=0; i<$(".production-selling-cover-image__list__btn").length;i++){
     console.log($(".production-selling-cover-image__list__btn").length);
@@ -16,6 +11,15 @@ for(let i=0; i<$(".production-selling-cover-image__list__btn").length;i++){
         console.log(i);
         $("#carousel__list").css("transform", "translateX("+(-100*i)+"%)");
         $($(".production-selling-cover-image__list__btn")[i]).addClass('production-selling-cover-image__list__btn--selected');
+
+        
+            for(let j=0;j<$(".production-selling-cover-image__list__btn").length;j++){
+                if(i == j ){
+                    continue;
+                }
+                $($(".production-selling-cover-image__list__btn")[j]).removeClass('production-selling-cover-image__list__btn--selected');
+            }
+        
     });
 }
 

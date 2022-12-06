@@ -96,4 +96,16 @@
 				<result column="SORT" property="sort"></result>
 			</collection>	
  	</resultMap>
+ 	
+ 	<!-- 상품 리스트 화면 -->
+ 	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
+	 	SELECT * FROM 
+		SALEPRODUCT p;
+ 	</select>
+ 	
+ 	<!-- 카테고리 리스트 -->
+ 	
+ 	<select id="getCategoryList" parameterType="CategoryVO" resultType="CategoryVO">
+ 		select * from PRODUCTCATEGORY;
+ 	</select>
 </mapper>

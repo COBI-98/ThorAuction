@@ -199,7 +199,7 @@ footer,header,main{box-sizing:border-box;position:relative;display:block}
 }
 @media(min-width:1024px){.container{margin-right:auto;margin-left:auto;width:calc(100% - 120px);max-width:100%;box-sizing:border-box;min-height:1px}
 }
-@media(min-width:1256px){.container{margin-right:auto;margin-left:auto;width:1136px;max-width:100%;box-sizing:border-box;min-height:1px}
+@media(min-width:1256px){.container{margin-right:auto;margin-left:auto;width:1256px;max-width:100%;box-sizing:border-box;min-height:1px}
 }
 .container-full{margin-right:auto;margin-left:auto;width:100%}
 .container-full,.row{box-sizing:border-box}
