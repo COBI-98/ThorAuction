@@ -114,7 +114,7 @@ public class ChatController {
 			kakaoDetailVO.setKaPoint(point - value);
 			kakaoDetailVO.setKaNickName(loginnum);
 			memberSocialService.setPoint(kakaoDetailVO);
-			//낙찰 내역 DB 저장
+			//낙찰 내역 DB 저장 (유저 ID - winuser, 구매 가격 - value, 구매한 날 - sysdate, 상품 번호 - item으로 찾기)
 			
 		}
 		
