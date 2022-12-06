@@ -93,7 +93,10 @@
                        <button type="button" id="fileAdd" class="btn btn-success">파일 추가</button>
             </div>
         </div>
-        <input type="submit" id="applicationSubmit" value="신청하기"  class ="btn btn-info">
+        <div>
+
+            <input type="submit" id="applicationSubmit" value="신청하기"  class ="btn btn-info">
+        </div>
     </form>
 
 				
