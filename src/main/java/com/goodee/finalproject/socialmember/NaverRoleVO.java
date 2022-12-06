@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class NaverRoleVO
 {
-	private Long kaRole;
-	private String kaNickName;
+	private Long NaRole;
+	private String NaNickName;
 }

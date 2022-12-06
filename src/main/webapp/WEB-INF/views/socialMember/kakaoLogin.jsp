@@ -45,7 +45,7 @@
 								<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
 							</c:when>
 							<c:when test="${naverInfo != null }">
-								<input type="hidden" id="kaName" name="kaNickName" value="${naverInfo.username }">
+								<input type="hidden" id="kaName" name="NaNickName" value="${naverInfo.username }">
 							</c:when>
 							<c:otherwise>error</c:otherwise>
 						</c:choose>
@@ -65,31 +65,71 @@
 							<tr>
 								<th>생년월일</th>
 								<td>
-									<input type="text" name="kaBirth">
+									<c:choose>
+										<c:when test="${kakaoInfo != null }">
+											<input type="text" name="kaBirth">
+										</c:when>
+										<c:when test="${naverInfo != null }">
+											<input type="text" name="NaBirth">
+										</c:when>
+										<c:otherwise>error</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<th>우편번호</th>
 								<td>
-									<input type="text" name="kaPost">
+									<c:choose>
+										<c:when test="${kakaoInfo != null }">
+											<input type="text" name="kaPost">
+										</c:when>
+										<c:when test="${naverInfo != null }">
+											<input type="text" name="NaPost">
+										</c:when>
+										<c:otherwise>error</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<th>주소</th>
 								<td>
-									<input type="text" name="kaAddr">
+									<c:choose>
+										<c:when test="${kakaoInfo != null }">
+											<input type="text" name="kaAddr">
+										</c:when>
+										<c:when test="${naverInfo != null }">
+											<input type="text" name="NaAddr">
+										</c:when>
+										<c:otherwise>error</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<th>상세주소</th>
 								<td>
-									<input type="text" name="kaAddrDetail">
+									<c:choose>
+										<c:when test="${kakaoInfo != null }">
+											<input type="text" name="kaAddrDetail">
+										</c:when>
+										<c:when test="${naverInfo != null }">
+											<input type="text" name="NaAddrDetail">
+										</c:when>
+										<c:otherwise>error</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
 								<td>
-									<input type="text" name="kaPhone">
+									<c:choose>
+										<c:when test="${kakaoInfo != null }">
+											<input type="text" name="kaPhone">
+										</c:when>
+										<c:when test="${naverInfo != null }">
+											<input type="text" name="NaPhone">
+										</c:when>
+										<c:otherwise>error</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</table>

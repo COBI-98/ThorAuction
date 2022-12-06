@@ -33,7 +33,7 @@ public class LogoutCustom implements LogoutHandler
 		log.info("=========== logout Handler ===========");
 
 		// 1. 일반 로그인 or 소셜 로그인 판별
-//		 log.info("authentication: {}", authentication.getClass());
+		// log.info("authentication: {}", authentication.getClass());
 		// log.info("social 가져오자: {}", authentication.getPrincipal().getClass().toString());
 
 		if (authentication == null)
@@ -69,8 +69,10 @@ public class LogoutCustom implements LogoutHandler
 			{
 				try
 				{
-					response.sendRedirect("/");
+					response.sendRedirect("https://nid.naver.com/nidlogin.logout=" + logout_uri);
+//					response.sendRedirect("/");
 					request.getSession().invalidate();
+					// request.removeAttribute(client_id);
 				}
 				catch (IOException e)
 				{
