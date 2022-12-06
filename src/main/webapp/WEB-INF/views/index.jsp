@@ -13,7 +13,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script defer src="/js/social/kakaoBan.js"></script>
-<!-- <script defer src="/js/social/memberBan.js"></script> -->
+<script defer src="/js/social/memberBan.js"></script>
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
@@ -25,14 +25,14 @@
 	<sec:authorize access="isAuthenticated()">
 		<c:forEach items="${kakaoRole }" var="kk">
 			<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
-				kakao <input type="text" value="${kk.kaRoleVOs[0].kaRoleName }" class="krole" readOnly>
+				<input type="hidden" value="${kk.kaRoleVOs[0].kaRoleName }" class="krole" readOnly>
 			</c:if>
 		</c:forEach>
 
 		<c:forEach items="${member}" var="m">
-			<c:if test="${m.roleVOs[0].roleName == 'ROLE_BAN' }">
-				<input type="text" value="${m.id}" class="iii" readOnly>
-				<input type="text" value="${m.roleVOs[0].roleName}" class="MID" readOnly>
+			<c:if test="${m.id == memID && m.roleVOs[0].roleName == 'ROLE_BAN' }">
+				<input type="hidden" value="${m.id}" class="iii" readOnly>
+				<input type="hidden" value="${m.roleVOs[0].roleName}" class="MID" readOnly>
 			</c:if>
 		</c:forEach>
 	</sec:authorize>

@@ -11,11 +11,15 @@
 			<ul class="nav">
 				<!-- 로그인 전 -->
 				<sec:authorize access="!isAuthenticated()">
-					<li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-					<li class="nav-item"><a href="../member/join" class="nav-link link-dark px-2">회원가입</a></li>
+					<li class="nav-item">
+						<a href="../member/login" class="nav-link link-dark px-2">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a href="../member/join" class="nav-link link-dark px-2">회원가입</a>
+					</li>
 				</sec:authorize>
 
-	<%-- 			<!-- 로그인 후 -->
+				<%-- 			<!-- 로그인 후 -->
 				<c:if test="${member != null}">
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
 					<%-- <li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
@@ -24,34 +28,59 @@
 				<%-- <sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/joinchoose" class="nav-link link-dark px-2">|회원가입|</a></li>
 				</sec:authorize> --%>
-				
-				<!-- 로그인 후 -->
-				<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a></li>
 
+				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
 					<c:choose>
 						<c:when test="${kakaoInfo != null }">
-							<li class="nav-item"><b>${kakaoInfo.kaName }님 안녕하세요</b></li>
+							<li class="nav-item">
+								<a class="nav-link link-dark px-2">
+									<b>${kakaoInfo.kaName }님 안녕하세요</b>
+								</a>
+							</li>
 						</c:when>
 						<c:when test="${naverInfo != null }">
-							<li class="nav-item"><b>${naverInfo.name }님 안녕하세요</b></li>
+							<li class="nav-item">
+								<a class="nav-link link-dark px-2">
+									<b>${naverInfo.name }님 안녕하세요</b>
+								</a>
+							</li>
 						</c:when>
 						<c:otherwise>
-						member Login
+							<li class="nav-item">
+								<a class="nav-link link-dark px-2">
+									<b>${member.name }님 안녕하세요</b>
+								</a>
+							</li>
 							<%-- <li class="nav-item"><b>${naverInfo }님 안녕하세요</b></li> --%>
 						</c:otherwise>
 					</c:choose>
-					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
+					<li class="nav-item">
+						<a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a>
+					</li>
 					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form> --%>
-					<c:forEach items="${kakaoRole }" var="kk">
-						<c:if test="${(kk.kaRoleVOs[0].kaRoleName == 'ROLE_ADMIN') == true}">
-							<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a></li>
+
+					<c:if test="${empty memID}">
+						<c:forEach items="${kakaoRole }" var="kk">
+							<c:if test="${kk.kaRoleVOs[0].kaRoleName == 'ROLE_ADMIN'}">
+								<li class="nav-item">
+									<a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					</c:if>
+
+					<c:if test="${not empty memID && memID == 'admin'}">
+						<c:if test="${member.roleVOs[0].roleName == 'ROLE_ADMIN'}">
+							<li class="nav-item">
+								<a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
+							</li>
 						</c:if>
-					</c:forEach>
+					</c:if>
 				</sec:authorize>
 			</ul>
 		</div>
@@ -64,12 +93,24 @@
 				<span class="fs-4">토실토실대</span>
 			</a>
 			<ul class="nav">
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">실시간 경매장</a></li>
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">신청게시판</a></li>
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">공지게시판</a></li>
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">QNA챗봇</a></li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark px-2">경매장</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark px-2">실시간 경매장</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark px-2">고객센터</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark px-2">신청게시판</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark px-2">공지게시판</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link link-dark px-2">QNA챗봇</a>
+				</li>
 			</ul>
 			<form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
 				<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
