@@ -12,7 +12,7 @@ table { border-collapse:collapse;table-layout:fixed;word-break:break-all; }
 ul, ol, li { list-style:none; }
 img, fieldset { border:0; }
 
-* {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal}
+/* * {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal} */
 *:before {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal}
 *:after {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal}
 em{font-style:normal}

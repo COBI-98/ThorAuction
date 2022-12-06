@@ -35,35 +35,55 @@
 		 </div>
 
      
-        <div>
-        글 제목<br>
+        <div class="applicationDetail">
+        글 제목
         <input type="text" name="title" placeholder="글 제목을 입력하세요"><br>
         </div>
-         <div>
-        작성자<br>
+         <div class="applicationDetail">
+        작성자
         <input type="text" name="writer"  ><br>
         </div>
         <!-- <input type="submit" name="add" value="신청하기 테스트"  class ="btn btn-info"> -->
        <div class="apllicationForm">
-            신청하는 상품 정보 
+            <div class="applicationInfo">
+                신청하는 상품 정보
+            </div> 
+            
             <input type="hidden" name="applicationNum" value="">
-            <div>
-                상품 이름<br>
+            <div class="applicationDetail">
+                상품명<br>
                 <input type="tex" name="productName" ><br>
             </div>
-            <div>
-                최저 경매가격<br>
+            <div  class="applicationDetail">
+                최저 판매가격<br>
                 <input type="text" name="productPrice"  ><br>
             </div>
-            <div>
-                상세정보<br>
-                <textarea id="detailContents" name="productInformation" rows="30" cols="100"></textarea>
-            </div>
-            <div>
+            <div  class="applicationDetail">
                 경매기간<br>
                 <input type="text" name="auctionPeriod" ><br>
             </div>
-            <div  class="board-filetitle">💾상품이미지 첨부  
+           
+            <div>
+                <div class="applicationInfoTitle">
+                상세정보
+                </div>
+                <div class="applicationInfoExplain"> 
+                    상품 상세정보 작성(필수 사항)<br>
+                    : 상품 모델명<br>
+                    : 새 상품 가격<br>
+                    : 상품 상태<br>
+                    : 상품 정보
+                </div>
+                <textarea id="detailContents" name="productInformation" rows="30" cols="100"></textarea>
+            </div>
+            
+            <div  class="board-filetitle">
+                <div class="applicationInfoTitle">
+                    💾상품이미지 첨부<br>
+                </div>  
+                <div class="applicationInfoExplain">
+                    : 상품 상태
+                </div>
                 <div class="mb-3" id="fileAddResult">
                        
                    </div>
@@ -134,7 +154,11 @@
         focus : true,
         lang : 'ko-KR',
         toolbar : toolbar,
-        placeholder : '상품<br>상품',
+        placeholder : '상품 상세정보 작성(필수사항)<br>'
+                      + ' : 상품 모델명<br>'
+                      + ' : 새 상품 가격<br>'
+                      + ' : 상품 상태<br>'
+                      + ' : 상품 정보<br>',
         callbacks : { //여기 부분이 이미지를 첨부하는 부분
         onImageUpload : function(files, editor,
         welEditable) {

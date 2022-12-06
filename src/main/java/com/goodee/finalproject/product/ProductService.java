@@ -30,4 +30,17 @@ public class ProductService {
 		return productMapper.getProductApproval(productVO);
 	}
 	
+	public int setSaleProduct(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.setSaleProduct(saleProductVO);
+	}
+	
+	public List<SaleProductVO> getSaleProductList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductList(saleProductVO);
+	}
+	
+	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception{
+		return productMapper.getCategoryList(categoryVO);
+	}
 }
