@@ -10,12 +10,11 @@
 <c:import url="../../template//boot.jsp"></c:import>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link href="/css/reset.css" rel="stylesheet">
 </head>
 <body>
+	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
-
-
-	<h1>경매신청게시판 상세화면</h1>
 	
 	<table class="table table-bordered border-primary">
 		<tbody>
@@ -123,6 +122,7 @@
 </div>
    
 </section>
+<c:import url="../../template/footer.jsp"></c:import>
 <script type="text/javascript">
 $(function(){
 	$("#refuseBtn").click(function(){

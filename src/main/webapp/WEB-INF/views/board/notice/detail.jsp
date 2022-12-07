@@ -7,14 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../../template/boot.jsp"></c:import>
-
+<link href="/css/reset.css" rel="stylesheet">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
+	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
-
-
-	<h1>공지게시판 상세보기</h1>
 	
 	<table class="table table-bordered border-primary">
   <tbody>
@@ -58,6 +56,7 @@
 <div> <a href="/board/notice/update?noticeNum=${noticeVO.noticeNum}" class="btn btn-info" >글 수정</a></div>
 <div> <a href="/board/notice/delete?noticeNum=${noticeVO.noticeNum}" class="btn btn-info" style="margin-top: 10px;">글 삭제</a></div>
 </section>
+<c:import url="../../template/footer.jsp"></c:import>
 	
 	
 </body>
