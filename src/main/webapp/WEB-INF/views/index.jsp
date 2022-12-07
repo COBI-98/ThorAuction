@@ -19,7 +19,7 @@
 		<h1>토르의 실시간 대장간 메인</h1>
 
 		<div class="mt-5">
-			<a href="../mypage/checkpw">체크</a>
+			<button type="button" id="check">체크</button>
 		</div>
 
 <!-- 	<a href="/oauth2/authorization/naver" style="padding-left: 20px; padding-right: 20px;">
@@ -27,5 +27,11 @@
 	</a> -->
 	</section>
 	<c:import url="./template/footer.jsp"></c:import>
+	
+	<script>
+		$("#check").click(function() {
+			confirm("confirm 테스트")
+		})
+	</script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -88,11 +89,18 @@ public class SecurityConfig
 
 	}
 	
-	//평문(Clear Text)을 암호화 시켜주는 객체생성
+	// 평문(Clear Text)을 암호화 시켜주는 객체생성
 	// 비밀번호 암호화
 	@Bean
-	public PasswordEncoder getEncoder() {
+	PasswordEncoder getEncoder() {
 		
 		return new BCryptPasswordEncoder();
 	}
+	
+//	// AuthenticationManager Bean 생성	
+//	@Bean
+//	AuthenticationManager authenticationManagerBean() throws Exception {
+//		
+//		return authenticationManagerBean();
+//	}
 }
