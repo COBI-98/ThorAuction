@@ -36,91 +36,101 @@
 				<th>등급 변경</th>
 				<!-- normal member start -->
 			</tr>
-			<c:forEach items="${member}" var="m">
-				<tr>
-					<td class="mId">${m.id }</td>
-					<td>${m.email }</td>
-					<td>${m.name }</td>
-					<td>${m.birth }</td>
-					<td>${m.post }</td>
-					<td>${m.addr }</td>
-					<td>${m.addr2 }</td>
-					<td>${m.phone }</td>
-					<td>${m.point }</td>
-					<td>${m.roleVOs[0].roleName }</td>
-					<td>
-						<c:choose>
-							<c:when test="${m.roleVOs[0].roleName == 'ROLE_MANGER' }">
-								<select name="select" class="selectRole">
-									<option class="role" value="Manager" selected>Manager</option>
-									<option class="role" value="User">User</option>
-									<option class="role" value="Ban">Ban</option>
-								</select>
-							</c:when>
-							<c:when test="${m.roleVOs[0].roleName == 'ROLE_USER' }">
-								<select name="select" class="selectRole">
-									<option class="role" value="Manager">Manager</option>
-									<option class="role" value="User" selected>User</option>
-									<option class="role" value="Ban">Ban</option>
-								</select>
-							</c:when>
-							<c:when test="${m.roleVOs[0].roleName == 'ROLE_BAN' }">
-								<select name="select" class="selectRole">
-									<option class="role" value="Manager">Manager</option>
-									<option class="role" value="User">User</option>
-									<option class="role" value="Ban" selected>Ban</option>
-								</select>
-							</c:when>
-							<c:otherwise>관리자</c:otherwise>
-						</c:choose>
-					</td>
-				</tr>
-			</c:forEach>
-			<!-- nomal member end -->
-
-			<!-- kakao member start -->
-			<c:forEach items="${kakao }" var="ka">
-				<c:if test="${ka.kaRoleVOs[0].kaRoleName != 'ROLE_ADMIN' }">
+			<c:if test="${member == null }">
+			일반 회원이 없습니다.
+			</c:if>
+			<c:if test="${member != null }">
+				<c:forEach items="${member}" var="m">
 					<tr>
-						<td class="kakaoID">${ka.kaNickName }</td>
-						<td class="kakaoEmail">${ka.kaEmail }</td>
-						<td class="kakaoName">${ka.kaName }</td>
-						<td>${ka.kakaoDetailVOs[0].kaBirth }</td>
-						<td>${ka.kakaoDetailVOs[0].kaPost }</td>
-						<td>${ka.kakaoDetailVOs[0].kaAddr }</td>
-						<td>${ka.kakaoDetailVOs[0].kaAddrDetail }</td>
-						<td>${ka.kakaoDetailVOs[0].kaPhone }</td>
-						<td>${ka.kakaoDetailVOs[0].kaPoint }</td>
-						<td>${ka.kaRoleVOs[0].kaRoleName}</td>
+						<td class="mId">${m.id }</td>
+						<td>${m.email }</td>
+						<td>${m.name }</td>
+						<td>${m.birth }</td>
+						<td>${m.post }</td>
+						<td>${m.addr }</td>
+						<td>${m.addr2 }</td>
+						<td>${m.phone }</td>
+						<td>${m.point }</td>
+						<td>${m.roleVOs[0].roleName }</td>
 						<td>
 							<c:choose>
-								<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_MANGER' }">
+								<c:when test="${m.roleVOs[0].roleName == 'ROLE_MANGER' }">
 									<select name="select" class="selectRole">
 										<option class="role" value="Manager" selected>Manager</option>
 										<option class="role" value="User">User</option>
 										<option class="role" value="Ban">Ban</option>
 									</select>
 								</c:when>
-								<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_USER' }">
+								<c:when test="${m.roleVOs[0].roleName == 'ROLE_USER' }">
 									<select name="select" class="selectRole">
 										<option class="role" value="Manager">Manager</option>
 										<option class="role" value="User" selected>User</option>
 										<option class="role" value="Ban">Ban</option>
 									</select>
 								</c:when>
-								<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_BAN' }">
+								<c:when test="${m.roleVOs[0].roleName == 'ROLE_BAN' }">
 									<select name="select" class="selectRole">
 										<option class="role" value="Manager">Manager</option>
 										<option class="role" value="User">User</option>
 										<option class="role" value="Ban" selected>Ban</option>
 									</select>
 								</c:when>
-								<c:otherwise>에러?</c:otherwise>
+								<c:otherwise>관리자</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
-				</c:if>
-			</c:forEach>
+				</c:forEach>
+			</c:if>
+			<!-- nomal member end -->
+
+			<!-- kakao member start -->
+			<c:if test="${kakao == null }">
+			소셜 회원이 없습니다.
+			</c:if>
+			<c:if test="${kakao != null }">
+				<c:forEach items="${kakao }" var="ka">
+					<c:if test="${ka.kaRoleVOs[0].kaRoleName != 'ROLE_ADMIN' }">
+						<tr>
+							<td class="kakaoID">${ka.kaNickName }</td>
+							<td class="kakaoEmail">${ka.kaEmail }</td>
+							<td class="kakaoName">${ka.kaName }</td>
+							<td>${ka.kakaoDetailVOs[0].kaBirth }</td>
+							<td>${ka.kakaoDetailVOs[0].kaPost }</td>
+							<td>${ka.kakaoDetailVOs[0].kaAddr }</td>
+							<td>${ka.kakaoDetailVOs[0].kaAddrDetail }</td>
+							<td>${ka.kakaoDetailVOs[0].kaPhone }</td>
+							<td>${ka.kakaoDetailVOs[0].kaPoint }</td>
+							<td>${ka.kaRoleVOs[0].kaRoleName}</td>
+							<td>
+								<c:choose>
+									<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_MANGER' }">
+										<select name="select" class="selectRole">
+											<option class="role" value="Manager" selected>Manager</option>
+											<option class="role" value="User">User</option>
+											<option class="role" value="Ban">Ban</option>
+										</select>
+									</c:when>
+									<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_USER' }">
+										<select name="select" class="selectRole">
+											<option class="role" value="Manager">Manager</option>
+											<option class="role" value="User" selected>User</option>
+											<option class="role" value="Ban">Ban</option>
+										</select>
+									</c:when>
+									<c:when test="${ka.kaRoleVOs[0].kaRoleName == 'ROLE_BAN' }">
+										<select name="select" class="selectRole">
+											<option class="role" value="Manager">Manager</option>
+											<option class="role" value="User">User</option>
+											<option class="role" value="Ban" selected>Ban</option>
+										</select>
+									</c:when>
+									<c:otherwise>에러?</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</c:if>
 			<!-- kakao member end -->
 
 			<!-- naver member start -->
