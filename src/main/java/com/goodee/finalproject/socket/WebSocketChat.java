@@ -80,6 +80,7 @@ public class WebSocketChat {
 		if(msg.substring(2, 6).equals("item")) {
 			item = String.valueOf(jsonObj.get("item"));
 			itemNum = Integer.parseInt(String.valueOf(jsonObj.get("itemNum")));
+			value = Integer.parseInt(String.valueOf(jsonObj.get("itemprice")));
 			sendMessage(msg,session);
 		}
 		

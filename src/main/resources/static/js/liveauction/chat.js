@@ -92,6 +92,8 @@ ws.onmessage = function(msg){
 			},
 			success : function(result) {
 				console.log(result);
+				var nummm = data.itemNum;
+				$('nummm').css("display","none");
 			}
 		})
 	}
@@ -99,6 +101,7 @@ ws.onmessage = function(msg){
 	//경매 물품 설정 시
 	else if(data.item != null) {
 		selecteditem.innerText = data.item;
+		amount.innerHTML = data.itemprice;
 	}
 	
 	//단위 경매 설정 시
@@ -605,9 +608,10 @@ unitsend.addEventListener("click",function(){
 //경매 물품 선택
 itemsend.addEventListener("click",function(){
 	//items.options[items.selectedIndex].value;
-	console.log(items.options[items.selectedIndex].innerText);
-	data12.item = items.options[items.selectedIndex].innerText;
-	data12.itemNum = items.options[items.selectedIndex].value;
+	var itemmm = items.options[items.selectedIndex];
+	data12.item = itemmm.innerText;
+	data12.itemNum = itemmm.value;
+	data12.itemprice = itemmm.dataset.price;
 	var temp = JSON.stringify(data12);
 	ws.send(temp);
 })
