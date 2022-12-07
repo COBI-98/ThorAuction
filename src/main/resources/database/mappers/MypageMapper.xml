@@ -36,8 +36,9 @@
 
 	<!-- 회원정보 수정 -->
 	<update id="setUpdate" parameterType="MemberVO">
-		UPDATE THORMEMBER 
+		UPDATE THORMEMBER
 		SET
+		PW = #{pw},
 		NAME = #{name},
 		BIRTH = #{birth},
 		EMAIL = #{email},
@@ -45,7 +46,6 @@
 		ADDR = #{addr},
 		ADDR2 = #{addr2},
 		PHONE = #{phone}
-		
 		WHERE ID = #{id}
 	</update>
 	
