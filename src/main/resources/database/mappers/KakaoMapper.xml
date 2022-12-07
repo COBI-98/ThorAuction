@@ -4,18 +4,21 @@
 <mapper
 	namespace="com.goodee.finalproject.socialmember.KakaoMapperIF">
 
-	<!-- insert into SOCIALKAKAO values(${kaNickName}, ${kaEmail}, ${kaBirth}, 
-		${kaName}, ${kaPost}, ${kaAddr}, ${kaAddrDetail}, ${kaPhone}, 3000) -->
+	<insert id="setKaRole" parameterType="KakaoRoleVO">
+		insert IGNORE INTO
+		KAKAOMEMBERROLE
+		values(#{kaNickName}, 3)
+	</insert>
 
 	<insert id="setKakao1" parameterType="KakaoVO">
-		INSERT INTO
+		INSERT IGNORE INTO
 		SOCIALKAKAO(KANICKNAME,KAEMAIL,KANAME)
 		values(#{kaNickName},
 		#{kaEmail}, #{kaName})
 	</insert>
 
 	<insert id="setKakaoDetail" parameterType="KakaoDetailVO">
-		insert into
+		insert IGNORE into
 		SOCIALKAKAODETAIL
 		(KANICKNAME, KABIRTH, KAPOST, KAADDR, KAADDRDETAIL,
 		KAPHONE, KAPOINT)
@@ -26,8 +29,24 @@
 	</insert>
 
 	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
-		<!-- select count(*) from SOCIALKAKAO where KANICKNAME=#{kaNickName} -->
-		select count(kaName) from SOCIALKAKAO where KANAME=#{kaName}
+		select
+		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
 
+
+	<!-- detail -->
+	<select id="getKakaoDetail" parameterType="KakaoVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+	
+	<!-- point -->
+	<update id="setPoint" parameterType="KakaoDetailVO">
+		UPDATE SOCIALKAKAODETAIL SET KAPOINT = #{kaPoint} WHERE KANICKNAME = #{kaNickName} 
+	</update>
+	
+	<select id="getOneMember" parameterType="KakaoDetailVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+	
+	
 </mapper>

@@ -10,28 +10,32 @@
 			</ul>
 			<ul class="nav">
 				<!-- 로그인 전 -->
-				<c:if test="${member == null}">
+				<sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-					<li class="nav-item"><a href="../member/signup" class="nav-link link-dark px-2">회원가입</a></li>
-				</c:if>
+					<li class="nav-item"><a href="../member/join" class="nav-link link-dark px-2">회원가입</a></li>
+				</sec:authorize>
 
-				<!-- 로그인 후 -->
+	<%-- 			<!-- 로그인 후 -->
 				<c:if test="${member != null}">
 					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
-					<li class="nav-item"><a href="../mypage/update" class="nav-link link-dark px-2">마이페이지</a></li>
-				</c:if>
+					<li class="nav-item"><a href="../mypage/id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
+				</c:if> --%>
 
 				<%-- <sec:authorize access="!isAuthenticated()">
 					<li class="nav-item"><a href="../member/joinchoose" class="nav-link link-dark px-2">|회원가입|</a></li>
 				</sec:authorize> --%>
+				
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-					<form action="/member/logout" method="post">
+					<li class="nav-item"><a href="" class="nav-link link-dark px-2"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
+					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
+					<li class="nav-item"><a href="../mypage/id=" class="nav-link link-dark px-2">마이페이지</a></li>
+					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
-					</form>
-					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">|카카오 정보|</a></li>
+					</form> --%>
+					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 기능</a></li>
 				</sec:authorize>
 				
 				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
@@ -47,7 +51,7 @@
 			</a>
 			<ul class="nav">
 				<li class="nav-item" style="width : calc(100%/7);"><a href="/product/list" class="nav-link link-dark px-2">온라인경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://192.168.1.101:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://localhost:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>

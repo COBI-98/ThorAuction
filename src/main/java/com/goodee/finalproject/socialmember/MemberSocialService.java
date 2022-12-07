@@ -1,5 +1,6 @@
 package com.goodee.finalproject.socialmember;
 
+import java.security.Principal;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,6 +24,18 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 	// @Value("${kakao.Admin.key}")
 	// private String adminKey;
+	
+	public KakaoDetailVO getOneMember(KakaoDetailVO kakaoDetailVO) throws Exception{
+		return kakaoMapperIF.getOneMember(kakaoDetailVO);
+	}
+	
+	public int setPoint(KakaoDetailVO kakaoDetailVO) throws Exception{
+		return kakaoMapperIF.setPoint(kakaoDetailVO);
+	}
+	
+	public KakaoDetailVO getKakaoDetail(KakaoVO kakaoVO) throws Exception{
+		return kakaoMapperIF.getKakaoDetail(kakaoVO);
+	}
 
 	public int IdCheck(KakaoVO kakaoVO) throws Exception
 	{
@@ -31,25 +44,27 @@ public class MemberSocialService extends DefaultOAuth2UserService
 
 	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
+
 		return kakaoMapperIF.setKakaoDetail(kakaoDetailVO);
 	}
 
-	public int setKakao1(KakaoVO object) throws Exception
+	public int setKakao1(KakaoVO kakaoVO) throws Exception
 	{
-		log.info("===== kakao service =====");
-
-		int rs = kakaoMapperIF.setKakao1(object);
-
-		log.info("memberservice set kakao : {}", rs);
+		int rs = kakaoMapperIF.setKakao1(kakaoVO);
+		log.info("------> service rs: {}", rs);
+		if (rs == 1)
+		{
+			kakaoMapperIF.setKaRole(kakaoVO);
+		}
 
 		return rs;
 	}
 
-	// 카카오 소셜 로그인7
+	// 카카오 소셜 로그인
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
 	{
-		// log.info("===== Social Login try =====");
+		log.info("===== Social Login try =====");
 		// // log.info("userRequest: {}", userRequest);
 		// log.info("userRequest AccessToken: {}", userRequest.getAccessToken());
 		// log.info("userRequest AdditionalParameters: {}", userRequest.getAdditionalParameters());
@@ -59,12 +74,26 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		String social = userRequest.getClientRegistration().getRegistrationId();
 		log.info(social);
 
-		OAuth2User oAuth2User2 = this.socialJoinCheck(userRequest);
+		log.info("social kakao: {}", (social == "kakao"));
+		log.info("social naver: {}", (social == "naver"));
+
+		OAuth2User oAuth2User2 = null;
+
+		if ((social.equals("kakao")))
+		{
+			oAuth2User2 = this.kakaoJoinCheck(userRequest);
+		}
+		else if ((social.equals("naver")))
+		{
+			oAuth2User2 = this.naverJoinCheck(userRequest);
+		}
+
+		log.info("oAuth Naver: {}", oAuth2User2);
 
 		return oAuth2User2;
 	}
 
-	public OAuth2User socialJoinCheck(OAuth2UserRequest userRequest)
+	public OAuth2User kakaoJoinCheck(OAuth2UserRequest userRequest)
 	{
 		// 회원가입 유무
 		OAuth2User oAuth2User = super.loadUser(userRequest);
@@ -98,5 +127,40 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		kakaoVO.setAttributes(oAuth2User.getAttributes());
 
 		return kakaoVO;
+	}
+
+	public OAuth2User naverJoinCheck(OAuth2UserRequest userRequest)
+	{
+		// 회원가입 유무
+		OAuth2User oAuth2User = super.loadUser(userRequest);
+
+		// log.info("===== user infomation =====");
+		// log.info("oauth2user-Name: {}", oAuth2User.getName());
+		// log.info("oauth2user-Attr: {}", oAuth2User.getAttributes());
+		// log.info("oauth2user-Auth: {}", oAuth2User.getAuthorities());
+		//
+		// log.info("===================================");
+		Map<String, Object> map = oAuth2User.getAttributes();
+
+		Iterator<String> keys = map.keySet().iterator(); // key 꺼내기
+		while (keys.hasNext()) // key가 있으면 true
+		{
+			String key = keys.next();
+			// log.info("Key: {}", key);
+			// map.get(key);
+		}
+		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("properties").getClass());
+		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("properties");
+		log.info("naver properties: {}", lm);
+		LinkedHashMap<String, Object> na = oAuth2User.getAttribute("profile");
+		log.info("naver account: {}", na);
+
+		NaverVO naverVO = new NaverVO();
+		naverVO.setNaNickName((String) lm.get("name"));
+		// naverVO.setNaEmail(na.get("email").toString());
+		naverVO.setNaSocial(userRequest.getClientRegistration().getRegistrationId());
+		naverVO.setAttriutes(oAuth2User.getAttributes());
+
+		return naverVO;
 	}
 }
