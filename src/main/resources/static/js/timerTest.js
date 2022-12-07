@@ -8,17 +8,14 @@ let count = $(".productDate").length;
 let haveDday = [count];
 for(let i = 0; i<count;i++){
    
-  console.log("rrr")
 
   haveDday[i] =  () => { 
-      console.log(i);
       let timelength = $($(".timeLength")[i]).val(); 
-      console.log($($(".productDate")[i]).val());
       let endDateCheck = new Date($($(".productDate")[i]).val());
-      console.log(endDateCheck);
+
       let endDate = new Date(endDateCheck.getTime() + (timelength*24*3600*1000)); 
         // 현재날짜
-        let now = new Date();
+      let now = new Date();
   
       // let dateGap = endDate.getTime() - now.getTime();
       // D-Day 날짜에서 현재 날짜의 차이를 getTime 메서드를 사용해서 밀리초의 값으로 가져온다.
@@ -29,6 +26,10 @@ for(let i = 0; i<count;i++){
       // 1000*60 => 60초(1분)*60 => 60분(1시간)*24 = 24시간(하루)
       // 나머지 연산자(%)를 이용해서 시/분/초를 구한다.
       let dateGap = endDate.getTime() - now.getTime();
+
+      if (dateGap < 0){
+        timer[i].innerHTML = ""
+      }else{
       let day = Math.floor(dateGap / (1000*60*60*24));   
       let hours = Math.floor((dateGap % (1000*60*60*24)) / (1000*60*60));   // 하루단위로 나누고 나온 나머지는 시,분,초가 나온다.
       let minutes = Math.floor((dateGap % (1000*60*60)) / (1000*60));   // 마찬가지로 시간단위로 나누고 나온 나머지는 분,초가 나온다.
@@ -41,7 +42,7 @@ for(let i = 0; i<count;i++){
       // console.log(timer.val());
       
       timer[i].innerHTML = "남은시간"+'<strong><span id="d-day-day0">' +`0${day}</span>일<span id="d-day-hour0"> ${hours}</span> : <span id="d-day-min0"> ${minutes}</span> : <span id="d-day-sec0"> `+`${seconds}</span></strong>`;
-      
+    }
   };
 
   
