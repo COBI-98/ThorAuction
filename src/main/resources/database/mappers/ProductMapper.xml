@@ -100,7 +100,8 @@
  	<!-- 상품 리스트 화면 -->
  	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
 	 	SELECT * FROM 
-		SALEPRODUCT p;
+		SALEPRODUCT p
+		where DEADLINEINFO =#{deadlineInfo};
  	</select>
  	
  	<!-- 상품리스트 디테일 -->
@@ -115,6 +116,11 @@
 		ON(a.PRODUCTNUM =pf.PRODUCTNUM )
 		WHERE p.PRODUCTID = #{productId};
  	</select>
+ 	
+ 	<update id="setDeadLineUpdate" parameterType="SaleProductVO">
+ 		UPDATE SALEPRODUCT SET
+		DEADLINEINFO = 1 WHERE PRODUCTID =#{productId}; 
+ 	</update>
 	
 	<resultMap type="SaleProductVO" id="getSaleProductDetail">
  		<id column="PRODUCTID" property="productId"></id>

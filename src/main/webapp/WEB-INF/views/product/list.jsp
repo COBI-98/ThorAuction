@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 	<title>토르의 실시간 대장간</title>
 	<c:import url="../template/boot.jsp"></c:import>
-	<link href="/css/reset.css" rel="stylesheet">
+	<!-- <link href="/css/reset.css" rel="stylesheet"> -->
 	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 	
 	<link rel="stylesheet" href="/css/chunk48-455aca93.css"> <!-- carousel -->
@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/css/testThorText.css">
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>-
+	<c:import url="../template/header.jsp"></c:import>
 		<div class="category-feed-container">
 			<div class="category-feed-wrap container">
 				<div class="category-feed row">
@@ -96,8 +96,8 @@
 							</div>
 							<div class="tap_set">
 								<ul>
-									<li class="on"><a href="auction_list.asp?sing=S">진행중인 경매</a></li>
-									<li><a href="auction_list.asp?sing=E">마감된 경매</a></li>
+									<li <c:if test="${saleVO[0].deadlineInfo == false}">class="on"</c:if>><a href="./list?deadlineInfo=0">진행중인 경매</a></li>
+									<li <c:if test="${saleVO[0].deadlineInfo == true}">class="on"</c:if>><a href="./list?deadlineInfo=1"">마감된 경매</a></li>
 								</ul>
 							</div>
 							<div class="sub_tit">온라인경매</div>
@@ -115,29 +115,39 @@
 								<ul>
 									<!-- 올린시간 -->
 									<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
-										<li>
-											
-											<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
-											<c:set var="testVO" value="testVO${status.index}" />
-											<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
-											<div class="imgbox">
-												<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+										
+											<li>
 												
-												<div class="timedate" id="timertest" >
-	
-												</div>
-											</div>
-											<div class="text">
-												<a href="#" class="title">${requestScope[testVO].productName}</a>
-												<div class="pricebox">
+												<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+												<c:set var="testVO" value="testVO${status.index}" />
+												<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+												<div class="imgbox">
+													<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
 													
-													<div>시작가 <span class="through">${requestScope[testVO].productPrice}</span> </div>
-													<div>현재가 <span class="price">${requestScope[testVO].productPrice}  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-													<a href="#" class="shophome">COBI</a>
+													<div class="timedate" id="timertest" >
+		
+													</div>
 												</div>
-												
-											</div>
-										</li> 
+												<div class="text">
+													<c:if test ="${not VO.deadlineInfo}">
+													<a href="#" class="title">${requestScope[testVO].productName}</a>
+													<div class="pricebox">
+														
+														<div>시작가 <span class="through">${requestScope[testVO].productPrice}</span> </div>
+														<div>현재가 <span class="price">${requestScope[testVO].productPrice}  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+														<a href="#" class="shophome">COBI</a>
+													</div>
+													</c:if>
+													<c:if test = "${VO.deadlineInfo}">
+														<a href="#" class="title">${requestScope[testVO].productName}</a>
+														<div class="pricebox">
+															경매가 종료되었습니다.
+															<a href="#" class="shophome">COBI</a>
+														</div>
+													</c:if>
+												</div>
+											</li> 
+										
 									</c:forEach>
 									
 									

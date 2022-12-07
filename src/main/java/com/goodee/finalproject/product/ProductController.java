@@ -1,5 +1,10 @@
 package com.goodee.finalproject.product;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,15 +58,31 @@ public class ProductController {
 		CategoryVO category = new CategoryVO();
 		List<CategoryVO> categoryVO = productService.getCategoryList(category);
 		List<SaleProductVO> saleVO = productService.getSaleProductList(saleproductVO);
-		log.info("category -> {}", categoryVO);
-		log.info("sale -> {}", saleVO);
+
+		LocalDateTime now = LocalDateTime.now();
+		 
+		Timestamp timestamp = Timestamp.valueOf(now);
+		
 		
 		List<ProductVO> productVOs = new ArrayList<>();
 		for(int productNum=0; productNum<saleVO.size(); productNum++) {
 			ProductVO productVO = new ProductVO();
+			
 			productVO.setProductNum(saleVO.get(productNum).getProductNum());
-			productVO = productService.getProductApproval(productVO);		
+			productVO = productService.getProductApproval(productVO);
+			Long test1 = saleVO.get(productNum).getProductDate().getTime();
+			Long test2 = productVO.getAuctionPeriod()*24*3600*1000;
+			Timestamp timestamp2 = new Timestamp(test1+test2);
+			
+			if(timestamp2.before(timestamp)) {
+				saleproductVO.setProductId(saleVO.get(productNum).getProductId());
+				int result = productService.setDeadLineUpdate(saleproductVO);
+				System.out.println(result);
+			}
+				
 			mv.addObject("testVO"+productNum, productVO);
+			
+			
 		}
 		
 		

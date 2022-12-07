@@ -14,6 +14,14 @@ public class SaleProductVO {
 	private Long productHit;
 	private Timestamp productDate;
 
+	
+	public Boolean getDeadlineInfo() {
+		if(deadlineInfo==null) {
+			deadlineInfo = false;
+		}
+		return deadlineInfo;
+	}
+	
 	private List<ProductVO> productVOs;
 	private List<CategoryVO> categoryVOs;
 }
