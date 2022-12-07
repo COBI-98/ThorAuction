@@ -12,7 +12,7 @@
     cursor: pointer;
 }
 .test_obj input[type="radio"]:checked + span {
-    background-color: #113a6b;
+    background-color: #fea532;
     color: #ffffff;
 }
 
@@ -32,12 +32,12 @@
 
 
 .test_obj input[type="submit"]:checked + span {
-    background-color: #113a6b;
+    background-color: #fea532;
     color: #ffffff;
 }
 
 .test_obj input[type="submit"].checked + span{
-    background-color: #113a6b;
+    background-color: #fea532;
     color: #ffffff;
     /* color: #113a6b; */
 }

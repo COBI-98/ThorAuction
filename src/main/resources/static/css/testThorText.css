@@ -181,16 +181,16 @@ input[size="2"] {width:40px}
 
 .blue {background-color:#141759;color:#fff;border:1px solid #141759}
 .pink {background-color:#ff7c71;color:#fff;border:2px solid #ff7c71}
-.red {background-color:#35c5f0;color:#fff;/* border:1px solid #35c5f0; */}
+.red {background-color:#fea532;color:#fff;/* border:1px solid #fea532; */}
 .gray {background-color:#979797;color:#fff;border:1px solid #979797;}
 .default {background-color:#fff;color:#666;border:1px solid #cecfce;}
 
-.import1 {color:#35c5f0;} /** 상단 bg **/
+.import1 {color:#fea532;} /** 상단 bg **/
 .import2 {color:#55635a;} /** 진녹색 **/
 .import3 {color:#938881;} /** 상단 랭킹bg **/
 .import4 {color:#fbca0c;} /** 노랑 **/
 .import_orange {color:#e57e2b;} /** 주황 **/
-.import1_bg {background-color:#35c5f0;color:#fff;border:1px solid #35c5f0;}
+.import1_bg {background-color:#fea532;color:#fff;border:1px solid #fea532;}
 .import2_bg {background-color:#55635a;color:#fff;border:1px solid #55635a;}
 .import3_bg {background-color:#938881;color:#fff;border:1px solid #938881;}
 .import4_bg {background-color:#fbca0c;color:#fff;border:1px solid #fbca0c;}
@@ -381,7 +381,7 @@ DIV.paging a{display:block}
 DIV.paging *{vertical-align:middle}
 DIV.paging li:hover {border: #a0a0a0 1px solid; }
 DIV.paging li:active {border: #a0a0a0 1px solid;}
-DIV.paging li.on {background-color:#35c5f0;width:30px;height:30px;color:#fff;border:1px solid #35c5f0;display:inline-block;margin:0 2px}
+DIV.paging li.on {background-color:#fea532;width:30px;height:30px;color:#fff;border:1px solid #fea532;display:inline-block;margin:0 2px}
 DIV.paging li {background-color:#fff;line-height:30px;width:30px;height:30px;border:1px solid #cecfce;display:inline-block;margin:0 2px}
 DIV.paging li a {color:#999;font-size:12px}
 
@@ -403,3 +403,4 @@ DIV.paging li a {color:#999;font-size:12px}
   animation-timing-function:step-end;
   */
 }
+

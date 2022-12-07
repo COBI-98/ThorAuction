@@ -45,14 +45,14 @@ to{transform:translate3d(30%,0,0)}
 .commerce-category-tree__entry__header{display:-webkit-box;display:-webkit-flex;display:-moz-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;-webkit-align-items:center;-moz-align-items:center;align-items:center;min-width:0;height:23px;padding:0 0 10px;color:#000}
 .commerce-category-tree__entry__title{-webkit-box-flex:1;-webkit-flex:1 0 0px;-moz-box-flex:1;-moz-flex:1 0 0px;-ms-flex:1 0 0px;flex:1 0 0px;min-width:0;font-size:13px;line-height:23px;white-space:nowrap;overflow:hidden;transition:opacity .1s}
 .commerce-category-tree__entry__title.focus-visible:focus,.commerce-category-tree__entry__title:active,.commerce-category-tree__entry__title:hover{opacity:.7}
-.commerce-category-tree__entry__title.selected{color:#35c5f0;font-weight:700}
+.commerce-category-tree__entry__title.selected{color:#fea532;font-weight:700}
 .commerce-category-tree__entry__expand{-webkit-box-flex:0;-webkit-flex:0 0 auto;-moz-box-flex:0;-moz-flex:0 0 auto;-ms-flex:0 0 auto;flex:0 0 auto;margin:0;padding:0 0 0 5px;line-height:23px;border:none;background:none;transition:opacity .1s}
 .commerce-category-tree__entry__expand>.icon{transition:transform .1s}
 .commerce-category-tree__entry__expand.open>.icon{transform:rotate(180deg)}
 .commerce-category-tree__entry__expand.focus-visible:focus,.commerce-category-tree__entry__expand:active,.commerce-category-tree__entry__expand:hover{opacity:.7}
 .commerce-category-tree__entry__children{margin-left:10px}
 .commerce-category-tree__entry__children .commerce-category-tree__entry__title{color:#424242}
-.commerce-category-tree__entry__children .commerce-category-tree__entry__title.selected{color:#35c5f0;font-weight:700}
+.commerce-category-tree__entry__children .commerce-category-tree__entry__title.selected{color:#fea532;font-weight:700}
 .commerce-category-tree__entry__children .commerce-category-tree__entry__expand{color:#bdbdbd}
 .commerce-category-header{margin:13px -15px 0;padding:0 15px;border-bottom:10px solid #ededed}
 @media(min-width:768px){.commerce-category-header{padding:0;border-bottom:0;margin:40px 0 0}
