@@ -8,20 +8,20 @@
 <meta charset="UTF-8">
 	<title>토르의 실시간 대장간</title>
 	<c:import url="../template/boot.jsp"></c:import>
-	<link href="/css/reset.css" rel="stylesheet">
+	
 	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 	
 	<link rel="stylesheet" href="/css/chunk48-455aca93.css"> <!-- carousel -->
 	<link rel="stylesheet" href="/css/chunk166-a1b0af68.css"> <!-- production-selling -->
 	<link rel="stylesheet" href="/css/chunk244-0436abc3.css"> <!-- html-->
 	<link rel="stylesheet" href="/css/chunk55-0c2ab26.css">
-	<link rel="stylesheet" href="/css/testThor.css">
+	<link rel="stylesheet" media="only screen and (min-width: 1023px)" href="/css/testThor.css">
 	<link rel="stylesheet" href="/css/testThorText.css">
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
-		<div class="production-selling-overview container">
+		<div class="production-selling-overview container content">
 			<div class="production-selling-overview__container row">
 				<div class="production-selling-overview__cover-image-wrap col-12 col-md-6 col-lg-7">
 					<div class="production-selling-cover-image-container"> <!-- check -->
@@ -164,24 +164,68 @@
 						</div>
 					</div>
 				</div>
+				<div class="tap_product">
+					<ul>
+						<li class="on" data-move="detail_con1"><a href="#">입찰현황</a></li>
+						<li data-move="detail_con2"><a href="#">상세정보</a></li>
+						<li data-move="detail_con3"><a href="#">배송/반품</a></li>
+						<li data-move="detail_con4"><a href="#">문의</a></li>
+					</ul>
+				</div>
+				<div class="product_cont">
+					<div class="auction_run" id="div_auction_run">
+						<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+						<meta http-equiv="X-UA-Compatible" content="IE=edge">
+						<link rel="stylesheet" media="only screen and (max-width: 1023px)" href="/css/ranking.css">
+						
+						<div class="runner">
+							<div class="title">
+								<strong>50,000</strong>원
+								<div class="name">cobi<br>co*****</div>
+							</div>
+							<div class="run">
+								<div class="bg1">
+									<img src="/images/dollar.png" alt="">
+									<span>1위</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="action_help">
+						<span class="point">입찰시, 꼭! 확인해주세요</span>
+						<dl>
+							<dt>낙찰자<br>결제/배송안내</dt>
+							<dd>
+								<ul>
+									<li><span>낙찰 후 48시간내에 결제</span> 해야하며, 48시간이 지나면 자동으로 입찰취소 상태로 변경됩니다.</li>
+									<li>입찰차가 입찰 후 <span>즉시 입찰 취소가 가능하나, 20만원 이상 고가 물건 취소시 30일동안 입찰신청이 중지</span>됩니다.</li>
+									<li>카드결제, 가상계좌, 실시간계좌이체, 방문결제중 선택해야하며, 방문일정 날짜 및 시간을 일주일내로 예약해 놓아야 합니다.</li>
+									<li>방문결제시, 예약해 놓은 일정이 지날경우 자동으로 취소됩니다.</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				
+				<table class="table table-bordered border-primary">
+					<tbody>
+						<tr class="table-primary">
+							
+							<th>상품상세정보</th>
+							<tr>
+							</tr>
+							
+							  <tr>
+							  <td>${VO.productInformation}</td>
+							  </tr>
+						  
+						</tr>
+						</tbody>
+					</table>
 			</div>
+			
+				
 		
-				
-		<table class="table table-bordered border-primary">
-		<tbody>
-			<tr class="table-primary">
-				
-				<th>상품상세정보</th>
-				<tr>
-				</tr>
-				
-				  <tr>
-				  <td>${VO.productInformation}</td>
-			 	 </tr>
-			  
-			</tr>
-			</tbody>
-		</table>
 		</c:forEach>
 		
 	</section>
