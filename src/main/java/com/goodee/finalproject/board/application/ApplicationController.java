@@ -50,14 +50,7 @@ public class ApplicationController {
 		boardPageMaker.setPerPage(5L);
 		List<ApplicationVO> test  = applicationService.getApplicationList(boardPageMaker);
 		mv.addObject("applicationVO", test);
-		log.info("--------------------");
-		
-		
-//		if(Change == null) {
-//			Change = "1";
-//		}
-//		log.info("change -> {}",Change);
-//		mv.addObject("sort", Change);
+
 		
 		mv.setViewName("/board/application/list");
 		return mv;

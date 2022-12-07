@@ -10,11 +10,11 @@ const timer = document.querySelector("#productTimeDate")
 haveDday =  () => { 
       let timelength = $("#timeLength").val(); 
       let endDateCheck = new Date($("#productDetailDate").val());
-      console.log(endDateCheck);
+
       let endDate = new Date(endDateCheck.getTime() + (timelength*24*3600*1000)); 
         // 현재날짜
         let now = new Date();
-      console.log("timetest");
+
     
       let dateGap = endDate.getTime() - now.getTime();
         // let dateGap = endDate.getTime() - now.getTime();
