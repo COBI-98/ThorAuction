@@ -26,17 +26,12 @@
     <!-- 방송 시작 부분 -->
   <div>
   
-  	<div style="margin-left: 100px;">
-	  	<input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
-	    <button id="open-room">Open Room</button>
-	    <button id="join-room">Join Room</button>
-	    <button id="open-or-join-room">Auto Open Or Join Room</button>
-  	</div>
+  	
     
     
 	
 		<div id="videos-container" style="margin: 20px 0;">
-			<div id="media-container" class = "media-container">
+			<div id="media-container" class = "media-container shadowBox">
 				<div id="media-broadcast">
 					<div id="media-header" >
 						<div id="media-title">
@@ -50,52 +45,42 @@
 					<div id="media-box" class="media-box">
 						<div id= "blackVideo" style="width: 100%; height: 100%;"></div>
 						<video id="localVideo" autoplay playsinline hidden ></video>
+						
 					</div>
 					
-					<div id="media-broad-option">
-						<button id="cameraStatus"> 방송 종료 </button>
-						<button id="cameraPause" class= ""> 방송 일시 정지 </button>
-						<button id="cameraBlack" class= ""> 방송 일시 정지 2 </button>
-						<button id="screenShare" class= ""> 화면 공유로 전환 </button>
-						<div>카메라 설정<select id="cameras"></select></div>
-						
-            <div>
-            <span>단위가격</span>
-            <input type="text" id="unit">
-            <input type="button" value="설정" id="unitsend">
-            </div>
-
-						<input type="button" class="" value="얼리기" id='stop'>
-					     <input type="button" class="" value="경매시작" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
-					     <input type="button" value="종료" id="end"> <!--session 닫힘-->
-					</div>
+					
 				</div>
-			
+		<div id="zoom" style="height: 75px; width: 75px;"></div>
+		
 				
 				
-        <div class="container">
+        <div class="chat-container">
           <div id="text">
             <span id="final">경매 최고가:</span>
             <span id="amount">${value}</span>
             <span id="hidden" style="visibility: hidden;">${value}</span>
             <span id="finalamount"></span>
-          </div>   
+          </div>
+          <div id="item">
+            <span>경매 물품</span>
+            <span id="selecteditem"></span>
+          </div>  
 
           <ul class="tabs">
             <li class="tab-link current" data-tab="chatt">채팅창</li>
             <li class="tab-link" data-tab="iddd">참가인원 목록</li>
           </ul>
           <div id='chatt' class="tab-content current">
-              <div id="chat-box">
+              <div class="chat-box">
                 <div id='talk'></div>
                 <div id='sendZone'>
-                  <textarea id='msg' value='hi...' placeholder="메시지를 입력해보세요!"></textarea>
-                  <input type='button' value='보내기' id='btnSend'>
+                  <input type='text' id='msg'  placeholder="메시지를 입력해보세요!">
+                  <input class ="bidcoinBtn" type='button' value='보내기' id='btnSend'>
                 </div>
               </div>
               <div>
-                  <input type='button' value="직접입력" id="auction">
-                  <input type='button' value="단위경매" id="add">
+                  <input type='button' value="직접입력" id="auction" class ="bidcoinBtn">
+                  <input type='button' value="단위경매" id="add" class ="bidcoinBtn">
               </div>
           </div>
           <div id ="iddd" class="tab-content">
@@ -104,9 +89,60 @@
         </div>
       </div>	
     </div>
+    <div style="display: flex; justify-content: center;">
+    
+    <div class="shadowBox media-container">
+    	<div id="media-broad-option">
+						<div class="optionBox">
+							<div >방송설정</div>
+							<div>
+							  	<input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
+							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>
+							    <button class= "bidcoinBtn" id="join-room">Join Room</button>
+						  	</div>
+						  	<div>카메라 설정<select id="cameras"></select></div>
+							<button id="cameraPause" class= "bidcoinBtn"> 방송 일시 정지 </button>
+							<button id="cameraBlack" class= "bidcoinBtn"> 방송 송출 정지 </button>
+							<button id="screenShare" class= "bidcoinBtn"> 화면 공유로 전환 </button>
+							
+							<div>
+								<button id="cameraStatus" class= "bidcoinBtn"> 방송 종료 </button>
+							</div>
+						</div>
+						
+						<div class="optionBox">
+							<div>경매설정</div>
+							<div>
+				              <span>경매 물건</span>
+                      <select id="items" name="items" style="width: 60%;">
+                        <c:forEach items="${itemList}" var="items">
+                        <option value="${items.productNum}">${items.productName}</option>
+                      </c:forEach>
+                      </select>
+				              <input type="button" value="설정" id="itemsend" class="bidcoinBtn">
+				            </div>
+				             
+				            <div>
+				           		<span>단위가격</span>
+					            <input type="text" id="unit">
+					            <input type="button" value="설정" id="unitsend" class="bidcoinBtn">
+				            </div>
+						
+							<input type="button" class="bidcoinBtn" value="채팅 정지" id='stop'>
+						    <input type="button" class="bidcoinBtn" value="경매시작" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
+						    <input type="button" class="bidcoinBtn" value="경매종료" id="end"> <!--session 닫힘-->
+						
+					
+						</div>
+					</div>
+    
+    
+    </div>
+    </div>
   </div>
 	
       <h2 id="id">${member}</h2>
+      <h2 id="loginnum">${num}</h2>
       <h2 id="point">${point}</h2>
       <h2 id="role">${role[0].roleName}</h2>
 

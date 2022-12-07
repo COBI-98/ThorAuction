@@ -16,20 +16,35 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 
 
 #localVideo{
+	object-fit:contain;
 	height: 100%;
+	max-width: 100%;
+	margin: auto;
 	
+}
+
+
+#videos-container{
+	display: flex;
+	justify-content: center;
 }
 
 .media-container {
   width : calc(100% - 150px)!important;
-  
+  max-width : 80%;
   background-color: skyblue;
-  overflow: hidden;
-  aspect-ratio: 16 / 9; 
-  margin-left: 75px;
+  min-height : 80%;
+  padding : 20px 80px;
   border: 0;
   display: flex !important;
-  justify-content: center;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+#media-broad-option{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 #media-header{
@@ -38,27 +53,40 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 }
 
 #media-broadcast{
-	width: 75%;
-	height: 75px;
+	width: 70%;
+	height: 100%;
 }
 
 .media-box {
   width: 100%;
   background-color: gold;
-
   margin: 0 auto;
-  aspect-ratio: 16 / 9; 
+  aspect-ratio: 12 / 9; 
 }
 
 #media-title{
 	
 	width : 80%;
 	padding: 15px;
+	height: 75px;
 }
 
+.optionBox{
+	width: 100%;
+	margin : 10px 0;
+	border: 1px solid #fea532;
+	padding : 15px;
+	border-radius: 5px;
+}
 
+.shadowBox{
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
 
+.optionBox Div{
 
+	margin: 5px;
+}
 
 
 
@@ -82,12 +110,12 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 .media-container {
     width: 36%;
     display: inline-block;
-    border: 1px solid rgb(0, 0, 0);
     border-radius: 4px;
     overflow: hidden;
     vertical-align: top;
     background: white;
 }
+
 
 .media-box {
     background: black;

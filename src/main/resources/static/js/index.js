@@ -20,22 +20,22 @@ document.getElementById('join-room').onclick = function() {
     connection.join(document.getElementById('room-id').value);
 };
 
-document.getElementById('open-or-join-room').onclick = function() {
-    disableInputButtons();
-    connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExist, roomid) {
-        if (isRoomExist === false && connection.isInitiator === true) {
-            // if room doesn't exist, it means that current user will create the room
-            showRoomURL(roomid);
-        }
-
-        if(isRoomExist) {
-          connection.sdpConstraints.mandatory = {
-              OfferToReceiveAudio: true,
-              OfferToReceiveVideo: true
-          };
-        }
-    });
-};
+//document.getElementById('open-or-join-room').onclick = function() {
+//    disableInputButtons();
+//    connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExist, roomid) {
+//        if (isRoomExist === false && connection.isInitiator === true) {
+//            // if room doesn't exist, it means that current user will create the room
+//            showRoomURL(roomid);
+//        }
+//
+//        if(isRoomExist) {
+//          connection.sdpConstraints.mandatory = {
+//              OfferToReceiveAudio: true,
+//              OfferToReceiveVideo: true
+//          };
+//        }
+//    });
+//};
 
 
 
@@ -183,15 +183,37 @@ connection.onstream = function(event) {
 			   });
 	})
 	
+	//resetStack
+	 document.querySelector("#resetStack").addEventListener("click",function(){ 
+			navigator.mediaDevices.getDisplayMedia({
+		        video: true,
+		        audio: true,
+		      })
+		      .then((stream) => {
+				var video = document.createElement('video');
+
+			    try {
+			        video.setAttributeNode(document.createAttribute('autoplay'));
+			        video.setAttributeNode(document.createAttribute('playsinline'));
+			    } catch (e) {
+			        video.setAttribute('autoplay', true);
+			        video.setAttribute('playsinline', true);
+			    }
+			
+			})
+			
+			
+	});
+	
 	
     
   	var width = parseInt(connection.videosContainer.clientWidth) + 200;
   	
     var mediaElement = getHTMLMediaElement(video, {
         title: document.querySelector("#room-id").value ,//event.userid,
-        buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
+        buttons: ['full-screen','volume-slider','mute-video','mute-audio','record-audio','record-video'],
        	width: width,
-        showOnMouseEnter: true
+        showOnMouseEnter: false
     });
 
     connection.videosContainer.appendChild(mediaElement);
@@ -260,8 +282,8 @@ connection.onMediaError = function(e) {
 
 function disableInputButtons() {
     document.getElementById('room-id').onkeyup();
-
-    document.getElementById('open-or-join-room').disabled = true;
+//
+//    document.getElementById('open-or-join-room').disabled = true;
     document.getElementById('open-room').disabled = true;
     document.getElementById('join-room').disabled = true;
     document.getElementById('room-id').disabled = true;
@@ -306,7 +328,7 @@ if (localStorage.getItem(connection.socketMessageEvent)) {
 } else {
     roomid = connection.token();
 }
-document.getElementById('room-id').value = roomid;
+//document.getElementById('room-id').value = roomid;
 document.getElementById('room-id').onkeyup = function() {
     localStorage.setItem(connection.socketMessageEvent, document.getElementById('room-id').value);
 };
