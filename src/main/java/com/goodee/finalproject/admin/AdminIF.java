@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.member.RoleVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
-import com.goodee.finalproject.socialmember.NaverVO;
 
 @Mapper
 public interface AdminIF
@@ -21,7 +20,7 @@ public interface AdminIF
 
 	public List<KakaoVO> getKakaoTotal(KakaoVO kakaoVO) throws Exception;
 
-	public List<NaverVO> getNaverTotal(NaverVO naverVO) throws Exception;
+//	public List<NaverVO> getNaverTotal(NaverVO naverVO) throws Exception;
 
 	// 일반 멤버 등급 수정
 	public int roleSetManager(List<MemberVO> memberVOs, String id) throws Exception;

@@ -19,25 +19,25 @@ public class MemberSocialService extends DefaultOAuth2UserService
 {
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
-	@Autowired
-	public NaverMapperIF naverMapperIF;
-
-	public int setNaverDetail(NaverDetailVO naverDetailVO) throws Exception
-	{
-		return naverMapperIF.setNaverDetail(naverDetailVO);
-	}
-
-	public int setNaver(NaverVO naverVO) throws Exception
-	{
-		int rs = naverMapperIF.setNaver(naverVO);
-		log.info("------> service naver rs: {}", rs);
-		if (rs == 1)
-		{
-			naverMapperIF.setNaRole(naverVO);
-		}
-
-		return rs;
-	}
+//	@Autowired
+//	public NaverMapperIF naverMapperIF;
+//
+//	public int setNaverDetail(NaverDetailVO naverDetailVO) throws Exception
+//	{
+//		return naverMapperIF.setNaverDetail(naverDetailVO);
+//	}
+//
+//	public int setNaver(NaverVO naverVO) throws Exception
+//	{
+//		int rs = naverMapperIF.setNaver(naverVO);
+//		log.info("------> service naver rs: {}", rs);
+//		if (rs == 1)
+//		{
+//			naverMapperIF.setNaRole(naverVO);
+//		}
+//
+//		return rs;
+//	}
 
 	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
@@ -82,7 +82,8 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		}
 		else if ((social.equals("naver")))
 		{
-			oAuth2User2 = this.naverJoinCheck(userRequest);
+			// oAuth2User2 = this.naverJoinCheck(userRequest);
+			oAuth2User2 = this.kakaoJoinCheck(userRequest);
 		}
 
 		log.info("oAuth Social: {}", oAuth2User2);
@@ -111,58 +112,78 @@ public class MemberSocialService extends DefaultOAuth2UserService
 			// map.get(key);
 		}
 		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("properties").getClass());
-		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("properties");
-		LinkedHashMap<String, Object> ka = oAuth2User.getAttribute("kakao_account");
-
 		KakaoVO kakaoVO = new KakaoVO();
-		kakaoVO.setKaNickName(oAuth2User.getName()); // id
-		// memberVO.setPwd(null); // pwd가 없으므로, 비우거나 랜덤한 값으로 생성
-		kakaoVO.setKaName((String) lm.get("nickname"));
-		kakaoVO.setKaEmail(ka.get("email").toString());
+		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("properties"); // kakao Information
+		if (lm != null) // kakao login
+		{
+			LinkedHashMap<String, Object> lm1 = oAuth2User.getAttribute("properties");
+			LinkedHashMap<String, Object> ka = oAuth2User.getAttribute("kakao_account");
 
-		kakaoVO.setSocial(userRequest.getClientRegistration().getRegistrationId()); // 소셜 이름 가져옴 : kakao
-		kakaoVO.setAttributes(oAuth2User.getAttributes());
+			kakaoVO.setKaNickName(oAuth2User.getName()); // id
+			// memberVO.setPwd(null); // pwd가 없으므로, 비우거나 랜덤한 값으로 생성
+			kakaoVO.setKaName((String) lm1.get("nickname"));
+			kakaoVO.setKaEmail(ka.get("email").toString());
+
+			kakaoVO.setSocial(userRequest.getClientRegistration().getRegistrationId()); // 소셜 이름 가져옴 : kakao
+			kakaoVO.setAttributes(oAuth2User.getAttributes());
+		}
+		// naver login
+		else
+		{
+			LinkedHashMap<String, Object> lms = oAuth2User.getAttribute("response");
+			log.info("naver properties: {}", lms);
+			// LinkedHashMap<String, Object> na = oAuth2User.getAttribute("profile");
+			// log.info("naver account: {}", na);
+
+			kakaoVO.setKaNickName((String) lms.get("id"));
+			kakaoVO.setKaEmail(lms.get("email").toString());
+			kakaoVO.setKaName(lms.get("name").toString());
+
+			kakaoVO.setSocial(userRequest.getClientRegistration().getRegistrationId());
+			kakaoVO.setAttributes(oAuth2User.getAttributes());
+		}
 
 		return kakaoVO;
 	}
 
-	public OAuth2User naverJoinCheck(OAuth2UserRequest userRequest)
-	{
-		// 회원가입 유무
-		OAuth2User oAuth2User = super.loadUser(userRequest);
-
-		// log.info("===== user infomation =====");
-		// log.info("oauth2user-Name: {}", oAuth2User.getName());
-		// log.info("oauth2user-Attr: {}", oAuth2User.getAttributes());
-		// log.info("oauth2user-Auth: {}", oAuth2User.getAuthorities());
-		//
-		// log.info("===================================");
-		Map<String, Object> map = oAuth2User.getAttributes();
-
-		Iterator<String> keys = map.keySet().iterator(); // key 꺼내기
-		while (keys.hasNext()) // key가 있으면 true
-		{
-			String key = keys.next();
-			// log.info("Key: {}", key);
-			map.get(key);
-		}
-		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("response").toString());
-		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("response");
-		log.info("naver properties: {}", lm);
-		// LinkedHashMap<String, Object> na = oAuth2User.getAttribute("profile");
-		// log.info("naver account: {}", na);
-
-		NaverVO naverVO = new NaverVO();
-		naverVO.setNaNickName((String) lm.get("id"));
-		naverVO.setNaEmail(lm.get("email").toString());
-		naverVO.setNaName(lm.get("name").toString());
-		naverVO.setNaSocial(userRequest.getClientRegistration().getRegistrationId());
-		naverVO.setAttriutes(oAuth2User.getAttributes());
-
-		// log.info(naverVO.getNaNickName());
-		// log.info(naverVO.getNaName());
-		// log.info(naverVO.getNaEmail());
-
-		return naverVO;
-	}
+	// public OAuth2User naverJoinCheck(OAuth2UserRequest userRequest)
+	// {
+	// // 회원가입 유무
+	// OAuth2User oAuth2User = super.loadUser(userRequest);
+	//
+	// // log.info("===== user infomation =====");
+	// // log.info("oauth2user-Name: {}", oAuth2User.getName());
+	// // log.info("oauth2user-Attr: {}", oAuth2User.getAttributes());
+	// // log.info("oauth2user-Auth: {}", oAuth2User.getAuthorities());
+	// //
+	// // log.info("===================================");
+	// Map<String, Object> map = oAuth2User.getAttributes();
+	//
+	// Iterator<String> keys = map.keySet().iterator(); // key 꺼내기
+	// while (keys.hasNext()) // key가 있으면 true
+	// {
+	// String key = keys.next();
+	// // log.info("Key: {}", key);
+	// map.get(key);
+	// }
+	// // log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("response").toString());
+	// LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("response");
+	// log.info("naver properties: {}", lm);
+	// // LinkedHashMap<String, Object> na = oAuth2User.getAttribute("profile");
+	// // log.info("naver account: {}", na);
+	//
+	// NaverVO naverVO = new NaverVO();
+	// naverVO.setNaNickName((String) lm.get("id"));
+	// naverVO.setNaEmail(lm.get("email").toString());
+	// naverVO.setNaName(lm.get("name").toString());
+	//
+	// naverVO.setNaSocial(userRequest.getClientRegistration().getRegistrationId());
+	// naverVO.setAttriutes(oAuth2User.getAttributes());
+	//
+	// // log.info(naverVO.getNaNickName());
+	// // log.info(naverVO.getNaName());
+	// // log.info(naverVO.getNaEmail());
+	//
+	// return naverVO;
+	// }
 }

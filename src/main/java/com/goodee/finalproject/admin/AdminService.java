@@ -11,7 +11,6 @@ import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.member.RoleVO;
 import com.goodee.finalproject.socialmember.KakaoRoleVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
-import com.goodee.finalproject.socialmember.NaverVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,10 +33,10 @@ public class AdminService
 		return ar;
 	}
 
-	public List<NaverVO> getNaverTotal(NaverVO naverVO) throws Exception
-	{
-		return adminIF.getNaverTotal(naverVO);
-	}
+//	public List<NaverVO> getNaverTotal(NaverVO naverVO) throws Exception
+//	{
+//		return adminIF.getNaverTotal(naverVO);
+//	}
 
 	public int roleSetManager(List<MemberVO> memberVOs, List<KakaoVO> kakaoVOs, String id, String kakaoEmail, String kakaoName,
 			String kaNickName) throws Exception
@@ -46,16 +45,16 @@ public class AdminService
 
 		if (id == "")
 		{
+			rs = adminIF.kakaoRoleSetManager(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
 			log.info("nickname class: {}", kaNickName.getClass());
-			try
-			{
-				log.info("parseLong: {}", (Long.parseLong(kaNickName)));
-				rs = adminIF.kakaoRoleSetManager(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
-			}
-			catch (NumberFormatException e)
-			{
-				rs = adminIF.naverRoleSetManager(kaNickName);
-			}
+			// try
+			// {
+			// log.info("parseLong: {}", (Long.parseLong(kaNickName)));
+			// }
+			// catch (NumberFormatException e)
+			// {
+			// rs = adminIF.naverRoleSetManager(kaNickName);
+			// }
 		}
 
 		return rs;
@@ -68,15 +67,15 @@ public class AdminService
 
 		if (id == "")
 		{
-			try
-			{
-				log.info("parseLong: {}", (Long.parseLong(kaNickName)));
-				rs = adminIF.kakaoRoleSetUser(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
-			}
-			catch (NumberFormatException e)
-			{
-				rs = adminIF.naverRoleSetUser(kaNickName);
-			}
+			rs = adminIF.kakaoRoleSetUser(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+			// try
+			// {
+			// log.info("parseLong: {}", (Long.parseLong(kaNickName)));
+			// }
+			// catch (NumberFormatException e)
+			// {
+			// rs = adminIF.naverRoleSetUser(kaNickName);
+			// }
 		}
 
 		return rs;
@@ -89,15 +88,15 @@ public class AdminService
 
 		if (id == "")
 		{
-			try
-			{
-				log.info("parseLong: {}", (Long.parseLong(kaNickName)));
-				rs = adminIF.kakaoRoleSetBan(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
-			}
-			catch (NumberFormatException e)
-			{
-				rs = adminIF.naverRoleSetBan(kaNickName);
-			}
+			rs = adminIF.kakaoRoleSetBan(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+			// try
+			// {
+			// log.info("parseLong: {}", (Long.parseLong(kaNickName)));
+			// }
+			// catch (NumberFormatException e)
+			// {
+			// rs = adminIF.naverRoleSetBan(kaNickName);
+			// }
 		}
 
 		return rs;

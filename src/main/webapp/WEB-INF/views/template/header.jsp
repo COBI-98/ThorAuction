@@ -40,13 +40,13 @@
 								</a>
 							</li>
 						</c:when>
-						<c:when test="${naverInfo != null }">
+<%-- 						<c:when test="${naverInfo != null }">
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
 									<b>${naverInfo.name }님 안녕하세요</b>
 								</a>
 							</li>
-						</c:when>
+						</c:when> --%>
 						<c:otherwise>
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
@@ -83,7 +83,7 @@
 						</c:if>
 					</c:if>
 
-					<c:if test="${empty memID}">
+<%-- 					<c:if test="${empty memID}">
 						<c:forEach items="${naver }" var="na">
 							<c:if
 								test="${((na.naRoleVOs[0].naRoleName == 'ROLE_ADMIN')==true) && ((na.username == naverInfo.username)==true)}">
@@ -92,7 +92,7 @@
 								</li>
 							</c:if>
 						</c:forEach>
-					</c:if>
+					</c:if> --%>
 
 				</sec:authorize>
 			</ul>

@@ -81,7 +81,7 @@
 	</resultMap>
 
 	<!-- 네이버 정보 -->
-	<select id="getNaverTotal" parameterType="NaverVO"
+	<!-- <select id="getNaverTotal" parameterType="NaverVO"
 		resultMap="naverTotal">
 		select sn.*, snd.*, nmr.*, n.* FROM
 		SOCIALNAVER sn
@@ -121,7 +121,7 @@
 			<id column="NaRole" property="NaRole" />
 			<result column="NaNickName" property="NaNickName" />
 		</collection>
-	</resultMap>
+	</resultMap> -->
 
 	<!-- 일반 회원 등급 수정 -->
 	<update id="roleSetManager" parameterType="MemberVO">
@@ -164,7 +164,7 @@
 
 
 	<!-- 네이버 회원 등급 수정 -->
-	<update id="naverRoleSetManager" parameterType="NaverVO">
+	<!-- <update id="naverRoleSetManager" parameterType="NaverVO">
 		update
 		NAVERMEMBERROLE
 		set NAROLE = 2 where NANICKNAME = #{NaNickName}
@@ -181,7 +181,7 @@
 		NAVERMEMBERROLE
 		set
 		NAROLE = 4 where NANICKNAME = #{NaNickName}
-	</update>
+	</update> -->
 	<!-- 네이버 회원 등급 수정 -->
 
 </mapper>
