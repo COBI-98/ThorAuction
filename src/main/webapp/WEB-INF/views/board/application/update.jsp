@@ -15,11 +15,11 @@
 <script src="/js/summernote/summernote-lite.js"></script>
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+<link href="/css/reset.css" rel="stylesheet">
 </head>
 <body>
-	
+	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
-		<h1>경매신청게시판 수정</h1>
 		<div class="row">
 	 <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
         <div>
@@ -115,6 +115,7 @@
 </div>
 	
 </section>
+<c:import url="../../template/footer.jsp"></c:import>
 <script src="/js/applicationFileManager.js"></script>
 
 <script type="text/javascript">

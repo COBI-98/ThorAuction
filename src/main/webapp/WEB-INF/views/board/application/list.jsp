@@ -10,11 +10,11 @@
 <c:import url="../../template/boot.jsp"></c:import>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="/css/application.css">
+<link href="/css/reset.css" rel="stylesheet">
 </head>
 <body>
-
-	<section class="container-fluid col-lg-8 mt-5">
-	<h1>경매신청 게시판</h1>
+	<c:import url="../../template/header.jsp"></c:import>
+	<section class="container-fluid col-lg-8 mt-5 ">
 	<div class="row mb-3">
 		<form action="./list"
 			class="row row-cols-lg-auto g-3 mt-5 align-items-center">
@@ -63,26 +63,26 @@
 				</div>
 			</div>
 			<div class="col-12">
-				<button type="submit" class="btn btn-primary">검색어찾기</button>
+				<button type="submit" class="btn btn-warning">검색어찾기</button>
 			</div>
 		</form>
 
 	</div>
-	<table class="table table-bordered border-primary">
+	<table class="table table-bordered border-warning">
 		 <thead >
-		    <tr class="table-primary">
+		    <tr class="table-warning">
 		      <th scope="col">번호</th>
-		      <th scope="col">작성자</th>
 		      <th scope="col">제목</th>
+		      <th scope="col">작성자</th>
 		      <th scope="col">작성날짜</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <c:forEach items="${applicationVO}" var="VO">
 		    <tr>		      
-			      <td><a href="./detail?applicationNum=${VO.applicationNum}">${VO.applicationNum}</a></td>
+			      <td>${VO.applicationNum}</td>
+			      <td><a href="./detail?applicationNum=${VO.applicationNum}">${VO.title}</a></td>
 			      <td>${VO.writer}</td>
-			      <td>${VO.title}</td>
 			      <td>${VO.regDate}</td>      
 			     
 		    </tr>
@@ -93,7 +93,7 @@
 	 <nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<c:if test="${boardPageMaker.pre}">
-						<li class="page-item"><a class="page-link"
+						<li class="page-item"><a class="pageColorChange"
 							href="./list?page=${boardPageMaker.startNum-1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">Previous</a>
 						</li>
 					</c:if>
@@ -102,20 +102,21 @@
 							
 						
 						<li class="page-item <c:if test="${param.page == i || param.page == null && i == 1 }">active</c:if>" >
-						<a class="page-link"
+						<a class="pageColorChange"
 							href="./list?page=${i}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">${i}</a></li>
 					</c:forEach>
 
 					<li class="page-item ${boardPageMaker.next?'':'disabled'}"><a
-						class="page-link"
+						class="pageColorChange"
 						href="./list?page=${boardPageMaker.lastNum+1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">Next</a>
 					</li>
 				</ul>
 		</nav>
 		<div>
-			<a href="./add" type="button" class="btn btn-info">글쓰기</a>
+			<a href="./add" type="button" class="btn btn-warning">글쓰기</a>
 		</div>
 		</section>
+		<c:import url="../../template/footer.jsp"></c:import>
 			<script type="text/javascript">
 				let result = '${param.result}';
 				if(result != ""){
