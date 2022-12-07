@@ -46,6 +46,7 @@ public class WebSocketChat {
 	private static String start="false"; //경매 시작
 	private static String unit =""; //단위 가격
 	private static String item =""; //경매 물품
+	private static int itemNum = 0; //경매 물품 번호 
 	
 	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
 	
@@ -78,6 +79,7 @@ public class WebSocketChat {
 		//경매 물품 설정
 		if(msg.substring(2, 6).equals("item")) {
 			item = String.valueOf(jsonObj.get("item"));
+			itemNum = Integer.parseInt(String.valueOf(jsonObj.get("itemNum")));
 			sendMessage(msg,session);
 		}
 		
@@ -238,6 +240,12 @@ public class WebSocketChat {
 	}
 	public void setItem(String str) {
 		this.item = str;
+	}
+	public int getItemNum() {
+		return itemNum;
+	}
+	public void setItemNum(int num) {
+		this.itemNum = num;
 	}
 	
 	public static <K, V> K getKey(Map<K, V> map, V value) {
