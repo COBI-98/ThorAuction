@@ -10,6 +10,7 @@ public class MemberService{
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	// 비밀번호 암호화해주는 메서드
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -28,6 +29,7 @@ public class MemberService{
 	// 회원가입 + 회원등급
 	public int setJoin(MemberVO memberVO) throws Exception {
 		
+		// 비밀번호 암호화
 		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
 		
 		int result = memberMapper.setJoin(memberVO);
