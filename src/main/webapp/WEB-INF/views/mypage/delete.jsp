@@ -8,12 +8,10 @@
 <title>Insert title here</title>
 
 <!-- JQuery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- SweetAlert2 -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- 회원탈퇴 JS -->
@@ -34,18 +32,7 @@
 		</table>
 
 		<button type="button" id="delete_btn">탈퇴하기</button>
-		<input type="hidden" name="name" value="${memberDB.name }"> 
-		<input type="hidden" name="birth" value="${memberDB.birth }"> 
-		<input type="hidden" name="email" value="${memberDB.email }"> 
-		<input type="hidden" name="post" value="${memberDB.post }"> 
-		<input type="hidden" name="addr" value="${memberDB.addr }"> 
-		<input type="hidden" name="addr2" value="${memberDB.addr2 }"> 
-		<input type="hidden" name="phone" value="${memberDB.phone }">
 
 	</form>
-	<c:if test="${msg == false}">
-		<p>입력하신 비밀번호가 틀렸습니다.</p>
-	</c:if>
-
 </body>
 </html>

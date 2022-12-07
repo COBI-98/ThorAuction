@@ -132,8 +132,7 @@ public class MypageController {
 	
 	// 회원탈퇴 POST
 	@PostMapping("delete")
-	@ResponseBody
-	public String setDelete(MemberVO memberVO, HttpSession session, RedirectAttributes attributes) throws Exception {
+	public String setDelete(@AuthenticationPrincipal MemberVO memberVO, HttpSession session, RedirectAttributes attributes) throws Exception {
 		
 		log.info("탈퇴 PST: {}", memberVO);
 		
