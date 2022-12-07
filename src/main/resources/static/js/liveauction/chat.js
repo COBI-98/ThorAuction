@@ -302,7 +302,7 @@ ws.onmessage = function(msg){
 		//경매시작 설정
 		if(data.gogo == "true") {
 			auctionend.value = "경매종료";
-			auctionend.classList[1] = 'start';
+			auctionend.classList.add("start");
 		}else if(data.gogo == "false"){
 			auctionend.value = "경매시작";
 		}
