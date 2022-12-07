@@ -90,10 +90,8 @@ ws.onmessage = function(msg){
 			data : {
 				loginnum : loginnum
 			},
-			success : function(result) {
-				console.log(result);
-				var nummm = data.itemNum;
-				$('nummm').css("display","none");
+			success : function() {
+				console.log("성공");
 			}
 		})
 	}
@@ -162,6 +160,8 @@ ws.onmessage = function(msg){
 			$('#finalamount').css("display","inline");
 			talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
 			selecteditem.innerText = "";
+			var nummm = data.itemNum;
+			$('#items.options[value='+nummm+']').css("display","none");
 		}else{
 			auctionend.value="경매종료";
 		}
@@ -497,6 +497,7 @@ function sendresult() {
 	data4.winner = rank[1];
 	data4.gg = start();
 	data4.loginnnn = "dlkjslkfj";
+	data4.itemNum = items.options[items.selectedIndex].value;
 	var temp = JSON.stringify(data4);
 	ws.send(temp);
 }

@@ -75,7 +75,6 @@
 		PRODUCTFILES p 
 		ON (a.PRODUCTNUM = p.PRODUCTNUM)
 		WHERE a.PRODUCTNUM = #{productNum}
-		AND a.STATUS = 0
 	</select>
 	
 	<resultMap type="ProductVO" id="getProductFileList">

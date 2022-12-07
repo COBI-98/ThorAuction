@@ -133,7 +133,7 @@ public class ChatController {
 		}
 		payHistoryVO.setCashe(value);
 		payHistoryVO.setProductNum(itemNum);
-		payHistoryService.setPayHistory(payHistoryVO);
+		//payHistoryService.setPayHistory(payHistoryVO);
 		
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(Long.valueOf(itemNum));
