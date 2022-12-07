@@ -18,6 +18,8 @@ import com.goodee.finalproject.board.application.ApplicationService;
 import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.member.MemberService;
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.payhistory.PayHistoryService;
+import com.goodee.finalproject.payhistory.PayHistoryVO;
 import com.goodee.finalproject.socialmember.KakaoDetailVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
 import com.goodee.finalproject.socialmember.MemberSocialService;
@@ -36,6 +38,9 @@ public class ChatController {
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private PayHistoryService payHistoryService;
 	
 	@RequestMapping("/liveAuction")
 	public ModelAndView chat(Authentication authentication) throws Exception {
@@ -95,6 +100,9 @@ public class ChatController {
 		int value = webSocketChat.getValue();
 		String winuser = webSocketChat.getWinuser();
 		String item = webSocketChat.getItem();
+		int itemNum = webSocketChat.getItemNum();
+		
+		PayHistoryVO payHistoryVO = new PayHistoryVO();
 
 		//일반 로그인 했을 때
 		if(loginnum.equals("1")) {
@@ -105,6 +113,10 @@ public class ChatController {
 			mem.setId(winuser);
 			memberService.setPoint(mem);
 			//낙찰 내역 DB 저장
+			payHistoryVO.setId(winuser);
+			payHistoryVO.setCashe(value);
+			payHistoryVO.setProductNum(itemNum);
+			payHistoryService.setPayHistory(payHistoryVO);
 		
 		//소셜 로그인 했을 때 
 		}else {
@@ -114,14 +126,19 @@ public class ChatController {
 			kakaoDetailVO.setKaPoint(point - value);
 			kakaoDetailVO.setKaNickName(loginnum);
 			memberSocialService.setPoint(kakaoDetailVO);
-			//낙찰 내역 DB 저장 (유저 ID - winuser, 구매 가격 - value, 구매한 날 - sysdate, 상품 번호 - item으로 찾기)
-			
+			//낙찰 내역 DB 저장 (유저 ID - winuser, 구매 가격 - value, 구매한 날 - sysdate, 상품 번호 - itemNum)
+			payHistoryVO.setId(loginnum);
+			payHistoryVO.setCashe(value);
+			payHistoryVO.setProductNum(itemNum);
+			payHistoryService.setPayHistory(payHistoryVO);
+
 		}
 		
 		
 		webSocketChat.setValue(0);
 		webSocketChat.setWinuser("");
 		webSocketChat.setItem("");
+		webSocketChat.setItemNum(0);
 	}
 	
 	

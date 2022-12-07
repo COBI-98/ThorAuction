@@ -116,7 +116,7 @@
 				              <span>경매 물건</span>
                       <select id="items" name="items" style="width: 60%;">
                         <c:forEach items="${itemList}" var="items">
-                        <option value="${items.productName}">${items.productName}</option>
+                        <option value="${items.productNum}">${items.productName}</option>
                       </c:forEach>
                       </select>
 				              <input type="button" value="설정" id="itemsend" class="bidcoinBtn">

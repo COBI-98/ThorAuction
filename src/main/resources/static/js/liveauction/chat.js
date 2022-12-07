@@ -605,8 +605,9 @@ unitsend.addEventListener("click",function(){
 //경매 물품 선택
 itemsend.addEventListener("click",function(){
 	//items.options[items.selectedIndex].value;
-	console.log(items.options[items.selectedIndex].value);
-	data12.item = items.options[items.selectedIndex].value;
+	console.log(items.options[items.selectedIndex].innerText);
+	data12.item = items.options[items.selectedIndex].innerText;
+	data12.itemNum = items.options[items.selectedIndex].value;
 	var temp = JSON.stringify(data12);
 	ws.send(temp);
 })
