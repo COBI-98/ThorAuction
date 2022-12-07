@@ -12,7 +12,6 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Component;
 
 import com.goodee.finalproject.socialmember.KakaoVO;
-import com.goodee.finalproject.socialmember.NaverVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,30 +54,52 @@ public class LogoutCustom implements LogoutHandler
 			{
 				try
 				{
-					response.sendRedirect(
-							"https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + logout_uri);
+					log.info("authddddd: {}", Long.parseLong(authentication.getName()));
+					try
+					{
+						response.sendRedirect(
+								"https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + logout_uri);
+					}
+					catch (IOException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					request.getSession().invalidate();
 				}
-				catch (IOException e)
+				// naver logout
+				catch (NumberFormatException e)
 				{
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					// e.printStackTrace();
+					try
+					{
+						response.sendRedirect("https://nid.naver.com/nidlogin.logout");
+						request.getSession().invalidate();
+					}
+					catch (IOException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
+			
 			// naver logout
-			else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
-			{
-				try
-				{
-					response.sendRedirect("https://nid.naver.com/nidlogin.logout");
-					request.getSession().invalidate();
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			// else if (authentication.getPrincipal().getClass().toString().equals("class
+			// com.goodee.finalproject.socialmember.NaverVO"))
+			// {
+			// try
+			// {
+			// response.sendRedirect("https://nid.naver.com/nidlogin.logout");
+			// request.getSession().invalidate();
+			// }
+			// catch (IOException e)
+			// {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+			// }
 		}
 	}
 

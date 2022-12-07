@@ -124,7 +124,7 @@
 			<!-- kakao member end -->
 
 			<!-- naver member start -->
-			<c:forEach items="${naver}" var="na">
+			<%-- <c:forEach items="${naver}" var="na">
 				<c:if test="${na.naRoleVOs[0].naRoleName != 'ROLE_ADMIN' }">
 					<tr>
 						<td class="kakaoID">${na.username }</td>
@@ -165,7 +165,7 @@
 						</td>
 					</tr>
 				</c:if>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 	</section>
 	<br>

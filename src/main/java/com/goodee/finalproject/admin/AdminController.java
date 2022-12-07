@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.socialmember.KakaoRoleVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
-import com.goodee.finalproject.socialmember.NaverVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,20 +26,20 @@ public class AdminController
 	public AdminService adminService;
 
 	@GetMapping("adminpage")
-	public ModelAndView adminpage(MemberVO memberVO, KakaoVO kakaoVO, NaverVO naverVO) throws Exception
+	public ModelAndView adminpage(MemberVO memberVO, KakaoVO kakaoVO) throws Exception
 	{
 		log.info("--- get adminpage ---");
 		ModelAndView modelAndView = new ModelAndView();
 
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
-		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
+//		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
 
-		log.info("naverVOs: {}", naverVOs);
+//		log.info("naverVOs: {}", naverVOs);
 
 		modelAndView.addObject("member", memberVOs);
 		modelAndView.addObject("kakao", kakaoVOs);
-		modelAndView.addObject("naver", naverVOs);
+//		modelAndView.addObject("naver", naverVOs);
 		modelAndView.setViewName("admin/adminpage");
 
 		return modelAndView;
@@ -48,14 +47,14 @@ public class AdminController
 
 	@PostMapping("adminpage")
 	@ResponseBody
-	public void adminpage(NaverVO naverVO, KakaoVO kakaoVO, @RequestParam("kakaoID") String nickName,
+	public void adminpage(KakaoVO kakaoVO, @RequestParam("kakaoID") String nickName,
 			@RequestParam("kakaoEmail") String email, @RequestParam("kakaoName") String name, @RequestParam("ID") String id,
 			MemberVO memberVO, @RequestParam("roleName") String role) throws Exception
 	{
 		log.info("====== post adminPage =====");
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
-		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
+//		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
 		// kakaoVOs kakaoEmail kakaoName
 		log.info(name);
 		log.info(email);

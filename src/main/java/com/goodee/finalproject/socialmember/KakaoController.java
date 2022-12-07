@@ -31,7 +31,7 @@ public class KakaoController
 	private MemberSocialService memberSocialService;
 
 	@GetMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(NaverVO naverVO, HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
+	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
@@ -54,31 +54,31 @@ public class KakaoController
 				return modelAndView;
 			}
 		}
-		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
-		{
-			int rsNa = memberSocialService.setNaver((NaverVO) authentication.getPrincipal());
-
-			log.info("naver insert: {}", rsNa);
-
-			log.info("authentication.getPrincipal(): {}", authentication.getPrincipal());
-			modelAndView.addObject("naverInfo", authentication.getPrincipal());
-			modelAndView.setViewName("socialMember/kakaoLogin");
-			session.setAttribute("naverInfo", authentication.getPrincipal());
-			session.setAttribute("naverVO", rsNa); // 카카오 정보 DB insert 성공/실패 값
-
-			if (rsNa == 0)
-			{
-				modelAndView.setViewName("redirect:/");
-
-				return modelAndView;
-			}
-		}
+//		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
+//		{
+//			int rsNa = memberSocialService.setNaver((NaverVO) authentication.getPrincipal());
+//
+//			log.info("naver insert: {}", rsNa);
+//
+//			log.info("authentication.getPrincipal(): {}", authentication.getPrincipal());
+//			modelAndView.addObject("naverInfo", authentication.getPrincipal());
+//			modelAndView.setViewName("socialMember/kakaoLogin");
+//			session.setAttribute("naverInfo", authentication.getPrincipal());
+//			session.setAttribute("naverVO", rsNa); // 카카오 정보 DB insert 성공/실패 값
+//
+//			if (rsNa == 0)
+//			{
+//				modelAndView.setViewName("redirect:/");
+//
+//				return modelAndView;
+//			}
+//		}
 
 		return modelAndView;
 	}
 
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO, Authentication authentication, NaverDetailVO naverDetailVO) throws Exception
+	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO, Authentication authentication) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
 		log.info("auth class: {}", authentication.getPrincipal().getClass().toString());
@@ -94,15 +94,15 @@ public class KakaoController
 			modelAndView.addObject("rs2", rs2);
 			modelAndView.setViewName("redirect:/");
 		}
-		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
-		{
-			int rs2 = memberSocialService.setNaverDetail(naverDetailVO);
-
-			log.info("naver login rs2: {}", rs2);
-
-			modelAndView.addObject("rs2", rs2);
-			modelAndView.setViewName("redirect:/");
-		}
+//		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
+//		{
+//			int rs2 = memberSocialService.setNaverDetail(naverDetailVO);
+//
+//			log.info("naver login rs2: {}", rs2);
+//
+//			modelAndView.addObject("rs2", rs2);
+//			modelAndView.setViewName("redirect:/");
+//		}
 
 		return modelAndView;
 	}
