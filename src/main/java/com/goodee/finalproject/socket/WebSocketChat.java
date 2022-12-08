@@ -82,6 +82,7 @@ public class WebSocketChat {
 		if(msg.substring(2, 6).equals("item")) {
 			item = String.valueOf(jsonObj.get("item"));
 			itemNum = Integer.parseInt(String.valueOf(jsonObj.get("itemNum")));
+			value = Integer.parseInt(String.valueOf(jsonObj.get("itemprice")));
 			sendMessage(msg,session);
 		}
 		
@@ -122,23 +123,20 @@ public class WebSocketChat {
 		
 		//경매 결과
 		else if(msg.substring(2, 8).equals("amount")) {
-
+			start = String.valueOf(jsonObj.get("gg"));
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
 			
 			String message = msg.replace("amount", "loginnum");
+			String vv = String.valueOf(jsonObj.get("loginnnn"));
+			message = message.replace(vv, amount);
 			
 			value=Integer.parseInt(amount);
 			winuser = winner;
 
 			Session ss = getKey(list,winner);
-			//DB에 저장할 예정 (금액, id, 경매 물품) 포인트 바로 빠지게 함
 
-			//DB 저장
 			
-			
-			//저장 후
-			//item ="";
 			sendMessage(msg,session);
 			sendOneMessage(message, ss);
 

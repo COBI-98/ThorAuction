@@ -23,6 +23,8 @@ import com.goodee.finalproject.member.MemberService;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.payhistory.PayHistoryService;
 import com.goodee.finalproject.payhistory.PayHistoryVO;
+import com.goodee.finalproject.product.ProductService;
+import com.goodee.finalproject.product.ProductVO;
 import com.goodee.finalproject.socialmember.KakaoDetailVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
 import com.goodee.finalproject.socialmember.MemberSocialService;
@@ -35,15 +37,14 @@ public class ChatController {
 	
 	@Autowired
 	private MemberService memberService;
-	
 	@Autowired
 	private MemberSocialService memberSocialService;
-	
 	@Autowired
 	private ApplicationService applicationService;
-	
 	@Autowired
 	private PayHistoryService payHistoryService;
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping("/liveAuction")
 	public ModelAndView chat(Authentication authentication) throws Exception {
@@ -100,11 +101,13 @@ public class ChatController {
 	}
 	
 	@RequestMapping(value="/liveAuction/loginNum", method=RequestMethod.POST)
-	public void pointMinus(String loginnum) throws Exception {
+	@ResponseBody
+	public int pointMinus(String loginnum) throws Exception {
 		int value = webSocketChat.getValue();
 		String winuser = webSocketChat.getWinuser();
-		String item = webSocketChat.getItem();
+		//String item = webSocketChat.getItem();
 		int itemNum = webSocketChat.getItemNum();
+		int result = 0;
 		
 		PayHistoryVO payHistoryVO = new PayHistoryVO();
 
@@ -118,31 +121,37 @@ public class ChatController {
 			memberService.setPoint(mem);
 			//낙찰 내역 DB 저장
 			payHistoryVO.setId(winuser);
-			payHistoryVO.setCashe(value);
-			payHistoryVO.setProductNum(itemNum);
-			payHistoryService.setPayHistory(payHistoryVO);
+
+			
+			
 		
 		//소셜 로그인 했을 때 
 		}else {
 			KakaoDetailVO kakaoDetailVO = new KakaoDetailVO();
 			kakaoDetailVO.setKaNickName(loginnum);
 			Long point = memberSocialService.getOneMember(kakaoDetailVO).getKaPoint();
-			kakaoDetailVO.setKaPoint(point - value);
 			kakaoDetailVO.setKaNickName(loginnum);
+			kakaoDetailVO.setKaPoint(point - value);
 			memberSocialService.setPoint(kakaoDetailVO);
 			//낙찰 내역 DB 저장 (유저 ID - winuser, 구매 가격 - value, 구매한 날 - sysdate, 상품 번호 - itemNum)
 			payHistoryVO.setId(loginnum);
-			payHistoryVO.setCashe(value);
-			payHistoryVO.setProductNum(itemNum);
-			payHistoryService.setPayHistory(payHistoryVO);
 
 		}
+		payHistoryVO.setCashe(value);
+		payHistoryVO.setProductNum(itemNum);
+		//payHistoryService.setPayHistory(payHistoryVO);
+		
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(Long.valueOf(itemNum));
+		result = productService.setStatus(productVO);
 		
 		
+		//정보 초기화
 		webSocketChat.setValue(0);
 		webSocketChat.setWinuser("");
 		webSocketChat.setItem("");
 		webSocketChat.setItemNum(0);
+		return result;
 	}
 	
 

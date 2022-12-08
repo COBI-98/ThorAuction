@@ -29,4 +29,8 @@ public class ProductService {
 		return productMapper.getProductApproval(productVO);
 	}
 	
+	public int setStatus(ProductVO productVO) throws Exception{
+		return productMapper.setStatus(productVO);
+	}
+	
 }
