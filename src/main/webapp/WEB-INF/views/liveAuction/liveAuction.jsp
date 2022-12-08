@@ -37,9 +37,9 @@
 						<div id="media-title">
 							<h2 id="media-titleText"> 제목</h2>
 						</div>
-						<div>
-							현재 인원<span id="count"></span>
-						</div>
+						<div id="item">
+			          	  	<span id="selecteditem"></span>
+			         	</div>  
 					</div>
 				
 					<div id="media-box" class="media-box">
@@ -50,26 +50,25 @@
 					
 					
 				</div>
-		<div id="zoom" style="height: 75px; width: 75px;"></div>
 		
-				
-				
-        <div class="chat-container">
-          <div id="text">
-            <span id="final">경매 최고가:</span>
-            <span id="amount">${value}</span>
-            <span id="hidden" style="visibility: hidden;">${value}</span>
-            <span id="finalamount"></span>
-          </div>
-          <div id="item">
-            <span>경매 물품</span>
-            <span id="selecteditem"></span>
-          </div>  
-
-          <ul class="tabs">
-            <li class="tab-link current" data-tab="chatt">채팅창</li>
-            <li class="tab-link" data-tab="iddd">참가인원 목록</li>
-          </ul>
+	
+		
+        <div class="chat-container">	
+			<div id= "chat-header" >
+	          <div id="text">
+	            <span id="final">경매 최고가:</span>
+	            <span id="amount">${value}</span>
+	            <span id="hidden" style="display: none;">${value}</span>
+	            <span id="finalamount"></span>
+	          </div>
+	          
+	
+	          <ul class="tabs">
+	            <li class="tab-link current" data-tab="chatt">채팅창</li>
+	            <li class="tab-link" data-tab="iddd">참가인원 (<span id="count"></span>)</li>
+	          </ul>
+		
+			</div>
           <div id='chatt' class="tab-content current">
               <div class="chat-box">
                 <div id='talk'></div>
@@ -78,7 +77,7 @@
                   <input class ="bidcoinBtn" type='button' value='보내기' id='btnSend'>
                 </div>
               </div>
-              <div>
+              <div id="bidZone">
                   <input type='button' value="직접입력" id="auction" class ="bidcoinBtn">
                   <input type='button' value="단위경매" id="add" class ="bidcoinBtn">
               </div>

@@ -50,6 +50,7 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 #media-header{
 	display: flex;
 	justify-content: space-between;
+	align-content: center;
 }
 
 #media-broadcast{
@@ -66,7 +67,7 @@ Documentation - github.com/muaz-khan/WebRTC-Experiment/tree/master/getMediaEleme
 
 #media-title{
 	
-	width : 80%;
+	max-width : 70%;
 	padding: 15px;
 	height: 75px;
 }
