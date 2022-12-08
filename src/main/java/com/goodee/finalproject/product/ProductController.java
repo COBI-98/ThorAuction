@@ -11,15 +11,18 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.board.application.ApplicationController;
+import com.goodee.finalproject.member.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -93,12 +96,40 @@ public class ProductController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getSaleProductListDetail(SaleProductVO saleProductVO) throws Exception{
+	public ModelAndView getSaleProductListDetail(SaleProductVO saleProductVO,Authentication authentication) throws Exception{
 		ModelAndView mv= new ModelAndView();
 		saleProductVO = productService.getSaleProductListDetail(saleProductVO);
 		
+		MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+		BidAmountVO bidAmountVO = new BidAmountVO();
+		
+//		log.info("Test 1 -> {}", saleProductVO.getBidAmountVOs());
+		
+		bidAmountVO.setProductId(saleProductVO.getProductId());
+		Long check = productService.getMaxAmountCheck(bidAmountVO);
+		
+		if(check == null) {
+			check = saleProductVO.getProductVOs().get(0).getProductPrice();
+		}
+		
+		mv.addObject("maxAmount", check);
+		mv.addObject("memberVO", memberVO);
 		mv.addObject("saleProductVO", saleProductVO);
 		mv.setViewName("product/detail");
 		return mv;
 	}
+	
+	@PostMapping("bid")
+	@ResponseBody
+	public String setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception{
+		
+		int result = productService.setBidAmountAdd(bidAmountVO);
+		String test = "";
+		if(result == 1) {
+			test = "7";
+		}
+		
+		return test;
+	}
+	
 }

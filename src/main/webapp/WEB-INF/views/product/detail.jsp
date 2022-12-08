@@ -17,6 +17,8 @@
 	<link rel="stylesheet" href="/css/chunk55-0c2ab26.css">
 	<link rel="stylesheet" media="only screen and (min-width: 1023px)" href="/css/testThor.css">
 	<link rel="stylesheet" href="/css/testThorText.css">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -87,18 +89,25 @@
 												<div class="production-selling-header__price"><span class="production-selling-header__price__price-wrap"><span class="production-selling-header__price__discount"><span class="number">시작가</span><span class="percent"></span></span>
 												<del class="production-selling-header__price__original">
 													<span class="number"><fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/></span><span class="won">원</span></del><span class="production-selling-header__price__separator production-selling-header__price__original"></span>
-													<span class="production-selling-header__price__coupon"><span class="number">현재가 : <fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/></span><span class="won">원</span>
+													<span class="production-selling-header__price__coupon"><span class="number">현재가 : <fmt:formatNumber value="${maxAmount}" pattern="###,###"/></span><span class="won">원</span>
 												</span>
 											</div>
 										</div>
 										<div class="production-selling-header__info-wrap">
+											<!-- 회원 이름 -->
+											<input type="hidden" id="id" value="${memberVO.id}">
+											<input type="hidden" id="productId" value="${saleProductVO.productId}">
+											<c:choose>
+												<c:when test = "${not saleProductVO.deadlineInfo}">
 											<div class="production-selling-header__promotion">
 												<div class="production-selling-header__promotion__title-wrap">
 													<span>혜택</span>
 												</div>
 												<div class="production-selling-header__promotion__content-wrap">
-													<p class="production-selling-header__promotion__entry"
-													><b>1500<!-- -->P</b> 적립 (<!-- -->(Gold (회원등급)) <!-- -->3<!-- -->% 적립)</p>
+													<p class="production-selling-header__promotion__entry">
+														<!-- 가격 계산 소수점버리기-->
+														<c:set var="point" value="${VO.productPrice*0.03}"></c:set>
+														<b><fmt:formatNumber type="number" maxFractionDigits="0" value="${point}" /><!-- -->P</b> 적립 (<!-- -->(Gold (회원등급)) <!-- -->3<!-- -->% 적립)</p>
 													</div>
 												</div>
 												<div class="production-selling-header__delivery">
@@ -111,40 +120,77 @@
 															<div class="production-selling-header__delivery__today-departure__header">
 																<span class="text">배송정보 : <span class="active">잘 보내드림</span></span>
 																
-											</div>
-										</div>
-										
-									</div>
-									
-								</div>
-								
-								<div class="info">
-										<ul>
-											<li class="timer" id="timer">
-											<div id="productTimeDate">
+														</div>
+													</div>
+													
+																</div>
+													
+																	</div>
+												
+																	
+																			<div class="info">
+																				<ul>
+																						<li class="timer" id="timer">
+																						<div id="productTimeDate">
 
-											</div> 
-											
-											</li>
-										</ul>
-									</div>
-							</div>
+																						</div> 
+																						
+																						</li>
+																				</ul>
+																			</div>
+																		</c:when>
+																		<c:otherwise>
+																			<div class="info">
+																				<ul>
+																					<li id="productTimeDate">
+																					</li>
+																				</ul>
+																			</div>
+																		</c:otherwise>
+																	</c:choose>
+										</div>
 							
-						
-						<div class="btn_box right">	
-							<!-- return false; -->
-							<a href="#" onclick="do_fav(94);" class="mbtn red">관심경매등록</a>
-						</div>
-						<div class="bidbtn" style="display:block">
-							<div class="bid1">
-								<span><a href="#" onclick="do_bid('A');">입찰하기 <strong><em><fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
-								1,000원 단위로 입찰
-							</div>
-							<div class="bid2">
-								<span><strong><input type="text" name="bid_money" onkeyup="numberFormat(this);" onblur="priceCutting('C', 1000);" value="<fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/>"> 원</strong> <a href="#" onclick="do_bid('B');">자율입찰 +</a></span>
-								원하는 입찰 금액을 적어주세요. <br>(입찰시 입찰단위로 변환됩니다.)<br>1,000원 단위로 자율입찰됩니다.
-							</div>
-						</div>
+							
+							<c:choose>
+								<c:when test = "${not saleProductVO.deadlineInfo}">
+									<div class="btn_box right">	
+										<!-- return false; -->
+										<a href="#" onclick="do_fav(94);" class="mbtn red">관심경매등록</a>
+									</div>
+									<div class="bidbtn" style="display:block">
+										<c:choose>
+											<c:when test="${VO.productPrice != maxAmount || saleProductVO.bidAmountVOs[0].amountId != null}">
+												<div class="bid1">
+													<c:set var="bidAmount" value="${maxAmount + saleProductVO.amountUnit}"></c:set>
+													<input type="hidden" id="amountUnit" value="${saleProductVO.amountUnit}">
+													<input type="hidden" id="startAmount" value="${bidAmount}">
+													<span><a href="#" onclick="dobid('A');">입찰하기 <strong><em><fmt:formatNumber value="${bidAmount}" pattern="###,###"/></em> 원</strong></a></span>
+													<fmt:formatNumber value="${saleProductVO.amountUnit}" pattern="###,###"/>원 단위로 입찰
+												</div>
+												<div class="bid2">
+													<span><strong><input type="text" id="bid_money" onkeyup="numberFormat(this);"  onblur="priceCutting('C', '${saleProductVO.amountUnit}');" value="<fmt:formatNumber value="${bidAmount}" pattern="###,###"/>"> 원</strong> <a href="#" onclick="dobid('B');">자율입찰 +</a></span>
+													원하는 입찰 금액을 적어주세요. <br>(입찰시 입찰단위로 변환됩니다.)<br><fmt:formatNumber value="${saleProductVO.amountUnit}" pattern="###,###"/>원 단위로 자율입찰됩니다.
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="bid1">
+													<input type="hidden" id="amountUnit" value="${saleProductVO.amountUnit}">
+													<input type="hidden" id="startAmount" value="${VO.productPrice}">
+													<span><a href="#" onclick="dobid('A');">입찰하기 <strong><em><fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
+													<fmt:formatNumber value="${saleProductVO.amountUnit}" pattern="###,###"/>원 단위로 입찰
+												</div>
+												<div class="bid2">
+													<span><strong><input type="text" id="bid_money" onkeyup="numberFormat(this);" onblur="priceCutting('C', '${saleProductVO.amountUnit}');" value="<fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/>"> 원</strong> <a href="#" onclick="dobid('B');">자율입찰 +</a></span>
+													원하는 입찰 금액을 적어주세요. <br>(입찰시 입찰단위로 변환됩니다.)<br><fmt:formatNumber value="${saleProductVO.amountUnit}" pattern="###,###"/>원 단위로 자율입찰됩니다.
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</c:when>
+								<c:otherwise>
+
+								</c:otherwise>							
+							</c:choose>
 						<div class="readinfo">
 							<h4>구매 전 꼭 확인해주세요!</h4>
 							<ul>
@@ -178,18 +224,23 @@
 						<meta http-equiv="X-UA-Compatible" content="IE=edge">
 						<link rel="stylesheet" media="only screen and (max-width: 1023px)" href="/css/ranking.css">
 						
-						<div class="runner">
-							<div class="title">
-								<strong>50,000</strong>원
-								<div class="name">cobi<br>co*****</div>
-							</div>
-							<div class="run">
-								<div class="bg1">
-									<img src="/images/dollar.png" alt="">
-									<span>1위</span>
+						<c:forEach items="${saleProductVO.bidAmountVOs}" var="amountVO" varStatus="status">
+							<c:if test="${amountVO.bidAmount != null}">
+								<div class="runner">
+									<div class="title">
+										<strong><fmt:formatNumber value="${amountVO.bidAmount}" pattern="###,###"/></strong>원
+										<div class="name">${amountVO.id}<br></div>
+									</div>
+									<div class="run">
+										<div class="bg${status.count}">
+											<img src="/images/dollar.png" alt="">
+											<span>${status.count}위</span>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
+							</c:if>
+						</c:forEach>
+						
 					</div>
 					<div class="action_help">
 						<span class="point">입찰시, 꼭! 확인해주세요</span>
@@ -207,9 +258,9 @@
 					</div>
 				</div>
 				
-				<table class="table table-bordered border-primary">
+				<table class="table table-bordered border-warning">
 					<tbody>
-						<tr class="table-primary">
+						<tr class="table-warning">
 							
 							<th>상품상세정보</th>
 							<tr>
@@ -230,6 +281,7 @@
 		
 	</section>
 	<script src="/js/detailTimer.js"></script>
+	<script src="/js/bidAmount.js"></script>
 	<script src="/js/test466.js"></script>
 	<script src="/js/test36.js"></script>
 	<script src="/js/test48.js"></script>

@@ -1,12 +1,10 @@
 /*! For license information please see 36-bd698aa9f594f52bafe0.chunk.js.LICENSE.txt */
 
 
-console.log($(".production-selling-cover-image__list__btn").length);
 
 
 
 for(let i=0; i<$(".production-selling-cover-image__list__btn").length;i++){
-    console.log($(".production-selling-cover-image__list__btn").length);
     $($(".production-selling-cover-image__list__btn")[i]).mouseenter(function(){
         console.log(i);
         $("#carousel__list").css("transform", "translateX("+(-100*i)+"%)");
@@ -1539,9 +1537,4 @@ return!1}
 }
 ]);
 
-console.log("rr");
-
-// $("production-selling-cover-image__list__btn")[0].focus(function(){
-//     console.log("rr");
-// });
 

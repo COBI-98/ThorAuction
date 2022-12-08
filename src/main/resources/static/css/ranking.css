@@ -1,6 +1,6 @@
 :root {
-    --color-point:#e80c0c;
-    --color-sub:#ffef36;
+    --color-point:#fea532;
+    --color-sub:#9DDDE9;
     }
     
     .screen {display:none !important;}
@@ -671,9 +671,9 @@
     .auction_run .runner .title .date{font-size:12px;color:#999}
     .auction_run .runner .run {margin:auto;position:absolute;left:50%;bottom:25px;transform:translateX(-50%);}
     .auction_run .runner .run img{position:absolute;left:50%;top:0px;transform:translate(-50%,-100%);height:95px}
-    .auction_run .runner .run .bg1{width:130px;height:110px;background:url('/images/auction/run1.png') center no-repeat;position:relative;background-size:130px}
-    .auction_run .runner .run .bg2{width:130px;height:104px;background:url('/images/auction/run2.png') center no-repeat;position:relative;background-size:130px}
-    .auction_run .runner .run .bg3{width:130px;height:120px;background:url('/images/auction/run3.png') center no-repeat;position:relative;background-size:130px}
+    .auction_run .runner .run .bg1{width:130px;height:110px;background:url('/images/run1.png') center no-repeat;position:relative;background-size:130px}
+    .auction_run .runner .run .bg2{width:130px;height:104px;background:url('/images/run2.png') center no-repeat;position:relative;background-size:130px}
+    .auction_run .runner .run .bg3{width:130px;height:120px;background:url('/images/run3.png') center no-repeat;position:relative;background-size:130px}
     .auction_run .runner .run .bg4{width:130px;height:125px;background:url('/images/auction/run4.png') center no-repeat;position:relative;background-size:130px}
     
     
@@ -897,7 +897,7 @@
     .compoany_detail .lbox .title{width:130px;font-size:18px;color:#a6a6a6;float:left;}
     
     .compoany_detail .lbox .text{float:left;width:calc(100% - 130px);font-size:14px;line-height:24px;letter-spacinG:-0.5px}
-    .compoany_detail .lbox .title strong{color:#232323;border-bottom: 2px solid #e80c0c;display:inline-block}
+    .compoany_detail .lbox .title strong{color:#232323;border-bottom: 2px solid #fea532;display:inline-block}
     .compoany_detail .lbox:after {clear:both;content:'';display:block;}
     .compoany_detail .rbox {background-color:#e88a8a;color:#fff;position:relative;padding:15px  25px 25px 100px} 
     .compoany_detail .rbox img{position:absolute;left:25px;top:25px;width:50px;}
