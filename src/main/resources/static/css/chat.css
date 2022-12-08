@@ -69,18 +69,28 @@
 
 #chatt .me{
   
-   margin : 1px 0px 2px 30%;   
+   margin : 1px 0px 2px 10px;   
    
    display: flex !important;
    justify-content: flex-end;
    align-items: flex-end;
 }
+#chatt .other{
+   margin : 2px;
+   display: flex !important;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+
 #chatt .chat-date{
    font-size: 12px;
 }
 
 #chatt .chat-text{
+	max-width : 100%;
    background-color : #eee;
+   word-break:break-all;
 }
 
 #chatt .hi{
@@ -88,9 +98,7 @@
    width: 100%;
 }
 
-#chatt .other{
-   margin : 2px;
-}
+
 
 /* #chatt .me#enter .chat-text{ */
 /*    background-color: white; */
@@ -115,6 +123,7 @@
 
 
 #text{
+	
    text-align: center;
    height: 45px;
 }
