@@ -92,14 +92,17 @@ ws.onmessage = function(msg){
 			},
 			success : function() {
 				console.log("성공");
+				point.innerText = point.innerText*1 - data.loginnnn*1;
 			}
 		})
+
 	}
 
 	//경매 물품 설정 시
 	else if(data.item != null) {
 		selecteditem.innerText = data.item;
 		amount.innerHTML = data.itemprice;
+		talk.innerHTML += `<div class="hi">`+"경매 물품이 " + data.item + "으로 설정되었습니다." +`</div>`;
 	}
 	
 	//단위 경매 설정 시
@@ -160,8 +163,19 @@ ws.onmessage = function(msg){
 			$('#finalamount').css("display","inline");
 			talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
 			selecteditem.innerText = "";
-			var nummm = data.itemNum;
-			$('#items.options[value='+nummm+']').css("display","none");
+
+			console.log(data.itemNum);
+			var num = data.itemNum;
+			$("#items option[value="+num+"]").hide();
+			
+
+
+
+
+
+
+
+
 		}else{
 			auctionend.value="경매종료";
 		}
@@ -252,14 +266,6 @@ ws.onmessage = function(msg){
 					</div>`;
 		}
 		
-		
-		
-						
-						
-						
-						
-						
-					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 		

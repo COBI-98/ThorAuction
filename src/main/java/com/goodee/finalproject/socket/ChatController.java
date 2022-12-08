@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goodee.finalproject.board.application.ApplicationService;
@@ -97,11 +98,13 @@ public class ChatController {
 	}
 	
 	@RequestMapping(value="/liveAuction/loginNum", method=RequestMethod.POST)
-	public void pointMinus(String loginnum) throws Exception {
+	@ResponseBody
+	public int pointMinus(String loginnum) throws Exception {
 		int value = webSocketChat.getValue();
 		String winuser = webSocketChat.getWinuser();
 		//String item = webSocketChat.getItem();
 		int itemNum = webSocketChat.getItemNum();
+		int result = 0;
 		
 		PayHistoryVO payHistoryVO = new PayHistoryVO();
 
@@ -137,7 +140,7 @@ public class ChatController {
 		
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(Long.valueOf(itemNum));
-		productService.setStatus(productVO);
+		result = productService.setStatus(productVO);
 		
 		
 		//정보 초기화
@@ -145,7 +148,7 @@ public class ChatController {
 		webSocketChat.setWinuser("");
 		webSocketChat.setItem("");
 		webSocketChat.setItemNum(0);
+		return result;
 	}
-	
 	
 }

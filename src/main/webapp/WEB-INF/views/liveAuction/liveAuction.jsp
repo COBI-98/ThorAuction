@@ -115,6 +115,7 @@
 							<div>
 				              <span>경매 물건</span>
                       <select id="items" name="items" style="width: 60%;">
+                        <option value="none" selected>=== 선택 ===</option>
                         <c:forEach items="${itemList}" var="items">
                         <option value="${items.productNum}" data-price="${items.productPrice}">${items.productName}</option>
                       </c:forEach>
