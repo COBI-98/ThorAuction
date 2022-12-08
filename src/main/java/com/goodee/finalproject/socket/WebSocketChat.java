@@ -47,7 +47,7 @@ public class WebSocketChat {
 	private static String unit =""; //단위 가격
 	private static String item =""; //경매 물품
 	private static int itemNum = 0; //경매 물품 번호 
-	private static String broadName;
+	private static String broadName="";
 	
 	
 	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
@@ -75,11 +75,14 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
-
-
+		
+		//방송 제목 설정
+		if(msg.substring(2, 7).equals("title")) {
+			broadName = String.valueOf(jsonObj.get("title"));
+		}
 		
 		//경매 물품 설정
-		if(msg.substring(2, 6).equals("item")) {
+		else if(msg.substring(2, 6).equals("item")) {
 			item = String.valueOf(jsonObj.get("item"));
 			itemNum = Integer.parseInt(String.valueOf(jsonObj.get("itemNum")));
 			value = Integer.parseInt(String.valueOf(jsonObj.get("itemprice")));
@@ -174,6 +177,7 @@ public class WebSocketChat {
 			msg = msg.replace(String.valueOf(jsonObj.get("winner")), winuser);
 			msg = msg.replace(String.valueOf(jsonObj.get("value")), String.valueOf(value));
 			msg = msg.replace(String.valueOf(jsonObj.get("goods")), item);
+			msg = msg.replace(String.valueOf(jsonObj.get("tt")), broadName);
 			
 			sendMessage(msg, session);
 		}
