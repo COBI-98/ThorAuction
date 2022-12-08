@@ -53,4 +53,14 @@ public class ProductService {
 		
 		return productMapper.setDeadLineUpdate(saleProductVO);
 	}
+
+	public Long getMaxAmountCheck(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.getMaxAmountCheck(bidAmountVO);
+	}
+	
+	public int setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.setBidAmountAdd(bidAmountVO);
+	}
 }

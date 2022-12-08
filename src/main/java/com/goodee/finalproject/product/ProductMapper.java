@@ -46,4 +46,8 @@ public interface ProductMapper {
 	// 온라인상품이 마감일이 지났을때 마감정보 1로 변경
 	public int setDeadLineUpdate(SaleProductVO saleProductVO) throws Exception;
 
+	public Long getMaxAmountCheck(BidAmountVO bidAmountVO) throws Exception;
+
+	// 입찰금액 추가
+	public int setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception;
 }

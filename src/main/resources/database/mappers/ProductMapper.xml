@@ -17,7 +17,7 @@
  	
  	<insert id="setSaleProduct" parameterType="SaleProductVO">
  		INSERT INTO SALEPRODUCT
- 		VALUE (PRODUCTID,#{productNum},#{categoryId},0,0,now());
+ 		VALUE (PRODUCTID,#{productNum},#{categoryId},0,0,now(),#{amountUnit});
  	</insert>
  	
  	<delete id="setSummerFileDelete" parameterType="ProductFileVO">
@@ -106,15 +106,19 @@
  	
  	<!-- 상품리스트 디테일 -->
  	<select id="getSaleProductListDetail" parameterType="SaleProductVO" resultMap="getSaleProductDetail">
- 		SELECT * FROM 
-		SALEPRODUCT p
-		LEFT JOIN
-		AUCTIONPRODUCT a 
-		ON(p.PRODUCTNUM = a.PRODUCTNUM)
-		LEFT JOIN
-		PRODUCTFILES pf 
-		ON(a.PRODUCTNUM =pf.PRODUCTNUM )
-		WHERE p.PRODUCTID = #{productId};
+ 		SELECT *    FROM 
+			SALEPRODUCT p
+			LEFT JOIN
+			AUCTIONPRODUCT a 
+			ON(p.PRODUCTNUM = a.PRODUCTNUM)
+				LEFT JOIN
+				PRODUCTFILES pf 
+				ON(a.PRODUCTNUM =pf.PRODUCTNUM )
+					LEFT JOIN 
+					BIDAMOUNT B
+					ON(p.PRODUCTID = B.PRODUCTID)
+					WHERE p.PRODUCTID = #{productId}
+					ORDER BY B.BIDAMOUNT DESC;
  	</select>
  	
  	<update id="setDeadLineUpdate" parameterType="SaleProductVO">
@@ -129,6 +133,7 @@
 		<result column="DEADLINEINFO" property="deadlineInfo"></result>
 		<result column="PRODUCTHIT" property="productHit"></result>
 		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
 		<collection property="productVOs" javaType="List" ofType="ProductVO">
 			<id column="PRODUCTNUM" property="productNum"></id>
 			<result column = "PRODUCTNAME" property="productName"></result>
@@ -144,15 +149,31 @@
 			</collection>
 			
 		</collection>
-		<collection property="categoryVOs" javaType="List" ofType="CategoryVO">
-				<id column="CATEGORYID" property="categoryId"></id>
-				<result column = "CATEGORYNAME" property="categoryName"></result>
+
+		
+		<collection property="bidAmountVOs" javaType="List" ofType="BidAmountVO">
+				<id column="AMOUNTID" property="amountId"></id>
+				<result column = "PRODUCTID" property="productId"></result>
+				<result column = "ID" property="id"></result>
+				<result column = "BIDAMOUNT" property="bidAmount"></result>
+				<result column = "BIDDATE" property="bidDate"></result>
 		</collection>
+		
 		
  	</resultMap>
  	
- 	<!-- 카테고리 리스트 -->
+ 	<select id="getMaxAmountCheck" parameterType="BidAmountVO" resultType="Long">
+ 	SELECT MAX(BIDAMOUNT) AS PRODUCTVO FROM BIDAMOUNT
+	WHERE PRODUCTID= #{productId};
+ 	</select>
  	
+ 	<!-- 입찰금액 추가 -->
+ 	<insert id="setBidAmountAdd" parameterType="BidAmountVO">
+	 	INSERT INTO BIDAMOUNT
+		VALUES (AMOUNTID,#{productId},#{id},#{bidAmount},now());
+ 	</insert>
+ 	
+ 	<!-- 카테고리 리스트 -->
  	<select id="getCategoryList" parameterType="CategoryVO" resultType="CategoryVO">
  		select * from PRODUCTCATEGORY;
  	</select>
