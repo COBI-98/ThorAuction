@@ -79,6 +79,7 @@ public class WebSocketChat {
 		//방송 제목 설정
 		if(msg.substring(2, 7).equals("title")) {
 			broadName = String.valueOf(jsonObj.get("title"));
+			sendMessage(msg, session);
 		}
 		
 		//경매 물품 설정
