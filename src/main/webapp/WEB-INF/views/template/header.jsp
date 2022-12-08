@@ -14,14 +14,20 @@
 	
 	
 	<nav class=" border-bottom" style="display: flex; justify-content: center;">
-	<div class="container d-flex flex-wrap justify-content-end" >
 	
 	
-		<ul class="nav" style="">
+		
+	
+	<div class="container " >
+		<ul class="nav" style="float: left; margin-left: 50px;">
+				<li class="nav-item nav-member"><a href="../admin/adminpage" class="nav-link">관리자 기능</a></li>
+				<li class="nav-item nav-member"><a href="#" class="nav-link">관리자 페이지</a></li>
+		</ul>
+		<ul class="nav" style="float: right;">
 				<!-- 로그인 전 -->
 				<sec:authorize access="!isAuthenticated()">
-					<li class="nav-item nav-member"><a href="../member/login" class="nav-link link-dark">로그인</a></li>
-					<li class="nav-item nav-member"><a href="../member/join" class="nav-link link-dark">회원가입</a></li>
+					<li class="nav-item nav-member"><a href="../member/login" class="nav-link" >로그인</a></li>
+					<li class="nav-item nav-member"><a href="../member/join" class="nav-link">회원가입</a></li>
 				</sec:authorize>
 
 	<%-- 			<!-- 로그인 후 -->
@@ -44,10 +50,10 @@
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form> --%>
-					<li class="nav-item nav-member"><a href="../admin/adminpage" class="nav-link link-dark">관리자 기능</a></li>
+					
 				</sec:authorize>
 				
-				<li class="nav-item nav-member"><a href="#" class="nav-link link-dark ">관리자 페이지</a></li>
+				
 			</ul>
 			
 			</div>
@@ -69,10 +75,10 @@
 				<span class="fs-4"><img alt="" src="images/logo_BidCoin.png" style="width: 200px;"></span>
 			</a>
 			<ul class="nav" style="height: 100%;">
-				<li class="nav-item nav-menu" ><a href="#" class="nav-link link-dark">경매장</a></li>
-		        <li class="nav-item nav-menu" ><a href="https://localhost:84/liveAuction" class="nav-link link-dark">실시간 경매장</a></li>
-		        <li class="nav-item nav-menu" ><a href="/board/application/list" class="nav-link link-dark">신청게시판</a></li>
-		        <li class="nav-item nav-menu" ><a href="/board/notice/list" class="nav-link link-dark">공지게시판</a></li>
+				<li class="nav-item nav-menu" ><a href="#" class="nav-link link-dark" style="font-weight: bold;">경매장</a></li>
+		        <li class="nav-item nav-menu" ><a href="https://localhost:84/liveAuction" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
+		        <li class="nav-item nav-menu" ><a href="/board/application/list" class="nav-link link-dark" style="font-weight: bold">신청게시판</a></li>
+		        <li class="nav-item nav-menu" ><a href="/board/notice/list" class="nav-link link-dark" style="font-weight: bold">공지게시판</a></li>
 		       
 			</ul>
 			

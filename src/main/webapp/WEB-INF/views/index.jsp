@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>토르의 실시간 대장간</title>
+<title>세상의 모든 경매: BIDCOIN르의 실시간 대장간</title>
 <c:import url="./template/boot.jsp"></c:import>
 <link href="/css/reset.css" rel="stylesheet">
-<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 </head>
 <script defer src="/js/admin/kakaoLoginCheck.js"></script>
 <body>
