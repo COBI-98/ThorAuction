@@ -282,10 +282,12 @@ ws.onmessage = function(msg){
 	else if(data.stop != null){
 		console.log(data);
 		if(data.stop ==true){
+			talk.innerHTML += `<div class="hi">`+ "*채팅이 정지되었습니다.*" +`</div>`;
 			stopChat.value="채팅시작";
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
+			talk.innerHTML += `<div class="hi">`+ "*채팅이 시작되었습니다.*" +`</div>`;
 			stopChat.value="채팅정지";
 			$('#msg').attr("readonly",false);
 		}

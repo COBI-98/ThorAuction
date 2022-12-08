@@ -247,6 +247,12 @@ public class WebSocketChat {
 	public void setItemNum(int num) {
 		this.itemNum = num;
 	}
+	public String getBroadName() {
+		return broadName;
+	}
+	public void setBroadName(String num) {
+		this.broadName = num;
+	}
 	
 	public static <K, V> K getKey(Map<K, V> map, V value) {
 	       // 찾을 hashmap 과 주어진 단서 value
