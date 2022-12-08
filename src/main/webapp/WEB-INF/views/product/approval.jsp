@@ -177,6 +177,11 @@
 					<option value="6">도서, e쿠폰</option>
 
 				</select>
+				<div class="applicationDetail">
+					경매 단위 입력
+					<input type="text" name="amountUnit"  />
+				</div>
+
 				<input type="hidden" name="productNum" value="${productVO.productNum}">
 			
 		<table class="table table-bordered border-primary">

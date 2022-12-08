@@ -13,6 +13,7 @@ public class SaleProductVO {
 	private Boolean deadlineInfo;
 	private Long productHit;
 	private Timestamp productDate;
+	private Long AmountUnit;
 
 	
 	public Boolean getDeadlineInfo() {
@@ -24,4 +25,5 @@ public class SaleProductVO {
 	
 	private List<ProductVO> productVOs;
 	private List<CategoryVO> categoryVOs;
+	private List<BidAmountVO> bidAmountVOs;
 }
