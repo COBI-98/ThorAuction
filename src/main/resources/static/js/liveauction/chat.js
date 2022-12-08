@@ -50,6 +50,7 @@ var items = getId('items');
 var itemsend = getId('itemsend');
 var selecteditem = getId('selecteditem');
 var ln = getId('loginnum');
+var mediaName = getId('media-titleText');
 
 var username;
 var win = false;
@@ -81,12 +82,12 @@ ws.onmessage = function(msg){
 
 
 	if(data.title != null){
-		document.querySelector("#media-titleText").innerHTML = data.title;
+		$("#media-titleText").innerHTML = data.title;
 	}
 
 
 	//로그인 종류
-	if(data.loginnum != null) {
+	else if(data.loginnum != null) {
 
 		var loginnum = ln.innerText;
 		console.log("loginnnnn : "+loginnum);
@@ -333,6 +334,10 @@ ws.onmessage = function(msg){
 
 		//경매 물품 설정
 		selecteditem.innerText = data.goods;
+		
+		//방송 제목 설정
+		console.log(data.tt);
+		mediaName.innerHTML = data.tt;
 	}
 
 	//퇴장시
@@ -564,6 +569,7 @@ function usercome(){
 	data5.winner = "renniw";
 	data5.value = "eulav";
 	data5.goods = "sdoog";
+	data5.tt = "wpahrwpahr";
 	var temp =JSON.stringify(data5);
 	ws.send(temp);
 }
