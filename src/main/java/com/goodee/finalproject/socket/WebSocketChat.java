@@ -47,6 +47,8 @@ public class WebSocketChat {
 	private static String unit =""; //단위 가격
 	private static String item =""; //경매 물품
 	private static int itemNum = 0; //경매 물품 번호 
+	private static String broadName;
+	
 	
 	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
 	
@@ -132,10 +134,6 @@ public class WebSocketChat {
 			Session ss = getKey(list,winner);
 			//DB에 저장할 예정 (금액, id, 경매 물품) 포인트 바로 빠지게 함
 
-			
-
-			
-			
 			//DB 저장
 			
 			
