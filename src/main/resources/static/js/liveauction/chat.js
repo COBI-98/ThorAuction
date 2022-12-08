@@ -80,17 +80,15 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid = "";
 
-
+	//방송 제목 설정 시
 	if(data.title != null){
-		$("#media-titleText").innerHTML = data.title;
+		mediaName.innerHTML = data.title;
 	}
-
 
 	//로그인 종류
 	else if(data.loginnum != null) {
 
 		var loginnum = ln.innerText;
-		console.log("loginnnnn : "+loginnum);
 		$.ajax({
 			type:'POST',
 			url : '/liveAuction/loginNum',
@@ -102,7 +100,6 @@ ws.onmessage = function(msg){
 				point.innerText = point.innerText*1 - data.loginnnn*1;
 			}
 		})
-
 	}
 
 	//경매 물품 설정 시
@@ -124,11 +121,11 @@ ws.onmessage = function(msg){
 			auctionend.value="경매종료";
 			auctionend.classList.add("start");
 			talk.innerHTML += `<div class="hi">`+ "*경매가 시작되었습니다.*" +`</div>`;
-	
 			final.innerText ="경매 최고가:";
+
 			//최종금액 초기화, 안보이게
-			finalamount.innerHTML = 0;
 			$('#finalamount').css("display","none");
+			finalamount.innerHTML = 0;
 	
 			//최고금액 보이게
 			$('#amount').css("display","inline");
@@ -136,8 +133,6 @@ ws.onmessage = function(msg){
 		}else{
 			auctionend.value="경매시작";
 		}
-
-
 	}
 
 	// //단위가격 클릭시
@@ -165,13 +160,13 @@ ws.onmessage = function(msg){
 			amount.innerHTML = 0;
 			rank[0] =aaa;
 			rank[1] = "id";
+			$('#finalamount').css("display","inline");
 			max = 0;
 			win = false;
-			$('#finalamount').css("display","inline");
 			talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
 			selecteditem.innerText = "";
 
-			console.log(data.itemNum);
+			//list 설정
 			var num = data.itemNum;
 			$("#items option[value="+num+"]").hide();
 			$("#items").val("none").prop("selected", true);
@@ -185,7 +180,6 @@ ws.onmessage = function(msg){
 		Swal.fire({
 			title: "강퇴 되었습니다.",  // title, text , html  로 글 작성
 			icon: "error",    //상황에 맞는 아이콘
-	
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
 			confirmButtonText: '확인',
@@ -203,8 +197,6 @@ ws.onmessage = function(msg){
 
 	//채팅 메세지 
 	else if(data.mid != null) {
-
-		
 
 		let a = data.msg;
 		var b = a.substr(4)*1;
@@ -227,12 +219,6 @@ ws.onmessage = function(msg){
 		amount.innerHTML = rank[0];
 		console.log(rank);
 		
-//		if(auctionend.classList.contains("start")) {
-//			if(data.msg.substr(0,4) =="[경매]" && pattern_num.test(b) && data.win == data.mid && b==rank[0]){
-//				cssid = 'enter';
-//			}
-//		}
-		
 		var item;
 		if(data.mid == userid.innerText){
 			css = 'class=me';
@@ -243,13 +229,11 @@ ws.onmessage = function(msg){
 						<div class="chat-date">
 							 ${data.date} 
 						</div>
-						
 						<div class="chat-text ${cssid}">
 							<span><b class="name">${data.mid}</b></span> <br/>
 							<span class="text">${data.msg}</span>
 						</div>
 					</div>`;
-			
 		}else{
 			css = 'class=other';
 			item = `
@@ -264,10 +248,8 @@ ws.onmessage = function(msg){
 						</div>
 					</div>`;
 		}
-		
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-		
 	}
 
 	//얼리기
@@ -330,7 +312,6 @@ ws.onmessage = function(msg){
 		selecteditem.innerText = data.goods;
 		
 		//방송 제목 설정
-		console.log(data.tt);
 		mediaName.innerHTML = data.tt;
 	}
 
@@ -344,8 +325,6 @@ ws.onmessage = function(msg){
 
 		usercount.innerHTML = data.list.length;
 		talk.innerHTML += `<div class="hi">` + data.name + "님이 퇴장하셨습니다." +`</div>`;
-
-		console.log(data);
 	}	
 }
 
@@ -406,7 +385,6 @@ function send(){
 
 		if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
 			if(t4 <= mypoint){
-				
 				if(t4 >= 1000){
 							if(t4 % 1000 != 0){
 								t4 = t4- t4%1000;
@@ -423,7 +401,6 @@ function send(){
 								document.querySelector("#msg").value ="[경매]"+ t4;
 								return;
 							}
-							
 						}else{
 							Swal.fire({
 					                title: "입찰 가격은 1000원 이상으로 가능합니다.",  // title, text , html  로 글 작성
@@ -431,14 +408,9 @@ function send(){
 									showConfirmButton : false,
 					                showCancelButton: false
 					            } )
-								setTimeout(() => {
-					                        Swal.close();
-					            }, 800)
-							
+								setTimeout(() => {Swal.close();}, 800)
 							return;
 						}
-				
-				
 				if(t4 > max) {
 					max=t4;	
 					console.log(max);
@@ -456,9 +428,7 @@ function send(){
 					showCancelButton: false,
 					showConfirmButton: false,
 				} )
-				setTimeout(() => {
-					                        Swal.close();
-            	}, 800)
+				setTimeout(() => {Swal.close();}, 800)
             	
 				document.querySelector("#msg").value ="[경매]"+ (mypoint- mypoint%1000);
 				return;
@@ -664,16 +634,9 @@ unitsend.addEventListener("click",function(){
 				showConfirmButton : false,
                 showCancelButton: false
             } )
-			setTimeout(() => {
-                        Swal.close();
-            }, 800)
-			
+			setTimeout(() => {Swal.close();}, 800)
 			document.querySelector("#unit").value = unit.value;
 		}
-		
-		
-		
-		
 	}else{
 		Swal.fire({
                 title: "단위 가격은 1000원 이상으로 설정 가능합니다.",  // title, text , html  로 글 작성
@@ -681,13 +644,9 @@ unitsend.addEventListener("click",function(){
 				showConfirmButton : false,
                 showCancelButton: false
             } )
-			setTimeout(() => {
-                        Swal.close();
-            }, 800)
-		
+			setTimeout(() => {Swal.close();}, 800)
 		return;
 	}
-	
 	data11.unit = unit.value;
 	var temp = JSON.stringify(data11);
 	ws.send(temp);
@@ -695,7 +654,6 @@ unitsend.addEventListener("click",function(){
 
 //경매 물품 선택
 itemsend.addEventListener("click",function(){
-	//items.options[items.selectedIndex].value;
 	var itemmm = items.options[items.selectedIndex];
 	data12.item = itemmm.innerText;
 	data12.itemNum = itemmm.value;
@@ -707,10 +665,6 @@ itemsend.addEventListener("click",function(){
 // 방송 제목 설정
 $("#setBroadNameBtn").click(function(){
 	data2.title = $("#broadName").val();
-	document.querySelector("#media-titleText").innerHTML = data2.title;
-	
-   var temp = JSON.stringify(data2);
-   ws.send(temp);
-	
-	
+    var temp = JSON.stringify(data2);
+    ws.send(temp);
 })
