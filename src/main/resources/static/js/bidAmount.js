@@ -1,4 +1,38 @@
 
+// 컴마 없애기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+//컴마 찍기
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//컴마 만들기
+function numberFormat(txtObj) {
+	var ostr=comma(uncomma(txtObj.value));
+	txtObj.value=ostr;
+}
+
+function priceCutting(stype, n) { // 금액, 타입, 절삭금액 단위
+	// var obj=document.auction_form;
+	// var aprice=obj.bid_money.value;
+
+    var aprice = $("#bid_money").val();
+    // 원단위처리(R:반올림, C:올림, F:버림)
+    aprice=uncomma(aprice);
+    var remove_price = 0;
+    remove_price = aprice / n;
+ 
+    if (stype == "C") {
+        remove_price = Math.ceil(remove_price);
+    }
+     
+    remove_price = remove_price * n;
+	var ostr=comma(uncomma(remove_price));
+	$("#bid_money").val(ostr);
+}
 function dobid(tmp) {
 	var user_check_id= $("#id").val();
     
