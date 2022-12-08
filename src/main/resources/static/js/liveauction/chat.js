@@ -396,6 +396,39 @@ function send(){
 
 		if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
 			if(t4 <= mypoint){
+				
+				if(t4 >= 1000){
+							if(t4 % 1000 != 0){
+								t4 = t4- t4%1000;
+								Swal.fire({
+					                title: "1000단위로 입찰 가능합니다.",  // title, text , html  로 글 작성
+					                icon: "info",    //상황에 맞는 아이콘
+									showConfirmButton : false,
+					                showCancelButton: false
+					            } )
+								setTimeout(() => {
+					                        Swal.close();
+					            }, 800)
+								
+								document.querySelector("#msg").value ="[경매]"+ t4;
+								return;
+							}
+							
+						}else{
+							Swal.fire({
+					                title: "입찰 가격은 1000원 이상으로 가능합니다.",  // title, text , html  로 글 작성
+					                icon: "info",    //상황에 맞는 아이콘
+									showConfirmButton : false,
+					                showCancelButton: false
+					            } )
+								setTimeout(() => {
+					                        Swal.close();
+					            }, 800)
+							
+							return;
+						}
+				
+				
 				if(t4 > max) {
 					max=t4;	
 					console.log(max);
@@ -407,15 +440,18 @@ function send(){
 			}else{
 				win=false;
 				Swal.fire({
-					title: "보유중인 포인트보다 높게 입력하셨습니다.",  // title, text , html  로 글 작성
-					icon: "error",    //상황에 맞는 아이콘
-			
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					confirmButtonText: '확인',
-					//reverseButtons: true   // 버튼 순서 변경
-				} ).then((result) => {   // 아무 버튼이나 누르면 발생
-				})
+					title: "보유중인 포인트보다 높게 입력하셨습니다.",  
+					icon: "error",    
+					
+					showCancelButton: false,
+					showConfirmButton: false,
+				} )
+				setTimeout(() => {
+					                        Swal.close();
+            	}, 800)
+            	
+				document.querySelector("#msg").value ="[경매]"+ (mypoint- mypoint%1000);
+				return;
 			}
 		}else{
 			win=false;
