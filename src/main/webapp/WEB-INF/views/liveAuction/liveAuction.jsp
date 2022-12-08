@@ -43,7 +43,9 @@
 					</div>
 				
 					<div id="media-box" class="media-box">
-						<div id= "blackVideo" style="width: 100%; height: 100%;"></div>
+						<div id= "blackVideo" style="width: 100%; height: 100%; color: #a8a8a8; display:flex; align-items: center; justify-content: center;">
+							<div>현재 실시간 경매를 진행하지 않고 있습니다.</div>
+						</div>
 						<video id="localVideo" autoplay playsinline hidden ></video>
 						
 					</div>
@@ -56,7 +58,7 @@
         <div class="chat-container">	
 			<div id= "chat-header" >
 	          <div id="text">
-	            <span id="final">경매 최고가:</span>
+	            <span id="final">현재 최고가:</span>
 	            <span id="amount">${value}</span>
 	            <span id="hidden" style="display: none;">${value}</span>
 	            <span id="finalamount"></span>
@@ -65,7 +67,7 @@
 	
 	          <ul class="tabs">
 	            <li class="tab-link current" data-tab="chatt">채팅창</li>
-	            <li class="tab-link" data-tab="iddd">참가인원 (<span id="count"></span>)</li>
+	            <li class="tab-link" data-tab="iddd">시청자 (<span id="count"></span>)</li>
 	          </ul>
 		
 			</div>

@@ -47,11 +47,11 @@
 			<a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
 				<svg class="bi me-2" width="40" height="32">
 					<use xlink:href="#bootstrap"></use></svg>
-				<span class="fs-4">토실토실대</span>
+				<span class="fs-4">BidCoin</span>
 			</a>
 			<ul class="nav">
 				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://localhost:82/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://localhost:84/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
