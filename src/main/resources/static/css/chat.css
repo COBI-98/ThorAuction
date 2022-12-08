@@ -52,7 +52,7 @@
     border-radius: 3px;
 	min-height: 40px;
 	min-width: 30px;
-	padding: 10px;
+	padding: 0 5px !important;
 }
 
 #chatt #talk div{
@@ -77,6 +77,7 @@
    align-items: flex-end;
 }
 #chatt .other{
+ 
    margin : 2px;
    display: flex !important;
    justify-content: flex-start;
@@ -89,12 +90,14 @@
 }
 
 #chatt .chat-text{
+	min-width : 60%;
 	max-width : 100%;
    background-color : #eee;
    word-break:break-all;
 }
 
 #chatt .hi{
+	text-align: center;
    font-size: 14px;
    width: 100%;
 }
@@ -132,7 +135,7 @@
 /* /*    margin : 2px; */
 /* } */
 .enter{
-	background-color: white;
+	background-color: white !important;
    border-style:solid;
    border-color: #fea532;
 	

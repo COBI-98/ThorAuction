@@ -438,8 +438,10 @@ function send(){
 //경매 버튼
 auction.addEventListener("click",function(){
 	var text = msg.value;
-	msg.value='';
-	msg.value = "[경매]" + text;
+	const regex = /[^0-9]/g;
+	const result = text.replace(regex, "");
+	
+	msg.value = "[경매]" + result;
 })
 
 
@@ -603,6 +605,41 @@ $('ul.tabs li').click(function(){
 //단위가격 설정
 unitsend.addEventListener("click",function(){
 	console.log(unit.value);
+	if(unit.value >= 1000){
+		
+		if(unit.value % 1000 != 0){
+			unit.value = unit.value- unit.value%1000;
+			
+			Swal.fire({
+                title: "단위 가격은 1000단위로 설정 가능합니다.",  // title, text , html  로 글 작성
+                icon: "info",    //상황에 맞는 아이콘
+				showConfirmButton : false,
+                showCancelButton: false
+            } )
+			setTimeout(() => {
+                        Swal.close();
+            }, 800)
+			
+			document.querySelector("#unit").value = unit.value;
+		}
+		
+		
+		
+		
+	}else{
+		Swal.fire({
+                title: "단위 가격은 1000원 이상으로 설정 가능합니다.",  // title, text , html  로 글 작성
+                icon: "info",    //상황에 맞는 아이콘
+				showConfirmButton : false,
+                showCancelButton: false
+            } )
+			setTimeout(() => {
+                        Swal.close();
+            }, 800)
+		
+		return;
+	}
+	
 	data11.unit = unit.value;
 	var temp = JSON.stringify(data11);
 	ws.send(temp);
