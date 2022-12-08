@@ -35,7 +35,7 @@
 				<div id="media-broadcast">
 					<div id="media-header" >
 						<div id="media-title">
-							<h2 id="media-titleText"> 제목 들어갑니다 ~ </h2>
+							<h2 id="media-titleText"> 제목</h2>
 						</div>
 						<div>
 							현재 인원<span id="count"></span>
@@ -94,7 +94,9 @@
     <div class="shadowBox media-container">
     	<div id="media-broad-option">
 						<div class="optionBox">
-							<div >방송설정</div>
+							<div>방송설정</div>
+							<div>방송 제목<input type="text" id="broadName"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn"></div>
+						
 							<div>
 							  	<input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
 							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>

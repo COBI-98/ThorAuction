@@ -79,6 +79,12 @@ ws.onmessage = function(msg){
 	var css;
 	var cssid = "";
 
+
+	if(data.title != null){
+		document.querySelector("#media-titleText").innerHTML = data.title;
+	}
+
+
 	//로그인 종류
 	if(data.loginnum != null) {
 
@@ -610,4 +616,15 @@ itemsend.addEventListener("click",function(){
 	data12.itemNum = items.options[items.selectedIndex].value;
 	var temp = JSON.stringify(data12);
 	ws.send(temp);
+})
+
+// 방송 제목 설정
+$("#setBroadNameBtn").click(function(){
+	data2.title = $("#broadName").val();
+	document.querySelector("#media-titleText").innerHTML = data2.title;
+	
+   var temp = JSON.stringify(data2);
+   ws.send(temp);
+	
+	
 })
