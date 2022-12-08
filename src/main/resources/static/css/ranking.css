@@ -628,7 +628,7 @@
     .auction_list li .imgbox{position:relative;width:100%}
     .auction_list li .imgbox:after{content:'';display:block;padding-bottom:100%;}
     .auction_list li .imgbox .img{display:block;position:absolute;width:100%;height:100%;top:0;right:0;bottom:0;left:0;border:1px solid #eaeaea;}
-    .auction_list li .imgbox .timedate{white-space:nowrap;color:#333;font-size:12px;position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;background-color:#ffef36;border-radius:15px;padding:5px 15px;letter-spacing:-0.5px}
+    .auction_list li .imgbox .timedate{white-space:nowrap;color:#333;font-size:12px;position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;background-color:#9DDDE9;border-radius:15px;padding:5px 15px;letter-spacing:-0.5px}
     .auction_list li .imgbox .timedate strong{font-size:14px;display:inline-block;}
     
     
