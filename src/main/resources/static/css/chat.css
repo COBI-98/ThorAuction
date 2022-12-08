@@ -16,13 +16,14 @@
 #chatt #talk{
    width: 100%;
    height: 83%;
-   overflow: scroll;
+   overflow: auto;
    border : 1px solid #aaa;
    /* text-align: center; */
 }
 
 
 #sendZone{
+	margin-top: 15px;
 	display:flex;
 	justify-content:space-around;
 	height: 15%;
@@ -98,7 +99,24 @@
    width: 100%;
 }
 
+#selecteditem, #text{
+	text-align: center;
+	font-size: 20px;
 
+	
+}
+
+
+#item{
+	display: flex;
+	align-content: center;
+	
+	
+}
+#chat-header{
+	width : 100%;
+	height: 75px;
+}
 
 /* #chatt .me#enter .chat-text{ */
 /*    background-color: white; */
@@ -132,6 +150,14 @@
    width: 25%;
    padding: 0 15px;
 } 
+#add{
+	min-width: 30%;
+}
+#bidZone{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
 
 #auction{
    background-color: white;
