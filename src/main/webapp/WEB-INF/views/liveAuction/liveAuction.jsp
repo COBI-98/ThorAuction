@@ -12,7 +12,7 @@
   <c:import url="../template/boot.jsp"></c:import>
   <link href="/css/reset.css" rel="stylesheet">
   <link href="/css/chat.css" rel="stylesheet">
-  <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
   <link rel="stylesheet" href="/css/getHTMLMediaElement.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 
@@ -44,7 +44,7 @@
 				
 					<div id="media-box" class="media-box">
 						<div id= "blackVideo" style="width: 100%; height: 100%; color: #a8a8a8; display:flex; align-items: center; justify-content: center;">
-							<div>현재 실시간 경매를 진행하지 않고 있습니다.</div>
+							<div>현재 실시간 경매를 진행하고 있지 않습니다.</div>
 						</div>
 						<video id="localVideo" autoplay playsinline hidden ></video>
 						
@@ -132,7 +132,7 @@
 					            <input type="button" value="설정" id="unitsend" class="bidcoinBtn">
 				            </div>
 						
-							<input type="button" class="bidcoinBtn" value="채팅 정지" id='stop'>
+							<input type="button" class="bidcoinBtn" value="채팅정지" id='stop'>
 						    <input type="button" class="bidcoinBtn" value="경매시작" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
 						    <input type="button" class="bidcoinBtn" value="경매종료" id="end"> <!--session 닫힘-->
 						

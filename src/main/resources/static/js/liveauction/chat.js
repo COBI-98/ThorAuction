@@ -308,11 +308,11 @@ ws.onmessage = function(msg){
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
-			stopChat.value="얼리기 해제";
+			stopChat.value="채팅시작";
 			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
-			stopChat.value="얼리기";
+			stopChat.value="채팅정지";
 			$('#msg').attr("readonly",false);
 		}
 
