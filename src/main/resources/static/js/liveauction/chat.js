@@ -174,15 +174,7 @@ ws.onmessage = function(msg){
 			console.log(data.itemNum);
 			var num = data.itemNum;
 			$("#items option[value="+num+"]").hide();
-			
-
-
-
-
-
-
-
-
+			$("#items").val("none").prop("selected", true);
 		}else{
 			auctionend.value="경매종료";
 		}
