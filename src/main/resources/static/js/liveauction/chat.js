@@ -96,15 +96,19 @@ ws.onmessage = function(msg){
 			data : {
 				loginnum : loginnum
 			},
-			success : function(result) {
-				console.log(result);
+			success : function() {
+				console.log("성공");
+				point.innerText = point.innerText*1 - data.loginnnn*1;
 			}
 		})
+
 	}
 
 	//경매 물품 설정 시
 	else if(data.item != null) {
 		selecteditem.innerText = data.item;
+		amount.innerHTML = data.itemprice;
+		talk.innerHTML += `<div class="hi">`+"경매 물품이 " + data.item + "으로 설정되었습니다." +`</div>`;
 	}
 	
 	//단위 경매 설정 시
@@ -165,6 +169,19 @@ ws.onmessage = function(msg){
 			$('#finalamount').css("display","inline");
 			talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
 			selecteditem.innerText = "";
+
+			console.log(data.itemNum);
+			var num = data.itemNum;
+			$("#items option[value="+num+"]").hide();
+			
+
+
+
+
+
+
+
+
 		}else{
 			auctionend.value="경매종료";
 		}
@@ -255,14 +272,6 @@ ws.onmessage = function(msg){
 					</div>`;
 		}
 		
-		
-		
-						
-						
-						
-						
-						
-					
 		talk.innerHTML += item;
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 		
@@ -540,6 +549,7 @@ function sendresult() {
 	data4.winner = rank[1];
 	data4.gg = start();
 	data4.loginnnn = "dlkjslkfj";
+	data4.itemNum = items.options[items.selectedIndex].value;
 	var temp = JSON.stringify(data4);
 	ws.send(temp);
 }
@@ -686,9 +696,10 @@ unitsend.addEventListener("click",function(){
 //경매 물품 선택
 itemsend.addEventListener("click",function(){
 	//items.options[items.selectedIndex].value;
-	console.log(items.options[items.selectedIndex].innerText);
-	data12.item = items.options[items.selectedIndex].innerText;
-	data12.itemNum = items.options[items.selectedIndex].value;
+	var itemmm = items.options[items.selectedIndex];
+	data12.item = itemmm.innerText;
+	data12.itemNum = itemmm.value;
+	data12.itemprice = itemmm.dataset.price;
 	var temp = JSON.stringify(data12);
 	ws.send(temp);
 })

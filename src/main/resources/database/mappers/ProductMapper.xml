@@ -7,7 +7,7 @@
  	
  	<insert id="setProductAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">	
  		INSERT INTO AUCTIONPRODUCT
-		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum});
+		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum},0);
  	</insert>
  	
  	<insert id="setProductFileAdd" parameterType="ProductFileVO">
@@ -90,7 +90,10 @@
 				<result column = "ORINAME" property="oriName"></result>
 				<result column="SORT" property="sort"></result>
 			</collection>
-			
-		
  	</resultMap>
+ 	
+ 	<update id="setStatus" parameterType="ProductVO">
+ 		UPDATE AUCTIONPRODUCT SET STATUS = 1 WHERE PRODUCTNUM = #{productNum}
+ 	
+ 	</update>
 </mapper>

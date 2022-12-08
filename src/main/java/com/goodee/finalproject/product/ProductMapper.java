@@ -29,4 +29,6 @@ public interface ProductMapper {
 
 	// 상품리스트 구현 메퍼
 	public ProductVO getProductApproval(ProductVO productVO) throws Exception;
+	
+	public int setStatus(ProductVO productVO) throws Exception;
 }
