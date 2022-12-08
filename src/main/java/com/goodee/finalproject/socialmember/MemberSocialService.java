@@ -19,25 +19,6 @@ public class MemberSocialService extends DefaultOAuth2UserService
 {
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
-//	@Autowired
-//	public NaverMapperIF naverMapperIF;
-//
-//	public int setNaverDetail(NaverDetailVO naverDetailVO) throws Exception
-//	{
-//		return naverMapperIF.setNaverDetail(naverDetailVO);
-//	}
-//
-//	public int setNaver(NaverVO naverVO) throws Exception
-//	{
-//		int rs = naverMapperIF.setNaver(naverVO);
-//		log.info("------> service naver rs: {}", rs);
-//		if (rs == 1)
-//		{
-//			naverMapperIF.setNaRole(naverVO);
-//		}
-//
-//		return rs;
-//	}
 
 	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
@@ -57,7 +38,7 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		return rs;
 	}
 
-	// 카카오 소셜 로그인
+	// 소셜 로그인
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
 	{
@@ -114,7 +95,8 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("properties").getClass());
 		KakaoVO kakaoVO = new KakaoVO();
 		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("properties"); // kakao Information
-		if (lm != null) // kakao login
+		
+		if (lm != null)
 		{
 			LinkedHashMap<String, Object> lm1 = oAuth2User.getAttribute("properties");
 			LinkedHashMap<String, Object> ka = oAuth2User.getAttribute("kakao_account");
