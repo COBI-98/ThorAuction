@@ -29,7 +29,7 @@ var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
 var auction = getId('auction');
-var stop = getId('stop');
+var stopChat = getId('stop');
 var count = 'tnuoc';
 var reset = getId('reset');
 var usercount = getId('count');
@@ -272,10 +272,11 @@ ws.onmessage = function(msg){
 	else if(data.stop != null){
 		console.log(data);
 		if(data.stop ==true){
-			
+			stopChat.value="채팅시작";
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
+			stopChat.value="채팅정지";
 			$('#msg').attr("readonly",false);
 		}
 	}
@@ -298,10 +299,11 @@ ws.onmessage = function(msg){
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
-			stop.value="얼리기 해제";
+			stopChat.value="얼리기 해제";
+			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
-			stop.value="얼리기";
+			stopChat.value="얼리기";
 			$('#msg').attr("readonly",false);
 		}
 
@@ -482,13 +484,13 @@ auction.addEventListener("click",function(){
 
 
 //얼리기
-stop.addEventListener("click",function(){
-	stop.classList.toggle("stop");
+stopChat.addEventListener("click",function(){
+	stopChat.classList.toggle("stop");
 	sendstop();
 })
 
 function stopchat(){
-	if(stop.classList.contains("stop")){
+	if(stopChat.classList.contains("stop")){
 		return true;
 	}
 	return false;
