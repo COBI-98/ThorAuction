@@ -31,6 +31,11 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	// 비밀번호 찾기
+//	public String sendMail(@RequestParam("email") String email) throws Exception {
+//		MailVO mailVO = 
+//	}
+	
 	// 아이디 중복확인 POST
 	@PostMapping("idCheck")
 	@ResponseBody
