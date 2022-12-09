@@ -1,5 +1,6 @@
 // charge.js
 
+
 // 아임포트 paid_at가 timestamp이기 때문에 date 타입으로 변경해주는 함수
 // 타임스탬프 값을 년월일로 변환
 function Unix_timestamp(t) {
@@ -14,6 +15,10 @@ function Unix_timestamp(t) {
 }
 
 $("#pay").click(function () {
+    const id= $('#id').val();
+
+    console.log("충전할 아이디: " + id);
+    
     // 사용자가 원하는 금액을 선택
     var money = $('input[name="cp_item"]:checked').val();
     console.log(money);
@@ -45,7 +50,6 @@ $("#pay").click(function () {
                     payTotal: rsp.paid_amount,
                     payResult: rsp.status,
                     payDate: Unix_timestamp(rsp.paid_at) // 선언한 함수 안에 아임포트 파라미터 넣어주기
-
                     //기타 필요한 데이터가 있으면 추가 전달
                 }
             }).done(function (data) { // 응답 처리
@@ -64,7 +68,7 @@ $("#pay").click(function () {
                 title: '결제 완료',
                 html: '마이페이지에서 포인트를 확인하세요',
             }).then(function () {
-                location.href = "../";
+                location.href = "../mypage/info?id=" + id;
             })
 
         } else {

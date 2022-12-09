@@ -45,6 +45,7 @@
                                         <span class="member-input__valid-wrapper"></span>
                                     </div>
                                 </div>
+                                <div class="member-input-wrong-message">ID가 존재하지 않거나 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</div>
                                 
                                 <button type="button" id="login_submit_btn" class="member-button login__btn">로그인</button>
 

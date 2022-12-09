@@ -49,11 +49,11 @@ $("#update_btn").click(function () {
 
     // 공백 및 빈 문자열 체크
 
-    if (!data.pw || data.pw.trim() === "") {
-        alert("비밀번호를 입력해 주세요");
+//    if (!data.pw || data.pw.trim() === "") {
+//        alert("비밀번호를 입력해 주세요");
 
-        return false;
-    }
+//        return false;
+//    }
     if (!data.email || data.email.trim() === "") {
         alert("이메일을 입력해 주세요");
 
@@ -102,7 +102,7 @@ $("#update_btn").click(function () {
             // dataType을 생략하면 요청한 자료에 맞게 자동으로 형식이 설정되기 때문에 생략해도 된다.
         }).done(function (result) {
                 alert("회원 수정이 완료되었습니다.");
-                window.location.href = "../";
+                location.href = "../mypage/info?id=" + data.id;
         }).fail(function (error) {
               alert(JSON.stringify(error));
          });
