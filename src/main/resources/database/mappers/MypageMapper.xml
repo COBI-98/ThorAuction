@@ -20,13 +20,6 @@
 		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
 	</insert>
 	
-	<!-- 비밀번호 체크 -->
-<!--  	<select id="checkPw" parameterType="MemberVO">
-		SELECT COUNT(*) 
-        FROM THORMEMBER
-        WHERE ID = #{id} AND PW = #{pw}
-	</select> -->
-	
 	<!-- 회원탈퇴 -->
 	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM THORMEMBER
@@ -39,8 +32,6 @@
 		UPDATE THORMEMBER
 		SET
 		PW = #{pw},
-		NAME = #{name},
-		BIRTH = #{birth},
 		EMAIL = #{email},
 		POST = #{post},
 		ADDR = #{addr},

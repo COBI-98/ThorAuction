@@ -26,12 +26,12 @@
 				<td><input type="text" disabled="disabled" value="${memberDB.roleVOs[0].roleName}"></td>
 			</tr>		
 			<tr>
-				<th>아이디</th>
-				<td><input type="text" id="id" name="id" readonly="readonly" value="${memberDB.id}"></td>
+ 				<th>아이디</th>
+				<td><input type="hidden" id="id" name="id" readonly="readonly" value="${memberDB.id}"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" id="pw" name="pw"></td>
+				<td><input type="hidden" id="pw" readonly="readonly" name="pw" value="${memberDB.pw}"></td>
 			</tr>			
  			<tr>
 				<th>이름</th>
