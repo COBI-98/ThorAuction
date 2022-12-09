@@ -24,6 +24,21 @@
 
 	<sec:authorize access="isAuthenticated()">
 		<c:forEach items="${kakaoRole }" var="kk">
+			<c:choose>
+				<c:when
+					test="${kk.kakaoDetailVOs[0].kaBirth == null && kk.kakaoDetailVOs[0].kaPost == null &&kk.kakaoDetailVOs[0].kaAddr == null &&
+			kk.kakaoDetailVOs[0].kaAddrDetail == null &&kk.kakaoDetailVOs[0].kaPhone == null &&kk.kakaoDetailVOs[0].kaPoint == null}">
+					<jsp:forward page="./socialMember/kakaoLogin.jsp"></jsp:forward>
+				</c:when>
+				<c:otherwise>
+					<jsp:forward page="../"></jsp:forward>
+				</c:otherwise>
+			</c:choose>
+			<%-- <c:if
+				test="${kk.kakaoDetailVOs[0].kaBirth == null && kk.kakaoDetailVOs[0].kaPost == null &&kk.kakaoDetailVOs[0].kaAddr == null &&
+			kk.kakaoDetailVOs[0].kaAddrDetail == null &&kk.kakaoDetailVOs[0].kaPhone == null &&kk.kakaoDetailVOs[0].kaPoint == null}">
+			</c:if> --%>
+
 			<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
 				<input type="hidden" value="${kk.kaRoleVOs[0].kaRoleName }" class="krole" readOnly>
 			</c:if>
@@ -36,7 +51,7 @@
 			</c:if>
 		</c:forEach>
 
-<%-- 		<c:forEach items="${naver }" var="n">
+		<%-- 		<c:forEach items="${naver }" var="n">
 			<c:if test="${n.username == naverInfo.username}">
 				<input type="hidden" value="${n.naRoleVOs[0].naRoleName}" class="krole" readOnly>
 			</c:if>

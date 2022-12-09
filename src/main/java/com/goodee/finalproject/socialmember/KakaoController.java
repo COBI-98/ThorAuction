@@ -81,19 +81,20 @@ public class KakaoController
 	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO, Authentication authentication) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
-		log.info("auth class: {}", authentication.getPrincipal().getClass().toString());
+//		log.info("auth class: {}", authentication.getPrincipal().getClass().toString());
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.KakaoVO"))
-		{
-			int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
-
-			log.info("kakao login rs2: {}", rs2);
-
-			modelAndView.addObject("rs2", rs2);
-			modelAndView.setViewName("redirect:/");
-		}
+		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
+		
+		log.info("kakao login rs2: {}", rs2);
+		
+//		modelAndView.addObject("rs2", rs2);
+//		modelAndView.setViewName("redirect:/");
+		
+//		if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.KakaoVO"))
+//		{
+//		}
 //		else if (authentication.getPrincipal().getClass().toString().equals("class com.goodee.finalproject.socialmember.NaverVO"))
 //		{
 //			int rs2 = memberSocialService.setNaverDetail(naverDetailVO);

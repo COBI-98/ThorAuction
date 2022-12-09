@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.goodee.finalproject.admin.AdminService;
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.socialmember.KakaoDetailVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
+import com.goodee.finalproject.socialmember.MemberSocialService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,28 +32,29 @@ public class HomeController
 {
 	@Autowired
 	private AdminService adminService;
-	@Value("${spring.security.oauth2.client.registration.kakao.client-id}")
-	private String client_id;
-	@Value("${kakao.logout}")
-	private String logout_uri;
+	@Autowired
+	private MemberSocialService memberSocialService;
 
 	@GetMapping("/")
-	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO,
+	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO, KakaoDetailVO kakaoDetailVO,
 			@RequestParam(value = "role", required = false) String role) throws Exception
 	{
 		log.info("===== home controller =====");
+
 		// log.info("param Role: {}", role);
-		log.info("principal name: {}", principal);
+		// log.info("principal name: {}", principal);
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
 		List<MemberVO> memberVOs = adminService.getMemberTotal(memberVO);
-//		List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
+		// List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
+
+		log.info("kakaoVOs: {}", kakaoVOs);
 
 		modelAndView.addObject("kakaoRole", kakaoVOs);
 		modelAndView.addObject("member", memberVOs);
-//		modelAndView.addObject("naver", naverVOs);
+		// modelAndView.addObject("naver", naverVOs);
 		modelAndView.addObject("ka", session.getAttribute("kakaoInfo"));
 
 		if (principal != null)
@@ -63,6 +66,11 @@ public class HomeController
 				log.info("ID정보 : {}" + principal.getName());
 				modelAndView.addObject("memID", principal.getName());
 				modelAndView.setViewName("header");
+			}
+			else
+			{
+				log.info("타입정보 : {}" + principal.getClass());
+				log.info("ID정보 : {}" + principal.getName());
 			}
 		}
 
