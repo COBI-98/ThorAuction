@@ -59,5 +59,11 @@
 
 	</sec:authorize>
 	<c:import url="./template/footer.jsp"></c:import>
+	
+	<script>
+		$("#check").click(function() {
+			confirm("confirm 테스트")
+		})
+	</script>
 </body>
 </html>

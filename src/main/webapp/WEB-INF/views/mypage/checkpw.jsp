@@ -26,30 +26,29 @@
                 <div class="member-card-layout__container">
                     <div class="member-card-layout__inner">
                         <h1 class="member-card-layout__logo">
-                            <img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="OP.GG">
+                            <img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="토실대">
                         </h1>
                         <div class="check-password">
-                            <h2 class="check-password__title">마이페이지</h2>
+                            <h2 class="check-password__title">내정보 수정</h2>
                             <div class="check-password__sub">회원정보 확인을 위해 비밀번호를 한번 더 입력해 주세요.</div>
-                            <form>
+                            
+                            <!-- <form action="login" method="POST"> -->
                                 <div class="member-input">
                                     <div class="member-input__state member-input__state--value member-input__state--disabled">
-                                        <input id="id" class="member-input__box" type="text" placeholder="아이디" disabled="" autocomplete="off" name="id" value="${member.id}">
+                                        <input id="id" class="member-input__box" type="text" placeholder="아이디" autocomplete="off" name="id" value="${memberDB.id}">
                                         <span class="member-input__valid-wrapper"></span>
                                     </div>
                                 </div>
-
+                                
                                 <div class="member-input">
                                     <div class="member-input__state">
                                         <input id="pw" class="member-input__box" type="password" placeholder="비밀번호" autocomplete="off" name="pw">
                                         <span class="member-input__valid-wrapper"></span>
                                     </div>
                                 </div>
-                                <div class="check-password__l-find-password">
-                                    <a class="check-password__find-password-btn" href="#">비밀번호를 잊으셨나요?</a>
-                                </div>
+
                                 <div class="check-password__l-modal-btn">
-                                    <button type="submit" id="checkpw_btn" class="member-button check-password__btn" disabled="">로그인</button>
+                                    <button type="button" id="checkpw_btn" class="member-button check-password__btn">진행하기</button>
                                 </div>
                             </form>
                         </div>

@@ -59,6 +59,7 @@
 					<li class="nav-item">
 						<a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a>
 					</li>
+					<li class="nav-item"><a href="../mypage/info?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li>
 					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>

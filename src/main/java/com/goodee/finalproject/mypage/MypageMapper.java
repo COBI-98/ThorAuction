@@ -15,7 +15,7 @@ public interface MypageMapper {
 	public int chargePoint(PayVO payVO) throws Exception;
 	
 	// 비밀번호 체크
-	public int checkPw(MemberVO memberVO) throws Exception;
+//	public boolean checkPw(String id, String checkPassword) throws Exception;
 	
 	// 회원탈퇴
 	public int setDelete(MemberVO memberVO) throws Exception;

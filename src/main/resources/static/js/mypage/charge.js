@@ -62,9 +62,9 @@ $("#pay").click(function () {
             Swal.fire({
                 icon: 'success',
                 title: '결제 완료',
-                html: '마이페이지로 이동합니다',
+                html: '마이페이지에서 포인트를 확인하세요',
             }).then(function () {
-                location.href = "/mypage/";
+                location.href = "../";
             })
 
         } else {

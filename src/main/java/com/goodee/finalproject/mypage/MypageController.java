@@ -6,10 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,33 +36,36 @@ public class MypageController {
 	private MypageService mypageService;
 	
 	// 마이페이지 홈
-	@GetMapping("")
-	public ModelAndView mypageHome(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception {
+	@GetMapping("info")
+	public ModelAndView info(MemberVO memberVO, ModelAndView mv) throws Exception {
 		
-		mypageService.getList(memberVO);
+		// DB에서 조회한 VO를 다시 VO에 담아줌
+		memberVO = mypageService.getList(memberVO);
 		
-		memberVO = (MemberVO)session.getAttribute("member");
+//		memberVO = (MemberVO)session.getAttribute("member");
 		
 		log.info("나와주세요 : {}", memberVO);
 		
 		mv.addObject("memberDB", memberVO);
-		mv.setViewName("mypage/index");
+		mv.setViewName("mypage/info");
 		
 		return mv;
 	}
 	
 	// 포인트 충전 GET
 	@GetMapping("charge")
-	public void chargePoint(HttpSession session) throws Exception { }
+	public void chargePoint(@AuthenticationPrincipal MemberVO memberVO) throws Exception { 
+		log.info("회원 정보 : {}", memberVO);
+	}
 	
 	// 포인트 충전 POST
 	@PostMapping("charge/point")
 	@ResponseBody
-	public int chargePoint(PayVO payVO, HttpServletRequest request, HttpSession session) throws Exception {
+	public int chargePoint(PayVO payVO, @AuthenticationPrincipal MemberVO memberVO, HttpServletRequest request, HttpSession session) throws Exception {
 		
 		// 세션으로 id를 꺼냄
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		log.info("charge : {}", memberVO);
+//		memberVO = (MemberVO)session.getAttribute("member");
+		log.info("회원 정보 : {}", memberVO);
 		
 		// 세션으로 memberVO를 꺼내서, PayVo에 넣어줌
 		payVO.setId(memberVO.getId());
@@ -80,61 +90,139 @@ public class MypageController {
 		return result;
 	}
 	
-	// 비밀번호 체크	
+	// 비밀번호 체크 GET
 	@GetMapping("checkpw")
+	public void checkPw(@AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+		log.info("회원 정보 : {}", memberVO);
+		
+		model.addAttribute("memberDB", memberVO);
+		
+	}
+	
+	// 비밀번호 체크 POST
+	@PostMapping("checkpw")
 	@ResponseBody
-	public int checkPw(MemberVO memberVO) throws Exception {
+	public boolean checkPw(@AuthenticationPrincipal MemberVO memberVO, @RequestParam String checkPassword, Model model) throws Exception {
 		
-		int result = mypageService.checkPw(memberVO);
+//		model.addAttribute("memberDB", memberVO);
 		
-		return result;
+		String id = memberVO.getId();
+		log.info("컨트롤러 비빌 : {}", memberVO);
+		log.info("컨트롤러 아이디 : {}", id);
+		log.info("컨트롤러 비빌 : {}", checkPassword);
+		
+//		return "mypage/checkpw";
+		
+		return mypageService.checkPw(memberVO, checkPassword);
 		
 	}
 	
 	// 회원탈퇴 GET
 	@GetMapping("delete")
-	public void setDelete() throws Exception {}
+	public void setDelete(@AuthenticationPrincipal MemberVO memberVO2, Model model) throws Exception {
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(memberVO2.getId());
+		
+		log.info("회원 정보 : {}", memberVO);
+		
+		model.addAttribute("memberDB", memberVO);
+	}
 	
 	// 회원탈퇴 POST
 	@PostMapping("delete")
-	public String setDelete(MemberVO memberVO, HttpSession session, RedirectAttributes attributes) throws Exception {
+	public String setDelete(@AuthenticationPrincipal MemberVO memberVO, HttpSession session, RedirectAttributes attributes) throws Exception {
 		
-		// 세션에 있는 member정보를 가져와 member변수에 넣어준다
-		MemberVO member =  (MemberVO)session.getAttribute("member");
+		log.info("탈퇴 PST: {}", memberVO);
 		
-		// 세션에 있는 비밀번호
-		String sessionPw = member.getPw();
+		int result = mypageService.setDelete(memberVO);
 		
-		// VO에 들어오는 비밀번호 
-		String VOPw = memberVO.getPw();
-		
-		if(!(sessionPw.equals(VOPw))) {
-			attributes.addFlashAttribute("msg", false);
-			return "redirect:/mypage/delete";
+		if(result > 0) {
+			log.info("탈퇴 성공");
+		} else {
+			log.info("탈퇴 실패");
 		}
 		
-		mypageService.setDelete(memberVO);
-		session.invalidate();
+		// 시큐리티 탈퇴 시 로그아웃 처리가 됨
+		SecurityContextHolder.clearContext();
 		
-		return "redirect:../";
+		return "redirect:/";
 		
+//		MemberVO memberVO = new MemberVO();
 		
-		
+//		// 세션에 있는 member정보를 가져와 member변수에 넣어준다
+////		MemberVO member =  (MemberVO)session.getAttribute("member");
+//		MemberVO member = memberVO2;
+//		
+//		// 세션에 있는 비밀번호
+//		String sessionPw = member.getPw();
+//		
+//		// VO에 들어오는 비밀번호 
+//		String VOPw = memberVO.getPw();
+//		
+//		log.info("Delete : {}",VOPw);
+//		
+//		if(!(sessionPw.equals(VOPw))) {
+//			attributes.addFlashAttribute("msg", false);
+//			return "redirect:/mypage/delete";
+//		}
 	}
 	
 	// 회원정보 수정 GET
 	@GetMapping("update")
-	public void setUpdate() throws Exception {}
-	
-	// 회원정보 수정 POST + 비밀번호 체크
-	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO, HttpSession session, Model model) throws Exception {
+	public void setUpdate(@AuthenticationPrincipal MemberVO memberVO2, Model model) throws Exception {
 		
-		mypageService.setUpdate(memberVO);
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(memberVO2.getId());
+		
+		memberVO = mypageService.getList(memberVO);
+		
+		log.info("컴트롤러 수정 GET : {}", memberVO);
+		
+		model.addAttribute("memberDB", memberVO);
+		
+		
+	}
+	
+	// 회원정보 수정 POST
+	@PostMapping("update")
+	//@PutMapping("update")
+	public String setUpdate(@RequestBody MemberVO memberVO, ModelAndView mv) throws Exception {
+//		MemberVO memberVO = new MemberVO();
+//		
+//		memberVO = memberVO2;
+		
+//		memberVO.setId(memberVO2.getId());
+//		memberVO.setPw(memberVO2.getPw());
+		
+		int result = mypageService.setUpdate(memberVO);
+		
+		if(result > 0) {
+			log.info("수정 성공");
+		} else {
+			log.info("수정 실패");
+		}
+		
+		log.info("컨트롤러 Update : {}", memberVO);
+		
+		return "redirect:../";
+		
+//		mv.addObject("memberDB", memberVO);
+//		mv.setViewName("mypage/info");
+		
+		
+//		// 세션 최신화
+//		// 1. 새로운 UsernamePasswordAuthenticationToken 생성하여 AuthenticationManager을 이용해 등록
+//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(memberVO.getId(), memberVO.getPw()));
+//
+//		
+//		// 2. SecurityContextHolder 안에 있는 Context를 호출해 변경된 Authentication으로 설정
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
 			
-		session.invalidate();
-			
-		return "redirect:../member/login";
+//		session.invalidate();
 	}
 	
 }
