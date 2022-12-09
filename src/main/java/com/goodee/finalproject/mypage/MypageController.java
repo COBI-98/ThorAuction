@@ -54,8 +54,16 @@ public class MypageController {
 	
 	// 포인트 충전 GET
 	@GetMapping("charge")
-	public void chargePoint(@AuthenticationPrincipal MemberVO memberVO) throws Exception { 
+	public void chargePoint(@AuthenticationPrincipal MemberVO memberVO2, Model model) throws Exception {
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(memberVO2.getId());
+		
 		log.info("회원 정보 : {}", memberVO);
+		
+		model.addAttribute("memberDB", memberVO);
+		
 	}
 	
 	// 포인트 충전 POST
@@ -144,7 +152,7 @@ public class MypageController {
 			log.info("탈퇴 실패");
 		}
 		
-		// 시큐리티 탈퇴 시 로그아웃 처리가 됨
+		// 시큐리티 로그아웃 처리
 		SecurityContextHolder.clearContext();
 		
 		return "redirect:/";
@@ -168,6 +176,42 @@ public class MypageController {
 //			return "redirect:/mypage/delete";
 //		}
 	}
+	
+	// 비밀번호 수정 GET
+	@GetMapping("updatepw")
+	public void setUpdatePw(@AuthenticationPrincipal MemberVO memberVO2, Model model) throws Exception {
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(memberVO2.getId());
+		
+		memberVO = mypageService.getList(memberVO);
+		
+		log.info("컴트롤러 비번수정 GET : {}", memberVO);
+		
+		model.addAttribute("memberDB", memberVO);
+	}	
+	
+	// 비밀번호 수정 POST
+	@PostMapping("updatepw")
+	public String setUpdatePw(@RequestBody MemberVO memberVO, ModelAndView mv) throws Exception {
+		
+		int result = mypageService.setUpdatePw(memberVO);
+		
+		if(result > 0) {
+			log.info("수정 성공");
+		} else {
+			log.info("수정 실패");
+		}
+		
+		log.info("컨트롤러 비번 수정 Update : {}", memberVO);
+		
+		// 시큐리티 로그아웃 처리
+		SecurityContextHolder.clearContext();
+		
+		return "redirect:../";
+		
+	}	
 	
 	// 회원정보 수정 GET
 	@GetMapping("update")
