@@ -34,6 +34,8 @@ $("#birth").blur(function () {
 
 	} else if ($("#birth").val().length < 6) {
 		$(".birthErrorMessage").text("생년월일 6자를 정확하게 입력해 주세요 ex)000101");
+
+		resultss[1] = false;
 	} else {
 		$(".birthErrorMessage").text("");
 
@@ -46,7 +48,7 @@ $("#birth").blur(function () {
 const autoHyphen = (target) => {
 	target.value = target.value
 		.replace(/[^0-9]/g, '')
-		.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+		.replace(/^(\d{3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
 }
 
 $("#phone").blur(function () {
@@ -55,7 +57,9 @@ $("#phone").blur(function () {
 		$(".phoneErrorMessage").attr("style", "color:#f00");
 	} else if ($("#phone").val().length < 11) {
 		$(".phoneErrorMessage").text("전화번호를 정확히 입력해 주세요");
-	}
+
+		resultss[2] = false;
+	}	
 	else {
 		$(".phoneErrorMessage").text("");
 
@@ -79,6 +83,8 @@ $("#email").blur(function () {
 
 	} else if (!isEmail($("#email").val())) {
 		$(".emailErrorMessage").text("이메일 주소를 다시 확인해 주세요");
+
+		resultss[3] = false;
 	}
 	else {
 		$(".emailErrorMessage").text("");

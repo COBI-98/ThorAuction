@@ -296,6 +296,18 @@ a {
     color: #fe453b;
 }
 
+.member-input-wrong-message:before {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(https://member.op.gg/icon_alert.953d9b77.svg) no-repeat 0 0;
+    background-size: 16px 16px;
+}
+
 .login__l {
     line-height: 1;
     -webkit-text-size-adjust: none;

@@ -21,6 +21,8 @@
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
 	
+		<input type="hidden" value="${memberDB.id}" id="id">
+	
 		<div class="card-body bg-white mt-0">
 	        <p style="font-weight: bold">카카오페이 현재 사용가능</p>
 	        <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
