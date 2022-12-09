@@ -37,7 +37,8 @@ public class HomeController
 
 	@GetMapping("/")
 	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO, KakaoDetailVO kakaoDetailVO,
-			@RequestParam(value = "role", required = false) String role) throws Exception
+			@RequestParam(value = "role", required = false) String role, @RequestParam(value = "check", required = false) String check)
+			throws Exception
 	{
 		log.info("===== home controller =====");
 
@@ -51,6 +52,16 @@ public class HomeController
 		// List<NaverVO> naverVOs = adminService.getNaverTotal(naverVO);
 
 		log.info("kakaoVOs: {}", kakaoVOs);
+		log.info(check);
+		session.setAttribute("c", check);
+
+//		if (check == null)
+//		{
+//			log.info("야야야ㅑ야야야야ㅑㅑ");
+//			modelAndView.setViewName("redirect:./socialMember/kakaoLogin");
+//
+//			return modelAndView;
+//		}
 
 		modelAndView.addObject("kakaoRole", kakaoVOs);
 		modelAndView.addObject("member", memberVOs);
