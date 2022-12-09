@@ -31,10 +31,10 @@
 				<a href="./charge">충전하기</a>
 			</div>
 			<div class="me-5">
-				<a href="./paypoint">충전내역</a>
+				<a href="./checkpw">정보수정</a>
 			</div>
 			<div class="me-5">
-				<a href="./checkpw">정보수정</a>
+				<a href="./updatepw">비밀번호 수정</a>
 			</div>
 			<div class="me-5">
 				<a href="./delete">회원탈퇴</a>
