@@ -42,7 +42,7 @@
 		resultMap="getKakaoTotal">
 		select sk.*, skd.*, kmr.*, k.* FROM
 		SOCIALKAKAO sk
-		inner join
+		left join
 		SOCIALKAKAODETAIL skd
 		on sk.KANICKNAME = skd.KANICKNAME
 		inner JOIN

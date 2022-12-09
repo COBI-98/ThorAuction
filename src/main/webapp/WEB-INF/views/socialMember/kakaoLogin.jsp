@@ -10,6 +10,18 @@
 <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 <link rel="stylesheet" href="/css/member/join.css">
 </head>
+<style>
+input {
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-bottom-width: 1px;
+	text-decoration: none;
+	border-style: solid;
+	outline: none;
+	padding-bottom: 8px;
+}
+</style>
 <script defer src="/js/admin/kakaoLoginCheck.js"></script>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -20,7 +32,7 @@
 				<div class="member-scroll-layout__inner">
 					<div class="register-header">
 						<h1 class="register-header__logo">
-							<img class="register-header__logo-image" src="/images/member/Odin.png" alt="토실대">
+							<img class="register-header__logo-image" src="/images/Bitcoin.png" alt="토실대">
 						</h1>
 						<div class="register-header__step">
 							<i class="register-header__step-dot">step 1</i> <i
@@ -28,6 +40,7 @@
 								class="register-header__step-dot">step 3</i> <i class="register-header__step-dot">step 4</i>
 						</div>
 					</div>
+					
 					<c:choose>
 						<c:when test="${kakaoInfo != null }">
 							<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
@@ -38,7 +51,7 @@
 						<c:otherwise>error</c:otherwise>
 					</c:choose>
 
-					<form action="./kakaoLogin" method="post">
+					<form action="./kakaoLogin" method="post" id="frm">
 
 						<c:choose>
 							<c:when test="${kakaoInfo != null }">
@@ -49,100 +62,98 @@
 							</c:when>
 							<c:otherwise>error</c:otherwise>
 						</c:choose>
-						<table>
-							<tr>
-								<th>이름</th>
-								<c:choose>
-									<c:when test="${kakaoInfo != null }">
-										<td>${kakaoInfo.kaName }</td>
-									</c:when>
-									<c:when test="${naverInfo != null }">
-										<td>${naverInfo.name }</td>
-									</c:when>
-									<c:otherwise>error</c:otherwise>
-								</c:choose>
-							</tr>
-							<tr>
-								<th>생년월일</th>
-								<td>
-									<c:choose>
-										<c:when test="${kakaoInfo != null }">
-											<input type="text" name="kaBirth">
-										</c:when>
-										<c:when test="${naverInfo != null }">
-											<input type="text" name="NaBirth">
-										</c:when>
-										<c:otherwise>error</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-							<tr>
-								<th>우편번호</th>
-								<td>
-									<c:choose>
-										<c:when test="${kakaoInfo != null }">
-											<input type="text" name="kaPost">
-										</c:when>
-										<c:when test="${naverInfo != null }">
-											<input type="text" name="NaPost">
-										</c:when>
-										<c:otherwise>error</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-							<tr>
-								<th>주소</th>
-								<td>
-									<c:choose>
-										<c:when test="${kakaoInfo != null }">
-											<input type="text" name="kaAddr">
-										</c:when>
-										<c:when test="${naverInfo != null }">
-											<input type="text" name="NaAddr">
-										</c:when>
-										<c:otherwise>error</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-							<tr>
-								<th>상세주소</th>
-								<td>
-									<c:choose>
-										<c:when test="${kakaoInfo != null }">
-											<input type="text" name="kaAddrDetail">
-										</c:when>
-										<c:when test="${naverInfo != null }">
-											<input type="text" name="NaAddrDetail">
-										</c:when>
-										<c:otherwise>error</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-							<tr>
-								<th>전화번호</th>
-								<td>
-									<c:choose>
-										<c:when test="${kakaoInfo != null }">
-											<input type="text" name="kaPhone">
-										</c:when>
-										<c:when test="${naverInfo != null }">
-											<input type="text" name="NaPhone">
-										</c:when>
-										<c:otherwise>error</c:otherwise>
-									</c:choose>
-								</td>
-							</tr>
-						</table>
-						<button type="submit" id="join_btn">가입하기</button>
-					</form>
-					<br>
-					<br>
 
-					<div class="sign-up__go-to-login">
-						이미 회원이신가요?
-						<a href="./login" type="button" class="sign-up__go-to-login-btn">로그인하기</a>
-						<a href="#" type="button" class="sign-up__go-to-login-btn">취소</a>
-					</div>
+						<section class="container-fluid justify-content-center col-lg-11">
+							<table class="table table-borderless">
+								<tr>
+									<th>이름</th>
+									<c:choose>
+										<c:when test="${kakaoInfo != null }">
+											<td>${kakaoInfo.kaName }</td>
+										</c:when>
+										<c:when test="${naverInfo != null }">
+											<td>${naverInfo.name }</td>
+										</c:when>
+										<c:otherwise>error</c:otherwise>
+									</c:choose>
+								</tr>
+								<tr>
+									<th>생년월일</th>
+									<td>
+										<c:choose>
+											<c:when test="${kakaoInfo != null }">
+												<input type="text" name="kaBirth" class="birth">
+											</c:when>
+											<c:when test="${naverInfo != null }">
+												<input type="text" name="NaBirth" class="birth">
+											</c:when>
+											<c:otherwise>error</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+								<tr>
+									<th>우편번호</th>
+									<td>
+										<c:choose>
+											<c:when test="${kakaoInfo != null }">
+												<input type="text" name="kaPost" class="post">
+											</c:when>
+											<c:when test="${naverInfo != null }">
+												<input type="text" name="NaPost" class="post">
+											</c:when>
+											<c:otherwise>error</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+								<tr>
+									<th>주소</th>
+									<td>
+										<c:choose>
+											<c:when test="${kakaoInfo != null }">
+												<input type="text" name="kaAddr" class="addr">
+											</c:when>
+											<c:when test="${naverInfo != null }">
+												<input type="text" name="NaAddr" class="addr">
+											</c:when>
+											<c:otherwise>error</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+								<tr>
+									<th>상세주소</th>
+									<td>
+										<c:choose>
+											<c:when test="${kakaoInfo != null }">
+												<input type="text" name="kaAddrDetail" class="addrDetail">
+											</c:when>
+											<c:when test="${naverInfo != null }">
+												<input type="text" name="NaAddrDetail" class="addrDetail">
+											</c:when>
+											<c:otherwise>error</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+								<tr>
+									<th>전화번호</th>
+									<td>
+										<c:choose>
+											<c:when test="${kakaoInfo != null }">
+												<input type="text" name="kaPhone" class="phone">
+											</c:when>
+											<c:when test="${naverInfo != null }">
+												<input type="text" name="NaPhone" class="phone">
+											</c:when>
+											<c:otherwise>error</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+							</table>
+							<br>
+							<div style="text-align: center;">
+								<button class="btn btn-outline-dark" type="submit" id="join_btn">가입하기</button>
+							</div>
+						</section>
+					</form>
 				</div>
 			</div>
 		</div>
