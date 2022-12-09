@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script defer src="/js/social/kakaoBan.js"></script>
 <script defer src="/js/social/memberBan.js"></script>
+<script defer src="/js/social/detailInfo.js"></script>
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
@@ -25,18 +26,18 @@
 	<sec:authorize access="isAuthenticated()">
 		<c:forEach items="${kakaoRole }" var="kk">
 			<c:choose>
-				<c:when
-					test="${kk.kakaoDetailVOs[0].kaBirth == null && kk.kakaoDetailVOs[0].kaPost == null &&kk.kakaoDetailVOs[0].kaAddr == null &&
-			kk.kakaoDetailVOs[0].kaAddrDetail == null &&kk.kakaoDetailVOs[0].kaPhone == null &&kk.kakaoDetailVOs[0].kaPoint == null}">
-					<jsp:forward page="./socialMember/kakaoLogin.jsp"></jsp:forward>
+				<c:when test="${kk.kakaoDetailVOs[0].kaBirth == null && kakaoInfo.kaNickName == kk.kaNickName }">
+					<input type="text" value="${kk.kakaoDetailVOs[0].kaBirth}" class="detail">
 				</c:when>
 				<c:otherwise>
-					<jsp:forward page="../"></jsp:forward>
 				</c:otherwise>
 			</c:choose>
-			<%-- <c:if
-				test="${kk.kakaoDetailVOs[0].kaBirth == null && kk.kakaoDetailVOs[0].kaPost == null &&kk.kakaoDetailVOs[0].kaAddr == null &&
-			kk.kakaoDetailVOs[0].kaAddrDetail == null &&kk.kakaoDetailVOs[0].kaPhone == null &&kk.kakaoDetailVOs[0].kaPoint == null}">
+
+			<%-- 			<c:if test="${kk.kakaoDetailVOs[0].kaBirth == null }">
+				<input type="text" value="${kk.kakaoDetailVOs[0].kaBirth}" id="detail">
+			</c:if>
+			<c:if test="${kk.kakaoDetailVOs[0].kaBirth != null }">
+				<input type="radio">
 			</c:if> --%>
 
 			<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
@@ -59,11 +60,5 @@
 
 	</sec:authorize>
 	<c:import url="./template/footer.jsp"></c:import>
-	
-	<script>
-		$("#check").click(function() {
-			confirm("confirm 테스트")
-		})
-	</script>
 </body>
 </html>

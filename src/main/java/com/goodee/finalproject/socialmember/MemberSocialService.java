@@ -20,6 +20,11 @@ public class MemberSocialService extends DefaultOAuth2UserService
 	@Autowired
 	public KakaoMapperIF kakaoMapperIF;
 
+	public KakaoDetailVO getDetail(KakaoDetailVO kakaoDetailVO) throws Exception
+	{
+		return kakaoMapperIF.getDetail(kakaoDetailVO);
+	}
+
 	public int setKakaoDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{
 
@@ -95,7 +100,7 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		// log.info("oAuth-pro-ClassName: {}", oAuth2User.getAttribute("properties").getClass());
 		KakaoVO kakaoVO = new KakaoVO();
 		LinkedHashMap<String, Object> lm = oAuth2User.getAttribute("properties"); // kakao Information
-		
+
 		if (lm != null)
 		{
 			LinkedHashMap<String, Object> lm1 = oAuth2User.getAttribute("properties");
