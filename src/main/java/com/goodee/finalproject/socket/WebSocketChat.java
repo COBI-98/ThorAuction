@@ -21,14 +21,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.goodee.finalproject.member.MemberService;
-import com.goodee.finalproject.member.MemberVO;
-import com.goodee.finalproject.socialmember.KakaoDetailVO;
-import com.goodee.finalproject.socialmember.MemberSocialService;
 import com.google.gson.Gson;
 
 @Service
@@ -47,7 +42,7 @@ public class WebSocketChat {
 	private static String unit =""; //단위 가격
 	private static String item =""; //경매 물품
 	private static int itemNum = 0; //경매 물품 번호 
-	private static String broadName="";
+	private static String broadName=""; //방송 제목
 	
 	
 	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
@@ -56,7 +51,6 @@ public class WebSocketChat {
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
 
-		
 		ModelAndView mv = new ModelAndView();
 		System.out.println("open session : " + s.toString());
 		if(!clients.contains(s)) {
@@ -64,7 +58,8 @@ public class WebSocketChat {
 			System.out.println("session open : " + s);
 		}else {
 			System.out.println("이미 연결된 session 임!!!");
-		}System.out.println(clients.size());
+		}
+		System.out.println(clients.size());
 	}
 	
 	@OnMessage
@@ -74,7 +69,6 @@ public class WebSocketChat {
 		Object obj = parser.parse(msg);
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
-		
 		
 		//방송 제목 설정
 		if(msg.substring(2, 7).equals("title")) {
@@ -113,7 +107,6 @@ public class WebSocketChat {
 			String vv = String.valueOf(jsonObj.get("value"));
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
-			
 			sendMessage(msg, session);
 		}
 		
@@ -140,11 +133,9 @@ public class WebSocketChat {
 
 			Session ss = getKey(list,winner);
 
-			
 			sendMessage(msg,session);
-			sendOneMessage(message, ss);
+			sendOneMessage(message, ss); //낙찰자한테만 보내기
 
-			
 		//채팅 전송
 		}else if(msg.substring(2, 5).equals("mid")) {
 			
