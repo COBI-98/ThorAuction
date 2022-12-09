@@ -24,6 +24,7 @@ public class MypageService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	
 	// 포인트 충전 + 누적 포인트
 	public int ChargePoint(PayVO payVO) throws Exception {
 		
@@ -60,11 +61,19 @@ public class MypageService {
 		return result;
 	}
 	
-	// 회원정보 수정
-	public int setUpdate(MemberVO memberVO) throws Exception {
+	// 비밀번호 수정
+	public int setUpdatePw(MemberVO memberVO) throws Exception {
 		
 		// 비밀번호 암호화
 		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		
+		int result = mypageMapper.setUpdate(memberVO);
+		
+		return result;
+	}
+	
+	// 회원정보 수정
+	public int setUpdate(MemberVO memberVO) throws Exception {
 		
 		int result = mypageMapper.setUpdate(memberVO);
 		
