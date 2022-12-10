@@ -21,7 +21,8 @@ input {
 	padding-bottom: 8px;
 }
 </style>
-<script defer src="/js/social/detailNull.js"></script>
+<script defer src="/js/social/loginDetailNull.js"></script>
+<script defer src="/js/social/loginAfterDetailNull.js"></script>
 <body>
 	<c:import url="../template/boot.jsp"></c:import>
 	<c:import url="../template/header.jsp"></c:import>
@@ -41,27 +42,17 @@ input {
 						</div>
 					</div>
 
-					<c:choose>
-						<c:when test="${kakaoInfo != null }">
-							<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
-						</c:when>
-						<c:when test="${naverInfo != null }">
-							<input type="hidden" id="kemail" name="kaEmail" value="${naInfo.NaEmail }">
-						</c:when>
-						<c:otherwise>error</c:otherwise>
-					</c:choose>
+					<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
 
 					<form action="kakaoLogin" method="post" id="joinForm">
 
-						<c:choose>
-							<c:when test="${kakaoInfo != null }">
-								<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
-							</c:when>
-							<c:when test="${naverInfo != null }">
-								<input type="hidden" id="kaName" name="NaNickName" value="${naverInfo.username }">
-							</c:when>
-							<c:otherwise>error</c:otherwise>
-						</c:choose>
+						<input type="hidden" id="kaName" name="kaNickName" value="${kakaoInfo.kaNickName }">
+
+						<c:forEach items="${getSocialList }" var="kk">
+							<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
+								<input type="hidden" class="detail" value="${kk.kakaoDetailVOs[0].kaBirth}">
+							</c:if>
+						</c:forEach>
 
 						<div class="sign-up">
 							<h2 class="sign-up__title">개인정보입력</h2>
@@ -70,25 +61,14 @@ input {
 								<br>
 								인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.
 							</div>
-
 							<!-- 이름 -->
-							<div class="member-input">
-								<c:choose>
-									<c:when test="${kakaoInfo != null }">
-										<td>이름: ${kakaoInfo.kaName }</td>
-									</c:when>
-									<c:when test="${naverInfo != null }">
-										<td>이름: ${naverInfo.name }</td>
-									</c:when>
-									<c:otherwise>error</c:otherwise>
-								</c:choose>
-							</div>
+							<div class="member-input">이름: ${kakaoInfo.kaName }</div>
 
 							<!-- 생년월일 -->
 							<div class="member-input">
 								<div class="member-input__state">
-									<input id="birth" class="member-input__box" name="kaBirth" maxlength='6' placeholder="생년월일" type="text"
-										autocomplete="off">
+									<input id="birth" class="member-input__box" name="kaBirth" maxlength='6' placeholder="생년월일"
+										type="text" autocomplete="off">
 									<span class="member-input__valid-wrapper"></span>
 								</div>
 
@@ -109,14 +89,6 @@ input {
 
 								<div class="sign-up__input-error-message phoneErrorMessage"></div>
 								<span class="msg_box">${errorMsg.phone}</span>
-								<div class="member-input__state">
-									<input id="memberInput9300" class="member-input__box" readonly="readonly" placeholder="인증번호를 입력하세요"
-										type="text" autocomplete="off" name="cnNum">
-									<span class="member-input__valid-wrapper"></span>
-								</div>
-								<div class="sign-up__input-error-message cnErrorMessage">인증이 필요합니다</div>
-								<div class="sign-up__input-error-message cnErrorMessage">인증번호를 다시 확인해주세요</div>
-								<div class="sign-up__input-error-message cnErrorMessage">인증이 성공했습니다</div>
 							</div>
 
 							<!-- 이메일 -->
@@ -157,8 +129,8 @@ input {
 							<!-- 상세주소 -->
 							<div class="member-input">
 								<div class="member-input__state">
-									<input id="addr2" name="kaAddrDetail" class="member-input__box" readonly="readonly" placeholder="상세주소"
-										type="text" autocomplete="off">
+									<input id="addr2" name="kaAddrDetail" class="member-input__box" readonly="readonly"
+										placeholder="상세주소" type="text" autocomplete="off">
 									<span class="member-input__valid-wrapper"></span>
 								</div>
 							</div>
