@@ -55,7 +55,7 @@
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">QNA챗봇</a></li>	
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="/chatbot" class="nav-link link-dark px-2">QNA챗봇</a></li>	
 			</ul>
 			<form role="search" style="width:220px; margin-left:20px;">
  
