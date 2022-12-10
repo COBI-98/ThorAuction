@@ -40,30 +40,18 @@
 								</a>
 							</li>
 						</c:when>
-<%-- 						<c:when test="${naverInfo != null }">
-							<li class="nav-item">
-								<a class="nav-link link-dark px-2">
-									<b>${naverInfo.name }님 안녕하세요</b>
-								</a>
-							</li>
-						</c:when> --%>
 						<c:otherwise>
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
 									<b>${member.name }님 안녕하세요</b>
 								</a>
 							</li>
-							<%-- <li class="nav-item"><b>${naverInfo }님 안녕하세요</b></li> --%>
 						</c:otherwise>
 					</c:choose>
 					<li class="nav-item">
 						<a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a>
 					</li>
 					<%-- <li class="nav-item"><a href="../mypage/info?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li> --%>
-					<%-- <form action="/member/logout" method="post">
-						<sec:csrfInput />
-						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
-					</form> --%>
 
 					<c:if test="${empty memID}">
 						<c:forEach items="${kakaoRole }" var="kk">
@@ -83,17 +71,6 @@
 							</li>
 						</c:if>
 					</c:if>
-
-<%-- 					<c:if test="${empty memID}">
-						<c:forEach items="${naver }" var="na">
-							<c:if
-								test="${((na.naRoleVOs[0].naRoleName == 'ROLE_ADMIN')==true) && ((na.username == naverInfo.username)==true)}">
-								<li class="nav-item">
-									<a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
-								</li>
-							</c:if>
-						</c:forEach>
-					</c:if> --%>
 
 				</sec:authorize>
 			</ul>

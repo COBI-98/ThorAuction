@@ -14,8 +14,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script defer src="/js/social/kakaoBan.js"></script>
 <script defer src="/js/social/memberBan.js"></script>
-<script defer src="/js/social/detailInfo.js"></script>
+<script defer src="/js/social/detailNullNotContent.js"></script>
 </head>
+<style>
+.swal-wide {
+	width: auto;
+}
+</style>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
@@ -25,23 +30,9 @@
 
 	<sec:authorize access="isAuthenticated()">
 		<c:forEach items="${kakaoRole }" var="kk">
-			<c:choose>
-				<c:when test="${kk.kakaoDetailVOs[0].kaBirth == null && kakaoInfo.kaNickName == kk.kaNickName }">
-					<input type="text" value="${kk.kakaoDetailVOs[0].kaBirth}" class="detail">
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
-
-			<%-- 			<c:if test="${kk.kakaoDetailVOs[0].kaBirth == null }">
-				<input type="text" value="${kk.kakaoDetailVOs[0].kaBirth}" id="detail">
-			</c:if>
-			<c:if test="${kk.kakaoDetailVOs[0].kaBirth != null }">
-				<input type="radio">
-			</c:if> --%>
-
 			<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
 				<input type="hidden" value="${kk.kaRoleVOs[0].kaRoleName }" class="krole" readOnly>
+				<input type="hidden" value="${kk.kakaoDetailVOs[0].kaBirth}" class="detailInfoNull">
 			</c:if>
 		</c:forEach>
 
@@ -51,12 +42,6 @@
 				<input type="hidden" value="${m.roleVOs[0].roleName}" class="MID" readOnly>
 			</c:if>
 		</c:forEach>
-
-		<%-- 		<c:forEach items="${naver }" var="n">
-			<c:if test="${n.username == naverInfo.username}">
-				<input type="hidden" value="${n.naRoleVOs[0].naRoleName}" class="krole" readOnly>
-			</c:if>
-		</c:forEach> --%>
 
 	</sec:authorize>
 	<c:import url="./template/footer.jsp"></c:import>

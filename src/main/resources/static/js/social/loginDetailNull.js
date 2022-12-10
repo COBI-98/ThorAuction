@@ -1,6 +1,6 @@
 // join.js
 
-let resultss = [true, false, false, false, false];
+let resultss = [true, false, false, true, false];
 
 
 // 생년월일 검증
@@ -45,27 +45,27 @@ $("#phone").blur(function () {
 
 // 이메일 검증
 // 이메일 정규식
-function isEmail(asValue) {
-	var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+// function isEmail(asValue) {
+// 	var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-	return regExp.test(asValue);
-}
+// 	return regExp.test(asValue);
+// }
 
-$("#email").blur(function () {
-	if ($("#email").val() == "") {
-		$(".emailErrorMessage").text("필수 항목입니다");
-		$(".emailErrorMessage").attr("style", "color:#f00");
+// $("#email").blur(function () {
+// 	if ($("#email").val() == "") {
+// 		$(".emailErrorMessage").text("필수 항목입니다");
+// 		$(".emailErrorMessage").attr("style", "color:#f00");
 
-	} else if (!isEmail($("#email").val())) {
-		$(".emailErrorMessage").text("이메일 주소를 다시 확인해 주세요");
-	}
-	else {
-		$(".emailErrorMessage").text("");
+// 	} else if (!isEmail($("#email").val())) {
+// 		$(".emailErrorMessage").text("이메일 주소를 다시 확인해 주세요");
+// 	}
+// 	else {
+// 		$(".emailErrorMessage").text("");
 
-		resultss[3] = true;
-	}
-	console.log(resultss[3]);
-});
+// 		resultss[3] = true;
+// 	}
+// 	console.log(resultss[3]);
+// });
 
 // 주소
 /* 다음 주소 연동 */
@@ -139,3 +139,4 @@ $("#join_submit_btn").click(function () {
 $("#join_cancel_btn").click(function () {
 	location.href = "/member/login"
 });
+
