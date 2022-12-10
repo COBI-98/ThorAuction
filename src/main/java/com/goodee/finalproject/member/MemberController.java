@@ -36,6 +36,10 @@ public class MemberController {
 //		MailVO mailVO = 
 //	}
 	
+	// 약관 동의 GET
+	@GetMapping("agree")
+	public void agree() throws Exception {}
+	
 	// 아이디 중복확인 POST
 	@PostMapping("idCheck")
 	@ResponseBody
