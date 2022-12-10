@@ -45,15 +45,30 @@ public class BotController {
 		String content ="";
 		String url ="";
 		System.out.println("gggg");
-		if(str.equals("일반 경매 하는 법"))
+		if(str.equals("일반 경매 신청하는 법"))
 		{
+			url = "/board/application/list";
 			content = "신청 게시판에서 신청먼저 하세욤";
 		}else if(str.equals("일반 경매 주의사항")) {
 			content = "주의사항 입니다";
 		}else if(str.equals("일반 경매 하러가기")) {
 			content = "/liveAuction";
+		}else if(str.equals("실시간 경매 신청하는 법")) {
+			url = "/board/application/list";
+			content = "신청 게시판에서 신청먼저 하세욤";
+		}else if(str.equals("실시간 경매 주의사항")) {
+			content = "주의사항 입니다.";
+		}else if(str.equals("실시간 경매 하러가기")) {
+			content = "/liveAuction";
+		}else if(str.equals("경매 승인시 배송방법")) {
+			content = "배송지 주소는 구디아카데미 입니다.";
+		}else if(str.equals("일반 경매 진행 시스템")) {
+			content = "일반 시스템";
+		}else if(str.equals("실시간 경매 진행 시스템")) {
+			content = "실시간 시스템";
 		}
 
+		map.put("url", url);
 		map.put("content", content);
 
 		return map;
@@ -71,13 +86,13 @@ public class BotController {
 		String content3 = "";
 		if(str.equals("일반 경매")) {
 		
-			content1 = "일반 경매 하는 법";
+			content1 = "일반 경매 신청하는 법";
 			content2 = "일반 경매 주의사항";
 			content3 = "일반 경매 하러가기";
 			
 		}else if(str.equals("실시간 경매")) {
 			
-			content1 = "실시간 경매 하는 법";
+			content1 = "실시간 경매 신청하는 법";
 			content2 = "실시간 경매 주의사항";
 			content3 = "실시간 경매 하러가기";
 			

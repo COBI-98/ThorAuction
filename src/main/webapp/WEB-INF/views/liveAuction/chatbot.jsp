@@ -75,13 +75,18 @@
           <div id='chatt' class="tab-content current">
               <div class="chat-box">
                 <div id='talk'></div>
-                <div id='sendZone' >
-                  <!-- <input type='text' id='msg'  placeholder="메시지를 입력해보세요!"> -->
+                <div id='send' >
+					<div>
+                	<input type='text' id='msg'  placeholder="메시지를 입력해보세요!">
+					<input class ="bidcoinBtn" type="button" value="보내기" id="msgSend">
+					</div>
+					<div id="sendZone">
                   <c:forEach items="${ar}" var="key">
                   <input class ="bidcoinBtn" type='button' value='${key}' id='btnSend'>
                 </c:forEach>
                 </div>
               </div>
+			</div>
               <!-- <div id="bidZone">
                   <input type='button' value="직접입력" id="auction" class ="bidcoinBtn">
                   <input type='button' value="단위경매" id="add" class ="bidcoinBtn">
