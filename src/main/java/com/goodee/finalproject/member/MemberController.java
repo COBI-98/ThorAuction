@@ -36,6 +36,10 @@ public class MemberController {
 //		MailVO mailVO = 
 //	}
 	
+	// 회원가입 성공 GET
+	@GetMapping("finishjoin")
+	public void finishJoin() throws Exception {}
+	
 	// 약관 동의 GET
 	@GetMapping("agree")
 	public void agree() throws Exception {}
@@ -163,6 +167,6 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:../";
+		return "member/finishjoin";
 	}
 }
