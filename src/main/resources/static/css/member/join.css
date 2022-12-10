@@ -114,8 +114,8 @@
     font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif;
     vertical-align: baseline;
     word-break: keep-all;
-    width: 190px;
-    height: 200px;
+    width: 400px;
+    height: 100px;
 }
 
 .register-header__step {
@@ -165,7 +165,7 @@
     border-radius: 50%;
     width: 8px;
     height: 8px;
-    background-color: #1ea1f7;
+    background-color: #fea532;
 }
 
 .sign-up {
@@ -315,7 +315,7 @@
     font-weight: 400;
     line-height: 19px;
     text-align: center;
-    background-color: #1ea1f7;
+    background-color: #fea532;
     font-weight: 700;
     cursor: pointer;
     line-height: 56px;

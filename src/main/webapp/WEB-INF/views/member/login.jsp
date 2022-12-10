@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 :: 토실대</title>
+<title>로그인 :: 비드코인</title>
 
 	<!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -27,7 +27,7 @@
                 <div class="member-card-layout__container">
                     <div class="member-card-layout__inner">
                         <h1 class="member-card-layout__logo">
-                            <a href="../"><img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="토실대 임시로고"></a>
+                            <a href="../"><img class="member-card-layout__logo-image" src="/images/bidcoin_logo.png" alt="bidcoin"></a>
                         </h1>
                         
                         <div class="login">
