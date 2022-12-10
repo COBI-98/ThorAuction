@@ -5,14 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>약관동의 :: 비드코인</title>
+	<link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
+	
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+	
+	<!-- 약관동의 CSS -->
     <link rel="stylesheet" href="/css/member/agree.css">
+    
+    <!-- 약관동의 JS -->
     <script defer src="/js/member/agree.js"></script>
 </head>
 <body>
@@ -23,7 +28,7 @@
 				<div class="member-scroll-layout__inner">
 					<div class="register-header">
 						<h1 class="register-header__logo">
-							<img class="register-header__logo-image" src="/images/bidcoin_logo.png" alt="bidcoin">
+							<a href="../"><img class="register-header__logo-image" src="/images/bidcoin_logo.png" alt="bidcoin"></a>
 						</h1>
 						<div class="register-header__step">
 							<i class="register-header__step-dot register-header__step-dot--on">step 1</i>

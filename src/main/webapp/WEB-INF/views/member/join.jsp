@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
     <title>회원가입 :: 비드코인</title>
+    <link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
 
 	<!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
