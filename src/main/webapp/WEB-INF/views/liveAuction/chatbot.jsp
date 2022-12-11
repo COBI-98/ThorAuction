@@ -75,11 +75,12 @@
           <div id='chatt' class="tab-content current">
               <div class="chat-box">
                 <div id='talk'></div>
-                <div id='send' >
+                <div id='send'>
 					<div>
                 	<input type='text' id='msg'  placeholder="메시지를 입력해보세요!">
 					<input class ="bidcoinBtn" type="button" value="보내기" id="msgSend">
 					</div>
+					<b style="text-align: center;" id="qna">자주 묻는 질문</b>
 					<div id="sendZone">
                   <c:forEach items="${ar}" var="key">
                   <input class ="bidcoinBtn" type='button' value='${key}' id='btnSend'>

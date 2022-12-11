@@ -7,7 +7,12 @@
     padding: 0px 15px; 
     text-align: center;
  } */
- 
+ #chatt #send #msg{
+   width: 80%;
+   height: 130px;
+   display: inline-block;
+}
+
  .chat-box{
      width: 100%;
      aspect-ratio: 4 / 9; 
@@ -23,7 +28,7 @@
 
 #chatt #talk{
     width: 100%;
-    height: 83%;
+    height: 63%;
     overflow: auto;
     border : 1px solid #aaa;
     /* text-align: center; */
@@ -55,4 +60,19 @@
     display: flex !important;
     justify-content: flex-start;
     align-items: flex-start;
+ }
+
+ #msgSend {
+   height: 130px;
+   width: 83px;
+   background-color: #fea532;
+   border: none;
+   color: white;
+ }
+
+ #btnSend{
+   background-color: #fea532;
+   border: none;
+   color: white;
+   height: 35px;
  }
