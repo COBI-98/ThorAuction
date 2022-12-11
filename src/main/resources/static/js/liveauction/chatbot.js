@@ -18,7 +18,7 @@ $("#sendZone").click(function(event){
             console.log("성공");
             console.log(result);
             console.log(result.content);
-            item = `<div class="other">
+            item = `<div class="other chat-text">
                         <div>
                             <ul>${str}</ul>
                         </div>
@@ -64,14 +64,14 @@ $("#talk").click(function(event){
                 
                 if((str == "일반 경매 하러가기") || (str == "실시간 경매 하러가기")) {
                     item = `<div class="other">
-                            <div>
+                            <div class="chat-text">
                                 <a href =${result.content} class="text">${str}</a> <br/>
                             </div>
                         </div>`;
                 }
                 else if((str == "일반 경매 신청하는 법") || (str == "실시간 경매 신청하는 법") || (str == "경매 신청하는 법")) {
                     item = `<div class="other">
-                                <div>
+                                <div class="chat-text">
                                     <a href =${result.url} class="text">신청하러 가기</a><br/>
                                     <b class="text">${result.content}</b> <br/>
                                 </div>
@@ -79,7 +79,7 @@ $("#talk").click(function(event){
                 }
                 else{
                     item = `<div class="other">
-                                <div>
+                                <div class="chat-text">
                                     <b class="text">${result.content}</b> <br/>
                                 </div>
                             </div>`;
@@ -180,7 +180,7 @@ $("#msgSend").click(function(){
                     console.log("성공");
                     console.log(result);
                     console.log(result.content);
-                    item = `<div class="other">
+                    item = `<div class="other chat-text">
                                 <div>
                                     <ul>${str}</ul>
                                 </div>
@@ -265,21 +265,21 @@ function send1(str) {
             
             if((str == "일반 경매 하러가기") || (str == "실시간 경매 하러가기")) {
                 item = `<div class="other">
-                        <div>
+                        <div class="chat-text">
 							<a href =${result.content} class="text">${str}</a> <br/>
                         </div>
 					</div>`;
             }
             else if((str == "일반 경매 신청하는 법") || (str == "실시간 경매 신청하는 법") || (str == "경매 신청하는 법"))  {
                 item = `<div class="other">
-                            <div>
+                            <div class="chat-text">
                                 <a href =${result.url} class="text">신청하러 가기</a><br/>
                                 <b class="text">${result.content}</b> <br/>
                             </div>
                         </div>`;
             }else if(str == "포인트 충전") {
                 item = `<div class="other">
-                            <div>
+                            <div class="chat-text">
                                 <a href =${result.url} class="text">포인트 충전하러 가기</a><br/>
                                 <b class="text">${result.content}</b> <br/>
                             </div>
@@ -287,7 +287,7 @@ function send1(str) {
             }
             else{
                 item = `<div class="other">
-                            <div>
+                            <div class="chat-text">
                                 <b class="text">${result.content}</b> <br/>
                             </div>
                         </div>`;
