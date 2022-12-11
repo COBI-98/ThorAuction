@@ -76,3 +76,9 @@
    color: white;
    height: 35px;
  }
+ #chatt .chat-text{
+	min-width : 60%;
+	max-width : 100%;
+   border-color: #fea532;
+   word-break:break-all;
+}
