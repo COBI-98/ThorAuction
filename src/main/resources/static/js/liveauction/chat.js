@@ -386,32 +386,40 @@ function send(){
 		if(index.substr(0,4) == "[경매]" && pattern_num.test(t4)){
 			if(t4 <= mypoint){
 				if(t4 >= 1000){
-							if(t4 % 1000 != 0){
-								t4 = t4- t4%1000;
-								Swal.fire({
-					                title: "1000단위로 입찰 가능합니다.",  // title, text , html  로 글 작성
-					                icon: "info",    //상황에 맞는 아이콘
-									showConfirmButton : false,
-					                showCancelButton: false
-					            } )
-								setTimeout(() => {
-					                        Swal.close();
-					            }, 800)
-								
-								document.querySelector("#msg").value ="[경매]"+ t4;
-								return;
-							}
-						}else{
-							Swal.fire({
-					                title: "입찰 가격은 1000원 이상으로 가능합니다.",  // title, text , html  로 글 작성
-					                icon: "info",    //상황에 맞는 아이콘
-									showConfirmButton : false,
-					                showCancelButton: false
-					            } )
-								setTimeout(() => {Swal.close();}, 800)
-							return;
-						}
-				if(t4 > max) {
+					if(t4 % 1000 != 0){
+						t4 = t4- t4%1000;
+						Swal.fire({
+							title: "1000단위로 입찰 가능합니다.",  // title, text , html  로 글 작성
+							icon: "info",    //상황에 맞는 아이콘
+							showConfirmButton : false,
+							showCancelButton: false
+						} )
+						setTimeout(() => {
+									Swal.close();
+						}, 800)
+						
+						document.querySelector("#msg").value ="[경매]"+ t4;
+						return;
+					}
+				}else{
+					Swal.fire({
+							title: "입찰 가격은 1000원 이상으로 가능합니다.",  // title, text , html  로 글 작성
+							icon: "info",    //상황에 맞는 아이콘
+							showConfirmButton : false,
+							showCancelButton: false
+						} )
+						setTimeout(() => {Swal.close();}, 800)
+					return;
+				}
+				if(rank[1] =='') {
+					if(t4 >= max) {
+						max=t4;	
+						console.log(max);
+						amount.innerHTML = max;
+						win = getId('id').innerHTML;
+					}
+				}
+				else if(t4 > max) {
 					max=t4;	
 					console.log(max);
 					amount.innerHTML = max;
