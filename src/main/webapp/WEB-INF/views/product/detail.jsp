@@ -18,6 +18,8 @@
 	<link rel="stylesheet" media="only screen and (min-width: 1023px)" href="/css/testThor.css">
 	<link rel="stylesheet" href="/css/testThorText.css">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
@@ -95,6 +97,7 @@
 										</div>
 										<div class="production-selling-header__info-wrap">
 											<!-- 회원 이름 -->
+											<input type="hidden" id="startAmount" value="${VO.productPrice}">
 											<input type="hidden" id="id" value="${memberVO.id}">
 											<input type="hidden" id="productId" value="${saleProductVO.productId}">
 											<c:choose>
@@ -155,7 +158,7 @@
 								<c:when test = "${not saleProductVO.deadlineInfo}">
 									<div class="btn_box right">	
 										<!-- return false; -->
-										<a href="#" onclick="do_fav(94);" class="mbtn red">관심경매등록</a>
+										<a href="#" onclick="do_fav();" class="mbtn red">관심경매등록</a>
 									</div>
 									<div class="bidbtn" style="display:block">
 										<c:choose>
