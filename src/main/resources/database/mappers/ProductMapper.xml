@@ -7,7 +7,7 @@
  	
  	<insert id="setProductAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">	
  		INSERT INTO AUCTIONPRODUCT
-		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum});
+		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum},0);
  	</insert>
  	
  	<insert id="setProductFileAdd" parameterType="ProductFileVO">
@@ -99,10 +99,20 @@
  	
  	<!-- 상품 리스트 화면 -->
  	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
-	 	SELECT * FROM 
+	 	
+		SELECT * FROM 
 		SALEPRODUCT p
-		where DEADLINEINFO =#{deadlineInfo};
+		where DEADLINEINFO = #{deadlineInfo};
  	</select>
+ 	
+ 	<select id="getSaleProductHitList" parameterType="SaleProductVO" resultType="SaleProductVO">
+	 	
+		SELECT * FROM 
+		SALEPRODUCT p
+		where DEADLINEINFO = #{deadlineInfo}
+		ORDER BY PRODUCTHIT DESC;
+ 	</select>
+ 	
  	
  	<!-- 상품리스트 디테일 -->
  	<select id="getSaleProductListDetail" parameterType="SaleProductVO" resultMap="getSaleProductDetail">
@@ -112,7 +122,7 @@
 			AUCTIONPRODUCT a 
 			ON(p.PRODUCTNUM = a.PRODUCTNUM)
 				LEFT JOIN
-				PRODUCTFILES pf 
+				PRODUCTFILES pf
 				ON(a.PRODUCTNUM =pf.PRODUCTNUM )
 					LEFT JOIN 
 					BIDAMOUNT B
@@ -177,4 +187,9 @@
  	<select id="getCategoryList" parameterType="CategoryVO" resultType="CategoryVO">
  		select * from PRODUCTCATEGORY;
  	</select>
+ 	
+ 	<!-- 조회수 업데이트 -->
+ 	<update id="setSaleProductHit" parameterType="SaleProductVO">
+ 		UPDATE SALEPRODUCT SET PRODUCTHIT = PRODUCTHIT+1 WHERE PRODUCTID = #{productId};
+ 	</update>
 </mapper>
