@@ -163,7 +163,7 @@
 				</div>
 			</div>
 		
-			
+			<div class="" style="text-align: center;">
 			<form class="align-center" action="./approval" method="post" enctype="multipart/form-data">	
 				
 				<label for="pl" hidden >카테고리</label>
@@ -183,10 +183,10 @@
 				</div>
 
 				<input type="hidden" name="productNum" value="${productVO.productNum}">
-			
-		<table class="table table-bordered border-primary">
+			</div>
+		<table class="table table-bordered border-warning">
 		<tbody>
-			<tr class="table-primary">
+			<tr class="table-warning">
 				
 				<th>경매기간 : ${productVO.auctionPeriod}</th>
 				<tr>
@@ -201,7 +201,7 @@
 			</tbody>
 		</table>
 		
-		<button type="submit" id="applicationSubmit" value="상품 게시" class ="btn btn-info">상품 게시하기</button>
+		<button type="submit" id="applicationSubmit" value="상품 게시" class ="btnRight btn btn-warning">상품 게시하기</button>
 	</form>
 	</section>
 	<!-- <script src="/js/timerTest.js"></script> -->
