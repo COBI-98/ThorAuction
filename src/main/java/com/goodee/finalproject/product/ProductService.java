@@ -73,4 +73,14 @@ public class ProductService {
 		
 		return productMapper.setSaleProductHit(saleProductVO);
 	}
+	
+	public int setLikeSaleProduct(LikeSaleProductVO likeSaleProductVO) throws Exception{
+		
+		return productMapper.setLikeSaleProduct(likeSaleProductVO);
+	}
+
+	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception{
+		
+		return productMapper.getLikeProductCheck(likeSaleProductVO);
+	}
 }

@@ -171,4 +171,20 @@ public class ProductController {
 		return test;
 	}
 	
+	@PostMapping("likeProduct")
+	@ResponseBody
+	public String setLikeSaleProduct(LikeSaleProductVO likeSaleProductVO) throws Exception{
+		
+		String likeCheck = productService.getLikeProductCheck(likeSaleProductVO);
+		
+		if(likeCheck == null) {
+			productService.setLikeSaleProduct(likeSaleProductVO);
+			likeCheck = "N";
+		}else {
+			likeCheck = "Y";
+		}
+		System.out.println(likeCheck);
+		return likeCheck;
+	}
+	
 }
