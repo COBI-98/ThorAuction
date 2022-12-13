@@ -68,3 +68,7 @@ select::-ms-expand {
     background-color:#fea532;
     border-color: #fea532;
 }
+
+.btnRight{
+    text-align: right;
+}

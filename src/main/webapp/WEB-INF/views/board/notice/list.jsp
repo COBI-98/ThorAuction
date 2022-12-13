@@ -14,12 +14,12 @@
 </head>
 <body>
 	<c:import url="../../template/header.jsp"></c:import>
-	<section class="container-fluid col-lg-8 mt-5">
-	<div class="row mb-3">
-		<form action="./list"
-			class="row row-cols-lg-auto g-3 align-items-center">
+	<section class="container-fluid col-lg-8 ">
+	<div class="row mb-3 bbs_search">
+		<form action="./list" >
 
-			<div class="col-12">
+			
+			<div class="col-3" style="display : inline-block;">
 				<label class="visually-hidden" for="Kind" >Kind</label> 
 				<select name="kind" class="form-select" id="Kind">
 					<option class="kinds" value="noticeNum" <c:if test="${param.kind eq 'noticeNum' }"> selected </c:if>>글번호</option>
@@ -29,15 +29,15 @@
 				</select>
 			</div>
 
-			<div class="col-12">
+			<div class="col-3" style="display : inline-block;">
 				<label class="visually-hidden" for="search">검색</label>
 				<div class="input-group">
 					<input type="text" name="search" value="${param.search}"
-						class="form-control" id="search" placeholder="Search">
+						class="form-control" id="search" placeholder="검색어를 입력하세요">
 				</div>
 			</div>
-			<div class="col-12">
-				<button type="submit" class="btn btn-warning">검색어찾기</button>
+			<div class="col-3" style="display : inline-block;">
+				<button type="submit" class="btn btn-warning">검색</button>
 			</div>
 		</form>
 
@@ -77,8 +77,8 @@
 	 <nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<c:if test="${boardPageMaker.pre}">
-						<li class="page-item"><a class="pageColorChange"
-							href="./list?page=${boardPageMaker.startNum-1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">Previous</a>
+						<li class="page-item ${boardPageMaker.pre ? '':'disabled'}"><a class="pageColorChange"
+							href="./list?page=${boardPageMaker.startNum-1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}"><<</a>
 						</li>
 					</c:if>
 					<c:forEach begin="${boardPageMaker.startNum}" end="${boardPageMaker.lastNum}" var="i">
@@ -88,13 +88,15 @@
 							href="./list?page=${i}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">${i}</a></li>
 					</c:forEach>
 
-					<li class="page-item ${boardPageMaker.next?'':'disabled'}"><a
-						class="pageColorChange"
-						href="./list?page=${boardPageMaker.lastNum+1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">Next</a>
-					</li>
+					<c:if test="${boardPageMaker.next}">
+						<li class="page-item ${boardPageMaker.next ? '':'disabled'}"><a
+							class="pageColorChange"
+							href="./list?page=${boardPageMaker.lastNum+1}&kind=${boardPageMaker.kind}&search=${boardPageMaker.search}">>></a>
+						</li>
+					</c:if>
 				</ul>
 		</nav>
-		<div>
+		<div class="btnAdd">
 			<a href="./add" type="button" class="btn btn-warning">글쓰기</a>
 		</div>
 		</section>

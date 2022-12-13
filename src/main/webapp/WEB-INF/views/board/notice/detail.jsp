@@ -14,11 +14,11 @@
 	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
 	
-	<table class="table table-bordered border-primary">
+	<table class="table table-bordered border-warning">
   <tbody>
   
     <tr >
-    	<th style="width: 70x;">글제목</th>
+    	<th style="width: 200px;">글제목</th>
     	<td>${noticeVO.title}</td>
       
     </tr>
@@ -33,9 +33,9 @@
     </tbody>
 </table>
 <div  class="board-filetitle">💾첨부 파일</div>
-    <table class="table table-bordered border-primary">
+    <table class="table table-bordered border-warning">
     <tbody>
-    <tr class="table-primary">
+    <tr class="table-warning">
 	    <th>파일</th>
     <c:forEach items="${noticeVO.noticeFileVOs }" var="file">
     	<c:if test="${not file.sort}">
@@ -50,11 +50,11 @@
     </table>
 
 
-</section>
-<section class="container-fluid col-lg-2 mt-5">
 
-<div> <a href="/board/notice/update?noticeNum=${noticeVO.noticeNum}" class="btn btn-info" >글 수정</a></div>
-<div> <a href="/board/notice/delete?noticeNum=${noticeVO.noticeNum}" class="btn btn-info" style="margin-top: 10px;">글 삭제</a></div>
+
+
+<div class="btnRight" > <a href="/board/notice/update?noticeNum=${noticeVO.noticeNum}" class="btn btn-warning" >글 수정</a></div>
+<div class="btnRight"> <a href="/board/notice/delete?noticeNum=${noticeVO.noticeNum}" class="btn btn-warning" style="margin-top: 10px;">글 삭제</a></div>
 </section>
 <c:import url="../../template/footer.jsp"></c:import>
 	
