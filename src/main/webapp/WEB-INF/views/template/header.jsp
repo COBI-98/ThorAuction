@@ -79,7 +79,7 @@
 			</a>
 			<ul class="nav" style="height: 100%;">
 				<li class="nav-item nav-menu" ><a href="#" class="nav-link link-dark" style="font-weight: bold;">경매장</a></li>
-		        <li class="nav-item nav-menu" ><a href="https://localhost:84/liveAuction" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
+		        <li class="nav-item nav-menu" ><a href="https://192.168.1.83:84/liveAuction?roomid=123" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
 		        <li class="nav-item nav-menu" ><a href="/board/application/list" class="nav-link link-dark" style="font-weight: bold">신청게시판</a></li>
 		        <li class="nav-item nav-menu" ><a href="/board/notice/list" class="nav-link link-dark" style="font-weight: bold">공지게시판</a></li>
 		       
