@@ -166,17 +166,18 @@ public class ProductController {
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
 		
 		String test = "";
-		// 시작가 관리 최대값이 없다면
 		
+		// 마감된경우
 		if(bidAmountVO.getDeadCheck().equals("1")) {
-			test = "2";
+			test = "1";
 			return test;
 		}
 		
+		// 시작가 관리 최대값이 없다면
 		if(check == null) {
 			check = bidAmountVO.getStartAmount();
 			if(check > bidAmountVO.getBidAmount()) {
-				test ="4";
+				test ="3";
 				return test;
 			}
 		}
@@ -185,12 +186,12 @@ public class ProductController {
 		System.out.println("check1"+check);
 		System.out.println("check2"+bidAmountVO.getBidAmount());
 		if(check.equals(bidAmountVO.getBidAmount())) {
-			test = "5";
+			test = "4";
 		} else if(check > bidAmountVO.getBidAmount()) {
-			test = "3";
+			test = "2";
 		}else if(check < bidAmountVO.getBidAmount()){
 			productService.setBidAmountAdd(bidAmountVO);
-			test = "6";
+			test = "5";
 		} 
 		
 		

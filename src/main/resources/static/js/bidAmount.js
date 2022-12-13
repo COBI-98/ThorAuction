@@ -178,14 +178,12 @@ function dobid(tmp) {
 						"deadCheck": deadCheck
                     },success:function(data) {
                         if(data==1) {
-                            swal("시작기간 전입니다");
-                        } else if(data==2) {
                             swal("경매가 종료되었습니다");
-                        } else if(data==3) {
+                        } else if(data==2) {
                             swal("입찰은 현가격보다 높아야 합니다");
-                        } else if(data==4) {
+                        } else if(data==3) {
                             swal("입찰은 시작가격보다 높아야 합니다.");
-                        } else if(data==5) {
+                        } else if(data==4) {
                             swal("해당 가격으로 이미 입찰되었습니다.").then(function(success){
 								if(success){
 
