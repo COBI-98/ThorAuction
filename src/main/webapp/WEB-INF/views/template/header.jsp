@@ -19,10 +19,13 @@
 		
 	
 	<div class="container " >
-		<ul class="nav" style="float: left; margin-left: 50px;">
+	<sec:authorize access="hasRole('ROLE_ADMIN')" >
+		<ul class="nav"   style="float: left; margin-left: 50px;">
 				<li class="nav-item nav-member"><a href="../admin/adminpage" class="nav-link">관리자 기능</a></li>
 				<li class="nav-item nav-member"><a href="#" class="nav-link">관리자 페이지</a></li>
 		</ul>
+	</sec:authorize>
+		
 		<ul class="nav" style="float: right;">
 				<!-- 로그인 전 -->
 				<sec:authorize access="!isAuthenticated()">
@@ -43,7 +46,7 @@
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-					<li class="nav-item nav-member"><a href="" class="nav-link link-dark"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
+					<li class="nav-item nav-member"><a href="" class="nav-link link-dark"><b><sec:authentication property="name" />님 안녕하세요</b></a></li>
 					<li class="nav-item nav-member"><a href="../member/logout" class="nav-link link-dark">로그아웃</a></li>
 					<li class="nav-item nav-member"><a href="../mypage/id=" class="nav-link link-dark">마이페이지</a></li>
 					<%-- <form action="/member/logout" method="post">

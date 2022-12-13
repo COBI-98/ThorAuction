@@ -29,13 +29,15 @@ var btnSend = getId('btnSend');
 var talk = getId('talk');
 var msg = getId('msg');
 var auction = getId('auction');
-var stopChat = getId('stop');
+var stopChat = getId('btnSend');
+var stopChatCold = getId('stopStart');
 var count = 'tnuoc';
 var reset = getId('reset');
 var usercount = getId('count');
 var amount = getId('amount');
 var iddd = getId('iddd');
-var auctionend = getId('auctionend');
+var auctionend = getId('media-titleText');
+var auctionStart = getId('auctionStart');
 var final = getId('final');
 var finalamount = getId('finalamount');
 var end = getId('end');
@@ -281,11 +283,11 @@ ws.onmessage = function(msg){
 	else if(data.stop != null){
 		console.log(data);
 		if(data.stop ==true){
-			stopChat.value="채팅시작";
+			stopChat.value="채팅정지";
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
-			stopChat.value="채팅정지";
+			stopChat.value="보내기";
 			$('#msg').attr("readonly",false);
 		}
 	}
@@ -308,11 +310,11 @@ ws.onmessage = function(msg){
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
-			stopChat.value="채팅시작";
+			stopChat.value="채팅정지";
 			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
-			stopChat.value="채팅정지";
+			stopChat.value="보내기";
 			$('#msg').attr("readonly",false);
 		}
 
@@ -351,39 +353,10 @@ ws.onmessage = function(msg){
 }
 
 
-//회원 강퇴시키기
-iddd.addEventListener("click",function(event){
-	let even = event.target;
-	if(even.id== "user") {
-		Swal.fire({
-			title: even.innerText + " 님을 강퇴시키겠습니까?",  // title, text , html  로 글 작성
-			icon: "warning",    //상황에 맞는 아이콘
-	
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			confirmButtonText: '강퇴',
-			cancelButtonText: '취소',
-			reverseButtons: true   // 버튼 순서 변경
-		} ).then((result) => {   // 아무 버튼이나 누르면 발생
-			if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
-				
-				//강퇴 진행
-				data7.out = even.innerText.substr(2);
-				var temp = JSON.stringify(data7);
-				ws.send(temp);
-				
-				Swal.fire({    
-					title: "강퇴 되었습니다.",
-					icon: "success",
-					confirmButtonColor: '#3085d6',
-					
-					confirmButtonText: '확인'
-				} ).then((result) => {
-				})
-			}
-		})
-	}
-})
+
+
+
+
 
 msg.onkeyup = function(ev){
 	if(ev.keyCode == 13){
@@ -492,11 +465,10 @@ auction.addEventListener("click",function(){
 })
 
 
-//얼리기
-stopChat.addEventListener("click",function(){
-	stopChat.classList.toggle("stop");
-	sendstop();
-})
+
+
+
+
 
 function stopchat(){
 	if(stopChat.classList.contains("stop")){
@@ -513,19 +485,7 @@ function sendstop(){
 }
 
 
-//경매 시작,종료 시 
-auctionend.addEventListener("click",function(){
-	auctionend.classList.toggle("start");
 
-	//경매 시작 클릭 시
-	if(auctionend.value == "경매시작")	 {
-		auctionstart();
-	
-	//경매 종료 클릭 시
-	}else{
-		sendresult();
-	}
-})
 
 //경매 시작 함수
 function auctionstart(){
@@ -568,47 +528,9 @@ function usercome(){
 	ws.send(temp);
 }
 
-//실시간 경매 종료 (소켓 닫음)
-end.addEventListener("click",function(){
 
-	Swal.fire({
-		title: "실시간 경매를 종료하시겠습니까?",  // title, text , html  로 글 작성
-		icon: "warning",    //상황에 맞는 아이콘
 
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: '종료',
-		cancelButtonText: '취소',
-		reverseButtons: true   // 버튼 순서 변경
-	} ).then((result) => {   // 아무 버튼이나 누르면 발생
-		if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
-			
-			data6.end = true;
-			var temp = JSON.stringify(data6);
 
-			Swal.fire({    
-				title: "종료 되었습니다.",
-				icon: "success",
-				confirmButtonColor: '#3085d6',
-				
-				confirmButtonText: '확인'
-			} ).then((result) => {
-				if (result.isConfirmed) {
-					ws.send(temp);
-				}
-			})
-		}
-	})
-
-})
-
-//방송 일시정지
-let cameraPause = document.querySelector("#cameraPause")
-
-cameraPause.addEventListener("click",function(){
-   cameraPause.classList.toggle("pause");
-   sendPause();
-})
 
 function pauseCam(){
    if(cameraPause.classList.contains("pause")){
@@ -650,8 +572,96 @@ $('ul.tabs li').click(function(){
 	$("#"+tab_id).addClass('current');
 })
 
-//단위가격 설정
-unitsend.addEventListener("click",function(){
+
+
+
+
+
+
+function adminChat(){
+	//회원 강퇴시키기
+	iddd.addEventListener("click",function(event){
+		let even = event.target;
+		if(even.id== "user") {
+			Swal.fire({
+				title: even.innerText + " 님을 강퇴시키겠습니까?",  // title, text , html  로 글 작성
+				icon: "warning",    //상황에 맞는 아이콘
+		
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: '강퇴',
+				cancelButtonText: '취소',
+				reverseButtons: true   // 버튼 순서 변경
+			} ).then((result) => {   // 아무 버튼이나 누르면 발생
+				if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
+					
+					//강퇴 진행
+					data7.out = even.innerText.substr(2);
+					var temp = JSON.stringify(data7);
+					ws.send(temp);
+					
+					Swal.fire({    
+						title: "강퇴 되었습니다.",
+						icon: "success",
+						confirmButtonColor: '#3085d6',
+						
+						confirmButtonText: '확인'
+					} ).then((result) => {
+					})
+				}
+			})
+		}
+	})
+	
+	stopChatCold.addEventListener("click",function(){
+		stopChat.classList.toggle("stop");
+		sendstop();
+	})
+
+	//경매 시작,종료 시 
+	auctionStart.addEventListener("click",function(){
+		auctionend.classList.toggle("start");
+
+		//경매 시작 클릭 시
+		if(auctionend.value == "경매시작")	 {
+			auctionstart();
+		
+		//경매 종료 클릭 시
+		}else{
+			sendresult();
+		}
+	})	
+
+
+
+
+	
+	//경매 물품 선택
+	itemsend.addEventListener("click",function(){
+		//items.options[items.selectedIndex].value;
+		var itemmm = items.options[items.selectedIndex];
+		data12.item = itemmm.innerText;
+		data12.itemNum = itemmm.value;
+		data12.itemprice = itemmm.dataset.price;
+		var temp = JSON.stringify(data12);
+		ws.send(temp);
+	})
+	
+	// 방송 제목 설정
+	$("#setBroadNameBtn").click(function(){
+		data2.title = $("#broadName").val();
+		document.querySelector("#media-titleText").innerHTML = data2.title;
+		
+	   var temp = JSON.stringify(data2);
+	   ws.send(temp);
+		
+		
+	})
+	
+	
+	
+	//단위가격 설정
+	unitsend.addEventListener("click",function(){
 	console.log(unit.value);
 	if(unit.value >= 1000){
 		
@@ -693,24 +703,47 @@ unitsend.addEventListener("click",function(){
 	ws.send(temp);
 })
 
-//경매 물품 선택
-itemsend.addEventListener("click",function(){
-	//items.options[items.selectedIndex].value;
-	var itemmm = items.options[items.selectedIndex];
-	data12.item = itemmm.innerText;
-	data12.itemNum = itemmm.value;
-	data12.itemprice = itemmm.dataset.price;
-	var temp = JSON.stringify(data12);
-	ws.send(temp);
-})
 
-// 방송 제목 설정
-$("#setBroadNameBtn").click(function(){
-	data2.title = $("#broadName").val();
-	document.querySelector("#media-titleText").innerHTML = data2.title;
+
+	//방송 일시정지
+	let cameraPause = document.querySelector("#cameraPause")
 	
-   var temp = JSON.stringify(data2);
-   ws.send(temp);
+	cameraPause.addEventListener("click",function(){
+	   cameraPause.classList.toggle("pause");
+	   sendPause();
+	})
 	
+	//실시간 경매 종료 (소켓 닫음)
+	end.addEventListener("click",function(){
 	
-})
+		Swal.fire({
+			title: "실시간 경매를 종료하시겠습니까?",  // title, text , html  로 글 작성
+			icon: "warning",    //상황에 맞는 아이콘
+	
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			confirmButtonText: '종료',
+			cancelButtonText: '취소',
+			reverseButtons: true   // 버튼 순서 변경
+		} ).then((result) => {   // 아무 버튼이나 누르면 발생
+			if (result.isConfirmed) {  // confirm 버튼을 눌렀다면,
+				
+				data6.end = true;
+				var temp = JSON.stringify(data6);
+	
+				Swal.fire({    
+					title: "종료 되었습니다.",
+					icon: "success",
+					confirmButtonColor: '#3085d6',
+					
+					confirmButtonText: '확인'
+				} ).then((result) => {
+					if (result.isConfirmed) {
+						ws.send(temp);
+					}
+				})
+			}
+		})
+	
+	})
+}
