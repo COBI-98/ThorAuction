@@ -165,6 +165,8 @@ ws.onmessage = function(msg){
 			win = false;
 			talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
 			selecteditem.innerText = "";
+			add.value = "+";
+			unit.value ="";
 
 			//list 설정
 			var num = data.itemNum;
@@ -496,17 +498,16 @@ auctionend.addEventListener("click",function(){
 
 	//경매 시작 클릭 시
 	if(auctionend.value == "경매시작")	 {
-		console.log($("select[name=items]").val());
-		if($("select[name=items]").val() != "none") {
-			if(unit.value !=""){
+		console.log(amount.innerHTML);
+		console.log(add.value.substr(1));
+		if(amount.innerHTML != 0) {
+			if(add.value.substr(1) !=""){
 				auctionstart();
 			}else{
 				Swal.fire({
 					title: "단위 가격이 설정이 안되었습니다..",  
 					icon: "error",    
-					
 					confirmButtonColor: '#3085d6',
-					
 					confirmButtonText: '확인'
 				} )
 			}
@@ -514,13 +515,10 @@ auctionend.addEventListener("click",function(){
 			Swal.fire({
 				title: "경매 물품이 설정이 안되었습니다.",  
 				icon: "error",    
-				
-				confirmButtonColor: '#3085d6',
-					
-					confirmButtonText: '확인'
+				confirmButtonColor: '#3085d6',	
+				confirmButtonText: '확인'
 			} )
 		}
-		
 	//경매 종료 클릭 시
 	}else{
 		sendresult();
@@ -529,7 +527,6 @@ auctionend.addEventListener("click",function(){
 
 //경매 시작 함수
 function auctionstart(){
-
 	data10.start = "경매가 시작되었습니다.";
 	data10.gogo = start();
 	var temp = JSON.stringify(data10);
