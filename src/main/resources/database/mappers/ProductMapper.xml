@@ -192,4 +192,16 @@
  	<update id="setSaleProductHit" parameterType="SaleProductVO">
  		UPDATE SALEPRODUCT SET PRODUCTHIT = PRODUCTHIT+1 WHERE PRODUCTID = #{productId};
  	</update>
+ 	
+ 	<!-- 관심있는상품 추가 -->
+ 	<insert id="setLikeSaleProduct" parameterType="LikeSaleProductVO">
+		INSERT INTO LIKESALEPRODUCT
+		VALUES (LIKENUM,#{productId},#{id});
+ 	</insert>
+ 	
+ 	<!-- 관심있는상품 체크 -->
+ 	<select id="getLikeProductCheck" parameterType="LikeSaleProductVO" resultType="String">
+ 		SELECT LIKENUM FROM LIKESALEPRODUCT
+ 		WHERE PRODUCTID =#{productId} AND ID= #{id}
+ 	</select>
 </mapper>
