@@ -20,6 +20,8 @@
    		<typeAlias type="com.goodee.finalproject.product.SaleProductVO" alias="SaleProductVO"/>
    		<typeAlias type="com.goodee.finalproject.product.CategoryVO" alias="CategoryVO"/>
    		<typeAlias type="com.goodee.finalproject.product.BidAmountVO" alias="BidAmountVO"/>
+   		<typeAlias type="com.goodee.finalproject.product.LikeSaleProductVO" alias="LikeSaleProductVO"/>
+   		
    		<typeAlias type="com.goodee.finalproject.payhistory.PayHistoryVO" alias="PayHistoryVO"/>
    		
    		<typeAlias type="com.goodee.finalproject.util.BoardPageMaker" alias="BoardPageMaker"/>
