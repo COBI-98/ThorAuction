@@ -273,8 +273,85 @@
 						  
 						</tr>
 						</tbody>
-					</table>
+				</table>
+				<h3 id="detail_con5">상품 정보 제공</h3>
+				<table class="tit_detailinfo">
+		
+					<tbody><tr>
+						<th>품명 및 모델명</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>KC 인증 필 유무</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>정격전압, 소비전력</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>에너지소비효율등급</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>동일모델의 출시년월</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>제조자(수입자)</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>제조국</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>크기(용량, 형태 포함)</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>품질보증기준</th>
+						<td>상세페이지</td>
+					</tr>
+					
+					<tr>
+						<th>A/S책임자와의 전화번호</th>
+						<td>상세페이지</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div class="product_info" id="detail_con3">
+				<dl>
+					<dt>환불/교환 불가사유</dt>
+					<dd>
+						<ul>
+							<li>ㆍ환불/교환 요청 가능 기간이 초과한 경우(배송 완료 시점으로부터 7일 초과 시)</li>
+							<li>ㆍ재고가 부족한 경우(단순 변심으로 교환을 요청했으나 재고가 부족한 경우 환불처리될 수 있음)</li>
+							<li>ㆍ주문/제작 상품의 제작이 이미 진행된 경우</li>
+							<li>ㆍ분실/파손/고장/오염이 발생한 경우</li>
+							<li>ㆍ모니터 해상도 차이로 인하여 색상 등 이미지가 실제와 상이한 경우</li>
+						</ul>
+					</dd>	
+				</dl>
+				</div>
+			<div class="stitle" id="detail_con4">상품문의하기</div>
+			<div class="stext">
+				상품에 대한 문의를 남기는 공간입니다. 배송 및 주문관련 문의 및 요청사항은 1:1문의에 남겨주세요. 
+				<a href="#" style="color:#999;font-size:11px;text-decoration:underline">1:1문의하기 +</a>
 			</div>
+			<p class="size12 pt15 center gray999">로그인을 하신 후에 문의 작성이 가능합니다</p>
+			<div class="pt5 center"><a href="#" onclick="open_layer_qna();" class="btn_after">상품문의 등록하기</a></div>	
+			
+		</div>
 			
 				
 		
