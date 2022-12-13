@@ -1,4 +1,71 @@
 
+// var xmlHttp;
+// var product_auction_state='Y';
+//진행중인 경매만
+// if(product_auction_state=='Y') {
+// 	var interval = setInterval(remainTime,1000);
+// }
+
+
+// function remainTime() {
+// 	var obj=document.auction_form;
+// 	var st=srvTime();
+// 	var nt = new Date(st); // 현재의 시간만 가져온다
+// 	var tmpdate='';
+// 	var tdate='';
+
+// 	var open='';
+// 	var ot='';
+
+// 	tmpdate=new Date(obj.tdate.value);
+
+// 	tdate=tmpdate.getFullYear()+","+tmpdate.getMonth()+","+tmpdate.getDate()+","+tmpdate.getHours()+","+tmpdate.getMinutes()+","+tmpdate.getSeconds();
+
+// 	ot=tmpdate.getTime();
+// 	var i=0;
+
+// 	if(nt<ot){ //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
+// 		sec = parseInt(ot - nt) / 1000;
+// 		day = parseInt(sec/60/60/24);
+// 		hour = Math.floor((sec / (60*60)) % 24);
+// 		min = Math.floor((sec / (60)) % 60)
+// 		sec = Math.floor(sec % 60);
+
+// 		if(day<10){day="0"+day;}
+// 		if(hour<10){hour="0"+hour;}
+// 		if(min<10){min="0"+min;}
+// 		if(sec<10){sec="0"+sec;}
+// 		$("#d-day-day"+i+"").html(day);
+// 		$("#d-day-hour"+i+"").html(hour);
+// 		$("#d-day-min"+i+"").html(min);
+// 		$("#d-day-sec"+i+"").html(sec);
+// 	} else{ //현재시간이 종료시간보다 크면
+// 		$("#d-day-day"+i+"").html('00');
+// 		$("#d-day-hour"+i+"").html('00');
+// 		$("#d-day-min"+i+"").html('00');
+// 		$("#d-day-sec"+i+"").html('00');		
+
+// 		var param="product_number=105";
+
+// 		$.ajax({
+// 			url:'x_bid_end.asp',
+// 			data:param,
+// 			type:'post',
+// 			success:function(data, status, req) {	
+// 				if(data != 'E') {
+// 					document.getElementById("div_money_n").innerHTML=formatnumber(data);
+// 					do_bid_run();
+// 					clearInterval(interval);
+// 					return;
+// 				}
+// 			},
+// 			error:function(req, status, error) {
+// 				swal(error);
+// 			}
+// 		});		
+// 	}
+
+// }
 // 컴마 없애기
 function uncomma(str) {
     str = String(str);
@@ -33,17 +100,30 @@ function priceCutting(stype, n) { // 금액, 타입, 절삭금액 단위
 	var ostr=comma(uncomma(remove_price));
 	$("#bid_money").val(ostr);
 }
+
 function dobid(tmp) {
 	var user_check_id= $("#id").val();
-    
-	if(user_check_id=='') {
-		var login = swal("입찰하려면 로그인을 하셔야 합니다.n로그인하시겠습니까");
-		if(login==true) {
-			location.href='/member/login';
-			return;
-		}
+	if(user_check_id=='' || user_check_id == null) {
+		
+		Swal.fire({
+			title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+			icon: "warning",    //상황에 맞는 아이콘
+
+			showCancelButton: true,
+			confirmButtonColor: '#fea532',
+			confirmButtonText: '확인',
+			cancelButtonText: '취소',
+			reverseButtons: true   // 버튼 순서 변경
+		}).then((result) =>{
+			if(result.isConfirmed){
+				location.href='/member/login';
+			}
+		})
+		
 	}
-	var ans=swal("입찰하시겠습니까?")
+	else{
+
+	
     swal({
         title: "입찰하시겠습니까?",
         text: "입찰하시면 포인트가 차감됩니다.",
@@ -56,8 +136,13 @@ function dobid(tmp) {
                 var product_money_t = $("#startAmount").val();
                 var product_Id= $("#productId").val();
                 var amountUnit = $("#amountUnit").val();
+				var startAmount = $("#startAmount").val();
+				var productDetailDate = $("#productDetailDate").val();
+				var timeLength = $("#timeLength").val();
+				var deadCheck = "";
                 if(tmp == 'B'){
                     product_money_t=$("#bid_money").val();
+					product_money_t = uncomma(product_money_t);
                 }
                 console.log("1 : "+wileDelete);
                 console.log("2 : "+user_check_id);
@@ -65,20 +150,32 @@ function dobid(tmp) {
                 console.log("4 : "+product_money_t);
                 console.log("5 : "+product_Id);
                 console.log("6 : " + amountUnit);
-
+				
+				const startDate = new Date(productDetailDate);
+				const deadLine = new Date();
+				
+				if(((timeLength*24*3600*1000)+startDate.getTime()) > deadLine.getTime()){
+					console.log("아직 진행");
+					deadCheck = "0";
+				}else{
+					console.log("마감됨")
+					deadCheck = "1";
+				}
                  if(product_money_t=='' || product_money_t=='0') {
-                     swal("입찰가격을 입력해주세요");
+                     swal("입찰가격을 입력해주세요");s
                     return;
                  }
 
                
                 $.ajax({
-                    url:'bid',
+                    url:'./bid',
                     type:'post',
                     data:{
                         "productId" : product_Id,
                         "bidAmount" : product_money_t,
-                        "id" :user_check_id
+                        "id" :user_check_id,
+						"startAmount" : startAmount,
+						"deadCheck": deadCheck
                     },success:function(data) {
                         if(data==1) {
                             swal("시작기간 전입니다");
@@ -89,10 +186,12 @@ function dobid(tmp) {
                         } else if(data==4) {
                             swal("입찰은 시작가격보다 높아야 합니다.");
                         } else if(data==5) {
-                            swal("경매 중단 기간이라 참여가 불가합니다.");
-                        } else if(data==6) {
-                            swal("해당 가격으로 이미 입찰되었습니다.");
-                            location.reload();
+                            swal("해당 가격으로 이미 입찰되었습니다.").then(function(success){
+								if(success){
+
+									location.reload();
+								}
+							})
                         } else {
                             swal("정상적으로 입찰되었습니다","","success").then(function(){
 
@@ -106,5 +205,150 @@ function dobid(tmp) {
                 });	
             }
         }) 
-        
+	} 
 }
+
+
+function do_bid_run() {
+	var param="p_number=105";
+
+	$.ajax({
+		url:'x_bid_run.asp',
+		data:param,
+		type:'post',
+		success:function(data, status, req) {
+			document.getElementById("div_auction_run").innerHTML=data;	
+		},
+		error:function(req, status, error) {
+			swal(error);
+		}
+	});	
+}
+
+function do_fav() {
+
+	var user_check_id=$("#id").val();
+	var product_check_id =$("#productId").val();
+	if(user_check_id=='' || user_check_id == null) {
+		Swal.fire({
+			title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+			icon: "warning",    //상황에 맞는 아이콘
+
+			showCancelButton: true,
+			confirmButtonColor: '#fea532',
+			confirmButtonText: '확인',
+			cancelButtonText: '취소',
+			reverseButtons: true   // 버튼 순서 변경
+		}).then((result) =>{
+			if(result.isConfirmed){
+				location.href='/member/login';
+			}
+		})
+
+		return;
+	}
+
+	console.log("rr");
+
+	$.ajax({
+		type:'POST',
+		url:'./likeProduct',
+		data:{
+			productId : product_check_id,
+			id : user_check_id  ,
+			
+		},success:function(data) {
+			if(data == "Y") {
+				swal("이미 관심경매로 등록되었습니다","마이페이지에서 확인 가능합니다.","warning");
+			} else {
+				swal("관심경매로 등록되었습니다.","마이페이지에서 확인 가능합니다.","success");
+			}
+		},
+		error:function(error) {
+			swal(error);
+		}
+	});	
+	
+}
+
+function open_layer_qna() {
+		var u_id=$("#id").val();
+		
+		console.log("rr");
+		console.log(u_id)
+
+		if(u_id=='' || u_id == null) {
+			Swal.fire({
+				title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+				icon: "warning",    //상황에 맞는 아이콘
+	
+				showCancelButton: true,
+				confirmButtonColor: '#fea532',
+				confirmButtonText: '확인',
+				cancelButtonText: '취소',
+				reverseButtons: true   // 버튼 순서 변경
+			}).then((result) =>{
+				if(result.isConfirmed){
+					location.href='/member/login'
+				}
+			})
+		}
+
+		var param=$("#productId").val();	
+		console.log(param);
+		// $.ajax({
+		// 	url:'/product/product_qna.asp',
+		// 	data:param,
+		// 	type:'post',
+		// 	success:function(data, status, req) {
+		// 		if (data=='n') {
+		// 			document.getElementById("layer_pop_qna").style.display="none";
+		// 			swal("상품문의는 로그인을 해야만 작성이 가능합니다.");
+		// 			return;
+		// 		} else {
+		// 			document.getElementById("layer_pop_qna").style.display="block";	
+		// 			document.getElementById("fixed_pop").style.display="block";
+		// 			document.getElementById("layer_pop_qna").innerHTML=data;
+		// 		}
+				
+		// 	},
+		// 	error:function(req, status, error) {
+		// 		swal(error);
+		// 	}
+		// });		
+		
+	}
+
+	function do_save_qna() {
+		var u_id=$("#id").val();
+		if(u_id=='') {
+			var ans=confirm("로그인하셔야 상품문의 작성이 가능합니다\n로그인 하시겠습니까?");
+			if(ans==true) {
+				location.href='/member/login';
+				return;
+			} else {
+				return;
+			}
+		}
+		
+		if($("#write_form2").validate()==false) {
+			return;
+		}
+
+		var obj=document.write_form2;
+		obj.action="/product/product_qna_proc.asp";
+		obj.submit();
+	}
+
+	function do_ment_view2(qna_idx) {
+		if(document.getElementById("do_menu2"+qna_idx).className=='over') {
+			document.getElementById("do_menu2"+qna_idx).className="";	
+		} else {
+			document.getElementById("do_menu2"+qna_idx).className="over";	
+		}
+	}
+
+	function close_layer() {
+		document.getElementById("fixed_pop").style.display="none";
+		document.getElementById("layer_pop_qna").style.display="none";		
+	}

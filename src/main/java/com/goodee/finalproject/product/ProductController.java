@@ -156,18 +156,46 @@ public class ProductController {
 		return mv;
 	}
 	
+	// 입찰 관리 bid post
 	@PostMapping("bid")
 	@ResponseBody
 	public String setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception{
 		
-		log.info("test2 -> {}",bidAmountVO);
-		int result = productService.setBidAmountAdd(bidAmountVO);
+		log.info("test2 -> {}",bidAmountVO.getBidAmount());
+		
+		Long check = productService.getMaxAmountCheck(bidAmountVO);
+		
 		String test = "";
-		log.info("test -> {}",result);
-		if(result == 1) {
-			test = "7";
+		// 시작가 관리 최대값이 없다면
+		
+		if(bidAmountVO.getDeadCheck().equals("1")) {
+			test = "2";
+			return test;
 		}
 		
+		if(check == null) {
+			check = bidAmountVO.getStartAmount();
+			if(check > bidAmountVO.getBidAmount()) {
+				test ="4";
+				return test;
+			}
+		}
+			
+		// 최대가격과 넘어오는 가격이 같음
+		System.out.println("check1"+check);
+		System.out.println("check2"+bidAmountVO.getBidAmount());
+		if(check.equals(bidAmountVO.getBidAmount())) {
+			test = "5";
+		} else if(check > bidAmountVO.getBidAmount()) {
+			test = "3";
+		}else if(check < bidAmountVO.getBidAmount()){
+			productService.setBidAmountAdd(bidAmountVO);
+			test = "6";
+		} 
+		
+		
+		
+			
 		return test;
 	}
 	
