@@ -44,14 +44,21 @@
 			         	</div>  
 					</div>
 				
-					<div id="media-box" class="media-box">
+					<div id="media-box" class="media-box" style="position: relative;">
 						<div id= "blackVideo" style="width: 100%; height: 100%; color: #a8a8a8; display:flex; align-items: center; justify-content: center;">
 							<div>현재 실시간 경매를 진행하고 있지 않습니다.</div>
 						</div>
 						<video id="localVideo" autoplay playsinline hidden ></video>
 						
+						
+						<div id = "mediaControls" style="width: 100%;  position: absolute;">
+						
+							<div id="mute-audio" style="width: 35px; height: 35px;"></div>
+							<div id="volume-slider" style="width: 35px; height: 35px;"></div>
+							<div id="zoom" style="width: 35px; height: 35px; float: right;"></div>
+						</div>
+						
 					</div>
-					
 					
 				</div>
 		
