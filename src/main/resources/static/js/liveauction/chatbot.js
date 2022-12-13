@@ -20,10 +20,10 @@ $("#sendZone").click(function(event){
             console.log(result.content);
             item = `<div class="other chat-text">
                         <div>
-                            <ul>${str}</ul>
+                            <ul><b>${str}</b></ul>
                         </div>
                         <div>
-							<li><b class="text">${result.content1}</b></li> <br/>
+							<li class="text">${result.content1}</li> <br/>
 							<li class="text">${result.content2}</li> <br/>
 							<li class="text">${result.content3}</li> <br/>
                         </div>
@@ -62,28 +62,7 @@ $("#talk").click(function(event){
                 console.log(result);
                 console.log(result.content);
                 
-                if((str == "일반 경매 하러가기") || (str == "실시간 경매 하러가기")) {
-                    item = `<div class="other">
-                            <div class="chat-text">
-                                <a href =${result.content} class="text">${str}</a> <br/>
-                            </div>
-                        </div>`;
-                }
-                else if((str == "일반 경매 신청하는 법") || (str == "실시간 경매 신청하는 법") || (str == "경매 신청하는 법")) {
-                    item = `<div class="other">
-                                <div class="chat-text">
-                                    <a href =${result.url} class="text">신청하러 가기</a><br/>
-                                    <b class="text">${result.content}</b> <br/>
-                                </div>
-                            </div>`;
-                }
-                else{
-                    item = `<div class="other">
-                                <div class="chat-text">
-                                    <b class="text">${result.content}</b> <br/>
-                                </div>
-                            </div>`;
-                }
+                item = `${result.content}`;
                 talk.innerHTML += item;
                 talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
             },
@@ -177,6 +156,7 @@ $("#msgSend").click(function(){
                                 </div>
                             </div>`;
                     talk.innerHTML += item;
+                    talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
                 },
                 error : function(result){
                     console.log("시류ㅐ");
@@ -272,6 +252,7 @@ function send1(str) {
                         </div>`;
             }
             talk.innerHTML += item;
+            talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
         },
         error : function(result){
             console.log("시류ㅐ");
@@ -304,6 +285,7 @@ function send2(str) {
                         </div>
 					</div>`;
             talk.innerHTML += item;
+            talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
         },
         error : function(result){
             console.log("시류ㅐ");

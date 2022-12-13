@@ -8,13 +8,13 @@
     text-align: center;
  } */
  #chatt #send #msg{
-   width: 80%;
+   width: 85%;
    height: 130px;
    display: inline-block;
 }
 
  .chat-box{
-     width: 100%;
+     width: 135%;
      aspect-ratio: 4 / 9; 
  }
 
@@ -31,6 +31,7 @@
     height: 63%;
     overflow: auto;
     border : 1px solid #aaa;
+    background-image: url("/images/snow.png");
     /* text-align: center; */
  }
 
@@ -48,11 +49,12 @@
   
  #chatt .me{
    
-    margin : 1px 0px 2px 10px;   
-    
+    margin : 10px 0px 10px 10px;   
+    color:white;
     display: flex !important;
     justify-content: flex-end;
     align-items: flex-end;
+    background-color: #fea532;
  }
  #chatt .other{
   
@@ -60,6 +62,7 @@
     display: flex !important;
     justify-content: flex-start;
     align-items: flex-start;
+    background-color :	#ffffff;
  }
 
  #msgSend {
