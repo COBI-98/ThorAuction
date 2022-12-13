@@ -496,8 +496,31 @@ auctionend.addEventListener("click",function(){
 
 	//경매 시작 클릭 시
 	if(auctionend.value == "경매시작")	 {
-		auctionstart();
-	
+		console.log($("select[name=items]").val());
+		if($("select[name=items]").val() != "none") {
+			if(unit.value !=""){
+				auctionstart();
+			}else{
+				Swal.fire({
+					title: "단위 가격이 설정이 안되었습니다..",  
+					icon: "error",    
+					
+					confirmButtonColor: '#3085d6',
+					
+					confirmButtonText: '확인'
+				} )
+			}
+		}else{
+			Swal.fire({
+				title: "경매 물품이 설정이 안되었습니다.",  
+				icon: "error",    
+				
+				confirmButtonColor: '#3085d6',
+					
+					confirmButtonText: '확인'
+			} )
+		}
+		
 	//경매 종료 클릭 시
 	}else{
 		sendresult();
