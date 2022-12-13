@@ -216,4 +216,17 @@ public class ProductController {
 		return likeCheck;
 	}
 	
+	@PostMapping("questionAdd")
+	public ModelAndView setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = productService.setQuestionAdd(productQuestionVO);
+		
+		
+		if(result==1) {
+			System.out.println("성공");
+		}
+		String url = "redirect:/product/detail?productId="+productQuestionVO.getProductId();
+		mv.setViewName(url);
+		return mv;
+	}
 }

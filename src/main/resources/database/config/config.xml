@@ -12,6 +12,7 @@
 		<typeAlias type="com.goodee.finalproject.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.goodee.finalproject.member.RoleVO" alias="RoleVO" />
 		<typeAlias type="com.goodee.finalproject.mypage.PayVO" alias="PayVO" />
+		
 		<typeAlias type="com.goodee.finalproject.board.notice.NoticeVO" alias="NoticeVO"/>
    		<typeAlias type="com.goodee.finalproject.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
    		<typeAlias type="com.goodee.finalproject.board.application.ApplicationVO" alias="ApplicationVO"/>
@@ -21,6 +22,7 @@
    		<typeAlias type="com.goodee.finalproject.product.CategoryVO" alias="CategoryVO"/>
    		<typeAlias type="com.goodee.finalproject.product.BidAmountVO" alias="BidAmountVO"/>
    		<typeAlias type="com.goodee.finalproject.product.LikeSaleProductVO" alias="LikeSaleProductVO"/>
+   		<typeAlias type="com.goodee.finalproject.product.ProductQuestionVO" alias="ProductQuestionVO"/>
    		
    		<typeAlias type="com.goodee.finalproject.payhistory.PayHistoryVO" alias="PayHistoryVO"/>
    		

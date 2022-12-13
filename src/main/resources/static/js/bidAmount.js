@@ -271,9 +271,7 @@ function do_fav() {
 
 function open_layer_qna() {
 		var u_id=$("#id").val();
-		
-		console.log("rr");
-		console.log(u_id)
+		var param=$("#productId").val();
 
 		if(u_id=='' || u_id == null) {
 			Swal.fire({
@@ -290,15 +288,12 @@ function open_layer_qna() {
 					location.href='/member/login'
 				}
 			})
+		}else{
+			document.getElementById("layer_pop_qna").style.display="block";	
+			document.getElementById("fixed_pop").style.display="block";
 		}
-
-		var param=$("#productId").val();	
-		console.log(param);
-		// $.ajax({
-		// 	url:'/product/product_qna.asp',
-		// 	data:param,
-		// 	type:'post',
-		// 	success:function(data, status, req) {
+		
+		
 		// 		if (data=='n') {
 		// 			document.getElementById("layer_pop_qna").style.display="none";
 		// 			swal("상품문의는 로그인을 해야만 작성이 가능합니다.");
@@ -319,22 +314,32 @@ function open_layer_qna() {
 
 	function do_save_qna() {
 		var u_id=$("#id").val();
+		var product_id=$("#productId").val();
+		console.log(u_id);
+		console.log(product_id)
+		console.log($("#commentTitle").val());
+		console.log($("#comment").val())
 		if(u_id=='') {
-			var ans=confirm("로그인하셔야 상품문의 작성이 가능합니다\n로그인 하시겠습니까?");
-			if(ans==true) {
-				location.href='/member/login';
-				return;
-			} else {
-				return;
-			}
+			Swal.fire({
+				title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+				icon: "warning",    //상황에 맞는 아이콘
+	
+				showCancelButton: true,
+				confirmButtonColor: '#fea532',
+				confirmButtonText: '확인',
+				cancelButtonText: '취소',
+				reverseButtons: true   // 버튼 순서 변경
+			}).then((result) =>{
+				if(result.isConfirmed){
+					location.href='/member/login';
+				}
+			})
 		}
 		
-		if($("#write_form2").validate()==false) {
-			return;
-		}
+		
 
 		var obj=document.write_form2;
-		obj.action="/product/product_qna_proc.asp";
+		obj.action="./questionAdd";
 		obj.submit();
 	}
 

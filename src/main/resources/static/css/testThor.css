@@ -750,7 +750,6 @@
     /******************************************************* íŒì—… *********************************************************/
     .layer_pop_design {position:fixed;left:50%;width:50%;margin-left:-25%;top:15px;min-height:450px;z-index:100;background-color:#fff;border-radius:25px;box-shadow:20px 20px 10px rgba(0,0,0,0.2)}
     .layer_pop_design h3.tit {position:relative}
-    .layer_pop_design h3.tit .close{position:absolute;top:15px;right:20px;cursor:pointer;background:url(/images/icon/close.png) no-repeat;background-size:100%;text-indent:-9999px;display:block;width:35px;height:35px;}
     
     .wid400 {width:400px !important;left:50%;margin-left:-200px}
     .wid1200 {width:1450px !important;left:50%;margin-left:-725px}

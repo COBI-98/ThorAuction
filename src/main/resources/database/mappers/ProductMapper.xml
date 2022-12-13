@@ -204,4 +204,10 @@
  		SELECT LIKENUM FROM LIKESALEPRODUCT
  		WHERE PRODUCTID =#{productId} AND ID= #{id}
  	</select>
+ 	
+ 	<!-- 상품 문의하기 -->
+ 	<insert id="setQuestionAdd" parameterType="ProductQuestionVO">
+ 		INSERT INTO PRODUCTQUESTION
+ 		VALUES (QUESTIONID,#{questionTitle},#{questionContents},now(),#{productId},#{id});
+ 	</insert>
 </mapper>
