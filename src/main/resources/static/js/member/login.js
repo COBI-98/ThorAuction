@@ -8,7 +8,7 @@ $("#id").blur(function () {
     } else { }
 });
 
-$("#pw").blur(function(){
+$("#pw").change(function(){
     if(!($("#pw").val()) == "") {
         results[1] = true;
     } 
