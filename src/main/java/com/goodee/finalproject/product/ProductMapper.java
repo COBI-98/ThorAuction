@@ -59,4 +59,6 @@ public interface ProductMapper {
 	public int setLikeSaleProduct(LikeSaleProductVO likeSaleProductVO) throws Exception;
 	
 	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception;
+	
+	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception;
 }

@@ -83,4 +83,9 @@ public class ProductService {
 		
 		return productMapper.getLikeProductCheck(likeSaleProductVO);
 	}
+	
+	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.setQuestionAdd(productQuestionVO);
+	}
 }
