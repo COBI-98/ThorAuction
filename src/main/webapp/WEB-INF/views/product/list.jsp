@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,53 +104,182 @@
 							<div class="sub_tit">온라인경매</div>
 							<div class="total_product">
 								<strong>총 ${saleVO.size()}개</strong><!-- 임시 -->
-								<div class="order_by">
-									<a href="auction_list.asp?sc=1&amp;" class="on">등록순</a>
-									<a href="auction_list.asp?sc=2&amp;">참여높은순</a>
-									<a href="auction_list.asp?sc=3&amp;">임박순</a>
-									<a href="auction_list.asp?sc=4&amp;">낮은가격순</a>
-									<a href="auction_list.asp?sc=5&amp;">높은가격순</a>
-								</div>
+								<c:if test="${not saleVO[0].deadlineInfo}">
+									<div class="order_by">
+										<a href="./list?sc=1&list;" <c:if test="${classCheck == '1'}">class="on"</c:if>>등록순</a>
+										<a href="./list?sc=2&list;" <c:if test="${classCheck == '2'}">class="on"</c:if>>참여높은순</a>
+										<a href="./list?sc=3&list;" <c:if test="${classCheck == '3'}">class="on"</c:if>>임박순</a>
+										<a href="./list?sc=4&list;" <c:if test="${classCheck == '4'}">class="on"</c:if>>낮은가격순</a>
+										<a href="./list?sc=5&list;" <c:if test="${classCheck == '5'}">class="on"</c:if>>높은가격순</a>
+									</div>
+								</c:if>
 							</div>
+							
 							<div class="auction_list">
 								<ul>
-									<!-- 올린시간 -->
-									<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
-										
-											<li>
-												
-												<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
-												<c:set var="testVO" value="testVO${status.index}" />
-												<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
-												<div class="imgbox">
-													<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
-													
-													<div class="timedate" id="timertest" >
-		
-													</div>
-												</div>
-												<div class="text">
-													<c:if test ="${not VO.deadlineInfo}">
-													<a href="#" class="title">${requestScope[testVO].productName}</a>
-													<div class="pricebox">
-														
-														<div>시작가 <span class="through">${requestScope[testVO].productPrice}</span> </div>
-														<div>현재가 <span class="price">${requestScope[testVO].productPrice}  <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-														<a href="#" class="shophome">COBI</a>
-													</div>
-													</c:if>
-													<c:if test = "${VO.deadlineInfo}">
-														<a href="#" class="title">${requestScope[testVO].productName}</a>
-														<div class="pricebox">
-															경매가 종료되었습니다.
-															<a href="#" class="shophome">COBI</a>
-														</div>
-													</c:if>
-												</div>
-											</li> 
-										
-									</c:forEach>
-									
+									<c:choose>
+											<c:when test="${classCheck == '2'}">
+												<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
+																
+																		<c:set var="testVO" value="testVO${status.index}" />
+																		<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
+																		<c:set var="deadLineCompare" value="${requestScope[testVO].auctionPeriod}" />
+																	<li>
+																		
+																		<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+																		<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+																		<div class="imgbox">
+																			<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+																			
+																			<div class="timedate" id="timertest" >
+								
+																			</div>
+																		</div>
+																		<div class="text">
+																			<c:if test ="${not VO.deadlineInfo}">
+																			<a href="#" class="title">${requestScope[testVO].productName}</a>
+																			<div class="pricebox">
+																				
+																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
+																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+																				<a href="#" class="shophome">COBI</a>
+																			</div>
+																			</c:if>
+																			<c:if test = "${VO.deadlineInfo}">
+																				<a href="#" class="title">${requestScope[testVO].productName}</a>
+																				<div class="pricebox">
+																					경매가 종료되었습니다.
+																					<a href="#" class="shophome">COBI</a>
+																				</div>
+																			</c:if>
+																		</div>
+																	</li> 
+																
+															</c:forEach>
+											</c:when>
+											<c:when test="${classCheck == '3'}">
+												<c:forEach items="${orderTime}" var="orderT">
+													<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
+																
+																		<c:set var="testVO" value="testVO${status.index}" />
+																		<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
+																		<c:set var="deadLineCompare" value="${requestScope[testVO].auctionPeriod*24*3600*1000+VO.productDate.getTime()}" />
+																		<c:if test="${orderT == deadLineCompare}">
+																	<li>
+																		
+																		<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+																		<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+																		<div class="imgbox">
+																			<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+																			
+																			<div class="timedate" id="timertest" >
+								
+																			</div>
+																		</div>
+																		<div class="text">
+																			<c:if test ="${not VO.deadlineInfo}">
+																			<a href="#" class="title">${requestScope[testVO].productName}</a>
+																			<div class="pricebox">
+																				
+																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
+																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+																				<a href="#" class="shophome">COBI</a>
+																			</div>
+																			</c:if>
+																			<c:if test = "${VO.deadlineInfo}">
+																				<a href="#" class="title">${requestScope[testVO].productName}</a>
+																				<div class="pricebox">
+																					경매가 종료되었습니다.
+																					<a href="#" class="shophome">COBI</a>
+																				</div>
+																			</c:if>
+																		</div>
+																	</li> 
+																</c:if>
+															</c:forEach>
+												</c:forEach>
+											</c:when>
+											<c:when test="${classCheck == '5' || classCheck == '4'}">
+												<c:forEach items="${orderBidAmount}" var="order">
+													<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
+																
+																		<c:set var="testVO" value="testVO${status.index}" />
+																		<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
+																		<c:if test="${order == requestScope[bidAmountCheck]}">
+																	<li>
+																		
+																		<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+																		<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+																		<div class="imgbox">
+																			<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+																			
+																			<div class="timedate" id="timertest" >
+								
+																			</div>
+																		</div>
+																		<div class="text">
+																			<c:if test ="${not VO.deadlineInfo}">
+																			<a href="#" class="title">${requestScope[testVO].productName}</a>
+																			<div class="pricebox">
+																				
+																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
+																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+																				<a href="#" class="shophome">COBI</a>
+																			</div>
+																			</c:if>
+																			<c:if test = "${VO.deadlineInfo}">
+																				<a href="#" class="title">${requestScope[testVO].productName}</a>
+																				<div class="pricebox">
+																					경매가 종료되었습니다.
+																					<a href="#" class="shophome">COBI</a>
+																				</div>
+																			</c:if>
+																		</div>
+																	</li> 
+																</c:if>
+															</c:forEach>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
+																
+																		<c:set var="testVO" value="testVO${status.index}" />
+																		<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
+																		<c:set var="deadLineCompare" value="${requestScope[testVO].auctionPeriod}" />
+																	<li>
+																		
+																		<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+																		<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+																		<div class="imgbox">
+																			<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+																			
+																			<div class="timedate" id="timertest" >
+								
+																			</div>
+																		</div>
+																		<div class="text">
+																			<c:if test ="${not VO.deadlineInfo}">
+																			<a href="#" class="title">${requestScope[testVO].productName}</a>
+																			<div class="pricebox">
+																				
+																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
+																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+																				<a href="#" class="shophome">COBI</a>
+																			</div>
+																			</c:if>
+																			<c:if test = "${VO.deadlineInfo}">
+																				<a href="#" class="title">${requestScope[testVO].productName}</a>
+																				<div class="pricebox">
+																					경매가 종료되었습니다.
+																					<a href="#" class="shophome">COBI</a>
+																				</div>
+																			</c:if>
+																		</div>
+																	</li> 
+																
+															</c:forEach>
+											</c:otherwise>	
+									</c:choose>
 									
 									
 									

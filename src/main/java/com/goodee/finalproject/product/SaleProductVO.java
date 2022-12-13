@@ -15,6 +15,16 @@ public class SaleProductVO {
 	private Timestamp productDate;
 	private Long AmountUnit;
 
+	// 등록순,가격순 체크용
+	private String sc; 
+	
+	public String getSc() {
+		if(sc ==null) {
+			sc = "1";
+		}
+		
+		return sc;
+	}
 	
 	public Boolean getDeadlineInfo() {
 		if(deadlineInfo==null) {

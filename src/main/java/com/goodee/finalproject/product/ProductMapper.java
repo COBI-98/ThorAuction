@@ -38,6 +38,9 @@ public interface ProductMapper {
 	// 상품리스트
 	public List<SaleProductVO> getSaleProductList(SaleProductVO saleProductVO) throws Exception;
 	
+	public List<SaleProductVO> getSaleProductHitList(SaleProductVO saleProductVO) throws Exception;
+	
+	
 	// 카테고리리스트
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception;
 
@@ -50,4 +53,6 @@ public interface ProductMapper {
 
 	// 입찰금액 추가
 	public int setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception;
+	
+	public int setSaleProductHit(SaleProductVO saleProductVO) throws Exception;
 }
