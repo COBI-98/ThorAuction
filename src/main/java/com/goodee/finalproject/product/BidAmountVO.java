@@ -13,4 +13,6 @@ public class BidAmountVO {
 	private Long bidAmount;
 	private Timestamp bidDate;
 	
+	private Long startAmount;
+	private String deadCheck;
 }
