@@ -156,8 +156,10 @@ connection.onstream = function(event) {
   	
   	
     
+    const screenShare = document.querySelector("#screenShare");
     
-    document.querySelector("#screenShare").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
+    if(screenShare != null ){
+	 screenShare.addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
 			var videoStream =  video.srcObject;
 			
 			
@@ -186,11 +188,15 @@ connection.onstream = function(event) {
 
 			
 	})
+	
+}
+   
     
     
     ////
-  
-    document.querySelector("#cameras").addEventListener("input",function(){ 
+  const cameras = document.querySelector("#cameras");
+  if(cameras != null){
+	 cameras.addEventListener("input",function(){ 
 			
 			 navigator.mediaDevices.getUserMedia({
 		        video: {
@@ -207,28 +213,8 @@ connection.onstream = function(event) {
 			   });
 	})
 	
-	//resetStack
-	 document.querySelector("#resetStack").addEventListener("click",function(){ 
-			navigator.mediaDevices.getDisplayMedia({
-		        video: true,
-		        audio: true,
-		      })
-		      .then((stream) => {
-				var video = document.createElement('video');
-
-			    try {
-			        video.setAttributeNode(document.createAttribute('autoplay'));
-			        video.setAttributeNode(document.createAttribute('playsinline'));
-			    } catch (e) {
-			        video.setAttribute('autoplay', true);
-			        video.setAttribute('playsinline', true);
-			    }
-			
-			})
-			
-			
-	});
-	
+}
+   
 	
     
   	var width = parseInt(connection.videosContainer.clientWidth) + 200;
@@ -246,7 +232,7 @@ connection.onstream = function(event) {
         mediaElement.media.play();
     }, 5000);
 
-    mediaElement.id = event.streamid;
+//    mediaElement.id = event.streamid;
     
    
 };
@@ -387,6 +373,32 @@ if(navigator.connection &&
 }
 
 
+document.querySelector("#localVideo").addEventListener("mouseover",function(){
+			
+            document.querySelector("#mediaControls").style.opacity = 1;
+           
+	
+	
+})
+document.querySelector("#mediaControls").addEventListener("mouseover",function(){
+			
+            document.querySelector("#mediaControls").style.opacity = 1;
+           
+	
+	
+})
+document.querySelector("#localVideo").addEventListener("mouseleave",function(){
+		
+             document.querySelector("#mediaControls").style.opacity = 0;
+            
+})
+
+
+document.querySelector("#mediaControls").addEventListener("mouseleave",function(){
+		
+             document.querySelector("#mediaControls").style.opacity = 0;
+            
+})
 
 
 

@@ -149,11 +149,7 @@ ws.onmessage = function(msg){
 	// 	amount.innerHTML = rank[0];
 	// }
 
-	//방송 일시정지 시
-	else if(data.pause != null){
-		let muteVideo = document.querySelector("#muteVideo");
-		muteVideo.click();
-	 }
+
 
 	//경매 종료 시
 	else if(data.amount != null) {
@@ -532,18 +528,8 @@ function usercome(){
 
 
 
-function pauseCam(){
-   if(cameraPause.classList.contains("pause")){
-      return true;
-   }   
-   return false;
-}
 
-function sendPause(){
-   data2.pause = pauseCam();
-   var temp = JSON.stringify(data2);
-   ws.send(temp);
-}
+
 
 //최고가 변경시 hidden 값 변경 (1초 뒤)
 $('#amount').on('DOMSubtreeModified propertychange',function(){
@@ -710,7 +696,7 @@ function adminChat(){
 	
 	cameraPause.addEventListener("click",function(){
 	   cameraPause.classList.toggle("pause");
-	   sendPause();
+	   
 	})
 	
 	//실시간 경매 종료 (소켓 닫음)
