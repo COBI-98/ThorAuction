@@ -134,7 +134,10 @@ public class ProductController {
 		ModelAndView mv= new ModelAndView();
 		saleProductVO = productService.getSaleProductListDetail(saleProductVO);
 		productService.setSaleProductHit(saleProductVO);
-		MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
 		BidAmountVO bidAmountVO = new BidAmountVO();
 		
 //		log.info("Test 1 -> {}", saleProductVO.getBidAmountVOs());
@@ -147,7 +150,7 @@ public class ProductController {
 		}
 		
 		mv.addObject("maxAmount", check);
-		mv.addObject("memberVO", memberVO);
+		
 		mv.addObject("saleProductVO", saleProductVO);
 		mv.setViewName("product/detail");
 		return mv;
