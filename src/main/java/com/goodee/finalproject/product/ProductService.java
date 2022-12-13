@@ -40,6 +40,11 @@ public class ProductService {
 		return productMapper.getSaleProductList(saleProductVO);
 	}
 	
+	public List<SaleProductVO> getSaleProductHitList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductHitList(saleProductVO);
+	}
+	
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception{
 		return productMapper.getCategoryList(categoryVO);
 	}
@@ -62,5 +67,10 @@ public class ProductService {
 	public int setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception{
 		
 		return productMapper.setBidAmountAdd(bidAmountVO);
+	}
+	
+	public int setSaleProductHit(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.setSaleProductHit(saleProductVO);
 	}
 }
