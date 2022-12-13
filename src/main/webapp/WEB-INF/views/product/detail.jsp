@@ -225,8 +225,9 @@
 						<link rel="stylesheet" media="only screen and (max-width: 1023px)" href="/css/ranking.css">
 						
 						<c:forEach items="${saleProductVO.bidAmountVOs}" var="amountVO" varStatus="status">
-							<c:if test="${amountVO.bidAmount != null}">
-								<div class="runner">
+							<c:if test="${amountVO.bidAmount != null && status.count < 5 }">
+								<p></p>
+								<div class="runner" id="detail_con1">
 									<div class="title">
 										<strong><fmt:formatNumber value="${amountVO.bidAmount}" pattern="###,###"/></strong>원
 										<div class="name">${amountVO.id}<br></div>
@@ -260,7 +261,7 @@
 				
 				<table class="table table-bordered border-warning">
 					<tbody>
-						<tr class="table-warning">
+						<tr class="table-warning" id="detail_con2">
 							
 							<th>상품상세정보</th>
 							<tr>
@@ -280,6 +281,36 @@
 		</c:forEach>
 		
 	</section>
+	<script type="text/javascript">
+		
+			
+		  $(".tap_product li").click(function() {
+			 var scrollPosition = $(this).data("move")
+		
+			 $(this).addClass('on');
+			 $(this).siblings().removeClass('on');
+			 var movenum = $(this).data("move")
+			  var offset = $("#" + movenum).offset();
+				$('html, body').animate({scrollTop : offset.top-100}, 400);
+		  });
+		
+		  $( document ).ready( function() {
+			var jbOffset = $( '.tap_product' ).offset();
+		
+			$( window ).scroll( function() {
+			  if ( $( document ).scrollTop() > jbOffset.top ) {
+				$( '.tap_product' ).addClass( 'jbFixed' );
+			  }
+			  else {
+				$( '.tap_product' ).removeClass( 'jbFixed' );
+			  }
+			});
+		
+		  } );
+		
+		 
+		
+		</script>
 	<script src="/js/detailTimer.js"></script>
 	<script src="/js/bidAmount.js"></script>
 	<script src="/js/test466.js"></script>
