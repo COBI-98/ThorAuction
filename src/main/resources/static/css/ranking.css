@@ -674,7 +674,7 @@
     .auction_run .runner .run .bg1{width:130px;height:110px;background:url('/images/run1.png') center no-repeat;position:relative;background-size:130px}
     .auction_run .runner .run .bg2{width:130px;height:104px;background:url('/images/run2.png') center no-repeat;position:relative;background-size:130px}
     .auction_run .runner .run .bg3{width:130px;height:120px;background:url('/images/run3.png') center no-repeat;position:relative;background-size:130px}
-    .auction_run .runner .run .bg4{width:130px;height:125px;background:url('/images/auction/run4.png') center no-repeat;position:relative;background-size:130px}
+    .auction_run .runner .run .bg4{width:130px;height:125px;background:url('/images/run4.png') center no-repeat;position:relative;background-size:130px}
     
     
     .auction_run .runner .run .bg1 img{position:absolute;left:50%;top:0px;transform:translate(-50%,-99%);}
