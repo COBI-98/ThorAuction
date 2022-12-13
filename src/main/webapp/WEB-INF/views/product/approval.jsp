@@ -130,15 +130,15 @@
 						
 						<div class="btn_box right">	
 							<!-- return false; -->
-							<a href="#" onclick="do_fav(94);" class="mbtn red">관심경매등록</a>
+							<a href="#" disabled class="mbtn red">관심경매등록</a>
 						</div>
 						<div class="bidbtn" style="display:block">
 							<div class="bid1">
-								<span><a href="#" onclick="do_bid('A');">입찰하기 <strong><em><fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
+								<span><a href="#" disabled>입찰하기 <strong><em><fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
 								1,000원 단위로 입찰
 							</div>
 							<div class="bid2">
-								<span><strong><input type="text" name="bid_money" onkeyup="numberFormat(this);" onblur="priceCutting('C', 1000);" value="<fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/>"> 원</strong> <a href="#" onclick="do_bid('B');">자율입찰 +</a></span>
+								<span><strong><input type="text" disabled name="bid_money" onkeyup="numberFormat(this);" onblur="priceCutting('C', 1000);" value="<fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/>"> 원</strong> <a href="#" >자율입찰 +</a></span>
 								원하는 입찰 금액을 적어주세요. <br>(입찰시 입찰단위로 변환됩니다.)<br>1,000원 단위로 자율입찰됩니다.
 							</div>
 						</div>
