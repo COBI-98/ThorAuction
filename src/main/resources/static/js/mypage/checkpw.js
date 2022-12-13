@@ -1,6 +1,7 @@
 // checkpw.js
 
 $('#checkpw_btn').click(function() {
+	const id = $('#id').val();
 	const checkPassword = $('#pw').val();
 	
 	if(!checkPassword || checkPassword.trim() === ""){
@@ -19,7 +20,7 @@ $('#checkpw_btn').click(function() {
 			console.log(result);
 			if(result){
 				console.log("비밀번호 일치");
-				location.href="/mypage/update";
+				location.href="/mypage/update?id=" + id;
 			} else if(!result){
 				console.log("비밀번호 틀림");
 				// 비밀번호가 일치하지 않으면
