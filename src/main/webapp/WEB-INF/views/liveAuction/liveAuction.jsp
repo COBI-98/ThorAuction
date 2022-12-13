@@ -37,7 +37,7 @@
 				<div id="media-broadcast">
 					<div id="media-header" >
 						<div id="media-title">
-							<h2 id="media-titleText"> 제목</h2>
+							<h2 id="media-titleText"></h2>
 						</div>
 						<div id="item">
 			          	  	<span id="selecteditem"></span>
@@ -53,6 +53,7 @@
 						
 						<div id = "mediaControls" style="width: 100%;  position: absolute;">
 						
+							<div id="muteVideo" style="width: 35px; height: 35px;"></div>
 							<div id="mute-audio" style="width: 35px; height: 35px;"></div>
 							<div id="volume-slider" style="width: 35px; height: 35px;"></div>
 							<div id="zoom" style="width: 35px; height: 35px; float: right;"></div>

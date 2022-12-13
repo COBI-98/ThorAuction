@@ -73,21 +73,18 @@ function getHTMLMediaElement(mediaElement, config) {
     }
 
     if (buttons.has('mute-video')) {
-        var muteVideo = document.createElement('div');
+        var muteVideo = document.querySelector('#muteVideo');
         let muteVideoId = document.createAttribute("id");
         muteVideoId.value = "muteVideo";
         muteVideo.setAttributeNode(muteVideoId);
         
         muteVideo.className = 'control ' + (config.toggle.has('mute-video') ? 'unmute-video selected' : 'mute-video');
-        mediaControls.appendChild(muteVideo);
-		muteVideo.style.display="none";
+//        mediaControls.appendChild(muteVideo);
         muteVideo.onclick = function() {
             if (muteVideo.className.indexOf('unmute-video') != -1) {
                 muteVideo.className = muteVideo.className.replace('unmute-video selected', 'mute-video');
                 mediaElement.muted = false;
                 mediaElement.volume = 1;
-                
-                
                 
                 mediaElement.play();
                 if (config.onUnMuted) config.onUnMuted('video');
