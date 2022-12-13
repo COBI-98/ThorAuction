@@ -26,7 +26,7 @@
                 <div class="member-card-layout__container">
                     <div class="member-card-layout__inner">
                         <h1 class="member-card-layout__logo">
-                            <img class="member-card-layout__logo-image" src="/images/member/Odin.png" alt="토실대">
+                            <img class="member-card-layout__logo-image" src="/images/bidcoin_logo.png" alt="비드코인">
                         </h1>
                         <div class="check-password">
                             <h2 class="check-password__title">내정보 수정</h2>
@@ -48,7 +48,7 @@
                                 </div>
 
                                 <div class="check-password__l-modal-btn">
-                                    <button type="button" id="checkpw_btn" class="member-button check-password__btn">진행하기</button>
+                                    <button type="button" id="checkpw_btn" class="member-button check-password__btn">로그인</button>
                                 </div>
                             </form>
                         </div>
