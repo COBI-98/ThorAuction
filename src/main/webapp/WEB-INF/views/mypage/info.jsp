@@ -92,7 +92,7 @@
                                                     <td>포인트 충전</td>
                                                     <td>포인트가 부족하신가요? 포인트를 충전해보세요!</td>
                                                     <td>
-                                                        <a href="https://dosomp.com/apply-seller/" class="button">충전하기</a>
+                                                        <a href="./charge" class="button">충전하기</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
