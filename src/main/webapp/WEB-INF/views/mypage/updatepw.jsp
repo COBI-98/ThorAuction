@@ -79,7 +79,7 @@
 													<a href="../mypage/updatepw?id=${memberDB.id}">비밀번호 변경</a>
 												</li>
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
-													<a href="#">회원탈퇴</a>
+													<a href="../mypage/delete?id=${memberDB.id}">회원탈퇴</a>
 												</li>
 											</ul>
 										</nav>
@@ -122,13 +122,13 @@
 													<input type="hidden" name="_msm_postid" value="">
 													
 													<!-- hidden -->
-													<input type="hidden" id="name" name="name" value="${memberDB.addr2}">
-													<input type="hidden" id="birth" name="birth" value="${memberDB.addr2}">
-													<input type="hidden" id="email" name="email" value="${memberDB.addr2}">
-													<input type="hidden" id="post" name="post" value="${memberDB.addr2}">
-													<input type="hidden" id="addr" name="addr" value="${memberDB.addr2}">
+													<input type="hidden" id="name" name="name" value="${memberDB.name}">
+													<input type="hidden" id="birth" name="birth" value="${memberDB.birth}">
+													<input type="hidden" id="email" name="email" value="${memberDB.email}">
+													<input type="hidden" id="post" name="post" value="${memberDB.post}">
+													<input type="hidden" id="addr" name="addr" value="${memberDB.addr}">
 													<input type="hidden" id="addr2" name="addr2" value="${memberDB.addr2}">
-													<input type="hidden" id="phone" name="phone" value="${memberDB.addr2}">
+													<input type="hidden" id="phone" name="phone" value="${memberDB.phone}">
 												</form>
 												<div class="mshop-members-message"></div>
 											</div>

@@ -51,7 +51,7 @@
                                                     <a href="../mypage/updatepw?id=${memberDB.id}">비밀번호 변경</a>
                                                 </li>                                                
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
-                                                    <a href="#">회원탈퇴</a>
+                                                    <a href="../mypage/delete?id=${memberDB.id}">회원탈퇴</a>
                                                 </li>
                                             </ul>
                                         </nav>
