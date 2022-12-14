@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>결제내역 :: 비드코인</title>
+	<title>입찰내역 :: 비드코인</title>
 	<link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
 	
 	<c:import url="../template/boot.jsp"></c:import>
@@ -38,7 +38,7 @@
 	
 	<!-- 마이페이지 CSS -->
 	<link rel="stylesheet" href="/css/mypage/info.css">
-
+	<link rel="stylesheet" href="/css/mypage/bidhistory.css">
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -63,13 +63,13 @@
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders ">
 													<a href="#">관심내역</a>
 												</li>
-												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
+												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions is-active">
 													<a href="../mypage/bidhistory?id=${memberDB.id}">입찰내역</a>
-												</li>													
+												</li>												
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
 													<a href="#">낙찰내역</a>
 												</li>
-												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile is-active">
+												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile">
 													<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
@@ -94,36 +94,35 @@
 											<div id="mshop_form_2702" class="ui mfs_form " style="">
 												<style></style>
 													<div class="field" style="">
-														<table class="table" style="font-size: 15px;">
-														  <thead>
-														    <tr>
-														      <th scope="col">주문번호</th>
-														      <th scope="col">금액</th>
-														      <th scope="col">상태</th>
-														      <th scope="col">날짜</th>
-														    </tr>
-														  </thead>
-														  <tbody>
-														    <c:forEach items="${pays}" var="pay">
-														    	<tr>
-														    		<td scope="row">
-														    		<c:set var="merchant" value="${pay.payMerchant}" />
-																    ${fn:substring(merchant,9,25) }
-														      		</td>
-														      <td><fmt:formatNumber value="${pay.payTotal}" pattern="###,###,###,###"/>원</td>
-														      <c:choose>
-														      	<c:when test="${pay.payResult == 'paid'}"><td>결제성공</td></c:when>
-														      	<c:when test="${pay.payResult == 'ready'}"><td>결제대기</td></c:when>
-														      	<c:when test="${pay.payResult == 'failed'}"><td>결제실패</td></c:when>
-														      </c:choose>
-														      <td>
-														      <c:set var="date" value="${pay.payDate}" />
-														      ${fn:substring(date, 0, 16) }
-														      </td>
-														    </tr>
-														    </c:forEach>
-														  </tbody>
-														</table>
+														<div class="mypage_content">
+													        <div class="pt5 pb5">총 <strong class="import">1</strong> 건의 경매참여내역이 있습니다. </div>
+													        <div class="myorder">
+													            <li class="list">
+													                <div class="shopinfo">
+													                    경매종료일: 2022-12-15 23:06:00 / 현재가: 22,000원
+													                </div>
+													                <div class="orderlist">
+													                    <ul class="prolist">
+													                        <li>
+													                            <a href="/auction/auction_view.asp?product_number=107">
+													                                <div class="imgbox"><img src="/userfiles/auction/2022/12/32022120817836_108887512.JPG"></div>
+													                                <div class="name">니코 미니 오일 라디에이터
+													                                    <div class="price">입찰금액 :22,000 원<br>
+													                                        입찰일 : 2022-12-14 16:17:08<br>
+													                                        입찰 : 1회
+													                                    </div>
+													                                </div>
+													                            </a>
+													                        </li>
+													                    </ul>
+													                    <div class="statebox">
+													                        <div class="state ">입찰</div>
+													                    </div>
+													                </div>
+													            </li>
+													        </div>
+													        <div class="he20"></div>
+													    </div>
 													</div>
 												<div class="mshop-members-message"></div>
 											</div>

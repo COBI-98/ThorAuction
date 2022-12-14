@@ -6,9 +6,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.product.ProductVO;
 
 @Mapper
 public interface MypageMapper {
+	
+	// 입찰 내역
+	public List<MemberVO> bidHistory(MemberVO memberVO) throws Exception;
 	
 	// 결제 내역
 	public List<PayVO> payHistory(PayVO payVO) throws Exception;

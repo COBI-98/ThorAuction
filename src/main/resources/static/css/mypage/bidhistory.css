@@ -1,0 +1,189 @@
+.mypage_content {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+}
+
+.mypage_title {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    font-size: 24px;
+    display: block;
+    padding: 0 0 25px;
+    letter-spacing: -0.5px;
+}
+
+.pt5 {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.pb5 {
+    padding-bottom: 5px;
+}
+
+.import {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    color: var(--color-point) !important;
+}
+
+.myorder {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+}
+
+.list {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    margin: 0px;
+    list-style: none;
+    clear: both;
+    border-top: 2px solid #333;
+    padding: 10px 0;
+}
+
+.shopinfo {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    font-size: inherit;
+    word-break: normal;
+    box-sizing: border-box;
+    position: relative;
+    font-family: Tahoma, verdana;
+    padding: 0px 0 10px 0;
+    color: #888;
+}
+
+.orderlist {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    border-top: 1px solid #eaeaea;
+}
+
+.prolist {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    width: calc(100% - 150px);
+}
+
+.imgbox {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    color: #333;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+    float: left;
+}
+
+.name {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    color: #333;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    width: calc(100% - 100px);
+    padding-left: 10px;
+    float: left;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.price {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    line-height: 1.6;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 14px;
+}
+
+.statebox {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    width: 150px;
+    text-align: center;
+}
+
+.state {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    list-style: none;
+    text-align: center;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+    color: var(--color-point);
+}
+
+.he20 {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    height: 20px;
+}
