@@ -1,12 +1,17 @@
 
 package com.goodee.finalproject.mypage;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.finalproject.member.MemberVO;
 
 @Mapper
 public interface MypageMapper {
+	
+	// 결제 내역
+	public List<PayVO> payHistory(PayVO payVO) throws Exception;
 	
 	// 총 포인트
 	public int getPoint(PayVO payVO) throws Exception;

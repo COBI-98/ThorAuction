@@ -39,7 +39,7 @@
                                                     <a href="#">낙찰내역</a>
                                                 </li>
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile">
-                                                    <a href="#">결제내역</a>
+                                                    <a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
                                                 </li>
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
                                                     <a href="#">신청한 상품</a>
@@ -60,7 +60,7 @@
                                         <div class="woocommerce-notices-wrapper"></div>
                                         <p>안녕하세요, <strong>${memberDB.id}</strong> 님</p>
                                         <p>
-                                            현재 <strong>${memberDB.name}</strong> 님의 포인트는 <strong><fmt:formatNumber value="${memberDB.point}" pattern="###,###,###"/> </strong>	 입니다
+                                            현재 <strong>${memberDB.name}</strong> 님의 포인트는 <strong><fmt:formatNumber value="${memberDB.point}" pattern="###,###,###,###"/></strong>	 입니다
                                         </p>
 
                                         <div class="woodmart-my-account-links">
@@ -74,7 +74,7 @@
                                                 <a href="#">낙찰내역</a>
                                             </div>
                                             <div class="msm-profile-link">
-                                                <a href="#">결제내역</a>
+                                                <a href="./payhistory?id=${memberDB.id}">결제내역</a>
                                             </div>
                                             <div class="msm-unsubscribe-link">
                                                 <a href="#">신청한 상품</a>

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>포인트 충전 :: 비드코인</title>
+	<title>결제내역 :: 비드코인</title>
 	<link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
 	
 	<c:import url="../template/boot.jsp"></c:import>
@@ -36,13 +38,9 @@
 	
 	<!-- 마이페이지 CSS -->
 	<link rel="stylesheet" href="/css/mypage/info.css">
-	<link rel="stylesheet" href="/css/mypage/charge.css">
 
-	<!-- 충전하기 JS -->
-    <script defer src="/js/mypage/charge.js"></script>
-	
-	<!-- 아임포트 -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<!-- 회원탈퇴 JS -->
+	<script defer src="/js/mypage/delete.js"></script>
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -61,7 +59,7 @@
 										<h3 class="woocommerce-MyAccount-title entry-title">마이페이지</h3>
 										<nav class="woocommerce-MyAccount-navigation">
 											<ul>
-												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active">
+												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard">
 													<a href="../mypage/info?id=${memberDB.id}">대시보드</a>
 												</li>
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders ">
@@ -70,7 +68,7 @@
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
 													<a href="#">낙찰내역</a>
 												</li>
-												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile">
+												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile is-active">
 													<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
@@ -79,7 +77,7 @@
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist">
 													<a href="../mypage/checkpw?id=${memberDB.id}">정보 수정</a>
 												</li>
-												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist">
+												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist ">
 													<a href="../mypage/updatepw?id=${memberDB.id}">비밀번호 변경</a>
 												</li>
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
@@ -94,39 +92,41 @@
 										<div style="max-width: 800px; margin: 0 auto;" class="msm-profile">
 											<div id="mshop_form_2702" class="ui mfs_form " style="">
 												<style></style>
-												<img alt="" src="/images/bidcoin_logo.png" class="mb-4" style= "width: 800px; height: 200px;">
-												<input type="hidden" value="${memberDB.id}" id="id">
-												<div class="card-body bg-white mt-0">
-													<label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
-		        									<label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="30000"><span>30,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="50000"><span>50,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="70000"><span>70,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="100000"><span>100,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="300000"><span>300,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="500000"><span>500,000원</span></label>
-											        <label class="box-radio-input"><input type="radio" name="cp_item" value="1000000"><span>1,000,000원</span></label>
-											        
-											        <label class="box-radio-input" style="width: 250px;">
-											        	<input type="radio" name="cp_item" id="value_money" value="">
-											        	<input type="text" id="input_money" placeholder="직접입력">
-											        </label>
-											        
-						        					<button type="button" class="btn carge_btn" id="pay">충전하기</button>
-						        					
-													<p style="font-weight: bold;">*** bidcoin은 카카오페이 결제만 가능합니다. ***</p>
-												</div>
-											
+												<form action="delete" method="POST" id="delete_form" class="ui form" data-id="2702" data-slug="edit_user_profile" data-error_popup="yes" data-type="">                                                     
+													<div class="field" style="">
+														<table class="table" style="font-size: 15px;">
+														  <thead>
+														    <tr>
+														      <th scope="col">주문번호</th>
+														      <th scope="col">금액</th>
+														      <th scope="col">상태</th>
+														      <th scope="col">날짜</th>
+														    </tr>
+														  </thead>
+														  <tbody>
+														    <c:forEach items="${pays}" var="pay">
+														    	<tr>
+														    		<td scope="row">
+														    		<c:set var="merchant" value="${pay.payMerchant}" />
+																    ${fn:substring(merchant,9,25) }
+														      		</td>
+														      <td><fmt:formatNumber value="${pay.payTotal}" pattern="###,###,###,###"/>원</td>
+														      <c:choose>
+														      	<c:when test="${pay.payResult == 'paid'}"><td>결제성공</td></c:when>
+														      	<c:when test="${pay.payResult == 'ready'}"><td>결제대기</td></c:when>
+														      	<c:when test="${pay.payResult == 'failed'}"><td>결제실패</td></c:when>
+														      </c:choose>
+														      <td>
+														      <c:set var="date" value="${pay.payDate}" />
+														      ${fn:substring(date, 0, 16) }
+														      </td>
+														    </tr>
+														    </c:forEach>
+														  </tbody>
+														</table>
+													</div>
+												</form>
 												<div class="mshop-members-message"></div>
-												
-												<!-- hidden -->
-												<input type="hidden" id="name" name="name" value="${memberDB.name}">
-												<input type="hidden" id="birth" name="birth" value="${memberDB.birth}">
-												<input type="hidden" id="email" name="email" value="${memberDB.email}">
-												<input type="hidden" id="post" name="post" value="${memberDB.post}">
-												<input type="hidden" id="addr" name="addr" value="${memberDB.addr}">
-												<input type="hidden" id="addr2" name="addr2" value="${memberDB.addr2}">
-												<input type="hidden" id="phone" name="phone" value="${memberDB.phone}">												
 											</div>
 										</div>
 									</div>

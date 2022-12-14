@@ -1,6 +1,7 @@
 package com.goodee.finalproject.mypage;
 
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -50,6 +51,21 @@ public class MypageController {
 		mv.setViewName("mypage/info");
 		
 		return mv;
+	}
+	
+	//결제내역
+	@GetMapping("payhistory")
+	public void payhistory(PayVO payVO, Model model) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(payVO.getId());
+		
+		List<PayVO> payVOs = mypageService.payHistory(payVO);
+		
+		log.info("결제내역 : {}", payVOs);
+		
+		model.addAttribute("pays", payVOs);
+		model.addAttribute("memberDB", memberVO);
 	}
 	
 	// 포인트 충전 GET
