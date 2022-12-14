@@ -30,7 +30,7 @@ $("#pay").click(function () {
         pg: 'kakaopay',
         pay_method: 'card', //생략 가능
         merchant_uid: 'merchant_' + new Date().getTime(), // 상점에서 관리하는 주문 번호
-        name: '토르의 실시간 대장간',
+        name: 'bidcoin',
         amount: money,
         buyer_email: $("#email").val(),
         buyer_name: $("#name").val(),

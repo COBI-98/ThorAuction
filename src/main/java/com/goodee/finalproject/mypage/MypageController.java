@@ -54,16 +54,11 @@ public class MypageController {
 	
 	// 포인트 충전 GET
 	@GetMapping("charge")
-	public void chargePoint(@AuthenticationPrincipal MemberVO memberVO2, Model model) throws Exception {
-		
-		MemberVO memberVO = new MemberVO();
-		
-		memberVO.setId(memberVO2.getId());
+	public void chargePoint(@AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
 		
 		log.info("회원 정보 : {}", memberVO);
 		
 		model.addAttribute("memberDB", memberVO);
-		
 	}
 	
 	// 포인트 충전 POST
