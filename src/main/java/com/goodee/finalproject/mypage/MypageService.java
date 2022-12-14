@@ -1,5 +1,7 @@
 package com.goodee.finalproject.mypage;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +25,13 @@ public class MypageService {
 	// 비밀번호 암호화해주는 메서드
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	
+	// 결제내역
+	public List<PayVO> payHistory(PayVO payVO) throws Exception {
+		
+		return mypageMapper.payHistory(payVO);
+	}
 	
 	
 	// 포인트 충전 + 누적 포인트

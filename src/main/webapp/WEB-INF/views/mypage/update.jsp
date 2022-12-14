@@ -62,7 +62,7 @@
 													<a href="#">낙찰내역</a>
 												</li>
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile">
-													<a href="#">결제내역</a>
+													<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
 													<a href="#">신청한 상품</a>

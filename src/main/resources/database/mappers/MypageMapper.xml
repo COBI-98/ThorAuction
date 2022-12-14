@@ -5,6 +5,13 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 결제내역 -->
+	<select id="payHistory" resultType="PayVO" parameterType="List">
+		SELECT * FROM PAY 
+		WHERE ID = #{id}
+		ORDER BY PAYDATE DESC
+	</select>
+
 	<!-- 총 포인트 -->
 	<update id="getPoint" parameterType="PayVO">
 		UPDATE THORMEMBER M 
@@ -16,8 +23,8 @@
 
 	<!-- 포인트 충전 -->
 	<insert id="chargePoint" parameterType="PayVO">
-		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE)
-		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
+		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE, PAYMERCHANT)
+		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now(), #{payMerchant})
 	</insert>
 	
 	<!-- 회원탈퇴 -->
