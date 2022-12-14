@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -50,7 +51,9 @@
 						<td>${m.addr }</td>
 						<td>${m.addr2 }</td>
 						<td>${m.phone }</td>
-						<td>${m.point }</td>
+						<td>
+							<fmt:formatNumber value="${m.point }" pattern="###,###,###,###" />
+						</td>
 						<td>${m.roleVOs[0].roleName }</td>
 						<td>
 							<c:choose>
@@ -99,7 +102,9 @@
 							<td>${ka.kakaoDetailVOs[0].kaAddr }</td>
 							<td>${ka.kakaoDetailVOs[0].kaAddrDetail }</td>
 							<td>${ka.kakaoDetailVOs[0].kaPhone }</td>
-							<td>${ka.kakaoDetailVOs[0].kaPoint }</td>
+							<td>
+								<fmt:formatNumber value="${ka.kakaoDetailVOs[0].kaPoint }" pattern="###,###,###,###" />
+							</td>
 							<td>${ka.kaRoleVOs[0].kaRoleName}</td>
 							<td>
 								<c:choose>
