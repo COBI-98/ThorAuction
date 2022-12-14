@@ -118,6 +118,15 @@
 												</div>
 											
 												<div class="mshop-members-message"></div>
+												
+												<!-- hidden -->
+												<input type="hidden" id="name" name="name" value="${memberDB.name}">
+												<input type="hidden" id="birth" name="birth" value="${memberDB.birth}">
+												<input type="hidden" id="email" name="email" value="${memberDB.email}">
+												<input type="hidden" id="post" name="post" value="${memberDB.post}">
+												<input type="hidden" id="addr" name="addr" value="${memberDB.addr}">
+												<input type="hidden" id="addr2" name="addr2" value="${memberDB.addr2}">
+												<input type="hidden" id="phone" name="phone" value="${memberDB.phone}">												
 											</div>
 										</div>
 									</div>
