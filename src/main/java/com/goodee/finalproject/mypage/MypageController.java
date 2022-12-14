@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.product.ProductService;
+import com.goodee.finalproject.product.ProductVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +37,7 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService mypageService;
+	
 	
 	// 마이페이지 홈
 	@GetMapping("info")
@@ -53,7 +56,16 @@ public class MypageController {
 		return mv;
 	}
 	
-	//결제내역
+	// 입찰내역
+	@GetMapping("bidhistory")
+	public void bidhistory(MemberVO memberVO) throws Exception {
+		
+		List<MemberVO> productVOs = mypageService.bidHistory(memberVO);
+		
+		log.info("입찰내역 : {}", productVOs);
+	}
+	
+	// 결제내역
 	@GetMapping("payhistory")
 	public void payhistory(PayVO payVO, Model model) throws Exception {
 		MemberVO memberVO = new MemberVO();

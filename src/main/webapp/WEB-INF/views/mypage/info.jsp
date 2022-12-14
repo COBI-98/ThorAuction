@@ -35,6 +35,9 @@
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
                                                     <a href="#">관심내역</a>
                                                 </li>
+												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
+													<a href="../mypage/bidhistory?id=${memberDB.id}">입찰내역</a>
+												</li>	                                                
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
                                                     <a href="#">낙찰내역</a>
                                                 </li>

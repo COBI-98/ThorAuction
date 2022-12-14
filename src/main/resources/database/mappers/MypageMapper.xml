@@ -5,6 +5,47 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 입찰내역 -->
+	<select id="bidHistory" resultMap="getBidHistory" parameterType="MemberVO">
+		SELECT B.*,TM.NAME,SP.*,AP.*,PF.*
+		 FROM THORMEMBER TM
+		 JOIN
+		 BIDAMOUNT B 
+	 	 ON TM.ID = B.ID
+	 	 JOIN 
+	 	 SALEPRODUCT SP
+	 	 ON B.PRODUCTID = SP.PRODUCTID 
+	 	 JOIN
+	 	 AUCTIONPRODUCT AP
+	 	 ON SP.PRODUCTNUM = AP.PRODUCTNUM 
+	 	 JOIN 
+	 	 PRODUCTFILES PF
+	 	 ON AP.PRODUCTNUM = PF.PRODUCTNUM 
+	 	 WHERE TM.ID = #{id}
+	</select>
+	
+	<resultMap type="ProductVO" id="getBidHistory">
+		<id column="PRODUCTNUM" property="productNum" />
+		<result column="PRODUCTNAME" property="productName" />
+		<result column="PRODUCTPRICE" property="productPrice" />
+		<result column="PRODUCTINFORMATION" property="productInformation" />
+		<result column="AUCTIONPERIOD" property="auctionPeriod" />
+		<result column="APPLICATIONNUM" property="applicationNum" />
+		
+		<collection property="productFileVO" javaType="List" ofType="ProductFileVO">
+			<id column="FILENUM" property="fileNum" />
+			<result column="FILENAME" property="fileName" />
+			<result column="ORINAME" property="oriName" />
+		</collection>
+		
+		<collection property="memberVO" javaType="String" ofType="MemberVO">
+			<id column="ID" property="id" />
+			<result column="NAME" property="name" />
+			<result column="POINT" property="point" />
+		</collection>
+		
+	</resultMap>
+
 	<!-- 결제내역 -->
 	<select id="payHistory" resultType="PayVO" parameterType="List">
 		SELECT * FROM PAY 

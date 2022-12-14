@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.product.ProductVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,13 +27,18 @@ public class MypageService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	// 입찰내역
+	public List<MemberVO> bidHistory(MemberVO memberVO) throws Exception {
+		
+		return mypageMapper.bidHistory(memberVO);
+	}
+	
 	
 	// 결제내역
 	public List<PayVO> payHistory(PayVO payVO) throws Exception {
 		
 		return mypageMapper.payHistory(payVO);
 	}
-	
 	
 	// 포인트 충전 + 누적 포인트
 	public int ChargePoint(PayVO payVO) throws Exception {
