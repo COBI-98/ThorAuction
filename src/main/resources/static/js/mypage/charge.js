@@ -49,7 +49,8 @@ $("#pay").click(function () {
                     payUid: rsp.imp_uid,
                     payTotal: rsp.paid_amount,
                     payResult: rsp.status,
-                    payDate: Unix_timestamp(rsp.paid_at) // 선언한 함수 안에 아임포트 파라미터 넣어주기
+                    payDate: Unix_timestamp(rsp.paid_at), // 선언한 함수 안에 아임포트 파라미터 넣어주기
+                    payMerchant: rsp.merchant_uid
                     //기타 필요한 데이터가 있으면 추가 전달
                 }
             }).done(function (data) { // 응답 처리
