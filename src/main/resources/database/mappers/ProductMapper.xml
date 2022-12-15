@@ -7,12 +7,17 @@
  	
  	<insert id="setProductAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">	
  		INSERT INTO AUCTIONPRODUCT
-		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum});
+		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum},0);
  	</insert>
  	
  	<insert id="setProductFileAdd" parameterType="ProductFileVO">
  		INSERT INTO PRODUCTFILES
  		VALUE (FILENUM,#{fileName},#{oriName},#{sort},#{productNum})
+ 	</insert>
+ 	
+ 	<insert id="setSaleProduct" parameterType="SaleProductVO">
+ 		INSERT INTO SALEPRODUCT
+ 		VALUE (PRODUCTID,#{productNum},#{categoryId},0,0,now(),#{amountUnit});
  	</insert>
  	
  	<delete id="setSummerFileDelete" parameterType="ProductFileVO">
@@ -67,7 +72,7 @@
 		DELETE FROM PRODUCTFILES WHERE PRODUCTNUM=#{productNum};
 	</delete>
 	
-	<!-- 상품 리스트 구현   -->
+	<!-- 상품 승인화면 구현   -->
 	<select id="getProductApproval" parameterType="productVO" resultMap="getProductFileList">
 		SELECT * FROM 
 		AUCTIONPRODUCT a
@@ -89,8 +94,120 @@
 				<result column = "FILENAME" property="fileName"></result>
 				<result column = "ORINAME" property="oriName"></result>
 				<result column="SORT" property="sort"></result>
+			</collection>	
+ 	</resultMap>
+ 	
+ 	<!-- 상품 리스트 화면 -->
+ 	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
+	 	
+		SELECT * FROM 
+		SALEPRODUCT p
+		where DEADLINEINFO = #{deadlineInfo};
+ 	</select>
+ 	
+ 	<select id="getSaleProductHitList" parameterType="SaleProductVO" resultType="SaleProductVO">
+	 	
+		SELECT * FROM 
+		SALEPRODUCT p
+		where DEADLINEINFO = #{deadlineInfo}
+		ORDER BY PRODUCTHIT DESC;
+ 	</select>
+ 	
+ 	
+ 	<!-- 상품리스트 디테일 -->
+ 	<select id="getSaleProductListDetail" parameterType="SaleProductVO" resultMap="getSaleProductDetail">
+ 		SELECT *    FROM 
+			SALEPRODUCT p
+			LEFT JOIN
+			AUCTIONPRODUCT a 
+			ON(p.PRODUCTNUM = a.PRODUCTNUM)
+				LEFT JOIN
+				PRODUCTFILES pf
+				ON(a.PRODUCTNUM =pf.PRODUCTNUM )
+					LEFT JOIN 
+					BIDAMOUNT B
+					ON(p.PRODUCTID = B.PRODUCTID)
+					WHERE p.PRODUCTID = #{productId}
+					ORDER BY B.BIDAMOUNT DESC;
+ 	</select>
+ 	
+ 	<update id="setDeadLineUpdate" parameterType="SaleProductVO">
+ 		UPDATE SALEPRODUCT SET
+		DEADLINEINFO = 1 WHERE PRODUCTID =#{productId}; 
+ 	</update>
+	
+	<resultMap type="SaleProductVO" id="getSaleProductDetail">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
 			</collection>
 			
+		</collection>
+
+		
+		<collection property="bidAmountVOs" javaType="List" ofType="BidAmountVO">
+				<id column="AMOUNTID" property="amountId"></id>
+				<result column = "PRODUCTID" property="productId"></result>
+				<result column = "ID" property="id"></result>
+				<result column = "BIDAMOUNT" property="bidAmount"></result>
+				<result column = "BIDDATE" property="bidDate"></result>
+		</collection>
+		
 		
  	</resultMap>
+ 	
+ 	<select id="getMaxAmountCheck" parameterType="BidAmountVO" resultType="Long">
+ 	SELECT MAX(BIDAMOUNT) AS PRODUCTVO FROM BIDAMOUNT
+	WHERE PRODUCTID= #{productId};
+ 	</select>
+ 	
+ 	<!-- 입찰금액 추가 -->
+ 	<insert id="setBidAmountAdd" parameterType="BidAmountVO">
+	 	INSERT INTO BIDAMOUNT
+		VALUES (AMOUNTID,#{productId},#{id},#{bidAmount},now());
+ 	</insert>
+ 	
+ 	<!-- 카테고리 리스트 -->
+ 	<select id="getCategoryList" parameterType="CategoryVO" resultType="CategoryVO">
+ 		select * from PRODUCTCATEGORY;
+ 	</select>
+ 	
+ 	<!-- 조회수 업데이트 -->
+ 	<update id="setSaleProductHit" parameterType="SaleProductVO">
+ 		UPDATE SALEPRODUCT SET PRODUCTHIT = PRODUCTHIT+1 WHERE PRODUCTID = #{productId};
+ 	</update>
+ 	
+ 	<!-- 관심있는상품 추가 -->
+ 	<insert id="setLikeSaleProduct" parameterType="LikeSaleProductVO">
+		INSERT INTO LIKESALEPRODUCT
+		VALUES (LIKENUM,#{productId},#{id});
+ 	</insert>
+ 	
+ 	<!-- 관심있는상품 체크 -->
+ 	<select id="getLikeProductCheck" parameterType="LikeSaleProductVO" resultType="String">
+ 		SELECT LIKENUM FROM LIKESALEPRODUCT
+ 		WHERE PRODUCTID =#{productId} AND ID= #{id}
+ 	</select>
+ 	
+ 	<!-- 상품 문의하기 -->
+ 	<insert id="setQuestionAdd" parameterType="ProductQuestionVO">
+ 		INSERT INTO PRODUCTQUESTION
+ 		VALUES (QUESTIONID,#{questionTitle},#{questionContents},now(),#{productId},#{id});
+ 	</insert>
 </mapper>

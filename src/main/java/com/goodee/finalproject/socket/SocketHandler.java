@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.websocket.OnError;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -64,4 +66,5 @@ public class SocketHandler extends TextWebSocketHandler {
 		super.afterConnectionClosed(session, status);
 
 	}
+	
 }

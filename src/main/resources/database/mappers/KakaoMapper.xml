@@ -33,4 +33,20 @@
 		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
 	</select>
 
+
+	<!-- detail -->
+	<select id="getKakaoDetail" parameterType="KakaoVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+	
+	<!-- point -->
+	<update id="setPoint" parameterType="KakaoDetailVO">
+		UPDATE SOCIALKAKAODETAIL SET KAPOINT = #{kaPoint} WHERE KANICKNAME = #{kaNickName} 
+	</update>
+	
+	<select id="getOneMember" parameterType="KakaoDetailVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+	
+	
 </mapper>
