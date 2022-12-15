@@ -67,7 +67,7 @@
  	
  	<insert id="setApplicationAdd" parameterType="ApplicationVO" useGeneratedKeys="true" keyProperty="applicationNum">	
  		INSERT INTO BOARDAPPLICATION
-		VALUE (#{applicationNum},#{writer},#{title},#{auctionSort},now());
+		VALUE (#{applicationNum},#{writer},#{title},#{auctionSort},now(),0);
  	</insert>
  	
  	
@@ -84,5 +84,13 @@
 		SELECT
 		COUNT(APPLICATIONNUM) FROM BOARDAPPLICATION
 		<include refid="search"></include>
+	</select>
+	
+	<select id="getApprovalCheckList" resultType="ApplicationVO">
+		SELECT * FROM 
+			BOARDAPPLICATION B LEFT JOIN
+			AUCTIONPRODUCT A 
+			ON (B.APPLICATIONNUM = A.APPLICATIONNUM) 
+			WHERE B.APPROVALCHECK = 1 AND B.AUCTIONSORT = 1
 	</select>
 </mapper>
