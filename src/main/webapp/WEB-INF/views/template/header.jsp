@@ -39,6 +39,9 @@
 									<b>${kakaoInfo.kaName }님 안녕하세요</b>
 								</a>
 							</li>
+							<li class="nav-item">
+								<a href="../mypage/info?id=${kakaoInfo.kaNickName}" class="nav-link link-dark px-2">카카오 마이페이지</a>
+							</li>
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item">
@@ -46,12 +49,14 @@
 									<b>${member.name }님 안녕하세요</b>
 								</a>
 							</li>
+							<li class="nav-item">
+								<a href="../mypage/info?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a>
+							</li>
 						</c:otherwise>
 					</c:choose>
 					<li class="nav-item">
 						<a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a>
 					</li>
-					<%-- <li class="nav-item"><a href="../mypage/info?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a></li> --%>
 
 					<c:if test="${empty memID}">
 						<c:forEach items="${kakaoRole }" var="kk">
