@@ -88,4 +88,9 @@ public class ProductService {
 		
 		return productMapper.setQuestionAdd(productQuestionVO);
 	}
+	
+	public int setAdminQuestionAdd(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		return productMapper.setAdminQuestionAdd(adminQuestionVO);
+	}
 }
