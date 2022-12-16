@@ -50,7 +50,7 @@ public class ChatController {
 	public ModelAndView chat(Authentication authentication) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<ApplicationVO> itemList = applicationService.getApprovalCheckList();
-		
+		System.out.println(authentication.getPrincipal());
 			if(authentication.getPrincipal().toString().substring(0, 8).equals("MemberVO")) {
 				
 				MemberVO mem = (MemberVO) authentication.getPrincipal();
@@ -122,9 +122,6 @@ public class ChatController {
 			//낙찰 내역 DB 저장
 			payHistoryVO.setId(winuser);
 
-			
-			
-		
 		//소셜 로그인 했을 때 
 		}else {
 			KakaoDetailVO kakaoDetailVO = new KakaoDetailVO();

@@ -5,7 +5,7 @@ function getId(id){
 $("#sendZone").click(function(event){
     var str = event.target.value;
     console.log(str);
-    item = `<div class="me"> <span>${str}</span> </div>`;
+    item = `<div class="me"> <img src="/images/user.jpg" style="width: 30px; margin-top: 5px;"> <span>${str}</span> </div><hr>`;
     talk.innerHTML += item;
     $.ajax({
         type:'POST',
@@ -19,6 +19,7 @@ $("#sendZone").click(function(event){
             console.log(result);
             console.log(result.content);
             item = `<div class="other chat-text">
+                        <img src="/images/coin.png" style="width: 30px; margin-top: 5px;">
                         <div>
                             <ul><b>${str}</b></ul>
                         </div>
@@ -27,7 +28,9 @@ $("#sendZone").click(function(event){
 							<li class="text">${result.content2}</li> <br/>
 							<li class="text">${result.content3}</li> <br/>
                         </div>
-					</div>`;
+					</div>
+                    <hr>`
+                    ;
             talk.innerHTML += item;
             talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
         },
@@ -43,7 +46,8 @@ $("#talk").click(function(event){
     var str = event.target.innerText;
     console.log(str);
 
-    item = `<div class="me"> <span>${str}</span> </div>`;
+    item = `
+            <div class="me"> <img src="/images/user.jpg" style="width: 30px; margin-top: 5px;"> <span>${str}</span> </div><hr>`;
     talk.innerHTML += item;
 
     if(str =="일반 경매" || str == "실시간 경매") {
@@ -65,6 +69,7 @@ $("#talk").click(function(event){
                 item = `${result.content}`;
                 talk.innerHTML += item;
                 talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+                console.log($(".text").html());
             },
             error : function(result){
                 console.log("시류ㅐ");
@@ -76,6 +81,13 @@ $("#talk").click(function(event){
 })
 
 var msg = getId('msg');
+msg.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("msgSend").click();
+    }
+})
+
 $("#msgSend").click(function(){
     let index = msg.value;
     var str;
@@ -85,12 +97,13 @@ $("#msgSend").click(function(){
         if(index.includes('일반') && index.includes("경매") && index.includes("신청") || index.includes("게시판")) {
             str = "일반 경매 신청하는 법";
             send1(str);
-        }else if(index.includes('일반') && index.includes("경매") || index.includes("하러") || index.includes("참여")){
-            str = "일반 경매 하러가기";
+        }
+        else if(index.includes('일반') && index.includes("경매") && index.includes("주의사항")){
+            str = "일반 경매 주의사항";
             send1(str);
         }
-        else if(index.includes('일반') && index.includes("경매") && index.includes("주의")){
-            str = "일반 경매 주의사항";
+        else if(index.includes('일반') && index.includes("경매") && index.includes("하러") || index.includes("하는") || index.includes("참여") || index.includes("방법") || index.includes("어떻게")){
+            str = "일반 경매 하러가기";
             send1(str);
         }
         else if(index.includes('일반') && index.includes("경매")) {
@@ -106,12 +119,13 @@ $("#msgSend").click(function(){
         if(index.includes('실시간') && index.includes("경매") && index.includes("신청") || index.includes("게시판")) {
         str = "실시간 경매 신청하는 법";
         send1(str);
-        }else if(index.includes('실시간') && index.includes("경매") && index.includes("하러") || index.includes("하는") || index.includes("참여") || index.includes("방법") || index.includes("어떻게")){
-            str = "실시간 경매 하러가기";
+        }
+        else if(index.includes('실시간') && index.includes("경매") && index.includes("주의사항")){
+            str = "실시간 경매 주의사항";
             send1(str);
         }
-        else if(index.includes('실시간') && index.includes("경매") && index.includes("주의")){
-            str = "실시간 경매 주의사항";
+        else if(index.includes('실시간') && index.includes("경매") && index.includes("하러") || index.includes("하는") || index.includes("참여") || index.includes("방법") || index.includes("어떻게")){
+            str = "실시간 경매 하러가기";
             send1(str);
         }
         else if(index.includes('실시간') && index.includes("경매")) {
@@ -146,6 +160,7 @@ $("#msgSend").click(function(){
                     console.log(result);
                     console.log(result.content);
                     item = `<div class="other chat-text">
+                                <img src="/images/coin.png" style="width: 30px; margin-top: 5px;">
                                 <div>
                                     <ul>${str}</ul>
                                 </div>
@@ -154,7 +169,8 @@ $("#msgSend").click(function(){
                                     <li class="text">${result.content2}</li> <br/>
                                     <li class="text">${result.content3}</li> <br/>
                                 </div>
-                            </div>`;
+                            </div>
+                            <hr>`;
                     talk.innerHTML += item;
                     talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
                 },
@@ -201,8 +217,9 @@ $("#msgSend").click(function(){
 
 })
 
+
 function me(index) {
-    item = `<div class="me"> <span>${index}</span> </div>`;
+    item = `<div class="me"> <img src="/images/user.jpg" style="width: 30px; margin-top: 5px;"> <span>${index}</span> </div><hr>`;
     talk.innerHTML += item;
     console.log("hihi");
     
@@ -222,35 +239,41 @@ function send1(str) {
             console.log(result);
             console.log(result.content);
             
-            if((str == "일반 경매 하러가기") || (str == "실시간 경매 하러가기")) {
-                item = `<div class="other">
-                        <div class="chat-text">
-							<a href =${result.content} class="text">${str}</a> <br/>
-                        </div>
-					</div>`;
-            }
-            else if((str == "일반 경매 신청하는 법") || (str == "실시간 경매 신청하는 법") || (str == "경매 신청하는 법"))  {
-                item = `<div class="other">
-                            <div class="chat-text">
-                                <a href =${result.url} class="text">신청하러 가기</a><br/>
-                                <b class="text">${result.content}</b> <br/>
-                            </div>
-                        </div>`;
-            }else if(str == "포인트 충전") {
-                item = `<div class="other">
-                            <div class="chat-text">
-                                <a href =${result.url} class="text">포인트 충전하러 가기</a><br/>
-                                <b class="text">${result.content}</b> <br/>
-                            </div>
-                        </div>`;
-            }
-            else{
-                item = `<div class="other">
-                            <div class="chat-text">
-                                <b class="text">${result.content}</b> <br/>
-                            </div>
-                        </div>`;
-            }
+            // if((str == "일반 경매 하러가기") || (str == "실시간 경매 하러가기")) {
+            //     item = `${result.content}`;
+            //     talk.innerHTML += item;
+            // }
+            // else if((str == "일반 경매 신청하는 법") || (str == "실시간 경매 신청하는 법") || (str == "경매 신청하는 법"))  {
+            //     item = `<div class="other">
+            //                 <img src="/images/coin.png" style="width: 30px; margin-top: 5px;">
+            //                 <div class="chat-text">
+            //                     <a href =${result.url} class="text">신청하러 가기</a><br/>
+            //                     <b class="text">${result.content}</b> <br/>
+            //                 </div>
+            //             </div>
+            //             <hr>`;
+
+            // }else if(str == "포인트 충전") {
+            //     item = `<div class="other">
+            //                 <img src="/images/coin.png" style="width: 30px; margin-top: 5px;">
+            //                 <div class="chat-text">
+            //                     <a href =${result.url} class="text">포인트 충전하러 가기</a><br/>
+            //                     <b class="text">${result.content}</b> <br/>
+            //                 </div>
+            //             </div>
+            //             <hr>`;
+            // }
+            // else{
+            //     item = `<div class="other">
+            //                 <img src="/images/coin.png" style="width: w 30px; margin-top: 5px;">
+            //                 <div class="chat-text">
+            //                     <b class="text">${result.content}</b> <br/>
+            //                 </div>
+            //             </div>
+            //             <hr>`;
+            // }
+            item = `${result.content}`;
+            //talk.innerHTML += item;
             talk.innerHTML += item;
             talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
         },
@@ -261,6 +284,7 @@ function send1(str) {
         }
     })
 }
+
 
 function send2(str) {
     $.ajax({
@@ -275,6 +299,7 @@ function send2(str) {
             console.log(result);
             console.log(result.content);
             item = `<div class="other">
+                        <img src="/images/coin.png" style="width: 30px; margin-top: 5px;">
                         <div>
                             <ul>${str}</ul>
                         </div>
@@ -283,7 +308,8 @@ function send2(str) {
 							<li class="text">${result.content2}</li> <br/>
 							<li class="text">${result.content3}</li> <br/>
                         </div>
-					</div>`;
+					</div>
+                    <hr>`;
             talk.innerHTML += item;
             talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
         },
