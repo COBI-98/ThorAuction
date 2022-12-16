@@ -1,4 +1,8 @@
 /* info.css */
+/* 
+body {
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
+} */
 
 .main-page-wrapper {
     -webkit-text-size-adjust: 100%;
@@ -26,7 +30,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     padding-top: 40px;
     margin-top: -40px;
     background-color: #fff;
@@ -58,7 +62,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -93,7 +97,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
@@ -127,7 +131,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     position: relative;
     width: 100%;
     min-height: 1px;
@@ -193,7 +197,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
 }
 
 .woocommerce {
@@ -222,7 +226,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
 }
 
 .woocommerce-my-account-wrapper {
@@ -251,7 +255,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     margin-left: -30px;
     margin-right: -30px;
     display: flex;
@@ -288,7 +292,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
@@ -328,7 +332,7 @@
     vertical-align: baseline;
     line-height: 1.4;
     display: block;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     font-size: 20px;
     padding-left: 15px;
     padding-right: 10px;
@@ -428,7 +432,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
@@ -466,7 +470,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     display: none;
 }
 
@@ -496,7 +500,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -534,7 +538,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -572,7 +576,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -609,7 +613,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -646,7 +650,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -683,7 +687,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -720,7 +724,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -758,7 +762,7 @@
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     -webkit-box-flex: 1;
     flex: 1 1 33%;
     max-width: 33%;
@@ -828,7 +832,7 @@
     border: 0;
     font: inherit;
     touch-action: manipulation;
-    font-family: NanumSquare, Cabin, sans-serif !important;
+    font-family: Helvetica,Helvetica Neue,Arial,Malgun Gothic,AppleSDGothicNeo-Regular,Dotum,AppleSDGothic,Apple SD Gothic Neo,AppleGothic,sans-serif !important;
     font-size: 13px;
     line-height: 18px;
     padding: 12px 20px;
