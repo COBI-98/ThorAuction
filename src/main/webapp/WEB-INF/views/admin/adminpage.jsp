@@ -26,11 +26,10 @@
 			<tr>
 				<th>아이디</th>
 				<th>이메일</th>
-				<th>이름</th>
-				<th>생년월일</th>
-				<th>우편번호</th>
+				<th style="width: 110px;">이름</th>
+				<th style="width: 110px;">생년월일</th>
+				<th style="width: 110px;">우편번호</th>
 				<th>주소</th>
-				<th>상세 주소</th>
 				<th>전화번호</th>
 				<th>포인트</th>
 				<th>등급</th>
@@ -48,8 +47,7 @@
 						<td>${m.name }</td>
 						<td>${m.birth }</td>
 						<td>${m.post }</td>
-						<td>${m.addr }</td>
-						<td>${m.addr2 }</td>
+						<td>${m.addr }${m.addr2 }</td>
 						<td>${m.phone }</td>
 						<td>
 							<fmt:formatNumber value="${m.point }" pattern="###,###,###,###" />
@@ -99,8 +97,7 @@
 							<td class="kakaoName">${ka.kaName }</td>
 							<td>${ka.kakaoDetailVOs[0].kaBirth }</td>
 							<td>${ka.kakaoDetailVOs[0].kaPost }</td>
-							<td>${ka.kakaoDetailVOs[0].kaAddr }</td>
-							<td>${ka.kakaoDetailVOs[0].kaAddrDetail }</td>
+							<td>${ka.kakaoDetailVOs[0].kaAddr }${ka.kakaoDetailVOs[0].kaAddrDetail }</td>
 							<td>${ka.kakaoDetailVOs[0].kaPhone }</td>
 							<td>
 								<fmt:formatNumber value="${ka.kakaoDetailVOs[0].kaPoint }" pattern="###,###,###,###" />
