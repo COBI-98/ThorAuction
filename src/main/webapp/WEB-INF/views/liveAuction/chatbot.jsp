@@ -22,145 +22,77 @@
   <c:import url="../template/header.jsp"></c:import>
   
   
-  <section class="">
-    <!-- 방송 시작 부분 -->
+  <section class="" style="padding:0px;">
   <div>
-  
-  	
-    
-    
-	
-		<!-- <div id="videos-container" style="margin: 20px 0;">
-			<div id="media-container" class = "media-container shadowBox">
-				<div id="media-broadcast">
-					<div id="media-header" >
-						<div id="media-title">
-							<h2 id="media-titleText"> 제목</h2>
-						</div>
-						<div id="item">
-			          	  	<span id="selecteditem"></span>
-			         	</div>  
-					</div>
-				
-					<div id="media-box" class="media-box">
-						<div id= "blackVideo" style="width: 100%; height: 100%; color: #a8a8a8; display:flex; align-items: center; justify-content: center;">
-							<div>현재 실시간 경매를 진행하지 않고 있습니다.</div>
-						</div>
-						<video id="localVideo" autoplay playsinline hidden ></video>
-						
-					</div>
-					
-					
-				</div>
-		
-	
-            -->
-        <div class="chat-container">
-            <!--
-			<div id= "chat-header" >
-	          <div id="text">
-	            <span id="final">현재 최고가:</span>
-	            <span id="amount">${value}</span>
-	            <span id="hidden" style="display: none;">${value}</span>
-	            <span id="finalamount"></span>
-	          </div>
-	          
-	
-	          <ul class="tabs">
-	            <li class="tab-link current" data-tab="chatt">채팅창</li>
-	            <li class="tab-link" data-tab="iddd">시청자 (<span id="count"></span>)</li>
-	          </ul> -->
-		
-			<!-- </div> -->
-          <div id='chatt' class="tab-content current">
-              <div class="chat-box">
-                <div id='talk'></div>
-                <div id='send'>
-					<div>
-                	<input type='text' id='msg'  placeholder="메시지를 입력해보세요!">
-					<input class ="bidcoinBtn" type="button" value="보내기" id="msgSend">
-					</div>
-					<b style="text-align: center;" id="qna">자주 묻는 질문</b>
-					<div id="sendZone">
-                  <c:forEach items="${ar}" var="key">
-                  <input class ="bidcoinBtn" type='button' value='${key}' id='btnSend'>
-                </c:forEach>
-                </div>
-              </div>
-			</div>
-              <!-- <div id="bidZone">
-                  <input type='button' value="직접입력" id="auction" class ="bidcoinBtn">
-                  <input type='button' value="단위경매" id="add" class ="bidcoinBtn">
-              </div> -->
-          </div>
-          <div id ="iddd" class="tab-content">
-              
-          </div>
-        </div>
-      </div>	
-    </div>
-    <!-- <div style="display: flex; justify-content: center;"> -->
-    
-    <!-- <div class="shadowBox media-container">
-    	<div id="media-broad-option">
-						<div class="optionBox">
-							<div>방송설정</div>
-							<div>방송 제목<input type="text" id="broadName"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn"></div>
-						
-							<div>
-							  	<input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
-							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>
-							    <button class= "bidcoinBtn" id="join-room">Join Room</button>
-						  	</div>
-						  	<div>카메라 설정<select id="cameras"></select></div>
-							<button id="cameraPause" class= "bidcoinBtn"> 방송 일시 정지 </button>
-							<button id="cameraBlack" class= "bidcoinBtn"> 방송 송출 정지 </button>
-							<button id="screenShare" class= "bidcoinBtn"> 화면 공유로 전환 </button>
-							
-							<div>
-								<button id="cameraStatus" class= "bidcoinBtn"> 방송 종료 </button>
+
+        <div class="chat-container show-grid" style="margin-left: 40px;">
+            
+			<div class="row">
+				<div class="col-sm-12" style="margin-left: 20px;">
+					<div class="row">
+						<div class="col-xs-8 col-sm-8">
+							<div id='chatt' class="tab-content current">
+								<div class="chat-box">
+								  	<div id='talk' class="form-control"></div>
+									<div id='send'>
+										<div>
+											<input class="form-control" type='text' id='msg'  placeholder="메시지를 입력해보세요!">
+											<!-- <input class ="bidcoinBtn" type="button" value="보내기" id="msgSend"> -->
+											<button type="button" class="bidcoinBtn" id="msgSend"><img src="/images/send.jpg" alt="" width="100%;" height="100%"></button>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						
-						<div class="optionBox">
-							<div>경매설정</div>
-							<div>
-				              <span>경매 물건</span>
-                      <select id="items" name="items" style="width: 60%;">
-                        <option value="none" selected>=== 선택 ===</option>
-                        <c:forEach items="${itemList}" var="items">
-                        <option value="${items.productNum}" data-price="${items.productPrice}">${items.productName}</option>
-                      </c:forEach>
-                      </select>
-				              <input type="button" value="설정" id="itemsend" class="bidcoinBtn">
-				            </div>
-				             
-				            <div>
-				           		<span>단위가격</span>
-					            <input type="text" id="unit">
-					            <input type="button" value="설정" id="unitsend" class="bidcoinBtn">
-				            </div>
-						
-							<input type="button" class="bidcoinBtn" value="채팅 정지" id='stop'>
-						    <input type="button" class="bidcoinBtn" value="경매시작" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
-						    <!--<input type="button" class="bidcoinBtn" value="경매종료" id="end"> <!--session 닫힘-->
-						
-					
-						<!--</div>
-					</div>
-    
-    
-    </div>
-    </div>-->
-  </div>
-	<!--
-      <h2 id="id">${member}</h2>
-      <h2 id="loginnum">${num}</h2>
-      <h2 id="point">${point}</h2>
-      <h2 id="role">${role[0].roleName}</h2> -->
+						<!-- <div class="col-xs-4 col-sm-3 card" >
+							<b id="qna">질문 카테고리</b>
+							<div id="sendZone" class="card-body">
+								<c:forEach items="${ar}" var="key">
+									<div>
+										<input class ="bidcoinBtn form-control" type='button' value='${key}' id='btnSend'>
+									</div>
+								</c:forEach>
+							</div> -->
 
-	<!-- <div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
-  </div> -->
+							<div class="col-xs-4 col-sm-3 text-center" style="display: block; height: 60%; padding-right: 0px;padding-left: 0px;" >
+								<div class="card mb-4 text-center">
+								<div class="card-header" id="qna"><b>질문 카테고리</b></div>
+								<div class="card-body" id="sendZone">
+									<c:forEach items="${ar}" var="key">
+									<div>
+										<input class ="bidcoinBtn form-control" type='button' value='${key}' id='btnSend'>
+									</div>
+								</c:forEach>
+								</div>
+							</div>
+							<div class="card mb-4 text-center">
+								<div class="card-header" id="qna"><b>질문 예시</b></div>
+								<div class="card-body">
+									<div>
+										<p>✔실시간 경매 신청하려면 어떻게 하나요?</p>
+										<p>✔일반 경매에 참여하려면 어떻게 하나요?</p>
+										<p>✔일반 경매시 주의사항으로는 어떤 것이 있을까요?</p>
+										<p>✔포인트는 어떻게 사용하나요?</p>
+									</div>
+								</div>
+								</div>
+							</div>
+<!-- 
+							<div class="col-xs-4 col-sm-3 card mb-4 text-center" style="display: block; height: 60%; padding-right: 0px;padding-left: 0px;" >
+							</div> -->
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+				
+		</div>
+          
+    </div>
+    
+  </div>
+	
   </section>
 
 <%-- <c:import url="../template/footer.jsp"></c:import> --%>
