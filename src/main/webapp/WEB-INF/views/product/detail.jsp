@@ -348,15 +348,90 @@
 				</div>
 			<div class="stitle" id="detail_con4">상품문의하기</div>
 			<div class="stext">
-				상품에 대한 문의를 남기는 공간입니다. 배송 및 주문관련 문의 및 요청사항은 1:1문의에 남겨주세요. 
-				<a href="#" style="color:#999;font-size:11px;text-decoration:underline">1:1문의하기 +</a>
+				상품에 대한 문의를 남기는 공간입니다. 
 			</div>
+			<ul class="product_qna">
+				<c:forEach items="${saleProductVO.productQuestionVOs}" var="questionVO">
+					<c:if test="${questionVO.questionId != null }">
+							<li id="do_menu2${questionVO.questionId}" class="">
+									<div class="qust">
+										
+										<span class="result <c:if test="${questionVO.adminQuestionVO.aqNum != null}"> end</c:if>">완료</span>
+										<a href="#" onclick="do_ment_view2('${questionVO.questionId}');return false" class="tit">${questionVO.questionTitle}</a>
+										<span class="name">${questionVO.id}</span>
+										<span class="date">${questionVO.questionDate}</span>
+									</div>
+									
+									<div class="box">
+										<div class="txt">
+											<div></div>${questionVO.questionContents}
+										</div>
+										<c:if test="${questionVO.adminQuestionVO.aqNum != null}">
+											
+											<div class="reply">
+												이미지 자리<br>
+												${questionVO.adminQuestionVO.aqContents}
+												<span class="date">${questionVO.adminQuestionVO.aqDate}</span>
+											</div>
+										</c:if>
+										<!-- 관리자만 보이게 -->
+										<c:if test="${questionVO.adminQuestionVO.aqNum == null}">
+											<div class="reply">
+												<form action="./adminQuestionAdd" method="post">
+													<input type="text" name="aqContents" id="aqContents">
+													<input type="hidden" name="questionId" value="${questionVO.questionId}">
+													<input type="hidden" name="prNum" value="${questionVO.productId}">
+													<input type="hidden" name="id" value="${memberVO.id}">
+													<button type="submit" class="btn btn-warning">관리자답변</button>
+												</form>
+											</div>
+										
+										</c:if>
+										
+									</div>
+									
+								</li> 
+							
+					</c:if>
+				</c:forEach>			
+			</ul>
+			<c:if test="${memberVO.id == null}">
 			<p class="size12 pt15 center gray999">로그인을 하신 후에 문의 작성이 가능합니다</p>
-			<div class="pt5 center"><a href="#" onclick="open_layer_qna();" class="btn_after">상품문의 등록하기</a></div>	
-			
+			</c:if>
+				<div class="pt5 center"><a href="#" onclick="open_layer_qna();" class="btn_after">상품문의 등록하기</a></div>	
+
 		</div>
 			
+		<div id="fixed_pop" style="display: none; padding: 0px; margin: 0px;" onclick="close_layer();"></div>
+
+		<div id="layer_pop_qna" style="display: none;" class="layer_pop_design">
+			<form name="write_form2" id="write_form2" method="post" >
+			<h3 class="tit">상품문의</h3>
+			<input type="hidden" id="id" name="id" value="${memberVO.id}">
+			<input type="hidden" id="productId" name="productId" value="${saleProductVO.productId}">
+				<div class="conbox">
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" class="qna_board">
+					<colgroup>
+						<col width="20%">
+						<col width="80%">
+					</colgroup><colgroup>
+					</colgroup><tbody><tr>
+						<th>제목</th>
+						<td><input type="text" name="questionTitle" id="commentTitle" placeholder="제목" class="wid100" valid="trim,required" element-name="제목"></td>
+					</tr>
+					<tr>
+						<th>문의내용</th>
+						<td><textarea class="wid100" name="questionContents" id="commentContents" valid="trim,required" element-name="문의내용"></textarea></td>
+					</tr>
+				</tbody></table>	
+				<div class="center pt10">
+					<a href="#" onclick="do_save_qna();" class="mbtn import1_bg">등록</a>
+					<a href="#" onclick="close_layer();" class="mbtn gray">취소</a>
+				</div>
 				
+				</div>
+			</form>
+			</div>		
 		
 		</c:forEach>
 		

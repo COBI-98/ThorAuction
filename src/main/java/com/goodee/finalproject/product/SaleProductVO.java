@@ -14,6 +14,8 @@ public class SaleProductVO {
 	private Long productHit;
 	private Timestamp productDate;
 	private Long AmountUnit;
+	
+	// comment용 ref 추가
 
 	// 등록순,가격순 체크용
 	private String sc; 
@@ -36,4 +38,5 @@ public class SaleProductVO {
 	private List<ProductVO> productVOs;
 	private List<CategoryVO> categoryVOs;
 	private List<BidAmountVO> bidAmountVOs;
+	private List<ProductQuestionVO> productQuestionVOs;
 }

@@ -151,6 +151,13 @@ public class ProductController {
 		
 		mv.addObject("maxAmount", check);
 		
+		for(int i = 0 ; i< saleProductVO.getProductQuestionVOs().size(); i++) {
+		
+			System.out.println(saleProductVO.getProductQuestionVOs().get(i).getQuestionId());
+			System.out.println(saleProductVO.getProductQuestionVOs().get(i).getAdminQuestionVO());
+
+		}
+		
 		mv.addObject("saleProductVO", saleProductVO);
 		mv.setViewName("product/detail");
 		return mv;
@@ -221,12 +228,41 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.setQuestionAdd(productQuestionVO);
 		
+		String message ="";
+		String url = "";
+		if(result==1) {
+			message="success";
+			url= "redirect:/product/detail?productId="+productQuestionVO.getProductId();
+		}else {
+			message ="fail";
+			url= "redirect:/product/detail?productId="+productQuestionVO.getProductId();
+		}
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
+		return mv;
+	}
+	
+	@PostMapping("adminQuestionAdd")
+	public ModelAndView setAdminQuestionAdd(AdminQuestionVO adminQuestionVO, String prNum) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		String message ="";
+		String url = "";
+		
+		int result = productService.setAdminQuestionAdd(adminQuestionVO);
+		
 		
 		if(result==1) {
-			System.out.println("성공");
+			message="success";
+			url = "redirect:/product/detail?productId="+prNum;
+		}else {
+			message ="fail";
+			url = "redirect:/product/detail?productId="+prNum;
 		}
-		String url = "redirect:/product/detail?productId="+productQuestionVO.getProductId();
-		mv.setViewName(url);
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
 		return mv;
 	}
 }
