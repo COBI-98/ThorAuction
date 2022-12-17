@@ -16,15 +16,16 @@
 	<!-- 내가 입찰한 상품의 입찰가, 입찰시간 -->
 	<select id="bidHistory" parameterType="List" resultType="BidAmountVO">
 		SELECT * FROM
-		BIDAMOUNT  WHERE ID = #{id}
+		BIDAMOUNT
+		WHERE ID = #{id}
 	</select>
 	
 	<!-- 내가 입찰한 상품의 최고가 -->
-<!-- 	<select id="bidMaxHistory" resultType="SaleProductVO">
+ 	<select id="bidMaxHistory" parameterType="BidAmountVO" resultType="BidAmountVO">
 		SELECT PRODUCTID, MAX(BIDAMOUNT) 
 		FROM BIDAMOUNT 
 		WHERE PRODUCTID = #{productId}
-	</select> -->
+	</select>
 	
 	<!-- 입찰한 상품 정보 -->
 	<select id="bidProductInformation" parameterType="BidAmountVO" resultMap="getBidProductInformation">
