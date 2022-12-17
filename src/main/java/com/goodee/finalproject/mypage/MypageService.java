@@ -42,9 +42,9 @@ public class MypageService {
 	}
 	
 	// 내가 입찰한 상품의 최고가
-	public SaleProductVO bidMaxHistory(SaleProductVO saleProductVO) throws Exception {
+	public List<BidAmountVO> bidMaxHistory(BidAmountVO bidAmountVO) throws Exception {
 		
-		return mypageMapper.bidMaxHistory(saleProductVO);
+		return mypageMapper.bidMaxHistory(bidAmountVO);
 	}
 	
 	// 입찰한 상품 정보

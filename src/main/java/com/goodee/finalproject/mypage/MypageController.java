@@ -1,5 +1,8 @@
 package com.goodee.finalproject.mypage;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -7,16 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +39,9 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 	
+	@Autowired
+	private ProductService productService;
+	
 	
 	// 마이페이지 홈
 	@GetMapping("info")
@@ -61,32 +63,58 @@ public class MypageController {
 	// 입찰내역
 	@GetMapping("bidhistory")
 	public Model bidProductInformation(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
-		SaleProductVO saleProductVO = new SaleProductVO();
 		
 		// 상품정보
 		List<SaleProductVO> saleProductVOs = mypageService.bidProductInformation(bidAmountVO);
 		// 내가 입찰한 상품의 입찰가, 입찰시간
 		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);
 		// 내가 입찰한 상품의 최고가
-		SaleProductVO bidMaxAmount = mypageService.bidMaxHistory(saleProductVO);
+		List<BidAmountVO> bidMaxAmounts = mypageService.bidMaxHistory(bidAmountVO);
 		// 입찰한 상품 수
 		int count = mypageService.productCount(bidAmountVO);
 		
+		List<Long> orderTime = new ArrayList<>();
+		List<Timestamp> time = new ArrayList<>();
 		
-//		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);
+		// 경매 종료시간 계산 
+		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
+			ProductVO productVO = new ProductVO();
+			
+			productVO.setProductNum(saleProductVOs.get(productNum).getProductNum());
+			productVO = productService.getProductApproval(productVO);
+			
+			// 등록일을 초로 변환
+			Long productAddDate = saleProductVOs.get(productNum).getProductDate().getTime();
+			// 기간을 초로 변환
+			Long auctionPeriod = productVO.getAuctionPeriod()*24*3600*1000;
+			
+			log.info("제발 : {}", productAddDate);
+			log.info("제발 : {}", auctionPeriod);
+			
+			// Long을 tiestamp으로 변환(초에서 날짜로 변환)
+			Timestamp timestamp = new Timestamp(productAddDate + auctionPeriod);
+			 orderTime.add(productAddDate + auctionPeriod);
+			 time.add(timestamp);
+			 
+			log.info("제발 : {}", orderTime);
+			log.info("제발 : {}", timestamp);
+			
+			//model.addAttribute("orderTime", timestamp);
+		} // for End
 		
-//		log.info("입찰내역 : {}", bidAmountVO);
 		log.info("입찰내역 : {}", saleProductVOs);
 		log.info("입찰내역 : {}", bidAmountVOs);
 		log.info("입찰내역 : {}", count);
-		log.info("bidMaxAmountVO : {}", bidMaxAmount);
+		log.info("bidMaxAmountVO : {}", bidMaxAmounts);
 		log.info("입찰내역 : {}", memberVO);
 		
 		model.addAttribute("saleProducts", saleProductVOs);
 		model.addAttribute("bidAmounts", bidAmountVOs);
-		model.addAttribute("bidMaxAmounts", bidMaxAmount);
+		model.addAttribute("bidMaxAmounts", bidMaxAmounts);
 		model.addAttribute("memberDB", memberVO);
 		model.addAttribute("count", count);
+		model.addAttribute("orderTime", orderTime);
+		model.addAttribute("time", time);
 		
 		return model;
 	}

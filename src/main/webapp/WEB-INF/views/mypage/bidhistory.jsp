@@ -98,14 +98,17 @@
 															<input type="hidden" name="id" value="${memberDB.id}">
 															<div class="myorder">
 																<c:forEach items="${saleProducts}" var="product">
-																<input type="hidden" name="productId" value="${product.productId}">
 																			<li class="list">
-																				<div class="shopinfo">경매시작: <fmt:formatDate value="${product.productDate}" pattern="yyyy-MM-dd HH:mm:ss"/> / 현재가: 공사 중...</div>
+																				<input type="hidden" name="productId" value="${product.productId}">
+																				 <%-- <c:forEach items="${time}" var="time"> --%>
+																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time[0]}" pattern="yyyy-MM-dd HH:mm:ss"/> / 현재가: ${requestScope[bidAmountCheck]}</div>
+																				<%-- </c:forEach> --%>
 																				<div class="orderlist">
 																					<ul class="prolist">
 																						<li>
 																							<a href="#">
 																							<c:forEach items="${product.productVOs}" var="products">
+																								<input type="hidden" name="productNum" value="${products.productNum}">
 																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}"></div>
 																								<div class="name">${products.productName}
 																							</c:forEach>
