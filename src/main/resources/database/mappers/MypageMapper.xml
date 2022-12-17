@@ -6,45 +6,76 @@
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
 	<!-- 입찰내역 -->
-	<select id="bidHistory" resultMap="getBidHistory" parameterType="MemberVO">
-		SELECT B.*,TM.NAME,SP.*,AP.*,PF.*
-		 FROM THORMEMBER TM
-		 JOIN
-		 BIDAMOUNT B 
-	 	 ON TM.ID = B.ID
-	 	 JOIN 
-	 	 SALEPRODUCT SP
-	 	 ON B.PRODUCTID = SP.PRODUCTID 
-	 	 JOIN
-	 	 AUCTIONPRODUCT AP
-	 	 ON SP.PRODUCTNUM = AP.PRODUCTNUM 
-	 	 JOIN 
-	 	 PRODUCTFILES PF
-	 	 ON AP.PRODUCTNUM = PF.PRODUCTNUM 
-	 	 WHERE TM.ID = #{id}
+	<!-- 입찰한 상품 수 -->
+	<select id="productCount" resultType="int">
+		SELECT COUNT(DISTINCT PRODUCTID)
+		FROM BIDAMOUNT
+		WHERE ID = #{id}
 	</select>
 	
-	<resultMap type="ProductVO" id="getBidHistory">
-		<id column="PRODUCTNUM" property="productNum" />
-		<result column="PRODUCTNAME" property="productName" />
-		<result column="PRODUCTPRICE" property="productPrice" />
-		<result column="PRODUCTINFORMATION" property="productInformation" />
-		<result column="AUCTIONPERIOD" property="auctionPeriod" />
-		<result column="APPLICATIONNUM" property="applicationNum" />
-		
-		<collection property="productFileVO" javaType="List" ofType="ProductFileVO">
-			<id column="FILENUM" property="fileNum" />
-			<result column="FILENAME" property="fileName" />
-			<result column="ORINAME" property="oriName" />
-		</collection>
-		
-		<collection property="memberVO" javaType="String" ofType="MemberVO">
-			<id column="ID" property="id" />
-			<result column="NAME" property="name" />
-			<result column="POINT" property="point" />
-		</collection>
-		
+	<!-- 내가 입찰한 상품의 입찰가, 입찰시간 -->
+	<select id="bidHistory" parameterType="List" resultType="BidAmountVO">
+		SELECT * FROM
+		BIDAMOUNT  WHERE ID = #{id}
+	</select>
+	
+	<!-- 내가 입찰한 상품의 최고가 -->
+<!-- 	<select id="bidMaxHistory" resultType="SaleProductVO">
+		SELECT PRODUCTID, MAX(BIDAMOUNT) 
+		FROM BIDAMOUNT 
+		WHERE PRODUCTID = #{productId}
+	</select> -->
+	
+	<!-- 입찰한 상품 정보 -->
+	<select id="bidProductInformation" parameterType="BidAmountVO" resultMap="getBidProductInformation">
+		SELECT * FROM 
+        SALEPRODUCT p
+        LEFT JOIN
+        AUCTIONPRODUCT a
+        ON(p.PRODUCTNUM = a.PRODUCTNUM)
+        LEFT JOIN
+        PRODUCTFILES pf
+        ON(a.PRODUCTNUM = pf.PRODUCTNUM)
+        LEFT JOIN 
+        BIDAMOUNT B
+        ON(p.PRODUCTID = B.PRODUCTID)
+        WHERE B.ID = #{id}
+        ORDER BY B.BIDAMOUNT DESC
+	</select>
+	
+	<resultMap type="SaleProductVO" id="getBidProductInformation">
+		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+      	<result column="PRODUCTDATE" property="productDate"></result>
+      	<result column="AMOUNTUNIT" property="amountUnit"></result>
+      	
+      	<collection property="productVOs" javaType="List" ofType="ProductVO">
+        	<id column="PRODUCTNUM" property="productNum"></id>
+        	<result column = "PRODUCTNAME" property="productName"></result>
+        	<result column = "PRODUCTPRICE" property="productPrice"></result>
+        	<result column="PRODUCTINFORMATION" property="productInformation"></result>
+        	<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+        	
+        	<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+	           <id column="FILENUM" property="fileNum"></id>
+	           <result column = "FILENAME" property="fileName"></result>
+	           <result column = "ORINAME" property="oriName"></result>
+	           <result column="SORT" property="sort"></result>
+	        </collection>
+      	</collection>
+         
+        <collection property="bidAmountVOs" javaType="List" ofType="BidAmountVO">
+        	<id column="AMOUNTID" property="amountId"></id>
+        	<result column = "PRODUCTID" property="productId"></result>
+       	    <result column = "ID" property="id"></result>
+            <result column = "BIDAMOUNT" property="bidAmount"></result>
+            <result column = "BIDDATE" property="bidDate"></result>
+        </collection>
 	</resultMap>
+	<!-- 입찰내역 END -->
 
 	<!-- 결제내역 -->
 	<select id="payHistory" resultType="PayVO" parameterType="List">

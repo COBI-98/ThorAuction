@@ -6,13 +6,24 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.product.BidAmountVO;
 import com.goodee.finalproject.product.ProductVO;
+import com.goodee.finalproject.product.SaleProductVO;
 
 @Mapper
 public interface MypageMapper {
 	
-	// 입찰 내역
-	public List<MemberVO> bidHistory(MemberVO memberVO) throws Exception;
+	// 입찰한 상품 수
+	public int productCount(BidAmountVO bidAmountVO) throws Exception;
+	
+	// 내가 입찰한 상품의 입찰가, 입찰시간
+	public List<BidAmountVO> bidHistory(BidAmountVO bidAmountVO) throws Exception;
+	
+	// 내가 입찰한 상품의 최고가
+	public SaleProductVO bidMaxHistory(SaleProductVO saleProductVO) throws Exception;
+	
+	// 입찰한 상품 정보
+	public List<SaleProductVO> bidProductInformation(BidAmountVO bidAmountVO) throws Exception;
 	
 	// 결제 내역
 	public List<PayVO> payHistory(PayVO payVO) throws Exception;

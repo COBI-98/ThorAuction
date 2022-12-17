@@ -8,7 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.goodee.finalproject.member.MemberVO;
-import com.goodee.finalproject.product.ProductVO;
+import com.goodee.finalproject.product.BidAmountVO;
+import com.goodee.finalproject.product.SaleProductVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,12 +28,30 @@ public class MypageService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	// 입찰내역
-	public List<MemberVO> bidHistory(MemberVO memberVO) throws Exception {
+	// 입찰한 상품 수
+	public int productCount(BidAmountVO bidAmountVO) throws Exception {
 		
-		return mypageMapper.bidHistory(memberVO);
+		return mypageMapper.productCount(bidAmountVO);
 	}
 	
+	
+	// 내가 입찰한 상품의 입찰가, 입찰시간
+	public List<BidAmountVO> bidHistory(BidAmountVO bidAmountVO) throws Exception {
+		
+		return mypageMapper.bidHistory(bidAmountVO);
+	}
+	
+	// 내가 입찰한 상품의 최고가
+	public SaleProductVO bidMaxHistory(SaleProductVO saleProductVO) throws Exception {
+		
+		return mypageMapper.bidMaxHistory(saleProductVO);
+	}
+	
+	// 입찰한 상품 정보
+	public List<SaleProductVO> bidProductInformation(BidAmountVO bidAmountVO) throws Exception {
+		
+		return mypageMapper.bidProductInformation(bidAmountVO);
+	}
 	
 	// 결제내역
 	public List<PayVO> payHistory(PayVO payVO) throws Exception {
