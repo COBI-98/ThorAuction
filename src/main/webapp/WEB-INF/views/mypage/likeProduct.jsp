@@ -60,10 +60,10 @@
 													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard">
 														<a href="../mypage/info?id=${memberDB.id}">대시보드</a>
 													</li>
-													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders ">
+													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders is-active">
 														<a href="../mypage/likeProduct?id=${memberDB.id}">관심내역</a>
 													</li>
-													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions is-active">
+													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
 														<a href="../mypage/bidhistory?id=${memberDB.id}">입찰내역</a>
 													</li>
 													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
@@ -94,38 +94,29 @@
 												<div id="mshop_form_2702" class="ui mfs_form " style="">
 													<div class="field" style="">
 														<div class="mypage_content">
-															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 입찰내역이 있습니다.</div>
 															<input type="hidden" name="id" value="${memberDB.id}">
 															<div class="myorder">
-																<c:forEach items="${saleProducts}" var="product">
 																			<li class="list">
-																				<input type="hidden" name="productId" value="${product.productId}">
-																				 <%-- <c:forEach items="${time}" var="time"> --%>
-																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time[0]}" pattern="yyyy-MM-dd HH:mm:ss"/> / 현재가: ${requestScope[bidAmountCheck]}</div>
-																				<%-- </c:forEach> --%>
 																				<div class="orderlist">
 																					<ul class="prolist">
 																						<li>
 																							<a href="#">
-																							<c:forEach items="${product.productVOs}" var="products">
 																								<input type="hidden" name="productNum" value="${products.productNum}">
 																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}"></div>
-																								<div class="name">${products.productName}
-																							</c:forEach>
+																								<div class="name">상품이름
 																									<div class="price">
-																										입찰금액: <fmt:formatNumber value="${product.bidAmountVOs[0].bidAmount}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.bidAmountVOs[0].bidDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
+																										여기에는 뭘 넣을까<br>
 																									</div>
 																								</div>
 																							</a>
 																						</li>
 																					</ul>
 																					<div class="statebox">
-																						<div class="state ">입찰</div>
+																						<div class="state ">삭제</div>
 																					</div>
 																				</div>
 																			</li>
 																		
-																	</c:forEach>
 																
 															</div>
 															<div class="he20"></div>

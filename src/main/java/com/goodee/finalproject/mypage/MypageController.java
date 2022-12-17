@@ -60,6 +60,13 @@ public class MypageController {
 		return mv;
 	}
 	
+	// 관심내역
+	@GetMapping("likeProduct")
+	public void likeProduct(@AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+		
+		model.addAttribute("memberDB", memberVO);
+	}
+	
 	// 입찰내역
 	@GetMapping("bidhistory")
 	public Model bidProductInformation(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
