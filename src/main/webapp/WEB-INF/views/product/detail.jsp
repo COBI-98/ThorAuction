@@ -355,11 +355,14 @@
 					<c:if test="${questionVO.questionId != null }">
 							<li id="do_menu2${questionVO.questionId}" class="">
 									<div class="qust">
-										
-										<span class="result <c:if test="${questionVO.adminQuestionVO.aqNum != null}"> end</c:if>">완료</span>
+										<span class="result <c:if test="${questionVO.adminQuestionVO.aqNum != null}"> end</c:if>"><c:if test="${questionVO.adminQuestionVO.aqNum != null}"> 완료</c:if><c:if test="${questionVO.adminQuestionVO.aqNum == null}">대기</c:if></span>
 										<a href="#" onclick="do_ment_view2('${questionVO.questionId}');return false" class="tit">${questionVO.questionTitle}</a>
 										<span class="name">${questionVO.id}</span>
 										<span class="date">${questionVO.questionDate}</span>
+										<!-- 작성자만 삭제가능 -->
+										<c:if test="${memberVO.id == questionVO.id}">
+											<sapn class="delete" onclick="do_delete_question_user('${questionVO.questionId}');">삭제</sapn>
+										</c:if>
 									</div>
 									
 									<div class="box">
@@ -370,8 +373,10 @@
 											
 											<div class="reply">
 												이미지 자리<br>
-												${questionVO.adminQuestionVO.aqContents}
-												<span class="date">${questionVO.adminQuestionVO.aqDate}</span>
+												${questionVO.adminQuestionVO.aqContents}<br>
+												
+												${questionVO.adminQuestionVO.aqDate}<br>
+												<button type="button" class="btn btn-warning" onclick="do_delete_question_admin('${questionVO.adminQuestionVO.aqNum}');">삭제</button>
 											</div>
 										</c:if>
 										<!-- 관리자만 보이게 -->
@@ -382,6 +387,7 @@
 													<input type="hidden" name="questionId" value="${questionVO.questionId}">
 													<input type="hidden" name="prNum" value="${questionVO.productId}">
 													<input type="hidden" name="id" value="${memberVO.id}">
+													
 													<button type="submit" class="btn btn-warning">관리자답변</button>
 												</form>
 											</div>

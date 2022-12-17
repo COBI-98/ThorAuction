@@ -151,12 +151,6 @@ public class ProductController {
 		
 		mv.addObject("maxAmount", check);
 		
-		for(int i = 0 ; i< saleProductVO.getProductQuestionVOs().size(); i++) {
-		
-			System.out.println(saleProductVO.getProductQuestionVOs().get(i).getQuestionId());
-			System.out.println(saleProductVO.getProductQuestionVOs().get(i).getAdminQuestionVO());
-
-		}
 		
 		mv.addObject("saleProductVO", saleProductVO);
 		mv.setViewName("product/detail");
@@ -190,8 +184,6 @@ public class ProductController {
 		}
 			
 		// 최대가격과 넘어오는 가격이 같음
-		System.out.println("check1"+check);
-		System.out.println("check2"+bidAmountVO.getBidAmount());
 		if(check.equals(bidAmountVO.getBidAmount())) {
 			test = "4";
 		} else if(check > bidAmountVO.getBidAmount()) {
@@ -232,10 +224,10 @@ public class ProductController {
 		String url = "";
 		if(result==1) {
 			message="success";
-			url= "redirect:/product/detail?productId="+productQuestionVO.getProductId();
+			url= "/product/detail?productId="+productQuestionVO.getProductId();
 		}else {
 			message ="fail";
-			url= "redirect:/product/detail?productId="+productQuestionVO.getProductId();
+			url= "/product/detail?productId="+productQuestionVO.getProductId();
 		}
 		mv.addObject("message", message);
 		mv.addObject("url", url);
@@ -255,14 +247,40 @@ public class ProductController {
 		
 		if(result==1) {
 			message="success";
-			url = "redirect:/product/detail?productId="+prNum;
+			url = "/product/detail?productId="+prNum;
 		}else {
 			message ="fail";
-			url = "redirect:/product/detail?productId="+prNum;
+			url = "/product/detail?productId="+prNum;
 		}
 		mv.addObject("message", message);
 		mv.addObject("url", url);
 		mv.setViewName("common/result");
 		return mv;
+	}
+	
+	@PostMapping("questionDelete")
+	@ResponseBody
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		AdminQuestionVO adminQuestionVO = productService.getAdminQuestionCheck(productQuestionVO);
+		int result = 0;
+		if(adminQuestionVO == null) {
+			productService.setQuestionDelete(productQuestionVO);
+			result = 1;
+		}else {
+			productService.setAdminQuestionDelete(adminQuestionVO);
+			productService.setQuestionDelete(productQuestionVO);
+			result = 1;
+		}
+		return result;
+	}
+	
+	@PostMapping("adminQuestionDelete")
+	@ResponseBody
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		int result = productService.setAdminQuestionDelete(adminQuestionVO);
+				
+		return result;
 	}
 }

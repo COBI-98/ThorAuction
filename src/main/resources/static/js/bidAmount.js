@@ -355,3 +355,76 @@ function open_layer_qna() {
 		document.getElementById("fixed_pop").style.display="none";
 		document.getElementById("layer_pop_qna").style.display="none";		
 	}
+
+function do_delete_question_user(qna_dep_num){
+
+	Swal.fire({
+		title: "댓글을 삭제하시겠습니까?",  // title, text , html  로 글 작성
+		icon: "warning",    //상황에 맞는 아이콘
+
+		showCancelButton: true,
+		confirmButtonColor: '#fea532',
+		confirmButtonText: '확인',
+		cancelButtonText: '취소',
+		reverseButtons: true   // 버튼 순서 변경
+	}).then((result) =>{
+		if(result.isConfirmed){
+			$.ajax({
+				type :"POST",
+				url :"./questionDelete",
+				data:{
+					questionId : qna_dep_num
+				},success:function(data) {
+					if(data == 1){
+						swal("삭제되었습니다","","success").then(function(){
+							location.reload();
+						})
+					}else{
+						swal("삭제 실패!","","error")
+					}
+				},error:function(){
+					console.log("Error 발생");
+				}
+			})
+		}else{
+			swal("취소하셨습니다");
+		}
+		
+	})
+}
+
+function do_delete_question_admin(qna_admin_num){
+	Swal.fire({
+		title: "댓글을 삭제하시겠습니까?",  // title, text , html  로 글 작성
+		icon: "warning",    //상황에 맞는 아이콘
+
+		showCancelButton: true,
+		confirmButtonColor: '#fea532',
+		confirmButtonText: '확인',
+		cancelButtonText: '취소',
+		reverseButtons: true   // 버튼 순서 변경
+	}).then((result) =>{
+		if(result.isConfirmed){
+			$.ajax({
+				type :"POST",
+				url :"./adminQuestionDelete",
+				data:{
+					aqNum : qna_admin_num
+				},success:function(data) {
+					if(data == 1){
+						swal("삭제되었습니다","","success").then(function(){
+							location.reload();
+						})
+					}else{
+						swal("삭제 실패!","","error")
+					}
+				},error:function(){
+					console.log("Error 발생");
+				}
+			})
+		}else{
+			swal("취소하셨습니다");
+		}
+		
+	})
+}
