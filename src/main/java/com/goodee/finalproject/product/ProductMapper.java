@@ -60,7 +60,16 @@ public interface ProductMapper {
 	
 	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception;
 	
+	
+	// 상품 문의 관리
 	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception;
 	
 	public int setAdminQuestionAdd(AdminQuestionVO adminQuestionVO) throws Exception;
+
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception;
+	
+	public AdminQuestionVO getAdminQuestionCheck(ProductQuestionVO productQuestionVO) throws Exception;
+	
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception;
+
 }

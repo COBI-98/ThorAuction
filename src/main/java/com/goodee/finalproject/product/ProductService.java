@@ -93,4 +93,20 @@ public class ProductService {
 		
 		return productMapper.setAdminQuestionAdd(adminQuestionVO);
 	}
+	
+	
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.setQuestionDelete(productQuestionVO);
+	}
+	
+	public AdminQuestionVO getAdminQuestionCheck(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.getAdminQuestionCheck(productQuestionVO);
+	}
+	
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		return productMapper.setAdminQuestionDelete(adminQuestionVO);
+	}
 }

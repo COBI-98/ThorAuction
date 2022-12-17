@@ -11,9 +11,16 @@
     
     <script type="text/javascript">
 		let message = '${message}';
-		swal(message).then(function(){
-			location.href="${url}";
-		})
+		if(message == "fail"){
+			swal(message,"","fail").then(function(){
+				location.href="${url}";
+			})
+		}else{
+			
+			swal(message,"","success").then(function(){
+				location.href="${url}";
+			})
+		}
 	</script>
 </body>
 </html>
