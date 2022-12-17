@@ -25,8 +25,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.product.BidAmountVO;
 import com.goodee.finalproject.product.ProductService;
 import com.goodee.finalproject.product.ProductVO;
+import com.goodee.finalproject.product.SaleProductVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,11 +60,35 @@ public class MypageController {
 	
 	// 입찰내역
 	@GetMapping("bidhistory")
-	public void bidhistory(MemberVO memberVO) throws Exception {
+	public Model bidProductInformation(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+		SaleProductVO saleProductVO = new SaleProductVO();
 		
-		List<MemberVO> productVOs = mypageService.bidHistory(memberVO);
+		// 상품정보
+		List<SaleProductVO> saleProductVOs = mypageService.bidProductInformation(bidAmountVO);
+		// 내가 입찰한 상품의 입찰가, 입찰시간
+		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);
+		// 내가 입찰한 상품의 최고가
+		SaleProductVO bidMaxAmount = mypageService.bidMaxHistory(saleProductVO);
+		// 입찰한 상품 수
+		int count = mypageService.productCount(bidAmountVO);
 		
-		log.info("입찰내역 : {}", productVOs);
+		
+//		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);
+		
+//		log.info("입찰내역 : {}", bidAmountVO);
+		log.info("입찰내역 : {}", saleProductVOs);
+		log.info("입찰내역 : {}", bidAmountVOs);
+		log.info("입찰내역 : {}", count);
+		log.info("bidMaxAmountVO : {}", bidMaxAmount);
+		log.info("입찰내역 : {}", memberVO);
+		
+		model.addAttribute("saleProducts", saleProductVOs);
+		model.addAttribute("bidAmounts", bidAmountVOs);
+		model.addAttribute("bidMaxAmounts", bidMaxAmount);
+		model.addAttribute("memberDB", memberVO);
+		model.addAttribute("count", count);
+		
+		return model;
 	}
 	
 	// 결제내역
