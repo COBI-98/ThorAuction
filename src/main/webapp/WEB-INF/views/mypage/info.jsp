@@ -33,7 +33,7 @@
                                                     <a href="#">대시보드</a>
                                                 </li>
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-                                                    <a href="#">관심내역</a>
+                                                    <a href="../mypage/likeProduct?id=${memberDB.id}">관심내역</a>
                                                 </li>
 												<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
 													<a href="../mypage/bidhistory?id=${memberDB.id}">입찰내역</a>
@@ -71,7 +71,7 @@
                                                 <a href="#">내 정보</a>
                                             </div>
                                             <div class="orders-link">
-                                                <a href="#">관심내역</a>
+                                                <a href="./likeProduct?id=${memberDB.id}">관심내역</a>
                                             </div>
                                             <div class="auctions-link">
                                                 <a href="#">낙찰내역</a>

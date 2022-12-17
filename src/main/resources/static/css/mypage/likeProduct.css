@@ -1,0 +1,162 @@
+.mypage_content {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    float: left;
+    width: calc(100% - 200px);
+    padding-left: 0%;
+    width: 100%;
+}
+
+.mypage_title {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    font-size: 24px;
+    display: block;
+    padding: 0 0 25px;
+    letter-spacing: -0.5px;
+}
+
+.board_list {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    width: 100%;
+    -webkit-border-horizontal-spacing: 0px;
+    -webkit-border-vertical-spacing: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+.board_list.myboard .progubun {
+    padding-left: 0px;
+    letter-spacinG: -0.5px;
+}
+
+.board_list.myboard td {
+    line-height: 1.4;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eaeaea;
+    text-align: center;
+}
+
+.small {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    border-collapse: collapse;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    margin: 0px;
+    text-align: left !important;
+    line-height: 1.4;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eaeaea;
+    padding-left: 0px;
+    letter-spacinG: -0.5px;
+}
+
+.left {
+    text-align: left !important;
+}
+
+.size14 {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    border-collapse: collapse;
+    text-align: left !important;
+    line-height: 1.4;
+    letter-spacinG: -0.5px;
+    color: #333;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 14px !important;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.price {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    border-collapse: collapse;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    margin: 0px;
+    color: var(--color-point) !important;
+    line-height: 1.4;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eaeaea;
+    font-weight: bold;
+    text-align: right;
+}
+
+.import {
+    color: var(--color-point) !important;
+}
+
+.screen {
+
+}
+
+.absbtn {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    border-collapse: collapse;
+    font-size: inherit;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    margin: 0px;
+    line-height: 1.4;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eaeaea;
+    text-align: center;
+}
+
+.sbtn {
+    --color-point: #e80c0c;
+    --color-sub: #ffef36;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;
+    word-break: normal;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 2px;
+    line-height: 14px !important;
+    background-color: #979797;
+    color: #fff;
+    border: 1px solid #979797;
+}
+
+.gray {
+    background-color: #979797;
+    color: #fff;
+    border: 1px solid #979797;
+}
