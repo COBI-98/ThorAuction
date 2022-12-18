@@ -68,7 +68,7 @@
 													<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
-													<a href="#">신청한 상품</a>
+													<a href="../mypage/appProduct?id=${memberDB.id}">신청한 상품</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist is-active">
 													<a href="../mypage/update?id=${memberDB.id}">정보 수정</a>

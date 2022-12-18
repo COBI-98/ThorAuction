@@ -61,6 +61,14 @@ public class MypageController {
 		return mv;
 	}
 	
+	// 신청한 상품
+	@GetMapping("appProduct")
+	public void appProduct(LikeSaleProductVO likeSaleProductVO, Model model, @AuthenticationPrincipal MemberVO memberVO) throws Exception {
+	
+		model.addAttribute("memberDB", memberVO);
+
+	}
+	
 	// 관심 상품 삭제
 	@PostMapping("deleteLikeProduct")
 	@ResponseBody

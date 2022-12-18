@@ -45,7 +45,7 @@
                                                     <a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
                                                 </li>
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
-                                                    <a href="#">신청한 상품</a>
+                                                    <a href="../mypage/appProduct?id=${memberDB.id}">신청한 상품</a>
                                                 </li>
                                                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist">
                                                     <a href="../mypage/checkpw?id=${memberDB.id}">정보 수정</a>
@@ -80,7 +80,7 @@
                                                 <a href="./payhistory?id=${memberDB.id}">결제내역</a>
                                             </div>
                                             <div class="msm-unsubscribe-link">
-                                                <a href="#">신청한 상품</a>
+                                                <a href="./appProduct?id=${memberDB.id}">신청한 상품</a>
                                             </div>
                                             <div class="auctions-link update">
                                                 <a href="./checkpw?id=${memberDB.id}">정보 수정</a>
