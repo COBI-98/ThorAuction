@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +15,12 @@
     <script type="text/javascript">
 		let message = '${message}';
 		if(message == "fail"){
-			swal(message,"","fail").then(function(){
+			swal("문의가 실패되었습니다.","","fail").then(function(){
 				location.href="${url}";
 			})
 		}else{
 			
-			swal(message,"","success").then(function(){
+			swal("문의가 완료되었습니다.","","success").then(function(){
 				location.href="${url}";
 			})
 		}
