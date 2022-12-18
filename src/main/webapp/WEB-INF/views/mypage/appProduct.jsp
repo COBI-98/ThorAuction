@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관심내역 :: 비드코인</title>
+<title>신청상품 :: 비드코인</title>
 <link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
 
 <c:import url="../template/boot.jsp"></c:import>
@@ -64,7 +64,7 @@
 													<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard">
 														<a href="../mypage/info?id=${memberDB.id}">대시보드</a>
 													</li>
-													<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders is-active">
+													<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
 														<a href="../mypage/likeProduct?id=${memberDB.id}">관심내역</a>
 													</li>
 													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
@@ -76,7 +76,7 @@
 													<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile">
 														<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 													</li>
-													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
+													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe is-active">
 														<a href="../mypage/appProduct?id=${memberDB.id}">신청한 상품</a>
 													</li>
 													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist">
@@ -103,11 +103,11 @@
 																<table class="table" style="font-size: 15px;">
 																	<thead>
 																		<tr>
-																			<th scope="col">상품번호</th>
-																			<th scope="col">이미지</th>
+																			<th scope="col">신청번호</th>
+																			<th scope="col">제목</th>
 																			<th scope="col">상품명</th>
-																			<th scope="col">등록일</th>
-																			<th scope="col">삭제</th>
+																			<th scope="col">신청일</th>
+																			<th scope="col">신청상태</th>
 																		</tr>
 																	</thead>
 
@@ -139,15 +139,15 @@
 															<table class="table" style="font-size: 15px;">
 																<thead>
 																	<tr>
-																		<th scope="col">상품번호</th>
-																		<th scope="col">이미지</th>
+																		<th scope="col">신청번호</th>
+																		<th scope="col">제목</th>
 																		<th scope="col">상품명</th>
-																		<th scope="col">등록일</th>
-																		<th scope="col">삭제</th>
+																		<th scope="col">신청일</th>
+																		<th scope="col">신청상태</th>
 																	</tr>
 																</thead>
 															</table>
-															<div class="null">관심내역에 등록된 상품이 없습니다</div>
+															<div class="null">신청하신 상품이 없습니다</div>
 														</c:otherwise>
 													</c:choose>
 													<div class="mshop-members-message"></div>
