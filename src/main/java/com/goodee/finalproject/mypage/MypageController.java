@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.BidAmountVO;
+import com.goodee.finalproject.product.LikeSaleProductVO;
 import com.goodee.finalproject.product.ProductService;
 import com.goodee.finalproject.product.ProductVO;
 import com.goodee.finalproject.product.SaleProductVO;
@@ -60,11 +61,33 @@ public class MypageController {
 		return mv;
 	}
 	
+	// 관심 상품 삭제
+	@PostMapping("deleteLikeProduct")
+	@ResponseBody
+	public int deleteLikeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception {
+		
+		int result = mypageService.deleteLikeProduct(likeSaleProductVO);
+		
+		if (result > 0) {
+			log.info("삭제 성공");
+		} else {
+			log.info("삭제 실패");
+		}
+		
+		return result;
+	}
+	
 	// 관심내역
 	@GetMapping("likeProduct")
-	public void likeProduct(@AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+	public void likeProduct(LikeSaleProductVO likeSaleProductVO, Model model, @AuthenticationPrincipal MemberVO memberVO) throws Exception {
 		
+		List<LikeSaleProductVO> likelike = mypageService.likeProduct(likeSaleProductVO);
+		
+		log.info("관심내역 : {}", likelike);
+		
+		model.addAttribute("likeProduct", likelike);
 		model.addAttribute("memberDB", memberVO);
+
 	}
 	
 	// 입찰내역
