@@ -73,7 +73,7 @@
 														<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 													</li>
 													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
-														<a href="#">신청한 상품</a>
+														<a href="../mypage/appProduct?id=${memberDB.id}">신청한 상품</a>
 													</li>
 													<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist">
 														<a href="../mypage/checkpw?id=${memberDB.id}">정보 수정</a>
@@ -93,6 +93,8 @@
 											<div style="max-width: 800px; margin: 0 auto;" class="msm-profile">
 												<div id="mshop_form_2702" class="ui mfs_form " style="">
 													<div class="field" style="">
+													<c:choose>
+														<c:when test="${not empty likeProduct}">
 														<div class="mypage_content">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 입찰내역이 있습니다.</div>
 															<input type="hidden" name="id" value="${memberDB.id}">
@@ -131,6 +133,15 @@
 															<div class="he20"></div>
 														</div>
 													</div>
+																										</c:when>
+														<c:otherwise>
+															<table class="table" style="font-size: 15px;">
+															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 입찰내역이 있습니다.</div>
+																
+															<div class="null">입찰한 내역이 없습니다</div>
+															</table>
+														</c:otherwise>
+													</c:choose>
 													<div class="mshop-members-message"></div>
 												</div>
 											</div>
