@@ -3,6 +3,9 @@
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="wrap">
+
+<c:import url="/WEB-INF/views/template/recentItem.jsp"></c:import>
+
 	<nav class="py-2 bg-light border-bottom">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
