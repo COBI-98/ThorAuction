@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.BidAmountVO;
+import com.goodee.finalproject.product.LikeSaleProductVO;
 import com.goodee.finalproject.product.SaleProductVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,20 @@ public class MypageService {
 	// 비밀번호 암호화해주는 메서드
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	// 관심 상품 삭제
+	public int deleteLikeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception {
+		
+		int result = mypageMapper.deleteLikeProduct(likeSaleProductVO);
+		
+		return result;
+	}
+	
+	// 관심내역
+	public List<LikeSaleProductVO> likeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception {
+		
+		return mypageMapper.likeProduct(likeSaleProductVO);
+	}
 	
 	// 입찰한 상품 수
 	public int productCount(BidAmountVO bidAmountVO) throws Exception {

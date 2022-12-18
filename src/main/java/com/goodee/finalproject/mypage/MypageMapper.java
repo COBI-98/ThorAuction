@@ -7,11 +7,17 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.BidAmountVO;
-import com.goodee.finalproject.product.ProductVO;
+import com.goodee.finalproject.product.LikeSaleProductVO;
 import com.goodee.finalproject.product.SaleProductVO;
 
 @Mapper
 public interface MypageMapper {
+	
+	// 관심 상품 삭제
+	public int deleteLikeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception;
+	
+	// 관심내역
+	public List<LikeSaleProductVO> likeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception;
 	
 	// 입찰한 상품 수
 	public int productCount(BidAmountVO bidAmountVO) throws Exception;

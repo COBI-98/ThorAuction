@@ -5,6 +5,57 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 관심 상품 삭제 -->
+	<delete id="deleteLikeProduct" parameterType="LikeSaleProductVO">
+		DELETE FROM LIKESALEPRODUCT
+		WHERE LIKENUM = #{likeNum} AND ID = #{id}
+	</delete>
+
+	<!-- 관심내역 -->
+	<select id="likeProduct" parameterType="LikeSaleProductVO" resultMap="getlikeProduct">
+		SELECT * FROM 
+		LIKESALEPRODUCT lp
+		INNER JOIN
+		SALEPRODUCT sp
+		ON  lp.PRODUCTID = sp.PRODUCTID
+		INNER JOIN
+		AUCTIONPRODUCT ap
+		ON sp.PRODUCTNUM = ap.PRODUCTNUM
+		INNER JOIN
+		PRODUCTFILES pf
+		ON ap.PRODUCTNUM = pf.PRODUCTNUM
+		WHERE ID = #{id}
+		ORDER BY LIKENUM DESC
+	</select>
+	
+	<resultMap type="LikeSaleProductVO" id="getlikeProduct">
+		<id column="LIKENUM" property="likeNum" />
+		<result column="PRODUCTID" property="productId" />
+		<result column="ID" property="id" />
+		
+		<collection property="saleProductVOs" javaType="List" ofType="SaleProductVO">
+			<id column="PRODUCTID" property="productId" />
+			<result column="PRODUCTNUM" property="productNum" />
+			<result column="PRODUCTHIT" property="productHit" />
+			<result column="PRODUCTDATE" property="productDate" />
+		</collection>
+		
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+       		<id column="PRODUCTNUM" property="productNum"></id>
+        	<result column = "PRODUCTNAME" property="productName"></result>
+        	<result column = "PRODUCTPRICE" property="productPrice"></result>
+        	<result column="PRODUCTINFORMATION" property="productInformation"></result>
+        	<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+        	
+        	<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+	           <id column="FILENUM" property="fileNum"></id>
+	           <result column = "FILENAME" property="fileName"></result>
+	           <result column = "ORINAME" property="oriName"></result>
+	           <result column="SORT" property="sort"></result>
+	        </collection>
+      	</collection>
+	</resultMap>
+
 	<!-- 입찰내역 -->
 	<!-- 입찰한 상품 수 -->
 	<select id="productCount" resultType="int">

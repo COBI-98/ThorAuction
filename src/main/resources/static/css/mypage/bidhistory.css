@@ -187,3 +187,10 @@
     box-sizing: border-box;
     height: 20px;
 }
+
+.null {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px 0;
+}
