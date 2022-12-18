@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.BidAmountVO;
 import com.goodee.finalproject.product.LikeSaleProductVO;
@@ -28,6 +29,12 @@ public class MypageService {
 	// 비밀번호 암호화해주는 메서드
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	// 신청한 상품
+	public List<ApplicationVO> appProduct(ApplicationVO applicationVO) throws Exception {
+		
+		return mypageMapper.appProduct(applicationVO);
+	}
 	
 	// 관심 상품 삭제
 	public int deleteLikeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception {

@@ -99,36 +99,34 @@
 												<div id="mshop_form_2702" class="ui mfs_form " style="">
 													<div class="field" style="">
 														<c:choose>
-															<c:when test="${not empty likeProduct}">
+															<c:when test="${not empty appProduct}">
 																<table class="table" style="font-size: 15px;">
 																	<thead>
 																		<tr>
 																			<th scope="col">신청번호</th>
 																			<th scope="col">제목</th>
 																			<th scope="col">상품명</th>
+																			<th scope="col">시작가</th>
 																			<th scope="col">신청일</th>
 																			<th scope="col">신청상태</th>
 																		</tr>
 																	</thead>
 
 																	<tbody>
-																		<c:forEach items="${likeProduct}" var="product">
+																		<c:forEach items="${appProduct}" var="app">
 																			<tr>
-																				<td scope="row">${product.productId }</td>
-																				<c:forEach items="${product.productVOs}" var="products">
-																					<td><img src="/file/product/${products.productFileVOs[0].fileName}"></td>
-																					<td>${products.productName}</td>
+																				<td scope="row">${app.applicationNum }</td>
+																				<td>${app.writer}</td>
+																				<c:forEach items="${app.productVOs}" var="product">
+																					<td>${product.productName }</td>
+																					<td><fmt:formatNumber value="${product.productPrice}" pattern="###,###,###,###" /></td>
 																				</c:forEach>
-																				<c:forEach items="${product.saleProductVOs}" var="productInfo">
-																					<td><fmt:formatDate value="${productInfo.productDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-																				</c:forEach>
-																				<td>
-																					<form action="deleteLikeProduct" method="POST" id="deleteLike_form">
-																						<input type="hidden" name="likeNum" id="likeNum" value="${product.likeNum}">
-																						<input type="hidden" name="id" id="id" value="${product.id}">
-																						<button type="button" class="submit ui button submit_btn deleteLike_btn" value="${product.likeNum}">삭제</button>
-																					</form>
-																				</td>
+																				<td><fmt:formatDate value="${app.regDate}" pattern="yyyy-MM-dd" /></td>
+																				<c:choose>
+																			      	<c:when test="${app.approvalCheck == 'false'}"><td>거부</td></c:when>
+																			      	<c:when test="${app.approvalCheck == 'true'}"><td>승인</td></c:when>
+																			      	<c:otherwise><td>대기</td></c:otherwise>
+																			     </c:choose>
 																			</tr>
 																		</c:forEach>
 																	</tbody>
@@ -142,6 +140,7 @@
 																		<th scope="col">신청번호</th>
 																		<th scope="col">제목</th>
 																		<th scope="col">상품명</th>
+																		<th scope="col">시작가</th>
 																		<th scope="col">신청일</th>
 																		<th scope="col">신청상태</th>
 																	</tr>
