@@ -95,7 +95,7 @@
 												<style></style>
 													<div class="field" style="">
 													<c:choose>
-														<c:when test="${not empty likeProduct}">
+														<c:when test="${not empty pays}">
 														<table class="table" style="font-size: 15px;">
 														  <thead>
 														    <tr>

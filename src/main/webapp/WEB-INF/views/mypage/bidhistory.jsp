@@ -94,7 +94,7 @@
 												<div id="mshop_form_2702" class="ui mfs_form " style="">
 													<div class="field" style="">
 													<c:choose>
-														<c:when test="${not empty likeProduct}">
+														<c:when test="${not empty saleProducts}">
 														<div class="mypage_content">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 입찰내역이 있습니다.</div>
 															<input type="hidden" name="id" value="${memberDB.id}">
