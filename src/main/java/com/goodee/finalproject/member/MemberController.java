@@ -65,7 +65,7 @@ public class MemberController {
 	@GetMapping("login")
 	public void getLogin(@RequestParam(defaultValue = "false", required = false) Boolean error, String message, Model model) throws Exception {
 		if(error) {
-			model.addAttribute("msg", "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("errorMsg", "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.");
 		}
 	}
 	

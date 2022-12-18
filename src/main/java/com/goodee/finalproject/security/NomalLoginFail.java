@@ -28,11 +28,11 @@ public class NomalLoginFail implements AuthenticationFailureHandler {
 		String result = null;
 		// 참조변수명 instanceof 클래스명
 		if(exception instanceof BadCredentialsException) {
-			result = "비밀번호가 틀렸습니다.";
+			result = "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다. 다시 시도해주세요.";
 		} else if(exception instanceof InternalAuthenticationServiceException) {
-			result = "가입되지 않은 아이디입니다.";
+			result = "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다. 다시 시도해주세요.";
 		} else {
-			result = "로그인 실패!";
+			result = "알 수 없는 이유로 로그인에 실패하였습니다. 관리자에게 문의하세요.";
 		}
 		
 		// redirect
