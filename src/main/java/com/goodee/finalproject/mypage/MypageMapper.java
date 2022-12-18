@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.BidAmountVO;
 import com.goodee.finalproject.product.LikeSaleProductVO;
@@ -12,6 +13,9 @@ import com.goodee.finalproject.product.SaleProductVO;
 
 @Mapper
 public interface MypageMapper {
+	
+	// 신청한 상품
+	public List<ApplicationVO> appProduct(ApplicationVO applicationVO) throws Exception;
 	
 	// 관심 상품 삭제
 	public int deleteLikeProduct(LikeSaleProductVO likeSaleProductVO) throws Exception;

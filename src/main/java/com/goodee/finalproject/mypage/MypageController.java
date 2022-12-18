@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.BidAmountVO;
 import com.goodee.finalproject.product.LikeSaleProductVO;
@@ -63,9 +64,16 @@ public class MypageController {
 	
 	// 신청한 상품
 	@GetMapping("appProduct")
-	public void appProduct(LikeSaleProductVO likeSaleProductVO, Model model, @AuthenticationPrincipal MemberVO memberVO) throws Exception {
-	
+	public void appProduct(ApplicationVO applicationVO, Model model, @AuthenticationPrincipal MemberVO memberVO) throws Exception {
+		
+		applicationVO.setWriter(memberVO.getId());
+		
+		List<ApplicationVO> appProduct = mypageService.appProduct(applicationVO);
+		
+		log.info("신청 상품 : {}", appProduct);
+		
 		model.addAttribute("memberDB", memberVO);
+		model.addAttribute("appProduct", appProduct);
 
 	}
 	
