@@ -314,11 +314,6 @@ function open_layer_qna() {
 
 	function do_save_qna() {
 		var u_id=$("#id").val();
-		var product_id=$("#productId").val();
-		console.log(u_id);
-		console.log(product_id)
-		console.log($("#commentTitle").val());
-		console.log($("#comment").val())
 		if(u_id=='') {
 			Swal.fire({
 				title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
@@ -339,8 +334,13 @@ function open_layer_qna() {
 		
 
 		var obj=document.write_form2;
-		obj.action="./questionAdd";
-		obj.submit();
+		if($("#commentTitle").val() != "" && $("#commentContents").val() != ""){
+
+			obj.action="./questionAdd";
+			obj.submit();
+		}else {
+			swal("제목과 문의내용을 입력해주세요.","","warning")
+		}
 	}
 
 	function do_ment_view2(qna_idx) {
