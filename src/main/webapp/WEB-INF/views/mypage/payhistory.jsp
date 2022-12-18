@@ -73,7 +73,7 @@
 													<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-unsubscribe">
-													<a href="#">신청한 상품</a>
+													<a href="../mypage/appProduct?id=${memberDB.id}">신청한 상품</a>
 												</li>
 												<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--wishlist">
 													<a href="../mypage/checkpw?id=${memberDB.id}">정보 수정</a>
@@ -94,6 +94,8 @@
 											<div id="mshop_form_2702" class="ui mfs_form " style="">
 												<style></style>
 													<div class="field" style="">
+													<c:choose>
+														<c:when test="${not empty likeProduct}">
 														<table class="table" style="font-size: 15px;">
 														  <thead>
 														    <tr>
@@ -125,6 +127,22 @@
 														  </tbody>
 														</table>
 													</div>
+													</c:when>
+														<c:otherwise>
+															<table class="table" style="font-size: 15px;">
+																<thead>
+																	<tr>
+																		<th scope="col">상품번호</th>
+																		<th scope="col">이미지</th>
+																		<th scope="col">상품명</th>
+																		<th scope="col">등록일</th>
+																		<th scope="col">삭제</th>
+																	</tr>
+																</thead>
+															</table>
+															<div class="null">결제한 내역이 없습니다</div>
+														</c:otherwise>
+													</c:choose>
 												<div class="mshop-members-message"></div>
 											</div>
 										</div>
