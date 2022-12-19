@@ -7,7 +7,7 @@
  	
  	<insert id="setProductAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">	
  		INSERT INTO AUCTIONPRODUCT
-		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum});
+		VALUE (#{productNum},#{productName},#{productPrice},#{productInformation},#{auctionPeriod},#{applicationNum},0);
  	</insert>
  	
  	<insert id="setProductFileAdd" parameterType="ProductFileVO">
@@ -15,7 +15,12 @@
  		VALUE (FILENUM,#{fileName},#{oriName},#{sort},#{productNum})
  	</insert>
  	
- 	<delete id="setSummerFileDelete" parameterType="ProductFileVO">
+ 	<insert id="setSaleProduct" parameterType="SaleProductVO" useGeneratedKeys="true" keyProperty="productId">
+ 		INSERT INTO SALEPRODUCT
+ 		VALUE (#{productId},#{productNum},#{categoryId},0,0,now(),#{amountUnit});
+ 	</insert>
+ 	
+ 	<delete id="setSummerFileDelete" parameterType="ProductFileVO" >
 	 	DELETE FROM 
 		PRODUCTFILES WHERE FILENUM =(
 		select MIN(FILENUM)  from PRODUCTFILES WHERE PRODUCTNUM=#{productNum});
@@ -67,7 +72,7 @@
 		DELETE FROM PRODUCTFILES WHERE PRODUCTNUM=#{productNum};
 	</delete>
 	
-	<!-- 상품 리스트 구현   -->
+	<!-- 상품 승인화면 구현   -->
 	<select id="getProductApproval" parameterType="productVO" resultMap="getProductFileList">
 		SELECT * FROM 
 		AUCTIONPRODUCT a
@@ -89,8 +94,191 @@
 				<result column = "FILENAME" property="fileName"></result>
 				<result column = "ORINAME" property="oriName"></result>
 				<result column="SORT" property="sort"></result>
+			</collection>	
+ 	</resultMap>
+ 	
+ 	<!-- 상품 리스트 화면 -->
+ 	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
+		SELECT * FROM 
+		SALEPRODUCT p
+		WHERE DEADLINEINFO = #{deadlineInfo};
+ 	</select>
+ 	
+ 	<select id="getSaleProductCategoryList" parameterType="SaleProductVO" resultMap="getProductCategory">
+		SELECT * FROM 
+		SALEPRODUCT p
+		WHERE DEADLINEINFO = #{deadlineInfo}
+		AND CATEGORYID = #{categoryId};
+ 	</select>
+ 	
+ 	<resultMap type="SaleProductVO" id="getProductCategory">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
+			<collection property="categoryVOs" javaType="List" ofType="CategoryVO" >
+				<id column="CATEGORYID" property="categoryId"></id>
+				<result column="CATEGORYNAME" property="categoryName"></result>
+			
+			</collection>
+ 	</resultMap> 
+ 	
+ 	<select id="getSaleProductHitList" parameterType="SaleProductVO" resultType="SaleProductVO">
+	 	
+		SELECT * FROM 
+		SALEPRODUCT p
+		where DEADLINEINFO = #{deadlineInfo}
+		ORDER BY PRODUCTHIT DESC;
+ 	</select>
+ 	
+ 	
+ 	<!-- 상품리스트 디테일 -->
+ 	<select id="getSaleProductListDetail" parameterType="SaleProductVO" resultMap="getSaleProductDetail">
+ 		SELECT *  FROM 
+			SALEPRODUCT p
+			LEFT JOIN
+			AUCTIONPRODUCT a 
+			ON(p.PRODUCTNUM = a.PRODUCTNUM)
+				LEFT JOIN
+				PRODUCTFILES pf
+				ON(a.PRODUCTNUM =pf.PRODUCTNUM )
+					LEFT JOIN 
+					BIDAMOUNT B
+					ON(p.PRODUCTID = B.PRODUCTID)
+						LEFT JOIN
+						PRODUCTQUESTION PQ
+						ON(p.PRODUCTID = PQ.PRODUCTID)
+							LEFT JOIN
+							ADMINQUESTION AQ
+							ON(PQ.QUESTIONID = AQ.QUESTIONID)
+								WHERE p.PRODUCTID = #{productId}
+								ORDER BY B.BIDAMOUNT DESC , PQ.QUESTIONID ASC;
+ 	</select>
+ 	
+ 	<update id="setDeadLineUpdate" parameterType="SaleProductVO">
+ 		UPDATE SALEPRODUCT SET
+		DEADLINEINFO = 1 WHERE PRODUCTID =#{productId}; 
+ 	</update>
+	
+	<resultMap type="SaleProductVO" id="getSaleProductDetail">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
 			</collection>
 			
+		</collection>
+
+		
+		<collection property="bidAmountVOs" javaType="List" ofType="BidAmountVO">
+				<id column="AMOUNTID" property="amountId"></id>
+				<result column = "PRODUCTID" property="productId"></result>
+				<result column = "ID" property="id"></result>
+				<result column = "BIDAMOUNT" property="bidAmount"></result>
+				<result column = "BIDDATE" property="bidDate"></result>
+		</collection>
+		
+		<collection property="productQuestionVOs" javaType="List" ofType="ProductQuestionVO">
+				<id column="QUESTIONID" property="questionId"></id>
+				<result column = "QUESTIONTITLE" property="questionTitle"></result>
+				<result column = "QUESTIONCONTENTS" property="questionContents"></result>
+				<result column = "QUESTIONDATE" property="questionDate"></result>
+				<result column = "PRODUCTID" property="productId"></result>
+				<result column = "ID" property="id"></result>
+				
+				<association property="adminQuestionVO" javaType="AdminQuestionVO">
+			         <id column="AQNUM" property="aqNum"/>
+			         <result column="AQCONTENTS" property="aqContents"/>
+			         <result column="AQDATE" property="aqDate"/>
+			         <result column="QUESTIONID" property="questionId"/>
+			         <result column="ID" property="id"/>
+			     </association>
+			     
+		</collection>
+		
 		
  	</resultMap>
+ 	
+ 	<select id="getMaxAmountCheck" parameterType="BidAmountVO" resultType="Long">
+ 	SELECT MAX(BIDAMOUNT) AS PRODUCTVO FROM BIDAMOUNT
+	WHERE PRODUCTID= #{productId};
+ 	</select>
+ 	
+ 	<!-- 입찰금액 추가 -->
+ 	<insert id="setBidAmountAdd" parameterType="BidAmountVO">
+	 	INSERT INTO BIDAMOUNT
+		VALUES (AMOUNTID,#{productId},#{id},#{bidAmount},now());
+ 	</insert>
+ 	
+ 	<!-- 카테고리 리스트 -->
+ 	<select id="getCategoryList" parameterType="CategoryVO" resultType="CategoryVO">
+ 		select * from PRODUCTCATEGORY;
+ 	</select>
+ 	
+ 	<!-- 조회수 업데이트 -->
+ 	<update id="setSaleProductHit" parameterType="SaleProductVO">
+ 		UPDATE SALEPRODUCT SET PRODUCTHIT = PRODUCTHIT+1 WHERE PRODUCTID = #{productId};
+ 	</update>
+ 	
+ 	<!-- 관심있는상품 추가 -->
+ 	<insert id="setLikeSaleProduct" parameterType="LikeSaleProductVO">
+		INSERT INTO LIKESALEPRODUCT
+		VALUES (LIKENUM,#{productId},#{id});
+ 	</insert>
+ 	
+ 	<!-- 관심있는상품 체크 -->
+ 	<select id="getLikeProductCheck" parameterType="LikeSaleProductVO" resultType="String">
+ 		SELECT LIKENUM FROM LIKESALEPRODUCT
+ 		WHERE PRODUCTID =#{productId} AND ID= #{id}
+ 	</select>
+ 	
+ 	<!-- 상품 문의하기 -->
+ 	<insert id="setQuestionAdd" parameterType="ProductQuestionVO" useGeneratedKeys="true" keyProperty="questionId">
+ 		INSERT INTO PRODUCTQUESTION
+ 		VALUES (#{questionId},#{questionTitle},#{questionContents},now(),#{productId},#{id});
+ 	</insert>
+ 	
+ 	<!-- 관리자 답변 -->
+ 	<insert id="setAdminQuestionAdd" parameterType="AdminQuestionVO">
+ 		INSERT INTO ADMINQUESTION
+ 		VALUES (AQNUM,#{aqContents},now(),#{questionId},#{id})
+ 	</insert>
+ 	
+ 	<!-- 문의 삭제 -->
+ 	<delete id="setQuestionDelete" parameterType="ProductQuestionVO">
+		DELETE FROM PRODUCTQUESTION WHERE QUESTIONID = #{questionId};
+ 	</delete>
+ 	
+ 	<!-- 관리자 답변 체크 -->
+ 	<select id="getAdminQuestionCheck" parameterType="ProductQuestionVO" resultType="AdminQuestionVO">
+ 		SELECT AQNUM FROM ADMINQUESTION WHERE QUESTIONID=#{questionId};
+ 	</select> 
+ 	<!-- 관리자 답변 삭제 -->
+ 	<delete id="setAdminQuestionDelete" parameterType="AdminQuestionVO">
+ 		DELETE FROM ADMINQUESTION WHERE AQNUM = #{aqNum};
+ 	</delete>
+ 	
+ 	<update id="setStatus" parameterType="ProductVO">
+ 		UPDATE AUCTIONPRODUCT SET STATUS = 1 WHERE PRODUCTNUM = #{productNum}
+ 	
+ 	</update>
+ 	
 </mapper>

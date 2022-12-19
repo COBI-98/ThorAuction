@@ -34,8 +34,8 @@
 		SOCIALKAKAODETAIL where KANICKNAME =
 		#{kaNickName}
 	</select>
-
-	<resultMap type="KakaoDetailVO" id="detail">
+	
+		<resultMap type="KakaoDetailVO" id="detail">
 		<id column="kaNickName" property="kaNickName" />
 		<result column="kaBirth" property="kaBirth" />
 		<result column="kaPost" property="kaPost" />
@@ -45,4 +45,23 @@
 		<result column="kaPoint" property="kaPoint" />
 	</resultMap>
 
+
+	<!-- detail -->
+	<select id="getKakaoDetail" parameterType="KakaoVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+	
+	<!-- point -->
+	<update id="setPoint" parameterType="KakaoDetailVO">
+		UPDATE SOCIALKAKAODETAIL SET KAPOINT = #{kaPoint} WHERE KANICKNAME = #{kaNickName} 
+	</update>
+	
+	<select id="getOneMember" parameterType="KakaoDetailVO" resultType="KakaoDetailVO">
+		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
+	</select>
+
+	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
+		select
+		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
+	</select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.goodee.finalproject.board.impl.BoardMapper;
 import com.goodee.finalproject.board.impl.BoardVO;
+import com.goodee.finalproject.product.SaleProductVO;
 import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.util.BoardPageMaker;
 
@@ -24,6 +25,8 @@ public interface ApplicationMapper  {
 	public int setApplicationUpdate(ApplicationVO applicationVO) throws Exception;
 	
 	public int setApplicationDelete(ApplicationVO applicationVO) throws Exception;
+	
+	public List<ApplicationVO> getApprovalCheckList() throws Exception;
 	
 
 }

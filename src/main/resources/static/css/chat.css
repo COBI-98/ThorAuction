@@ -8,21 +8,22 @@
    text-align: center;
 } */
 
-#chat-box{
+.chat-box{
 	width: 100%;
-	aspect-ratio: 4.9 / 9; 
+	aspect-ratio: 4 / 9; 
 }
 
 #chatt #talk{
    width: 100%;
    height: 83%;
-   overflow: scroll;
+   overflow: auto;
    border : 1px solid #aaa;
    /* text-align: center; */
 }
 
 
 #sendZone{
+	margin-top: 15px;
 	display:flex;
 	justify-content:space-around;
 	height: 15%;
@@ -38,13 +39,24 @@
 #chatt #btnSend{
    width: 20%;
    height: 100%;
-   background-color: #fea532;
-   color: white;
-   border-style: none;
+  
+}
+
+
+
+.bidcoinBtn{
+	background-color: #fea532;
+    color: white;
+    font-weight : 500;
+    border-style: none;
+    border-radius: 3px;
+	min-height: 40px;
+	min-width: 30px;
+	padding: 0 5px !important;
 }
 
 #chatt #talk div{
-   width: 60%;
+   
    display: inline-block;
    padding: 6px;
    border-radius:10px;   
@@ -57,40 +69,98 @@
 }
 
 #chatt .me{
-   background-color : #eee;
-   margin : 1px 0px 2px 40%;   
+  
+   margin : 1px 0px 2px 10px;   
+   
+   display: flex !important;
+   justify-content: flex-end;
+   align-items: flex-end;
 }
-
 #chatt .other{
+ 
+   margin : 2px;
+   display: flex !important;
+   justify-content: flex-start;
+   align-items: flex-start;
+}
+
+
+#chatt .chat-date{
+   font-size: 12px;
+}
+
+#chatt .chat-text{
+	min-width : 60%;
+	max-width : 100%;
    background-color : #eee;
-   margin : 2px;
+   word-break:break-all;
 }
 
-#chatt .me#enter{
-   background-color: white;
-   border-style:solid;
-   border-color: #fea532;
-   margin : 1px 0px 2px 40%;   
+#chatt .hi{
+	text-align: center;
+   font-size: 14px;
+   width: 100%;
 }
 
-#chatt .other#enter{
-   background-color: white;
+#selecteditem, #text{
+	text-align: center;
+	font-size: 20px;
+
+	
+}
+
+
+#item{
+	display: flex;
+	align-content: center;
+	
+	
+}
+#chat-header{
+	width : 100%;
+	height: 75px;
+}
+
+/* #chatt .me#enter .chat-text{ */
+/*    background-color: white; */
+/*    border-style:solid; */
+/*    border-color: #fea532; */
+/* /*    margin : 1px 0px 2px 40%;    */ 
+/* } */
+
+/* #chatt .other#enter .chat-text{ */
+/*    background-color: white; */
+/*    border-style:solid; */
+/*    border-color: #fea532; */
+/* /*    margin : 2px; */
+/* } */
+.enter{
+	background-color: white !important;
    border-style:solid;
    border-color: #fea532;
-   margin : 2px;
+	
 }
 
 
 
 #text{
+	
    text-align: center;
    height: 45px;
 }
 
- .container{
+ .chat-container{
    width: 25%;
-   padding: 0px 15px;
+   padding: 0 15px;
 } 
+#add{
+	min-width: 30%;
+}
+#bidZone{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
 
 #auction{
    background-color: white;

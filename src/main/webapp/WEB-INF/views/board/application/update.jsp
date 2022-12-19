@@ -15,11 +15,11 @@
 <script src="/js/summernote/summernote-lite.js"></script>
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+<link href="/css/reset.css" rel="stylesheet">
 </head>
 <body>
-	
+	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
-		<h1>경매신청게시판 수정</h1>
 		<div class="row">
 	 <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
         <div>
@@ -35,36 +35,54 @@
 		 </div>
 
      
-        <div>
+        <div class="applicationDetail">
         글 제목<br>
         <input type="text" name="title" value="${applicationUpdate.title}" ><br>
         </div>
-         <div>
+         <div class="applicationDetail">
         작성자<br>
         <input type="text" name="writer" value="${applicationUpdate.writer}" ><br>
         </div>
         <input type="hidden" name="applicationNum" id="applicationNum" value="${applicationUpdate.applicationNum}">
        <div class="apllicationForm">
-            신청하는 상품 정보 
+        <div class="applicationInfo">
+            신청하는 상품 정보
+        </div>  
             <c:forEach items="${applicationUpdate.productVOs}" var="product">
                 <input type="hidden" id="productNum" name="productNum" value="${product.productNum}">
-            <div>
-                상품 이름<br>
+            <div class="applicationDetail">
+                상품명<br>
                 <input type="text" name="productName" value="${product.productName}" ><br>
             </div>
-            <div>
-                최저 경매가격<br>
+            <div class="applicationDetail">
+                최저 판매가격<br>
                 <input type="text" name="productPrice" value="${product.productPrice}" ><br>
             </div>
-            <div>
-                상세정보<br>
-                <textarea id="detailContents" name="productInformation" rows="30" cols="100">${product.productInformation}</textarea>
-            </div>
-            <div>
+            <div class="applicationDetail">
                 경매기간<br>
                 <input type="text" name="auctionPeriod" value="${product.auctionPeriod}"><br>
             </div>
-            <div  class="board-filetitle">💾상품이미지 첨부  
+            <div>
+                <div class="applicationInfoTitle">
+                    상세정보
+                    </div>
+                    <div class="applicationInfoExplain"> 
+                        상품 상세정보 작성(필수 사항)<br>
+                        : 상품 모델명<br>
+                        : 새 상품 가격<br>
+                        : 상품 상태<br>
+                        : 상품 정보
+                    </div>
+                <textarea id="detailContents" name="productInformation" rows="30" cols="100">${product.productInformation}</textarea>
+            </div>
+            
+            <div  class="board-filetitle">
+                <div class="applicationInfoTitle">
+                    💾상품이미지 첨부<br>
+                </div>  
+                <div class="applicationInfoExplain">
+                    : 상품 상태
+                </div> 
                 <div class="mb-3" id="fileAddResult">
                     
                     <c:forEach items="${product.productFileVOs}" var="file">
@@ -97,6 +115,7 @@
 </div>
 	
 </section>
+<c:import url="../../template/footer.jsp"></c:import>
 <script src="/js/applicationFileManager.js"></script>
 
 <script type="text/javascript">

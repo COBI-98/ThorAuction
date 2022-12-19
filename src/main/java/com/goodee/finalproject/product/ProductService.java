@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -29,4 +30,92 @@ public class ProductService {
 		return productMapper.getProductApproval(productVO);
 	}
 	
+	public int setSaleProduct(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.setSaleProduct(saleProductVO);
+	}
+	
+	public List<SaleProductVO> getSaleProductList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductList(saleProductVO);
+	}
+	
+	public List<SaleProductVO> getSaleProductHitList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductHitList(saleProductVO);
+	}
+	
+	public List<SaleProductVO> getSaleProductCategoryList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductCategoryList(saleProductVO);
+	}
+	
+	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception{
+		return productMapper.getCategoryList(categoryVO);
+	}
+	
+	public SaleProductVO getSaleProductListDetail(SaleProductVO saleproductVO) throws Exception{
+		
+		return productMapper.getSaleProductListDetail(saleproductVO);
+	}
+	
+	public int setDeadLineUpdate(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.setDeadLineUpdate(saleProductVO);
+	}
+
+	public Long getMaxAmountCheck(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.getMaxAmountCheck(bidAmountVO);
+	}
+	
+	public int setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.setBidAmountAdd(bidAmountVO);
+	}
+	
+	public int setSaleProductHit(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.setSaleProductHit(saleProductVO);
+	}
+	
+	public int setLikeSaleProduct(LikeSaleProductVO likeSaleProductVO) throws Exception{
+		
+		return productMapper.setLikeSaleProduct(likeSaleProductVO);
+	}
+
+	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception{
+		
+		return productMapper.getLikeProductCheck(likeSaleProductVO);
+	}
+	
+	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.setQuestionAdd(productQuestionVO);
+	}
+	
+	public int setAdminQuestionAdd(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		return productMapper.setAdminQuestionAdd(adminQuestionVO);
+	}
+	
+	
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.setQuestionDelete(productQuestionVO);
+	}
+	
+	public AdminQuestionVO getAdminQuestionCheck(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.getAdminQuestionCheck(productQuestionVO);
+	}
+	
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		return productMapper.setAdminQuestionDelete(adminQuestionVO);
+	}
+	
+	public int setStatus(ProductVO productVO) throws Exception{
+		return productMapper.setStatus(productVO);
+	}
 }

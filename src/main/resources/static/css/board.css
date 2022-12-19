@@ -11,7 +11,7 @@
     width: auto;
     height: 38px;
     line-height: 38px;
-    border: 1px solid cornflowerblue;
+    border: 1px solid #fea532;
     font-size: 12px;
 }
 .file_form .text {
@@ -28,7 +28,7 @@
     position: absolute;
     top:0;right:0;
     width: 80px;
-    background-color: cornflowerblue;
+    background-color: #fea532;
     text-align: center;
     color: #fff;
     content:'첨부파일';

@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -35,10 +36,14 @@ public class WebSocketChat {
 	private static int value;
 	private static Set<String> set = new HashSet<String>(); //채팅참여 name 
 	private static Map<Session, String> list = new HashMap<>(); //채팅참여 session, name
-	private static String winuser="";
-	private static String stop="false";
-	private static String start="false";
-	private static String unit ="";
+	private static String winuser=""; //낙찰 유저
+	private static String stop="false"; //얼리기
+	private static String start="false"; //경매 시작
+	private static String unit =""; //단위 가격
+	private static String item =""; //경매 물품
+	private static int itemNum = 0; //경매 물품 번호 
+	private static String broadName=""; //방송 제목
+	
 	
 	private static List<String> banlist = new ArrayList<String>(); //강퇴 list
 	
@@ -46,7 +51,6 @@ public class WebSocketChat {
 	@OnOpen
 	public void onOpen(Session s,EndpointConfig config) throws Exception {
 
-		
 		ModelAndView mv = new ModelAndView();
 		System.out.println("open session : " + s.toString());
 		if(!clients.contains(s)) {
@@ -54,7 +58,8 @@ public class WebSocketChat {
 			System.out.println("session open : " + s);
 		}else {
 			System.out.println("이미 연결된 session 임!!!");
-		}System.out.println(clients.size());
+		}
+		System.out.println(clients.size());
 	}
 	
 	@OnMessage
@@ -65,8 +70,22 @@ public class WebSocketChat {
 		JSONObject jsonObj = (JSONObject) obj;
 		System.out.println(msg);
 		
+		//방송 제목 설정
+		if(msg.substring(2, 7).equals("title")) {
+			broadName = String.valueOf(jsonObj.get("title"));
+			sendMessage(msg, session);
+		}
+		
+		//경매 물품 설정
+		else if(msg.substring(2, 6).equals("item")) {
+			item = String.valueOf(jsonObj.get("item"));
+			itemNum = Integer.parseInt(String.valueOf(jsonObj.get("itemNum")));
+			value = Integer.parseInt(String.valueOf(jsonObj.get("itemprice")));
+			sendMessage(msg,session);
+		}
+		
 		//단위 경매 설정
-		if(msg.substring(2, 6).equals("unit")) {
+		else if(msg.substring(2, 6).equals("unit")) {
 			unit = String.valueOf(jsonObj.get("unit"));
 			sendMessage(msg, session);
 		}
@@ -88,7 +107,6 @@ public class WebSocketChat {
 			String vv = String.valueOf(jsonObj.get("value"));
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
-			
 			sendMessage(msg, session);
 		}
 		
@@ -102,13 +120,22 @@ public class WebSocketChat {
 		
 		//경매 결과
 		else if(msg.substring(2, 8).equals("amount")) {
-
+			start = String.valueOf(jsonObj.get("gg"));
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
 			String winner = String.valueOf(jsonObj.get("winner")); //낙찰자
-			//DB에 저장할 예정
 			
+			String message = msg.replace("amount", "loginnum");
+			String vv = String.valueOf(jsonObj.get("loginnnn"));
+			message = message.replace(vv, amount);
+			
+			value=Integer.parseInt(amount);
+			winuser = winner;
+
+			Session ss = getKey(list,winner);
+
 			sendMessage(msg,session);
-			
+			sendOneMessage(message, ss); //낙찰자한테만 보내기
+
 		//채팅 전송
 		}else if(msg.substring(2, 5).equals("mid")) {
 			
@@ -122,7 +149,6 @@ public class WebSocketChat {
 			}
 			int valu = Integer.parseInt(vv);
 			setValue(valu);
-			
 			sendMessage(msg, session);
 			
 		//입장시
@@ -140,12 +166,16 @@ public class WebSocketChat {
 			msg = msg.replace(String.valueOf(jsonObj.get("ppp")), stop);
 			msg = msg.replace(String.valueOf(jsonObj.get("gogo")), start);
 			msg = msg.replace(String.valueOf(jsonObj.get("price")),unit);
-						
+			msg = msg.replace(String.valueOf(jsonObj.get("winner")), winuser);
+			msg = msg.replace(String.valueOf(jsonObj.get("value")), String.valueOf(value));
+			msg = msg.replace(String.valueOf(jsonObj.get("goods")), item);
+			msg = msg.replace(String.valueOf(jsonObj.get("tt")), broadName);
+			
 			sendMessage(msg, session);
 		}
 		else {
 			sendMessage(msg, session);
-		}	
+		}
 	}
 	
 	//메세지 전송
@@ -191,6 +221,31 @@ public class WebSocketChat {
 		this.value = valu;
 	}
 	
+	public String getWinuser() {
+		return winuser;
+	}
+	public void setWinuser(String user) {
+		this.winuser = user;
+	}
+	public String getItem() {
+		return item;
+	}
+	public void setItem(String str) {
+		this.item = str;
+	}
+	public int getItemNum() {
+		return itemNum;
+	}
+	public void setItemNum(int num) {
+		this.itemNum = num;
+	}
+	public String getBroadName() {
+		return broadName;
+	}
+	public void setBroadName(String num) {
+		this.broadName = num;
+	}
+	
 	public static <K, V> K getKey(Map<K, V> map, V value) {
 	       // 찾을 hashmap 과 주어진 단서 value
 	       for (K key : map.keySet()) {
@@ -203,6 +258,11 @@ public class WebSocketChat {
 	
 	public List<String> getBanList() {
 		return banlist;
+	}
+	
+	@OnError
+	public void handleError(Throwable t){
+		t.printStackTrace();
 	}
 
 }
