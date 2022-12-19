@@ -133,9 +133,10 @@ function dobid(tmp) {
       })
       .then((wileDelete) => {
             if(wileDelete==true) {
-                var product_money_t = $("#startAmount").val();
+                var product_money_t = $("#bidAmountCheck").val();
                 var product_Id= $("#productId").val();
                 var amountUnit = $("#amountUnit").val();
+
 				var startAmount = $("#startAmount").val();
 				var productDetailDate = $("#productDetailDate").val();
 				var timeLength = $("#timeLength").val();
