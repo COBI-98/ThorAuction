@@ -111,7 +111,7 @@
 	
 	<header class="py-3 mb-4 border-bottom">
 		<div class="container d-flex flex-wrap justify-content-center" style="align-items: flex-end;">
-			<a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+			<a href="/product/list" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
 				<svg class="bi me-2" width="40" height="32">
 					<use xlink:href="#bootstrap"></use></svg>
 				<span class="fs-4"><img alt="" src="/images/logo_BidCoin.png" style="width: 200px;"></span>

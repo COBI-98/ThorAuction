@@ -267,12 +267,12 @@ ws.onmessage = function(msg){
 		console.log(data);
 		if(data.stop ==true){
 			talk.innerHTML += `<div class="hi">`+ "*채팅이 정지되었습니다.*" +`</div>`;
-			stopChat.value="채팅시작";
+			stopChatCold.value="채팅시작";
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
 			talk.innerHTML += `<div class="hi">`+ "*채팅이 시작되었습니다.*" +`</div>`;
-			stopChat.value="채팅정지";
+			stopChatCold.value="채팅정지";
 			$('#msg').attr("readonly",false);
 		}
 	}
@@ -295,11 +295,11 @@ ws.onmessage = function(msg){
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
-			stopChat.value="채팅정지";
+			stopChatCold.value="채팅정지";
 			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
-			stopChat.value="보내기";
+			stopChatCold.value="보내기";
 			$('#msg').attr("readonly",false);
 		}
 
