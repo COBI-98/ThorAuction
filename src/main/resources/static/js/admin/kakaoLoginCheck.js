@@ -9,29 +9,6 @@ function idcheck() {
     }).then(function () {
         location = '/oauth2/authorization/kakao';
     });
-    
-    // let kNickName = $(".kNickName").val();
 
-    // console.log(kNickName);
-
-    // $.ajax({
-    //     url: '/socialMember/IdCheck',
-    //     type: "POST",
-    //     data: { kaNickName: kNickName },
-    //     traditional: true,
-    //     success: function (rs) {
-    //         console.log(rs);
-    //         swal({
-    //             title: "카카오 로그인",
-    //             icon: "info",
-    //         }).then(function () {
-    //             location = '/oauth2/authorization/kakao';
-    //         });
-    //     },
-    //     error: function (textStatus, errorThrown) {
-    //         alert("서버 요청 실패");
-    //         console.log(textStatus);
-    //         console.log(errorThrown);
-    //     }
-    // })
 }
+

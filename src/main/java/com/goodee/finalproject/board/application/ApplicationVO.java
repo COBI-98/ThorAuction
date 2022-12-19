@@ -16,6 +16,7 @@ public class ApplicationVO extends ProductVO {
 	private String title;
 	private Date regDate;
 	private Boolean auctionSort;
+	private Boolean approvalCheck;
 	
 	private List<ProductVO> productVOs;
 }

@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>필수정보입력 :: 토실대</title>
+    <title>회원가입 :: 비드코인</title>
+    <link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
 
 	<!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -28,7 +29,7 @@
                 <div class="member-scroll-layout__inner">
                     <div class="register-header">
                         <h1 class="register-header__logo">
-                            <a href="../"><img class="register-header__logo-image" src="/images/member/Odin.png" alt="토실대 임시로고"></a>
+                            <a href="../"><img class="register-header__logo-image" src="/images/bidcoin_logo.png" alt="bidcoin"></a>
                         </h1>
                         <div class="register-header__step">
                             <i class="register-header__step-dot">step 1</i>
@@ -40,7 +41,7 @@
                     <form action="join" method="POST" id="joinForm">
 
                         <div class="sign-up">
-                            <h2 class="sign-up__title">개인정보입력</h2>
+                            <h2 class="sign-up__title">회원가입</h2>
                             <div class="sign-up__sub">회원가입을 위해서 핸드폰 인증이 진행되며, <br>인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</div>
                             
                             <!-- 아이디 -->

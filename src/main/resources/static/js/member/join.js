@@ -3,7 +3,7 @@
 let resultss = [false, false, false, false, false];
 
 // 이름 검증
-function isname(asValue) {
+function isName(asValue) {
 	var regExp = /^[가-힣]{2,5}$/;
 
 	return regExp.test(asValue);
@@ -14,7 +14,7 @@ $("#name").blur(function () {
 	if ($("#name").val() == "") {
 		$(".nameErrorMessage").text("필수 항목입니다");
 		$(".nameErrorMessage").attr("style", "color:#f00");
-	} else if (!isname($("#name").val())) {
+	} else if (!isName($("#name").val())) {
 		$(".nameErrorMessage").text("2~5자 한글만 사용해 주세요");
 		$(".nameErrorMessage").attr("style", "color:#f00");
 		
@@ -27,17 +27,35 @@ $("#name").blur(function () {
 });
 
 // 생년월일 검증
+function isBirth(asValue) {
+	var regExp = /^[0-9]{6}$/;
+
+	return regExp.test(asValue);
+}
+
 $("#birth").blur(function () {
 	if ($("#birth").val() == "") {
 		$(".birthErrorMessage").text("필수 항목입니다");
 		$(".birthErrorMessage").attr("style", "color:#f00");
 
-	} else if ($("#birth").val().length < 6) {
-		$(".birthErrorMessage").text("생년월일 6자를 정확하게 입력해 주세요 ex)000101");
 	} else {
 		$(".birthErrorMessage").text("");
 
 		resultss[1] = true;
+	}
+
+	if (!isBirth($("#birth").val())) {
+		$(".birthErrorMessage").text("숫자만 입력해 주세요");
+		$(".birthErrorMessage").attr("style", "color:#f00");
+
+		resultss[1] = false;
+	}
+
+	if ($("#birth").val().length < 6) {
+		$(".birthErrorMessage").text("생년월일 6자를 정확하게 입력해 주세요 ex)000101");
+		$(".birthErrorMessage").attr("style", "color:#f00");
+
+		resultss[1] = false;
 	}
 });
 
@@ -46,7 +64,7 @@ $("#birth").blur(function () {
 const autoHyphen = (target) => {
 	target.value = target.value
 		.replace(/[^0-9]/g, '')
-		.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+		.replace(/^(\d{3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
 }
 
 $("#phone").blur(function () {
@@ -55,7 +73,10 @@ $("#phone").blur(function () {
 		$(".phoneErrorMessage").attr("style", "color:#f00");
 	} else if ($("#phone").val().length < 11) {
 		$(".phoneErrorMessage").text("전화번호를 정확히 입력해 주세요");
-	}
+		$(".phoneErrorMessage").attr("style", "color:#f00");
+
+		resultss[2] = false;
+	}	
 	else {
 		$(".phoneErrorMessage").text("");
 
@@ -79,6 +100,9 @@ $("#email").blur(function () {
 
 	} else if (!isEmail($("#email").val())) {
 		$(".emailErrorMessage").text("이메일 주소를 다시 확인해 주세요");
+		$(".emailErrorMessage").attr("style", "color:#f00");
+
+		resultss[3] = false;
 	}
 	else {
 		$(".emailErrorMessage").text("");

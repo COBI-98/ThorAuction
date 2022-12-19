@@ -16,16 +16,16 @@ class Idcheck
 	private MemberSocialService memberSocialService;
 
 //	@Test
-	void test() throws Exception
-	{
-		KakaoVO kakaoVO = new KakaoVO();
-		kakaoVO.setKaNickName("2526670487");
-		kakaoVO.setKaName("김진규");
-		kakaoVO.setKaEmail("kjg08070@naver.com");
-		
-		int rs = memberSocialService.IdCheck(kakaoVO);
-		
-		assertEquals(1, rs);
-	}
+//	void test() throws Exception
+//	{
+//		KakaoVO kakaoVO = new KakaoVO();
+//		kakaoVO.setKaNickName("2526670487");
+//		kakaoVO.setKaName("김진규");
+//		kakaoVO.setKaEmail("kjg08070@naver.com");
+//		
+//		int rs = memberSocialService.IdCheck(kakaoVO);
+//		
+//		assertEquals(1, rs);
+//	}
 
 }

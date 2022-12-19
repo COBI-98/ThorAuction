@@ -118,12 +118,12 @@ ws.onmessage = function(msg){
 	else if(data.item != null) {
 		selecteditem.innerText = data.item;
 		amount.innerHTML = data.itemprice;
-		talk.innerHTML += `<div class="hi">`+"경매 물품이 " + data.item + "으로 설정되었습니다." +`</div>`;
+		talk.innerHTML += `<div class="hi" style="font-weight:bold;">`+"경매 물품이 " + data.item + "으로 설정되었습니다." +`</div>`;
 	}
 	
 	//단위 경매 설정 시
 	if(data.unit != null){
-		talk.innerHTML += `<div class="hi">`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
+		talk.innerHTML += `<div class="hi" style="font-weight:bold;">`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
 		add.value = "+" + data.unit;
 	}
 
@@ -132,7 +132,7 @@ ws.onmessage = function(msg){
 		if(data.gogo == true) {
 			auctionend.value="경매종료";
 			auctionend.classList.add("start");
-			talk.innerHTML += `<div class="hi">`+ "*경매가 시작되었습니다.*" +`</div>`;
+			talk.innerHTML += `<div class="hi" style="font-weight:bold;">`+ "*경매가 시작되었습니다.*" +`</div>`;
 			final.innerText ="경매 최고가:";
 
 			//최종금액 초기화, 안보이게
@@ -171,7 +171,7 @@ ws.onmessage = function(msg){
 			$('#finalamount').css("display","inline");
 			max = 0;
 			win = false;
-			talk.innerHTML += `<div class="hi">`+ "*경매가  종료되었습니다.*" +`</div>`;
+			talk.innerHTML += `<div class="hi" style="font-weight:bold;">`+ "*경매가  종료되었습니다.*" +`</div>`;
 			selecteditem.innerText = "";
 			add.value = "+";
 			unit.value ="";

@@ -10,19 +10,19 @@
 <c:import url="../../template//boot.jsp"></c:import>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link href="/css/reset.css" rel="stylesheet">
 </head>
 <body>
+	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
-
-
-	<h1>경매신청게시판 상세화면</h1>
 	
-	<table class="table table-bordered border-primary">
+	<table class="table table-bordered border-warning">
 		<tbody>
 		
 		  <tr >
-			  <th style="width: 70px;">글제목</th>
+			  <th style="width: 200px;">글제목</th>
 			  <td>${applicationVO.title}</td>
+			 
 			
 		  </tr>
 		   <tr >
@@ -32,14 +32,14 @@
 		  </tbody>
 	  </table>
 	  <div class="board-filetitle">💾첨부 파일</div>
-		  <table class="table table-bordered border-primary">
+		  <table class="table table-bordered border-warning">
 		  <tbody>
-		  <tr class="table-primary">
+		  <tr class="table-warning">
 			  
 		  <c:forEach items="${applicationVO.productVOs}" var="product">
 			  
 				   <tr>
-					   <th>상품이름</th>
+					   <th style="width: 200px;">상품이름</th>
 					  <td>${product.productName}</td>
 					  
 				  </tr>
@@ -48,40 +48,48 @@
 					<td><fmt:formatNumber value="${product.productPrice}" pattern="###,###"/></td>
 				</tr>
 				<tr>
-					<th>상품상세정보</th>
-					<td>${product.productInformation}</td>
-				</tr>
-				<tr>
 					<th>경매기간</th>
 					<td>${product.auctionPeriod}</td>
 				</tr>
-				<th>파일</th>
+				<tr>
+					<th>상품상세정보</th>
+					<td>${product.productInformation}</td>
+				</tr>
+				
+				<th>첨부파일</th>
+				<td>
 				<c:forEach items="${product.productFileVOs}" var="file">
 					<c:if test="${not file.sort}">
-						<tr>
+						
 							
-							<td>${file.fileName}</td>
-							
-						</tr>
+							<img src="/file/product/${file.fileName}" alt="" width="100px">					
+						
 						
 					</c:if>
 				</c:forEach>
+				</td>
 		  </c:forEach>
 		  </tbody>
 		  </table>
 
 
-</section>
-<section class="container-fluid col-lg-2 mt-5">
 
-<div> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-info" >글 수정</a></div>
-<div> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-info" style="margin-top: 10px;">글 삭제</a></div>
-<div> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" class="btn btn-success" >승인</a></div>
+
+<div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" >글 수정</a></div>
+<div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="margin-top: 10px; ">글 삭제</a></div>
+<c:if test="${applicationVO.auctionSort == true}">
+	<div class="btnRight"> <a href="#" class="btn btn-success" >승인</a></div>
+</c:if>
+<c:if test="${applicationVO.auctionSort != true}">
+	<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" class="btn btn-success" >승인</a></div>
+</c:if>
 <!-- Button trigger modal -->
 <!-- Button trigger modal -->
+<div class="btnRight">
 <button type="button" id="refuseBtn" class="btn btn-danger btn-lg"  >
   거부
 </button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -97,7 +105,7 @@
                 <table class="table">
                     <tr>
                         <td>사용자명</td>
-                        <td><input class="form-control" id="userName" type="text"></td>
+                        <td><input class="form-control" id="userName" type="text" value="${applicationVO.writer}"></td>
                     </tr>
                     <tr>
                         <td>취소사유<td>
@@ -115,14 +123,15 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button id="modalSubmit" type="button" class="btn btn-success">Submit</button>
-                <button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="modalSubmit" type="button" class="btn btn-success">전송</button>
+                <button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">취소</button>
             </div>
         </div>
     </div>
 </div>
    
 </section>
+<c:import url="../../template/footer.jsp"></c:import>
 <script type="text/javascript">
 $(function(){
 	$("#refuseBtn").click(function(){

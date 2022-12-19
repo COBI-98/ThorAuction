@@ -5,6 +5,166 @@
 	
 <mapper namespace="com.goodee.finalproject.mypage.MypageMapper">
 
+	<!-- 신청한 상품 -->
+	<select id="appProduct" parameterType="ApplicationVO" resultMap="getAppProduct">
+		SELECT * FROM
+		BOARDAPPLICATION app
+		INNER JOIN
+		AUCTIONPRODUCT p
+		ON app.APPLICATIONNUM = p.APPLICATIONNUM 
+		INNER JOIN
+		SALEPRODUCT s
+		ON p.PRODUCTNUM = s.PRODUCTNUM
+		WHERE app.WRITER = #{writer}
+	</select>
+	
+	<resultMap type="ApplicationVO" id="getAppProduct">
+		<id column="APPLICATIONNUM" property="applicationNum" />
+		<result column="TITLE" property="title" />
+		<result column="WRITER" property="writer" />
+		<result column="REGDATE" property="regDate" />
+		<result column="AUCTIONSORT" property="auctionSort" />
+		<result column="APPROVALCHECK" property="approvalCheck" />
+		
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum" />
+			<result column="PRODUCTNAME" property="productName" />
+			<result column="PRODUCTPRICE" property="productPrice" />
+		</collection>
+		
+	</resultMap>
+
+	<!-- 관심 상품 삭제 -->
+	<delete id="deleteLikeProduct" parameterType="LikeSaleProductVO">
+		DELETE FROM 
+		LIKESALEPRODUCT
+		WHERE LIKENUM = #{likeNum} AND ID = #{id}
+	</delete>
+
+	<!-- 관심내역 -->
+	<select id="likeProduct" parameterType="LikeSaleProductVO" resultMap="getLikeProduct">
+		SELECT * FROM 
+		LIKESALEPRODUCT lp
+		INNER JOIN
+		SALEPRODUCT sp
+		ON  lp.PRODUCTID = sp.PRODUCTID
+		INNER JOIN
+		AUCTIONPRODUCT ap
+		ON sp.PRODUCTNUM = ap.PRODUCTNUM
+		INNER JOIN
+		PRODUCTFILES pf
+		ON ap.PRODUCTNUM = pf.PRODUCTNUM
+		WHERE lp.ID = #{id}
+		ORDER BY lp.LIKENUM DESC
+	</select>
+	
+	<resultMap type="LikeSaleProductVO" id="getLikeProduct">
+		<id column="LIKENUM" property="likeNum" />
+		<result column="PRODUCTID" property="productId" />
+		<result column="ID" property="id" />
+		
+		<collection property="saleProductVOs" javaType="List" ofType="SaleProductVO">
+			<id column="PRODUCTID" property="productId" />
+			<result column="PRODUCTNUM" property="productNum" />
+			<result column="PRODUCTHIT" property="productHit" />
+			<result column="PRODUCTDATE" property="productDate" />
+		</collection>
+		
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+       		<id column="PRODUCTNUM" property="productNum"></id>
+        	<result column = "PRODUCTNAME" property="productName"></result>
+        	<result column = "PRODUCTPRICE" property="productPrice"></result>
+        	<result column="PRODUCTINFORMATION" property="productInformation"></result>
+        	<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+        	
+        	<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+	           <id column="FILENUM" property="fileNum"></id>
+	           <result column = "FILENAME" property="fileName"></result>
+	           <result column = "ORINAME" property="oriName"></result>
+	           <result column="SORT" property="sort"></result>
+	        </collection>
+      	</collection>
+	</resultMap>
+
+	<!-- 입찰내역 -->
+	<!-- 입찰한 상품 수 -->
+	<select id="productCount" resultType="int">
+		SELECT COUNT(DISTINCT PRODUCTID)
+		FROM BIDAMOUNT
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 내가 입찰한 상품의 입찰가, 입찰시간 -->
+	<select id="bidHistory" parameterType="List" resultType="BidAmountVO">
+		SELECT * FROM
+		BIDAMOUNT
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 내가 입찰한 상품의 최고가 -->
+ 	<select id="bidMaxHistory" parameterType="BidAmountVO" resultType="Long">
+	 	SELECT MAX(BIDAMOUNT) AS PRODUCTVO FROM BIDAMOUNT
+		WHERE PRODUCTID= #{productId}
+	</select>
+	
+	<!-- 입찰한 상품 정보 -->
+	<select id="bidProductInformation" parameterType="BidAmountVO" resultMap="getBidProductInformation">
+		SELECT * FROM 
+        SALEPRODUCT p
+        LEFT JOIN
+        AUCTIONPRODUCT a
+        ON(p.PRODUCTNUM = a.PRODUCTNUM)
+        LEFT JOIN
+        PRODUCTFILES pf
+        ON(a.PRODUCTNUM = pf.PRODUCTNUM)
+        LEFT JOIN 
+        BIDAMOUNT B
+        ON(p.PRODUCTID = B.PRODUCTID)
+        WHERE B.ID = #{id}
+        ORDER BY B.BIDAMOUNT DESC
+	</select>
+	
+	<resultMap type="SaleProductVO" id="getBidProductInformation">
+		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+      	<result column="PRODUCTDATE" property="productDate"></result>
+      	<result column="AMOUNTUNIT" property="amountUnit"></result>
+      	
+      	<collection property="productVOs" javaType="List" ofType="ProductVO">
+        	<id column="PRODUCTNUM" property="productNum"></id>
+        	<result column = "PRODUCTNAME" property="productName"></result>
+        	<result column = "PRODUCTPRICE" property="productPrice"></result>
+        	<result column="PRODUCTINFORMATION" property="productInformation"></result>
+        	<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+        	
+        	<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+	           <id column="FILENUM" property="fileNum"></id>
+	           <result column = "FILENAME" property="fileName"></result>
+	           <result column = "ORINAME" property="oriName"></result>
+	           <result column="SORT" property="sort"></result>
+	        </collection>
+      	</collection>
+         
+        <collection property="bidAmountVOs" javaType="List" ofType="BidAmountVO">
+        	<id column="AMOUNTID" property="amountId"></id>
+        	<result column = "PRODUCTID" property="productId"></result>
+       	    <result column = "ID" property="id"></result>
+            <result column = "BIDAMOUNT" property="bidAmount"></result>
+            <result column = "BIDDATE" property="bidDate"></result>
+        </collection>
+	</resultMap>
+	<!-- 입찰내역 END -->
+
+	<!-- 결제내역 -->
+	<select id="payHistory" resultType="PayVO" parameterType="List">
+		SELECT * FROM PAY 
+		WHERE ID = #{id}
+		ORDER BY PAYDATE DESC
+	</select>
+
 	<!-- 총 포인트 -->
 	<update id="getPoint" parameterType="PayVO">
 		UPDATE THORMEMBER M 
@@ -16,19 +176,12 @@
 
 	<!-- 포인트 충전 -->
 	<insert id="chargePoint" parameterType="PayVO">
-		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE)
-		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now())
+		INSERT INTO PAY(PAYUID, ID, PAYTOTAL, PAYRESULT, PAYDATE, PAYMERCHANT)
+		VALUES(#{payUid}, #{id}, #{payTotal}, #{payResult}, now(), #{payMerchant})
 	</insert>
 	
-	<!-- 비밀번호 체크 -->
-	<select id="checkPw" parameterType="MemberVO" resultType="int">
-		SELECT COUNT(*) 
-        FROM THORMEMBER
-        WHERE ID = #{id} AND PW = #{pw}
-	</select>
-
 	<!-- 회원탈퇴 -->
-	<delete id="setDelete">
+	<delete id="setDelete" parameterType="MemberVO">
 		DELETE FROM THORMEMBER
 		WHERE ID = #{id}
 		AND PW = #{pw}
@@ -36,16 +189,14 @@
 
 	<!-- 회원정보 수정 -->
 	<update id="setUpdate" parameterType="MemberVO">
-		UPDATE THORMEMBER 
+		UPDATE THORMEMBER
 		SET
-		NAME = #{name},
-		BIRTH = #{birth},
+		PW = #{pw},
 		EMAIL = #{email},
 		POST = #{post},
 		ADDR = #{addr},
 		ADDR2 = #{addr2},
 		PHONE = #{phone}
-		
 		WHERE ID = #{id}
 	</update>
 	
