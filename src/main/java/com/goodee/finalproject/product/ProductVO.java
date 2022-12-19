@@ -1,7 +1,5 @@
 package com.goodee.finalproject.product;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -17,14 +15,6 @@ public class ProductVO {
 	private Long auctionPeriod;
 	private Long applicationNum;
 	private boolean status;
-	
-	NumberFormat numberFormat = NumberFormat.getInstance();
-	
-	public Long getProductPrice() {
-		
-		
-		return this.productPrice;
-	}
 	
 	private MultipartFile [] files;
 	

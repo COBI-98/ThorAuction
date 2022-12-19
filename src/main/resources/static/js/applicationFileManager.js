@@ -18,7 +18,7 @@ $("#fileAdd").click(function(){
     }
     
     console.log(productNum);
-    if($(".files").length<3){
+    if($(".files").length<8){
         let r = '<div class="file_form mt-2">';
         /* r = r+'<label for="contents" class="form-label">Files</label>'; label 여부 체크 */
         r = r+'<input type="file" name="files" class="files form-control">';
@@ -27,7 +27,7 @@ $("#fileAdd").click(function(){
         r = r+'</div>';
         $("#fileAddResult").append(r);
     }else {
-        swal("최대 3개만 가능","","warning")
+        swal("최대 8개만 가능","","warning")
     }
 
     for(let i=0; i<$(".files").length; i++){
