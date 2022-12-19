@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>토르의 실시간 대장간</title>
+  <title>세상의 모든 경매: BIDCOIN</title>
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
   <c:import url="../template/boot.jsp"></c:import>
   <link href="/css/reset.css" rel="stylesheet">
   <link href="/css/chat.css" rel="stylesheet">
-  <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
   <link rel="stylesheet" href="/css/getHTMLMediaElement.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 
@@ -29,21 +31,29 @@
 				<div id="media-broadcast">
 					<div id="media-header" >
 						<div id="media-title">
-							<h2 id="media-titleText"> 제목</h2>
+							<h2 id="media-titleText"></h2>
 						</div>
 						<div id="item">
 			          	  	<span id="selecteditem"></span>
 			         	</div>  
 					</div>
 				
-					<div id="media-box" class="media-box">
+					<div id="media-box" class="media-box" style="position: relative;">
 						<div id= "blackVideo" style="width: 100%; height: 100%; color: #a8a8a8; display:flex; align-items: center; justify-content: center;">
-							<div>현재 실시간 경매를 진행하지 않고 있습니다.</div>
+							<div>현재 실시간 경매를 진행하고 있지 않습니다.</div>
 						</div>
 						<video id="localVideo" autoplay playsinline hidden ></video>
 						
+						
+						<div id = "mediaControls" style="width: 100%;  position: absolute;">
+						
+							<div id="muteVideo" style="width: 35px; height: 35px;"></div>
+							<div id="mute-audio" style="width: 35px; height: 35px;"></div>
+							<div id="volume-slider" style="width: 35px; height: 35px;"></div>
+							<div id="zoom" style="width: 35px; height: 35px; float: right;"></div>
+						</div>
+						
 					</div>
-					
 					
 				</div>
 		
@@ -84,8 +94,10 @@
         </div>
       </div>	
     </div>
-    <div style="display: flex; justify-content: center;">
+    <input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
+    <sec:authorize access="hasRole('ROLE_ADMIN')" >
     
+    <div style="display: flex; justify-content: center;">
     <div class="shadowBox media-container">
     	<div id="media-broad-option">
 						<div class="optionBox">
@@ -93,7 +105,7 @@
 							<div>방송 제목<input type="text" id="broadName"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn"></div>
 						
 							<div>
-							  	<input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
+							  	
 							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>
 							    <button class= "bidcoinBtn" id="join-room">Join Room</button>
 						  	</div>
@@ -126,8 +138,8 @@
 					            <input type="button" value="설정" id="unitsend" class="bidcoinBtn">
 				            </div>
 						
-							<input type="button" class="bidcoinBtn" value="채팅 정지" id='stop'>
-						    <input type="button" class="bidcoinBtn" value="경매시작" id="auctionend"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
+							<input type="button" class="bidcoinBtn" value="채팅정지" id='stopStart'>
+						    <input type="button" class="bidcoinBtn" value="경매시작" id="auctionStart"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
 						    <input type="button" class="bidcoinBtn" value="경매종료" id="end"> <!--session 닫힘-->
 						
 					
@@ -135,7 +147,9 @@
 					</div>
     
     
-    </div>
+    </div></div>
+    </sec:authorize>
+    
   </div>
 	<div style="display: none;">
       <h2 id="id">${member}</h2>
@@ -149,23 +163,33 @@
   <c:import url="../template/footer.jsp"></c:import>
 </div>
 
-  
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-  
-  <script src='/js/liveauction/chat.js'></script>
-  <script src="/js/liveauction/RTCMultiConnection.js"></script>
-  <!-- <script src="/socket.io/socket.io.js"></script> -->
-  <script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
-  <script src="/js/liveauction/getHTMLMediaElement.js"></script>
-  <script src='/js/index.js'></script>
-  
+<%-- <c:import url="../template/footer.jsp"></c:import> --%>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src='/js/liveauction/chat.js'></script>
+<script src="/js/liveauction/RTCMultiConnection.js"></script>
+<!-- <script src="/socket.io/socket.io.js"></script> -->
+<script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
+<script src="/js/liveauction/getHTMLMediaElement.js"></script>
+<script src='/js/liveauction/index.js'></script>
+
   <footer>
-	  <small id="send-message"></small>
-	</footer>
-	
-	<script src="https://www.webrtc-experiment.com/common.js"></script>
-	
+    <small id="send-message"></small>
+  </footer>
+
+  <script src="https://www.webrtc-experiment.com/common.js"></script>
+
+<script type="text/javascript">
+
+	<sec:authorize access="hasRole('ROLE_ADMIN')" >
+		adminChat();
+		adminBroadCast();
+	</sec:authorize>
+</script>
+
+
 </body>
 </html>

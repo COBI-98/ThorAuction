@@ -47,3 +47,28 @@ select::-ms-expand {
   display: none;
 }
 
+
+
+/* header */
+.nav-member{
+	
+	height: 80%;
+	font-weight: 600;
+	
+}
+
+.nav-menu a{
+	
+	font-size: 20px;
+	height: 50%;
+	padding : 0 10px;
+}
+.nav-member a{
+	
+	
+		color: #484848 !important;
+	
+}
+
+
+
