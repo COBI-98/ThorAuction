@@ -187,6 +187,12 @@
 		adminChat();
 		adminBroadCast();
 	</sec:authorize>
+	
+	
+	
+	joinRoom();
+	
+	
 </script>
 
 
