@@ -21,7 +21,7 @@
   
   <c:import url="../template/header.jsp"></c:import>
   
-  
+  <div>
   <section class="">
     <!-- 방송 시작 부분 -->
   <div>
@@ -144,34 +144,35 @@
     </div>
     </div>
   </div>
-	
+	<div style="display: none;">
       <h2 id="id">${member}</h2>
       <h2 id="loginnum">${num}</h2>
       <h2 id="point">${point}</h2>
       <h2 id="role">${role[0].roleName}</h2>
-
+	</div>
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
   </section>
+  <c:import url="../template/footer.jsp"></c:import>
+</div>
 
-<%-- <c:import url="../template/footer.jsp"></c:import> --%>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-<script src='/js/liveauction/chat.js'></script>
-<script src="/js/liveauction/RTCMultiConnection.js"></script>
-<!-- <script src="/socket.io/socket.io.js"></script> -->
-<script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
-<script src="/js/liveauction/getHTMLMediaElement.js"></script>
-<script src='/js/index.js'></script>
-
+  
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+  
+  <script src='/js/liveauction/chat.js'></script>
+  <script src="/js/liveauction/RTCMultiConnection.js"></script>
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
+  <script src="/js/liveauction/getHTMLMediaElement.js"></script>
+  <script src='/js/index.js'></script>
+  
   <footer>
-    <small id="send-message"></small>
-  </footer>
-
-  <script src="https://www.webrtc-experiment.com/common.js"></script>
-
+	  <small id="send-message"></small>
+	</footer>
+	
+	<script src="https://www.webrtc-experiment.com/common.js"></script>
+	
 </body>
 </html>

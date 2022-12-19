@@ -23,7 +23,6 @@
   
   
   <section class="" style="padding:0px;">
-  <div>
 
         <div class="chat-container show-grid" style="margin-left: 40px;">
             
@@ -37,35 +36,26 @@
 									<div id='send'>
 										<div>
 											<input class="form-control" type='text' id='msg'  placeholder="메시지를 입력해보세요!">
-											<!-- <input class ="bidcoinBtn" type="button" value="보내기" id="msgSend"> -->
 											<button type="button" class="bidcoinBtn" id="msgSend"><img src="/images/send.jpg" alt="" width="100%;" height="100%"></button>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!-- <div class="col-xs-4 col-sm-3 card" >
-							<b id="qna">질문 카테고리</b>
-							<div id="sendZone" class="card-body">
-								<c:forEach items="${ar}" var="key">
-									<div>
-										<input class ="bidcoinBtn form-control" type='button' value='${key}' id='btnSend'>
-									</div>
-								</c:forEach>
-							</div> -->
 
-							<div class="col-xs-4 col-sm-3 text-center" style="display: block; height: 60%; padding-right: 0px;padding-left: 0px;" >
-								<div class="card mb-4 text-center">
-								<div class="card-header" id="qna"><b>질문 카테고리</b></div>
-								<div class="card-body" id="sendZone">
-									<c:forEach items="${ar}" var="key">
-									<div>
-										<input class ="bidcoinBtn form-control" type='button' value='${key}' id='btnSend'>
+
+							<div class="col-xs-4 col-sm-3" style="display: block; height: 60%; padding-right: 0px;padding-left: 0px;" >
+								<div class="card mb-4">
+									<div class="card-header" id="qna"><b>질문 카테고리</b></div>
+									<div class="card-body" id="sendZone">
+										<c:forEach items="${ar}" var="key">
+										<div>
+											<input class ="bidcoinBtn form-control" type='button' value='${key}' id='btnSend'>
+										</div>
+										</c:forEach>
 									</div>
-								</c:forEach>
 								</div>
-							</div>
-							<div class="card mb-4 text-center">
+							<div class="card mb-4">
 								<div class="card-header" id="qna"><b>질문 예시</b></div>
 								<div class="card-body">
 									<div>
@@ -75,15 +65,8 @@
 										<p>✔포인트는 어떻게 사용하나요?</p>
 									</div>
 								</div>
-								</div>
 							</div>
-<!-- 
-							<div class="col-xs-4 col-sm-3 card mb-4 text-center" style="display: block; height: 60%; padding-right: 0px;padding-left: 0px;" >
-							</div> -->
-
-
-						</div>
-					</div>
+							</div>
 				</div>
 			</div>
 				
@@ -91,11 +74,11 @@
           
     </div>
     
-  </div>
 	
   </section>
 
-<%-- <c:import url="../template/footer.jsp"></c:import> --%>
+ <c:import url="../template/footer.jsp"></c:import>
+</div>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
