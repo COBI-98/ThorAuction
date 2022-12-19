@@ -101,26 +101,21 @@
     <div class="shadowBox media-container">
     	<div id="media-broad-option">
 						<div class="optionBox">
-							<div>방송설정</div>
-							<div>방송 제목<input type="text" id="broadName"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn"></div>
-						
+							<div style="font-size: 20px; font-weight: bold;">방송설정</div>
 							<div>
-							  	
-							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>
-							    <button class= "bidcoinBtn" id="join-room">Join Room</button>
-						  	</div>
-						  	<div>카메라 설정<select id="cameras"></select></div>
-							<button id="cameraPause" class= "bidcoinBtn"> 방송 일시 정지 </button>
-							<button id="cameraBlack" class= "bidcoinBtn"> 방송 송출 정지 </button>
-							<button id="screenShare" class= "bidcoinBtn"> 화면 공유로 전환 </button>
-							
-							<div>
+								방송 제목<input type="text" id="broadName" style="margin: 10px;"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn">
+								<button class= "bidcoinBtn" id="open-room">방송 시작</button>
 								<button id="cameraStatus" class= "bidcoinBtn"> 방송 종료 </button>
 							</div>
+						  	<div>카메라 설정<select id="cameras"></select></div>
+							<button id="cameraBlack" class= "bidcoinBtn"> 방송 송출 일시 정지 </button>
+							<button id="screenShare" class= "bidcoinBtn"> 화면 공유로 전환 </button>
+							
+							
 						</div>
 						
 						<div class="optionBox">
-							<div>경매설정</div>
+							<div style="font-size: 20px; font-weight: bold;">경매설정</div>
 							<div>
 				              <span>경매 물건</span>
                       <select id="items" name="items" style="width: 60%;">
