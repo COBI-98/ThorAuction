@@ -99,11 +99,32 @@
  	
  	<!-- 상품 리스트 화면 -->
  	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
-	 	
 		SELECT * FROM 
 		SALEPRODUCT p
-		where DEADLINEINFO = #{deadlineInfo};
+		WHERE DEADLINEINFO = #{deadlineInfo};
  	</select>
+ 	
+ 	<select id="getSaleProductCategoryList" parameterType="SaleProductVO" resultMap="getProductCategory">
+		SELECT * FROM 
+		SALEPRODUCT p
+		WHERE DEADLINEINFO = #{deadlineInfo}
+		AND CATEGORYID = #{categoryId};
+ 	</select>
+ 	
+ 	<resultMap type="SaleProductVO" id="getProductCategory">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
+			<collection property="categoryVOs" javaType="List" ofType="CategoryVO" >
+				<id column="CATEGORYID" property="categoryId"></id>
+				<result column="CATEGORYNAME" property="categoryName"></result>
+			
+			</collection>
+ 	</resultMap> 
  	
  	<select id="getSaleProductHitList" parameterType="SaleProductVO" resultType="SaleProductVO">
 	 	
@@ -124,15 +145,15 @@
 				LEFT JOIN
 				PRODUCTFILES pf
 				ON(a.PRODUCTNUM =pf.PRODUCTNUM )
+					LEFT JOIN 
+					BIDAMOUNT B
+					ON(p.PRODUCTID = B.PRODUCTID)
 						LEFT JOIN
 						PRODUCTQUESTION PQ
-						ON(PQ.PRODUCTID = p.PRODUCTID)
+						ON(p.PRODUCTID = PQ.PRODUCTID)
 							LEFT JOIN
 							ADMINQUESTION AQ
 							ON(PQ.QUESTIONID = AQ.QUESTIONID)
-								LEFT JOIN 
-								BIDAMOUNT B
-								ON(p.PRODUCTID = B.PRODUCTID)
 								WHERE p.PRODUCTID = #{productId}
 								ORDER BY B.BIDAMOUNT DESC , PQ.QUESTIONID ASC;
  	</select>
