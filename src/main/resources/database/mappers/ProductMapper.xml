@@ -15,12 +15,12 @@
  		VALUE (FILENUM,#{fileName},#{oriName},#{sort},#{productNum})
  	</insert>
  	
- 	<insert id="setSaleProduct" parameterType="SaleProductVO">
+ 	<insert id="setSaleProduct" parameterType="SaleProductVO" useGeneratedKeys="true" keyProperty="productId">
  		INSERT INTO SALEPRODUCT
- 		VALUE (PRODUCTID,#{productNum},#{categoryId},0,0,now(),#{amountUnit});
+ 		VALUE (#{productId},#{productNum},#{categoryId},0,0,now(),#{amountUnit});
  	</insert>
  	
- 	<delete id="setSummerFileDelete" parameterType="ProductFileVO">
+ 	<delete id="setSummerFileDelete" parameterType="ProductFileVO" >
 	 	DELETE FROM 
 		PRODUCTFILES WHERE FILENUM =(
 		select MIN(FILENUM)  from PRODUCTFILES WHERE PRODUCTNUM=#{productNum});
@@ -99,11 +99,32 @@
  	
  	<!-- 상품 리스트 화면 -->
  	<select id="getSaleProductList" parameterType="SaleProductVO" resultType="SaleProductVO">
-	 	
 		SELECT * FROM 
 		SALEPRODUCT p
-		where DEADLINEINFO = #{deadlineInfo};
+		WHERE DEADLINEINFO = #{deadlineInfo};
  	</select>
+ 	
+ 	<select id="getSaleProductCategoryList" parameterType="SaleProductVO" resultMap="getProductCategory">
+		SELECT * FROM 
+		SALEPRODUCT p
+		WHERE DEADLINEINFO = #{deadlineInfo}
+		AND CATEGORYID = #{categoryId};
+ 	</select>
+ 	
+ 	<resultMap type="SaleProductVO" id="getProductCategory">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
+			<collection property="categoryVOs" javaType="List" ofType="CategoryVO" >
+				<id column="CATEGORYID" property="categoryId"></id>
+				<result column="CATEGORYNAME" property="categoryName"></result>
+			
+			</collection>
+ 	</resultMap> 
  	
  	<select id="getSaleProductHitList" parameterType="SaleProductVO" resultType="SaleProductVO">
 	 	
@@ -116,7 +137,7 @@
  	
  	<!-- 상품리스트 디테일 -->
  	<select id="getSaleProductListDetail" parameterType="SaleProductVO" resultMap="getSaleProductDetail">
- 		SELECT *    FROM 
+ 		SELECT *  FROM 
 			SALEPRODUCT p
 			LEFT JOIN
 			AUCTIONPRODUCT a 
@@ -127,8 +148,14 @@
 					LEFT JOIN 
 					BIDAMOUNT B
 					ON(p.PRODUCTID = B.PRODUCTID)
-					WHERE p.PRODUCTID = #{productId}
-					ORDER BY B.BIDAMOUNT DESC;
+						LEFT JOIN
+						PRODUCTQUESTION PQ
+						ON(p.PRODUCTID = PQ.PRODUCTID)
+							LEFT JOIN
+							ADMINQUESTION AQ
+							ON(PQ.QUESTIONID = AQ.QUESTIONID)
+								WHERE p.PRODUCTID = #{productId}
+								ORDER BY B.BIDAMOUNT DESC , PQ.QUESTIONID ASC;
  	</select>
  	
  	<update id="setDeadLineUpdate" parameterType="SaleProductVO">
@@ -169,6 +196,24 @@
 				<result column = "BIDDATE" property="bidDate"></result>
 		</collection>
 		
+		<collection property="productQuestionVOs" javaType="List" ofType="ProductQuestionVO">
+				<id column="QUESTIONID" property="questionId"></id>
+				<result column = "QUESTIONTITLE" property="questionTitle"></result>
+				<result column = "QUESTIONCONTENTS" property="questionContents"></result>
+				<result column = "QUESTIONDATE" property="questionDate"></result>
+				<result column = "PRODUCTID" property="productId"></result>
+				<result column = "ID" property="id"></result>
+				
+				<association property="adminQuestionVO" javaType="AdminQuestionVO">
+			         <id column="AQNUM" property="aqNum"/>
+			         <result column="AQCONTENTS" property="aqContents"/>
+			         <result column="AQDATE" property="aqDate"/>
+			         <result column="QUESTIONID" property="questionId"/>
+			         <result column="ID" property="id"/>
+			     </association>
+			     
+		</collection>
+		
 		
  	</resultMap>
  	
@@ -206,8 +251,34 @@
  	</select>
  	
  	<!-- 상품 문의하기 -->
- 	<insert id="setQuestionAdd" parameterType="ProductQuestionVO">
+ 	<insert id="setQuestionAdd" parameterType="ProductQuestionVO" useGeneratedKeys="true" keyProperty="questionId">
  		INSERT INTO PRODUCTQUESTION
- 		VALUES (QUESTIONID,#{questionTitle},#{questionContents},now(),#{productId},#{id});
+ 		VALUES (#{questionId},#{questionTitle},#{questionContents},now(),#{productId},#{id});
  	</insert>
+ 	
+ 	<!-- 관리자 답변 -->
+ 	<insert id="setAdminQuestionAdd" parameterType="AdminQuestionVO">
+ 		INSERT INTO ADMINQUESTION
+ 		VALUES (AQNUM,#{aqContents},now(),#{questionId},#{id})
+ 	</insert>
+ 	
+ 	<!-- 문의 삭제 -->
+ 	<delete id="setQuestionDelete" parameterType="ProductQuestionVO">
+		DELETE FROM PRODUCTQUESTION WHERE QUESTIONID = #{questionId};
+ 	</delete>
+ 	
+ 	<!-- 관리자 답변 체크 -->
+ 	<select id="getAdminQuestionCheck" parameterType="ProductQuestionVO" resultType="AdminQuestionVO">
+ 		SELECT AQNUM FROM ADMINQUESTION WHERE QUESTIONID=#{questionId};
+ 	</select> 
+ 	<!-- 관리자 답변 삭제 -->
+ 	<delete id="setAdminQuestionDelete" parameterType="AdminQuestionVO">
+ 		DELETE FROM ADMINQUESTION WHERE AQNUM = #{aqNum};
+ 	</delete>
+ 	
+ 	<update id="setStatus" parameterType="ProductVO">
+ 		UPDATE AUCTIONPRODUCT SET STATUS = 1 WHERE PRODUCTNUM = #{productNum}
+ 	
+ 	</update>
+ 	
 </mapper>

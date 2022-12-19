@@ -9,6 +9,12 @@
 		<typeAlias type="com.goodee.finalproject.socialmember.KakaoDetailVO" alias="KakaoDetailVO" />
 		<typeAlias type="com.goodee.finalproject.socialmember.KakaoRoleVO" alias="KakaoRoleVO" />
 		<typeAlias type="com.goodee.finalproject.socialmember.KaRoleVO" alias="KaRoleVO" />
+		
+<!-- 		<typeAlias type="com.goodee.finalproject.socialmember.NaverVO" alias="NaverVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.NaverDetailVO" alias="NaverDetailVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.NaverRoleVO" alias="NaverRoleVO" />
+		<typeAlias type="com.goodee.finalproject.socialmember.NaRoleVO" alias="NaRoleVO" /> -->
+		
 		<typeAlias type="com.goodee.finalproject.member.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.goodee.finalproject.member.RoleVO" alias="RoleVO" />
 		<typeAlias type="com.goodee.finalproject.mypage.PayVO" alias="PayVO" />
@@ -23,6 +29,8 @@
    		<typeAlias type="com.goodee.finalproject.product.BidAmountVO" alias="BidAmountVO"/>
    		<typeAlias type="com.goodee.finalproject.product.LikeSaleProductVO" alias="LikeSaleProductVO"/>
    		<typeAlias type="com.goodee.finalproject.product.ProductQuestionVO" alias="ProductQuestionVO"/>
+   		<typeAlias type="com.goodee.finalproject.product.AdminQuestionVO" alias="AdminQuestionVO"/>
+   		
    		
    		<typeAlias type="com.goodee.finalproject.payhistory.PayHistoryVO" alias="PayHistoryVO"/>
    		

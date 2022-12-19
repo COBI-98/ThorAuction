@@ -45,6 +45,11 @@ public class ProductService {
 		return productMapper.getSaleProductHitList(saleProductVO);
 	}
 	
+	public List<SaleProductVO> getSaleProductCategoryList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductCategoryList(saleProductVO);
+	}
+	
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception{
 		return productMapper.getCategoryList(categoryVO);
 	}
@@ -87,5 +92,30 @@ public class ProductService {
 	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception{
 		
 		return productMapper.setQuestionAdd(productQuestionVO);
+	}
+	
+	public int setAdminQuestionAdd(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		return productMapper.setAdminQuestionAdd(adminQuestionVO);
+	}
+	
+	
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.setQuestionDelete(productQuestionVO);
+	}
+	
+	public AdminQuestionVO getAdminQuestionCheck(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		return productMapper.getAdminQuestionCheck(productQuestionVO);
+	}
+	
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		return productMapper.setAdminQuestionDelete(adminQuestionVO);
+	}
+	
+	public int setStatus(ProductVO productVO) throws Exception{
+		return productMapper.setStatus(productVO);
 	}
 }

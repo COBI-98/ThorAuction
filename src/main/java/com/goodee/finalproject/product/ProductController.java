@@ -62,11 +62,18 @@ public class ProductController {
 		CategoryVO category = new CategoryVO();
 		
 		List<CategoryVO> categoryVO = productService.getCategoryList(category);
-		List<SaleProductVO> saleVO = productService.getSaleProductList(saleproductVO);
+		List<SaleProductVO> saleVO = new ArrayList<>();
+		if(saleproductVO.getCategoryId() == null) {
+			saleVO = productService.getSaleProductList(saleproductVO);
+		}else {
+			saleVO = productService.getSaleProductCategoryList(saleproductVO);
+		}
 		
-		if(saleproductVO.getSc().equals("2")){
+		if(saleproductVO.getSc().equals("2") && saleproductVO.getCategoryId() == null){
 			saleVO = productService.getSaleProductHitList(saleproductVO);
 		}
+		
+		//카테고리 조회수 추가
 		
 		List<Long> orderTime = new ArrayList<>();
 		List<Long> orderBidAmount = new ArrayList<>();
@@ -151,6 +158,7 @@ public class ProductController {
 		
 		mv.addObject("maxAmount", check);
 		
+		
 		mv.addObject("saleProductVO", saleProductVO);
 		mv.setViewName("product/detail");
 		return mv;
@@ -179,12 +187,14 @@ public class ProductController {
 			if(check > bidAmountVO.getBidAmount()) {
 				test ="3";
 				return test;
+			}else {
+				test="5";
+				productService.setBidAmountAdd(bidAmountVO);
+				return test;
 			}
 		}
 			
 		// 최대가격과 넘어오는 가격이 같음
-		System.out.println("check1"+check);
-		System.out.println("check2"+bidAmountVO.getBidAmount());
 		if(check.equals(bidAmountVO.getBidAmount())) {
 			test = "4";
 		} else if(check > bidAmountVO.getBidAmount()) {
@@ -221,12 +231,67 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.setQuestionAdd(productQuestionVO);
 		
+		String message ="";
+		String url = "";
+		if(result==1) {
+			message="success";
+			url= "/product/detail?productId="+productQuestionVO.getProductId();
+		}else {
+			message ="fail";
+			url= "/product/detail?productId="+productQuestionVO.getProductId();
+		}
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
+		return mv;
+	}
+	
+	@PostMapping("adminQuestionAdd")
+	public ModelAndView setAdminQuestionAdd(AdminQuestionVO adminQuestionVO, String prNum) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		String message ="";
+		String url = "";
+		
+		int result = productService.setAdminQuestionAdd(adminQuestionVO);
+		
 		
 		if(result==1) {
-			System.out.println("성공");
+			message="success";
+			url = "/product/detail?productId="+prNum;
+		}else {
+			message ="fail";
+			url = "/product/detail?productId="+prNum;
 		}
-		String url = "redirect:/product/detail?productId="+productQuestionVO.getProductId();
-		mv.setViewName(url);
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
 		return mv;
+	}
+	
+	@PostMapping("questionDelete")
+	@ResponseBody
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception{
+		
+		AdminQuestionVO adminQuestionVO = productService.getAdminQuestionCheck(productQuestionVO);
+		int result = 0;
+		if(adminQuestionVO == null) {
+			productService.setQuestionDelete(productQuestionVO);
+			result = 1;
+		}else {
+			productService.setAdminQuestionDelete(adminQuestionVO);
+			productService.setQuestionDelete(productQuestionVO);
+			result = 1;
+		}
+		return result;
+	}
+	
+	@PostMapping("adminQuestionDelete")
+	@ResponseBody
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception{
+		
+		int result = productService.setAdminQuestionDelete(adminQuestionVO);
+		
+		return result;
 	}
 }
