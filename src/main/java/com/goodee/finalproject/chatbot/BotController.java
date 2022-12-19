@@ -176,7 +176,7 @@ public class BotController {
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
 							+"<span class='text'>비드코인에서는 포인트를 충전해서 사용하실 수 있습니다.!</span>"
-							+"<a href ='/liveAuction' class='text'>포인트 충전하러 가기</a> <br/>"
+							+"<a href ='/mypage/charge' class='text'>포인트 충전하러 가기</a> <br/>"
 						+"</div>"
                    +"</div>"
                    + "<hr>";
@@ -199,6 +199,7 @@ public class BotController {
                        +"</div>"
                    +"</div>"
                    + "<hr>";
+			
 		}else if(str.equals("엑스")) {
 			content = 
 					"<div class='other'>"
