@@ -106,7 +106,8 @@ function dobid(tmp) {
 	if(user_check_id=='' || user_check_id == null) {
 		
 		Swal.fire({
-			title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+			title: "로그인하셔야 가능합니다.",  // title, text , html  로 글 작성
+			text : "로그인하시겠습니까??",
 			icon: "warning",    //상황에 맞는 아이콘
 
 			showCancelButton: true,
@@ -208,29 +209,14 @@ function dobid(tmp) {
 }
 
 
-function do_bid_run() {
-	var param="p_number=105";
-
-	$.ajax({
-		url:'x_bid_run.asp',
-		data:param,
-		type:'post',
-		success:function(data, status, req) {
-			document.getElementById("div_auction_run").innerHTML=data;	
-		},
-		error:function(req, status, error) {
-			swal(error);
-		}
-	});	
-}
-
 function do_fav() {
 
 	var user_check_id=$("#id").val();
 	var product_check_id =$("#productId").val();
 	if(user_check_id=='' || user_check_id == null) {
 		Swal.fire({
-			title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+			title: "로그인하셔야 가능합니다.",  // title, text , html  로 글 작성
+			text : "로그인하시겠습니까??",
 			icon: "warning",    //상황에 맞는 아이콘
 
 			showCancelButton: true,
@@ -276,7 +262,8 @@ function open_layer_qna() {
 
 		if(u_id=='' || u_id == null) {
 			Swal.fire({
-				title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+				title: "로그인하셔야 가능합니다.",  // title, text , html  로 글 작성
+				text : "로그인하시겠습니까??",
 				icon: "warning",    //상황에 맞는 아이콘
 	
 				showCancelButton: true,
@@ -317,7 +304,8 @@ function open_layer_qna() {
 		var u_id=$("#id").val();
 		if(u_id=='') {
 			Swal.fire({
-				title: "로그인하셔야 가능합니다.\n로그인하시겠습니까??",  // title, text , html  로 글 작성
+				title: "로그인하셔야 가능합니다.",  // title, text , html  로 글 작성
+				text : "로그인하시겠습니까??",	
 				icon: "warning",    //상황에 맞는 아이콘
 	
 				showCancelButton: true,
