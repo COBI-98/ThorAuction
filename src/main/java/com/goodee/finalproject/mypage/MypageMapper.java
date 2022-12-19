@@ -30,7 +30,7 @@ public interface MypageMapper {
 	public List<BidAmountVO> bidHistory(BidAmountVO bidAmountVO) throws Exception;
 	
 	// 내가 입찰한 상품의 최고가
-	public List<BidAmountVO> bidMaxHistory(BidAmountVO bidAmountVO) throws Exception;
+	public Long bidMaxHistory(BidAmountVO bidAmountVO) throws Exception;
 	
 	// 입찰한 상품 정보
 	public List<SaleProductVO> bidProductInformation(BidAmountVO bidAmountVO) throws Exception;
