@@ -21,8 +21,8 @@
   
   <c:import url="../template/header.jsp"></c:import>
   
-  
-  <section class="" style="padding:0px;">
+  <div>
+  <section class="">
 
         <div class="chat-container show-grid" style="margin-left: 40px;">
             

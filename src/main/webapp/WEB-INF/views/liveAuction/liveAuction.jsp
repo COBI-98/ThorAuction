@@ -24,12 +24,6 @@
   <div>
   <section class="">
     <!-- 방송 시작 부분 -->
-  <div>
-  
-  	
-    
-    
-	
 		<div id="videos-container" style="margin: 20px 0;">
 			<div id="media-container" class = "media-container shadowBox">
 				<div id="media-broadcast">
@@ -141,7 +135,6 @@
 					</div>
     
     
-    </div>
     </div>
   </div>
 	<div style="display: none;">
