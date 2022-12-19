@@ -133,13 +133,14 @@ public class ChatController {
 			kakaoDetailVO.setKaNickName(loginnum);
 			kakaoDetailVO.setKaPoint(point - value);
 			memberSocialService.setPoint(kakaoDetailVO);
+			
 			//낙찰 내역 DB 저장 (유저 ID - winuser, 구매 가격 - value, 구매한 날 - sysdate, 상품 번호 - itemNum)
 			payHistoryVO.setId(loginnum);
 
 		}
 		payHistoryVO.setCashe(value);
 		payHistoryVO.setProductNum(itemNum);
-		//payHistoryService.setPayHistory(payHistoryVO);
+		payHistoryService.setPayHistory(payHistoryVO);
 		
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(Long.valueOf(itemNum));
@@ -151,6 +152,7 @@ public class ChatController {
 		webSocketChat.setWinuser("");
 		webSocketChat.setItem("");
 		webSocketChat.setItemNum(0);
+		webSocketChat.setBroadName("");
 		return result;
 	}
 	
