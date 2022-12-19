@@ -376,24 +376,28 @@
 												${questionVO.adminQuestionVO.aqContents}<br>
 												
 												${questionVO.adminQuestionVO.aqDate}<br>
-												<button type="button" class="btn btn-warning" onclick="do_delete_question_admin('${questionVO.adminQuestionVO.aqNum}');">삭제</button>
+												<!-- 관리자만-->
+												<c:if test="${memberVO.roleVOs[0].roleNum == 1}">
+													<button type="button" class="btn btn-warning" onclick="do_delete_question_admin('${questionVO.adminQuestionVO.aqNum}');">삭제</button>
+												</c:if>
 											</div>
 										</c:if>
 										<!-- 관리자만 보이게 -->
-										<c:if test="${questionVO.adminQuestionVO.aqNum == null}">
-											<div class="reply">
-												<form action="./adminQuestionAdd" method="post">
-													<input type="text" name="aqContents" id="aqContents">
-													<input type="hidden" name="questionId" value="${questionVO.questionId}">
-													<input type="hidden" name="prNum" value="${questionVO.productId}">
-													<input type="hidden" name="id" value="${memberVO.id}">
-													
-													<button type="submit" class="btn btn-warning">관리자답변</button>
-												</form>
-											</div>
-										
+										<c:if test="${memberVO.roleVOs[0].roleNum == 1}">
+											<c:if test="${questionVO.adminQuestionVO.aqNum == null}">
+												<div class="reply">
+													<form action="./adminQuestionAdd" method="post">
+														<input type="text" name="aqContents" id="aqContents">
+														<input type="hidden" name="questionId" value="${questionVO.questionId}">
+														<input type="hidden" name="prNum" value="${questionVO.productId}">
+														<input type="hidden" name="id" value="${memberVO.id}">
+														
+														<button type="submit" class="btn btn-warning">관리자답변</button>
+													</form>
+												</div>
+											
+											</c:if>
 										</c:if>
-										
 									</div>
 									
 								</li> 
