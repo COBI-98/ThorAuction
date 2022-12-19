@@ -117,7 +117,7 @@
 																				<td scope="row">${product.productId }</td>
 																				<c:forEach items="${product.productVOs}" var="products">
 																					<td><img src="/file/product/${products.productFileVOs[0].fileName}"></td>
-																					<td>${products.productName}</td>
+																					<td><a href="../product/detail?productId=${product.productId}">${products.productName}</a></td>
 																				</c:forEach>
 																				<c:forEach items="${product.saleProductVOs}" var="productInfo">
 																					<td><fmt:formatDate value="${productInfo.productDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
