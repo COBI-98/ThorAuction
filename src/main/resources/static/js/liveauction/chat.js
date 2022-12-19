@@ -23,6 +23,8 @@ var data13 = {};
 var data15 = {};
 var ws ;
 
+
+var openRoom = getId('open-room');
 var userid = getId('id');
 var btnLogin = getId('btnLogin');
 var btnSend = getId('btnSend');
@@ -82,6 +84,13 @@ ws.onmessage = function(msg){
 	var data = JSON.parse(msg.data);
 	var css;
 	var cssid = "";
+
+
+
+	if(data.joinRoom != null){
+		joinRoom();
+	}
+
 
 	//방송 제목 설정 시
 	if(data.title != null){
@@ -380,7 +389,7 @@ function send(){
 							showConfirmButton : false,
 							showCancelButton: false
 						} )
-						setTimeout(() => {Swal.close();}, 800)
+						setTimeout(() => {Swal.close();}, 900)
 					return;
 				}
 				if(rank[1] =='') {
@@ -408,7 +417,7 @@ function send(){
 					showCancelButton: false,
 					showConfirmButton: false,
 				} )
-				setTimeout(() => {Swal.close();}, 800)
+				setTimeout(() => {Swal.close();}, 900)
             	
 				document.querySelector("#msg").value ="[경매]"+ (mypoint- mypoint%1000);
 				return;
@@ -630,7 +639,7 @@ function adminChat(){
 				showConfirmButton : false,
                 showCancelButton: false
             })
-			setTimeout(() => {Swal.close();}, 800)
+			setTimeout(() => {Swal.close();}, 900)
 			document.querySelector("#unit").value = unit.value;
 		}
 	}else{
@@ -640,7 +649,7 @@ function adminChat(){
 				showConfirmButton : false,
                 showCancelButton: false
             })
-			setTimeout(() => {Swal.close();}, 800)
+			setTimeout(() => {Swal.close();}, 900)
 		return;
 	}
 		data11.unit = unit.value;
@@ -665,6 +674,20 @@ function adminChat(){
 		var temp = JSON.stringify(data2);
 		ws.send(temp);
 	})
-
+	
+	
+	
+	$("#open-room").click(function(){
+		
+		setTimeout(function(){
+			data15.joinRoom=true;
+			var temp = JSON.stringify(data15);
+			ws.send(temp);
+			
+			
+		},2000);
+		
+		
+	})
 }
 
