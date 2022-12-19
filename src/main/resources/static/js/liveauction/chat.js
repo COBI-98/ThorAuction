@@ -461,39 +461,6 @@ function sendstop(){
 }
 
 
-auctionend.addEventListener("click",function(){
-	auctionend.classList.toggle("start");
-	//경매 시작 클릭 시
-	if(auctionend.value == "경매시작")	 {
-
-		console.log(amount.innerHTML);
-		console.log(add.value.substr(1));
-		if(amount.innerHTML != 0) {
-			if(add.value.substr(1) !=""){
-				auctionstart();
-			}else{
-				Swal.fire({
-					title: "단위 가격이 설정이 안되었습니다..",  
-					icon: "error",    
-					confirmButtonColor: '#3085d6',
-					confirmButtonText: '확인'
-				} )
-			}
-		}else{
-			Swal.fire({
-				title: "경매 물품이 설정이 안되었습니다.",  
-				icon: "error",    
-				confirmButtonColor: '#3085d6',	
-				confirmButtonText: '확인'
-			} )
-		}
-	//경매 종료 클릭 시
-	}else{
-		sendresult();
-	}
-})
-
-
 //경매 시작 함수
 function auctionstart(){
 	data10.start = "경매가 시작되었습니다.";
@@ -609,7 +576,7 @@ function adminChat(){
 			})
 		}
 	})
-}
+
 	
 	stopChatCold.addEventListener("click",function(){
 		stopChat.classList.toggle("stop");
@@ -619,43 +586,35 @@ function adminChat(){
 	//경매 시작,종료 시 
 	auctionStart.addEventListener("click",function(){
 		auctionend.classList.toggle("start");
-
 		//경매 시작 클릭 시
 		if(auctionend.value == "경매시작")	 {
-			auctionstart();
-		
+			console.log(amount.innerHTML);
+			console.log(add.value.substr(1));
+			if(amount.innerHTML != 0) {
+				if(add.value.substr(1) !=""){
+					auctionstart();
+				}else{
+					Swal.fire({
+						title: "단위 가격이 설정이 안되었습니다..",  
+						icon: "error",    
+						confirmButtonColor: '#3085d6',
+						confirmButtonText: '확인'
+					} )
+				}
+			}else{
+				Swal.fire({
+					title: "경매 물품이 설정이 안되었습니다.",  
+					icon: "error",    
+					confirmButtonColor: '#3085d6',	
+					confirmButtonText: '확인'
+				} )
+			}
 		//경매 종료 클릭 시
 		}else{
 			sendresult();
 		}
-	})	
 
-
-
-
-	
-	//경매 물품 선택
-	itemsend.addEventListener("click",function(){
-		//items.options[items.selectedIndex].value;
-		var itemmm = items.options[items.selectedIndex];
-		data12.item = itemmm.innerText;
-		data12.itemNum = itemmm.value;
-		data12.itemprice = itemmm.dataset.price;
-		var temp = JSON.stringify(data12);
-		ws.send(temp);
 	})
-	
-	// 방송 제목 설정
-	setBroadNameBtn.addEventListener("click",function(){
-		console.log("clickckkkkk");
-		data2.title = $("#broadName").val();
-		document.querySelector("#media-titleText").innerHTML = data2.title;
-		
-	   var temp = JSON.stringify(data2);
-	   ws.send(temp);
-	})
-	
-	
 	
 	//단위가격 설정
 	unitsend.addEventListener("click",function(){
@@ -684,24 +643,28 @@ function adminChat(){
 			setTimeout(() => {Swal.close();}, 800)
 		return;
 	}
-	data11.unit = unit.value;
-	var temp = JSON.stringify(data11);
-	ws.send(temp);
-})
+		data11.unit = unit.value;
+		var temp = JSON.stringify(data11);
+		ws.send(temp);
+		})
 
-//경매 물품 선택
-itemsend.addEventListener("click",function(){
-	var itemmm = items.options[items.selectedIndex];
-	data12.item = itemmm.innerText;
-	data12.itemNum = itemmm.value;
-	data12.itemprice = itemmm.dataset.price;
-	var temp = JSON.stringify(data12);
-	ws.send(temp);
-})
+	//경매 물품 선택
+	itemsend.addEventListener("click",function(){
+		console.log("설정");
+		var itemmm = items.options[items.selectedIndex];
+		data12.item = itemmm.innerText;
+		data12.itemNum = itemmm.value;
+		data12.itemprice = itemmm.dataset.price;
+		var temp = JSON.stringify(data12);
+		ws.send(temp);
+	})
 
-// 방송 제목 설정
-$("#setBroadNameBtn").click(function(){
-	data2.title = $("#broadName").val();
-    var temp = JSON.stringify(data2);
-    ws.send(temp);
-})
+	// 방송 제목 설정
+	$("#setBroadNameBtn").click(function(){
+		data2.title = $("#broadName").val();
+		var temp = JSON.stringify(data2);
+		ws.send(temp);
+	})
+
+}
+
