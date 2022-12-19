@@ -40,7 +40,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="../mypage/info?id=${kakaoInfo.kaNickName}" class="nav-link link-dark px-2">카카오 마이페이지</a>
+								<a href="../mypage/info?id=${kakaoInfo.kaNickName}" class="nav-link link-dark px-2">마이페이지</a>
 							</li>
 						</c:when>
 						<c:otherwise>
