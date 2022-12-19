@@ -62,11 +62,18 @@ public class ProductController {
 		CategoryVO category = new CategoryVO();
 		
 		List<CategoryVO> categoryVO = productService.getCategoryList(category);
-		List<SaleProductVO> saleVO = productService.getSaleProductList(saleproductVO);
+		List<SaleProductVO> saleVO = new ArrayList<>();
+		if(saleproductVO.getCategoryId() == null) {
+			saleVO = productService.getSaleProductList(saleproductVO);
+		}else {
+			saleVO = productService.getSaleProductCategoryList(saleproductVO);
+		}
 		
-		if(saleproductVO.getSc().equals("2")){
+		if(saleproductVO.getSc().equals("2") && saleproductVO.getCategoryId() == null){
 			saleVO = productService.getSaleProductHitList(saleproductVO);
 		}
+		
+		//카테고리 조회수 추가
 		
 		List<Long> orderTime = new ArrayList<>();
 		List<Long> orderBidAmount = new ArrayList<>();
@@ -180,6 +187,10 @@ public class ProductController {
 			if(check > bidAmountVO.getBidAmount()) {
 				test ="3";
 				return test;
+			}else {
+				test="5";
+				productService.setBidAmountAdd(bidAmountVO);
+				return test;
 			}
 		}
 			
@@ -280,7 +291,7 @@ public class ProductController {
 	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception{
 		
 		int result = productService.setAdminQuestionDelete(adminQuestionVO);
-				
+		
 		return result;
 	}
 }

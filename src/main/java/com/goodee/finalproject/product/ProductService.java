@@ -45,6 +45,11 @@ public class ProductService {
 		return productMapper.getSaleProductHitList(saleProductVO);
 	}
 	
+	public List<SaleProductVO> getSaleProductCategoryList(SaleProductVO saleProductVO) throws Exception{
+		
+		return productMapper.getSaleProductCategoryList(saleProductVO);
+	}
+	
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception{
 		return productMapper.getCategoryList(categoryVO);
 	}

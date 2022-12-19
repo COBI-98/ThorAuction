@@ -29,59 +29,16 @@
 					<div class="category-feed__side-bar col-12 col-md-3">
 						<section class="commerce-category-list">
 							<h2 class="commerce-category-list__title">
-								<a href="./list?category=${categoryVO[0].categoryId}">${categoryVO[0].categoryName}</a>
+								<a href="./list?<c:if test="${param.deadlineInfo != null}">deadlineInfo=${param.deadlineInfo}&</c:if>">전체보기</a>
 							</h2>
-							<ul class="commerce-category-tree commerce-category-list__categories">
-								<li class="commerce-category-tree__entry">
-									<div class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title" 
-										href="#">의류테스트1</a>
-									</div>
-								</li>
-								<li class="commerce-category-tree__entry">
-									<div class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title" href="#">의류테스트2</a>
-										<button class="commerce-category-tree__entry__expand" title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z">
-												</path>
-											</svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;">
-									</div>
-								</li>
-								<!-- 여기 반복-->
-								<li class="commerce-category-tree__entry">
-									<div class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title" href="#">의류테스트3</a>
-										<button class="commerce-category-tree__entry__expand" title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z">
-					
-												</path>
-											</svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;">
-									</div>
-								</li>
-							</ul>
+							
 							<ul class="commerce-category-list__others">
 							<c:forEach items="${categoryVO}" var="category" varStatus="status">
 								<li class="commerce-category-list__others__item">
-									<a href="./list?category=${category.categoryId}">${category.categoryName}</a>
+									<a href="./list?<c:if test="${param.deadlineInfo != null}">deadlineInfo=${param.deadlineInfo}&</c:if>categoryId=${category.categoryId}">${category.categoryName}</a>
 								</li>
 							</c:forEach>
 							</ul>
-							<!-- <ul class="commerce-category-list__others">
-								<li class="commerce-category-list__others__item">
-									<a href="/store/category?category=2">데코·식물</a>
-								</li>
-								<li class="commerce-category-list__others__item">
-									<a href="/store/category?category=0">가구</a>
-								</li>
-							</ul> -->
 						</section>
 					</div>
 					<div class="category-feed__content col-12 col-md-9">
@@ -106,11 +63,11 @@
 								<strong>총 ${saleVO.size()}개</strong><!-- 임시 -->
 								<c:if test="${not saleVO[0].deadlineInfo}">
 									<div class="order_by">
-										<a href="./list?sc=1&list;" <c:if test="${classCheck == '1'}">class="on"</c:if>>등록순</a>
-										<a href="./list?sc=2&list;" <c:if test="${classCheck == '2'}">class="on"</c:if>>참여높은순</a>
-										<a href="./list?sc=3&list;" <c:if test="${classCheck == '3'}">class="on"</c:if>>임박순</a>
-										<a href="./list?sc=4&list;" <c:if test="${classCheck == '4'}">class="on"</c:if>>낮은가격순</a>
-										<a href="./list?sc=5&list;" <c:if test="${classCheck == '5'}">class="on"</c:if>>높은가격순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=1&list;" <c:if test="${classCheck == '1'}">class="on"</c:if>>등록순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=2&list;" <c:if test="${classCheck == '2'}">class="on"</c:if>>참여높은순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=3&list;" <c:if test="${classCheck == '3'}">class="on"</c:if>>임박순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=4&list;" <c:if test="${classCheck == '4'}">class="on"</c:if>>낮은가격순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=5&list;" <c:if test="${classCheck == '5'}">class="on"</c:if>>높은가격순</a>
 									</div>
 								</c:if>
 							</div>

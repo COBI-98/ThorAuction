@@ -40,6 +40,7 @@ public interface ProductMapper {
 	
 	public List<SaleProductVO> getSaleProductHitList(SaleProductVO saleProductVO) throws Exception;
 	
+	public List<SaleProductVO> getSaleProductCategoryList(SaleProductVO saleProductVO) throws Exception;
 	
 	// 카테고리리스트
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception;
