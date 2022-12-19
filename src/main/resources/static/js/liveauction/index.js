@@ -1,41 +1,59 @@
 
 
+
+
+
+
+
+
+
+
+
+
 // ......................................................
 // .......................UI Code........................
 // ......................................................
-document.getElementById('open-room').onclick = function() {
-    disableInputButtons();
-    connection.open(document.getElementById('room-id').value, function() {
-        showRoomURL(connection.sessionid);
-    });
-};
 
-document.getElementById('join-room').onclick = function() {
-    disableInputButtons();
+function adminBroadCast(){
+	document.getElementById('open-room').onclick = function() {
+//	    disableInputButtons();
+	    connection.open(document.getElementById('room-id').value, function() {
+	        showRoomURL(connection.sessionid);
+	    });
+	};
+	
+	document.getElementById('join-room').onclick = function() {
+//	    disableInputButtons();
+	
+	    connection.sdpConstraints.mandatory = {
+	        OfferToReceiveAudio: true,
+	        OfferToReceiveVideo: true
+	    };
+	    connection.join(document.getElementById('room-id').value);
+	};
+	
+}
 
-    connection.sdpConstraints.mandatory = {
-        OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true
-    };
-    connection.join(document.getElementById('room-id').value);
-};
 
-document.getElementById('open-or-join-room').onclick = function() {
-    disableInputButtons();
-    connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExist, roomid) {
-        if (isRoomExist === false && connection.isInitiator === true) {
-            // if room doesn't exist, it means that current user will create the room
-            showRoomURL(roomid);
-        }
 
-        if(isRoomExist) {
-          connection.sdpConstraints.mandatory = {
-              OfferToReceiveAudio: true,
-              OfferToReceiveVideo: true
-          };
-        }
-    });
-};
+
+
+//document.getElementById('open-or-join-room').onclick = function() {
+//    disableInputButtons();
+//    connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExist, roomid) {
+//        if (isRoomExist === false && connection.isInitiator === true) {
+//            // if room doesn't exist, it means that current user will create the room
+//            showRoomURL(roomid);
+//        }
+//
+//        if(isRoomExist) {
+//          connection.sdpConstraints.mandatory = {
+//              OfferToReceiveAudio: true,
+//              OfferToReceiveVideo: true
+//          };
+//        }
+//    });
+//};
 
 
 
@@ -122,18 +140,26 @@ connection.onstream = function(event) {
   ///  
   	const cameraBlack = document.querySelector("#cameraBlack");
   	let cameraSelect=document.querySelector("#cameras")
-  	cameraBlack.addEventListener("click",function(){
+  	
+  	if(cameraBlack != null){
+		cameraBlack.addEventListener("click",function(){
+		
+			video.srcObject.getVideoTracks().forEach((track) => (console.log(track)));
+			console.log(cameraSelect.value);
+		
+		
+			 video.srcObject.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
+			 video.srcObject.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
+		})
 	
-		video.srcObject.getVideoTracks().forEach((track) => (console.log(track)));
-		console.log(cameraSelect.value);
-	
-	
-		 video.srcObject.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
-		 video.srcObject.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
-	})
+	}
+  	
+  	
     
+    const screenShare = document.querySelector("#screenShare");
     
-    document.querySelector("#screenShare").addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
+    if(screenShare != null ){
+	 screenShare.addEventListener("click",function(){ // 얼떨결에 화면공유.. ? 
 			var videoStream =  video.srcObject;
 			
 			
@@ -162,11 +188,15 @@ connection.onstream = function(event) {
 
 			
 	})
+	
+}
+   
     
     
     ////
-  
-    document.querySelector("#cameras").addEventListener("input",function(){ 
+  const cameras = document.querySelector("#cameras");
+  if(cameras != null){
+	 cameras.addEventListener("input",function(){ 
 			
 			 navigator.mediaDevices.getUserMedia({
 		        video: {
@@ -183,15 +213,17 @@ connection.onstream = function(event) {
 			   });
 	})
 	
+}
+   
 	
     
   	var width = parseInt(connection.videosContainer.clientWidth) + 200;
   	
     var mediaElement = getHTMLMediaElement(video, {
         title: document.querySelector("#room-id").value ,//event.userid,
-        buttons: ['full-screen','volume-slider','mute-video','mute-audio'],
+        buttons: ['full-screen','volume-slider','mute-video','mute-audio','record-audio','record-video'],
        	width: width,
-        showOnMouseEnter: true
+        showOnMouseEnter: false
     });
 
     connection.videosContainer.appendChild(mediaElement);
@@ -200,7 +232,7 @@ connection.onstream = function(event) {
         mediaElement.media.play();
     }, 5000);
 
-    mediaElement.id = event.streamid;
+//    mediaElement.id = event.streamid;
     
    
 };
@@ -258,14 +290,7 @@ connection.onMediaError = function(e) {
 // ALL below scripts are redundant!!!
 // ..................................
 
-function disableInputButtons() {
-    document.getElementById('room-id').onkeyup();
 
-    document.getElementById('open-or-join-room').disabled = true;
-    document.getElementById('open-room').disabled = true;
-    document.getElementById('join-room').disabled = true;
-    document.getElementById('room-id').disabled = true;
-}
 
 // ......................................................
 // ......................Handling Room-ID................
@@ -306,10 +331,10 @@ if (localStorage.getItem(connection.socketMessageEvent)) {
 } else {
     roomid = connection.token();
 }
-document.getElementById('room-id').value = roomid;
-document.getElementById('room-id').onkeyup = function() {
-    localStorage.setItem(connection.socketMessageEvent, document.getElementById('room-id').value);
-};
+//document.getElementById('room-id').value = roomid;
+//document.getElementById('room-id').onkeyup = function() {
+//    localStorage.setItem(connection.socketMessageEvent, document.getElementById('room-id').value);
+//};
 
 var hashString = location.hash.replace('#', '');
 if (hashString.length && hashString.indexOf('comment-') == 0) {
@@ -337,7 +362,7 @@ if (roomid && roomid.length) {
         });
     })();
 
-    disableInputButtons();
+//    disableInputButtons();
 }
 
 // detect 2G
@@ -348,6 +373,32 @@ if(navigator.connection &&
 }
 
 
+document.querySelector("#localVideo").addEventListener("mouseover",function(){
+			
+            document.querySelector("#mediaControls").style.opacity = 1;
+           
+	
+	
+})
+document.querySelector("#mediaControls").addEventListener("mouseover",function(){
+			
+            document.querySelector("#mediaControls").style.opacity = 1;
+           
+	
+	
+})
+document.querySelector("#localVideo").addEventListener("mouseleave",function(){
+		
+             document.querySelector("#mediaControls").style.opacity = 0;
+            
+})
+
+
+document.querySelector("#mediaControls").addEventListener("mouseleave",function(){
+		
+             document.querySelector("#mediaControls").style.opacity = 0;
+            
+})
 
 
 

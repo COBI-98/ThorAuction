@@ -56,4 +56,13 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 경매 낙찰 후 포인트 update -->
+	<update id="setPoint" parameterType="MemberVO">
+		UPDATE THORMEMBER SET POINT = #{point} WHERE ID = #{id}
+	</update>
+	
+	<select id="getOneMember" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM THORMEMBER WHERE ID = #{id}
+	</select>
+	
 </mapper>
