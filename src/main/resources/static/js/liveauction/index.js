@@ -36,7 +36,10 @@ function adminBroadCast(){
 
 function joinRoom(){
 	
-	 connection.join(123);
+	if(document.querySelector("#localVideo").paused){
+		connection.join(123);
+		console.log("비디오 실행");
+	}
 }
 
 
