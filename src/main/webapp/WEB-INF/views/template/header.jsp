@@ -25,7 +25,7 @@
 	<div class="container " >
 	<sec:authorize access="hasRole('ROLE_ADMIN')" >
 		<ul class="nav"   style="float: left; margin-left: 50px;">
-				<li class="nav-item nav-member"><a href="../admin/adminpage" class="nav-link">관리자 기능</a></li>
+				<li class="nav-item nav-member"><a href="/admin/adminpage" class="nav-link">관리자 기능</a></li>
 				<li class="nav-item nav-member"><a href="#" class="nav-link">관리자 페이지</a></li>
 		</ul>
 	</sec:authorize>
@@ -33,8 +33,8 @@
 		<ul class="nav" style="float: right;">
 				<!-- 로그인 전 -->
 				<sec:authorize access="!isAuthenticated()">
-					<li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-					<li class="nav-item"><a href="../member/agree" class="nav-link link-dark px-2">회원가입</a></li>
+					<li class="nav-item"><a href="/member/login" class="nav-link link-dark px-2">로그인</a></li>
+					<li class="nav-item"><a href="/member/agree" class="nav-link link-dark px-2">회원가입</a></li>
 				</sec:authorize>
 
 				<%-- 			<!-- 로그인 후 -->
@@ -58,7 +58,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="../mypage/info?id=${kakaoInfo.kaNickName}" class="nav-link link-dark px-2">마이페이지</a>
+								<a href="/mypage/info?id=${kakaoInfo.kaNickName}" class="nav-link link-dark px-2">마이페이지</a>
 							</li>
 						</c:when>
 						<c:otherwise>
@@ -68,12 +68,12 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="../mypage/info?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a>
+								<a href="/mypage/info?id=${member.id}" class="nav-link link-dark px-2">마이페이지</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
 					<li class="nav-item">
-						<a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a>
+						<a href="/member/logout" class="nav-link link-dark px-2">로그아웃</a>
 					</li>
 
 					<c:if test="${empty memID}">
@@ -81,7 +81,7 @@
 							<c:if
 								test="${((kk.kaRoleVOs[0].kaRoleName == 'ROLE_ADMIN')==true) && ((kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName)==true)}">
 								<li class="nav-item">
-									<a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
+									<a href="/admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
 								</li>
 							</c:if>
 						</c:forEach>
@@ -90,7 +90,7 @@
 					<c:if test="${not empty memID && memID == 'admin'}">
 						<c:if test="${member.roleVOs[0].roleName == 'ROLE_ADMIN'}">
 							<li class="nav-item">
-								<a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
+								<a href="/admin/adminpage" class="nav-link link-dark px-2">관리자 페이지</a>
 							</li>
 						</c:if>
 					</c:if>
