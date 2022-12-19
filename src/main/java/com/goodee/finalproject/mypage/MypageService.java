@@ -64,7 +64,7 @@ public class MypageService {
 	}
 	
 	// 내가 입찰한 상품의 최고가
-	public List<BidAmountVO> bidMaxHistory(BidAmountVO bidAmountVO) throws Exception {
+	public Long bidMaxHistory(BidAmountVO bidAmountVO) throws Exception {
 		
 		return mypageMapper.bidMaxHistory(bidAmountVO);
 	}

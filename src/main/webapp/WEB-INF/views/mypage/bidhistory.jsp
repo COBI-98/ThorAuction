@@ -100,20 +100,22 @@
 															<input type="hidden" name="id" value="${memberDB.id}">
 															<div class="myorder">
 																<c:forEach items="${saleProducts}" var="product">
+ 																<%-- <c:forEach items="${product.bidMaxAmounts}" var="max">
+																	<input type="hidden" name="productId" value="${max.productId}">
+																</c:forEach> --%>
 																			<li class="list">
-																				<input type="hidden" name="productId" value="${product.productId}">
-																				 <%-- <c:forEach items="${time}" var="time"> --%>
-																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time[0]}" pattern="yyyy-MM-dd HH:mm:ss"/> / 현재가: ${requestScope[bidAmountCheck]}</div>
-																				<%-- </c:forEach> --%>
+																				 <c:forEach items="${orderTime}" var="time">
+																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/> / 최고가: ${orderBidAmount}원</div>
+																				</c:forEach>
 																				<div class="orderlist">
 																					<ul class="prolist">
 																						<li>
-																							<a href="#">
+																							<a href="../product/detail?productId=${product.productId}">
 																							<c:forEach items="${product.productVOs}" var="products">
-																								<input type="hidden" name="productNum" value="${products.productNum}">
 																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}"></div>
 																								<div class="name">${products.productName}
 																							</c:forEach>
+																									<input type="hidden" name="productId" value="${product.bidAmountVOs[0].productId}">
 																									<div class="price">
 																										입찰금액: <fmt:formatNumber value="${product.bidAmountVOs[0].bidAmount}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.bidAmountVOs[0].bidDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 																									</div>

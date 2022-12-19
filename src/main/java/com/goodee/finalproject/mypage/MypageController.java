@@ -109,18 +109,19 @@ public class MypageController {
 	// 입찰내역
 	@GetMapping("bidhistory")
 	public Model bidProductInformation(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+		SaleProductVO saleProductVO = new SaleProductVO();
+		
 		
 		// 상품정보
 		List<SaleProductVO> saleProductVOs = mypageService.bidProductInformation(bidAmountVO);
 		// 내가 입찰한 상품의 입찰가, 입찰시간
-		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);
-		// 내가 입찰한 상품의 최고가
-		List<BidAmountVO> bidMaxAmounts = mypageService.bidMaxHistory(bidAmountVO);
+		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);		
 		// 입찰한 상품 수
 		int count = mypageService.productCount(bidAmountVO);
 		
 		List<Long> orderTime = new ArrayList<>();
 		List<Timestamp> time = new ArrayList<>();
+		List<Long> orderBidAmount = new ArrayList<>();
 		
 		// 경매 종료시간 계산 
 		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
@@ -145,22 +146,30 @@ public class MypageController {
 			log.info("제발 : {}", orderTime);
 			log.info("제발 : {}", timestamp);
 			
+			// 내가 입찰한 상품의 최고가
+			bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
+			Long check = mypageService.bidMaxHistory(bidAmountVO);
+			
+			orderBidAmount.add(check);
+			model.addAttribute("bidMax"+productNum, check);
+			
 			//model.addAttribute("orderTime", timestamp);
 		} // for End
 		
 		log.info("입찰내역 : {}", saleProductVOs);
 		log.info("입찰내역 : {}", bidAmountVOs);
 		log.info("입찰내역 : {}", count);
-		log.info("bidMaxAmountVO : {}", bidMaxAmounts);
+//		log.info("bidMaxAmountVO : {}", bidMaxAmounts);
 		log.info("입찰내역 : {}", memberVO);
 		
 		model.addAttribute("saleProducts", saleProductVOs);
 		model.addAttribute("bidAmounts", bidAmountVOs);
-		model.addAttribute("bidMaxAmounts", bidMaxAmounts);
+//		model.addAttribute("bidMaxAmounts", bidMaxAmounts);
 		model.addAttribute("memberDB", memberVO);
 		model.addAttribute("count", count);
-		model.addAttribute("orderTime", orderTime);
+		model.addAttribute("orderTime", time);
 		model.addAttribute("time", time);
+		model.addAttribute("orderBidAmount", orderBidAmount);
 		
 		return model;
 	}
