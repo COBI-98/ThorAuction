@@ -104,10 +104,10 @@
 																	<thead>
 																		<tr>
 																			<th scope="col">신청번호</th>
-																			<th scope="col">제목</th>
-																			<th scope="col">상품명</th>
+																			<th scope="col" style="text-align: center;">제목</th>
+																			<th scope="col" style="text-align: center;">상품명</th>
 																			<th scope="col">시작가</th>
-																			<th scope="col">신청일</th>
+																			<th scope="col" style="text-align: center;">신청일</th>
 																			<th scope="col">신청상태</th>
 																		</tr>
 																	</thead>
@@ -116,15 +116,15 @@
 																		<c:forEach items="${appProduct}" var="app">
 																			<tr>
 																				<td scope="row">${app.applicationNum }</td>
-																				<td>${app.writer}</td>
+																				<td>${app.title}</td>
 																				<c:forEach items="${app.productVOs}" var="product">
-																					<td>${product.productName }</td>
+																					<td><a href="../board/application/detail?applicationNum=${app.applicationNum}">${product.productName}</a></td>
 																					<td><fmt:formatNumber value="${product.productPrice}" pattern="###,###,###,###" /></td>
 																				</c:forEach>
 																				<td><fmt:formatDate value="${app.regDate}" pattern="yyyy-MM-dd" /></td>
 																				<c:choose>
-																			      	<c:when test="${app.approvalCheck == 'false'}"><td>거부</td></c:when>
-																			      	<c:when test="${app.approvalCheck == 'true'}"><td>승인</td></c:when>
+																			      	<c:when test="${app.approvalCheck == 'false'}"><td style="color: red; font-weight: bold; text-align: center;">거부</td></c:when>
+																			      	<c:when test="${app.approvalCheck == 'true'}"><td style="color: blue; font-weight: bold; text-align: center;">승인</td></c:when>
 																			      	<c:otherwise><td>대기</td></c:otherwise>
 																			     </c:choose>
 																			</tr>
