@@ -60,8 +60,8 @@
 		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
 	</select>
 
-	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
+<!-- 	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
 		select
 		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
-	</select>
+	</select> -->
 </mapper>
