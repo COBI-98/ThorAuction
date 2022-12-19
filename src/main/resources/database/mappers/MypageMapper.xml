@@ -12,8 +12,10 @@
 		INNER JOIN
 		AUCTIONPRODUCT p
 		ON app.APPLICATIONNUM = p.APPLICATIONNUM 
+		INNER JOIN
+		SALEPRODUCT s
+		ON p.PRODUCTNUM = s.PRODUCTNUM
 		WHERE app.WRITER = #{writer}
-		ORDER BY app.APPLICATIONNUM DESC
 	</select>
 	
 	<resultMap type="ApplicationVO" id="getAppProduct">
@@ -29,6 +31,7 @@
 			<result column="PRODUCTNAME" property="productName" />
 			<result column="PRODUCTPRICE" property="productPrice" />
 		</collection>
+		
 	</resultMap>
 
 	<!-- 관심 상품 삭제 -->
@@ -99,10 +102,9 @@
 	</select>
 	
 	<!-- 내가 입찰한 상품의 최고가 -->
- 	<select id="bidMaxHistory" parameterType="BidAmountVO" resultType="BidAmountVO">
-		SELECT PRODUCTID, MAX(BIDAMOUNT) 
-		FROM BIDAMOUNT 
-		WHERE PRODUCTID = #{productId}
+ 	<select id="bidMaxHistory" parameterType="BidAmountVO" resultType="Long">
+	 	SELECT MAX(BIDAMOUNT) AS PRODUCTVO FROM BIDAMOUNT
+		WHERE PRODUCTID= #{productId}
 	</select>
 	
 	<!-- 입찰한 상품 정보 -->
