@@ -53,6 +53,7 @@ var itemsend = getId('itemsend');
 var selecteditem = getId('selecteditem');
 var ln = getId('loginnum');
 var mediaName = getId('media-titleText');
+var setBroadNameBtn = getId('setBroadNameBtn');
 
 var username;
 var win = false;
@@ -460,9 +461,11 @@ function sendstop(){
 }
 
 
-
+auctionend.addEventListener("click",function(){
+	auctionend.classList.toggle("start");
 	//경매 시작 클릭 시
 	if(auctionend.value == "경매시작")	 {
+
 		console.log(amount.innerHTML);
 		console.log(add.value.substr(1));
 		if(amount.innerHTML != 0) {
@@ -488,6 +491,7 @@ function sendstop(){
 	}else{
 		sendresult();
 	}
+})
 
 
 //경매 시작 함수
@@ -642,14 +646,13 @@ function adminChat(){
 	})
 	
 	// 방송 제목 설정
-	$("#setBroadNameBtn").click(function(){
+	setBroadNameBtn.addEventListener("click",function(){
+		console.log("clickckkkkk");
 		data2.title = $("#broadName").val();
 		document.querySelector("#media-titleText").innerHTML = data2.title;
 		
 	   var temp = JSON.stringify(data2);
 	   ws.send(temp);
-		
-		
 	})
 	
 	
