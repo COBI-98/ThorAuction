@@ -47,15 +47,14 @@ function getHTMLMediaElement(mediaElement, config) {
     var mediaElementContainer = document.querySelector('#media-container');
     
 
-	mediaElementContainer.className = 'media-container';
-    var mediaControls = document.createElement('div');
+	mediaElementContainer.className = 'media-container shadowBox';
+    var mediaControls = document.querySelector('#mediaControls');
     mediaControls.className = 'media-controls';
-    mediaElementContainer.appendChild(mediaControls);
 
     if (buttons.has('mute-audio')) {
-        var muteAudio = document.createElement('div');
+        var muteAudio = document.querySelector('#mute-audio');
         muteAudio.className = 'control ' + (config.toggle.has('mute-audio') ? 'unmute-audio selected' : 'mute-audio');
-        mediaControls.appendChild(muteAudio);
+//        mediaControls.appendChild(muteAudio);
 
         muteAudio.onclick = function() {
             if (muteAudio.className.indexOf('unmute-audio') != -1) {
@@ -74,21 +73,18 @@ function getHTMLMediaElement(mediaElement, config) {
     }
 
     if (buttons.has('mute-video')) {
-        var muteVideo = document.createElement('div');
+        var muteVideo = document.querySelector('#muteVideo');
         let muteVideoId = document.createAttribute("id");
         muteVideoId.value = "muteVideo";
         muteVideo.setAttributeNode(muteVideoId);
         
         muteVideo.className = 'control ' + (config.toggle.has('mute-video') ? 'unmute-video selected' : 'mute-video');
-        mediaControls.appendChild(muteVideo);
-		muteVideo.style.display="none";
+//        mediaControls.appendChild(muteVideo);
         muteVideo.onclick = function() {
             if (muteVideo.className.indexOf('unmute-video') != -1) {
                 muteVideo.className = muteVideo.className.replace('unmute-video selected', 'mute-video');
                 mediaElement.muted = false;
                 mediaElement.volume = 1;
-                
-                
                 
                 mediaElement.play();
                 if (config.onUnMuted) config.onUnMuted('video');
@@ -123,9 +119,8 @@ function getHTMLMediaElement(mediaElement, config) {
 
 
 //    if (buttons.has('volume-slider')) {
-        var volumeSlider = document.createElement('div');
+        var volumeSlider = document.querySelector('#volume-slider');
         volumeSlider.className = 'control volume-slider';
-        volumeControl.appendChild(volumeSlider);
 
         var slider = document.createElement('input');
         slider.type = 'range';
@@ -138,7 +133,7 @@ function getHTMLMediaElement(mediaElement, config) {
         volumeSlider.appendChild(slider);
 //    }
 
-//    if (buttons.has('full-screen')) {
+    if (buttons.has('full-screen')) {
         const zoom = document.querySelector('#zoom');
         zoom.className = 'control ' + (config.toggle.has('zoom-in') ? 'zoom-out selected' : 'zoom-in');
 		console.log("fullscreen");
@@ -202,7 +197,7 @@ function getHTMLMediaElement(mediaElement, config) {
         document.addEventListener('fullscreenchange', screenStateChange, false);
         document.addEventListener('mozfullscreenchange', screenStateChange, false);
         document.addEventListener('webkitfullscreenchange', screenStateChange, false);
-//    }
+    }
 
     if (buttons.has('volume-slider') || buttons.has('full-screen') || buttons.has('record-audio') || buttons.has('record-video')) {
         mediaElementContainer.appendChild(volumeControl);
@@ -232,16 +227,15 @@ function getHTMLMediaElement(mediaElement, config) {
     var times = 0;
 
     function adjustControls() { 	//마우스 올리면 사라지는 컨트롤바 이벤트
-        mediaControls.style.marginLeft = (mediaElementContainer.clientWidth - mediaControls.clientWidth - 2) + 'px';
 
-        if (slider) {
-            slider.style.width = (mediaElementContainer.clientWidth / 3) + 'px';
-            volumeControl.style.marginLeft = (mediaElementContainer.clientWidth / 3 - 30) + 'px';
-
-            if (zoom) zoom.style['border-top-right-radius'] = '5px';
-        } else {
-            volumeControl.style.marginLeft = (mediaElementContainer.clientWidth - volumeControl.clientWidth - 2) + 'px';
-        }
+//        if (slider) {
+//            slider.style.width = (mediaElementContainer.clientWidth / 3) + 'px';
+//            volumeControl.style.marginLeft = (mediaElementContainer.clientWidth / 3 - 30) + 'px';
+//
+//            if (zoom) zoom.style['border-top-right-radius'] = '5px';
+//        } else {
+//            volumeControl.style.marginLeft = (mediaElementContainer.clientWidth - volumeControl.clientWidth - 2) + 'px';
+//        }
 
         volumeControl.style.marginTop = (mediaElementContainer.clientHeight - volumeControl.clientHeight - 2) + 'px';
 
@@ -338,7 +332,8 @@ function getAudioElement(mediaElement, config) {
     mediaElementContainer.appendChild(mediaControls);
 
     var muteAudio = document.createElement('div');
-    muteAudio.className = 'control ' + (config.toggle.has('mute-audio') ? 'unmute-audio selected' : 'mute-audio');
+    
+muteAudio.className = 'control ' + (config.toggle.has('mute-audio') ? 'unmute-audio selected' : 'mute-audio');
     mediaControls.appendChild(muteAudio);
 
     muteAudio.style['border-top-left-radius'] = '5px';
@@ -371,19 +366,18 @@ function getAudioElement(mediaElement, config) {
 //        };
 //    }
 
-    var volumeSlider = document.createElement('div');
+    var volumeSlider = document.querySelector('#volume-slider');
     volumeSlider.className = 'control volume-slider';
     volumeSlider.style.width = 'auto';
-    mediaControls.appendChild(volumeSlider);
 
     var slider = document.createElement('input');
     slider.style.marginTop = '11px';
-    slider.style.width = ' 200px';
+    slider.style.width = ' 35px';
 
-    if (config.buttons && config.buttons.indexOf('record-audio') == -1) {
-        slider.style.width = ' 241px';
-    }
-
+//    if (config.buttons && config.buttons.indexOf('record-audio') == -1) {
+//        slider.style.width = ' 241px';
+//    }
+//
     slider.type = 'range';
     slider.min = 0;
     slider.max = 100;
@@ -431,8 +425,6 @@ function getAudioElement(mediaElement, config) {
     var times = 0;
 
     function adjustControls() {		// 마우스 치우면 컨트롤바 사라짐
-        mediaControls.style.marginLeft = (mediaElementContainer.clientWidth - mediaControls.clientWidth - 7) + 'px';
-        mediaControls.style.marginTop = (mediaElementContainer.clientHeight - mediaControls.clientHeight - 6) + 'px';
         if (times < 10) {
             times++;
             setTimeout(adjustControls, 1000);
@@ -478,3 +470,6 @@ function getAudioElement(mediaElement, config) {
 
     return mediaElementContainer;
 }
+
+
+

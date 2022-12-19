@@ -3,16 +3,34 @@
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="wrap">
-	<nav class="py-2 bg-light border-bottom">
+	<nav class="py-2 bg-light border-bottom" style="background-color: #fea532 !important; height: 40px;">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
 
 			</ul>
-			<ul class="nav">
+		</div>
+	</nav>
+	
+	
+	
+	<nav class=" border-bottom" style="display: flex; justify-content: center;">
+	
+	
+		
+	
+	<div class="container " >
+	<sec:authorize access="hasRole('ROLE_ADMIN')" >
+		<ul class="nav"   style="float: left; margin-left: 50px;">
+				<li class="nav-item nav-member"><a href="../admin/adminpage" class="nav-link">관리자 기능</a></li>
+				<li class="nav-item nav-member"><a href="#" class="nav-link">관리자 페이지</a></li>
+		</ul>
+	</sec:authorize>
+		
+		<ul class="nav" style="float: right;">
 				<!-- 로그인 전 -->
 				<sec:authorize access="!isAuthenticated()">
-					<li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-					<li class="nav-item"><a href="../member/join" class="nav-link link-dark px-2">회원가입</a></li>
+					<li class="nav-item nav-member"><a href="../member/login" class="nav-link" >로그인</a></li>
+					<li class="nav-item nav-member"><a href="../member/join" class="nav-link">회원가입</a></li>
 				</sec:authorize>
 
 	<%-- 			<!-- 로그인 후 -->
@@ -28,26 +46,36 @@
 				<!-- 로그인 후 -->
 				<sec:authentication property="Principal" var="member" />
 				<sec:authorize access="isAuthenticated()">
-					<li class="nav-item"><a href="" class="nav-link link-dark px-2"><b>${kakaoInfo.kaName }님 안녕하세요</b></a></li>
-					<li class="nav-item"><a href="../member/logout" class="nav-link link-dark px-2">로그아웃</a></li>
-					<li class="nav-item"><a href="../mypage/id=" class="nav-link link-dark px-2">마이페이지</a></li>
+					<li class="nav-item nav-member"><a href="" class="nav-link link-dark"><b><sec:authentication property="name" />님 안녕하세요</b></a></li>
+					<li class="nav-item nav-member"><a href="../member/logout" class="nav-link link-dark">로그아웃</a></li>
+					<li class="nav-item nav-member"><a href="../mypage/id=" class="nav-link link-dark">마이페이지</a></li>
 					<%-- <form action="/member/logout" method="post">
 						<sec:csrfInput />
 						<li class="nav-item"><button class="btn btn-outline-none">logout</button></li>
 					</form> --%>
-					<li class="nav-item"><a href="../admin/adminpage" class="nav-link link-dark px-2">관리자 기능</a></li>
+					
 				</sec:authorize>
 				
-				<li class="nav-item"><a href="#" class="nav-link link-dark px-2">관리자 페이지</a></li>
+				
 			</ul>
-		</div>
-	</nav>
+			
+			</div>
+		</nav>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<header class="py-3 mb-4 border-bottom">
-		<div class="container d-flex flex-wrap justify-content-center">
+		<div class="container d-flex flex-wrap justify-content-center" style="align-items: flex-end;">
 			<a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
 				<svg class="bi me-2" width="40" height="32">
 					<use xlink:href="#bootstrap"></use></svg>
-				<span class="fs-4">BidCoin</span>
+				<span class="fs-4"><img alt="" src="images/logo_BidCoin.png" style="width: 200px;"></span>
 			</a>
 			<ul class="nav">
 				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
@@ -57,15 +85,11 @@
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
 		        <li class="nav-item" style="width : calc(100%/6);"><a href="/chatbot" class="nav-link link-dark px-2">QNA챗봇</a></li>	
 			</ul>
-			<form role="search" style="width:220px; margin-left:20px;">
- 
-		        <input type="search" class="form-control" placeholder="Search..." aria-label="Search" style="display:inline; width:175px;">
-		        <button type="button" style="background-color: white; border-style:none; display:inline;">
-		        	<img src="/images/icons8-search-64.png" style="width: 25px; margin-bottom:8px;">
-		        </button>
+			
+			
+			</div>
 	
-	      	</form>	
-		</div>
+		
 	</header>
 
 	<script>
