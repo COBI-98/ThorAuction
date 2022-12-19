@@ -114,9 +114,9 @@
 														      		</td>
 														      <td><fmt:formatNumber value="${pay.payTotal}" pattern="###,###,###,###"/>원</td>
 														      <c:choose>
-														      	<c:when test="${pay.payResult == 'paid'}"><td>결제성공</td></c:when>
-														      	<c:when test="${pay.payResult == 'ready'}"><td>결제대기</td></c:when>
-														      	<c:when test="${pay.payResult == 'failed'}"><td>결제실패</td></c:when>
+														      	<c:when test="${pay.payResult == 'paid'}"><td style="color: blue; font-weight: bold;">결제성공</td></c:when>
+														      	<c:when test="${pay.payResult == 'ready'}"><td>결제대기</td style="color: red; font-weight: bold;"></c:when>
+														      	<c:when test="${pay.payResult == 'failed'}"><td style="color: red; font-weight: bold; ">결제실패</td></c:when>
 														      </c:choose>
 														      <td>
 														      <c:set var="date" value="${pay.payDate}" />
