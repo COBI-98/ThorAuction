@@ -488,7 +488,7 @@ function sendstop(){
 	}else{
 		sendresult();
 	}
-})
+
 
 //경매 시작 함수
 function auctionstart(){
@@ -605,6 +605,7 @@ function adminChat(){
 			})
 		}
 	})
+}
 	
 	stopChatCold.addEventListener("click",function(){
 		stopChat.classList.toggle("stop");
@@ -666,7 +667,7 @@ function adminChat(){
                 icon: "info",    //상황에 맞는 아이콘
 				showConfirmButton : false,
                 showCancelButton: false
-            } )
+            })
 			setTimeout(() => {Swal.close();}, 800)
 			document.querySelector("#unit").value = unit.value;
 		}
@@ -676,7 +677,7 @@ function adminChat(){
                 icon: "info",    //상황에 맞는 아이콘
 				showConfirmButton : false,
                 showCancelButton: false
-            } )
+            })
 			setTimeout(() => {Swal.close();}, 800)
 		return;
 	}

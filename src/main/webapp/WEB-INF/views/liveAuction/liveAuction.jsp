@@ -160,10 +160,9 @@
 	<div id="room-urls" style="width : 200px;text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
   </div>
   </section>
-  <c:import url="../template/footer.jsp"></c:import>
 </div>
 
-<%-- <c:import url="../template/footer.jsp"></c:import> --%>
+<!-- <c:import url="../template/footer.jsp"></c:import> -->
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
