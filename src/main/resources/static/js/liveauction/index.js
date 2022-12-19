@@ -34,6 +34,10 @@ function adminBroadCast(){
 	
 }
 
+function joinRoom(){
+	
+	 connection.join(123);
+}
 
 
 
