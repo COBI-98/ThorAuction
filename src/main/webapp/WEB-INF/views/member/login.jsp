@@ -47,6 +47,9 @@
 											autocomplete="off"> <span class="member-input__valid-wrapper"></span>
 									</div>
 								</div>
+								<c:if test="${param.message != null}">
+                                	<div id="errorMsg" class="member-input-wrong-message"">${param.message}</div>
+                                </c:if>
 
 								<button type="button" id="login_submit_btn" class="member-button login__btn">로그인</button>
 
@@ -76,5 +79,8 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		history.replaceState({}, null, location.pathname)
+    </script>
 </body>
 </html>
