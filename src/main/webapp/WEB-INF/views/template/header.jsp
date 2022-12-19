@@ -77,12 +77,13 @@
 					<use xlink:href="#bootstrap"></use></svg>
 				<span class="fs-4"><img alt="" src="images/logo_BidCoin.png" style="width: 200px;"></span>
 			</a>
-			<ul class="nav" style="height: 100%;">
-				<li class="nav-item nav-menu" ><a href="#" class="nav-link link-dark" style="font-weight: bold;">경매장</a></li>
-		        <li class="nav-item nav-menu" ><a href="https://192.168.1.83:84/liveAuction?roomid=123" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
-		        <li class="nav-item nav-menu" ><a href="/board/application/list" class="nav-link link-dark" style="font-weight: bold">신청게시판</a></li>
-		        <li class="nav-item nav-menu" ><a href="/board/notice/list" class="nav-link link-dark" style="font-weight: bold">공지게시판</a></li>
-		       
+			<ul class="nav">
+				<li class="nav-item" style="width : calc(100%/7);"><a href="#" class="nav-link link-dark px-2">경매장</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://localhost:84/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
+		        <li class="nav-item" style="width : calc(100%/6);"><a href="/chatbot" class="nav-link link-dark px-2">QNA챗봇</a></li>	
 			</ul>
 			
 			
