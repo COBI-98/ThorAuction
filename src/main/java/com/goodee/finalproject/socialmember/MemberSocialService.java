@@ -35,10 +35,10 @@ public class MemberSocialService extends DefaultOAuth2UserService
 		return kakaoMapperIF.getKakaoDetail(kakaoVO);
 	}
 
-	public int IdCheck(KakaoVO kakaoVO) throws Exception
-	{
-		return kakaoMapperIF.getDetail(kakaoDetailVO);
-	}
+//	public int IdCheck(KakaoVO kakaoVO) throws Exception
+//	{
+//		return kakaoMapperIF.getKakaoDetail(kakaoVO);
+//	}
 	
 	public KakaoDetailVO getDetail(KakaoDetailVO kakaoDetailVO) throws Exception
 	{

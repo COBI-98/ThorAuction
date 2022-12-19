@@ -3,11 +3,11 @@
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="wrap">
-	<nav class="py-2 bg-light border-bottom" style="background-color: #fea532 !important; height: 40px;">
+<nav class="py-2 bg-light border-bottom" style="background-color: #fea532 !important; height: 40px;">
 
 <c:import url="/WEB-INF/views/template/recentItem.jsp"></c:import>
 
-	<nav class="py-2 bg-light border-bottom">
+	<!-- <nav class="py-2 bg-light border-bottom"> -->
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
 

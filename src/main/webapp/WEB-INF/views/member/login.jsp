@@ -41,17 +41,6 @@
                                     </div>
                                 </div>
 
-                                <div class="member-input">
-                                    <div class="member-input__state">
-                                        <input id="pw" name="pw" class="member-input__box" type="password" placeholder="비밀번호" autocomplete="off">
-                                        <span class="member-input__valid-wrapper"></span>
-                                    </div>
-                                </div>
-                                <c:if test="${param.message != null}">
-                                	<div id="errorMsg" class="member-input-wrong-message"">${param.message}</div>
-                                </c:if>
-                                <button type="button" id="login_submit_btn" class="member-button login__btn">로그인</button>
-
 								<div class="member-input">
 									<div class="member-input__state">
 										<input id="pw" name="pw" class="member-input__box" type="password" placeholder="비밀번호"
