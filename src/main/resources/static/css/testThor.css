@@ -1,6 +1,6 @@
 :root {
-    --color-point:rgb(53, 197, 240);
-    --color-sub:#d3a27f;
+    --color-point:#fea532;
+    --color-sub:#9DDDE9;
     }
 .mobile {
     display:none !important;
@@ -338,13 +338,13 @@
     .production-selling-overview .production-selling-overview__container .production-selling-overview__content .production-selling-header__info-wrap .info li strong {position:absolute;right:0px;top:0px;line-height:32px;color:#999}
     .production-selling-overview .production-selling-overview__container .production-selling-overview__content .production-selling-header__info-wrap .info li strong em{font-size:16px;font-style:normal;color:#222}
     .production-selling-overview .production-selling-overview__container .production-selling-overview__content .production-selling-header__info-wrap .info li.timer {border-top:1px solid #eaeaea;line-height:56px}
-    .production-selling-overview .production-selling-overview__container .production-selling-overview__content .production-selling-header__info-wrap .info li.timer strong {background:url('/images/icon/timer.png') left center no-repeat;background-size:22px;padding-left:30px;font-size:20px;color:#222;line-height:56px}
+    .production-selling-overview .production-selling-overview__container .production-selling-overview__content .production-selling-header__info-wrap .info li.timer strong {background:url('/images/timer.png') left center no-repeat;background-size:22px;padding-left:30px;font-size:20px;color:#222;line-height:56px}
     
     
     /* ê¼­ ì½ì–´ì£¼ì„¸ìš” */
     .readinfo {clear:both;padding-top:50px}
     .readinfo h4 {font-size:18px;display:block;padding-bottom:5px;border-bottom:1px solid #666}
-    .readinfo li {border-bottom:1px solid #eaeaea;line-height:40px;background:url('/images/icon/arr_b.png') 98% 17px no-repeat;}
+    .readinfo li {border-bottom:1px solid #eaeaea;line-height:40px;background:url('/images/arr_b.png') 98% 17px no-repeat;}
     .readinfo li a{color:#999;display:block}
     .readinfo li .txt{display:none;padding-bottom:10px;}
     .readinfo li.on {background:url('/images/icon/arr_t.png') 98% 17px no-repeat;}
@@ -362,7 +362,7 @@
     
     /** ìƒí’ˆíƒ­ **/
     .tap_product {padding:60px 0 30px;position:relative;background-color:#fff;z-index:1}
-    .tap_product.jbFixed ul{position:fixed;left:50%;transform:translateX(-50%);;top:0px;max-width:1050px;width:100%;padding:0px;background-color:#fff}
+    .tap_product.jbFixed ul{position:fixed;left:50%;transform:translateX(-50%);;top:0px;max-width:1100px;width:100%;padding:0px;background-color:#fff}
     .tap_product ul:after {clear:both;content:'';display:block}
     .tap_product li {float:left;width:calc(25% + 1px);border:1px solid #cecfce;border-bottom:1px solid var(--color-point);margin-left:-1px;position:relative;}
     .tap_product li a{color:#7d7d7d;display:block;line-height:53px;text-align:center}
@@ -639,7 +639,7 @@
     .auction_list li .imgbox a{display:block;overflow:hidden}
     .auction_list li .imgbox:after{content:'';display:block;padding-bottom:100%;}
     .auction_list li .imgbox .img{display:block;position:absolute;width:100%;height:100%;top:0;right:0;bottom:0;left:0;border:1px solid #eaeaea;}
-    .auction_list li .imgbox .timedate{white-space:nowrap;color:#333;font-size:12px;position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;background-color:#ffef36;border-radius:15px;padding:5px 15px;}
+    .auction_list li .imgbox .timedate{white-space:nowrap;color:#333;font-size:12px;position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;background-color:#fea532;border-radius:15px;padding:5px 15px;}
     .auction_list li .imgbox .timedate strong{font-size:17px;display:inline-block;}
     
     
@@ -673,7 +673,7 @@
     .bidbtn .bid2 span input[type="text"]{border:none;border-bottom:1px solid #444;background-color:transparent;width:50%;font-size:21px;color:#222;text-aligN:center;}
     
     /** ìž…ì°°ë§ˆë¼í†¤ **/
-    .auction_run {background:url('/images/auction/auction_bg.jpg') center center no-repeat;height:430px;display:flex;}
+    .auction_run {background:url('/images/test.png') center center no-repeat;height:430px;display:flex;}
     .auction_run .runner{width:25%;text-align:center;padding-top:20px;position:relative;}
     .auction_run .runner:first-child .title:before{content:'';display:block;background:url('/images/auction/king.png') no-repeat;width:32px;height:26px;margin:auto;}
     .auction_run .runner:first-child .title{padding-top:0px}
@@ -682,11 +682,11 @@
     .auction_run .runner .title .date{font-size:14px;color:#999}
     .auction_run .runner .run{margin:auto;position:absolute;left:50%;bottom:25px;transform:translateX(-50%);}
     .auction_run .runner .run img{position:absolute;left:50%;top:0px;transform:translate(-50%,-100%);height:95px}
-    .auction_run .runner .run .bg1{width:165px;height:169px;background:url('/images/auction/run1.png') center no-repeat;position:relative;}
-    .auction_run .runner .run .bg2{width:165px;height:154px;background:url('/images/auction/run2.png') center no-repeat;position:relative;}
-    .auction_run .runner .run .bg3{width:165px;height:160px;background:url('/images/auction/run3.png') center no-repeat;position:relative;}
-    .auction_run .runner .run .bg4{width:165px;height:175px;background:url('/images/auction/run4.png') center no-repeat;position:relative;}
-    
+    .auction_run .runner .run .bg1{width:165px;height:169px;background:url('/images/run1.png') center no-repeat;position:relative;}
+    .auction_run .runner .run .bg2{width:165px;height:154px;background:url('/images/run2.png') center no-repeat;position:relative;}
+    .auction_run .runner .run .bg3{width:165px;height:160px;background:url('/images/run3.png') center no-repeat;position:relative;}
+    .auction_run .runner .run .bg4{width:165px;height:175px;background:url('/images/run4.png') center no-repeat;position:relative;}
+     
     
     .auction_run .runner .run .bg1 img{position:absolute;left:50%;top:0px;transform:translate(-50%,-99%);}
     .auction_run .runner .run .bg2 img{position:absolute;left:50%;top:0px;transform:rotate(-10deg) translate(-46%,-100%);}
@@ -725,7 +725,7 @@
     .tap_set.ban2 li {width:calc(50% + 1px);}
     .tap_set.ban4 li {width:calc(25% + 1px);}
     .tap_set.ban5 li {width:calc(50% + 1px);}
-    .tap_set li {float:left;width:calc(33.3% + 1px);border:1px solid #cecfce;border-bottom:1px solid var(--color-point);margin-left:-1px;position:relative;}
+    .tap_set li {float:left;width:calc(50.0% + 1px);border:1px solid #cecfce;border-bottom:1px solid var(--color-point);margin-left:-1px;position:relative;}
     .tap_set li a{color:#7d7d7d;display:block;line-height:53px;text-align:center}
     .tap_set li.on {border:1px solid var(--color-point);border-bottom:1px solid #fff;z-index:3}
     .tap_set li.on a{color:var(--color-point)}
@@ -750,7 +750,6 @@
     /******************************************************* íŒì—… *********************************************************/
     .layer_pop_design {position:fixed;left:50%;width:50%;margin-left:-25%;top:15px;min-height:450px;z-index:100;background-color:#fff;border-radius:25px;box-shadow:20px 20px 10px rgba(0,0,0,0.2)}
     .layer_pop_design h3.tit {position:relative}
-    .layer_pop_design h3.tit .close{position:absolute;top:15px;right:20px;cursor:pointer;background:url(/images/icon/close.png) no-repeat;background-size:100%;text-indent:-9999px;display:block;width:35px;height:35px;}
     
     .wid400 {width:400px !important;left:50%;margin-left:-200px}
     .wid1200 {width:1450px !important;left:50%;margin-left:-725px}
@@ -881,7 +880,7 @@
     .left_product .search li {border-bottom:1px solid #f3f3f3}
     .left_product .search li.on a{color:#222;font-weight:500}
     .left_product .search li a{position: relative;    display: block;    padding: 9px 29px 9px 0;    color: #666;    font-size: 14px;}
-    .left_product .search li a:after{content: "";    display: block;background: url(/images/icon/arr_r2.png) no-repeat top left;    background-position: -102px 0;    width: 6px;    height: 11px;    position: absolute;    right: 3px;    top: 50%;    margin-top: -5px;background-size:8px}
+    .left_product .search li a:after{content: "";    display: block;background: url('/images/icon/arr_r2.png') no-repeat top left;    background-position: -102px 0;    width: 6px;    height: 11px;    position: absolute;    right: 3px;    top: 50%;    margin-top: -5px;background-size:8px}
     .left_product .search{border-bottom:2px solid #333;padding-bottom:20px}
     .left_product .search2{border-bottom:2px solid #333;;padding-bottom:20px}
     
