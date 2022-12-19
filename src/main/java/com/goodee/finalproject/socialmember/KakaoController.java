@@ -3,6 +3,7 @@ package com.goodee.finalproject.socialmember;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,55 +31,33 @@ public class KakaoController
 {
 	@Autowired
 	private MemberSocialService memberSocialService;
-
-	@PostMapping("IdCheck")
-	@ResponseBody
-	public int IdCheck(KakaoVO kakaoVO, HttpServletResponse response) throws Exception
-	{
-		log.info("======= id check =======");
-		int rs = memberSocialService.IdCheck(kakaoVO);
-
-		log.info("idCheck rs: {}", rs);
-
-		return rs;
-	}
+	@Autowired
+	private AdminService adminService;
 
 	@GetMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, Authentication authentication) throws Exception
+	public ModelAndView kakaoLogin(HttpSession session, KakaoVO kakaoVO, Authentication authentication, KakaoDetailVO kakaoDetailVO)
+			throws Exception
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
-		log.info("===== authentication: {}", authentication.getName());
-
-		// auth getName 과 DB의 소셜 ID가 같으면 메인으로?
 
 		int rs = memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
+		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
 
+		modelAndView.addObject("getSocialList", kakaoVOs);
 		modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
 		modelAndView.setViewName("socialMember/kakaoLogin");
-		session.setAttribute("kakaoVO", rs);
+		session.setAttribute("kakaoVO", rs); // 카카오 정보 DB insert 성공/실패 값
 		session.setAttribute("kakaoInfo", authentication.getPrincipal());
-		
-		log.info("getNickName: {}", session.getAttribute("kakaoVO"));
-		int se = (int) session.getAttribute("kakaoVO");
-		if (se == 0)
-		{
-			modelAndView.setViewName("redirect:/");
-
-			return modelAndView;
-		}
 
 		return modelAndView;
 	}
 
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(HttpSession session, KakaoDetailVO kakaoDetailVO, Authentication authentication) throws Exception
+	public ModelAndView kakaoLogin(KakaoDetailVO kakaoDetailVO, Authentication authentication) throws Exception
 	{
 		log.info("==== post kakaoLogin ====");
-
 		ModelAndView modelAndView = new ModelAndView();
-
-		// log.info("kakao : {}", session.getAttribute("SPRING_SECURITY_CONTEXT"));
 
 		int rs2 = memberSocialService.setKakaoDetail(kakaoDetailVO);
 

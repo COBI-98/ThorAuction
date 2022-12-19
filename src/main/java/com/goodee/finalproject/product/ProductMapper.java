@@ -40,6 +40,7 @@ public interface ProductMapper {
 	
 	public List<SaleProductVO> getSaleProductHitList(SaleProductVO saleProductVO) throws Exception;
 	
+	public List<SaleProductVO> getSaleProductCategoryList(SaleProductVO saleProductVO) throws Exception;
 	
 	// 카테고리리스트
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception;
@@ -60,5 +61,18 @@ public interface ProductMapper {
 	
 	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception;
 	
+	
+	// 상품 문의 관리
 	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception;
+	
+	public int setAdminQuestionAdd(AdminQuestionVO adminQuestionVO) throws Exception;
+
+	public int setQuestionDelete(ProductQuestionVO productQuestionVO) throws Exception;
+	
+	public AdminQuestionVO getAdminQuestionCheck(ProductQuestionVO productQuestionVO) throws Exception;
+	
+	public int setAdminQuestionDelete(AdminQuestionVO adminQuestionVO) throws Exception;
+	
+	public int setStatus(ProductVO productVO) throws Exception;
+
 }

@@ -12,4 +12,7 @@ public class ProductQuestionVO {
 	private Date questionDate;
 	private Long productId;
 	private String id;
+	
+	private AdminQuestionVO adminQuestionVO;
+	
 }

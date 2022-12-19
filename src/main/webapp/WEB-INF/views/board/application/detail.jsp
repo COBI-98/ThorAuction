@@ -77,7 +77,12 @@
 
 <div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" >글 수정</a></div>
 <div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="margin-top: 10px; ">글 삭제</a></div>
-<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" class="btn btn-success" >승인</a></div>
+<c:if test="${applicationVO.auctionSort == true}">
+	<div class="btnRight"> <a href="#" class="btn btn-success" >승인</a></div>
+</c:if>
+<c:if test="${applicationVO.auctionSort != true}">
+	<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" class="btn btn-success" >승인</a></div>
+</c:if>
 <!-- Button trigger modal -->
 <!-- Button trigger modal -->
 <div class="btnRight">
@@ -100,7 +105,7 @@
                 <table class="table">
                     <tr>
                         <td>사용자명</td>
-                        <td><input class="form-control" id="userName" type="text"></td>
+                        <td><input class="form-control" id="userName" type="text" value="${applicationVO.writer}"></td>
                     </tr>
                     <tr>
                         <td>취소사유<td>
@@ -118,8 +123,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button id="modalSubmit" type="button" class="btn btn-success">Submit</button>
-                <button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="modalSubmit" type="button" class="btn btn-success">전송</button>
+                <button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">취소</button>
             </div>
         </div>
     </div>

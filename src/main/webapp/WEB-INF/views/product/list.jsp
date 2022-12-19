@@ -29,59 +29,16 @@
 					<div class="category-feed__side-bar col-12 col-md-3">
 						<section class="commerce-category-list">
 							<h2 class="commerce-category-list__title">
-								<a href="./list?category=${categoryVO[0].categoryId}">${categoryVO[0].categoryName}</a>
+								<a href="./list?<c:if test="${param.deadlineInfo != null}">deadlineInfo=${param.deadlineInfo}&</c:if>">전체보기</a>
 							</h2>
-							<ul class="commerce-category-tree commerce-category-list__categories">
-								<li class="commerce-category-tree__entry">
-									<div class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title" 
-										href="#">의류테스트1</a>
-									</div>
-								</li>
-								<li class="commerce-category-tree__entry">
-									<div class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title" href="#">의류테스트2</a>
-										<button class="commerce-category-tree__entry__expand" title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z">
-												</path>
-											</svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;">
-									</div>
-								</li>
-								<!-- 여기 반복-->
-								<li class="commerce-category-tree__entry">
-									<div class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title" href="#">의류테스트3</a>
-										<button class="commerce-category-tree__entry__expand" title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor" viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z">
-					
-												</path>
-											</svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;">
-									</div>
-								</li>
-							</ul>
+							
 							<ul class="commerce-category-list__others">
 							<c:forEach items="${categoryVO}" var="category" varStatus="status">
 								<li class="commerce-category-list__others__item">
-									<a href="./list?category=${category.categoryId}">${category.categoryName}</a>
+									<a href="./list?<c:if test="${param.deadlineInfo != null}">deadlineInfo=${param.deadlineInfo}&</c:if>categoryId=${category.categoryId}">${category.categoryName}</a>
 								</li>
 							</c:forEach>
 							</ul>
-							<!-- <ul class="commerce-category-list__others">
-								<li class="commerce-category-list__others__item">
-									<a href="/store/category?category=2">데코·식물</a>
-								</li>
-								<li class="commerce-category-list__others__item">
-									<a href="/store/category?category=0">가구</a>
-								</li>
-							</ul> -->
 						</section>
 					</div>
 					<div class="category-feed__content col-12 col-md-9">
@@ -106,11 +63,11 @@
 								<strong>총 ${saleVO.size()}개</strong><!-- 임시 -->
 								<c:if test="${not saleVO[0].deadlineInfo}">
 									<div class="order_by">
-										<a href="./list?sc=1&list;" <c:if test="${classCheck == '1'}">class="on"</c:if>>등록순</a>
-										<a href="./list?sc=2&list;" <c:if test="${classCheck == '2'}">class="on"</c:if>>참여높은순</a>
-										<a href="./list?sc=3&list;" <c:if test="${classCheck == '3'}">class="on"</c:if>>임박순</a>
-										<a href="./list?sc=4&list;" <c:if test="${classCheck == '4'}">class="on"</c:if>>낮은가격순</a>
-										<a href="./list?sc=5&list;" <c:if test="${classCheck == '5'}">class="on"</c:if>>높은가격순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=1&list;" <c:if test="${classCheck == '1'}">class="on"</c:if>>등록순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=2&list;" <c:if test="${classCheck == '2'}">class="on"</c:if>>참여높은순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=3&list;" <c:if test="${classCheck == '3'}">class="on"</c:if>>임박순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=4&list;" <c:if test="${classCheck == '4'}">class="on"</c:if>>낮은가격순</a>
+										<a href="./list?<c:if test="${param.categoryId != null}">categoryId=${param.categoryId}&</c:if>sc=5&list;" <c:if test="${classCheck == '5'}">class="on"</c:if>>높은가격순</a>
 									</div>
 								</c:if>
 							</div>
@@ -200,46 +157,61 @@
 												</c:forEach>
 											</c:when>
 											<c:when test="${classCheck == '5' || classCheck == '4'}">
-												<c:forEach items="${orderBidAmount}" var="order">
-													<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
-																
-																		<c:set var="testVO" value="testVO${status.index}" />
-																		<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
-																		<c:if test="${order == requestScope[bidAmountCheck]}">
-																	<li>
-																		
-																		<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
-																		<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
-																		<div class="imgbox">
-																			<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+											
+												
+												<c:set var="countCheck1" value="-1"></c:set>
+												<c:forEach items="${orderBidAmount}" var="order" varStatus="statusCheck">
+													<!-- 판매가격이 같은 값을 가진다면 중복으로 보여져 break문을 걸기위해-->
+													<c:set var="loop_flag" value="false" />
+														<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
+															<c:set var="countCheck" value="0"></c:set>
+															<c:set var="countCheck" value="${countCheck+countCheck1}"></c:set>
+															<c:if test="${not loop_flag }">
+																			<c:set var="testVO" value="testVO${status.index}" />
+																			<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
 																			
-																			<div class="timedate" id="timertest" >
-								
-																			</div>
-																		</div>
-																		<div class="text">
-																			<c:if test ="${not VO.deadlineInfo}">
-																			<a href="#" class="title">${requestScope[testVO].productName}</a>
-																			<div class="pricebox">
+																			<c:if test="${order == requestScope[bidAmountCheck] && countCheck != status.index}">
+																				<!-- 상품 개수를 체크하기위해 -->
 																				
-																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
-																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
-																			</div>
+																				<!-- 넘어오는 리스트의 사이즈와 상품의 개수가 같으면 break문을걸기위해 true-->
+																					<li>
+																						<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+																						<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+																						<div class="imgbox">
+																							<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+																							
+																							<div class="timedate" id="timertest" >
+												
+																							</div>
+																						</div>
+																						<div class="text">
+																							<c:if test ="${not VO.deadlineInfo}">
+																							<a href="#" class="title">${requestScope[testVO].productName}</a>
+																							<div class="pricebox">
+																								
+																								<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
+																								<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+																								<a href="#" class="shophome">COBI</a>
+																							</div>
+																							</c:if>
+																							<c:if test = "${VO.deadlineInfo}">
+																								<a href="#" class="title">${requestScope[testVO].productName}</a>
+																								<div class="pricebox">
+																									경매가 종료되었습니다.
+																									<a href="#" class="shophome">COBI</a>
+																								</div>
+																							</c:if>
+																						</div>
+																					</li> 
+																					<c:set var="countCheck1" value="${status.index}" />
+																					
+																					<c:set var="loop_flag" value="true" />
 																			</c:if>
-																			<c:if test = "${VO.deadlineInfo}">
-																				<a href="#" class="title">${requestScope[testVO].productName}</a>
-																				<div class="pricebox">
-																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
-																				</div>
-																			</c:if>
-																		</div>
-																	</li> 
-																</c:if>
-															</c:forEach>
+																		</c:if>
+																</c:forEach>
 												</c:forEach>
 											</c:when>
+											
 											<c:otherwise>
 												<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
 																

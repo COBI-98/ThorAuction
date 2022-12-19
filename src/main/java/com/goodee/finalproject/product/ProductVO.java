@@ -14,6 +14,7 @@ public class ProductVO {
 	private String productInformation;
 	private Long auctionPeriod;
 	private Long applicationNum;
+	private boolean status;
 	
 	private MultipartFile [] files;
 	

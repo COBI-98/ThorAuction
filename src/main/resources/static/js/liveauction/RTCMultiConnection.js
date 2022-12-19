@@ -380,11 +380,15 @@ var RTCMultiConnection = function(roomid, forceOptions) {
         });
 
         const cameraOff = document.querySelector("#cameraStatus");
-        cameraOff.addEventListener("click", function(){
-            if(connection.socket.connect()){
-                connection.socket.disconnect();
-            }
-        })
+        if(cameraOff != null){
+	
+	        cameraOff.addEventListener("click", function(){
+	            if(connection.socket.connect()){
+	                connection.socket.disconnect();
+	            }
+	        })
+	
+	}
         
 
         connection.socket.on('disconnect', function(event) {
