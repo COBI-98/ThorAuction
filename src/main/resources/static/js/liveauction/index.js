@@ -22,15 +22,15 @@ function adminBroadCast(){
 	    });
 	};
 	
-	document.getElementById('join-room').onclick = function() {
-//	    disableInputButtons();
-	
-	    connection.sdpConstraints.mandatory = {
-	        OfferToReceiveAudio: true,
-	        OfferToReceiveVideo: true
-	    };
-	    connection.join(document.getElementById('room-id').value);
-	};
+//	document.getElementById('join-room').onclick = function() {
+////	    disableInputButtons();
+//	
+//	    connection.sdpConstraints.mandatory = {
+//	        OfferToReceiveAudio: true,
+//	        OfferToReceiveVideo: true
+//	    };
+//	    connection.join(document.getElementById('room-id').value);
+//	};
 	
 }
 
