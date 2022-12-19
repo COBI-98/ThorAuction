@@ -3,28 +3,7 @@
 header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption{display:block}
 
 
-/* reset */
-body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,footer,textarea,button,select { margin:0px; padding:0px; }
-body {font-size:14px;}
-#wrap {font-size:14px;}
 
-table { border-collapse:collapse;table-layout:fixed;word-break:break-all; }
-ul, ol, li { list-style:none; }
-img, fieldset { border:0; }
-
-/* * {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal} */
-*:before {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal}
-*:after {font-size:inherit;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Tahoma,verdana, 'Noto Sans KR', '나눔고딕','Nanum Gothic',맑은고딕,애플고딕,나눔고딕,돋음,dotum;word-break:normal}
-em{font-style:normal}
-form	{display:inline;margin:0px}
-
-/** 게시판 벗어나지않게 **/
-
-a {color:#333;text-decoration:none}
-a:hover {text-decoration:none}
- a,img,input {outline: none;
-	
-}
 
 pre {white-space: pre-wrap;padding:0px;margin:0px }
 
@@ -395,12 +374,5 @@ DIV.paging li a {color:#999;font-size:12px}
 .blink {
   animation: blink-effect 1s step-end infinite;
   color:#ce080c
-
-  /*
-  animation-name: blink-effect;
-  animation-duration: 1s;
-  animation-iteration-count:infinite;
-  animation-timing-function:step-end;
-  */
 }
 
