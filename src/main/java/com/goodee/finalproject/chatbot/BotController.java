@@ -190,6 +190,24 @@ public class BotController {
                        +"</div>"
                    +"</div>"
                    + "<hr>";
+		}else if(str.equals("인사")) {
+			content = 
+					"<div class='other'>"
+						+"<div class='chat-text'>"
+						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+						+"<span class='text'>안녕하세요! 비드코인입니다! 궁금하신 점을 저에게 물어봐주세요!</span>"
+                       +"</div>"
+                   +"</div>"
+                   + "<hr>";
+		}else if(str.equals("엑스")) {
+			content = 
+					"<div class='other'>"
+						+"<div class='chat-text'>"
+						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+						+"<span class='text'>죄송합니다. 비드코인에 관련된 질문만 해주시면 감사하겠습니다!</span>"
+                       +"</div>"
+                   +"</div>"
+                   + "<hr>";
 		}
 
 		map.put("content", content);

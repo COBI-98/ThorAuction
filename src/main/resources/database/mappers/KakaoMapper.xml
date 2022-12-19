@@ -28,10 +28,22 @@
 		#{kaAddrDetail}, #{kaPhone}, 3000)
 	</insert>
 
-	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
-		select
-		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
+	<select id="getDetail" parameterType="KakaoDetailVO"
+		resultMap="detail">
+		select * from
+		SOCIALKAKAODETAIL where KANICKNAME =
+		#{kaNickName}
 	</select>
+	
+		<resultMap type="KakaoDetailVO" id="detail">
+		<id column="kaNickName" property="kaNickName" />
+		<result column="kaBirth" property="kaBirth" />
+		<result column="kaPost" property="kaPost" />
+		<result column="kaAddr" property="kaAddr" />
+		<result column="kaAddrDetail" property="kaAddrDetail" />
+		<result column="kaPhone" property="kaPhone" />
+		<result column="kaPoint" property="kaPoint" />
+	</resultMap>
 
 
 	<!-- detail -->
@@ -47,6 +59,9 @@
 	<select id="getOneMember" parameterType="KakaoDetailVO" resultType="KakaoDetailVO">
 		SELECT * FROM SOCIALKAKAODETAIL WHERE  KANICKNAME = #{kaNickName}
 	</select>
-	
-	
+
+<!-- 	<select id="IdCheck" parameterType="KakaoVO" resultType="int">
+		select
+		count(*) from SOCIALKAKAO where KANICKNAME = #{kaNickName}
+	</select> -->
 </mapper>

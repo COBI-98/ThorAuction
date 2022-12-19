@@ -31,6 +31,19 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	// 비밀번호 찾기
+//	public String sendMail(@RequestParam("email") String email) throws Exception {
+//		MailVO mailVO = 
+//	}
+	
+	// 회원가입 성공 GET
+	@GetMapping("finishjoin")
+	public void finishJoin() throws Exception {}
+	
+	// 약관 동의 GET
+	@GetMapping("agree")
+	public void agree() throws Exception {}
+	
 	// 아이디 중복확인 POST
 	@PostMapping("idCheck")
 	@ResponseBody
@@ -52,7 +65,7 @@ public class MemberController {
 	@GetMapping("login")
 	public void getLogin(@RequestParam(defaultValue = "false", required = false) Boolean error, String message, Model model) throws Exception {
 		if(error) {
-			model.addAttribute("msg", "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("errorMsg", "ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.");
 		}
 	}
 	
@@ -154,6 +167,6 @@ public class MemberController {
 			
 		}
 		
-		return "redirect:../";
+		return "member/finishjoin";
 	}
 }

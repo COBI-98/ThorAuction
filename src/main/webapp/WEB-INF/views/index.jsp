@@ -9,24 +9,42 @@
 <title>세상의 모든 경매: BIDCOIN</title>
 <c:import url="./template/boot.jsp"></c:import>
 <link href="/css/reset.css" rel="stylesheet">
+<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script defer src="/js/social/kakaoBan.js"></script>
+<script defer src="/js/social/memberBan.js"></script>
+<script defer src="/js/social/detailNullNotContent.js"></script>
   <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 </head>
-<script defer src="/js/admin/kakaoLoginCheck.js"></script>
+<style>
+.swal-wide {
+	width: auto;
+}
+</style>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
 
 		<h1>토르의 실시간 대장간 메인</h1>
-
-		<div class="mt-5">
-			<a href="../mypage/update">회원정보 수정</a>
-			<a href="../mypage/delete">회원탈퇴</a>
-		</div>
-
-<!-- 	<a href="/oauth2/authorization/naver" style="padding-left: 20px; padding-right: 20px;">
-		<img style="width: 80px; height: 80px;" src="/images/social/naver.png">
-	</a> -->
 	</section>
+
+	<sec:authorize access="isAuthenticated()">
+		<c:forEach items="${kakaoRole }" var="kk">
+			<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
+				<input type="hidden" value="${kk.kaRoleVOs[0].kaRoleName }" class="krole" readOnly>
+				<input type="hidden" value="${kk.kakaoDetailVOs[0].kaBirth}" class="detailInfoNull">
+			</c:if>
+		</c:forEach>
+
+		<c:forEach items="${member}" var="m">
+			<c:if test="${m.id == memID && m.roleVOs[0].roleName == 'ROLE_BAN' }">
+				<input type="hidden" value="${m.id}" class="iii" readOnly>
+				<input type="hidden" value="${m.roleVOs[0].roleName}" class="MID" readOnly>
+			</c:if>
+		</c:forEach>
+
+	</sec:authorize>
 	<c:import url="./template/footer.jsp"></c:import>
 </body>
 </html>

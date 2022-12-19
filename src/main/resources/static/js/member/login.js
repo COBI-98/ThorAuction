@@ -8,7 +8,7 @@ $("#id").blur(function () {
     } else { }
 });
 
-$("#pw").blur(function(){
+$("#pw").change(function(){
     if(!($("#pw").val()) == "") {
         results[1] = true;
     } 
@@ -20,7 +20,9 @@ $("#login_submit_btn").click(function () {
 			icon: 'warning',
 			title: '다시 시도해주세요',
 			text: 'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.',
-		  });
+		  }).then(function(){
+            $("#id").focus();
+          })
 	} else {
 		$("#loginForm").submit();
 	}
@@ -33,7 +35,9 @@ $("#pw").keyup(function(key) {
                 icon: 'warning',
                 title: '다시 시도해주세요',
                 text: 'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다.',
-              });
+            }).then(function(){
+                $("#pw").focus();
+            })
         } else {
             $("#loginForm").submit();
         }

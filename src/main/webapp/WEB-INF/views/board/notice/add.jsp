@@ -12,13 +12,13 @@
 <!-- 서머노트를 위해 추가해야할 부분 -->
 <script src="/js/summernote/summernote-ko-KR.js"></script>
 <script src="/js/summernote/summernote-lite.js"></script>
+<link href="/css/reset.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 </head>
 <body>
-	
+	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5">
-		<h1>공지게시판 글쓰기</h1>
 		<div class="row mt-5">
 	 <form class="align-center" action="./add" method="post" enctype="multipart/form-data">
         <div class="form-check">
@@ -66,6 +66,7 @@
 </div>
 	
 </section>
+<c:import url="../../template/footer.jsp"></c:import>
 <script src="/js/fileManager.js">
 
 </script>

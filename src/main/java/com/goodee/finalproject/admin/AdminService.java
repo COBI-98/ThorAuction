@@ -33,7 +33,12 @@ public class AdminService
 		return ar;
 	}
 
-	public int roleSetManager(List<MemberVO> memberVOs, String id, List<KakaoVO> kakaoVOs, String kakaoEmail, String kakaoName,
+//	public List<NaverVO> getNaverTotal(NaverVO naverVO) throws Exception
+//	{
+//		return adminIF.getNaverTotal(naverVO);
+//	}
+
+	public int roleSetManager(List<MemberVO> memberVOs, List<KakaoVO> kakaoVOs, String id, String kakaoEmail, String kakaoName,
 			String kaNickName) throws Exception
 	{
 		int rs = adminIF.roleSetManager(memberVOs, id);
@@ -41,6 +46,15 @@ public class AdminService
 		if (id == "")
 		{
 			rs = adminIF.kakaoRoleSetManager(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+			log.info("nickname class: {}", kaNickName.getClass());
+			// try
+			// {
+			// log.info("parseLong: {}", (Long.parseLong(kaNickName)));
+			// }
+			// catch (NumberFormatException e)
+			// {
+			// rs = adminIF.naverRoleSetManager(kaNickName);
+			// }
 		}
 
 		return rs;
@@ -54,6 +68,14 @@ public class AdminService
 		if (id == "")
 		{
 			rs = adminIF.kakaoRoleSetUser(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+			// try
+			// {
+			// log.info("parseLong: {}", (Long.parseLong(kaNickName)));
+			// }
+			// catch (NumberFormatException e)
+			// {
+			// rs = adminIF.naverRoleSetUser(kaNickName);
+			// }
 		}
 
 		return rs;
@@ -67,6 +89,14 @@ public class AdminService
 		if (id == "")
 		{
 			rs = adminIF.kakaoRoleSetBan(kakaoVOs, kaNickName, kakaoEmail, kakaoName);
+			// try
+			// {
+			// log.info("parseLong: {}", (Long.parseLong(kaNickName)));
+			// }
+			// catch (NumberFormatException e)
+			// {
+			// rs = adminIF.naverRoleSetBan(kaNickName);
+			// }
 		}
 
 		return rs;

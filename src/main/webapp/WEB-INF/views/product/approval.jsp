@@ -47,7 +47,7 @@
 								<c:forEach items="${productVO.productFileVOs}" var="file" varStatus="status">
 									<c:if test="${not file.sort}">
 										<li class="production-selling-cover-image__list__item">
-											<button class="production-selling-cover-image__list__btn" type="button" aria-label="${stauts.count}">
+											<button class="production-selling-cover-image__list__btn" type="button" aria-label="${status.count}">
 												<img class="image" alt="상품의 대표 이미지" src="/file/product/${file.fileName}?gif=1&amp;w=72&amp;h=72&amp;c=c&amp;webp=1" 
 												srcset="/file/product/${file.fileName}?gif=1&amp;w=144&amp;h=144&amp;c=c&amp;webp=1 1.5x,/file/product/${file.fileName}?gif=1&amp;w=144&amp;h=144&amp;c=c&amp;webp=1 2x,
 												/file/product/${file.fileName}?gif=1&amp;w=240&amp;h=240&amp;c=c&amp;webp=1 3x">
@@ -113,10 +113,13 @@
 									</div>
 									
 								</div>
+								
 								<div class="info">
 										<ul>
-											<li class="timer">
-											
+											<li class="timer" id="timer">
+											<!-- <div id="timertest">
+
+											</div> -->
 											남은시간<strong><span id="d-day-day0">0${productVO.auctionPeriod}</span>일<span id="d-day-hour0">00</span>:<span id="d-day-min0">00</span>:<span id="d-day-sec0">00</span></strong>
 											
 											</li>
@@ -127,15 +130,15 @@
 						
 						<div class="btn_box right">	
 							<!-- return false; -->
-							<a href="#" onclick="do_fav(94);" class="mbtn red">관심경매등록</a>
+							<a href="#" disabled class="mbtn red">관심경매등록</a>
 						</div>
 						<div class="bidbtn" style="display:block">
 							<div class="bid1">
-								<span><a href="#" onclick="do_bid('A');">입찰하기 <strong><em><fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
+								<span><a href="#" disabled>입찰하기 <strong><em><fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
 								1,000원 단위로 입찰
 							</div>
 							<div class="bid2">
-								<span><strong><input type="text" name="bid_money" onkeyup="numberFormat(this);" onblur="priceCutting('C', 1000);" value="<fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/>"> 원</strong> <a href="#" onclick="do_bid('B');">자율입찰 +</a></span>
+								<span><strong><input type="text" disabled name="bid_money" onkeyup="numberFormat(this);" onblur="priceCutting('C', 1000);" value="<fmt:formatNumber value="${productVO.productPrice}" pattern="###,###"/>"> 원</strong> <a href="#" >자율입찰 +</a></span>
 								원하는 입찰 금액을 적어주세요. <br>(입찰시 입찰단위로 변환됩니다.)<br>1,000원 단위로 자율입찰됩니다.
 							</div>
 						</div>
@@ -160,38 +163,48 @@
 				</div>
 			</div>
 		
-			
-					
+			<div class="" style="text-align: center;">
+			<form class="align-center" action="./approval" method="post" enctype="multipart/form-data">	
 				
 				<label for="pl" hidden >카테고리</label>
-				<select name="productCategory" id="" class="pl">
+				<select name="categoryId" id="" class="pl">
 					<option value="">카테고리를 선택해주세요</option>
-					<option value="cloths">의류</option>
-					<option value="image">뷰티, 잡화</option>
-					<option value="cloths">가구, 생활, 건강</option>
-					<option value="image">가전, 디지털, 컴퓨터</option>
-					<option value="image">스포츠, 레저, 자동차</option>
-					<option value="image">도서, e쿠폰</option>
+					<option value="1">의류</option>
+					<option value="2">뷰티, 잡화</option>
+					<option value="3">가구, 생활, 건강</option>
+					<option value="4">가전, 디지털, 컴퓨터</option>
+					<option value="5">스포츠, 레저, 자동차</option>
+					<option value="6">도서, e쿠폰</option>
 
 				</select>
-		<table class="table table-bordered border-primary">
+				<div class="applicationDetail">
+					경매 단위 입력
+					<input type="text" name="amountUnit"  />
+				</div>
+
+				<input type="hidden" name="productNum" value="${productVO.productNum}">
+			</div>
+		<table class="table table-bordered border-warning">
 		<tbody>
-			<tr class="table-primary">
-				 
+			<tr class="table-warning">
+				
 				<th>경매기간 : ${productVO.auctionPeriod}</th>
-				<tr></tr>
-				<th>상품상세정보</th>
 				<tr>
-				  
+				<th>상품상세정보</th>
+				</tr>
+				
+				  <tr>
 				  <td>${productVO.productInformation}</td>
-			  </tr>
+			 	 </tr>
 			  
 			</tr>
 			</tbody>
 		</table>
 		
-		<input type="submit" id="applicationSubmit" value="상품 게시"  class ="btn btn-info">
+		<button type="submit" id="applicationSubmit" value="상품 게시" class ="btnRight btn btn-warning">상품 게시하기</button>
+	</form>
 	</section>
+	<!-- <script src="/js/timerTest.js"></script> -->
 	<script src="/js/test466.js"></script>
 	<script src="/js/test36.js"></script>
 	<script src="/js/test48.js"></script>
@@ -199,13 +212,3 @@
 	<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>
-.production-selling-cover-image__list__btn.production-selling-cover-image__list__btn--selected:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid #35c5f0;
-    border-radius: 4px;
-}

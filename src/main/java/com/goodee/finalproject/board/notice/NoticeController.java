@@ -104,15 +104,11 @@ public class NoticeController {
 	@ResponseBody
 	public int setFileUpdateNumber(NoticeFileVO noticeFileVO) throws Exception{
 		
-		log.info("NoticeFileVO -> {}", noticeFileVO);
-		log.info("NoticeFileVO123 -> {}", noticeFileVO.getRowNum());
-		log.info("NoticeFileVO1234 -> {}", noticeFileVO.getNoticeNum());
+		
 		long ROWNUM = noticeFileVO.getRowNum()+1L;
 		noticeFileVO.setRowNum(ROWNUM);
 		noticeFileVO = noticeService.getFileNumCheck(noticeFileVO);
-		log.info("------------------------------------------------");
-		log.info("NoticeFileVOOOOOO -> {}",noticeFileVO);
-		log.info("NoticeFileVOCheck -> {}", noticeFileVO.getNoticeFileNum());
+		
 //		int result = noticeService.setFileNumCheckDelete(noticeFileVO);
 		int result = noticeFileVO.getNoticeFileNum().intValue();
 		
