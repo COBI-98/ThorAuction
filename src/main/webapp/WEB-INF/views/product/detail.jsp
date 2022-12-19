@@ -166,7 +166,7 @@
 												<div class="bid1">
 													<c:set var="bidAmount" value="${maxAmount + saleProductVO.amountUnit}"></c:set>
 													<input type="hidden" id="amountUnit" value="${saleProductVO.amountUnit}">
-													<input type="hidden" id="startAmount" value="${bidAmount}">
+													<input type="hidden" id="bidAmountCheck" value="${bidAmount}">
 													<span><a href="#" onclick="dobid('A');">입찰하기 <strong><em><fmt:formatNumber value="${bidAmount}" pattern="###,###"/></em> 원</strong></a></span>
 													<fmt:formatNumber value="${saleProductVO.amountUnit}" pattern="###,###"/>원 단위로 입찰
 												</div>
@@ -178,7 +178,7 @@
 											<c:otherwise>
 												<div class="bid1">
 													<input type="hidden" id="amountUnit" value="${saleProductVO.amountUnit}">
-													<input type="hidden" id="startAmount" value="${VO.productPrice}">
+													<input type="hidden" id="bidAmountCheck" value="${VO.productPrice}">
 													<span><a href="#" onclick="dobid('A');">입찰하기 <strong><em><fmt:formatNumber value="${VO.productPrice}" pattern="###,###"/></em> 원</strong></a></span>
 													<fmt:formatNumber value="${saleProductVO.amountUnit}" pattern="###,###"/>원 단위로 입찰
 												</div>
