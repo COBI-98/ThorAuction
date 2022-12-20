@@ -47,7 +47,20 @@
 								<nav class="commerce-category-breadcrumb-wrap commerce-category-header__breadcrumb">
 									<ol class="commerce-category-breadcrumb">
 										<li class="commerce-category-breadcrumb__entry">
-											<a class="link" href="#">의류</a>
+											<a class="link" href="#">
+												<c:choose>
+													<c:when test="${param.categoryId == 1}">의류</c:when>
+													<c:when test="${param.categoryId == 2}">뷰티, 잡화</c:when>
+													<c:when test="${param.categoryId == 3}">가구, 생활, 건강</c:when>
+													<c:when test="${param.categoryId == 4}">가전, 디지털, 컴퓨터</c:when>
+													<c:when test="${param.categoryId == 5}">스포츠, 레저, 자동차</c:when>
+													<c:when test="${param.categoryId == 6}">도서, e쿠폰</c:when>
+													
+													<c:otherwise>
+														전체보기
+													</c:otherwise>
+												</c:choose>
+											</a>
 										</li>
 									</ol>
 								</nav>
@@ -156,29 +169,15 @@
 															</c:forEach>
 												</c:forEach>
 											</c:when>
-											<c:when test="${classCheck == '5' || classCheck == '4'}">
-											
-												
-												<c:set var="countCheck1" value="-1"></c:set>
-												<c:forEach items="${orderBidAmount}" var="order" varStatus="statusCheck">
-													<!-- 판매가격이 같은 값을 가진다면 중복으로 보여져 break문을 걸기위해-->
-													<c:set var="loop_flag" value="false" />
-														<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
-															<c:set var="countCheck" value="0"></c:set>
-															<c:set var="countCheck" value="${countCheck+countCheck1}"></c:set>
-															<c:if test="${not loop_flag }">
-																			<c:set var="testVO" value="testVO${status.index}" />
-																			<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
-																			
-																			<c:if test="${order == requestScope[bidAmountCheck] && countCheck != status.index}">
-																				<!-- 상품 개수를 체크하기위해 -->
-																				
+											<c:when test="${classCheck == '4' || classCheck == '5'}">
+									
+													<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
 																				<!-- 넘어오는 리스트의 사이즈와 상품의 개수가 같으면 break문을걸기위해 true-->
 																					<li>
 																						<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
 																						<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
 																						<div class="imgbox">
-																							<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${requestScope[testVO].productFileVOs[0].fileName}" alt="">${requestScope[testVO].productName}</a>
+																							<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${VO.productVOs[0].productFileVOs[0].fileName}" alt="">${VO.productVOs[0].productName}</a>
 																							
 																							<div class="timedate" id="timertest" >
 												
@@ -186,16 +185,15 @@
 																						</div>
 																						<div class="text">
 																							<c:if test ="${not VO.deadlineInfo}">
-																							<a href="#" class="title">${requestScope[testVO].productName}</a>
+																							<a href="#" class="title">${VO.productVOs[0].productName}</a>
 																							<div class="pricebox">
-																								
-																								<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
-																								<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
+																								<div>시작가 <span class="through"><fmt:formatNumber value="${VO.productVOs[0].productPrice}" pattern="###,###"/></span> </div>
+																								<div>현재가 <span class="price"><fmt:formatNumber value="${VO.maxBidAmount}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
 																								<a href="#" class="shophome">COBI</a>
 																							</div>
 																							</c:if>
 																							<c:if test = "${VO.deadlineInfo}">
-																								<a href="#" class="title">${requestScope[testVO].productName}</a>
+																								<a href="#" class="title">${VO.productVOs[0].productName}</a>
 																								<div class="pricebox">
 																									경매가 종료되었습니다.
 																									<a href="#" class="shophome">COBI</a>
@@ -203,14 +201,10 @@
 																							</c:if>
 																						</div>
 																					</li> 
-																					<c:set var="countCheck1" value="${status.index}" />
-																					
-																					<c:set var="loop_flag" value="true" />
-																			</c:if>
-																		</c:if>
+																		
 																</c:forEach>
-												</c:forEach>
-											</c:when>
+																			
+															</c:when>
 											
 											<c:otherwise>
 												<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
