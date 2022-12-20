@@ -274,4 +274,9 @@ public class ApplicationService {
 	public List<ApplicationVO> getApprovalCheckList() throws Exception{
 		return applicationMapper.getApprovalCheckList();
 	}
+	
+	public int setApprovalCheckUpdate(ApplicationVO applicationVO) throws Exception{
+		
+		return applicationMapper.setApprovalCheckUpdate(applicationVO);
+	}
 }

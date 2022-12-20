@@ -93,4 +93,9 @@
 			ON (B.APPLICATIONNUM = A.APPLICATIONNUM) 
 			WHERE B.APPROVALCHECK = 1 AND B.AUCTIONSORT = 1 AND A.STATUS = 0
 	</select>
+	
+	<update id="setApprovalCheckUpdate" parameterType="ApplicationVO">				
+		UPDATE BOARDAPPLICATION SET APPROVALCHECK = #{approvalCheck} 
+		WHERE APPLICATIONNUM =#{applicationNum}
+	</update>
 </mapper>
