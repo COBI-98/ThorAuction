@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 	<title>토르의 실시간 대장간</title>
 	<c:import url="../template/boot.jsp"></c:import>
-	<!-- <link href="/css/reset.css" rel="stylesheet"> -->
+	<link href="/css/reset.css" rel="stylesheet">
 	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 	
 	<link rel="stylesheet" href="/css/chunk48-455aca93.css"> <!-- carousel -->

@@ -9,11 +9,12 @@
   <meta charset="utf-8">
   <title>세상의 모든 경매: BIDCOIN</title>
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <c:import url="../template/boot.jsp"></c:import>
   <link href="/css/reset.css" rel="stylesheet">
   <link href="/css/chat.css" rel="stylesheet">
+  <link rel="stylesheet" media="only screen and (min-width:200px) and (max-width:480px)" href="/css/liveAuctionM.css">
   <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
   <link rel="stylesheet" href="/css/getHTMLMediaElement.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
@@ -57,7 +58,7 @@
 	</div>
     <!-- 방송 시작 부분 -->
 		<div id="videos-container" style="margin: 20px 0;">
-			<div id="media-container" class = "media-container shadowBox">
+			<div id="media-container" class = "media-container shadowBox col-sm-12">
 				<div id="media-broadcast">
 					<div id="media-header" >
 						<div id="media-title">
@@ -72,7 +73,7 @@
 						<div id= "blackVideo" style="width: 100%; height: 100%; color: #a8a8a8; display:flex; align-items: center; justify-content: center;">
 							<div>현재 실시간 경매를 진행하고 있지 않습니다.</div>
 						</div>
-						<video id="localVideo" autoplay playsinline hidden ></video>
+						<video id="localVideo" autoplay playsinline hidden style="left: 50%;" ></video>
 						
 						
 						<div id = "mediaControls" style="width: 100%;  position: absolute;">
@@ -131,26 +132,21 @@
     <div class="shadowBox media-container">
     	<div id="media-broad-option">
 						<div class="optionBox">
-							<div>방송설정</div>
-							<div>방송 제목<input type="text" id="broadName"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn"></div>
-						
+							<div style="font-size: 20px; font-weight: bold;">방송설정</div>
 							<div>
-							  	
-							    <button class= "bidcoinBtn" id="open-room">방송 시작</button>
-							    <button class= "bidcoinBtn" id="join-room">Join Room</button>
-						  	</div>
-						  	<div>카메라 설정<select id="cameras"></select></div>
-							<button id="cameraPause" class= "bidcoinBtn"> 방송 일시 정지 </button>
-							<button id="cameraBlack" class= "bidcoinBtn"> 방송 송출 정지 </button>
-							<button id="screenShare" class= "bidcoinBtn"> 화면 공유로 전환 </button>
-							
-							<div>
+								방송 제목<input type="text" id="broadName" style="margin: 10px;"><input type="button" value="설정" id="setBroadNameBtn" class="bidcoinBtn">
+								<button class= "bidcoinBtn" id="open-room">방송 시작</button>
 								<button id="cameraStatus" class= "bidcoinBtn"> 방송 종료 </button>
 							</div>
+						  	<div>카메라 설정<select id="cameras"></select></div>
+							<button id="cameraBlack" class= "bidcoinBtn"> 방송 송출 일시 정지 </button>
+							<button id="screenShare" class= "bidcoinBtn"> 화면 공유로 전환 </button>
+							
+							
 						</div>
 						
 						<div class="optionBox">
-							<div>경매설정</div>
+							<div style="font-size: 20px; font-weight: bold;">경매설정</div>
 							<div>
 				              <span>경매 물건</span>
                       <select id="items" name="items" style="width: 60%;">
