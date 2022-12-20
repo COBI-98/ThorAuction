@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<style>
+.nav-link {
+	color: black !important;
+	font-weight: bold;
+	}
+</style>
 <div class="wrap">
 <nav class="py-2 bg-light border-bottom" style="background-color: #fea532 !important; height: 40px;">
 
@@ -15,12 +21,7 @@
 		</div>
 	</nav>
 	
-	
-	
 	<nav class=" border-bottom" style="display: flex; justify-content: center;">
-	
-	
-		
 	
 	<div class="container " >
 	<sec:authorize access="hasRole('ROLE_ADMIN')" >
