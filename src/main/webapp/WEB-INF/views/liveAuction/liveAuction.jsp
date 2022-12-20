@@ -26,6 +26,36 @@
   
   <div>
   <section class="">
+	<div>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color : white; border : none;" >
+			<img src="/images/warning.png" alt="" width="10%;" height="100%">
+		</button> 
+		
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel" style="text-align: center;">실시간 경매 주의사항</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>✅ 입찰 시, 본인의 포인트보다 높게 금액을 입력할 수 없습니다.</p>
+					<p>✅ 경매 시작 전 입찰 금액 입력 시 반영이 되지 않습니다.</p>
+					<p>✅ 경매 진행 중 욕설이나 타인을 비난하는 행위, 도배를 하는 행위는 강퇴를 당하실 수 있습니다. </p>
+					<p>✅ 강퇴를 당하면 실시간 경매에 참여할 수 없습니다.</p>
+					<p>✅ 경매 종료 시, 낙찰되셨을 때 바로 포인트가 차감됩니다.</p>
+					<p>✅ 입찰은 1000원 단위로만 가능합니다.</p>
+
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
     <!-- 방송 시작 부분 -->
 		<div id="videos-container" style="margin: 20px 0;">
 			<div id="media-container" class = "media-container shadowBox col-sm-12">
@@ -145,6 +175,8 @@
     
     </div></div>
     </sec:authorize>
+
+	
     
   </div>
 	<div style="display: none;">
