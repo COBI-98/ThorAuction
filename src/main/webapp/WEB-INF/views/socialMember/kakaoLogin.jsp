@@ -20,12 +20,17 @@ input {
 	outline: none;
 	padding-bottom: 8px;
 }
+
+.aa {
+	width: 300px;
+	height: 100px;
+}
 </style>
 <script defer src="/js/social/loginDetailNull.js"></script>
 <script defer src="/js/social/loginAfterDetailNull.js"></script>
 <body>
 	<c:import url="../template/boot.jsp"></c:import>
-	<c:import url="../template/header.jsp"></c:import>
+	<%-- <c:import url="../template/header.jsp"></c:import> --%>
 	<div id="root">
 		<div class="app">
 			<div class="member-scroll-layout">
@@ -33,13 +38,8 @@ input {
 				<div class="member-scroll-layout__inner">
 					<div class="register-header">
 						<h1 class="register-header__logo">
-							<img class="register-header__logo-image" src="/images/Bitcoin.png" alt="토실대">
+							<img class="register-header__logo-image aa" src="/images/bidcoin_logo.png" alt="토실대">
 						</h1>
-						<div class="register-header__step">
-							<i class="register-header__step-dot">step 1</i> <i
-								class="register-header__step-dot register-header__step-dot--on">step 2</i> <i
-								class="register-header__step-dot">step 3</i> <i class="register-header__step-dot">step 4</i>
-						</div>
 					</div>
 
 					<input type="hidden" id="kemail" name="kaEmail" value="${kakaoInfo.kaEmail }">
@@ -56,11 +56,8 @@ input {
 
 						<div class="sign-up">
 							<h2 class="sign-up__title">개인정보입력</h2>
-							<div class="sign-up__sub">
-								회원가입을 위해서 핸드폰 인증이 진행되며,
-								<br>
-								인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.
-							</div>
+							<br>
+							<br>
 							<!-- 이름 -->
 							<div class="member-input">이름: ${kakaoInfo.kaName }</div>
 
@@ -80,9 +77,9 @@ input {
 							<div class="member-input">
 								<div class="member-input__state" style="padding-bottom: 0px;">
 									<div class="container">
-										<input id="phone" oninput="autoHyphen(this)" class="member-input__box" name="kaPhone" maxlength='13'
-											placeholder="전화번호" type="text" autocomplete="off">
-										<button id="confirm__btn" type="button" class="member-button confirm__btn">인증번호 받기</button>
+										<input style="margin-bottom: 20px;" id="phone" oninput="autoHyphen(this)" class="member-input__box"
+											name="kaPhone" maxlength='13' placeholder="전화번호" type="text" autocomplete="off">
+										<!-- <button id="confirm__btn" type="button" class="member-button confirm__btn">인증번호 받기</button> -->
 									</div>
 									<span class="member-input__valid-wrapper"></span>
 								</div>
@@ -138,7 +135,9 @@ input {
 
 							<div class="sign-up__l-btn">
 								<button type="button" id="join_submit_btn" class="member-button sign-up__btn">가입하기</button>
-								<button type="button" id="join_cancel_btn" class="member-button cancel-button sign-up__btn-cancel">취소</button>
+								<a href="/member/logout">
+									<button type="button" id="join_cancel_btn" class="member-button cancel-button sign-up__btn-cancel">취소</button>
+								</a>
 							</div>
 						</div>
 						<br>
@@ -148,7 +147,7 @@ input {
 			</div>
 		</div>
 	</div>
-	<c:import url="../template/footer.jsp"></c:import>
+	<%-- <c:import url="../template/footer.jsp"></c:import> --%>
 </body>
 <!-- 다음 주소록 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
