@@ -84,7 +84,7 @@
                                                 <a href="./likeProduct?id=${memberDB.id}">관심내역</a>
                                             </div>
                                             <div class="auctions-link">
-                                                <a href="#">낙찰내역</a>
+                                                <a href="./successfulBid?id=${memberDB.id}">낙찰내역</a>
                                             </div>
                                             <div class="msm-profile-link">
                                                 <a href="./payhistory?id=${memberDB.id}">결제내역</a>
