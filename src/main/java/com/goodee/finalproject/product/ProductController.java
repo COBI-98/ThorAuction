@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -76,7 +78,6 @@ public class ProductController {
 		//카테고리 조회수 추가
 		
 		List<Long> orderTime = new ArrayList<>();
-		List<Long> orderBidAmount = new ArrayList<>();
 		
 		BidAmountVO bidAmountVO = new BidAmountVO();
 		
@@ -97,38 +98,41 @@ public class ProductController {
 			
 			Timestamp timestamp2 = new Timestamp(test1+test2);
 			orderTime.add(test1+test2);
-			if(timestamp2.before(timestamp)) {
-				saleproductVO.setProductId(saleVO.get(productNum).getProductId());
-				int result = productService.setDeadLineUpdate(saleproductVO);
-			}
+			// deadline 업데이트 
+//			if(timestamp2.before(timestamp)) {
+//				saleproductVO.setProductId(saleVO.get(productNum).getProductId());
+//				int result = productService.setDeadLineUpdate(saleproductVO);
+//			}
 			
 			// 현재최고가 
 			bidAmountVO.setProductId(saleVO.get(productNum).getProductId());
 			Long check = productService.getMaxAmountCheck(bidAmountVO);
 			
+			//최고가가 없다면 초기값 지정
 			if(check == null) {
 				check = productVO.getProductPrice();
 			}
 			
-			orderBidAmount.add(check);
+			saleVO.get(productNum).setMaxBidAmount(check);
+			System.out.println(saleVO.get(productNum).getMaxBidAmount());
 			mv.addObject("testVO"+productNum, productVO);
 			mv.addObject("bidAmountCheck"+productNum, check);
 
 		}
-		
 		// 정렬
 		if(saleproductVO.getSc().equals("3")) {
 			Collections.sort(orderTime);
 		}else if(saleproductVO.getSc().equals("4")) {
-			Collections.sort(orderBidAmount);
+			saleVO = saleVO.stream().sorted(Comparator.comparing(SaleProductVO::getMaxBidAmount)).collect(Collectors.toList());
+			
 		}else if(saleproductVO.getSc().equals("5")) {
-			Collections.sort(orderBidAmount, Collections.reverseOrder());
+			saleVO = saleVO.stream().sorted(Comparator.comparing(SaleProductVO::getMaxBidAmount).reversed()).collect(Collectors.toList());
+			
 		}else {
 			
 		}
 
 		mv.addObject("orderTime", orderTime);
-		mv.addObject("orderBidAmount", orderBidAmount);
 		mv.addObject("classCheck", saleproductVO.getSc());
 		mv.addObject("categoryVO", categoryVO);
 		mv.addObject("saleVO", saleVO);
@@ -147,7 +151,12 @@ public class ProductController {
 		}
 		BidAmountVO bidAmountVO = new BidAmountVO();
 		
-//		log.info("Test 1 -> {}", saleProductVO.getBidAmountVOs());
+		LocalDateTime now = LocalDateTime.now(); 
+		Timestamp timestamp = Timestamp.valueOf(now);
+		
+		// 기간 + getTime();
+		System.out.println("test"+saleProductVO.getProductVOs().get(0).getAuctionPeriod()*24*3600*1000);
+		System.out.println(saleProductVO.getProductDate().getTime());
 		
 		bidAmountVO.setProductId(saleProductVO.getProductId());
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
@@ -173,8 +182,9 @@ public class ProductController {
 		
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
 		
+		List<BidAmountVO> bidAmountUserList = productService.getBidAmountUser(bidAmountVO);
 		String test = "";
-		
+		String userCheck = "";
 		// 마감된경우
 		if(bidAmountVO.getDeadCheck().equals("1")) {
 			test = "1";
@@ -187,7 +197,7 @@ public class ProductController {
 			if(check > bidAmountVO.getBidAmount()) {
 				test ="3";
 				return test;
-			}else {
+			}else {	
 				test="5";
 				productService.setBidAmountAdd(bidAmountVO);
 				return test;
@@ -200,8 +210,20 @@ public class ProductController {
 		} else if(check > bidAmountVO.getBidAmount()) {
 			test = "2";
 		}else if(check < bidAmountVO.getBidAmount()){
-			productService.setBidAmountAdd(bidAmountVO);
-			test = "5";
+			// 같은 유저가 동일한 상품을 입찰하면 db가 업데이트
+			for(int i=0;i<bidAmountUserList.size();i++) {
+				if(bidAmountUserList.get(i).getId().equals(bidAmountVO.getId())) {
+					userCheck="1";
+					System.out.println("userCheck : " + userCheck);
+					
+				}
+			}				
+			test="5";
+			if(userCheck.equals("1")) {
+				productService.setBidAmountUpdate(bidAmountVO);
+			}else {
+				productService.setBidAmountAdd(bidAmountVO);
+			}
 		} 
 		
 		
