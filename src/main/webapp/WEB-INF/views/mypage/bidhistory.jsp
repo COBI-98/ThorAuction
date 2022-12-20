@@ -103,14 +103,17 @@
  																<%-- <c:forEach items="${product.bidMaxAmounts}" var="max">
 																	<input type="hidden" name="productId" value="${max.productId}">
 																</c:forEach> --%>
+																<c:forEach items="${orderBidAmount }" var="bid">
+																	1 : ${bid}
+																</c:forEach>
 																			<li class="list">
 																				 <c:forEach items="${orderTime}" var="time">
-																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/> / 최고가: ${orderBidAmount}원</div>
+																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/> / 최고가: ${bid }원</div>
 																				</c:forEach>
 																				<div class="orderlist">
 																					<ul class="prolist">
 																						<li>
-																							<a href="../product/detail?productId=${product.productId}">
+																							<a href="../product/detail?productId=${product.productId}" >
 																							<c:forEach items="${product.productVOs}" var="products">
 																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}"></div>
 																								<div class="name">${products.productName}
@@ -123,6 +126,7 @@
 																							</a>
 																						</li>
 																					</ul>
+																					
 																					<div class="statebox">
 																						<div class="state ">입찰</div>
 																					</div>
@@ -130,12 +134,11 @@
 																			</li>
 																		
 																	</c:forEach>
-																
 															</div>
 															<div class="he20"></div>
 														</div>
 													</div>
-																										</c:when>
+												</c:when>
 														<c:otherwise>
 															<table class="table" style="font-size: 15px;">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 입찰내역이 있습니다.</div>

@@ -3,6 +3,7 @@ package com.goodee.finalproject.mypage;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -119,35 +120,41 @@ public class MypageController {
 		// 입찰한 상품 수
 		int count = mypageService.productCount(bidAmountVO);
 		
+		List<SaleProductVO> saleVO = new ArrayList<>();
+		
+		saleVO = mypageService.bidProductInformation(bidAmountVO);
+		
 		List<Long> orderTime = new ArrayList<>();
 		List<Timestamp> time = new ArrayList<>();
 		List<Long> orderBidAmount = new ArrayList<>();
 		
 		// 경매 종료시간 계산 
-		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
+		for(int productNum = 0; productNum < saleVO.size(); productNum++) {
 			ProductVO productVO = new ProductVO();
 			
 			productVO.setProductNum(saleProductVOs.get(productNum).getProductNum());
 			productVO = productService.getProductApproval(productVO);
 			
 			// 등록일을 초로 변환
-			Long productAddDate = saleProductVOs.get(productNum).getProductDate().getTime();
+			Long productAddDate = saleVO.get(productNum).getProductDate().getTime();
 			// 기간을 초로 변환
 			Long auctionPeriod = productVO.getAuctionPeriod()*24*3600*1000;
 			
-			log.info("제발 : {}", productAddDate);
-			log.info("제발 : {}", auctionPeriod);
+			log.info("등록일->초 : {}", productAddDate);
+			log.info("기간->초 : {}", auctionPeriod);
 			
 			// Long을 tiestamp으로 변환(초에서 날짜로 변환)
 			Timestamp timestamp = new Timestamp(productAddDate + auctionPeriod);
-			 orderTime.add(productAddDate + auctionPeriod);
+			orderTime.add(productAddDate + auctionPeriod);
 			 time.add(timestamp);
 			 
-			log.info("제발 : {}", orderTime);
-			log.info("제발 : {}", timestamp);
+			log.info("Long : {}", orderTime);
+			log.info("timestamp : {}", timestamp);
+;
+			log.info("=============================================");
 			
 			// 내가 입찰한 상품의 최고가
-			bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
+			bidAmountVO.setProductId(saleVO.get(productNum).getProductId());
 			Long check = mypageService.bidMaxHistory(bidAmountVO);
 			
 			orderBidAmount.add(check);
