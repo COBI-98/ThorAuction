@@ -123,6 +123,7 @@ public class MypageController {
 //		List<Long> orderTime = new ArrayList<>();
 //		List<Timestamp> time = new ArrayList<>();
 //		List<Long> orderBidAmount = new ArrayList<>();
+		
 		// 마감시간 확인
 		LocalDateTime now = LocalDateTime.now(); 
 		Timestamp timestamp = Timestamp.valueOf(now);
@@ -147,7 +148,7 @@ public class MypageController {
 			
 			// Long을 tiestamp으로 변환(초에서 날짜로 변환)
 			Timestamp timestamp2 = new Timestamp(productAddDate + auctionPeriod);
-//			
+			
 			if(timestamp2.before(timestamp)) {
 				SaleProductVO saleproductVO = new SaleProductVO();
 				saleproductVO.setProductId(saleProductVOs.get(productNum).getProductId());
