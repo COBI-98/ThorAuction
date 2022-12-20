@@ -25,7 +25,7 @@
 	<div class="container " >
 	<sec:authorize access="hasRole('ROLE_ADMIN')" >
 		<ul class="nav"   style="float: left; margin-left: 50px;">
-				<li class="nav-item nav-member"><a href="../admin/adminpage" class="nav-link">관리자 기능</a></li>
+				<li class="nav-item nav-member"><a href="/admin/adminpage" class="nav-link">관리자 기능</a></li>
 				<li class="nav-item nav-member"><a href="#" class="nav-link">관리자 페이지</a></li>
 		</ul>
 	</sec:authorize>
@@ -111,18 +111,18 @@
 	
 	<header class="py-3 mb-4 border-bottom">
 		<div class="container d-flex flex-wrap justify-content-center" style="align-items: flex-end;">
-			<a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+			<a href="/product/list" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
 				<svg class="bi me-2" width="40" height="32">
 					<use xlink:href="#bootstrap"></use></svg>
-				<span class="fs-4"><img alt="" src="images/logo_BidCoin.png" style="width: 200px;"></span>
+				<span class="fs-4"><img alt="" src="/images/logo_BidCoin.png" style="width: 200px;"></span>
 			</a>
 			<ul class="nav">
-				<li class="nav-item" style="width : calc(100%/7);"><a href="/product/list" class="nav-link link-dark px-2">경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="https://localhost:84/liveAuction" class="nav-link link-dark px-2">실시간 경매장</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/application/list" class="nav-link link-dark px-2">신청게시판</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="/board/notice/list" class="nav-link link-dark px-2">공지게시판</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="#" class="nav-link link-dark px-2">고객센터</a></li>
-		        <li class="nav-item" style="width : calc(100%/6);"><a href="/chatbot" class="nav-link link-dark px-2">QNA챗봇</a></li>	
+				<li class="nav-item nav-menu" ><a href="/product/list" class="nav-link link-dark" style="font-weight: bold;">경매장</a></li>
+		        <li class="nav-item nav-menu" ><a href="https://192.168.1.83:80/" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
+		        <li class="nav-item nav-menu" ><a href="/board/application/list" class="nav-link link-dark" style="font-weight: bold">신청게시판</a></li>
+		        <li class="nav-item nav-menu" ><a href="/board/notice/list" class="nav-link link-dark" style="font-weight: bold">공지게시판</a></li>
+		         <li class="nav-item nav-menu" ><a href="/chatbot" class="nav-link link-dark" style="font-weight: bold">QNA챗봇</a></li>
+		       
 			</ul>
 			
 			

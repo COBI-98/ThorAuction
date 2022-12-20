@@ -18,19 +18,19 @@ function adminBroadCast(){
 	document.getElementById('open-room').onclick = function() {
 //	    disableInputButtons();
 	    connection.open(document.getElementById('room-id').value, function() {
-	        showRoomURL(connection.sessionid);
+//	        showRoomURL(connection.sessionid);
 	    });
 	};
 	
-	document.getElementById('join-room').onclick = function() {
-//	    disableInputButtons();
-	
-	    connection.sdpConstraints.mandatory = {
-	        OfferToReceiveAudio: true,
-	        OfferToReceiveVideo: true
-	    };
-	    connection.join(document.getElementById('room-id').value);
-	};
+//	document.getElementById('join-room').onclick = function() {
+////	    disableInputButtons();
+//	
+//	    connection.sdpConstraints.mandatory = {
+//	        OfferToReceiveAudio: true,
+//	        OfferToReceiveVideo: true
+//	    };
+//	    connection.join(document.getElementById('room-id').value);
+//	};
 	
 }
 
@@ -303,21 +303,21 @@ connection.onMediaError = function(e) {
 // ......................Handling Room-ID................
 // ......................................................
 
-function showRoomURL(roomid) {
-    var roomHashURL = '#' + roomid;
-    var roomQueryStringURL = '?roomid=' + roomid;
-
-    var html = '<h2>Unique URL for your room:</h2><br>';
-
-    html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
-    html += '<br>';
-    html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
-
-    var roomURLsDiv = document.getElementById('room-urls');
-    roomURLsDiv.innerHTML = html;
-
-    roomURLsDiv.style.display = 'block';
-}
+//function showRoomURL(roomid) {
+//    var roomHashURL = '#' + roomid;
+//    var roomQueryStringURL = '?roomid=' + roomid;
+//
+//    var html = '<h2>Unique URL for your room:</h2><br>';
+//
+//    html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
+//    html += '<br>';
+//    html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
+//
+//    var roomURLsDiv = document.getElementById('room-urls');
+//    roomURLsDiv.innerHTML = html;
+//
+//    roomURLsDiv.style.display = 'block';
+//}
 
 (function() {
     var params = {},
