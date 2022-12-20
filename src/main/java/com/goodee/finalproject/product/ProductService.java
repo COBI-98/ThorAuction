@@ -74,6 +74,16 @@ public class ProductService {
 		return productMapper.setBidAmountAdd(bidAmountVO);
 	}
 	
+	public List<BidAmountVO> getBidAmountUser(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.getBidAmountUser(bidAmountVO);
+	}
+	
+	public int setBidAmountUpdate(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.setBidAmountUpdate(bidAmountVO);
+	}
+	
 	public int setSaleProductHit(SaleProductVO saleProductVO) throws Exception{
 		
 		return productMapper.setSaleProductHit(saleProductVO);
