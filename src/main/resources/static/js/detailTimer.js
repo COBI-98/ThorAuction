@@ -19,7 +19,7 @@ haveDday =  () => {
         // 현재날짜
         let now = new Date();
 
-    
+      
       let dateGap = endDate.getTime() - now.getTime();
         // let dateGap = endDate.getTime() - now.getTime();
       // D-Day 날짜에서 현재 날짜의 차이를 getTime 메서드를 사용해서 밀리초의 값으로 가져온다.
@@ -31,8 +31,25 @@ haveDday =  () => {
       // 나머지 연산자(%)를 이용해서 시/분/초를 구한다.
       if(dateGap<0){
         timer.innerHTML = "경매가 종료되었습니다.";
+        console.log($("#productId").val());
         clearInterval(interval);
         
+        
+        $.ajax({
+          type:"POST",
+          url:"/product/deadLineProduct",
+          data:{
+            productId : $("#productId").val()
+          },
+          success:function(result){
+            if(result ==1){
+              console.log("일단 업데이트")
+            }
+          },
+          error:function(){
+
+          }
+        })        
       }else{
 
         let day = Math.floor(dateGap / (1000*60*60*24));   

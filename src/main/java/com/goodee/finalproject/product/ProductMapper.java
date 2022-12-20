@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.goodee.finalproject.member.MemberVO;
+
 @Mapper
 public interface ProductMapper {
 
@@ -61,6 +63,10 @@ public interface ProductMapper {
 	
 	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception;
 	
+	//입찰금액 같은 유저는 업데이트
+	public List<BidAmountVO> getBidAmountUser(BidAmountVO bidAmountVO) throws Exception;
+	
+	public int setBidAmountUpdate(BidAmountVO bidAmountVO) throws Exception;
 	
 	// 상품 문의 관리
 	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception;
@@ -75,4 +81,8 @@ public interface ProductMapper {
 	
 	public int setStatus(ProductVO productVO) throws Exception;
 
+	// 회원 포인트 관리
+	public int setBidAmountSuccess(BidAmountVO bidAmountVO) throws Exception;
+	
+	public int setBidAmountFail(BidAmountVO bidAmountVO) throws Exception;
 }

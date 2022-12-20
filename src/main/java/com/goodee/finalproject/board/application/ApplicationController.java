@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.board.application.ApplicationVO;
+import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.product.ProductFileVO;
 import com.goodee.finalproject.product.ProductService;
 import com.goodee.finalproject.product.ProductVO;
@@ -45,8 +47,13 @@ public class ApplicationController {
 	
 
 	@GetMapping("list")
-	public ModelAndView getApplicationList(BoardPageMaker boardPageMaker,String Change) throws Exception{
+	public ModelAndView getApplicationList(BoardPageMaker boardPageMaker,Authentication authentication) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
+		
 		boardPageMaker.setPerPage(5L);
 		List<ApplicationVO> test  = applicationService.getApplicationList(boardPageMaker);
 		mv.addObject("applicationVO", test);
@@ -76,10 +83,13 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getApplicationListDetail(ApplicationVO applicationVO) throws Exception{
+	public ModelAndView getApplicationListDetail(ApplicationVO applicationVO,Authentication authentication) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		ApplicationVO VO = applicationService.getApplicationListDetail(applicationVO);
-	
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
 		mv.addObject("applicationVO",VO);
 		mv.setViewName("/board/application/detail");
 		return mv;
@@ -200,5 +210,14 @@ public class ApplicationController {
 		applicationService.setApplicationDelete(applicationVO);
 		mv.setViewName("redirect:./list");
 		return mv;
+	}
+	
+	@PostMapping("approvalCheckUpdate")
+	@ResponseBody
+	public int setApprovalCheckUpdate(ApplicationVO applicationVO) throws Exception{
+		int result = applicationService.setApprovalCheckUpdate(applicationVO);
+		
+		
+		return result;
 	}
 }

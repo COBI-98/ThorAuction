@@ -35,6 +35,8 @@ public class SaleProductVO {
 		return deadlineInfo;
 	}
 	
+	public Long maxBidAmount;
+	
 	private List<ProductVO> productVOs;
 	private List<CategoryVO> categoryVOs;
 	private List<BidAmountVO> bidAmountVOs;

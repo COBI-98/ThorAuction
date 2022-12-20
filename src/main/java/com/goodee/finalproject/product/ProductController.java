@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.board.application.ApplicationController;
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.mypage.MypageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +38,8 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
+	@Autowired
+	private MypageService mypageService;
 	
 	@GetMapping("approval")
 	public ModelAndView getApprovalProduct(ProductVO productVO) throws Exception{
@@ -76,7 +81,6 @@ public class ProductController {
 		//카테고리 조회수 추가
 		
 		List<Long> orderTime = new ArrayList<>();
-		List<Long> orderBidAmount = new ArrayList<>();
 		
 		BidAmountVO bidAmountVO = new BidAmountVO();
 		
@@ -96,39 +100,50 @@ public class ProductController {
 			Long test2 = productVO.getAuctionPeriod()*24*3600*1000;
 			
 			Timestamp timestamp2 = new Timestamp(test1+test2);
-			orderTime.add(test1+test2);
-			if(timestamp2.before(timestamp)) {
-				saleproductVO.setProductId(saleVO.get(productNum).getProductId());
-				int result = productService.setDeadLineUpdate(saleproductVO);
-			}
-			
 			// 현재최고가 
 			bidAmountVO.setProductId(saleVO.get(productNum).getProductId());
 			Long check = productService.getMaxAmountCheck(bidAmountVO);
 			
+			orderTime.add(test1+test2);
+			// deadline 업데이트 
+			if(timestamp2.before(timestamp)) {
+				saleproductVO.setProductId(saleVO.get(productNum).getProductId());
+				int result = productService.setDeadLineUpdate(saleproductVO);
+				
+				// 최고가가 null 이라면 입찰한 자가 없으니 status 유지
+				if(check != null) {
+					//최고가가 있다면 경매종료 후 상품 결제진행
+					productService.setStatus(productVO);
+				}
+			}
+			
+			
+			
+			//최고가가 없다면 초기값 지정
 			if(check == null) {
 				check = productVO.getProductPrice();
 			}
 			
-			orderBidAmount.add(check);
+			saleVO.get(productNum).setMaxBidAmount(check);
+			System.out.println(saleVO.get(productNum).getMaxBidAmount());
 			mv.addObject("testVO"+productNum, productVO);
 			mv.addObject("bidAmountCheck"+productNum, check);
 
 		}
-		
 		// 정렬
 		if(saleproductVO.getSc().equals("3")) {
 			Collections.sort(orderTime);
 		}else if(saleproductVO.getSc().equals("4")) {
-			Collections.sort(orderBidAmount);
+			saleVO = saleVO.stream().sorted(Comparator.comparing(SaleProductVO::getMaxBidAmount)).collect(Collectors.toList());
+			
 		}else if(saleproductVO.getSc().equals("5")) {
-			Collections.sort(orderBidAmount, Collections.reverseOrder());
+			saleVO = saleVO.stream().sorted(Comparator.comparing(SaleProductVO::getMaxBidAmount).reversed()).collect(Collectors.toList());
+			
 		}else {
 			
 		}
 
 		mv.addObject("orderTime", orderTime);
-		mv.addObject("orderBidAmount", orderBidAmount);
 		mv.addObject("classCheck", saleproductVO.getSc());
 		mv.addObject("categoryVO", categoryVO);
 		mv.addObject("saleVO", saleVO);
@@ -147,7 +162,12 @@ public class ProductController {
 		}
 		BidAmountVO bidAmountVO = new BidAmountVO();
 		
-//		log.info("Test 1 -> {}", saleProductVO.getBidAmountVOs());
+		LocalDateTime now = LocalDateTime.now(); 
+		Timestamp timestamp = Timestamp.valueOf(now);
+		
+		// 기간 + getTime();
+		System.out.println("test"+saleProductVO.getProductVOs().get(0).getAuctionPeriod()*24*3600*1000);
+		System.out.println(saleProductVO.getProductDate().getTime());
 		
 		bidAmountVO.setProductId(saleProductVO.getProductId());
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
@@ -168,13 +188,16 @@ public class ProductController {
 	@PostMapping("bid")
 	@ResponseBody
 	public String setBidAmountAdd(BidAmountVO bidAmountVO) throws Exception{
-		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId(bidAmountVO.getId());
 		log.info("test2 -> {}",bidAmountVO.getBidAmount());
-		
+		memberVO = mypageService.getList(memberVO);
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
 		
+		List<BidAmountVO> bidAmountUserList = productService.getBidAmountUser(bidAmountVO);
 		String test = "";
-		
+		String userCheck = "";
+		Long userBidAmount = 0L;
 		// 마감된경우
 		if(bidAmountVO.getDeadCheck().equals("1")) {
 			test = "1";
@@ -187,10 +210,14 @@ public class ProductController {
 			if(check > bidAmountVO.getBidAmount()) {
 				test ="3";
 				return test;
-			}else {
-				test="5";
-				productService.setBidAmountAdd(bidAmountVO);
-				return test;
+			}else {	
+				if(memberVO.getPoint() < bidAmountVO.getBidAmount()) {
+					test = "5";
+				}else {
+					test="6";
+					productService.setBidAmountAdd(bidAmountVO);
+					return test;
+				}
 			}
 		}
 			
@@ -200,13 +227,28 @@ public class ProductController {
 		} else if(check > bidAmountVO.getBidAmount()) {
 			test = "2";
 		}else if(check < bidAmountVO.getBidAmount()){
-			productService.setBidAmountAdd(bidAmountVO);
-			test = "5";
+			if(memberVO.getPoint() < bidAmountVO.getBidAmount()) {
+				test = "5";
+			}else {
+				// 같은 유저가 동일한 상품을 입찰하면 db가 업데이트
+				for(int i=0;i<bidAmountUserList.size();i++) {
+					if(bidAmountUserList.get(i).getId().equals(bidAmountVO.getId())) {
+						userCheck="1";
+						userBidAmount = bidAmountUserList.get(i).getBidAmount();
+					}
+				}				
+				test="6";
+				if(userCheck.equals("1")) {
+					productService.setBidAmountUpdate(bidAmountVO);
+					bidAmountVO.setBidAmount(bidAmountVO.getBidAmount()-userBidAmount);
+					productService.setBidAmountSuccess(bidAmountVO);
+				}else {
+					productService.setBidAmountAdd(bidAmountVO);
+					productService.setBidAmountSuccess(bidAmountVO);
+				}
+			}
 		} 
-		
-		
-		
-			
+
 		return test;
 	}
 	
@@ -292,6 +334,15 @@ public class ProductController {
 		
 		int result = productService.setAdminQuestionDelete(adminQuestionVO);
 		
+		return result;
+	}
+	
+	@PostMapping("deadLineProduct")
+	@ResponseBody
+	public int setDeadLineProductCheck(SaleProductVO saleproductVO) throws Exception{
+
+		int result = productService.setDeadLineUpdate(saleproductVO);
+		System.out.println(saleproductVO);
 		return result;
 	}
 }
