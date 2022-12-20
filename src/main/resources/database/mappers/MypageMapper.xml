@@ -9,13 +9,14 @@
 	<select id="appProduct" parameterType="ApplicationVO" resultMap="getAppProduct">
 		SELECT * FROM
 		BOARDAPPLICATION app
-		INNER JOIN
+		JOIN
 		AUCTIONPRODUCT p
 		ON app.APPLICATIONNUM = p.APPLICATIONNUM 
-		INNER JOIN
+		LEFT JOIN
 		SALEPRODUCT s
 		ON p.PRODUCTNUM = s.PRODUCTNUM
 		WHERE app.WRITER = #{writer}
+		ORDER BY p.APPLICATIONNUM DESC
 	</select>
 	
 	<resultMap type="ApplicationVO" id="getAppProduct">
