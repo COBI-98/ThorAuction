@@ -316,4 +316,13 @@ public class ProductController {
 		
 		return result;
 	}
+	
+	@PostMapping("deadLineProduct")
+	@ResponseBody
+	public int setDeadLineProductCheck(SaleProductVO saleproductVO) throws Exception{
+
+		int result = productService.setDeadLineUpdate(saleproductVO);
+		
+		return result;
+	}
 }
