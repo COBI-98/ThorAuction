@@ -150,6 +150,7 @@ public class ChatController {
 		webSocketChat.setItem("");
 		webSocketChat.setItemNum(0);
 		webSocketChat.setBroadName("");
+		webSocketChat.setUnit("");
 		return result;
 	}
 	
