@@ -267,12 +267,18 @@ ws.onmessage = function(msg){
 		console.log(data);
 		if(data.stop ==true){
 			talk.innerHTML += `<div class="hi">`+ "*채팅이 정지되었습니다.*" +`</div>`;
-			stopChat.value="채팅시작";
+			talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+
+			stopChat.value="보내기";
+			stopChatCold.value = "채팅시작";
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
 			talk.innerHTML += `<div class="hi">`+ "*채팅이 시작되었습니다.*" +`</div>`;
+			talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+
 			stopChat.value="채팅정지";
+			stopChatCold.value = "채팅정지";
 			$('#msg').attr("readonly",false);
 		}
 	}
@@ -291,15 +297,20 @@ ws.onmessage = function(msg){
 			iddd.innerHTML += `<div id="user">`+"👀"+ userlist[i].trim() + `</div>`;
 		}
 		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
+		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+
 		usercount.innerHTML = userlist.length;
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
 			stopChat.value="채팅정지";
+			stopChatCold.value="채팅정지";
 			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
 			stopChat.value="보내기";
+			stopChatCold.value="채팅시작";
+
 			$('#msg').attr("readonly",false);
 		}
 
