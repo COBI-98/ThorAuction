@@ -118,7 +118,7 @@ public class WebSocketChat {
 			sendOneMessage(msg, ss);
 		}
 		
-		//경매 결과
+		//경매 종료
 		else if(msg.substring(2, 8).equals("amount")) {
 			start = String.valueOf(jsonObj.get("gg"));
 			String amount = String.valueOf(jsonObj.get("amount")); //금액
@@ -258,6 +258,14 @@ public class WebSocketChat {
 	
 	public List<String> getBanList() {
 		return banlist;
+	}
+	
+	public String getUnit() {
+		return unit;
+	}
+	
+	public void setUnit(String u) {
+		this.unit = u;
 	}
 	
 	@OnError

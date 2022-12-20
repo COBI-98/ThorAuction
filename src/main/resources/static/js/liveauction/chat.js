@@ -610,7 +610,7 @@ function adminChat(){
 						confirmButtonText: '확인'
 					} )
 				}
-			}else if(items.value == 'none'){ 
+			}else{ 
 				Swal.fire({
 					title: "경매 물품이 설정이 안되었습니다.",  
 					icon: "error",    
