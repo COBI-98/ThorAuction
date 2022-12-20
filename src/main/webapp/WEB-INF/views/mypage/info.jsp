@@ -61,10 +61,20 @@
                                     </div><!-- .woodmart-my-account-sidebar -->
                                     <div class="woocommerce-MyAccount-content">
                                         <div class="woocommerce-notices-wrapper"></div>
-                                        <p>안녕하세요, <strong>${memberDB.id}</strong> 님</p>
-                                        <p>
-                                            현재 <strong>${memberDB.name}</strong> 님의 포인트는 <strong><fmt:formatNumber value="${memberDB.point}" pattern="###,###,###,###"/></strong>	 입니다
-                                        </p>
+                                        <c:choose>
+											<c:when test="${kakaoInfo == null }">
+												<p>안녕하세요, <strong>${memberDB.id}</strong> 님</p>
+		                                        <p>
+		                                            현재 <strong>${memberDB.name}</strong> 님의 포인트는 <strong><fmt:formatNumber value="${memberDB.point}" pattern="###,###,###,###"/></strong>	 입니다
+		                                        </p>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<p>안녕하세요, <strong>${kakaoInfo.kaName }</strong> 님</p>
+		                                        <p>
+		                                            현재 <strong>${kakaoInfo.kaName }</strong> 님의 포인트는 <strong><fmt:formatNumber value="3000" pattern="###,###,###,###"/></strong>	 입니다
+		                                        </p>
+                                        	</c:otherwise>
+                                        </c:choose>
 
                                         <div class="woodmart-my-account-links">
                                             <div class="dashboard-link">
