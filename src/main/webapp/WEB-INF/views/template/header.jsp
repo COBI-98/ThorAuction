@@ -118,7 +118,7 @@
 			</a>
 			<ul class="nav">
 				<li class="nav-item nav-menu" ><a href="/product/list" class="nav-link link-dark" style="font-weight: bold;">경매장</a></li>
-		        <li class="nav-item nav-menu" ><a href="https://192.168.1.83:84/liveAuction" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
+		        <li class="nav-item nav-menu" ><a href="https://192.168.1.83:80/" class="nav-link link-dark" style="font-weight: bold">실시간 경매장</a></li>
 		        <li class="nav-item nav-menu" ><a href="/board/application/list" class="nav-link link-dark" style="font-weight: bold">신청게시판</a></li>
 		        <li class="nav-item nav-menu" ><a href="/board/notice/list" class="nav-link link-dark" style="font-weight: bold">공지게시판</a></li>
 		         <li class="nav-item nav-menu" ><a href="/chatbot" class="nav-link link-dark" style="font-weight: bold">QNA챗봇</a></li>
