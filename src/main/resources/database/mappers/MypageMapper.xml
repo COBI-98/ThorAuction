@@ -139,7 +139,7 @@
         	<result column = "PRODUCTPRICE" property="productPrice"></result>
         	<result column="PRODUCTINFORMATION" property="productInformation"></result>
         	<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
-        	
+        	<result column = "STATUS" property="status"></result>
         	<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
 	           <id column="FILENUM" property="fileNum"></id>
 	           <result column = "FILENAME" property="fileName"></result>

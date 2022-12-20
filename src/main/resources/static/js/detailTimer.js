@@ -31,7 +31,6 @@ haveDday =  () => {
       // 나머지 연산자(%)를 이용해서 시/분/초를 구한다.
       if(dateGap<0){
         timer.innerHTML = "경매가 종료되었습니다.";
-        console.log("qwer");
         console.log($("#productId").val());
         clearInterval(interval);
         

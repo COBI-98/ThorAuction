@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.finalproject.board.notice.NoticeFileVO;
 import com.goodee.finalproject.board.notice.NoticeVO;
+import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -128,4 +129,16 @@ public class ProductService {
 	public int setStatus(ProductVO productVO) throws Exception{
 		return productMapper.setStatus(productVO);
 	}
+	
+	public int setBidAmountSuccess(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.setBidAmountSuccess(bidAmountVO);
+	}
+	
+	public int setBidAmountFail(BidAmountVO bidAmountVO) throws Exception{
+		
+		return productMapper.setBidAmountFail(bidAmountVO);
+	}
+	
+	
 }

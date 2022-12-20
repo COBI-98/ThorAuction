@@ -128,7 +128,7 @@
 			<result column = "PRODUCTPRICE" property="productPrice"></result>
 			<result column="PRODUCTINFORMATION" property="productInformation"></result>
 			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
-			
+			<result column = "STATUS" property="status"></result>
 			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
 				<id column="FILENUM" property="fileNum"></id>
 				<result column = "FILENAME" property="fileName"></result>
@@ -369,4 +369,15 @@
  		UPDATE BIDAMOUNT SET BIDAMOUNT = #{bidAmount} WHERE PRODUCTID =#{productId} AND ID=#{id}
  	</update>
  	
+ 	<!-- 낙찰자들 포인트 감소 -->
+ 	<update id="setBidAmountSuccess" parameterType="BidAmountVO">
+ 		UPDATE THORMEMBER SET POINT=POINT-#{bidAmount} WHERE ID=#{id}
+ 	</update>
+ 	
+ 	<!-- 낙찰자 아닌경우 포인트환급 -->
+ 	<update id="setBidAmountFail" parameterType="BidAmountVO">
+ 		UPDATE THORMEMBER SET POINT=POINT+#{bidAmount} WHERE ID=#{id};
+ 	</update>
+ 	
+ 	<!-- 낙찰자인 경우 ? -->
 </mapper>
