@@ -6,6 +6,12 @@ const timer = document.querySelectorAll(".timedate")
 // [ ] 0되면 deadline 1로 변경하도록
 let count = $(".productDate").length;
 let haveDday = [count];
+
+for(let j=0;j<count;j++){
+  let countTime = () => {  // countTime함수 생성해서
+    setInterval(haveDday[j], 1000);    // setInterval 메서드에서 haveDday함수를 1초(1000밀리초)마다 실행(호출)한다.
+};
+
 for(let i = 0; i<count;i++){
    
 
@@ -28,7 +34,10 @@ for(let i = 0; i<count;i++){
       let dateGap = endDate.getTime() - now.getTime();
 
       if (dateGap < 0){
-        timer[i].innerHTML = ""
+        timer[i].innerHTML = "경매가 종료되었습니다.";
+        clearInterval(interval);
+        
+
       }else{
       let day = Math.floor(dateGap / (1000*60*60*24));   
       let hours = Math.floor((dateGap % (1000*60*60*24)) / (1000*60*60));   // 하루단위로 나누고 나온 나머지는 시,분,초가 나온다.
@@ -48,10 +57,7 @@ for(let i = 0; i<count;i++){
   
 }
 
-for(let j=0;j<count;j++){
-  let countTime = () => {  // countTime함수 생성해서
-    setInterval(haveDday[j], 1000);    // setInterval 메서드에서 haveDday함수를 1초(1000밀리초)마다 실행(호출)한다.
-};
+
 
  $(document).ready(function() {
     countTime();

@@ -71,7 +71,7 @@
 														<a href="../mypage/bidhistory?id=${memberDB.id}">입찰내역</a>
 													</li>
 													<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--auctions">
-														<a href="#">낙찰내역</a>
+														<a href="/mypage/successfulBid?id=${memberDB.id}">낙찰내역</a>
 													</li>
 													<li	class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--msm-profile">
 														<a href="../mypage/payhistory?id=${memberDB.id}">결제내역</a>
@@ -123,9 +123,12 @@
 																				</c:forEach>
 																				<td><fmt:formatDate value="${app.regDate}" pattern="yyyy-MM-dd" /></td>
 																				<c:choose>
-																			      	<c:when test="${app.approvalCheck == 'false'}"><td style="color: red; font-weight: bold; text-align: center;">거부</td></c:when>
-																			      	<c:when test="${app.approvalCheck == 'true'}"><td style="color: blue; font-weight: bold; text-align: center;">승인</td></c:when>
-																			      	<c:otherwise><td>대기</td></c:otherwise>
+																			      	<c:when test="${app.approvalCheck == '0'}"><td style="color: #fea532; font-weight: bold; text-align: center;">대기</td></c:when>
+																			      	<c:when test="${app.approvalCheck == '1'}"><td style="color: blue; font-weight: bold; text-align: center;">승인</td></c:when>
+																					  <c:when test="${app.approvalCheck == '2'}"><td style="color: red; font-weight: bold; text-align: center;">거부 <br> 상세정보 부족</td></c:when>
+																					  <c:when test="${app.approvalCheck == '3'}"><td style="color: red; font-weight: bold; text-align: center;">거부 <br> 부적절한 이미지</td></c:when>
+																					  <c:when test="${app.approvalCheck == '4'}"><td style="color: red; font-weight: bold; text-align: center;">거부 <br> 부적절한 상품</td></c:when>
+																			      	<c:otherwise><td>거부</td></c:otherwise>
 																			     </c:choose>
 																			</tr>
 																		</c:forEach>
