@@ -295,11 +295,11 @@ ws.onmessage = function(msg){
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
-			stopChatCold.value="채팅정지";
+			stopChat.value="채팅정지";
 			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
-			stopChatCold.value="보내기";
+			stopChat.value="보내기";
 			$('#msg').attr("readonly",false);
 		}
 
