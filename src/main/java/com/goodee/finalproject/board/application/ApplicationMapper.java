@@ -28,5 +28,6 @@ public interface ApplicationMapper  {
 	
 	public List<ApplicationVO> getApprovalCheckList() throws Exception;
 	
+	public int setApprovalCheckUpdate(ApplicationVO applicationVO) throws Exception;
 
 }

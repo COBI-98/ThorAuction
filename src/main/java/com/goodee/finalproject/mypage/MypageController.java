@@ -2,6 +2,7 @@ package com.goodee.finalproject.mypage;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -109,48 +110,158 @@ public class MypageController {
 	// 입찰내역
 	@GetMapping("bidhistory")
 	public Model bidProductInformation(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
-		SaleProductVO saleProductVO = new SaleProductVO();
 		
-		
+
 		// 상품정보
 		List<SaleProductVO> saleProductVOs = mypageService.bidProductInformation(bidAmountVO);
 		// 내가 입찰한 상품의 입찰가, 입찰시간
 		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);		
 		// 입찰한 상품 수
-		int count = mypageService.productCount(bidAmountVO);
-		
-		List<Long> orderTime = new ArrayList<>();
-		List<Timestamp> time = new ArrayList<>();
-		List<Long> orderBidAmount = new ArrayList<>();
-		
+		//int count = mypageService.productCount(bidAmountVO);
+		int count = 0;
+//		List<Long> orderTime = new ArrayList<>();
+//		List<Timestamp> time = new ArrayList<>();
+//		List<Long> orderBidAmount = new ArrayList<>();
+		// 마감시간 확인
+		LocalDateTime now = LocalDateTime.now(); 
+		Timestamp timestamp = Timestamp.valueOf(now);
+				
 		// 경매 종료시간 계산 
 		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
 			ProductVO productVO = new ProductVO();
-			
 			productVO.setProductNum(saleProductVOs.get(productNum).getProductNum());
 			productVO = productService.getProductApproval(productVO);
 			
+			//마감된 상품확인
+			if(saleProductVOs.get(productNum).getDeadlineInfo() == false) {
+				count ++;
+			}
 			// 등록일을 초로 변환
 			Long productAddDate = saleProductVOs.get(productNum).getProductDate().getTime();
 			// 기간을 초로 변환
 			Long auctionPeriod = productVO.getAuctionPeriod()*24*3600*1000;
-			
+			System.out.println("??? : " +productVO.getAuctionPeriod());
 			log.info("제발 : {}", productAddDate);
 			log.info("제발 : {}", auctionPeriod);
 			
 			// Long을 tiestamp으로 변환(초에서 날짜로 변환)
-			Timestamp timestamp = new Timestamp(productAddDate + auctionPeriod);
-			 orderTime.add(productAddDate + auctionPeriod);
-			 time.add(timestamp);
-			 
-			log.info("제발 : {}", orderTime);
-			log.info("제발 : {}", timestamp);
+			Timestamp timestamp2 = new Timestamp(productAddDate + auctionPeriod);
+//			
+			if(timestamp2.before(timestamp)) {
+				SaleProductVO saleproductVO = new SaleProductVO();
+				saleproductVO.setProductId(saleProductVOs.get(productNum).getProductId());
+				int result = productService.setDeadLineUpdate(saleproductVO);
+				
+				bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
+				Long check = productService.getMaxAmountCheck(bidAmountVO);
+				
+				// 최고가가 null 이라면 입찰한 자가 없으니 status 유지
+				if(check != null) {
+					//최고가가 있다면 경매종료 후 상품 결제진행
+					productService.setStatus(productVO);
+				}
+			}
+//			orderTime.add(productAddDate + auctionPeriod);
+//			 time.add(timestamp2);
+//			 
+//			log.info("제발 : {}", orderTime);
+//			log.info("제발 : {}", timestamp2);
 			
 			// 내가 입찰한 상품의 최고가
 			bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
 			Long check = mypageService.bidMaxHistory(bidAmountVO);
 			
-			orderBidAmount.add(check);
+			// 상품의 입찰내역중 최대가격 max로 저장 
+			saleProductVOs.get(productNum).setMaxBidAmount(check);
+//			orderBidAmount.add(check);
+			
+			model.addAttribute("bidMax"+productNum, check);
+			
+			//model.addAttribute("orderTime", timestamp);
+		} // for End
+		
+		log.info("입찰내역 : {}", saleProductVOs);
+		log.info("입찰내역 : {}", bidAmountVOs);
+//		log.info("bidMaxAmountVO : {}", bidMaxAmounts);
+		log.info("입찰내역 : {}", memberVO);
+		
+		model.addAttribute("saleProducts", saleProductVOs);
+		model.addAttribute("bidAmounts", bidAmountVOs);
+//		model.addAttribute("bidMaxAmounts", bidMaxAmounts);
+		model.addAttribute("memberDB", memberVO);
+		model.addAttribute("count", count);
+//		model.addAttribute("orderTime", time);
+//		model.addAttribute("time", time);
+//		model.addAttribute("orderBidAmount", orderBidAmount);
+		
+		return model;
+	}
+	@GetMapping("successfulBid")
+	public Model getSuccessfulBid(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+		
+
+		// 상품정보
+		List<SaleProductVO> saleProductVOs = mypageService.bidProductInformation(bidAmountVO);
+		// 내가 입찰한 상품의 입찰가, 입찰시간
+		List<BidAmountVO> bidAmountVOs = mypageService.bidHistory(bidAmountVO);		
+		// 입찰한 상품 수
+//		int count = mypageService.productCount(bidAmountVO);
+		int count = 0;
+//		List<Long> orderTime = new ArrayList<>();
+//		List<Timestamp> time = new ArrayList<>();
+//		List<Long> orderBidAmount = new ArrayList<>();
+		// 마감시간 확인
+		LocalDateTime now = LocalDateTime.now(); 
+		Timestamp timestamp = Timestamp.valueOf(now);
+				
+		// 경매 종료시간 계산 
+		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
+			ProductVO productVO = new ProductVO();
+			productVO.setProductNum(saleProductVOs.get(productNum).getProductNum());
+			productVO = productService.getProductApproval(productVO);
+			
+			if(saleProductVOs.get(productNum).getDeadlineInfo() == true) {
+				count ++;
+			}
+			// 등록일을 초로 변환
+			Long productAddDate = saleProductVOs.get(productNum).getProductDate().getTime();
+			// 기간을 초로 변환
+			Long auctionPeriod = productVO.getAuctionPeriod()*24*3600*1000;
+			System.out.println("??? : " +productVO.getAuctionPeriod());
+			log.info("제발 : {}", productAddDate);
+			log.info("제발 : {}", auctionPeriod);
+			
+			// Long을 tiestamp으로 변환(초에서 날짜로 변환)
+			Timestamp timestamp2 = new Timestamp(productAddDate + auctionPeriod);
+//			
+			if(timestamp2.before(timestamp)) {
+				SaleProductVO saleproductVO = new SaleProductVO();
+				saleproductVO.setProductId(saleProductVOs.get(productNum).getProductId());
+				int result = productService.setDeadLineUpdate(saleproductVO);
+				
+				bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
+				Long check = productService.getMaxAmountCheck(bidAmountVO);
+				
+				// 최고가가 null 이라면 입찰한 자가 없으니 status 유지
+				if(check != null) {
+					//최고가가 있다면 경매종료 후 상품 결제진행
+					productService.setStatus(productVO);
+				}
+			}
+//			orderTime.add(productAddDate + auctionPeriod);
+//			 time.add(timestamp2);
+//			 
+//			log.info("제발 : {}", orderTime);
+//			log.info("제발 : {}", timestamp2);
+			
+			// 내가 입찰한 상품의 최고가
+			bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
+			Long check = mypageService.bidMaxHistory(bidAmountVO);
+			
+			// 상품의 입찰내역중 최대가격 max로 저장 
+			saleProductVOs.get(productNum).setMaxBidAmount(check);
+//			orderBidAmount.add(check);
+			
 			model.addAttribute("bidMax"+productNum, check);
 			
 			//model.addAttribute("orderTime", timestamp);
@@ -167,9 +278,9 @@ public class MypageController {
 //		model.addAttribute("bidMaxAmounts", bidMaxAmounts);
 		model.addAttribute("memberDB", memberVO);
 		model.addAttribute("count", count);
-		model.addAttribute("orderTime", time);
-		model.addAttribute("time", time);
-		model.addAttribute("orderBidAmount", orderBidAmount);
+//		model.addAttribute("orderTime", time);
+//		model.addAttribute("time", time);
+//		model.addAttribute("orderBidAmount", orderBidAmount);
 		
 		return model;
 	}

@@ -77,11 +77,12 @@
 
 <div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" >글 수정</a></div>
 <div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="margin-top: 10px; ">글 삭제</a></div>
+<c:if test="${memberVO.roleVOs[0].roleNum == 1 || memberVO.roleVOs[0].roleNum == 2}">
 <c:if test="${applicationVO.auctionSort == true}">
-	<div class="btnRight"> <a href="#" class="btn btn-success" >승인</a></div>
+	<div class="btnRight"> <a href="#" id="approval_btn" class="btn btn-success" >승인</a></div>
 </c:if>
 <c:if test="${applicationVO.auctionSort != true}">
-	<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" class="btn btn-success" >승인</a></div>
+	<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" id="approval_btn2" class="btn btn-success" >승인</a></div>
 </c:if>
 <!-- Button trigger modal -->
 <!-- Button trigger modal -->
@@ -90,6 +91,7 @@
   거부
 </button>
 </div>
+</c:if>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -105,21 +107,19 @@
                 <table class="table">
                     <tr>
                         <td>사용자명</td>
-                        <td><input class="form-control" id="userName" type="text" value="${applicationVO.writer}"></td>
+                        <td><input class="form-control" id="userName" disabled type="text" value="${applicationVO.writer}"></td>
                     </tr>
                     <tr>
                         <td>취소사유<td>
-                        <label for="pet-select" hidden="">취소사유</label>
-							<select name="pets" id="pet-select">
+							<input type="hidden" id="application_num"value="${applicationVO.applicationNum}">
+                        <label for="approvalCheck" hidden="">취소사유</label>
+							<select name="approvalCheck" id="approvalCheck">
 							    <option value="">사유를 선택해주세요</option>
-							    <option value="contents">상세내용 부족</option>
-							    <option value="image">부적절한 이미지</option>
+							    <option value="1">상세정보 부족</option>
+							    <option value="2">부적절한 이미지</option>
+								<option value="3">부적절한 상품</option>
 							</select>
-                    </tr>  
-                    <tr>
-                        <td>내용</td>
-                        <td><textarea class="form-control" id="contents" rows="10"></textarea></td>
-                    </tr>                    
+                    </tr>                  
                 </table>
             </div>
             <div class="modal-footer">
@@ -132,6 +132,7 @@
    
 </section>
 <c:import url="../../template/footer.jsp"></c:import>
+<script src="/js/approvalSubmit.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#refuseBtn").click(function(){

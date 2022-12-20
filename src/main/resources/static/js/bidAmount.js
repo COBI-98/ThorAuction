@@ -192,7 +192,9 @@ function dobid(tmp) {
 									location.reload();
 								}
 							})
-                        } else {
+                        } else if(data==5) {
+                            swal("입찰은 가지고 계신 포인트보다 낮아야합니다.")
+                        } else{
                             swal("정상적으로 입찰되었습니다","","success").then(function(){
 
                                 location.reload();
