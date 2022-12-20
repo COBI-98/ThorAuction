@@ -116,7 +116,7 @@
 																			<tr>
 																				<td scope="row">${product.productId }</td>
 																				<c:forEach items="${product.productVOs}" var="products">
-																					<td><img src="/file/product/${products.productFileVOs[0].fileName}"></td>
+																					<td><img src="/file/product/${products.productFileVOs[0].fileName}" style="widows: 90px; height: 90px"></td>
 																					<td><a href="../product/detail?productId=${product.productId}">${products.productName}</a></td>
 																				</c:forEach>
 																				<c:forEach items="${product.saleProductVOs}" var="productInfo">
