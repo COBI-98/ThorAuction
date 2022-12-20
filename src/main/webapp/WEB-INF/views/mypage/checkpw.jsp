@@ -36,7 +36,7 @@
                             <form action="checkpw" method="POST" id="checkpw_form">
                                 <div class="member-input">
                                     <div class="member-input__state member-input__state--value member-input__state--disabled">
-                                        <input id="id" class="member-input__box" type="text" placeholder="아이디" autocomplete="off" name="id" value="${memberDB.id}">
+                                        <input id="id" class="member-input__box" type="text" readonly="readonly" autocomplete="off" name="id" value="${memberDB.id}">
                                         <span class="member-input__valid-wrapper"></span>
                                     </div>
                                 </div>

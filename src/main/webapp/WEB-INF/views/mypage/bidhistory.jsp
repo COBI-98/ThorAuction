@@ -150,12 +150,11 @@
 																		
 																			
 																	</c:forEach>
-																
 															</div>
 															<div class="he20"></div>
 														</div>
 													</div>
-																										</c:when>
+												</c:when>
 														<c:otherwise>
 															<table class="table" style="font-size: 15px;">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 입찰내역이 있습니다.</div>
