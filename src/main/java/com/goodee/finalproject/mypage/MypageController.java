@@ -121,7 +121,7 @@ public class MypageController {
 		
 		List<Long> orderTime = new ArrayList<>();
 		List<Timestamp> time = new ArrayList<>();
-		List<Long> orderBidAmount = new ArrayList<>();
+//		List<Long> orderBidAmount = new ArrayList<>();
 		
 		// 경매 종료시간 계산 
 		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
@@ -150,7 +150,10 @@ public class MypageController {
 			bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
 			Long check = mypageService.bidMaxHistory(bidAmountVO);
 			
-			orderBidAmount.add(check);
+			// 상품의 입찰내역중 최대가격 max로 저장 
+			saleProductVOs.get(productNum).setMaxBidAmount(check);
+//			orderBidAmount.add(check);
+			
 			model.addAttribute("bidMax"+productNum, check);
 			
 			//model.addAttribute("orderTime", timestamp);
@@ -169,7 +172,7 @@ public class MypageController {
 		model.addAttribute("count", count);
 		model.addAttribute("orderTime", time);
 		model.addAttribute("time", time);
-		model.addAttribute("orderBidAmount", orderBidAmount);
+//		model.addAttribute("orderBidAmount", orderBidAmount);
 		
 		return model;
 	}

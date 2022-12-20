@@ -100,31 +100,40 @@
 															<input type="hidden" name="id" value="${memberDB.id}">
 															<div class="myorder">
 																<c:forEach items="${saleProducts}" var="product">
- 																<%-- <c:forEach items="${product.bidMaxAmounts}" var="max">
-																	<input type="hidden" name="productId" value="${max.productId}">
-																</c:forEach> --%>
 																			<li class="list">
-																				 <c:forEach items="${orderTime}" var="time">
-																					<div class="shopinfo">경매 종료일: <fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/> / 최고가: ${orderBidAmount}원</div>
-																				</c:forEach>
 																				<div class="orderlist">
 																					<ul class="prolist">
 																						<li>
-																							<a href="../product/detail?productId=${product.productId}">
+																							<a href="/product/detail?productId=${product.productId}">
 																							<c:forEach items="${product.productVOs}" var="products">
-																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}"></div>
-																								<div class="name">${products.productName}
+																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" width="100px"></div>
+																								<div class="name">${products.productName}</div>
 																							</c:forEach>
 																									<input type="hidden" name="productId" value="${product.bidAmountVOs[0].productId}">
 																									<div class="price">
 																										입찰금액: <fmt:formatNumber value="${product.bidAmountVOs[0].bidAmount}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.bidAmountVOs[0].bidDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 																									</div>
-																								</div>
+																									<input type="hidden" class="productDate" name="tdate" value="${product.productDate}">
+																									<input type="hidden" class="timeLength" value="${product.productVOs[0].auctionPeriod}">
+																									<div class="timedate" id="timertest" >
+								
+																									</div>
 																							</a>
 																						</li>
 																					</ul>
 																					<div class="statebox">
-																						<div class="state ">입찰</div>
+																						<c:choose>
+																							<c:when test="${product.maxBidAmount == product.bidAmountVOs[0].bidAmount}">
+																								<div class="state ">최고가 입찰중</div>
+																							</c:when>
+																							<c:when test="${product.maxBidAmount != product.bidAmountVOs[0].bidAmount}">
+																								<div class="state ">입찰중 <br>
+																								최고가 = ${product.maxBidAmount}</div>
+																							</c:when>
+																							<c:otherwise>
+																							</c:otherwise>
+																						</c:choose>
+																						
 																					</div>
 																				</div>
 																			</li>
@@ -160,6 +169,7 @@
 			</div>
 			<!-- end row -->
 		</div>
+		
 		<script>
 			var mfs_form_2702 = {
 				ajaxurl : '/wp-admin/admin-ajax.php',
@@ -180,5 +190,6 @@
 
 	</section>
 	<c:import url="../template/footer.jsp"></c:import>
+	<script src="/js/timerTest.js"></script> 
 </body>
 </html>
