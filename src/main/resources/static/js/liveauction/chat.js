@@ -130,7 +130,7 @@ ws.onmessage = function(msg){
 	//경매 시작시
 	else if(data.start != null){
 		if(data.gogo == true) {
-			auctionend.value="경매종료";
+			auctionStart.value="경매종료";
 			auctionend.classList.add("start");
 			talk.innerHTML += `<div class="hi" style="font-weight:bold;">`+ "*경매가 시작되었습니다.*" +`</div>`;
 			final.innerText ="경매 최고가:";
@@ -143,7 +143,7 @@ ws.onmessage = function(msg){
 			$('#amount').css("display","inline");
 			
 		}else{
-			auctionend.value="경매시작";
+			auctionStart.value="경매시작";
 		}
 	}
 
@@ -160,7 +160,7 @@ ws.onmessage = function(msg){
 	//경매 종료 시
 	else if(data.amount != null) {
 		if(data.gg == false) {
-			auctionend.value="경매시작";
+			auctionStart.value="경매시작";
 			final.innerText = "최종 금액:";
 			let ff = rank[0];
 			$('#amount').css("display","none");
@@ -181,7 +181,7 @@ ws.onmessage = function(msg){
 			$("#items option[value="+num+"]").hide();
 			$("#items").val("none").prop("selected", true);
 		}else{
-			auctionend.value="경매종료";
+			auctionStart.value="경매종료";
 		}
 	}
 
@@ -267,12 +267,18 @@ ws.onmessage = function(msg){
 		console.log(data);
 		if(data.stop ==true){
 			talk.innerHTML += `<div class="hi">`+ "*채팅이 정지되었습니다.*" +`</div>`;
-			stopChat.value="채팅시작";
+			talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+
+			stopChat.value="보내기";
+			stopChatCold.value = "채팅시작";
 			msg.innerHTML ='';
 			$('#msg').attr("readonly",true);
 		}else{
 			talk.innerHTML += `<div class="hi">`+ "*채팅이 시작되었습니다.*" +`</div>`;
+			talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+
 			stopChat.value="채팅정지";
+			stopChatCold.value = "채팅정지";
 			$('#msg').attr("readonly",false);
 		}
 	}
@@ -291,24 +297,29 @@ ws.onmessage = function(msg){
 			iddd.innerHTML += `<div id="user">`+"👀"+ userlist[i].trim() + `</div>`;
 		}
 		talk.innerHTML += `<div class="hi">` + data.come + "님이 입장하셨습니다." +`</div>`;
+		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+
 		usercount.innerHTML = userlist.length;
 		
 		//얼리기 설정
 		if(data.ppp =="true"){
 			stopChat.value="채팅정지";
+			stopChatCold.value="채팅정지";
 			console.log("gggg");
 			$('#msg').attr("readonly",true);
 		}else{
 			stopChat.value="보내기";
+			stopChatCold.value="채팅시작";
+
 			$('#msg').attr("readonly",false);
 		}
 
 		//경매시작 설정
 		if(data.gogo == "true") {
-			auctionend.value = "경매종료";
+			auctionStart.value = "경매종료";
 			auctionend.classList.add("start");
 		}else if(data.gogo == "false"){
-			auctionend.value = "경매시작";
+			auctionStart.value = "경매시작";
 		}
 
 		rank[0] = data.value *1;
@@ -594,13 +605,13 @@ function adminChat(){
 
 	//경매 시작,종료 시 
 	auctionStart.addEventListener("click",function(){
-		auctionend.classList.toggle("start");
 		//경매 시작 클릭 시
-		if(auctionend.value == "경매시작")	 {
+		if(auctionStart.value == "경매시작")	 {
 			console.log(amount.innerHTML);
 			console.log(add.value.substr(1));
 			if(amount.innerHTML != 0) {
 				if(add.value.substr(1) !=""){
+					auctionend.classList.toggle("start");
 					auctionstart();
 				}else{
 					Swal.fire({
@@ -610,7 +621,7 @@ function adminChat(){
 						confirmButtonText: '확인'
 					} )
 				}
-			}else{
+			}else{ 
 				Swal.fire({
 					title: "경매 물품이 설정이 안되었습니다.",  
 					icon: "error",    
@@ -618,10 +629,14 @@ function adminChat(){
 					confirmButtonText: '확인'
 				} )
 			}
+
 		//경매 종료 클릭 시
 		}else{
+			auctionend.classList.toggle("start");
 			sendresult();
 		}
+
+		console.log(items.value);
 
 	})
 	

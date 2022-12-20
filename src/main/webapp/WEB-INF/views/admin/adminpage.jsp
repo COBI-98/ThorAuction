@@ -84,7 +84,7 @@
 			</c:if>
 			<!-- nomal member end -->
 
-			<!-- kakao member start -->
+			<!-- social member start -->
 			<c:if test="${kakao == null }">
 			소셜 회원이 없습니다.
 			</c:if>
@@ -133,51 +133,7 @@
 					</c:if>
 				</c:forEach>
 			</c:if>
-			<!-- kakao member end -->
-
-			<!-- naver member start -->
-			<%-- <c:forEach items="${naver}" var="na">
-				<c:if test="${na.naRoleVOs[0].naRoleName != 'ROLE_ADMIN' }">
-					<tr>
-						<td class="kakaoID">${na.username }</td>
-						<td class="kakaoEmail">${na.email }</td>
-						<td class="kakaoName">${na.name }</td>
-						<td>${na.naverDetailVOs[0].naBirth }</td>
-						<td>${na.naverDetailVOs[0].naPost }</td>
-						<td>${na.naverDetailVOs[0].naAddr }</td>
-						<td>${na.naverDetailVOs[0].naAddrDetail }</td>
-						<td>${na.naverDetailVOs[0].naPhone }</td>
-						<td>${na.naverDetailVOs[0].naPoint }</td>
-						<td>${na.naRoleVOs[0].naRoleName}</td>
-						<td>
-							<c:choose>
-								<c:when test="${na.naRoleVOs[0].naRoleName == 'ROLE_MANGER' }">
-									<select name="select" class="selectRole">
-										<option class="role" value="Manager" selected>Manager</option>
-										<option class="role" value="User">User</option>
-										<option class="role" value="Ban">Ban</option>
-									</select>
-								</c:when>
-								<c:when test="${na.naRoleVOs[0].naRoleName == 'ROLE_USER' }">
-									<select name="select" class="selectRole">
-										<option class="role" value="Manager">Manager</option>
-										<option class="role" value="User" selected>User</option>
-										<option class="role" value="Ban">Ban</option>
-									</select>
-								</c:when>
-								<c:when test="${na.naRoleVOs[0].naRoleName == 'ROLE_BAN' }">
-									<select name="select" class="selectRole">
-										<option class="role" value="Manager">Manager</option>
-										<option class="role" value="User">User</option>
-										<option class="role" value="Ban" selected>Ban</option>
-									</select>
-								</c:when>
-								<c:otherwise>에러?</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-				</c:if>
-			</c:forEach> --%>
+			<!-- social member end -->
 		</table>
 	</section>
 	<br>

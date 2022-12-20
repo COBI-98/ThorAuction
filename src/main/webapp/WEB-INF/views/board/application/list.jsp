@@ -91,7 +91,12 @@
 		      <th scope="col">제목</th>
 		      <th scope="col">작성자</th>
 		      <th scope="col">작성날짜</th>
-		    </tr>
+			  <c:if test="${memberVO.roleVOs[0].roleNum == 1 || memberVO.roleVOs[0].roleNum == 2}">
+				  
+				<th scope="col">승인상태</th>
+			  </c:if>
+				
+			</tr>
 		  </thead>
 		  <tbody>
 		    <c:forEach items="${applicationVO}" var="VO">
@@ -99,8 +104,17 @@
 			      <td>${VO.applicationNum}</td>
 			      <td><a href="./detail?applicationNum=${VO.applicationNum}">${VO.title}</a></td>
 			      <td>${VO.writer}</td>
-			      <td>${VO.regDate}</td>      
-			     
+			      <td>${VO.regDate}</td>  
+				  <c:if test="${memberVO.roleVOs[0].roleNum == 1 || memberVO.roleVOs[0].roleNum == 2}">				  
+					<c:choose>
+						<c:when test="${VO.approvalCheck == '0'}"><td style="color: #fea532; font-weight: bold; text-align: center;">대기</td></c:when>
+						<c:when test="${VO.approvalCheck == '1'}"><td style="color: blue; font-weight: bold; text-align: center;">승인</td></c:when>
+						<c:when test="${VO.approvalCheck == '2'}"><td style="color: red; font-weight: bold; text-align: center;">거부/상세정보 부족</td></c:when>
+						<c:when test="${VO.approvalCheck == '3'}"><td style="color: red; font-weight: bold; text-align: center;">거부/부적절한 이미지</td></c:when>
+						<c:when test="${VO.approvalCheck == '4'}"><td style="color: red; font-weight: bold; text-align: center;">거부/부적절한 상품</td></c:when>
+							<c:otherwise><td>거부</td></c:otherwise>
+					</c:choose>
+			  	</c:if>
 		    </tr>
 		     </c:forEach>
 		   </tbody>
