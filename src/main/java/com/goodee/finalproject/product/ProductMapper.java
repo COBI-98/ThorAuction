@@ -61,6 +61,10 @@ public interface ProductMapper {
 	
 	public String getLikeProductCheck(LikeSaleProductVO likeSaleProductVO) throws Exception;
 	
+	//입찰금액 같은 유저는 업데이트
+	public List<BidAmountVO> getBidAmountUser(BidAmountVO bidAmountVO) throws Exception;
+	
+	public int setBidAmountUpdate(BidAmountVO bidAmountVO) throws Exception;
 	
 	// 상품 문의 관리
 	public int setQuestionAdd(ProductQuestionVO productQuestionVO) throws Exception;
