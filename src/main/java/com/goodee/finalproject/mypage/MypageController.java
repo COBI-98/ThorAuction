@@ -128,7 +128,7 @@ public class MypageController {
 		Timestamp timestamp = Timestamp.valueOf(now);
 				
 		// 경매 종료시간 계산 
-		for(int productNum = 0; productNum < saleVO.size(); productNum++) {
+		for(int productNum = 0; productNum < saleProductVOs.size(); productNum++) {
 			ProductVO productVO = new ProductVO();
 			productVO.setProductNum(saleProductVOs.get(productNum).getProductNum());
 			productVO = productService.getProductApproval(productVO);
@@ -138,7 +138,7 @@ public class MypageController {
 				count ++;
 			}
 			// 등록일을 초로 변환
-			Long productAddDate = saleVO.get(productNum).getProductDate().getTime();
+			Long productAddDate = saleProductVOs.get(productNum).getProductDate().getTime();
 			// 기간을 초로 변환
 			Long auctionPeriod = productVO.getAuctionPeriod()*24*3600*1000;
 			System.out.println("??? : " +productVO.getAuctionPeriod());
@@ -169,7 +169,7 @@ public class MypageController {
 //			log.info("제발 : {}", timestamp2);
 			
 			// 내가 입찰한 상품의 최고가
-			bidAmountVO.setProductId(saleVO.get(productNum).getProductId());
+			bidAmountVO.setProductId(saleProductVOs.get(productNum).getProductId());
 			Long check = mypageService.bidMaxHistory(bidAmountVO);
 			
 			// 상품의 입찰내역중 최대가격 max로 저장 
