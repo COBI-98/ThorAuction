@@ -33,8 +33,8 @@
 		<ul class="nav" style="float: right;">
 				<!-- 로그인 전 -->
 				<sec:authorize access="!isAuthenticated()">
-					<li class="nav-item"><a href="../member/login" class="nav-link link-dark px-2">로그인</a></li>
-					<li class="nav-item"><a href="../member/agree" class="nav-link link-dark px-2">회원가입</a></li>
+					<li class="nav-item"><a href="/member/login" class="nav-link link-dark px-2">로그인</a></li>
+					<li class="nav-item"><a href="/member/agree" class="nav-link link-dark px-2">회원가입</a></li>
 				</sec:authorize>
 
 				<%-- 			<!-- 로그인 후 -->
