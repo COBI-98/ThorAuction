@@ -69,7 +69,7 @@
 						<c:when test="${kakaoInfo != null }">
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
-									<b>${kakaoInfo.kaname} 님 / </b> <fmt:formatNumber value="${kakaoInfo.kakaoDetailVOs[0].kaPoint}" pattern="###,###,###,###"/> BP</b>
+									<b>${kakaoInfo.kaName} 님 / </b> <fmt:formatNumber value="${kakaoInfo.kakaoDetailVOs[0].kaPoint}" pattern="###,###,###,###"/> BP</b>
 								</a>
 							</li>
 							<li class="nav-item">
