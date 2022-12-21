@@ -134,14 +134,13 @@
 																				
 																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
 																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
+																				
 																			</div>
 																			</c:if>
 																			<c:if test = "${VO.deadlineInfo}">
 																				<a href="#" class="title">${requestScope[testVO].productName}</a>
 																				<div class="pricebox">
 																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
 																				</div>
 																			</c:if>
 																		</div>
@@ -175,14 +174,13 @@
 																				
 																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
 																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
+																				
 																			</div>
 																			</c:if>
 																			<c:if test = "${VO.deadlineInfo}">
 																				<a href="#" class="title">${requestScope[testVO].productName}</a>
 																				<div class="pricebox">
 																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
 																				</div>
 																			</c:if>
 																		</div>
@@ -215,14 +213,13 @@
 																							<div class="pricebox">
 																								<div>시작가 <span class="through"><fmt:formatNumber value="${VO.productVOs[0].productPrice}" pattern="###,###"/></span> </div>
 																								<div>현재가 <span class="price"><fmt:formatNumber value="${VO.maxBidAmount}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																								<a href="#" class="shophome">COBI</a>
+																								
 																							</div>
 																							</c:if>
 																							<c:if test = "${VO.deadlineInfo}">
 																								<a href="#" class="title">${VO.productVOs[0].productName}</a>
 																								<div class="pricebox">
 																									경매가 종료되었습니다.
-																									<a href="#" class="shophome">COBI</a>
 																								</div>
 																							</c:if>
 																						</div>
@@ -256,14 +253,14 @@
 																				
 																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
 																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
+																				
 																			</div>
 																			</c:if>
 																			<c:if test = "${VO.deadlineInfo}">
 																				<a href="#" class="title">${requestScope[testVO].productName}</a>
 																				<div class="pricebox">
 																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
+																					
 																				</div>
 																			</c:if>
 																		</div>
