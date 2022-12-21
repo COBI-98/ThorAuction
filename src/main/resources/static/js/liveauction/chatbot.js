@@ -166,10 +166,10 @@ $("#msgSend").click(function(){
                     item = `<div class="other chat-text">
                                 <img src="/images/coin.png" style="width: 30px; margin-top: 5px;">
                                 <div>
-                                    <ul>${str}</ul>
+                                    <ul><b>${str}</b></ul>
                                 </div>
                                 <div>
-                                    <li><b class="text" style="cursor:pointer;">${result.content1}</b></li> <br/>
+                                    <li>class="text" style="cursor:pointer;">${result.content1}</li> <br/>
                                     <li class="text" style="cursor:pointer;">${result.content2}</li> <br/>
                                     <li class="text" style="cursor:pointer;">${result.content3}</li> <br/>
                                 </div>

@@ -84,6 +84,11 @@
    align-items: flex-start;
 }
 
+#chatt .other .chat-date{
+   padding-top: 40px !important;
+
+}
+
 
 #chatt .chat-date{
    font-size: 12px;
