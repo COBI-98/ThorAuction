@@ -173,10 +173,14 @@
 									
 													<c:forEach items="${saleVO}" var="VO" varStatus="status" end="${saleVO.size()}">
 																				<!-- 넘어오는 리스트의 사이즈와 상품의 개수가 같으면 break문을걸기위해 true-->
-																					<li>
-																						<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
-																						<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
-																						<div class="imgbox">
+																				<c:set var="testVO" value="testVO${status.index}" />
+																				<c:set var="bidAmountCheck" value="bidAmountCheck${status.index}" />
+																				<c:set var="deadLineCompare" value="${requestScope[testVO].auctionPeriod}" />
+																				<li>
+																				
+																				<input type="hidden" class="productDate" name="tdate" value="${VO.productDate}">
+																				<input type="hidden" class="timeLength" value="${requestScope[testVO].auctionPeriod}">
+																				<div class="imgbox">
 																							<a href="./detail?productId=${VO.productId}" class="img"><img src="/file/product/${VO.productVOs[0].productFileVOs[0].fileName}" alt="">${VO.productVOs[0].productName}</a>
 																							
 																							<div class="timedate" id="timertest" >
