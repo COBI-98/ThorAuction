@@ -27,7 +27,7 @@ $('#memberAgreeCheckbox2048').click(function() {
 
 // 전체 동의 후 필수약관 중 체크 해제하면 전체 동의 체크 해제
 $('input[name="agree_check"]').click(function() {
-    var total = $('input[name="agree_check"]').length; // 2개
+    var total = $('input[name="agree_check"]').length; // 3개
     var checked = $('input[name="agree_check"]:checked').length;
 
     if(total != checked) {
@@ -78,8 +78,12 @@ $('#memberAgreeCheckbox4728').click(function() {
     let checkbox = $('#memberAgreeCheckbox4728').prop("checked");
 
     if(checkbox) {
+        console.log(checkbox);
+
         $('#agree3').addClass('member-agree-checkbox__state--checked');
     } else {
+        console.log(checkbox);
+        
         $('#agree3').removeClass('member-agree-checkbox__state--checked');
     }
  });

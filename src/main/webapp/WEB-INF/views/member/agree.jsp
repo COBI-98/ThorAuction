@@ -480,8 +480,8 @@
 						<div>
 							<h3 class="agree__l-check-term">
 								<div class="member-agree-checkbox">
-									<span id="agree3" class="member-agree-checkbox__state">
-										<input id="memberAgreeCheckbox4728" type="checkbox" class="member-agree-checkbox__input">
+									<span id="agree3" name="agree_check" class="member-agree-checkbox__state">
+										<input id="memberAgreeCheckbox4728" name="agree_check" type="checkbox" class="member-agree-checkbox__input">
 									</span>
 									<label for="memberAgreeCheckbox4728" class="member-agree-checkbox__label">
 										<div>이벤트 등 프로모션 알림 메일 및 푸시 알림 수신 
