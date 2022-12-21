@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <style>
@@ -68,7 +69,7 @@
 						<c:when test="${kakaoInfo != null }">
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
-									<b>${kakaoInfo.kaName }님 안녕하세요</b>
+									<b>${kakaoInfo.kaName} 님 / </b> <fmt:formatNumber value="${kakaoInfo.kakaoDetailVOs[0].kaPoint}" pattern="###,###,###,###"/> BP</b>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -80,7 +81,7 @@
 						<c:otherwise>
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
-									<b>${member.name }님 안녕하세요</b>
+									<b>${member.name} 님 / </b> <fmt:formatNumber value="${member.point}" pattern="###,###,###,###"/> BP</b>
 								</a>
 							</li>
 							<li class="nav-item">

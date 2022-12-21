@@ -7,9 +7,9 @@
 
 <head>
 <meta charset="UTF-8">
-<title>토르의 실시간 대장간</title>
+<title>세상의 모든 경매: BIDCOIN</title>
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 <link href="/css/reset.css" rel="stylesheet">
-<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 <link rel="stylesheet" href="/css/admin/admin.css">
 <script defer src="/js/admin/admin.js"></script>
 </head>
