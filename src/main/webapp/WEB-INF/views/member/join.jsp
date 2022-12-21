@@ -104,15 +104,15 @@
 
                             <!-- 전화번호 -->
                             <div class="member-input">
-                                <div class="member-input__state" style="padding-bottom: 0px;">
+                                <div class="member-input__state">
                                     <div class="container">
                                         <input id="phone" oninput="autoHyphen(this)" class="member-input__box" name="phone" maxlength='13' placeholder="전화번호" type="text" autocomplete="off">
-                                        <button id="confirm__btn" type="button" class="member-button confirm__btn">인증번호 받기</button>
+                                        <!-- <button id="confirm__btn" type="button" class="member-button confirm__btn">인증번호 받기</button> -->
                                     </div>
                                     <span class="member-input__valid-wrapper"></span>
                                 </div>
                                 
-                                <div class="sign-up__input-error-message phoneErrorMessage"></div>
+<%--                                 <div class="sign-up__input-error-message phoneErrorMessage"></div>
                                 <span class="msg_box">${errorMsg.phone}</span>
                                 <div class="member-input__state">
                                     <input id="memberInput9300" class="member-input__box" readonly="readonly" placeholder="인증번호를 입력하세요" type="text" autocomplete="off" name="cnNum">                                    
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="sign-up__input-error-message cnErrorMessage">인증이 필요합니다</div>
                                 <div class="sign-up__input-error-message cnErrorMessage">인증번호를 다시 확인해주세요</div>
-                                <div class="sign-up__input-error-message cnErrorMessage">인증이 성공했습니다</div>
+                                <div class="sign-up__input-error-message cnErrorMessage">인증이 성공했습니다</div> --%>
                             </div>
 
                             <!-- 이메일 -->
