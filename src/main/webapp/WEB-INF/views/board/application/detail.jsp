@@ -77,9 +77,10 @@
 
 <div style="display: flex; justify-content: flex-end;">
 
-
-	<div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >수정</a></div>
-	<div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style=" color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;  ">삭제</a></div>
+	<c:if test="${memberVO.id == applicationVO.writer}">
+		<div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >수정</a></div>
+		<div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style=" color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;  ">삭제</a></div>
+	</c:if>
 	<c:if test="${memberVO.roleVOs[0].roleNum == 1 || memberVO.roleVOs[0].roleNum == 2}">
 		<c:if test="${applicationVO.auctionSort == true}">
 			<div class="btnRight"> <a href="#" id="approval_btn" class="btn btn-success" style=" color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >승인</a></div>
