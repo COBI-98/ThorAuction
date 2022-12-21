@@ -229,7 +229,7 @@
 													</c:when>
 														<c:otherwise>
 															<table class="table" style="font-size: 15px;">
-															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 낙찰내역이 있습니다.</div>
+															<div class="pt5 pb5">총 <strong class="import">0</strong> 건의 낙찰내역이 있습니다.</div>
 																
 															<div class="null">낙찰한 내역이 없습니다</div>
 															</table>
