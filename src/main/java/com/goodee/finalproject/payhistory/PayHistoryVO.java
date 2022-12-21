@@ -1,6 +1,9 @@
 package com.goodee.finalproject.payhistory;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.goodee.finalproject.product.ProductVO;
 
 import lombok.Data;
 
@@ -12,4 +15,5 @@ public class PayHistoryVO {
 	private Date regDate;
 	private int productNum;
 
+	private List<ProductVO> productVOs;
 }
