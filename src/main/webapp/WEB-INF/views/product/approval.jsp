@@ -21,7 +21,16 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container d-flex flex-wrap justify-content-center">
+		
+	
+	
 		<div class="production-selling-overview container">
+		<div style="text-align: center; font-size: 40px; font-weight: 600;">
+		
+			상품 미리보기
+		
+		</div>
+		<hr>
 			<div class="production-selling-overview__container row">
 				<div class="production-selling-overview__cover-image-wrap col-12 col-md-6 col-lg-7">
 					<div class="production-selling-cover-image-container"> <!-- check -->
@@ -75,7 +84,7 @@
 							<div class="production-selling-header">
 								<h1 class="production-selling-header__title">
 									<p class="production-selling-header__title__brand-wrap">
-										<span class="production-selling-header__title__name">${productVO.productName} : (상품이름)</span>
+										<span class="production-selling-header__title__name">${productVO.productName}</span>
 											
 											</h1>
 										</div>
@@ -90,22 +99,17 @@
 										<div class="production-selling-header__info-wrap">
 											<div class="production-selling-header__promotion">
 												<div class="production-selling-header__promotion__title-wrap">
-													<span>혜택</span>
+													
 												</div>
 												<div class="production-selling-header__promotion__content-wrap">
-													<p class="production-selling-header__promotion__entry"
-													><b>1500<!-- -->P</b> 적립 (<!-- -->(Gold (회원등급)) <!-- -->3<!-- -->% 적립)</p>
 													</div>
 												</div>
 												<div class="production-selling-header__delivery">
 													<div class="production-selling-header__delivery__title-wrap">
-														<span>배송</span>
 													</div>
 													<div class="production-selling-header__delivery__content-wrap">
-														<span class="production-selling-header__delivery__fee"><b>무료배송</b></span>
 														<div class="_2SUYq production-selling-header__delivery__today-departure__dropdown">
 															<div class="production-selling-header__delivery__today-departure__header">
-																<span class="text">배송정보 : <span class="active">잘 보내드림</span></span>
 																
 											</div>
 										</div>
@@ -166,21 +170,7 @@
 			<div class="" style="text-align: center;">
 			<form class="align-center" action="./approval" method="post" enctype="multipart/form-data">	
 				
-				<label for="pl" hidden >카테고리</label>
-				<select name="categoryId" id="" class="pl">
-					<option value="">카테고리를 선택해주세요</option>
-					<option value="1">의류</option>
-					<option value="2">뷰티, 잡화</option>
-					<option value="3">가구, 생활, 건강</option>
-					<option value="4">가전, 디지털, 컴퓨터</option>
-					<option value="5">스포츠, 레저, 자동차</option>
-					<option value="6">도서, e쿠폰</option>
-
-				</select>
-				<div class="applicationDetail">
-					경매 단위 입력
-					<input type="text" name="amountUnit"  />
-				</div>
+				
 
 				<input type="hidden" name="productNum" value="${productVO.productNum}">
 			</div>
@@ -188,9 +178,9 @@
 		<tbody>
 			<tr class="table-warning">
 				
-				<th>경매기간 : ${productVO.auctionPeriod}</th>
+				<th style="font-size: 18px; font-weight: 600">경매기간 : ${productVO.auctionPeriod} 일</th>
 				<tr>
-				<th>상품상세정보</th>
+				<th style="font-size: 18px; font-weight: 600">상품상세정보</th>
 				</tr>
 				
 				  <tr>
@@ -201,7 +191,34 @@
 			</tbody>
 		</table>
 		
-		<button type="submit" id="applicationSubmit" value="상품 게시" class ="btnRight btn btn-warning">상품 게시하기</button>
+			<div>
+					<div style="margin-top: 30px;">
+						<span style="font-size: 18px; font-weight: 600">카테고리</span> 
+							<select name="categoryId" id="" class="pl">
+								<option value="">카테고리를 선택해주세요</option>
+								<option value="1">의류</option>
+								<option value="2">뷰티, 잡화</option>
+								<option value="3">가구, 생활, 건강</option>
+								<option value="4">가전, 디지털, 컴퓨터</option>
+								<option value="5">스포츠, 레저, 자동차</option>
+								<option value="6">도서, e쿠폰</option>
+							</select>
+					</div>
+					<div class="applicationDetail" style="margin-top: 30px; font-size: 18px; font-weight: 600">
+						<span >경매 단위 입력</span> 
+						<input placeholder="3,000" type="text" name="amountUnit" style="text-align: right;"  />원
+					</div>
+			<div style="margin-top: 30px; font-size: 18px; font-weight: 600">
+				<button type="submit" id="applicationSubmit" value="상품 게시" class ="btnRight btn btn-warning" style="color: white; border: 0; width: 120px; height: 70px; font-size: 20px; font-weight: 600; float: right;">상품 게시하기</button>
+			
+			</div>
+		
+		</div>
+		
+		
+		
+		
+		
 	</form>
 	</section>
 	<!-- <script src="/js/timerTest.js"></script> -->

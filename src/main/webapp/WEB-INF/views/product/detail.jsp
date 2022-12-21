@@ -83,7 +83,7 @@
 							<div class="production-selling-header">
 								<h1 class="production-selling-header__title">
 									<p class="production-selling-header__title__brand-wrap">
-										<span class="production-selling-header__title__name">${VO.productName} : (상품이름)</span>
+										<span class="production-selling-header__title__name" style="font-weight: 600">${VO.productName}</span>
 											
 											</h1>
 										</div>
@@ -110,18 +110,15 @@
 													<p class="production-selling-header__promotion__entry">
 														<!-- 가격 계산 소수점버리기-->
 														<c:set var="point" value="${VO.productPrice*0.03}"></c:set>
-														<b><fmt:formatNumber type="number" maxFractionDigits="0" value="${point}" /><!-- -->P</b> 적립 (<!-- -->(Gold (회원등급)) <!-- -->3<!-- -->% 적립)</p>
+														<b><fmt:formatNumber type="number" maxFractionDigits="0" value="${point}" /><!-- -->P</b> 적립 (<!-- -->(회원등급) <!-- -->3<!-- -->% 적립)</p>
 													</div>
 												</div>
 												<div class="production-selling-header__delivery">
 													<div class="production-selling-header__delivery__title-wrap">
-														<span>배송</span>
 													</div>
 													<div class="production-selling-header__delivery__content-wrap">
-														<span class="production-selling-header__delivery__fee"><b>무료배송</b></span>
 														<div class="_2SUYq production-selling-header__delivery__today-departure__dropdown">
 															<div class="production-selling-header__delivery__today-departure__header">
-																<span class="text">배송정보 : <span class="active">잘 보내드림</span></span>
 																
 														</div>
 													</div>
@@ -195,7 +192,8 @@
 								</c:otherwise>							
 							</c:choose>
 						<div class="readinfo">
-							<h4>구매 전 꼭 확인해주세요!</h4>
+							<div style="font-size: 17px; font-weight: 600">구매 전 꼭 확인해주세요!</div>
+							<hr>	
 							<ul>
 								<li class="on"><a href="#">배송정보 안내</a>
 								<div class="txt">
