@@ -27,6 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.finalproject.board.application.ApplicationVO;
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.payhistory.PayHistoryService;
+import com.goodee.finalproject.payhistory.PayHistoryVO;
 import com.goodee.finalproject.product.BidAmountVO;
 import com.goodee.finalproject.product.LikeSaleProductVO;
 import com.goodee.finalproject.product.ProductService;
@@ -46,6 +48,8 @@ public class MypageController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private PayHistoryService payHistoryService;
 	
 	// 마이페이지 홈
 	@GetMapping("info")
@@ -198,8 +202,9 @@ public class MypageController {
 		return model;
 	}
 	@GetMapping("successfulBid")
-	public Model getSuccessfulBid(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO, Model model) throws Exception {
+	public ModelAndView getSuccessfulBid(BidAmountVO bidAmountVO, @AuthenticationPrincipal MemberVO memberVO) throws Exception {
 		
+		ModelAndView model = new ModelAndView();
 
 		// 상품정보
 		List<SaleProductVO> saleProductVOs = mypageService.bidProductInformation(bidAmountVO);
@@ -208,10 +213,14 @@ public class MypageController {
 		// 입찰한 상품 수
 //		int count = mypageService.productCount(bidAmountVO);
 		int count = 0;
-//		List<Long> orderTime = new ArrayList<>();
-//		List<Timestamp> time = new ArrayList<>();
-//		List<Long> orderBidAmount = new ArrayList<>();
-		// 마감시간 확인
+		
+		
+		
+		PayHistoryVO payHistoryVO = new PayHistoryVO();
+		payHistoryVO.setId(memberVO.getId());
+		List<PayHistoryVO> userPayHistory = payHistoryService.getPayHistoryList(payHistoryVO);
+		
+
 		LocalDateTime now = LocalDateTime.now(); 
 		Timestamp timestamp = Timestamp.valueOf(now);
 				
@@ -263,25 +272,17 @@ public class MypageController {
 			saleProductVOs.get(productNum).setMaxBidAmount(check);
 //			orderBidAmount.add(check);
 			
-			model.addAttribute("bidMax"+productNum, check);
+			model.addObject("bidMax"+productNum, check);
 			
 			//model.addAttribute("orderTime", timestamp);
 		} // for End
+
+		model.addObject("saleProducts", saleProductVOs);
+		model.addObject("bidAmounts", bidAmountVOs);
+		model.addObject("userPayHistory", userPayHistory);
+		model.addObject("memberDB", memberVO);
+		model.addObject("count", count);
 		
-		log.info("입찰내역 : {}", saleProductVOs);
-		log.info("입찰내역 : {}", bidAmountVOs);
-		log.info("입찰내역 : {}", count);
-//		log.info("bidMaxAmountVO : {}", bidMaxAmounts);
-		log.info("입찰내역 : {}", memberVO);
-		
-		model.addAttribute("saleProducts", saleProductVOs);
-		model.addAttribute("bidAmounts", bidAmountVOs);
-//		model.addAttribute("bidMaxAmounts", bidMaxAmounts);
-		model.addAttribute("memberDB", memberVO);
-		model.addAttribute("count", count);
-//		model.addAttribute("orderTime", time);
-//		model.addAttribute("time", time);
-//		model.addAttribute("orderBidAmount", orderBidAmount);
 		
 		return model;
 	}
