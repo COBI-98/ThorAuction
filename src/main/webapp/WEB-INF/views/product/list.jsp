@@ -49,7 +49,7 @@
 		<div class="category-feed-wrap container">
 			<div class="category-feed row">
 				<div class="category-feed__side-bar col-12 col-md-3">
-					<section class="commerce-category-list">
+					<section class="" >
 						<h2 class="commerce-category-list__title">
 							<a href="./list?<c:if test="${param.deadlineInfo != null}">deadlineInfo=${param.deadlineInfo}&</c:if>">전체보기</a>
 						</h2>
@@ -69,7 +69,7 @@
 							<nav class="commerce-category-breadcrumb-wrap commerce-category-header__breadcrumb">
 								<ol class="commerce-category-breadcrumb">
 									<li class="commerce-category-breadcrumb__entry">
-										<a class="link" href="#">
+										<a class="link" href="#" style="font-size: 18px; font-weight: 600">
 											<c:choose>
 												<c:when test="${param.categoryId == 1}">의류</c:when>
 												<c:when test="${param.categoryId == 2}">뷰티, 잡화</c:when>
@@ -134,14 +134,13 @@
 																				
 																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
 																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
+																				
 																			</div>
 																			</c:if>
 																			<c:if test = "${VO.deadlineInfo}">
 																				<a href="#" class="title">${requestScope[testVO].productName}</a>
 																				<div class="pricebox">
 																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
 																				</div>
 																			</c:if>
 																		</div>
@@ -175,14 +174,13 @@
 																				
 																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
 																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
+																				
 																			</div>
 																			</c:if>
 																			<c:if test = "${VO.deadlineInfo}">
 																				<a href="#" class="title">${requestScope[testVO].productName}</a>
 																				<div class="pricebox">
 																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
 																				</div>
 																			</c:if>
 																		</div>
@@ -215,14 +213,13 @@
 																							<div class="pricebox">
 																								<div>시작가 <span class="through"><fmt:formatNumber value="${VO.productVOs[0].productPrice}" pattern="###,###"/></span> </div>
 																								<div>현재가 <span class="price"><fmt:formatNumber value="${VO.maxBidAmount}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																								<a href="#" class="shophome">COBI</a>
+																								
 																							</div>
 																							</c:if>
 																							<c:if test = "${VO.deadlineInfo}">
 																								<a href="#" class="title">${VO.productVOs[0].productName}</a>
 																								<div class="pricebox">
 																									경매가 종료되었습니다.
-																									<a href="#" class="shophome">COBI</a>
 																								</div>
 																							</c:if>
 																						</div>
@@ -256,14 +253,14 @@
 																				
 																				<div>시작가 <span class="through"><fmt:formatNumber value="${requestScope[testVO].productPrice}" pattern="###,###"/></span> </div>
 																				<div>현재가 <span class="price"><fmt:formatNumber value="${requestScope[bidAmountCheck]}" pattern="###,###"/> <em style="font-size:14px;vertical-align:top">↑</em></span></div>
-																				<a href="#" class="shophome">COBI</a>
+																				
 																			</div>
 																			</c:if>
 																			<c:if test = "${VO.deadlineInfo}">
 																				<a href="#" class="title">${requestScope[testVO].productName}</a>
 																				<div class="pricebox">
 																					경매가 종료되었습니다.
-																					<a href="#" class="shophome">COBI</a>
+																					
 																				</div>
 																			</c:if>
 																		</div>

@@ -97,9 +97,11 @@
 					</c:if>
 				</ul>
 		</nav>
-		<div class="btnAdd">
-			<a href="./add" type="button" class="btn btn-warning" style="color: white; font-weight: 600">글쓰기</a>
-		</div>
+		<c:if test="${memberVO.roleVOs[0].roleNum == 1}">
+			<div class="btnAdd">
+				<a href="./add" type="button" class="btn btn-warning" style="color: white; font-weight: 600">글쓰기</a>
+			</div>
+		</c:if>
 		</section>
 		<c:import url="../../template/footer.jsp"></c:import>
 			<script type="text/javascript">
