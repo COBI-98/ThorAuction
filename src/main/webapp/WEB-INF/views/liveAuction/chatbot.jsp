@@ -22,7 +22,7 @@
   <c:import url="../template/header.jsp"></c:import>
   
   <div>
-  <section class="">
+  <section class="" style="padding-bottom: 100px;">
 
         <div class="chat-container show-grid" style="margin-left: 40px;">
             
@@ -31,11 +31,11 @@
 					<div class="row">
 						<div class="col-xs-8 col-sm-8">
 							<div id='chatt' class="tab-content current">
-								<div class="chat-box">
-								  	<div id='talk' class="form-control"></div>
+								<div class="chat-box" style="height : 0px;">
+								  	<div id='talk' class="form-control" style="height: 650px;"></div>
 									<div id='send'>
 										<div>
-											<input class="form-control" type='text' id='msg'  placeholder="메시지를 입력해보세요!">
+											<input class="form-control" type='text' id='msg'  placeholder="메세지를 입력해보세요!" style="width: 50%; margin-top: 10px; margin-bottom: 10px;">
 											<button type="button" class="bidcoinBtn" id="msgSend"><img src="/images/send.jpg" alt="" width="100%;" height="100%"></button>
 										</div>
 									</div>
@@ -45,7 +45,7 @@
 
 
 							<div class="col-xs-4 col-sm-3" style="display: block; height: 60%; padding-right: 0px;padding-left: 0px;" >
-								<div class="card mb-4">
+								<div class="card mb-5">
 									<div class="card-header" id="qna"><b>질문 카테고리</b></div>
 									<div class="card-body" id="sendZone">
 										<c:forEach items="${ar}" var="key">
@@ -90,6 +90,7 @@
 <!-- <script src="https://192.168.1.83:80/socket.io/socket.io.js"></script>
 <script src="/js/liveauction/getHTMLMediaElement.js"></script> -->
 <!-- <script src='/js/index.js'></script> -->
+<!-- <c:import url="../template/footer.jsp"></c:import> -->
 
   <footer>
     <small id="send-message"></small>
@@ -98,4 +99,5 @@
   <!-- <script src="https://www.webrtc-experiment.com/common.js"></script> -->
 
 </body>
+
 </html>

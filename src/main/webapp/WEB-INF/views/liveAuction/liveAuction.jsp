@@ -25,14 +25,14 @@
   
   <div>
   <section class="">
-	<div>
 		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color : white; border : none;" >
-			<img src="/images/warning.png" alt="" width="10%;" height="100%">
-		</button> 
+		<!-- <div>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color : white; border : none; " >
+				<img src="/images/warning.png" alt="" width="10%;" height="100%">
+		</div> -->
 		
 		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -53,8 +53,7 @@
 				</div>
 			</div>
 			</div>
-		</div>
-	</div>
+		</div> -->
     <!-- 방송 시작 부분 -->
 		<div id="videos-container" style="margin: 20px 0;">
 			<div id="media-container" class = "media-container shadowBox">
