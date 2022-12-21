@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>토르의 실시간 대장간</title>
+	<title>세상의 모든 경매: BIDCOIN</title>
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 	<c:import url="../template/boot.jsp"></c:import>
 	
-	<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 	
 	<link rel="stylesheet" href="/css/chunk48-455aca93.css"> <!-- carousel -->
 	<link rel="stylesheet" href="/css/chunk166-a1b0af68.css"> <!-- production-selling -->
@@ -372,9 +372,9 @@
 										<c:if test="${questionVO.adminQuestionVO.aqNum != null}">
 											
 											<div class="reply">
-												이미지 자리<br>
+												<img src="/images/Bitcoin.png" alt="" style="width: 30px;">
 												${questionVO.adminQuestionVO.aqContents}<br>
-												${questionVO.adminQuestionVO.id}<br>
+												${questionVO.adminQuestionVO.name}<br>
 												${questionVO.adminQuestionVO.aqDate}<br>
 												<!-- 관리자만-->
 												<c:if test="${memberVO.roleVOs[0].roleNum == 1}">
@@ -390,7 +390,7 @@
 														<input type="text" name="aqContents" id="aqContents">
 														<input type="hidden" name="questionId" value="${questionVO.questionId}">
 														<input type="hidden" name="prNum" value="${questionVO.productId}">
-														<input type="hidden" name="id" value="${memberVO.id}">
+														<input type="hidden" name="name" value="${memberVO.id}">
 														
 														<button type="submit" class="btn btn-warning">관리자답변</button>
 													</form>
