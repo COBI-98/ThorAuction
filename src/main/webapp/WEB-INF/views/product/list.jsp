@@ -10,7 +10,7 @@
 <title>세상의 모든 경매: BIDCOIN</title>
 <c:import url="../template/boot.jsp"></c:import>
 <link href="/css/reset.css" rel="stylesheet">
-<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 
 <link rel="stylesheet" href="/css/chunk48-455aca93.css">
 <!-- carousel -->
