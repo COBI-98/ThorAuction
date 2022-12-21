@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>세상의 모든 경매: BIDCOIN</title>
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 <link href="/css/reset.css" rel="stylesheet">
-<link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
 <link rel="stylesheet" href="/css/member/join.css">
 </head>
 <style>
