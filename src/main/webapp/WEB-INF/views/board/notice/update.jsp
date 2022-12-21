@@ -24,26 +24,29 @@
 	 <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="noticeNum" id="noticeNum" value="${noticeUpdate.noticeNum}" >
         <div class="form-check">
-            <input type="checkbox" id="checkDate"  name="importCheck" <c:if test="${noticeUpdate.importCheck == true}">checked</c:if> >
-            <label for="">
-                중요 공지사항
+            <input type="checkbox" id="radioDate" name="importCheck" <c:if test="${noticeUpdate.importCheck == true}">checked</c:if>>
+            <label for="" style="font-size: 18px; font-weight: 600; margin-bottom: 15px;">
+                ❗중요 공지사항
             </label>
-            <!-- <input type="radio" id="radioDate2" name="importCheck">
-            <label for="">
-                해당 없음
-            </label> -->
+            
         </div>
+         <div style="display: flex; justify-content: space-between; width: 100%; margin: 10px 0;">
+	        <div style="width: 70%;">
+	    		<span style="font-size: 18px; font-weight: 600;">제목</span> 
+	      	  	<input type="text" name="title" value="${noticeUpdate.title}" placeholder="제목을 입력하세요" style="width: 80%; height: 40px;">
+	        </div>
+	        <div style="width: 30%;">
+	       		<span style="font-size: 18px; font-weight: 600;">작성자</span> 
+	        	<input type="text" name="writer" value="${noticeUpdate.writer}" style="width: 70%;height: 40px;" value="${memberVO.id}" readonly>
+	        </div>
+        
+        
+        </div>
+        
+        
+        
         <div>
-        글 제목<br>
-        <input type="text" name="title" value="${noticeUpdate.title}">
-        <br>
-        </div>
-         <div>
-        작성자<br>
-        <input type="text" name="writer"  value="${noticeUpdate.writer}"  readonly><br>
-        </div>
-        <div>
-        글 내용<br>
+        <div style="margin: 10px 0; font-size: 18px; font-weight: 600;">내용</div>
         <textarea id="summernote" name="contents" rows="30" cols="100" >${noticeUpdate.contents}</textarea>
         </div>
         <div  class="board-filetitle mb-3" id="refresh">💾첨부 파일  
