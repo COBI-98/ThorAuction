@@ -28,22 +28,6 @@
 
 	</section>
 
-	<sec:authorize access="isAuthenticated()">
-		<c:forEach items="${kakaoRole }" var="kk">
-			<c:if test="${kk.kakaoRoleVOs[0].kaNickName == kakaoInfo.kaNickName }">
-				<input type="hidden" value="${kk.kaRoleVOs[0].kaRoleName }" class="krole" readOnly>
-				<input type="hidden" value="${kk.kakaoDetailVOs[0].kaBirth}" class="detailInfoNull">
-			</c:if>
-		</c:forEach>
-
-		<c:forEach items="${member}" var="m">
-			<c:if test="${m.id == memID && m.roleVOs[0].roleName == 'ROLE_BAN' }">
-				<input type="hidden" value="${m.id}" class="iii" readOnly>
-				<input type="hidden" value="${m.roleVOs[0].roleName}" class="MID" readOnly>
-			</c:if>
-		</c:forEach>
-
-	</sec:authorize>
 	<c:import url="./template/footer.jsp"></c:import>
 </body>
 </html>

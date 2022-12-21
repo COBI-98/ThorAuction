@@ -7,7 +7,7 @@ var memRole = $(".MID").val();
 console.log("member Role: ", memRole);
 
 $.ajax({
-    url: '/',
+    url: './list',
     type: 'GET',
     traditional: true,
     data: {
@@ -21,7 +21,7 @@ $.ajax({
                 text: '관리자에 의해 로그인이 차단되었습니다.',
                 icon: "error"
             }).then(function () {
-                location = 'member/logout';
+                location = '/member/logout';
                 return false;
             })
         }
