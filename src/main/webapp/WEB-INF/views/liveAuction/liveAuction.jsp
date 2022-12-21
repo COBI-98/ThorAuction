@@ -85,7 +85,9 @@
 						
 					</div>
 					
+					
 				</div>
+				
 		
 	
 		
@@ -115,14 +117,15 @@
               </div>
               <div id="bidZone">
                   <input type='button' value="직접입력" id="auction" class ="bidcoinBtn">
-                  <input type='button' value="단위경매" id="add" class ="bidcoinBtn">
+                  <input type='button' value="+" id="add" class ="bidcoinBtn">
               </div>
           </div>
           <div id ="iddd" class="tab-content">
               
           </div>
         </div>
-      </div>	
+      </div>
+	  	
     </div>
     <input  type="hidden" id="room-id" value="123" readonly="readonly" autocorrect=off autocapitalize=off size=20>
     <sec:authorize access="hasRole('ROLE_ADMIN')" >
@@ -170,7 +173,7 @@
 						
 							<input type="button" class="bidcoinBtn" value="채팅정지" id='stopStart'>
 						    <input type="button" class="bidcoinBtn" value="경매시작" id="auctionStart"> <!--배열 controller로 보내짐 / 가격 안변하게하기-->
-						    <input type="button" class="bidcoinBtn" value="경매종료" id="end"> <!--session 닫힘-->
+						    <!-- <input type="button" class="bidcoinBtn" value="경매종료" id="end"> session 닫힘 -->
 						
 					
 						</div>
