@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 :: 토실대</title>
+<title>마이페이지 :: 비드코인</title>
 <link href="/images/bidcoin_coin.png" rel="shortcut icon" type="image/x-icon">
 
 	<!-- JQuery -->
