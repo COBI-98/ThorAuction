@@ -1,5 +1,7 @@
 package com.goodee.finalproject.payhistory;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +15,8 @@ public class PayHistoryService {
 		return payHistoryMapper.setPayHistory(payHistoryVO);
 	}
 
+	public List<PayHistoryVO> getPayHistoryList(PayHistoryVO payHistoryVO) throws Exception{
+		
+		return payHistoryMapper.getPayHistoryList(payHistoryVO);
+	}
 }
