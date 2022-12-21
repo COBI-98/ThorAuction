@@ -18,7 +18,7 @@
 	<table class="table table-bordered border-warning">
   <tbody>
   
-    <tr >
+    <tr>
     	<th style="width: 200px;">글제목</th>
     	<td>${noticeVO.title}</td>
       
@@ -53,9 +53,10 @@
 
 
 
-
-<div class="btnRight" > <a href="/board/notice/update?noticeNum=${noticeVO.noticeNum}" class="btn btn-warning" >글 수정</a></div>
-<div class="btnRight"> <a href="/board/notice/delete?noticeNum=${noticeVO.noticeNum}" class="btn btn-warning" style="margin-top: 10px;">글 삭제</a></div>
+<c:if test="${memberVO.roleVOs[0].roleNum == 1}">
+	<div class="btnRight" > <a href="/board/notice/update?noticeNum=${noticeVO.noticeNum}" class="btn btn-warning" >글 수정</a></div>
+	<div class="btnRight"> <a href="/board/notice/delete?noticeNum=${noticeVO.noticeNum}" class="btn btn-warning" style="margin-top: 10px;">글 삭제</a></div>
+</c:if>
 </section>
 <c:import url="../../template/footer.jsp"></c:import>
 	
