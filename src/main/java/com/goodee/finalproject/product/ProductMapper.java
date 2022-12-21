@@ -8,6 +8,9 @@ import com.goodee.finalproject.member.MemberVO;
 
 @Mapper
 public interface ProductMapper {
+	
+	// 최근 본 상품
+	public List<SaleProductVO> recentProduct(Long productId) throws Exception;
 
 	public int setProductAdd(ProductVO productVO) throws Exception;
 	

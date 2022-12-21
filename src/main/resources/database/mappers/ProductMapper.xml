@@ -4,6 +4,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.goodee.finalproject.product.ProductMapper">
+
+	<!-- 최근 본 상품 -->
+	<select id="recentProduct" parameterType="SaleProductVO" resultMap="getTestList">
+		SELECT S.PRODUCTID, P.FILENAME
+		FROM SALEPRODUCT S
+		JOIN
+		AUCTIONPRODUCT A
+		ON S.PRODUCTNUM = A.PRODUCTNUM
+		JOIN 
+		PRODUCTFILES P 
+		ON A.PRODUCTNUM = P.PRODUCTNUM
+		WHERE PRODUCTID = #{productId}
+	</select>
  	
  	<insert id="setProductAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">	
  		INSERT INTO AUCTIONPRODUCT
