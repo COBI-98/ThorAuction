@@ -73,8 +73,9 @@ public class HomeController
 				log.info("ID정보 : {}" + principal.getName());
 			}
 		}
-
+		
 		modelAndView.setViewName("index");
+		modelAndView.setViewName("redirect:/product/list");
 
 		return modelAndView;
 	}

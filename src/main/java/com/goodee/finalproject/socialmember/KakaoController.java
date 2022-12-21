@@ -43,7 +43,7 @@ public class KakaoController
 
 		if (authentication == null)
 		{
-			modelAndView.setViewName("redirect:/");
+			modelAndView.setViewName("redirect:/product/list");
 
 			return modelAndView;
 		}
@@ -56,6 +56,7 @@ public class KakaoController
 		modelAndView.setViewName("socialMember/kakaoLogin");
 		session.setAttribute("kakaoVO", rs); // 카카오 정보 DB insert 성공/실패 값
 		session.setAttribute("kakaoInfo", authentication.getPrincipal());
+		
 
 		return modelAndView;
 	}
@@ -71,7 +72,7 @@ public class KakaoController
 		log.info("kakao login rs2: {}", rs2);
 
 		modelAndView.addObject("rs2", rs2);
-		modelAndView.setViewName("redirect:/");
+		modelAndView.setViewName("redirect:/product/list");
 
 		return modelAndView;
 	}
