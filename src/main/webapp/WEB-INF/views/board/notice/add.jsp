@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>세상의 모든 경매: BIDCOIN</title>
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 <!-- jquery -->
 <c:import url="../../template/boot.jsp"></c:import>
 <c:import url="../../template/summer.jsp"></c:import>

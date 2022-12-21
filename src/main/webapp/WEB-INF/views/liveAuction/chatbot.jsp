@@ -5,14 +5,14 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>토르의 실시간 대장간</title>
+<title>세상의 모든 경매: BIDCOIN</title>
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   
   <c:import url="../template/boot.jsp"></c:import>
   <link href="/css/reset.css" rel="stylesheet">
   <link href="/css/chatbot.css" rel="stylesheet">
-  <link href="/images/Thor.jpg" rel="shortcut icon" type="image/x-icon">
   <link rel="stylesheet" href="/css/getHTMLMediaElement.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 

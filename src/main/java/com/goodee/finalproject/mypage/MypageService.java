@@ -23,10 +23,10 @@ public class MypageService {
 	private MypageMapper mypageMapper;
 	
 	// 암호화된 비밀번호와 VO에 있는 비밀번호 비교해주는 메서드
-	@Autowired
-	private BCryptPasswordEncoder encoder; 
+//	@Autowired
+//	private BCryptPasswordEncoder encoder; 
 	
-	// 비밀번호 암호화해주는 메서드
+	// 비밀번호 암호화해주는 메서드, 암호화된 비밀번호와 VO에 있는 비밀번호 비교해주는 메서드
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -102,7 +102,7 @@ public class MypageService {
 		log.info("서비스 : {}", checkPassword);
 		log.info("서비스 : {}", realPassword);
 		
-		boolean matches = encoder.matches(checkPassword, realPassword);
+		boolean matches = passwordEncoder.matches(checkPassword, realPassword);
 		
 		return matches;
 	}

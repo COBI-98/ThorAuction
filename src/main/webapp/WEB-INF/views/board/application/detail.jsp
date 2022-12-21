@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>세상의 모든 경매: BIDCOIN</title>
+  <link href="/images/miniLogo_BidCoin.png" rel="shortcut icon" type="image/x-icon">
 <c:import url="../../template//boot.jsp"></c:import>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
