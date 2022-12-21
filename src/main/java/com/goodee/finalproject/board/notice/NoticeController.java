@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.util.BoardPageMaker;
 import com.goodee.finalproject.util.FileManager;
 import com.google.gson.JsonObject;
@@ -65,7 +67,15 @@ public class NoticeController {
 	}
 	
 	@GetMapping("add")
-	public void setNoticeAdd(NoticeVO noticeVO) throws Exception{
+	public ModelAndView setNoticeAdd(NoticeVO noticeVO,Authentication authentication) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
+		
+		return mv;
 	}
 	
 	@RequestMapping(value="uploadSummernoteImageFile", produces = "application/json; charset=utf8")
