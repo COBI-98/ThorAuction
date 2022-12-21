@@ -616,7 +616,11 @@ function adminChat(){
 	
 	stopChatCold.addEventListener("click",function(){
 		stopChat.classList.toggle("stop");
-		stopChatCold.value="채팅정지";
+		if(stopChat.classList.contains("stop")){
+			stopChatCold.value = "채팅시작";
+		}else {
+			stopChatCold.value="채팅정지";
+		}
 
 		sendstop();
 	})
