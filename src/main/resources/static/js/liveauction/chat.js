@@ -122,7 +122,7 @@ ws.onmessage = function(msg){
 	}
 	
 	//단위 경매 설정 시
-	if(data.unit != null){
+	else if(data.unit != null){
 		talk.innerHTML += `<div class="hi" style="font-weight:bold;">`+"단위 가격이 " + data.unit + "원 으로 변경되었습니다." +`</div>`;
 		add.value = "+" + data.unit;
 	}
