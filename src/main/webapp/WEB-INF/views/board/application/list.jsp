@@ -17,46 +17,58 @@
 	<c:import url="../../template/header.jsp"></c:import>
 	<section class="container-fluid col-lg-8 mt-5 ">
 	<div class="row mb-3">
-		<form action="./list" class="row formStyle">
-			<div>
-				<label class="test_obj">
-					<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == null || param.auctionSort == 1}">class="checked"</c:if> value="1">
-					<span>실시간경매 게시판</span>
+		<form action="./list" class="row ">
+			<div >
+				<div style="display: flex; justify-content: center;">
+						<label class="test_obj" >
+							<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == null || param.auctionSort == 1}">class="checked"</c:if> value="1">
+							<span style="font-size: 18px;">실시간경매 게시판</span>
+							
+						</label>
+						 
+						<label class="test_obj">
+							<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == 0}">class="checked"</c:if> value="0" >
+							<span style="font-size: 18px;">온라인경매 게시판</span>
+						</label>
+				</div>
+				
+				
+				<div>
+					<img alt="" src="/images/noticedd.jpg">
+				</div>
+				
+				<div style="border: 1px solid #f1a94c; border-radius: 20px; padding: 15px; text-align: center; font-size: 17px;">
 					
-				</label>
-				 
-				<label class="test_obj">
-					<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == 0}">class="checked"</c:if> value="0" >
-					<span>온라인경매 게시판</span>
-				</label>
-				<c:if test="${param.auctionSort == null || param.auctionSort == 1}">
-					<br><span>본 게시판은 실시간 경매장의 상품판매를 위해 운영되고있습니다.<br>
-						입력 폼에 맞게 판매하시려는 상품을 신청하시면 승인, 반려 여부를 알려드립니다.<br>
-						승인, 판매상품을 해당주소로 보내주시면 판매를 도와드립니다.<br>
-						반려, 판매상품의 취소 사유를 확인하시고 수정해서 작성해주시면 판매를 도와드리겠습니다. <br>
-						<br>
-						실시간 경매 날짜는 추후 공지됩니다. 
-					</span>
-				</c:if>
-				<c:if test="${param.auctionSort == 0}">
-					<br><span>본 게시판은 온라인 경매장의 상품판매를 위해 운영되고있습니다.<br>
-						입력 폼에 맞게 판매하시려는 상품을 신청하시면 승인, 반려 여부를 알려드립니다.<br>
-						승인, 판매상품을 해당주소로 보내주시면 판매를 도와드립니다.<br>
-						반려, 판매상품의 취소 사유를 확인하시고 수정해서 작성해주시면 판매를 도와드리겠습니다.<br><br>
-
-						승인 이후, 온라인 경매장에 상품에서 확인하실 수 있습니다.
-					</span>
-				</c:if>
+					<c:if test="${param.auctionSort == null || param.auctionSort == 1}">
+						<br><span>본 게시판은 실시간 경매장의 상품판매를 위해 운영되고있습니다.<br>
+							입력 폼에 맞게 판매하시려는 상품을 신청하시면 승인, 반려 여부를 알려드립니다.<br>
+							승인, 판매상품을 해당주소로 보내주시면 판매를 도와드립니다.<br>
+							반려, 판매상품의 취소 사유를 확인하시고 수정해서 작성해주시면 판매를 도와드리겠습니다. <br>
+							<br>
+							실시간 경매 날짜는 추후 공지됩니다. 
+						</span>
+					</c:if>
+					<c:if test="${param.auctionSort == 0}">
+						<br><span>본 게시판은 온라인 경매장의 상품판매를 위해 운영되고있습니다.<br>
+							입력 폼에 맞게 판매하시려는 상품을 신청하시면 승인, 반려 여부를 알려드립니다.<br>
+							승인, 판매상품을 해당주소로 보내주시면 판매를 도와드립니다.<br>
+							반려, 판매상품의 취소 사유를 확인하시고 수정해서 작성해주시면 판매를 도와드리겠습니다.<br><br>
+	
+							승인 이후, 온라인 경매장에 상품에서 확인하실 수 있습니다.
+						</span>
+					</c:if>
+				
+				</div>
 			 </div>
 		</form>
 	</div> 
 
-	<div class="row mb-3 bbs_search">
-		<form action="./list">
+	<div class="row mb-3 bbs_search" style="display: flex;justify-content: center;">
+		<form action="./list" style="width: 70%;">
 			<input type="hidden" value="${param.auctionSort}">
 			<div class="col-3" style="display : inline-block;">
 				<label class="visually-hidden" for="Kind" >Kind</label> 
-				<select name="kind" class="form-select" id="Kind">
+				<select name="kind" class="form-select" id="Kind" style="width: 50%;">
 					
 					<option class="kinds" value="applicationNum" <c:if test="${param.kind eq 'applicationNum' }"> selected </c:if>>글번호</option>
 		
@@ -66,15 +78,15 @@
 				</select>
 			</div>
 
-			<div class="col-3" style="display : inline-block;">
-				<label class="visually-hidden" for="search">검색</label>
+			<div class="col-7" style="display : inline-block;">
+				<label class="visually-hidden" for="search" >검색</label>
 				<div class="input-group">
 					<input type="text" name="search" value="${param.search}"
 						class="form-control" id="search" placeholder="검색어를 입력하세요">
 				</div>
 			</div>
-			<div class="col-3" style="display : inline-block;">
-				<button type="submit" class="btn btn-warning">검색</button>
+			<div class="" style="display : inline-block;">
+				<button type="submit" class="btn btn-warning" style="color: white;font-weight: 600">검색</button>
 			</div>
 				<label class="visually-hidden" for="auctionSort"></label>
 				<div class="input-group">
@@ -145,7 +157,7 @@
 					</ul>
 			</nav>
 		<div class="btnAdd">
-			<a href="./add" type="button" class="btn btn-warning">글쓰기</a>
+			<a href="./add" type="button" class="btn btn-warning" style="color: white; font-weight: 600">글쓰기</a>
 		</div>
 		</section>
 		<c:import url="../../template/footer.jsp"></c:import>
