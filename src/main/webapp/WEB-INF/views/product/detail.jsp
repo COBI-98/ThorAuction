@@ -277,7 +277,7 @@
 						</tr>
 						</tbody>
 				</table>
-				<h3 id="detail_con5">상품 정보 제공</h3>
+				<h3 id="detail_con5" style="margin: 50px 0 25px 0">상품 정보 제공</h3>
 				<table class="tit_detailinfo">
 		
 					<tbody><tr>
@@ -346,7 +346,11 @@
 					</dd>	
 				</dl>
 				</div>
-			<div class="stitle" id="detail_con4">상품문의하기</div>
+				<br>
+				<br>
+				<br>
+				<hr>
+			<div class="stitle" id="detail_con4" style="font-size: 28px; font-weight: 600; padding: 0">상품 문의하기</div>
 			<div class="stext">
 				상품에 대한 문의를 남기는 공간입니다. 
 			</div>
@@ -372,10 +376,17 @@
 										<c:if test="${questionVO.adminQuestionVO.aqNum != null}">
 											
 											<div class="reply">
-												<img src="/images/Bitcoin.png" alt="" style="width: 30px;">
-												${questionVO.adminQuestionVO.aqContents}<br>
-												${questionVO.adminQuestionVO.name}<br>
-												${questionVO.adminQuestionVO.aqDate}<br>
+												<div style=" margin: 8px;">
+													<img src="/images/Bitcoin.png" alt="" style="width: 30px; display: inline; margin: 8px;">${questionVO.adminQuestionVO.name}
+													<div style="float: right; width: 10%;">
+														${questionVO.adminQuestionVO.aqDate}
+													</div>
+												</div>
+												<div style="margin: 20px 15px; font-size: 15px;">
+													${questionVO.adminQuestionVO.aqContents}
+												</div>
+												
+												
 												<!-- 관리자만-->
 												<c:if test="${memberVO.roleVOs[0].roleNum == 1}">
 													<button type="button" class="btn btn-warning" onclick="do_delete_question_admin('${questionVO.adminQuestionVO.aqNum}');">삭제</button>
@@ -408,7 +419,7 @@
 			<c:if test="${memberVO.id == null}">
 			<p class="size12 pt15 center gray999">로그인을 하신 후에 문의 작성이 가능합니다</p>
 			</c:if>
-				<div class="pt5 center"><a href="#" onclick="open_layer_qna();" class="btn_after">상품문의 등록하기</a></div>	
+				<div class="pt5 center" style="border-radius: 20px; font-size: 18px; margin: 10px;"><a href="#" onclick="open_layer_qna();" class="btn_after" style="border-radius: 20px;">상품문의 등록하기</a></div>	
 
 		</div>
 			
