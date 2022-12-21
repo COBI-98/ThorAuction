@@ -110,7 +110,7 @@
 																							<li>
 																								<a href="/product/detail?productId=${product.productId}">
 																								<c:forEach items="${product.productVOs}" var="products">
-																									<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" style="width=100px; height="100px;"></div>
+																									<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" style="width:100px; height:100px;"></div>
 																									<div class="name">${products.productName}</div>
 																								</c:forEach>
 																										<input type="hidden" name="productId" value="${product.bidAmountVOs[0].productId}">
