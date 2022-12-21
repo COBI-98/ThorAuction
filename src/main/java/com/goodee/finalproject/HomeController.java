@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.goodee.finalproject.admin.AdminService;
 import com.goodee.finalproject.member.MemberVO;
+import com.goodee.finalproject.mypage.MypageService;
 import com.goodee.finalproject.socialmember.KakaoDetailVO;
 import com.goodee.finalproject.socialmember.KakaoVO;
 import com.goodee.finalproject.socialmember.MemberSocialService;
@@ -34,6 +35,8 @@ public class HomeController
 	private AdminService adminService;
 	@Autowired
 	private MemberSocialService memberSocialService;
+	@Autowired
+	private MypageService mypageService;
 
 	@GetMapping("/")
 	public ModelAndView home(Principal principal, MemberVO memberVO, HttpSession session, KakaoVO kakaoVO, KakaoDetailVO kakaoDetailVO,
@@ -66,6 +69,16 @@ public class HomeController
 				log.info("ID정보 : {}" + principal.getName());
 				modelAndView.addObject("memID", principal.getName());
 				modelAndView.setViewName("header");
+				
+				// header 포인트 최신화
+				memberVO.setId(principal.getName());
+				log.info("indexId: {}", memberVO.getId());
+				
+				memberVO = mypageService.getList(memberVO);
+				log.info("indexVO: {}", memberVO);
+				
+				modelAndView.addObject("memberDB", memberVO);
+				modelAndView.setViewName("/**");
 			}
 			else
 			{
