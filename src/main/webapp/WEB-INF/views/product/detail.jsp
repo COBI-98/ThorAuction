@@ -351,7 +351,7 @@
 				상품에 대한 문의를 남기는 공간입니다. 
 			</div>
 			<ul class="product_qna">
-				<c:forEach items="${saleProductVO.productQuestionVOs}" var="questionVO">
+				<c:forEach items="${saleProductQna.productQuestionVOs}" var="questionVO">
 					<c:if test="${questionVO.questionId != null }">
 							<li id="do_menu2${questionVO.questionId}" class="">
 									<div class="qust">
@@ -374,7 +374,7 @@
 											<div class="reply">
 												이미지 자리<br>
 												${questionVO.adminQuestionVO.aqContents}<br>
-												
+												${questionVO.adminQuestionVO.id}<br>
 												${questionVO.adminQuestionVO.aqDate}<br>
 												<!-- 관리자만-->
 												<c:if test="${memberVO.roleVOs[0].roleNum == 1}">

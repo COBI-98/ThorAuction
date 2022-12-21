@@ -48,6 +48,8 @@ public interface ProductMapper {
 	public List<CategoryVO> getCategoryList(CategoryVO categoryVO) throws Exception;
 
 	public SaleProductVO getSaleProductListDetail(SaleProductVO saleProductVO) throws Exception;
+	
+	public SaleProductVO getSaleProductListDetail2(SaleProductVO saleProductVO) throws Exception;
 
 	// 온라인상품이 마감일이 지났을때 마감정보 1로 변경
 	public int setDeadLineUpdate(SaleProductVO saleProductVO) throws Exception;
