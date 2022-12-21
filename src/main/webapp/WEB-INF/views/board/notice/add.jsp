@@ -34,7 +34,7 @@
         </div>
          <div>
         작성자<br>
-        <input type="text" name="writer"  ><br>
+        <input type="text" name="writer" value="${memberVO.id}" readonly ><br>
         </div>
         <div>
         글 내용<br>

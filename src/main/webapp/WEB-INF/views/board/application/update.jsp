@@ -41,7 +41,7 @@
         </div>
          <div class="applicationDetail">
         작성자<br>
-        <input type="text" name="writer" value="${applicationUpdate.writer}" ><br>
+        <input type="text" name="writer" value="${applicationUpdate.writer}" readonly ><br>
         </div>
         <input type="hidden" name="applicationNum" id="applicationNum" value="${applicationUpdate.applicationNum}">
        <div class="apllicationForm">
