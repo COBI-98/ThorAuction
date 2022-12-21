@@ -56,6 +56,7 @@ var selecteditem = getId('selecteditem');
 var ln = getId('loginnum');
 var mediaName = getId('media-titleText');
 var setBroadNameBtn = getId('setBroadNameBtn');
+var real = getId('real');
 
 var username;
 var win = false;
@@ -147,8 +148,13 @@ ws.onmessage = function(msg){
 	
 			//최고금액 보이게
 			$('#amount').css("display","inline");
+
+			real.innerText = "경매 진행중!!!"
+
 			
 		}else{
+			real.innerText = "경매를 진행하고 있지 않습니다."
+
 			// auctionStart.value="경매시작";
 		}
 	}
@@ -188,6 +194,9 @@ ws.onmessage = function(msg){
 			var num = data.itemNum;
 			$("#items option[value="+num+"]").hide();
 			$("#items").val("none").prop("selected", true);
+
+			real.innerText = "경매를 진행하고 있지 않습니다."
+
 		}else{
 			// auctionStart.value="경매종료";
 		}
@@ -329,12 +338,16 @@ ws.onmessage = function(msg){
 			// talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 
 			//text 하나로 표시
+			real.innerText = "경매 진행중!!!"
+
 
 			auctionend.classList.add("start");
 		}else if(data.gogo == "false"){
 			// auctionStart.value = "경매시작";
 			// talk.innerHTML += `<div class="hi">` + "<b>"+"*경매 진행 중 아닙니다.*" +"</b>" +`</div>`;
 			// talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+			real.innerText = "경매를 진행하고 있지 않습니다."
+
 
 		}
 
