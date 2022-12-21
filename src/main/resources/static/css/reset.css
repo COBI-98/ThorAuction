@@ -23,13 +23,14 @@ left: 0;
 right: 0;
 }
 
-a{
+a {
 text-decoration: none !important;
 }
+
 .wrap {
 min-height: 100%;
 position: relative;
-padding-bottom: 305px; /* footer height = 84px */
+padding-bottom: 205px; /* footer height = 84px */
 }
 
 .productImgs{
