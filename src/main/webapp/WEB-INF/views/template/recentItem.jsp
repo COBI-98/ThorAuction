@@ -15,7 +15,7 @@
 				<c:forEach items="${recentList}" var="product">
 					<li class="css-1vgyrcu e1tjwjt93">
 						<a href="/product/detail?productId=${product.productId}" class="css-10nxrmy e1tjwjt92">
-							<img src="../resources/upload/product/${product.productVOs[0].productFileVOs[0].fileName}" class="css-68s41j e1tjwjt90" style="width: 60px; height: 80px;">
+							<img src="/resources/upload/product/${product.productVOs[0].productFileVOs[0].fileName}" class="css-68s41j e1tjwjt90" style="width: 60px; height: 80px;">
 						</a>
 					</li>
 				</c:forEach>
