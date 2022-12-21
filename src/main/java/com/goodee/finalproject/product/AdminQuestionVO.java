@@ -10,6 +10,6 @@ public class AdminQuestionVO {
 	private String aqContents;
 	private Date aqDate;
 	private Long questionId;
-	private String id;
+	private String name;
 	
 }
