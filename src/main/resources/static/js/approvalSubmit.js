@@ -15,7 +15,7 @@ $("#modalSubmit").click(function(){
             },success:function(result){
                 if(result == 1){
                     swal("취소사유 작성 완료","","success").then(function(){
-                        location.reload();
+                        location.href="/board/application/list";
                     })
                 }
             },error:function(){
@@ -36,7 +36,9 @@ $("#approval_btn").click(function(){
             approvalCheck : 1
         },success:function(result){
             if(result == 1){
-                swal("승인완료","","success")
+                swal("승인완료","","success").then(function(){
+                    location.href="/board/application/list";
+                })
             }
         },error:function(){
             swal("에러");
