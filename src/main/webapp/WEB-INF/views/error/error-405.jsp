@@ -11,7 +11,7 @@
 <meta name="description"
 	content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
 <meta name="robots" content="noindex,nofollow" />
-<title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+<title>Error 405 : bidcoin</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
 <!-- Custom CSS -->
@@ -39,7 +39,7 @@
 				<h1 class="error-title text-danger">405</h1>
 				<h3 class="text-uppercase error-subtitle">PAGE NOT FOUND !</h3>
 				<p class="text-muted mt-4 mb-4">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
-				<a href="/"
+				<a href="/product/list"
 					class="
               btn btn-danger btn-rounded
               waves-effect waves-light
