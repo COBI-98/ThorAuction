@@ -19,21 +19,21 @@
 <link href="/css/reset.css" rel="stylesheet">
 </head>
 <body>
-	<c:import url="../../template/header.jsp"></c:import>
-	<section class="container-fluid col-lg-8 mt-5">
-		<div class="row">
-	 <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
+   <c:import url="../../template/header.jsp"></c:import>
+   <section class="container-fluid col-lg-8 mt-5">
+      <div class="row">
+    <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
         <div>
-	        <label class="test_obj">
-			    <input type="radio" name="auctionSort" <c:if test="${applicationUpdate.auctionSort == true}">checked</c:if> value="1">
-			    <span>실시간경매 상품신청</span>
-			</label>
-			 
-			<label class="test_obj">
-			    <input type="radio" name="auctionSort" <c:if test="${applicationUpdate.auctionSort == false}">checked</c:if> value="0">
-			    <span>온라인경매 상품신청</span>
-			</label>
-		 </div>
+           <label class="test_obj">
+             <input type="radio" name="auctionSort" <c:if test="${applicationUpdate.auctionSort == true}">checked</c:if> value="1">
+             <span>실시간경매 상품신청</span>
+         </label>
+          
+         <label class="test_obj">
+             <input type="radio" name="auctionSort" <c:if test="${applicationUpdate.auctionSort == false}">checked</c:if> value="0">
+             <span>온라인경매 상품신청</span>
+         </label>
+       </div>
 
      
         <div class="applicationDetail">
@@ -108,26 +108,26 @@
         <input type="submit" id="applicationSubmit" value="수정하기"  class ="btn btn-info">
     </form>
 
-				
+            
     
         
         
         <!-- </form> -->
 </div>
-	
+   
 </section>
 <c:import url="../../template/footer.jsp"></c:import>
 <script src="/js/applicationFileManager.js"></script>
 
 <script type="text/javascript">
-	$("#contents").summernote({
+   $("#contents").summernote({
         height: 500,                 // 에디터 높이
         minHeight: null,             // 최소 높이
         maxHeight: null,             // 최대 높이
         focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
         lang: "ko-KR",               // 한글 설정
         placeholder: '최대 2048자까지 쓸 수 있습니다'   //placeholder 설정
-        // callbacks: {	//이미지 첨부하는 부분
+        // callbacks: {   //이미지 첨부하는 부분
         //        onImageUpload : function(files) {
         //             uploadSummernoteImageFile(files[0],this);
         //         }
@@ -138,7 +138,7 @@
 
 <script type="text/javascript">
    
-	$(document).ready(function() {
+   $(document).ready(function() {
 
     var toolbar = [
         // 글꼴 설정
@@ -186,21 +186,21 @@
     
 
     function uploadSummernoteImageFile(file, el) {
-			data = new FormData();
-			data.append("file", file);
-			$.ajax({
-				data : data,
-				type : "POST",
-				url : "./uploadSummernoteImageFile",
-				contentType : false,
-				enctype : 'multipart/form-data',
-				processData : false,
-				success : function(data) {
+         data = new FormData();
+         data.append("file", file);
+         $.ajax({
+            data : data,
+            type : "POST",
+            url : "./uploadSummernoteImageFile",
+            contentType : false,
+            enctype : 'multipart/form-data',
+            processData : false,
+            success : function(data) {
                     console.log(data.url);
-					$(el).summernote('editor.insertImage', data.url);
+               $(el).summernote('editor.insertImage', data.url);
                     console.log("rr");
-				}
-			});
+            }
+         });
         }
  
 </script>
