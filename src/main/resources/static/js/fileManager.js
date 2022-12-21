@@ -19,11 +19,13 @@ $("#fileAdd").click(function(){
     
     console.log(noticeNum);
     if($(".files").length<3){
-        let r = '<div class="file_form mt-2">';
+        let r = '<div style="width:100%;">';
+         r = r+'<div class="file_form mt-2" style="width:90%;">';
         /* r = r+'<label for="contents" class="form-label">Files</label>'; label 여부 체크 */
         r = r+'<input type="file" name="files" class="files form-control">';
         r = r+'<span class="text">선택된 파일 없음</span> ';
-        r = r+'<button type="button" class="del btn btn-danger" style="margin:auto;display: block;">X</button>'
+        r = r+'<button type="button" class="del btn btn-danger" style="display: block;">X</button>'
+        r = r+'</div>';
         r = r+'</div>';
         $("#fileAddResult").append(r);
     }else {
