@@ -168,10 +168,13 @@ public class NoticeController {
 	}
 
 	@GetMapping("detail")
-	public ModelAndView getNoticeListDetail(NoticeVO noticeVO) throws Exception{
+	public ModelAndView getNoticeListDetail(NoticeVO noticeVO,Authentication authentication) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		noticeVO = noticeService.getNoticeListDetail(noticeVO);
-	
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
 		mv.addObject("noticeVO",noticeVO);
 		mv.setViewName("/board/notice/detail");
 		return mv;
