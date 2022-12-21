@@ -50,7 +50,7 @@ for(let i = 0; i<count;i++){
       // $(".timer").innerHTML = `${day}<span>일</span> ${hours}<span>시간</span> : ${minutes}<span>분</span> : ${seconds}<span>초</span> 남았습니다.`;
       // console.log(timer.val());
       
-      timer[i].innerHTML = "남은시간"+'<strong><span id="d-day-day0">' +`0${day}</span>일<span id="d-day-hour0"> ${hours}</span> : <span id="d-day-min0"> ${minutes}</span> : <span id="d-day-sec0"> `+`${seconds}</span></strong>`;
+      timer[i].innerHTML = "남은시간 "+'<strong><span id="d-day-day0">' +`0${day}</span>일<span id="d-day-hour0"> ${hours}</span> : <span id="d-day-min0"> ${minutes}</span> : <span id="d-day-sec0"> `+`${seconds}</span></strong>`;
     }
   };
 

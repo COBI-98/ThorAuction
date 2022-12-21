@@ -104,34 +104,37 @@
 																			
 																			<c:when test="${product.deadlineInfo == false && product.productVOs[0].status == false}">
 																				<li class="list">
+																				<div class="shopinfo">경매 시작일: <fmt:formatDate value="${product.productDate}" pattern="yyyy-MM-dd HH:mm:ss"/> / 현재가: <fmt:formatNumber value="${product.maxBidAmount}" pattern="###,###,###,###"/>원</div>
 																					<div class="orderlist">
 																						<ul class="prolist">
 																							<li>
 																								<a href="/product/detail?productId=${product.productId}">
 																								<c:forEach items="${product.productVOs}" var="products">
-																									<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" width="100px"></div>
+																									<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" style="width=100px; height="100px;"></div>
 																									<div class="name">${products.productName}</div>
 																								</c:forEach>
 																										<input type="hidden" name="productId" value="${product.bidAmountVOs[0].productId}">
-																										<div class="price">
+																										<div class="price" style="margin-left: 100px;">
 																											입찰금액: <fmt:formatNumber value="${product.bidAmountVOs[0].bidAmount}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.bidAmountVOs[0].bidDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 																										</div>
 																										<input type="hidden" class="productDate" name="tdate" value="${product.productDate}">
 																										<input type="hidden" class="timeLength" value="${product.productVOs[0].auctionPeriod}">
-																										<div class="timedate" id="timertest" >
+																										<div class="timedate" id="timertest" style="margin-left: 100px;">
 									
 																										</div>
 																								</a>
 																							</li>
 																						</ul>
+																						
 																						<div class="statebox">
+																						
 																							<c:choose>
 																								<c:when test="${product.maxBidAmount == product.bidAmountVOs[0].bidAmount}">
 																									<div class="state ">최고가 입찰중</div>
 																								</c:when>
 																								<c:when test="${product.maxBidAmount != product.bidAmountVOs[0].bidAmount}">
-																									<div class="state ">입찰중 <br>
-																									최고가 = ${product.maxBidAmount}</div>
+																									<div class="state ">입찰중</div>
+																									
 																								</c:when>
 																								<c:otherwise>
 																								</c:otherwise>

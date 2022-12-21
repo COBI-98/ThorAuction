@@ -108,7 +108,7 @@
 																			<th scope="col" style="text-align: center;">상품명</th>
 																			<th scope="col">시작가</th>
 																			<th scope="col" style="text-align: center;">신청일</th>
-																			<th scope="col">신청상태</th>
+																			<th scope="col" style="text-align: center;">신청상태</th>
 																		</tr>
 																	</thead>
 
@@ -125,10 +125,10 @@
 																				<c:choose>
 																			      	<c:when test="${app.approvalCheck == '0'}"><td style="color: #fea532; font-weight: bold; text-align: center;">대기</td></c:when>
 																			      	<c:when test="${app.approvalCheck == '1'}"><td style="color: blue; font-weight: bold; text-align: center;">승인</td></c:when>
-																					  <c:when test="${app.approvalCheck == '2'}"><td style="color: red; font-weight: bold; text-align: center;">거부 <br> 상세정보 부족</td></c:when>
-																					  <c:when test="${app.approvalCheck == '3'}"><td style="color: red; font-weight: bold; text-align: center;">거부 <br> 부적절한 이미지</td></c:when>
-																					  <c:when test="${app.approvalCheck == '4'}"><td style="color: red; font-weight: bold; text-align: center;">거부 <br> 부적절한 상품</td></c:when>
-																			      	<c:otherwise><td>거부</td></c:otherwise>
+																					<c:when test="${app.approvalCheck == '2'}"><td style="color: red; font-weight: bold; text-align: center;">상세정보 부족</td></c:when>
+																					<c:when test="${app.approvalCheck == '3'}"><td style="color: red; font-weight: bold; text-align: center;">부적절한 이미지</td></c:when>
+																					<c:when test="${app.approvalCheck == '4'}"><td style="color: red; font-weight: bold; text-align: center;">부적절한 상품</td></c:when>
+																					  <c:otherwise><td>거부</td></c:otherwise>
 																			     </c:choose>
 																			</tr>
 																		</c:forEach>

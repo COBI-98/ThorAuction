@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- security tag -->
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<style>
+.nav-link {
+	color: black !important;
+	font-weight: bold;
+	}
+</style>
 <div class="wrap">
 	<nav class="py-2 bg-light border-bottom" style="background-color: #fea532 !important; height: 40px;">
 
@@ -135,17 +141,3 @@
 
 	</header>
 
-	<script>
-		var width = '500';
-		var height = '600';
-		var left = Math.ceil((window.screen.width) / 2);
-		var top = Math.ceil((window.screen.height) / 2);
-		// /oauth2/authorization/kakao
-		function popup() {
-			var url = "/member/delete";
-			var name = "popup test";
-			var option = "width=" + width + ", height=" + height + ", top="
-					+ top + ", left=" + left
-			window.open(url, name, option);
-		}
-	</script>

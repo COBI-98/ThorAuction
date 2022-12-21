@@ -26,6 +26,12 @@ public class ProductService {
 	@Autowired
 	private ProductMapper productMapper;
 	
+	// 최근 본 상품
+	public List<SaleProductVO> recentProduct(Long productId) throws Exception {
+		
+		return productMapper.recentProduct(productId);
+	}
+	
 	public ProductVO getProductApproval(ProductVO productVO) throws Exception{
 		
 		return productMapper.getProductApproval(productVO);
@@ -58,6 +64,11 @@ public class ProductService {
 	public SaleProductVO getSaleProductListDetail(SaleProductVO saleproductVO) throws Exception{
 		
 		return productMapper.getSaleProductListDetail(saleproductVO);
+	}
+	
+	public SaleProductVO getSaleProductListDetail2(SaleProductVO saleproductVO) throws Exception{
+		
+		return productMapper.getSaleProductListDetail2(saleproductVO);
 	}
 	
 	public int setDeadLineUpdate(SaleProductVO saleProductVO) throws Exception{

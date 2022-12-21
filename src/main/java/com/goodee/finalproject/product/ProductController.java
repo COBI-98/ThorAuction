@@ -1,14 +1,13 @@
 package com.goodee.finalproject.product;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -19,12 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.goodee.finalproject.board.application.ApplicationController;
 import com.goodee.finalproject.member.MemberVO;
 import com.goodee.finalproject.mypage.MypageService;
 
@@ -152,10 +149,18 @@ public class ProductController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getSaleProductListDetail(SaleProductVO saleProductVO,Authentication authentication) throws Exception{
+	public ModelAndView getSaleProductListDetail(SaleProductVO saleProductVO,Authentication authentication, HttpSession session) throws Exception{
 		ModelAndView mv= new ModelAndView();
+		
+		// 댓글관리과 입찰내역이 하나의 테이블에 left join이 안되어서 VO관리를 두개로 나눔
+		SaleProductVO saleProductVO2 = saleProductVO;
 		saleProductVO = productService.getSaleProductListDetail(saleProductVO);
+		
+		//댓글관리
+		saleProductVO2 = productService.getSaleProductListDetail2(saleProductVO2);
+		
 		productService.setSaleProductHit(saleProductVO);
+		
 		if(authentication != null) {
 			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
 			mv.addObject("memberVO", memberVO);
@@ -165,9 +170,6 @@ public class ProductController {
 		LocalDateTime now = LocalDateTime.now(); 
 		Timestamp timestamp = Timestamp.valueOf(now);
 		
-		// 기간 + getTime();
-		System.out.println("test"+saleProductVO.getProductVOs().get(0).getAuctionPeriod()*24*3600*1000);
-		System.out.println(saleProductVO.getProductDate().getTime());
 		
 		bidAmountVO.setProductId(saleProductVO.getProductId());
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
@@ -176,10 +178,46 @@ public class ProductController {
 			check = saleProductVO.getProductVOs().get(0).getProductPrice();
 		}
 		
+		// 최근 본 상품
+		Long productId = saleProductVO.getProductId();
+		
+		List<Long> ar = (List<Long>)session.getAttribute("recent");
+		
+		if(ar == null) {
+			ar = new ArrayList<Long>();
+			session.setAttribute("recent", ar);
+		}
+		
+		ar.add(productId);
+		
+		// 중복상품 제거
+		Set<Long> set = new HashSet<Long>(ar);
+		
+		// 중복 제거된 상품을 다시 newAr에 넣기
+		List<Long> newAr = new ArrayList<Long>(set);
+		
+		List<SaleProductVO> recentList = new ArrayList<SaleProductVO>();
+		
+		// 최근 본 상품 form에 넣기
+		for(Long l : newAr) {
+			List<SaleProductVO> recentListDetail = productService.recentProduct(l);
+			
+			if(recentListDetail.size() != 0) {
+				recentList.add(recentListDetail.get(0));
+			}
+		}
+		
+		session.setAttribute("recentList", recentList);
+		
+		mv.addObject("recentList", recentList);
+		
+		log.info("최근 : {}", recentList);
+		// 최근 본 상품 End
+		
 		mv.addObject("maxAmount", check);
 		
-		
 		mv.addObject("saleProductVO", saleProductVO);
+		mv.addObject("saleProductQna", saleProductVO2);
 		mv.setViewName("product/detail");
 		return mv;
 	}
