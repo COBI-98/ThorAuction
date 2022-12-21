@@ -104,6 +104,7 @@
 																			
 																			<c:when test="${product.deadlineInfo == true && product.productVOs[0].status == true && product.maxBidAmount != product.bidAmountVOs[0].bidAmount}">
 																			<li class="list">
+																			<div class="shopinfo">경매 시작일: <fmt:formatDate value="${product.productDate}" pattern="yyyy-MM-dd HH:mm:ss"/> / 낙찰금액: <fmt:formatNumber value="${product.maxBidAmount}" pattern="###,###,###,###"/>원</div>
 																				<div class="orderlist">
 																					<ul class="prolist">
 																						<li>
@@ -113,12 +114,12 @@
 																								<div class="name">${products.productName}</div>
 																							</c:forEach>
 																									<input type="hidden" name="productId" value="${product.bidAmountVOs[0].productId}">
-																									<div class="price">
+																									<div class="price" style="margin-left: 100px;">
 																										입찰금액: <fmt:formatNumber value="${product.bidAmountVOs[0].bidAmount}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.bidAmountVOs[0].bidDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 																									</div>
 																									<input type="hidden" class="productDate" name="tdate" value="${product.productDate}">
 																									<input type="hidden" class="timeLength" value="${product.productVOs[0].auctionPeriod}">
-																									<div class="timedate" id="timertest" >
+																									<div class="timedate" id="timertest" style="margin-left: 100px;">
 								
 																									</div>
 																							</a>
@@ -133,21 +134,22 @@
 																			<c:when test="${product.deadlineInfo == true && product.productVOs[0].status == true && product.maxBidAmount == product.bidAmountVOs[0].bidAmount}">
 																				<!-- 마감된 상품이 내가 최고가로 입찰을 했다면 낙찰내역으로 -->
 																				<li class="list">
+																				<div class="shopinfo">경매 시작일: <fmt:formatDate value="${product.productDate}" pattern="yyyy-MM-dd HH:mm:ss"/> / 낙찰금액: <fmt:formatNumber value="${product.maxBidAmount}" pattern="###,###,###,###"/>원</div>
 																					<div class="orderlist">
 																						<ul class="prolist">
 																							<li>
 																								<a href="/product/detail?productId=${product.productId}">
 																								<c:forEach items="${product.productVOs}" var="products">
-																									<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" width="100px"></div>
+																									<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" style="width="100px; height=100px;"></div>
 																									<div class="name">${products.productName}</div>
 																								</c:forEach>
 																										<input type="hidden" name="productId" value="${product.bidAmountVOs[0].productId}">
-																										<div class="price">
+																										<div class="price" style="margin-left: 100px;">
 																											입찰금액: <fmt:formatNumber value="${product.bidAmountVOs[0].bidAmount}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.bidAmountVOs[0].bidDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 																										</div>
 																										<input type="hidden" class="productDate" name="tdate" value="${product.productDate}">
 																										<input type="hidden" class="timeLength" value="${product.productVOs[0].auctionPeriod}">
-																										<div class="timedate" id="timertest" >
+																										<div class="timedate" id="timertest" style="margin-left: 100px;">
 									
 																										</div>
 																								</a>
@@ -172,7 +174,7 @@
 															<div class="he20"></div>
 														</div>
 													</div>
-																										</c:when>
+													</c:when>
 														<c:otherwise>
 															<table class="table" style="font-size: 15px;">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 낙찰내역이 있습니다.</div>
