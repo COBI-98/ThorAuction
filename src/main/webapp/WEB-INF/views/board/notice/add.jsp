@@ -65,11 +65,15 @@
 
         </div>
 			<div class="mb-3">
-				<button type="button" id="fileAdd" class="btn btn-success">첨부파일 추가</button>
+				<button type="button" id="fileAdd" class="btn btn-success" style="float: right;margin: 15px;">첨부파일 추가</button>
 			</div>
             
+            <div>
+            
+		       	 <input type="submit" name="add" value="공지사항 추가"  class ="btn btn-info"style="float: right; font-weight: 600; color: white; background-color: #f1a94c; border: 0">
+            
+            </div>
          
-        <input type="submit" name="add" value="공지사항 추가"  class ="btn btn-info"style="margin-left: 300px; font-weight: 600; color: white; background-color: #f1a94c; border: 0">
         </form>
 </div>
 	
