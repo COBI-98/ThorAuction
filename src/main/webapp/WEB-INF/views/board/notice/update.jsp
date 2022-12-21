@@ -40,7 +40,7 @@
         </div>
          <div>
         작성자<br>
-        <input type="text" name="writer"  value="${noticeUpdate.writer}"><br>
+        <input type="text" name="writer"  value="${noticeUpdate.writer}"  readonly><br>
         </div>
         <div>
         글 내용<br>
