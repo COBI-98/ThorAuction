@@ -20,7 +20,7 @@
 		<form action="./list" >
 
 			
-			<div class="col-3" style="display : inline-block;">
+			<div class="col-2" style="display : inline-block;">
 				<label class="visually-hidden" for="Kind" >Kind</label> 
 				<select name="kind" class="form-select" id="Kind">
 					<option class="kinds" value="noticeNum" <c:if test="${param.kind eq 'noticeNum' }"> selected </c:if>>글번호</option>
@@ -30,15 +30,15 @@
 				</select>
 			</div>
 
-			<div class="col-3" style="display : inline-block;">
-				<label class="visually-hidden" for="search">검색</label>
+			<div class="col-5" style="display : inline-block;">
+				<label class="visually-hidden" for="search" >검색</label>
 				<div class="input-group">
 					<input type="text" name="search" value="${param.search}"
 						class="form-control" id="search" placeholder="검색어를 입력하세요">
 				</div>
 			</div>
 			<div class="col-3" style="display : inline-block;">
-				<button type="submit" class="btn btn-warning">검색</button>
+				<button type="submit" class="btn btn-warning" style="color: white; font-weight: 600">검색</button>
 			</div>
 		</form>
 
@@ -98,7 +98,7 @@
 				</ul>
 		</nav>
 		<div class="btnAdd">
-			<a href="./add" type="button" class="btn btn-warning">글쓰기</a>
+			<a href="./add" type="button" class="btn btn-warning" style="color: white; font-weight: 600">글쓰기</a>
 		</div>
 		</section>
 		<c:import url="../../template/footer.jsp"></c:import>

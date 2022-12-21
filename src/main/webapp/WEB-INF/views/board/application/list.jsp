@@ -22,13 +22,13 @@
 				<div style="display: flex; justify-content: center;">
 						<label class="test_obj" >
 							<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == null || param.auctionSort == 1}">class="checked"</c:if> value="1">
-							<span style="font-size: 18px;">실시간경매 게시판</span>
+							<span style="font-size: 18px; font-weight: 600">실시간경매 게시판</span>
 							
 						</label>
 						 
 						<label class="test_obj">
 							<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == 0}">class="checked"</c:if> value="0" >
-							<span style="font-size: 18px;">온라인경매 게시판</span>
+							<span style="font-size: 18px; font-weight: 600">온라인경매 게시판</span>
 						</label>
 				</div>
 				
