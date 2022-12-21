@@ -88,18 +88,6 @@ input {
 								<span class="msg_box">${errorMsg.phone}</span>
 							</div>
 
-							<!-- 이메일 -->
-							<div class="member-input">
-								<div class="member-input__state">
-									<input id="email" class="member-input__box" placeholder="이메일" type="email" autocomplete="off"
-										name="email">
-									<span class="member-input__valid-wrapper"></span>
-								</div>
-
-								<div class="sign-up__input-error-message emailErrorMessage"></div>
-								<span class="msg_box">${errorMsg.email}</span>
-							</div>
-
 							<!-- 우편번호 -->
 							<div class="member-input">
 								<div class="member-input__state" style="padding-bottom: 0px;">
@@ -136,7 +124,7 @@ input {
 							<div class="sign-up__l-btn">
 								<button type="button" id="join_submit_btn" class="member-button sign-up__btn">가입하기</button>
 								<a href="/member/logout">
-									<button type="button" id="join_cancel_btn" class="member-button cancel-button sign-up__btn-cancel">취소</button>
+									<button type="button" id="join_cancel_btn" class="member-button cancel-button sign-up__btn-cancel">로그아웃</button>
 								</a>
 							</div>
 						</div>

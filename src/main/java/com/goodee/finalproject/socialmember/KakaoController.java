@@ -41,6 +41,13 @@ public class KakaoController
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("--- get kakaoLogin ---");
 
+		if (authentication == null)
+		{
+			modelAndView.setViewName("redirect:/");
+
+			return modelAndView;
+		}
+
 		int rs = memberSocialService.setKakao1((KakaoVO) authentication.getPrincipal());
 		List<KakaoVO> kakaoVOs = adminService.getKakaoTotal(kakaoVO);
 
