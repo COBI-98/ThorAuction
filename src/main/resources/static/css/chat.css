@@ -84,6 +84,11 @@
    align-items: flex-start;
 }
 
+#chatt .other .chat-date{
+   padding-top: 40px !important;
+
+}
+
 
 #chatt .chat-date{
    font-size: 12px;
@@ -197,4 +202,11 @@ ul.tabs li.current{
 
 .tab-content.current{
 	display: inherit;
+}
+
+#real {
+   text-align: center;
+   padding-top: 20px;
+   font-size: 25px;
+   font-weight: bold;
 }

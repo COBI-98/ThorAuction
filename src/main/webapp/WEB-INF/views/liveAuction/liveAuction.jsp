@@ -26,7 +26,10 @@
   <c:import url="../template/header.jsp"></c:import>
   
   <div>
-  <section class="">
+	<div>
+		<p id="real">경매를 진행하고 있지 않습니다..</p>
+	</div>
+  <section class="" style="padding-top: 20px;">
 		<!-- Button trigger modal -->
 		<!-- <div>
 			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color : white; border : none; " >

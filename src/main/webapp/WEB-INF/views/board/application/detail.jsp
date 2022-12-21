@@ -32,7 +32,7 @@
 		  </tr>
 		  </tbody>
 	  </table>
-	  <div class="board-filetitle">💾첨부 파일</div>
+	  <div class="board-filetitle" style="font-size: 23px; font-weight: 600; margin: 10px;">상세 정보</div>
 		  <table class="table table-bordered border-warning">
 		  <tbody>
 		  <tr class="table-warning">
@@ -75,24 +75,29 @@
 
 
 
+<div style="display: flex; justify-content: flex-end;">
 
-<div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" >글 수정</a></div>
-<div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="margin-top: 10px; ">글 삭제</a></div>
-<c:if test="${memberVO.roleVOs[0].roleNum == 1 || memberVO.roleVOs[0].roleNum == 2}">
-<c:if test="${applicationVO.auctionSort == true}">
-	<div class="btnRight"> <a href="#" id="approval_btn" class="btn btn-success" >승인</a></div>
-</c:if>
-<c:if test="${applicationVO.auctionSort != true}">
-	<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" id="approval_btn2" class="btn btn-success" >승인</a></div>
-</c:if>
-<!-- Button trigger modal -->
-<!-- Button trigger modal -->
-<div class="btnRight">
-<button type="button" id="refuseBtn" class="btn btn-danger btn-lg"  >
-  거부
-</button>
+
+	<div class="btnRight"> <a href="/board/application/update?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style="color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >수정</a></div>
+	<div class="btnRight"> <a href="/board/application/delete?applicationNum=${applicationVO.applicationNum}" class="btn btn-warning" style=" color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;  ">삭제</a></div>
+	<c:if test="${memberVO.roleVOs[0].roleNum == 1 || memberVO.roleVOs[0].roleNum == 2}">
+		<c:if test="${applicationVO.auctionSort == true}">
+			<div class="btnRight"> <a href="#" id="approval_btn" class="btn btn-success" style=" color: white; width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >승인</a></div>
+		</c:if>
+		<c:if test="${applicationVO.auctionSort != true}">
+			<div class="btnRight"> <a href="/product/approval?productNum=${applicationVO.productVOs[0].productNum}" id="approval_btn2" class="btn btn-success" style="width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >승인</a></div>
+		</c:if>
+		<!-- Button trigger modal -->
+		<!-- Button trigger modal -->
+		<div class="btnRight">
+			<button type="button" id="refuseBtn" class="btn btn-danger btn-lg" style="width: 75px; height: 40px; font-size: 18px; margin-left: 10px;" >
+			  거부
+			</button>
+		</div>
+	</c:if>
+
+
 </div>
-</c:if>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
