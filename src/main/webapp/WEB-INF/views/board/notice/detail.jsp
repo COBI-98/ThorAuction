@@ -29,7 +29,7 @@
     </tr>
      <tr>
     	<th>내용</th>
-    	<td>${noticeVO.contents}</td>
+    	<td >${noticeVO.contents}</td>
     </tr>
     </tbody>
 </table>
