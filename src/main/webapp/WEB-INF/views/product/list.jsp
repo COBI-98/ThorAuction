@@ -49,7 +49,7 @@
 		<div class="category-feed-wrap container">
 			<div class="category-feed row">
 				<div class="category-feed__side-bar col-12 col-md-3">
-					<section class="commerce-category-list">
+					<section class="" >
 						<h2 class="commerce-category-list__title">
 							<a href="./list?<c:if test="${param.deadlineInfo != null}">deadlineInfo=${param.deadlineInfo}&</c:if>">전체보기</a>
 						</h2>
@@ -69,7 +69,7 @@
 							<nav class="commerce-category-breadcrumb-wrap commerce-category-header__breadcrumb">
 								<ol class="commerce-category-breadcrumb">
 									<li class="commerce-category-breadcrumb__entry">
-										<a class="link" href="#">
+										<a class="link" href="#" style="font-size: 18px; font-weight: 600">
 											<c:choose>
 												<c:when test="${param.categoryId == 1}">의류</c:when>
 												<c:when test="${param.categoryId == 2}">뷰티, 잡화</c:when>

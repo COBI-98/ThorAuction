@@ -39,7 +39,7 @@
 	        </div>
 	        <div style="width: 30%;">
 	       		<span style="font-size: 18px; font-weight: 600;">작성자</span> 
-	        	<input type="text" name="writer"  style="width: 70%;height: 40px; value="${memberVO.id}" readonly">
+	        	<input type="text" name="writer"  style="width: 70%;height: 40px;" value="${memberVO.id}" readonly>
 	        </div>
         
         
@@ -64,16 +64,17 @@
 			</div>
 
         </div>
+        <div>
 			<div class="mb-3">
-				<button type="button" id="fileAdd" class="btn btn-success" style="float: right;margin: 15px;">첨부파일 추가</button>
+				<button type="button" id="fileAdd" class="btn btn-success" style="float: right; margin: 0 15px;">첨부파일 추가</button>
 			</div>
-            
             <div>
             
 		       	 <input type="submit" name="add" value="공지사항 추가"  class ="btn btn-info"style="float: right; font-weight: 600; color: white; background-color: #f1a94c; border: 0">
             
             </div>
-         
+        
+        </div>
         </form>
 </div>
 	
