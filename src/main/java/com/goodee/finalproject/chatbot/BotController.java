@@ -50,7 +50,7 @@ public class BotController {
 							+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
 								+"<b class='text'>경매 신청</b>"
 								+"<p class='text'>신청 게시판에서 경매를 진행하고 싶은 물건에 대해 신청글을 적어주세요!</p>"
-								+"<a href ='/board/application/list' class='text'>경매 신청하러 가기</a>"
+								+"<a href ='/board/application/list' class='text'>👉경매 신청하러 가기</a>"
 						+"</div>"
 					+"</div>"
 					+ "<hr>";
@@ -74,7 +74,7 @@ public class BotController {
 					 "<div class='other'>"
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<a href ='/product/list' class='text'>일반 경매하러 가기</a>"
+							+"<a href ='/product/list' class='text'>👉일반 경매하러 가기</a>"
 						+"</div>"
 					 +"</div>"
 					 + "<hr>";
@@ -101,7 +101,7 @@ public class BotController {
 					 "<div class='other'>"
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<a href ='/liveAuction' class='text'>실시간 경매하러 가기</a>"
+							+"<a href ='/liveAuction' class='text'>👉실시간 경매하러 가기</a>"
 						+"</div>"
 					 +"</div>"
 					 + "<hr>";
@@ -184,8 +184,8 @@ public class BotController {
 					"<div class='other'>"
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<span class='text'>비드코인에서는 포인트를 충전해서 사용하실 수 있습니다.!</span>"
-							+"<a href ='/mypage/charge' class='text'>포인트 충전하러 가기</a> <br/>"
+							+"<span class='text'>비드코인에서는 포인트를 충전해서 사용하실 수 있습니다!</span><br/>"
+							+"<a href ='/mypage/charge' class='text'>👉포인트 충전하러 가기</a> <br/>"
 						+"</div>"
                    +"</div>"
                    + "<hr>";
