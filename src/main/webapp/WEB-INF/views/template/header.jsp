@@ -69,7 +69,7 @@
 						<c:when test="${kakaoInfo != null }">
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
-									<b>${kakaoInfo.kaname} 님 / </b> <fmt:formatNumber value="${kakaoInfo.kakaoDetailVOs[0].kaPoint}" pattern="###,###,###,###"/> BP</b>
+									<b>${kakaoInfo.kaname}님, 환영합니다</b>
 								</a>
 							</li>
 							<li class="nav-item">
@@ -81,7 +81,7 @@
 						<c:otherwise>
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
-									<b>${member.name} 님 / </b> <fmt:formatNumber value="${member.point}" pattern="###,###,###,###"/> BP</b>
+									<b>${member.name}님, 환영합니다</b>
 								</a>
 							</li>
 							<li class="nav-item">
