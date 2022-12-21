@@ -41,7 +41,7 @@
         </div>
          <div class="applicationDetail">
         작성자
-        <input type="text" name="writer"  ><br>
+        <input type="text" name="writer" value="${memberVO.id}" readonly  ><br>
         </div>
         <!-- <input type="submit" name="add" value="신청하기 테스트"  class ="btn btn-info"> -->
        <div class="apllicationForm">
