@@ -170,7 +170,7 @@ public class WebSocketChat {
 			msg = msg.replace(String.valueOf(jsonObj.get("value")), String.valueOf(value));
 			msg = msg.replace(String.valueOf(jsonObj.get("goods")), item);
 			msg = msg.replace(String.valueOf(jsonObj.get("tt")), broadName);
-			
+
 			sendMessage(msg, session);
 		}
 		else {

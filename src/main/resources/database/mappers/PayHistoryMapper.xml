@@ -9,5 +9,40 @@
 		INSERT INTO PAYHISTORY
 		VALUES(#{payNum}, #{id} ,#{cashe} , SYSDATE(), #{productNum})
 	</insert>
+	
+	<select id="getPayHistoryList" parameterType="PayHistoryVO" resultMap="getUserPayList">
+		SELECT * FROM 
+			PAYHISTORY p 
+				LEFT JOIN
+				AUCTIONPRODUCT a 
+				ON(p.PRODUCTNUM = a.PRODUCTNUM)
+					LEFT JOIN
+					PRODUCTFILES pf
+					ON(a.PRODUCTNUM =pf.PRODUCTNUM )
+					WHERE p.id =#{id}
+	</select>
+	
+	<resultMap type="PayHistoryVO" id="getUserPayList">
+		<id column="PAYNUM" property="payNum"></id>
+		<result column="ID" property="id"></result>
+		<result column="CASHE" property="cashe"></result>
+		<result column="REGDATE" property="regDate"></result>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<collection property="productVOs" javaType="List" ofType="ProductVO">
+			<id column="PRODUCTNUM" property="productNum"></id>
+			<result column = "PRODUCTNAME" property="productName"></result>
+			<result column = "PRODUCTPRICE" property="productPrice"></result>
+			<result column="PRODUCTINFORMATION" property="productInformation"></result>
+			<result column = "AUCTIONPERIOD" property="auctionPeriod"></result>
+			
+			<collection property="productFileVOs" javaType="List" ofType="ProductFileVO">
+				<id column="FILENUM" property="fileNum"></id>
+				<result column = "FILENAME" property="fileName"></result>
+				<result column = "ORINAME" property="oriName"></result>
+				<result column="SORT" property="sort"></result>
+			</collection>
+			
+		</collection>
+	</resultMap>
 
 </mapper>
