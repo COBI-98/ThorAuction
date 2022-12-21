@@ -66,6 +66,11 @@ public class ProductService {
 		return productMapper.getSaleProductListDetail(saleproductVO);
 	}
 	
+	public SaleProductVO getSaleProductListDetail2(SaleProductVO saleproductVO) throws Exception{
+		
+		return productMapper.getSaleProductListDetail2(saleproductVO);
+	}
+	
 	public int setDeadLineUpdate(SaleProductVO saleProductVO) throws Exception{
 		
 		return productMapper.setDeadLineUpdate(saleProductVO);
