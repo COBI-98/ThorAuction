@@ -47,21 +47,24 @@ public class BotController {
 			content = 
 					"<div class='other'>"
 						+"<div class='chat-text'>"
-						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<b class='text'>경매 신청</b>"
-							+"<p class='text'>신청 게시판에서 경매를 진행하고 싶은 물건에 대해 신청글을 적어주세요!</p>"
-							+"<a href ='/board/application/list' class='text'>경매 신청하러 가기</a>"
+							+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+								+"<b class='text'>경매 신청</b>"
+								+"<p class='text'>신청 게시판에서 경매를 진행하고 싶은 물건에 대해 신청글을 적어주세요!</p>"
+								+"<a href ='/board/application/list' class='text'>👉경매 신청하러 가기</a>"
 						+"</div>"
 					+"</div>"
 					+ "<hr>";
 			
 		}else if(str.equals("일반 경매 주의사항")) {
-			content = "<div class='other'>"
+			content = "<div class='othe'>"
                     	+ "<div class='chat-text'>"
-                    	+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-                    		+ "<b class='text'>일반 경매 시 주의사항</b>"
-                    		+ "<p class='text'>1. 한번 입찰 시, 판매자 상품에 문제가 생기지 않는 이상 유찰시킬 수 없습니다.</p>"
-                    		+ "<p class='text'>2. 상품의 하자는 판매자 책임입니다.</p>"
+	                    	+ "<div style='margin-left : 15%;'>"
+		                    	+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+		                    		+ "<b class='text'>일반 경매 시 주의사항</b>"
+		                    + "</div>"
+	                    		+ "<p class='text'>1. 한번 입찰 시, 판매자 상품에 문제가 생기지 않는 이상 유찰시킬 수 없습니다.</p>"
+	                    		+ "<p class='text'>2. 상품의 하자는 판매자 책임입니다.</p>"
+		                    
                     	+"</div>"
                     +"</div>"
                     + "<hr>";
@@ -71,21 +74,24 @@ public class BotController {
 					 "<div class='other'>"
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<a href ='/product/list' class='text'>일반 경매하러 가기</a>"
+							+"<a href ='/product/list' class='text'>👉일반 경매하러 가기</a>"
 						+"</div>"
 					 +"</div>"
 					 + "<hr>";
 			
 		}else if(str.equals("실시간 경매 주의사항")) {
 			content = 
-					"<div class='other'>"
+					"<div class='othe'>"
 						+"<div class='chat-text'>"
-						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<b class='text'>실시간 경매 시 주의사항</b>"
+						+ "<div style='margin-left : 15%;'>"
+							+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+								+"<b class='text'>실시간 경매 시 주의사항</b>"
+						+ "</div>"
 							+"<p class='text'>1. 경매 시작 전 입찰 금액 입력 시 반영이 되지 않습니다.</p>"
 							+"<p class='text'>2. 경매 진행 중 욕설이나 타인을 비난하는 행위, 도배를 하는 행위는 강퇴를 당하실 수 있습니다.</p>"
 							+"<p class='text'>3. 강퇴를 당하면 실시간 경매에 참여할 수 없습니다.</p>"
 							+"<p class='text'>4. 입찰 금액 입력 시 자신의 포인트보다 높게 입력할 수 없습니다.</p>"
+							
 						+"</div>"
 					+"</div>"
 					+ "<hr>";
@@ -95,7 +101,7 @@ public class BotController {
 					 "<div class='other'>"
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<a href ='/liveAuction' class='text'>실시간 경매하러 가기</a>"
+							+"<a href ='/liveAuction' class='text'>👉실시간 경매하러 가기</a>"
 						+"</div>"
 					 +"</div>"
 					 + "<hr>";
@@ -104,23 +110,24 @@ public class BotController {
 			content = 
 					"<div class='other'>"
 						+"<div class='chat-text'>"
-						+"<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-						+ "<b class='text'>배송 주소</b>"
+							+"<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+							+ "<b class='text'>배송 주소</b>"
 							+"<p class='text'>배송지 주소는  서울특별시 금천구 가산디지털1로 151</p>"
 							+"<p class='text'>(가산동, 세진 이노플렉스1차) 306호 구디아카데미 입니다.</p>"
-						+"</div>"
 					+"</div>"
 					+ "<hr>";
 			
 		}else if(str.equals("일반 경매 진행 시스템")) {
 			content = 
-						"<div class='other'>"
+						"<div class='othe'>"
 							+ "<div class='chat-text'>"
-							+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-								+ "<b class='text'>일반 경매 진행 시스템</b>"
-								+ "<p class='text'>1. 신청 게시판에서 신청 게시글을 올립니다.</p>"
-								+ "<p class='text'>2. 관리자가 게시글 승인 시 경매장에서 경매가 시작됩니다.</p>"
-								+ "<p class='text'>3. 버튼을 통해 입찰할 수 있습니다.</p>"
+								+ "<div style='margin-left : 15%;'>"
+									+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+									+ "<b class='text'>일반 경매 진행 시스템</b>"
+								+"</div>"
+								+ "<p class='text'>1. 신청게시판의 게시물 중 관리자가 승인한 물품만 경매가 진행됩니다.</p>"
+								+ "<p class='text'>2. 입찰은 포인트를 통해 할 수 있습니다.</p>"								
+								+ "<p class='text'>3. 입찰은 입찰버튼과 자율입찰을 통해 입찰할 수 있습니다.</p>"
 								+ "<p class='text'>4. 종료시간 전에 가장 높은 금액을 입찰한 분이 낙찰하게 됩니다.</p>"
 							+"</div>"
 						+"</div>"
@@ -128,10 +135,12 @@ public class BotController {
 			
 		}else if(str.equals("실시간 경매 진행 시스템")) {
 			content = 
-						"<div class='other'>"
+						"<div class='othe'>"
 							+"<div class='chat-text'>"
-							+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
+							+ "<div style='margin-left : 15%;'>"
+								+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
 								+"<b class='text'>실시간 경매 진행 시스템</b>"
+							+ "</div>"
 								+"<p class='text'>1. 신청 게시판에서 신청 게시글을 올립니다.</p>"
 								+"<p class='text'>2. 관리자가 게시글 승인 시 경매장에서 경매가 시작됩니다.</p>"
 								+"<p class='text'>3. 직접 금액을 입력하거나 단위가격을 통해 입찰할 수 있습니다.</p>"
@@ -175,8 +184,8 @@ public class BotController {
 					"<div class='other'>"
 						+"<div class='chat-text'>"
 						+ "<img src=\"/images/coin.png\" style=\"width: 30px; margin-top: 5px;\">"
-							+"<span class='text'>비드코인에서는 포인트를 충전해서 사용하실 수 있습니다.!</span>"
-							+"<a href ='/mypage/charge' class='text'>포인트 충전하러 가기</a> <br/>"
+							+"<span class='text'>비드코인에서는 포인트를 충전해서 사용하실 수 있습니다!</span><br/>"
+							+"<a href ='/mypage/charge' class='text'>👉포인트 충전하러 가기</a> <br/>"
 						+"</div>"
                    +"</div>"
                    + "<hr>";
