@@ -114,10 +114,10 @@
 							<input type="hidden" id="application_num"value="${applicationVO.applicationNum}">
                         <label for="approvalCheck" hidden="">취소사유</label>
 							<select name="approvalCheck" id="approvalCheck">
-							    <option value="">사유를 선택해주세요</option>
-							    <option value="1">상세정보 부족</option>
-							    <option value="2">부적절한 이미지</option>
-								<option value="3">부적절한 상품</option>
+							    <option value="0">사유를 선택해주세요</option>
+							    <option value="2">상세정보 부족</option>
+							    <option value="3">부적절한 이미지</option>
+								<option value="4">부적절한 상품</option>
 							</select>
                     </tr>                  
                 </table>
