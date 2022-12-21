@@ -84,7 +84,7 @@
 							<div class="production-selling-header">
 								<h1 class="production-selling-header__title">
 									<p class="production-selling-header__title__brand-wrap">
-										<span class="production-selling-header__title__name">${productVO.productName} : (상품이름)</span>
+										<span class="production-selling-header__title__name">${productVO.productName}</span>
 											
 											</h1>
 										</div>
@@ -99,22 +99,17 @@
 										<div class="production-selling-header__info-wrap">
 											<div class="production-selling-header__promotion">
 												<div class="production-selling-header__promotion__title-wrap">
-													<span>혜택</span>
+													
 												</div>
 												<div class="production-selling-header__promotion__content-wrap">
-													<p class="production-selling-header__promotion__entry"
-													><b>1500<!-- -->P</b> 적립 (<!-- -->(Gold (회원등급)) <!-- -->3<!-- -->% 적립)</p>
 													</div>
 												</div>
 												<div class="production-selling-header__delivery">
 													<div class="production-selling-header__delivery__title-wrap">
-														<span>배송</span>
 													</div>
 													<div class="production-selling-header__delivery__content-wrap">
-														<span class="production-selling-header__delivery__fee"><b>무료배송</b></span>
 														<div class="_2SUYq production-selling-header__delivery__today-departure__dropdown">
 															<div class="production-selling-header__delivery__today-departure__header">
-																<span class="text">배송정보 : <span class="active">잘 보내드림</span></span>
 																
 											</div>
 										</div>
