@@ -20,60 +20,64 @@
 </head>
 <body>
 	<c:import url="../../template/header.jsp"></c:import>
-	<section class="container-fluid col-lg-8 mt-5">
+	<section class="container-fluid col-lg-7 mt-5">
 		<div class="row">
 	 <form class="align-center" action="./add" method="post" enctype="multipart/form-data">
-        <div>
+        <div style="display: flex; justify-content: center; margin-bottom: 40px;">
 	        <label class="test_obj">
 			    <input type="radio" name="auctionSort" value="1">
-			    <span>실시간경매 상품신청</span>
+			    <span style="font-size: 18px; font-weight: 600;">실시간경매 상품신청</span>
 			</label>
 			 
 			<label class="test_obj">
 			    <input type="radio" name="auctionSort" value="0">
-			    <span>온라인경매 상품신청</span>
+			    <span  style="font-size: 18px; font-weight: 600;">온라인경매 상품신청</span>
 			</label>
 		 </div>
 
-     
-        <div class="applicationDetail">
-        글 제목
-        <input type="text" name="title" placeholder="글 제목을 입력하세요"><br>
-        </div>
-         <div class="applicationDetail">
-        작성자
-        <input type="text" name="writer"  ><br>
-        </div>
+     	<div style="display: flex; justify-content: space-between; margin: 25px;">
+     	
+		        <div class="" style="width:  60%;">
+		       		 <span style="font-weight: 600; font-size: 18px;">글 제목</span>
+			        <input type="text" name="title" placeholder="글 제목을 입력하세요" style="width:  70%; height: 40px;"><br>
+		        </div>
+		         <div class="" style="width:  20%;">
+			       	<span style="font-weight: 600; font-size: 18px;">작성자</span>
+			        <input type="text" name="writer" style="width:  70%; height: 40px;" value="${memberVO.id}" readonly ><br>
+		        </div>
+     	
+     	
+     	</div>
         <!-- <input type="submit" name="add" value="신청하기 테스트"  class ="btn btn-info"> -->
-       <div class="apllicationForm">
-            <div class="applicationInfo">
-                신청하는 상품 정보
+       <div class="apllicationForm" style="width: 100%;">
+            <div class="applicationInfo" style="font-size: 35px; margin: 20px;">
+                상품 정보
             </div> 
             
             <input type="hidden" name="applicationNum" value="">
-            <div class="applicationDetail">
+            <div class="" style="width: 50%; font-size: 18px; font-weight: 600; margin: 15px;">
                 상품명<br>
-                <input type="tex" name="productName" ><br>
+                <input type="text" name="productName" placeholder="상품명" style="width:90%; "><br>
             </div>
-            <div  class="applicationDetail">
-                최저 판매가격<br>
-                <input type="text" name="productPrice"  ><br>
-            </div>
-            <div  class="applicationDetail">
-                경매기간<br>
-                <input type="text" name="auctionPeriod" ><br>
+            <div style="display: flex; width: 50%; font-size: 18px; font-weight: 600; ">
+	            <div  class="" style="margin: 15px;">
+	                최초 입찰가격<br>
+	                <input type="text" name="productPrice"  placeholder="100,000" style="text-align: right;">원
+	            </div>
+	            <div  class="" style="margin: 15px;">
+	                경매기간<br>
+	                <input type="text" name="auctionPeriod"  placeholder="3" style="text-align: right;" >일
+	            </div>
+            
+            
             </div>
            
             <div>
-                <div class="applicationInfoTitle">
+                <div class="" style="font-size: 23px; font-weight: 600; margin: 15px;">
                 상세정보
                 </div>
-                <div class="applicationInfoExplain"> 
-                    상품 상세정보 작성(필수 사항)<br>
-                    : 상품 모델명<br>
-                    : 새 상품 가격<br>
-                    : 상품 상태<br>
-                    : 상품 정보
+                <div class="applicationInfoExplain" style="margin: 15px;"> 
+                    경매 상품의 상세 정보를 입력 해 주세요. (모델명/ 상태/ 정보)
                 </div>
                 <textarea id="detailContents" name="productInformation" rows="30" cols="100"></textarea>
             </div>
@@ -87,16 +91,18 @@
                 </div>
                 <div class="mb-3" id="fileAddResult">
                        
-                   </div>
-       
+                       
+                          </div>
+  	  	   <button type="button" id="fileAdd" class="btn btn-success" style="float: right; margin: 15px;">파일 추가</button>
+                
+          
                </div>
-                   <div class="mb-3">
-                       <button type="button" id="fileAdd" class="btn btn-success">파일 추가</button>
-            </div>
+                 
+                      
         </div>
         <div>
 
-            <input type="submit" id="applicationSubmit" value="신청하기"  class ="btn btn-info">
+            <input type="submit" id="applicationSubmit" value="신청하기"  class ="btn btn-info" style="color: white; font-weight: 600; background-color: #f1a94c; border: 0;float: right;">
         </div>
     </form>
 
@@ -160,10 +166,10 @@
         lang : 'ko-KR',
         toolbar : toolbar,
         placeholder : '상품 상세정보 작성(필수사항)<br>'
-                      + ' : 상품 모델명<br>'
-                      + ' : 새 상품 가격<br>'
-                      + ' : 상품 상태<br>'
-                      + ' : 상품 정보<br>',
+                      + '&nbsp;&nbsp; : 상품 모델명<br>'
+                      + '&nbsp;&nbsp; : 새 상품 가격<br>'
+                      + '&nbsp;&nbsp; : 상품 상태<br>'
+                      + '&nbsp;&nbsp; : 상품 정보<br>',
         callbacks : { //여기 부분이 이미지를 첨부하는 부분
         onImageUpload : function(files, editor,
         welEditable) {

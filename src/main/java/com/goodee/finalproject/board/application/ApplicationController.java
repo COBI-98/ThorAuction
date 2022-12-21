@@ -64,8 +64,14 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("add")
-	public void setApplicationAdd(ApplicationVO applicationVO) throws Exception{
+	public ModelAndView setApplicationAdd(ApplicationVO applicationVO,Authentication authentication) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
 		
+		return mv;
 	}
 	
 	@PostMapping("add")

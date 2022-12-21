@@ -19,26 +19,33 @@
 </head>
 <body>
 	<c:import url="../../template/header.jsp"></c:import>
-	<section class="container-fluid col-lg-8 mt-5">
-		<div class="row mt-5">
-	 <form class="align-center" action="./add" method="post" enctype="multipart/form-data">
+	<section class="container-fluid col-lg-8 ">
+		<div class="row ">
+	 <form class="align-center" action="./add" method="post" enctype="multipart/form-data" style="">
+	 	<div style="font-size: 30px; font-weight: 600; margin: 15px; margin-bottom: 40px;">
+	 		공지사항 글 작성
+	 	</div>
         <div class="form-check">
             <input type="checkbox" id="radioDate" name="importCheck">
-            <label for="">
-                중요 공지사항
+            <label for="" style="font-size: 18px; font-weight: 600; margin-bottom: 15px;">
+                ❗중요 공지사항
             </label>
             
         </div>
-        <div>
-        글 제목<br>
-        <input type="text" name="title" placeholder="글 제목을 입력하세요"><br>
+        <div style="display: flex; justify-content: space-between; width: 100%; margin: 10px 0;">
+	        <div style="width: 70%;">
+	    		<span style="font-size: 18px; font-weight: 600;">제목</span> 
+	      	  	<input type="text" name="title" placeholder="제목을 입력하세요" style="width: 80%; height: 40px;">
+	        </div>
+	        <div style="width: 30%;">
+	       		<span style="font-size: 18px; font-weight: 600;">작성자</span> 
+	        	<input type="text" name="writer"  style="width: 70%;height: 40px; value="${memberVO.id}" readonly">
+	        </div>
+        
+        
         </div>
-         <div>
-        작성자<br>
-        <input type="text" name="writer"  ><br>
-        </div>
         <div>
-        글 내용<br>
+        <div style="margin: 10px 0; font-size: 18px; font-weight: 600;">내용</div> 
         <textarea id="summernote" name="contents" th: rows="30" cols="100"></textarea>
         </div>    
          <!-- <div>
@@ -58,11 +65,15 @@
 
         </div>
 			<div class="mb-3">
-				<button type="button" id="fileAdd" class="btn btn-success">첨부파일 추가</button>
+				<button type="button" id="fileAdd" class="btn btn-success" style="float: right;margin: 15px;">첨부파일 추가</button>
 			</div>
             
+            <div>
+            
+		       	 <input type="submit" name="add" value="공지사항 추가"  class ="btn btn-info"style="float: right; font-weight: 600; color: white; background-color: #f1a94c; border: 0">
+            
+            </div>
          
-        <input type="submit" name="add" value="공지사항 추가"  class ="btn btn-info"style="margin-left: 300px;">
         </form>
 </div>
 	
