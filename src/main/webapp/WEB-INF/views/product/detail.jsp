@@ -83,7 +83,7 @@
 							<div class="production-selling-header">
 								<h1 class="production-selling-header__title">
 									<p class="production-selling-header__title__brand-wrap">
-										<span class="production-selling-header__title__name">${VO.productName}</span>
+										<span class="production-selling-header__title__name" style="font-weight: 600">${VO.productName}</span>
 											
 											</h1>
 										</div>
@@ -192,7 +192,8 @@
 								</c:otherwise>							
 							</c:choose>
 						<div class="readinfo">
-							<h4>구매 전 꼭 확인해주세요!</h4>
+							<div style="font-size: 17px; font-weight: 600">구매 전 꼭 확인해주세요!</div>
+							<hr>	
 							<ul>
 								<li class="on"><a href="#">배송정보 안내</a>
 								<div class="txt">
