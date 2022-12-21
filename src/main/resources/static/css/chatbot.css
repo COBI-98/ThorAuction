@@ -71,6 +71,17 @@
     background-color :	#e9ecef;
  }
 
+ #chatt .othe{
+  
+   margin : 2px;
+   display: flex !important;
+   justify-content: center;
+   align-items: flex-start;
+   /* text-align: center; */
+   background-color :	#e9ecef;
+   padding-left: 220px !important;
+}
+
  #msgSend {
    height: 45px;
    width: 4.5%;
@@ -94,6 +105,7 @@
    border-color: #fea532;
    word-break:break-all;
 }
+
 
 #qna{
    font-size: larger;
