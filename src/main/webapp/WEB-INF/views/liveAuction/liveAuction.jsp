@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
     
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -95,7 +96,7 @@
 			<div id= "chat-header" >
 	          <div id="text">
 	            <span id="final">현재 최고가:</span>
-	            <span id="amount">${value}</span>
+	            <span id="amount"><fmt:formatNumber value="${value}" pattern="###,###,###,###"/></span>
 	            <span id="hidden" style="display: none;">${value}</span>
 	            <span id="finalamount"></span>
 	          </div>

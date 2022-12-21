@@ -56,7 +56,7 @@
 								<div class="login__l-sign-up">
 									<span class="login__sign-up-link"> <a class="member-link" href="#">아이디 찾기</a> <span
 										class="member-link__span">|</span> <a class="member-link" href="#">비밀번호 찾기</a> <span
-										class="member-link__span">|</span> <a class="member-link" href="./join">회원가입</a>
+										class="member-link__span">|</span> <a class="member-link" href="./agree">회원가입</a>
 									</span>
 								</div>
 

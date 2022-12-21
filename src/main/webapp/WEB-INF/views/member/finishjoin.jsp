@@ -27,9 +27,9 @@
                         </div>
                     </div>
                     <div class="done">
-                        <h2 class="done__title">회원가입완료</h2>
+                        <h2 class="done__title">회원가입 완료</h2>
                         <div class="done__sub">bidcoin 회원이 되신 것을 환영합니다.<br> 다양한 서비스를 자유롭게 이용해보세요.</div>
-                        <a class="done__link" href="../">메인으로 가기</a>
+                        <a class="done__link" href="/member/login">로그인 하러 가기</a>
                     </div>
                 </div>
             </div>
