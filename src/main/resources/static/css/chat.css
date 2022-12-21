@@ -203,3 +203,9 @@ ul.tabs li.current{
 .tab-content.current{
 	display: inherit;
 }
+
+#real {
+   text-align: center;
+   font-size: 20px;
+   font-weight: bold;
+}
