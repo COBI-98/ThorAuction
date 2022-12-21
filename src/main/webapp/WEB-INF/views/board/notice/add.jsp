@@ -39,7 +39,7 @@
 	        </div>
 	        <div style="width: 30%;">
 	       		<span style="font-size: 18px; font-weight: 600;">작성자</span> 
-	        	<input type="text" name="writer"  style="width: 70%;height: 40px;">
+	        	<input type="text" name="writer"  style="width: 70%;height: 40px; value="${memberVO.id}" readonly">
 	        </div>
         
         
