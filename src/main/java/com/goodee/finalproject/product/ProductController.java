@@ -152,7 +152,13 @@ public class ProductController {
 	public ModelAndView getSaleProductListDetail(SaleProductVO saleProductVO,Authentication authentication, HttpSession session) throws Exception{
 		ModelAndView mv= new ModelAndView();
 		
+		// 댓글관리과 입찰내역이 하나의 테이블에 left join이 안되어서 VO관리를 두개로 나눔
+		SaleProductVO saleProductVO2 = saleProductVO;
 		saleProductVO = productService.getSaleProductListDetail(saleProductVO);
+		
+		//댓글관리
+		saleProductVO2 = productService.getSaleProductListDetail2(saleProductVO2);
+		
 		productService.setSaleProductHit(saleProductVO);
 		
 		if(authentication != null) {
@@ -164,9 +170,6 @@ public class ProductController {
 		LocalDateTime now = LocalDateTime.now(); 
 		Timestamp timestamp = Timestamp.valueOf(now);
 		
-		// 기간 + getTime();
-		System.out.println("test"+saleProductVO.getProductVOs().get(0).getAuctionPeriod()*24*3600*1000);
-		System.out.println(saleProductVO.getProductDate().getTime());
 		
 		bidAmountVO.setProductId(saleProductVO.getProductId());
 		Long check = productService.getMaxAmountCheck(bidAmountVO);
@@ -213,8 +216,8 @@ public class ProductController {
 		
 		mv.addObject("maxAmount", check);
 		
-		
 		mv.addObject("saleProductVO", saleProductVO);
+		mv.addObject("saleProductQna", saleProductVO2);
 		mv.setViewName("product/detail");
 		return mv;
 	}

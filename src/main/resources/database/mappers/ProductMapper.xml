@@ -240,15 +240,24 @@
 					LEFT JOIN 
 					BIDAMOUNT B
 					ON(p.PRODUCTID = B.PRODUCTID)
-						LEFT JOIN
-						PRODUCTQUESTION PQ
-						ON(p.PRODUCTID = PQ.PRODUCTID)
-							LEFT JOIN
-							ADMINQUESTION AQ
-							ON(PQ.QUESTIONID = AQ.QUESTIONID)
 								WHERE p.PRODUCTID = #{productId}
-								ORDER BY B.BIDAMOUNT DESC , PQ.QUESTIONID ASC;
+								ORDER BY B.BIDAMOUNT DESC;
  	</select>
+ 	
+ 	<select id="getSaleProductListDetail2" parameterType="SaleProductVO" resultMap="getSaleProductDetail2">
+ 		SELECT *  FROM 
+		SALEPRODUCT p
+		LEFT JOIN
+		PRODUCTQUESTION PQ
+		ON(p.PRODUCTID = PQ.PRODUCTID)
+			LEFT JOIN
+			ADMINQUESTION AQ
+			ON(PQ.QUESTIONID = AQ.QUESTIONID)
+			WHERE p.PRODUCTID = #{productId}
+			ORDER BY PQ.ID DESC;
+ 	</select>
+ 	
+ 	
  	
  	<!-- 마감된 상품 -->
  	<update id="setDeadLineUpdate" parameterType="SaleProductVO">
@@ -289,6 +298,35 @@
 				<result column = "BIDDATE" property="bidDate"></result>
 		</collection>
 		
+		<collection property="productQuestionVOs" javaType="List" ofType="ProductQuestionVO">
+				<id column="QUESTIONID" property="questionId"></id>
+				<result column = "QUESTIONTITLE" property="questionTitle"></result>
+				<result column = "QUESTIONCONTENTS" property="questionContents"></result>
+				<result column = "QUESTIONDATE" property="questionDate"></result>
+				<result column = "PRODUCTID" property="productId"></result>
+				<result column = "ID" property="id"></result>
+				
+				<association property="adminQuestionVO" javaType="AdminQuestionVO">
+			         <id column="AQNUM" property="aqNum"/>
+			         <result column="AQCONTENTS" property="aqContents"/>
+			         <result column="AQDATE" property="aqDate"/>
+			         <result column="QUESTIONID" property="questionId"/>
+			         <result column="ID" property="id"/>
+			     </association>
+			     
+		</collection>
+		
+		
+ 	</resultMap>
+ 	
+ 	<resultMap type="SaleProductVO" id="getSaleProductDetail2">
+ 		<id column="PRODUCTID" property="productId"></id>
+		<result column="PRODUCTNUM" property="productNum"></result>
+		<result column="CATEGORYID" property="categoryId"></result>
+		<result column="DEADLINEINFO" property="deadlineInfo"></result>
+		<result column="PRODUCTHIT" property="productHit"></result>
+		<result column="PRODUCTDATE" property="productDate"></result>
+		<result column="AMOUNTUNIT" property="amountUnit"></result>
 		<collection property="productQuestionVOs" javaType="List" ofType="ProductQuestionVO">
 				<id column="QUESTIONID" property="questionId"></id>
 				<result column = "QUESTIONTITLE" property="questionTitle"></result>
