@@ -54,12 +54,18 @@ public class NoticeController {
 	   
 	
 	@GetMapping("list")
-	public ModelAndView getNoticeList(BoardPageMaker boardPageMaker) throws Exception{
+	public ModelAndView getNoticeList(BoardPageMaker boardPageMaker,Authentication authentication) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		NoticeVO noticeVO = new NoticeVO();
 		List<NoticeVO> test2 = noticeService.getNoticeTotalList(noticeVO);
 		boardPageMaker.setPerPage(5L);
 		List<NoticeVO> test  = noticeService.getNoticeList(boardPageMaker);
+		
+		if(authentication != null) {
+			MemberVO memberVO= (MemberVO) authentication.getPrincipal();
+			mv.addObject("memberVO", memberVO);
+		}
+		
 		mv.addObject("importNotice", test2);
 		mv.addObject("testdto", test);
 		mv.setViewName("/board/notice/list");
