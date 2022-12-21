@@ -37,6 +37,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- 마이페이지 CSS -->
+<link rel="stylesheet" href="/css/application.css">
 <link rel="stylesheet" href="/css/mypage/info.css">
 <link rel="stylesheet" href="/css/mypage/bidhistory.css">
 </head>
@@ -93,8 +94,24 @@
 											<div style="max-width: 800px; margin: 0 auto;" class="msm-profile">
 												<div id="mshop_form_2702" class="ui mfs_form " style="">
 													<div class="field" style="">
+														<form action="/mypage/successfulBid?id=123"  class="row formStyle">
+															<div>
+															<label class="test_obj">
+																<input type="hidden" name="id" value="${memberDB.id}">
+																<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == null || param.auctionSort == 1}">class="checked"</c:if> value="1">
+																<span>온라인경매 낙찰내역</span>
+																
+															</label>
+															
+															<label class="test_obj">
+																<input type="submit" name="auctionSort" <c:if test="${param.auctionSort == 0}">class="checked"</c:if> value="0" >
+																<span>실시간경매 낙찰내역</span>
+															</label>
+															</div>
+														</form>
+
 													<c:choose>
-														<c:when test="${not empty saleProducts}">
+														<c:when test="${not empty saleProducts && (param.auctionSort == null || param.auctionSort == 1)}">
 														<div class="mypage_content">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 낙찰내역이 있습니다.</div>
 															<input type="hidden" name="id" value="${memberDB.id}">
@@ -159,6 +176,7 @@
 																					</div>
 																				</li>
 																			</c:when>
+																			
 																			<c:otherwise>
 																				
 																			
@@ -172,7 +190,43 @@
 															<div class="he20"></div>
 														</div>
 													</div>
-																										</c:when>
+													</c:when>
+													<c:when test="${not empty userPayHistory && param.auctionSort == 0}">
+														<div class="mypage_content">
+															<div class="pt5 pb5">총 <strong class="import">${userPayHistory.size()}</strong> 건의 낙찰내역이 있습니다.</div>
+															<input type="hidden" name="id" value="${memberDB.id}">
+															<div class="myorder">
+																<c:forEach items="${userPayHistory}" var="product" varStatus="status">
+																		<li class="list">
+																				<div class="orderlist">
+																					<ul class="prolist">
+																						<li>
+																							<c:forEach items="${product.productVOs}" var="products">
+																								<div class="imgbox"><img src="/file/product/${products.productFileVOs[0].fileName}" width="100px"></div>
+																								<div class="name">${products.productName}</div>
+																							</c:forEach>
+																									<div class="price">
+																										입찰금액: <fmt:formatNumber value="${product.cashe}" pattern="###,###,###,###"/>원<br> 입찰일: <fmt:formatDate value="${product.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/><br>
+																									</div>
+																							</a>
+																						</li>
+																					</ul>
+																					<div class="statebox">
+																							<div class="state">낙찰</div>
+																					</div>
+																				</div>
+																			</li>
+																			
+																			
+																		
+																			
+																	</c:forEach>
+																
+															</div>
+															<div class="he20"></div>
+														</div>
+													</div>
+													</c:when>
 														<c:otherwise>
 															<table class="table" style="font-size: 15px;">
 															<div class="pt5 pb5">총 <strong class="import">${count}</strong> 건의 낙찰내역이 있습니다.</div>
@@ -181,6 +235,7 @@
 															</table>
 														</c:otherwise>
 													</c:choose>
+													
 													<div class="mshop-members-message"></div>
 												</div>
 											</div>
