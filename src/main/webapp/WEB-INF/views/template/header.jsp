@@ -69,7 +69,7 @@
 						<c:when test="${kakaoInfo != null }">
 							<li class="nav-item">
 								<a class="nav-link link-dark px-2">
-									<b>${kakaoInfo.kaname}님, 환영합니다</b>
+									<b>${kakaoInfo.kaName}님, 환영합니다</b>
 								</a>
 							</li>
 							<li class="nav-item">
