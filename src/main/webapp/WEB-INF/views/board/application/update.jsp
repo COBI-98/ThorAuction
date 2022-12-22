@@ -36,7 +36,7 @@
        </div>
 
        <div style="display: flex; justify-content: space-between; margin: 25px;">
-     	
+        
             <div class="" style="width:  60%;">
                     <span style="font-weight: 600; font-size: 18px;">글 제목</span>
                 <input type="text" name="title" value="${applicationUpdate.title}" placeholder="글 제목을 입력하세요" style="width:  70%; height: 40px;"><br>
@@ -62,14 +62,14 @@
             </div>
           
             <div style="display: flex; width: 50%; font-size: 18px; font-weight: 600; ">
-	            <div  class="" style="margin: 15px;">
-	                최초 입찰가격<br>
-	                <input type="text" name="productPrice"  value="${product.productPrice}" style="text-align: right;">원
-	            </div>
-	            <div  class="" style="margin: 15px;">
-	                경매기간<br>
-	                <input type="text" name="auctionPeriod"  value="${product.auctionPeriod}" style="text-align: right;" >일
-	            </div>
+               <div  class="" style="margin: 15px;">
+                   최초 입찰가격<br>
+                   <input type="text" name="productPrice"  value="${product.productPrice}" style="text-align: right;">원
+               </div>
+               <div  class="" style="margin: 15px;">
+                   경매기간<br>
+                   <input type="text" name="auctionPeriod"  value="${product.auctionPeriod}" style="text-align: right;" >일
+               </div>
             
             
             </div>
