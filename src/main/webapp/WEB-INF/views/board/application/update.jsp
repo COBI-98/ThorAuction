@@ -23,56 +23,63 @@
    <section class="container-fluid col-lg-8 mt-5">
       <div class="row">
     <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
-        <div>
+        <div style="display: flex; justify-content: center; margin-bottom: 40px;">
            <label class="test_obj">
              <input type="radio" name="auctionSort" <c:if test="${applicationUpdate.auctionSort == true}">checked</c:if> value="1">
-             <span>실시간경매 상품신청</span>
+             <span style="font-size: 18px; font-weight: 600;">실시간경매 상품신청</span>
          </label>
           
          <label class="test_obj">
              <input type="radio" name="auctionSort" <c:if test="${applicationUpdate.auctionSort == false}">checked</c:if> value="0">
-             <span>온라인경매 상품신청</span>
+             <span style="font-size: 18px; font-weight: 600;">온라인경매 상품신청</span>
          </label>
        </div>
 
-     
-        <div class="applicationDetail">
-        글 제목<br>
-        <input type="text" name="title" value="${applicationUpdate.title}" ><br>
+       <div style="display: flex; justify-content: space-between; margin: 25px;">
+     	
+            <div class="" style="width:  60%;">
+                    <span style="font-weight: 600; font-size: 18px;">글 제목</span>
+                <input type="text" name="title" value="${applicationUpdate.title}" placeholder="글 제목을 입력하세요" style="width:  70%; height: 40px;"><br>
+            </div>
+            <div class="" style="width:  20%;">
+                <span style="font-weight: 600; font-size: 18px;">작성자</span>
+                <input type="text" name="writer"   value="${applicationUpdate.writer}" style="width:  70%; height: 40px;" value="${memberVO.id}" readonly ><br>
+            </div>
+ 
+ 
         </div>
-         <div class="applicationDetail">
-        작성자<br>
-        <input type="text" name="writer" value="${applicationUpdate.writer}" readonly ><br>
-        </div>
+        
         <input type="hidden" name="applicationNum" id="applicationNum" value="${applicationUpdate.applicationNum}">
-       <div class="apllicationForm">
-        <div class="applicationInfo">
-            신청하는 상품 정보
+       <div class="apllicationForm" style="width: 100%;">
+        <div class="applicationInfo" style="font-size: 35px; margin: 20px;">
+            상품 정보
         </div>  
             <c:forEach items="${applicationUpdate.productVOs}" var="product">
                 <input type="hidden" id="productNum" name="productNum" value="${product.productNum}">
-            <div class="applicationDetail">
+            <div class="applicationDetail" style="width: 50%; font-size: 18px; font-weight: 600; margin: 15px;">
                 상품명<br>
-                <input type="text" name="productName" value="${product.productName}" ><br>
+                <input type="text" name="productName" value="${product.productName}" placeholder="상품명" style="width:90%; " ><br>
             </div>
-            <div class="applicationDetail">
-                최저 판매가격<br>
-                <input type="text" name="productPrice" value="${product.productPrice}" ><br>
+          
+            <div style="display: flex; width: 50%; font-size: 18px; font-weight: 600; ">
+	            <div  class="" style="margin: 15px;">
+	                최초 입찰가격<br>
+	                <input type="text" name="productPrice"  value="${product.productPrice}" style="text-align: right;">원
+	            </div>
+	            <div  class="" style="margin: 15px;">
+	                경매기간<br>
+	                <input type="text" name="auctionPeriod"  value="${product.auctionPeriod}" style="text-align: right;" >일
+	            </div>
+            
+            
             </div>
-            <div class="applicationDetail">
-                경매기간<br>
-                <input type="text" name="auctionPeriod" value="${product.auctionPeriod}"><br>
-            </div>
+            
             <div>
-                <div class="applicationInfoTitle">
+                <div class="applicationInfoTitle" style="font-size: 23px; font-weight: 600; margin: 15px;">
                     상세정보
                     </div>
                     <div class="applicationInfoExplain"> 
-                        상품 상세정보 작성(필수 사항)<br>
-                        : 상품 모델명<br>
-                        : 새 상품 가격<br>
-                        : 상품 상태<br>
-                        : 상품 정보
+                        경매 상품의 상세 정보를 입력 해 주세요. (모델명/ 상태/ 정보)
                     </div>
                 <textarea id="detailContents" name="productInformation" rows="30" cols="100">${product.productInformation}</textarea>
             </div>
@@ -84,14 +91,14 @@
                 <div class="applicationInfoExplain">
                     : 상품 상태
                 </div> 
-                <div class="mb-3" id="fileAddResult">
+                <div class="mb-3" id="fileAddResult" style="width:100%;">
                     
                     <c:forEach items="${product.productFileVOs}" var="file">
                         <c:if test="${not file.sort}">
-                            <div class="file_form mt-2">
+                            <div class="file_form mt-2" style="width:80%;">
                                 <input type="file" name="files"  class="files form-control">
                                 <span class="text" >${file.oriName}</span> 
-                                <button type="button" class="del btn btn-danger" style="margin:auto;display: block;">X</button>
+                                <button type="button" class="del btn btn-danger" style="position: absolute; right:-50px; top:0px; ">X</button>
                                 
                             </div>
                         
@@ -101,11 +108,11 @@
        
                </div>
                    <div class="mb-3">
-                       <button type="button" id="fileAdd" class="btn btn-success">파일 추가</button>
+                    <button type="button" id="fileAdd" class="btn btn-success" style="float: right; margin: 15px;">파일 추가</button>
             </div>
         </c:forEach>
         </div>
-        <input type="submit" id="applicationSubmit" value="수정하기"  class ="btn btn-info">
+        <input type="submit" id="applicationSubmit" value="수정하기"  class ="btn btn-info" style="color: white; font-weight: 600; background-color: #f1a94c; border: 0;float: right;">
     </form>
 
             
