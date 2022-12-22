@@ -53,7 +53,7 @@ public class KakaoController
 
 		modelAndView.addObject("getSocialList", kakaoVOs);
 		modelAndView.addObject("kakaoInfo", authentication.getPrincipal());
-		modelAndView.setViewName("socialMember/kakaoLogin");
+		modelAndView.setViewName("/socialMember/kakaoLogin");
 		session.setAttribute("kakaoVO", rs); // 카카오 정보 DB insert 성공/실패 값
 		session.setAttribute("kakaoInfo", authentication.getPrincipal());
 		
