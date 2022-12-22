@@ -358,11 +358,11 @@ public class ProductController
 
 	@PostMapping("likeProduct")
 	@ResponseBody
-	public String setLikeSaleProduct(LikeSaleProductVO likeSaleProductVO) throws Exception
-	{
+	public String setLikeSaleProduct(LikeSaleProductVO likeSaleProductVO) throws Exception{
 
 		String likeCheck = productService.getLikeProductCheck(likeSaleProductVO);
-
+		System.out.println("check" + likeCheck);
+		System.out.println(likeSaleProductVO);
 		if (likeCheck == null)
 		{
 			productService.setLikeSaleProduct(likeSaleProductVO);

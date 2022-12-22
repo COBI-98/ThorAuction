@@ -24,55 +24,59 @@
 	 <form class="align-center" action="./update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="noticeNum" id="noticeNum" value="${noticeUpdate.noticeNum}" >
         <div class="form-check">
-            <input type="checkbox" id="radioDate" name="importCheck" <c:if test="${noticeUpdate.importCheck == true}">checked</c:if>>
+            <input type="checkbox" id="checkDate"  name="importCheck" <c:if test="${noticeUpdate.importCheck == true}">checked</c:if> >
             <label for="" style="font-size: 18px; font-weight: 600; margin-bottom: 15px;">
                 ❗중요 공지사항
             </label>
             
         </div>
-         <div style="display: flex; justify-content: space-between; width: 100%; margin: 10px 0;">
+        <div style="display: flex; justify-content: space-between; width: 100%; margin: 10px 0;">
 	        <div style="width: 70%;">
 	    		<span style="font-size: 18px; font-weight: 600;">제목</span> 
-	      	  	<input type="text" name="title" value="${noticeUpdate.title}" placeholder="제목을 입력하세요" style="width: 80%; height: 40px;">
+	      	  	<input type="text" name="title" placeholder="제목을 입력하세요" value="${noticeUpdate.title}" style="width: 80%; height: 40px;">
 	        </div>
 	        <div style="width: 30%;">
 	       		<span style="font-size: 18px; font-weight: 600;">작성자</span> 
-	        	<input type="text" name="writer" value="${noticeUpdate.writer}" style="width: 70%;height: 40px;" value="${memberVO.id}" readonly>
+	        	<input type="text" name="writer"  style="width: 70%;height: 40px;" value="${noticeUpdate.writer}" readonly>
 	        </div>
         
         
         </div>
-        
-        
-        
+
         <div>
-        <div style="margin: 10px 0; font-size: 18px; font-weight: 600;">내용</div>
-        <textarea id="summernote" name="contents" rows="30" cols="100" >${noticeUpdate.contents}</textarea>
-        </div>
+            <div style="margin: 10px 0; font-size: 18px; font-weight: 600;">내용</div> 
+            <textarea id="summernote" name="contents" th: rows="30" cols="100">${noticeUpdate.contents}</textarea>
+            </div> 
+        <div>
+       
         <div  class="board-filetitle mb-3" id="refresh">💾첨부 파일  
-            <div class="mb-3" id="fileAddResult">
+        <div class="mb-3"  id="fileAddResult" style="width:100%;">
         <c:forEach items="${noticeUpdate.noticeFileVOs}" var="file" varStatus="status">
             <c:if test="${not file.sort}">
                 
-                    <div class="file_form mt-2">
+                    <div class="file_form mt-2" style="width:80%;">
                         <!-- <label for="contents" class="form-label"></label> -->
 
                         <input type="file" name="files"  class="files form-control">
                         <span class="text" >${file.noticeOriName}</span> 
-                        <button type="button" class="del btn btn-danger" style="margin:auto;display: block;">X</button>
-                        
+                        <button type="button" class="del btn btn-danger" style="position: absolute; right:-50px; top:0px; ">X</button>
+
                     </div>
                 
             </c:if>
         </c:forEach>
           </div>
-      </div>  
-			<div class="mb-3">
-				<button type="button" id="fileAdd" class="btn btn-success">첨부파일 추가</button>
-			</div>
+        </div>  
+            <div class="mb-3">
+                <button type="button" id="fileAdd" class="btn btn-success" style="float: right; margin: 0 15px;">첨부파일 추가</button>
+            </div>
+            <div>
+            
+                    <input type="submit" name="update" value="수정하기"  class ="btn btn-info"style="float: right; font-weight: 600; color: white; background-color: #f1a94c; border: 0">
+            
+            </div>
         
-         
-        <input type="submit" name="add" value="수정하기"  class ="btn btn-info"style="margin-left: 300px;">
+        </div>
         </form>
 </div>
 	
